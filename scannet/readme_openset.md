@@ -24,7 +24,7 @@ To use `openai_tools` to get the names and descriptions of objects in images, ch
 
 Alternatively, run 
 ```bash
-python scannet/script/ram/inference_ram_given_folders.py --scans-folder folder_with_rgbd_images_scan_in scannet_format  --output_json_folder xxx --start_scene_id e.g.0 --end_scene_id e.g.100 --pretrained xxx/ram_plus_swin_large_14m.pth --process_every_n_images 3 --llm_tag_des custom_llm_tag_json_required_by_ram
+python scannet/script/ram/inference_ram_given_folders.py --scans_folder folder_with_rgbd_images_scan_in scannet_format  --output_json_folder xxx --start_scene_id e.g.0 --end_scene_id e.g.100 --pretrained xxx/ram_plus_swin_large_14m.pth --process_every_n_images 3 --llm_tag_des custom_llm_tag_json_file_required_by_ram
 ```
 to use RAM for tagging. Check `inference_ram_given_folders.py` for detailed input parameters. Make sure you have downloaded the `.pth` model (for example, `ram_plus_swin_large_14m.pth`) from [RAM](https://github.com/xinyu1205/recognize-anything). 
 
@@ -124,15 +124,21 @@ cd scannet/cpp/build
 ## Generate Aligned Instances for Scenes with More Than One Scan
 
 Some scenes have more than one scan (e.g., scene0000_00, scene0000_01, scene0000_02).
-We want to test finding the node observed in scene0000_01 with map built in scene0000_00. So we need to align the instance id of scene0000_01 and scene0000_00. We do that by aligning the Scene PLY with RANSAC + ICP first to get the transformation (from scenexxxx_00 to scenexxxx_0x). Then find the instance correspondence with point overlapping and bert name correspondence or direct name comparing (default: fast and less false). The transformation matrix will be saved as transformation.npy in scenexxxx_0x's folder.(transformation: _00 -> _0x, inv_transformation: _0x -> _00). The aligned cloud, for visualization and checking, is saved as aligned_cloud_with_scan_00.ply.
+We want to test finding the node observed in scene0000_01 with map built in scene0000_00. So we need to align the instance id of scene0000_01 and scene0000_00. We do that by manual alignment + ICP or aligning RANSAC + ICP to get the transformation (from scenexxxx_00 to scenexxxx_0x). Then find the instance correspondence with point overlapping and bert name correspondence or direct name comparing (default: fast and less false). The transformation matrix will be saved as transformation.npy in scenexxxx_0x's folder.(transformation: _00 -> _0x, inv_transformation: _0x -> _00). The aligned cloud, for visualization and checking, is saved as aligned_cloud_with_scan_00.ply.
 
 Run:
 ```bash
-python scannet/script/align_instances.py --source_dir path_to_scene0000_00 --target_dir path_to_scene0000_01 --visualize --ori_pt_transform --use_bert_embeddings --three_channel_id 
+python scannet/script/align_instances.py --source_dir path_to_scene0000_00 --target_dir path_to_scene0000_01 --use_bert_embeddings --three_channel_id --manual_transform --force_transform
 ```
-to get the alignment from scene0000_01 to scene0000_00. This will generate a csv file named ``matched_instance_correspondence_to_00.csv'' in the folder of scene0000_01.
+to get the alignment from scene0000_01 to scene0000_00. You will first see the point cloud from source_dir in a window. Press `shift` and left click at least three points that you choose for inital alignment. Then press `q` and a new window will show the point cloud from target_dir. Select the same points in this window and press `q`. Then you will see a alignment result later. If you are satisfied, press `y`, otherwise `r` to reselect the points.
+This will generate a csv file named ``matched_instance_correspondence_to_00.csv'' in the folder of scene0000_01.
 
-To run the script for all scenes
+To run the script for all scenes to get the GT alignment of two scans of the same scene.
+```bash
+python scannet/script/align_instances_for_all.py --data_dir output_json_folder_with_plys --openset_scans --manual_transform
+```
+
+(Optionally) If the images and pose of your scan are clean, accurate and cover the same places (like in ScanNet), you can also use the following mode to align automatically:
 ```bash
 python scannet/script/align_instances_for_all.py --data_dir xxx/scans --skip_existing --openset_scans
 ```
@@ -151,20 +157,12 @@ There will be another csv generated in scene0000_01.
 
 ```
 
-__The following README is from the fixed-set setting and has not been validated yet.__
-
-__Different scenes might need different parameters to get a good result__. Run the following to examine the results:
+Run the following to examine the alignment results:
 
 ```bash
 python scannet/script/alignment_examine.py --dataset_dir xxx/processed/scans --new
 ```
 Add `--new` the first time you examine results. This will create a `to_examine.csv` containing the scenes to be examined (unviewed and negatives). When you run it a second time, remove `--new`. When examining, press `p` (positive), `n` (negative), or `q`/Esc (quit).
-
-After examination, tune the parameters in ```align_instances.py``` and run 
-```bash
-python scannet/script/align_instances_for_all.py --data_dir xxx/processed/scans --use_scene_csv
-```
-With `--use_scene_csv`, only the scenes listed in the CSV will be considered, to avoid re-aligning scenes that are already good.
 
 
 ## Per Frame Data Finalize

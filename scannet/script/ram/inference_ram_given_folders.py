@@ -27,7 +27,7 @@ from inference_ram_plus_openset import RAMPlusOpensetInference
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Tag2Text inferece for tagging and captioning')
-    parser.add_argument('--scans-folder',
+    parser.add_argument('--scans_folder',
                         metavar='DIR',
                         help='path to imagescans folder',
                         default='/media/cc/My Passport/dataset/scannet/images/scans')

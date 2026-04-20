@@ -19,6 +19,13 @@ if __name__ == "__main__":
     parser.add_argument("--skip_existing", action="store_true", default=False)
     parser.add_argument("--use_scene_csv", action="store_true", default=False)
     parser.add_argument("--openset_scans", action="store_true", default=False)
+    parser.add_argument("--use_original_ply_for_pt_transform", action="store_true", default=False)
+    parser.add_argument(
+        "--manual_transform",
+        action="store_true",
+        default=False,
+        help="Use interactive manual alignment (pick correspondences) for each scene pair.",
+    )
     args = parser.parse_args()
 
     if args.openset_scans:
@@ -70,8 +77,27 @@ if __name__ == "__main__":
                 continue
         
             os.chdir(file_path)
+            manual_flags = "--manual_transform --force_transform" if args.manual_transform else ""
             if args.openset_scans:
-                os.system(f"python align_instances.py --source_dir '{source_dir}' --target_dir '{target_dir}' --ori_pt_transform --use_bert_embeddings --three_channel_id")
+                if args.use_original_ply_for_pt_transform:
+                    os.system(
+                        f"python align_instances.py --source_dir '{source_dir}' --target_dir '{target_dir}' "
+                        f"--ori_pt_transform --use_bert_embeddings --three_channel_id {manual_flags}"
+                    )
+                else:
+                    os.system(
+                        f"python align_instances.py --source_dir '{source_dir}' --target_dir '{target_dir}' "
+                        f"--use_bert_embeddings --three_channel_id {manual_flags}"
+                    )
             else:
-                os.system(f"python align_instances.py --source_dir '{source_dir}' --target_dir '{target_dir}' --ori_pt_transform --use_bert_embeddings  --recalculate_bert_embeddings")
+                if args.use_original_ply_for_pt_transform:
+                    os.system(
+                        f"python align_instances.py --source_dir '{source_dir}' --target_dir '{target_dir}' "
+                        f"--ori_pt_transform --use_bert_embeddings --recalculate_bert_embeddings {manual_flags}"
+                    )
+                else:
+                    os.system(
+                        f"python align_instances.py --source_dir '{source_dir}' --target_dir '{target_dir}' "
+                        f"--use_bert_embeddings --recalculate_bert_embeddings {manual_flags}"
+                    )
             

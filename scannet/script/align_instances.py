@@ -38,7 +38,267 @@ def resolve_ori_scan_mesh_path(ori_scan_dir, scene_name):
     )
 
 
-def align_point_clouds_with_icp(pcd_source, pcd_target, voxel_size=0.05, visualize=True, save_aligned_ply=True, save_ply_path=None):
+def resolve_instance_cloud_path(scene_dir: str):
+    """
+    Prefer filtered instance cloud if available.
+    """
+    candidates = (
+        os.path.join(scene_dir, "instance_cloud_filtered.ply"),
+        os.path.join(scene_dir, "instance_cloud.ply"),
+    )
+    for path in candidates:
+        if os.path.isfile(path):
+            return path
+    tried = ", ".join(os.path.basename(p) for p in candidates)
+    raise FileNotFoundError(f"No instance cloud PLY under {scene_dir!r} (tried: {tried})")
+
+
+def _pick_points(pcd: o3d.geometry.PointCloud, window_name: str):
+    print("")
+    print(window_name)
+    print("- " * 30)
+    print("Instructions:")
+    print("- Shift + left click to pick points")
+    print("- Press 'Q' or close the window when done")
+    print("- Pick points in the SAME order for source and target")
+    vis = o3d.visualization.VisualizerWithEditing()
+    vis.create_window(window_name=window_name)
+    vis.add_geometry(pcd)
+    vis.run()
+    vis.destroy_window()
+    return vis.get_picked_points()
+
+
+def _instance_ids_from_colors(pcd: o3d.geometry.PointCloud, three_channel_id: bool):
+    if not pcd.has_colors():
+        return None
+    colors = np.asarray(pcd.colors)
+    if colors.size == 0:
+        return None
+    if not three_channel_id:
+        return (colors[:, 0] * 255).astype(np.int32)
+    return (
+        (colors[:, 0] * 255)
+        + (colors[:, 1] * 255 * 255)
+        + (colors[:, 2] * 255 * 255 * 255)
+    ).astype(np.int32)
+
+
+def _nice_color_from_index(i: int):
+    # Golden-ratio spaced hues -> visually distinct, stable palette.
+    h = (0.61803398875 * (i + 1)) % 1.0
+    s = 0.65
+    v = 0.95
+    import colorsys
+
+    r, g, b = colorsys.hsv_to_rgb(h, s, v)
+    return np.array([r, g, b], dtype=np.float64)
+
+
+def _colorize_instances_for_viz(
+    pcd: o3d.geometry.PointCloud,
+    three_channel_id: bool,
+    seed: int = 0,
+):
+    """
+    Return a COPY of pcd where each instance-id (encoded in colors) gets a nice distinct color.
+    This is for visualization only; do not use for downstream ID extraction.
+    """
+    p = o3d.geometry.PointCloud(pcd)
+    if not p.has_points():
+        return p
+
+    ids = _instance_ids_from_colors(p, three_channel_id)
+    if ids is None:
+        # Fallback: uniform light gray if no IDs available
+        p.colors = o3d.utility.Vector3dVector(np.tile(np.array([[0.85, 0.85, 0.85]]), (len(p.points), 1)))
+        return p
+
+    unique_ids = np.unique(ids)
+    # Put background (0) last so it doesn't dominate perception.
+    unique_ids = [uid for uid in unique_ids if uid != 0] + ([0] if 0 in unique_ids else [])
+
+    # Stable mapping: sort then color by index
+    unique_ids_sorted = sorted(unique_ids)
+    color_lut = {uid: _nice_color_from_index(i + seed) for i, uid in enumerate(unique_ids_sorted)}
+    colors = np.vstack([color_lut[i] for i in ids])
+    p.colors = o3d.utility.Vector3dVector(colors)
+    return p
+
+
+def manual_align_point_clouds(
+    pcd_source: o3d.geometry.PointCloud,
+    pcd_target: o3d.geometry.PointCloud,
+    refine_with_icp: bool = True,
+    voxel_size: float = 0.06,
+    icp_max_corr_factor: float = 1.0,
+    icp_point_to_plane: bool = True,
+    three_channel_id: bool = False,
+):
+    """
+    Manual alignment by picking corresponding points in source/target.
+    Produces an initial transform from correspondences and optionally refines with ICP.
+    """
+    # Use colored copies to make point picking easier.
+    pcd_source_viz = _colorize_instances_for_viz(pcd_source, three_channel_id, seed=0)
+    pcd_target_viz = _colorize_instances_for_viz(pcd_target, three_channel_id, seed=101)
+
+    picked_source = _pick_points(pcd_source_viz, "Pick points in SOURCE")
+    picked_target = _pick_points(pcd_target_viz, "Pick points in TARGET")
+
+    if len(picked_source) < 3 or len(picked_target) < 3:
+        raise ValueError("Need at least 3 picked points in both source and target.")
+    if len(picked_source) != len(picked_target):
+        raise ValueError(
+            f"Picked {len(picked_source)} points in source but {len(picked_target)} in target. Must match."
+        )
+
+    source_pts = np.asarray(pcd_source.points)
+    target_pts = np.asarray(pcd_target.points)
+    corr = np.array(list(zip(picked_source, picked_target)), dtype=np.int32)
+
+    p2p = o3d.pipelines.registration.TransformationEstimationPointToPoint()
+    init_T = p2p.compute_transformation(
+        pcd_source,
+        pcd_target,
+        o3d.utility.Vector2iVector(corr),
+    )
+    print("Manual initial transform from picked correspondences:")
+    print(init_T)
+
+    if not refine_with_icp:
+        return init_T
+
+    icp_max_corr = float(voxel_size) * float(icp_max_corr_factor)
+    if icp_point_to_plane:
+        pcd_source.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=50)
+        )
+        pcd_target.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=50)
+        )
+        icp_estimation = o3d.pipelines.registration.TransformationEstimationPointToPlane(
+            o3d.pipelines.registration.TukeyLoss(k=voxel_size * 1.5)
+        )
+    else:
+        icp_estimation = o3d.pipelines.registration.TransformationEstimationPointToPoint()
+
+    result_icp = o3d.pipelines.registration.registration_icp(
+        pcd_source,
+        pcd_target,
+        max_correspondence_distance=icp_max_corr,
+        init=init_T,
+        estimation_method=icp_estimation,
+    )
+    print("ICP refined transform (starting from manual init):")
+    print(result_icp.transformation)
+    return result_icp.transformation
+
+
+def _show_alignment_and_get_user_choice(
+    pcd_source: o3d.geometry.PointCloud,
+    pcd_target: o3d.geometry.PointCloud,
+    transformation: np.ndarray,
+    window_name: str = "Manual alignment result",
+):
+    """
+    Show alignment result in an interactive window.
+    Keys:
+      - Y: accept
+      - R: redo picking
+      - Q / Esc: abort
+    Returns: "accept" | "redo" | "abort"
+    """
+    src = o3d.geometry.PointCloud(pcd_source)
+    src.transform(transformation)
+    tgt = o3d.geometry.PointCloud(pcd_target)
+
+    # Color overlay for clarity
+    src.paint_uniform_color([0.1, 0.9, 0.1])  # green
+    tgt.paint_uniform_color([0.9, 0.1, 0.1])  # red
+
+    choice = {"value": None}
+
+    def _set_choice(val):
+        def _cb(vis):
+            choice["value"] = val
+            vis.close()
+            return False
+
+        return _cb
+
+    print("")
+    print("Manual alignment review window")
+    print("- " * 30)
+    print("Press:")
+    print("  Y = accept this alignment")
+    print("  R = redo point picking")
+    print("  Q/Esc = abort")
+
+    vis = o3d.visualization.VisualizerWithKeyCallback()
+    vis.create_window(window_name=window_name)
+    vis.add_geometry(tgt)
+    vis.add_geometry(src)
+
+    # Key codes: use ord('Y'), ord('R'), ord('Q'); Esc is 256 in GLFW.
+    vis.register_key_callback(ord("Y"), _set_choice("accept"))
+    vis.register_key_callback(ord("y"), _set_choice("accept"))
+    vis.register_key_callback(ord("R"), _set_choice("redo"))
+    vis.register_key_callback(ord("r"), _set_choice("redo"))
+    vis.register_key_callback(ord("Q"), _set_choice("abort"))
+    vis.register_key_callback(ord("q"), _set_choice("abort"))
+    vis.register_key_callback(256, _set_choice("abort"))
+
+    vis.run()
+    vis.destroy_window()
+
+    return choice["value"] or "abort"
+
+
+def manual_align_point_clouds_interactive(
+    pcd_source: o3d.geometry.PointCloud,
+    pcd_target: o3d.geometry.PointCloud,
+    voxel_size: float = 0.06,
+    icp_max_corr_factor: float = 1.0,
+    icp_point_to_plane: bool = True,
+    three_channel_id: bool = False,
+    refine_with_icp: bool = True,
+):
+    """
+    Manual alignment loop:
+      pick correspondences -> compute transform (+ optional ICP) -> show result -> accept/redo/abort
+    """
+    while True:
+        T = manual_align_point_clouds(
+            pcd_source,
+            pcd_target,
+            refine_with_icp=refine_with_icp,
+            voxel_size=voxel_size,
+            icp_max_corr_factor=icp_max_corr_factor,
+            icp_point_to_plane=icp_point_to_plane,
+            three_channel_id=three_channel_id,
+        )
+        choice = _show_alignment_and_get_user_choice(
+            pcd_source, pcd_target, T, window_name="Manual alignment result (red=target, green=aligned source)"
+        )
+        if choice == "accept":
+            return T
+        if choice == "redo":
+            continue
+        raise RuntimeError("Manual alignment aborted by user.")
+
+
+def align_point_clouds_with_icp(
+    pcd_source,
+    pcd_target,
+    voxel_size=0.05,
+    visualize=True,
+    save_aligned_ply=True,
+    save_ply_path=None,
+    ransac_max_corr_factor: float = 5.0,
+    icp_max_corr_factor: float = 1.0,
+    icp_point_to_plane: bool = True,
+):
     """
     Aligns source point cloud to target using RANSAC + ICP.
     
@@ -60,6 +320,11 @@ def align_point_clouds_with_icp(pcd_source, pcd_target, voxel_size=0.05, visuali
             o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 5, max_nn=100))
         return pcd_down, fpfh
 
+    # Background clouds are often much noisier; use a coarser voxel to stabilize FPFH/RANSAC.
+    if voxel_size is None:
+        max_points = max(len(pcd_source.points), len(pcd_target.points))
+        voxel_size = 0.10 if max_points > 250_000 else 0.06
+
     # Preprocess and extract features
     source_down, fpfh_source = preprocess(pcd_source, voxel_size)
     target_down, fpfh_target = preprocess(pcd_target, voxel_size)
@@ -70,20 +335,27 @@ def align_point_clouds_with_icp(pcd_source, pcd_target, voxel_size=0.05, visuali
 
     # Show the point clouds before ransac
     if visualize:
-        o3d.visualization.draw_geometries([source_down, target_down], window_name="Point Clouds Before RANSAC")
+        # Use plain gray in this view (feature-based), to avoid confusing ID colors.
+        s = o3d.geometry.PointCloud(source_down)
+        t = o3d.geometry.PointCloud(target_down)
+        s.paint_uniform_color([0.7, 0.7, 0.7])
+        t.paint_uniform_color([0.2, 0.6, 0.9])
+        o3d.visualization.draw_geometries([s, t], window_name="Point Clouds Before RANSAC")
 
     # RANSAC global alignment
+    ransac_max_corr = voxel_size * float(ransac_max_corr_factor)
     result_ransac = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
         source_down, target_down,
         fpfh_source, fpfh_target,
-        mutual_filter=False,
-        max_correspondence_distance=voxel_size * 5,
+        mutual_filter=True,
+        max_correspondence_distance=ransac_max_corr,
         estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPoint(False),
         ransac_n=4,
         checkers=[
-            o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(voxel_size * 5)
+            o3d.pipelines.registration.CorrespondenceCheckerBasedOnEdgeLength(0.9),
+            o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(ransac_max_corr),
         ],
-        criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(1000000, min_point_num)
+        criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(200000, min_point_num)
     )
 
     print("RANSAC initial alignment:")
@@ -93,15 +365,34 @@ def align_point_clouds_with_icp(pcd_source, pcd_target, voxel_size=0.05, visuali
 
     # SHow the ransac result
     if visualize:
-        ransac_source_down = source_down.transform(result_ransac.transformation)
-        o3d.visualization.draw_geometries([ransac_source_down, target_down], window_name="RANSAC Initial Alignment")
+        ransac_source_down = o3d.geometry.PointCloud(source_down)
+        ransac_source_down.transform(result_ransac.transformation)
+        s = o3d.geometry.PointCloud(ransac_source_down)
+        t = o3d.geometry.PointCloud(target_down)
+        s.paint_uniform_color([0.2, 0.8, 0.2])
+        t.paint_uniform_color([0.9, 0.2, 0.2])
+        o3d.visualization.draw_geometries([s, t], window_name="RANSAC Initial Alignment")
 
     # ICP refinement
+    icp_max_corr = voxel_size * float(icp_max_corr_factor)
+    if icp_point_to_plane:
+        pcd_source.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=50)
+        )
+        pcd_target.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=50)
+        )
+        icp_estimation = o3d.pipelines.registration.TransformationEstimationPointToPlane(
+            o3d.pipelines.registration.TukeyLoss(k=voxel_size * 1.5)
+        )
+    else:
+        icp_estimation = o3d.pipelines.registration.TransformationEstimationPointToPoint()
+
     result_icp = o3d.pipelines.registration.registration_icp(
         pcd_source, pcd_target,
-        max_correspondence_distance=voxel_size * 1.5,
+        max_correspondence_distance=icp_max_corr,
         init=result_ransac.transformation,
-        estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPoint()
+        estimation_method=icp_estimation,
     )
 
     final_transformation = result_icp.transformation
@@ -110,7 +401,8 @@ def align_point_clouds_with_icp(pcd_source, pcd_target, voxel_size=0.05, visuali
 
     # Transform and visualize
     if visualize or (save_aligned_ply and save_ply_path is not None):
-        pcd_source_transformed = pcd_source.transform(final_transformation)
+        pcd_source_transformed = o3d.geometry.PointCloud(pcd_source)
+        pcd_source_transformed.transform(final_transformation)
         # Copy and color
         pcd_target_viz = o3d.geometry.PointCloud()
         pcd_target_viz.points = pcd_target.points
@@ -399,8 +691,20 @@ if __name__ == "__main__":
     parser.add_argument("--use_bert_embeddings", action="store_true")
     parser.add_argument("--recalculate_bert_embeddings", action="store_true")
     parser.add_argument("--three_channel_id", action="store_true")
-    parser.add_argument("--skip_transform_if_exists", type=bool, default=True)
+    # NOTE: don't use type=bool; argparse would parse "--flag False" as True (bool("False") == True).
+    parser.add_argument("--skip_transform_if_exists", action="store_true", default=True, help="If transformation.npy exists, reuse it.")
+    parser.add_argument("--no_skip_transform_if_exists", dest="skip_transform_if_exists", action="store_false", help="Always recompute transform (unless --force_transform).")
+    parser.add_argument("--force_transform", action="store_true", help="Recompute transform even if transformation.npy exists.")
+    parser.add_argument("--voxel_size", type=float, default=0.06, help="Downsample voxel size for RANSAC/ICP. Larger is more robust but less precise.")
+    parser.add_argument("--ransac_max_corr_factor", type=float, default=5.0, help="RANSAC max correspondence distance = voxel_size * factor")
+    parser.add_argument("--icp_max_corr_factor", type=float, default=1.0, help="ICP max correspondence distance = voxel_size * factor")
+    parser.add_argument("--icp_point_to_plane", action="store_true", default=True, help="Use point-to-plane ICP (recommended)")
+    parser.add_argument("--icp_point_to_point", dest="icp_point_to_plane", action="store_false", help="Use point-to-point ICP")
+    parser.add_argument("--manual_transform", action="store_true", help="Pick correspondences in an interactive window to initialize alignment (then refine with ICP).")
+    parser.add_argument("--manual_no_icp_refine", action="store_true", help="With --manual_transform, skip ICP refinement and use picked-point transform directly.")
+    parser.add_argument("--viz_random_instance_colors", action="store_true", default=True, help="Use distinct colors per instance in Open3D windows (visualization only).")
     args = parser.parse_args()
+
 
     print(f"Source dir: {args.source_dir}")
     print(f"Target dir: {args.target_dir}")
@@ -409,15 +713,25 @@ if __name__ == "__main__":
     print(f"Use BERT embeddings: {args.use_bert_embeddings}")
     print(f"Three channel id: {args.three_channel_id}")
 
-    source_ply = o3d.io.read_point_cloud(os.path.join(args.source_dir, "instance_cloud.ply"))
-    target_ply = o3d.io.read_point_cloud(os.path.join(args.target_dir, "instance_cloud.ply"))
+    source_instance_ply_path = resolve_instance_cloud_path(args.source_dir)
+    target_instance_ply_path = resolve_instance_cloud_path(args.target_dir)
+    print(f"Source instance cloud: {source_instance_ply_path}")
+    print(f"Target instance cloud: {target_instance_ply_path}")
+    source_ply = o3d.io.read_point_cloud(source_instance_ply_path)
+    target_ply = o3d.io.read_point_cloud(target_instance_ply_path)
 
-    if args.skip_transform_if_exists:
+    if args.manual_transform:
+        # Manual alignment must always run (otherwise it would silently load an existing transform).
+        args.force_transform = True
+
+    if args.skip_transform_if_exists and not args.force_transform:
         if os.path.exists(os.path.join(args.target_dir, "transformation.npy")):
             transformation = np.load(os.path.join(args.target_dir, "transformation.npy"))
             print(f"Transformation matrix loaded from {os.path.join(args.target_dir, 'transformation.npy')}")
         else:
             args.skip_transform_if_exists = False
+
+    did_compute_transform = False
 
     if args.ori_pt_transform and not args.skip_transform_if_exists:
         if args.ori_scan_dir is None:
@@ -472,11 +786,54 @@ if __name__ == "__main__":
 
 
     # Get the transformation matrix from the source point cloud to the target point cloud
-    if not args.skip_transform_if_exists:
-        transformation = align_point_clouds_with_icp(source_ply_for_transform, target_ply_for_transform, voxel_size=0.05, visualize=args.visualize, save_aligned_ply=not args.no_save_aligned_ply, save_ply_path=os.path.join(args.target_dir, "aligned_cloud_with_scan_00.ply"))
+    if (not args.skip_transform_if_exists) or args.force_transform:
+        if args.manual_transform:
+            transformation = manual_align_point_clouds_interactive(
+                source_ply_for_transform,
+                target_ply_for_transform,
+                voxel_size=args.voxel_size,
+                icp_max_corr_factor=args.icp_max_corr_factor,
+                icp_point_to_plane=args.icp_point_to_plane,
+                three_channel_id=args.three_channel_id,
+                refine_with_icp=not args.manual_no_icp_refine,
+            )
+            did_compute_transform = True
+        else:
+            transformation = align_point_clouds_with_icp(
+                source_ply_for_transform,
+                target_ply_for_transform,
+                voxel_size=args.voxel_size,
+                visualize=args.visualize,
+                save_aligned_ply=not args.no_save_aligned_ply,
+                save_ply_path=os.path.join(args.target_dir, "aligned_cloud_with_scan_00.ply"),
+                ransac_max_corr_factor=args.ransac_max_corr_factor,
+                icp_max_corr_factor=args.icp_max_corr_factor,
+                icp_point_to_plane=args.icp_point_to_plane,
+            )
+            did_compute_transform = True
     
     # Transform the source point cloud
     source_ply.transform(transformation)
+
+    # If we computed a new transform (manual or forced), update outputs used by other tools:
+    # - aligned_cloud_with_scan_00.ply (used by alignment_examine.py)
+    # - transformation.npy / inv_transformation.txt (used by downstream scripts)
+    if did_compute_transform:
+        if not args.no_save_aligned_ply:
+            # Save combined aligned point cloud (red=target, green=aligned source)
+            src_viz = o3d.geometry.PointCloud(source_ply)
+            tgt_viz = o3d.geometry.PointCloud(target_ply)
+            src_viz.paint_uniform_color([0.1, 0.9, 0.1])
+            tgt_viz.paint_uniform_color([0.9, 0.1, 0.1])
+            combined = tgt_viz + src_viz
+            out_ply = os.path.join(args.target_dir, "aligned_cloud_with_scan_00.ply")
+            o3d.io.write_point_cloud(out_ply, combined)
+            print(f"Saved aligned point cloud to {out_ply}")
+
+        np.save(os.path.join(args.target_dir, "transformation.npy"), transformation)
+        with open(os.path.join(args.target_dir, "inv_transformation.txt"), "w") as f:
+            f.write(str(np.linalg.inv(transformation)).replace("[", "").replace("]", ""))
+        print("Saved transformation.npy and inv_transformation.txt")
 
     # Show the source and target point clouds
     if args.visualize:
@@ -575,12 +932,7 @@ if __name__ == "__main__":
         for id_B, id_A in match_dict.items():
             writer.writerow([id_B, id_A])
 
-    # Save the transformation matrix to a numpy file and a txt file (without [])
-    if not args.skip_transform_if_exists:
-        np.save(os.path.join(args.target_dir, "transformation.npy"), transformation)
-        inv_transformation = np.linalg.inv(transformation)
-        with open(os.path.join(args.target_dir, "inv_transformation.txt"), "w") as f:
-            f.write(str(np.linalg.inv(transformation)).replace("[", "").replace("]", ""))
+    # (saving handled above when did_compute_transform == True)
 
     if args.visualize:
         # visualize_inference_results_points(results, map_ply_path, frame_ply_path, frame_ply_pose_path
