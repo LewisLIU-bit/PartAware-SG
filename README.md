@@ -84,6 +84,25 @@ detector errors, duplicate parts, and uncertain ownership remain. Accuracy gains
 require annotated evaluation. The consolidated report is in [RESEARCH_LOG.md](RESEARCH_LOG.md); raw records and generated graphs are stored under `/home/lewisliu/datasets/scannet-sg-processed/partaware_v1`.
 
 
+### Visualize the generated part graph
+
+The main experiment's `topology_map.json` is the saved object baseline. New parts
+are in `parts/partaware_graph.json` or `parts_refined/partaware_graph.json`.
+Re-fused object graphs are under the external experiment's `cpp_regression`.
+
+```bash
+.venv-vlpart/bin/python script/visualize_partaware.py \
+  --graph /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/parts_refined/partaware_graph.json \
+  --base-cloud /home/lewisliu/datasets/scannet-sg-processed/hypersim_joint_v4/hypersim/ai_001_002/instance_cloud_with_background.ply \
+  --show-object-edges
+```
+
+Blue spheres represent objects; colored part clouds and spheres show confirmed
+tracks; green lines are `part_of`. The terminal lists node IDs and names.
+`--include-provisional` displays all tracks; `--nodes-only` hides part point clouds;
+`--check-only` validates geometry without opening a window. The original
+`script/visualize_map.py` remains available for object graphs.
+
 ## Dataset Download
 To download our dataset, please check [here](/download/Download_ScanNet_SG.md)
 
