@@ -89,3 +89,30 @@ Do not apply the patch twice. The current WSL runtime already contains it.
 The patch preserves earlier CUDA/inference fixes without publishing modified
 third-party repositories. Outputs belong under `datasets/scannet-sg-processed`
 and experiment names should end in `_v1` for the first run.
+
+## Default Florence frontend
+
+Florence runs in a separate long-lived Python worker, using the existing
+`sg-florence` environment on this machine. This leaves RAM/GroundingDINO's
+transformers 4.35 and VLPart's timm 0.5 dependencies intact. No API is used.
+
+```bash
+export FLORENCE_PYTHON=/home/lewisliu/miniconda3/envs/sg-florence/bin/python
+export FLORENCE_MODEL_DIR=/home/lewisliu/models/vision/Florence-2-large-ft
+```
+
+On a fresh machine, prepare an isolated environment with a working CUDA
+PyTorch matching the base environment, `transformers==4.49.0`,
+`timm==1.0.15`, `einops==0.8.1`, and Pillow. Download the official
+[Microsoft Florence-2-large-ft](https://huggingface.co/microsoft/Florence-2-large-ft)
+checkpoint into `FLORENCE_MODEL_DIR`. Eager attention is used; FlashAttention
+is optional. The loader scopes its optional-import workaround to Florence's
+conditional import and passes an explicit trusted local configuration.
+
+`get_seg_openset.py` defaults to `--grounding_backend florence` for both
+`--image_folder` and `--manifest`. `--florence_model_dir` overrides the model
+location. External proposal and saved rendering modes keep their own path.
+Set `--grounding_backend dino` to reproduce the original frontend.
+Use a fresh output folder for new inference; existing complete runs can still
+be skipped with `--skip_existing`. Model and input failures are reported,
+and never silently converted to a DINO run.

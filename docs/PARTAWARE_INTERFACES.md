@@ -68,3 +68,25 @@ The verified `partaware_v1` experiment contains `hypersim/ai_001_002`,
 `scannet/scene0000_00`, and external regression/history records. The source tree
 contains no generated run results. Only ScanNet and Hypersim dedicated routes
 are retained. The original generic manifest ABI is preserved.
+
+## Florence and the common viewer
+
+`get_seg_openset.py --grounding_backend florence|dino` defaults to Florence.
+Folder and manifest inputs, masks, frame IDs, object JSON fields, DINO 256D
+features, and SBERT 384D embeddings retain the original format. Florence
+scores are additional uncalibrated metadata. The shared `JointGrounding`
+implementation handles candidate boxes, class NMS, SAM, and duplicate masks;
+the portable default uses soft crop evidence, while explicit reference
+profiles retain their configured hard negative tests. Neither changes 3D IDs.
+
+`visualize_map_with_nodes` keeps its old arguments and adds optional trailing
+arguments: `show_parts=False`, `show_part_points=False`,
+`include_provisional_parts=False`, `part_radius=0.035`, `check_only=False`,
+and `screenshot_path=None`. The CLI exposes these as flags (`--screenshot`
+for the last argument). Child geometry comes from `build_part_overlay`;
+the same legacy or GUI renderer displays both layers. Object geometry remains
+identical when parts are disabled and remains an unchanged prefix when enabled.
+Confirmed parts without a parent are shown only in diagnostic all-track mode.
+The compatibility wrapper preserves its existing flag names and infers the
+base PLY from the saved part-run configuration when that PLY exists; otherwise
+specify `--base-cloud`.

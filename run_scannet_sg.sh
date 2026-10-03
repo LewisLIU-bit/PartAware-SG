@@ -92,6 +92,11 @@ RAM_WEIGHT="$HOME/models/ram/ram_plus_swin_large_14m.pth"
 FRAME_STEP="${FRAME_STEP:-3}"
 
 CONFIDENCE_THRESHOLD="${CONFIDENCE_THRESHOLD:-0.4}"
+GROUNDING_BACKEND="${GROUNDING_BACKEND:-florence}"
+case "$GROUNDING_BACKEND" in
+    florence|dino) ;;
+    *) echo "ERROR: GROUNDING_BACKEND must be florence or dino"; exit 1 ;;
+esac
 
 MAX_DEPTH="${MAX_DEPTH:-0.0}"
 
@@ -146,6 +151,7 @@ echo "Start stage:          $START_STAGE"
 echo
 echo "Frame step:           $FRAME_STEP"
 echo "Confidence threshold: $CONFIDENCE_THRESHOLD"
+echo "Grounding backend:     $GROUNDING_BACKEND"
 echo "Max depth:            $MAX_DEPTH"
 echo "Pixel subsample:      $SUBSAMPLE_FACTOR"
 echo "Edge threshold:       $EDGE_THRESHOLD"
@@ -367,7 +373,8 @@ if [ "$START_NUM" -le 2 ]; then
     python "$REPO/scannet/script/grounded_sam/scannet_process/get_seg_openset.py" \
         --image_folder "$RAM_INPUT_ROOT/$SCENE" \
         --json_folder "$REFINED" \
-        --confidence_threshold "$CONFIDENCE_THRESHOLD"
+        --confidence_threshold "$CONFIDENCE_THRESHOLD" \
+        --grounding_backend "$GROUNDING_BACKEND"
 
     MASK_COUNT="$(
         find "$REFINED" -maxdepth 1 -type f \

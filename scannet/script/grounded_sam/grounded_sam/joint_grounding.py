@@ -188,11 +188,38 @@ class JointGrounding:
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-    def write_run_config(self, scene_dir, manifest, threshold):
+    def _scorer_for_profile(self, profile):
+        from qwen_tools.florence_worker import make_florence_scorer
+        if profile["scorer"] is None:
+            cfg = profile["config"]
+            profile["scorer"] = make_florence_scorer(
+                profile["model_dir"], cfg.get("device", "cuda"), cfg.get("max_description_tokens", 96))
+        return profile["scorer"]
+
+    def log_frame(self, scene_dir, frame_id, instances):
+        record = {"message": "完成 Florence 联合评分与实例掩码保存", "frame_id": str(frame_id),
+                  "backend": type(self).__name__, "instances": len(instances), "calibrated": False,
+                  "objects": [{"name": row["object_name"], "local_id": row["frame_instance_id"],
+                               "joint_score": row.get("joint_score"),
+                               "description_margin": row.get("description_margin")}
+                              for row in instances]}
+        with (Path(scene_dir) / "run_zh.jsonl").open("a", encoding="utf-8") as log:
+            log.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+    def write_run_config(self, scene_dir, manifest, threshold, input_jobs=None):
+        import inspect
+        backend_source = Path(inspect.getfile(type(self)))
         record = {"schema_version": "joint_grounding_trial_v1", "calibrated": False,
                   "joint_config": self.config, "final_threshold": threshold,
                   "implementation_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                  "manifest_sha256": hashlib.sha256(Path(manifest).read_bytes()).hexdigest(),
+                  "backend": type(self).__name__,
+                  "backend_sha256": hashlib.sha256(backend_source.read_bytes()).hexdigest(),
+                  "manifest_sha256": hashlib.sha256(Path(manifest).read_bytes()).hexdigest() if manifest else None,
+                  "input_mode": "manifest" if manifest else "legacy_scannet",
+                  "input_frames": [{"frame_id": str(fid), "rgb": str(rgb),
+                                    "rgb_sha256": hashlib.sha256(Path(rgb).read_bytes()).hexdigest(),
+                                    "tags_sha256": hashlib.sha256(Path(tags).read_bytes()).hexdigest()}
+                                   for fid, rgb, tags in (input_jobs or [])],
                   "description_profiles": {n: p["config"] for n, p in self.profiles.items()}}
         path = Path(scene_dir) / "run_config.json"
         if path.exists() and load_json(path) != record:
@@ -203,7 +230,7 @@ class JointGrounding:
         import cv2
         import torch
         from PIL import Image
-        from qwen_tools.description_scoring import FlorenceDescriptionScorer, crop_box
+        from qwen_tools.description_scoring import crop_box
         self.last_details = []
         if not self.candidate_threshold < threshold < 1:
             raise ValueError("Candidate threshold must be below the final threshold")
@@ -254,10 +281,7 @@ class JointGrounding:
             if not relevant:
                 continue
             cfg = profile["config"]
-            if profile["scorer"] is None:
-                profile["scorer"] = FlorenceDescriptionScorer(
-                    profile["model_dir"], cfg.get("device", "cuda"), cfg.get("max_description_tokens", 96))
-            scorer = profile["scorer"]
+            scorer = self._scorer_for_profile(profile)
             scorer.model.to(scorer.device)
             descriptions, target = cfg["descriptions"], cfg["target_description_id"]
             if profile["baseline"] is None:
@@ -282,7 +306,7 @@ class JointGrounding:
                       f"raw_competition={raw_margins} joint={r['joint_score']:.3f} {decision}", flush=True)
                 r["description"] = {"description_margin": margin, "description_log_likelihood": ll[target],
                                     "description_gain": gains[target], "description_competitor": other,
-                                    "scoring_description": descriptions[target], "description_source": "profile_config",
+                                    "scoring_description": descriptions[target], "description_source": cfg.get("description_source", "profile_config"),
                                     "description_support": fused_score(0.5, margin, 0.0),
                                     "description_raw_competition": raw_margins,
                                     "description_pass": r["description_pass"]}

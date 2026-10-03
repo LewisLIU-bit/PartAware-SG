@@ -43,3 +43,4 @@ scannet/script/qwen_tools/configs/
 !docs/model_checksums.json
 !docs/environment_partaware.json
 !docs/partaware_requirements.txt
+!docs/environment_florence.json

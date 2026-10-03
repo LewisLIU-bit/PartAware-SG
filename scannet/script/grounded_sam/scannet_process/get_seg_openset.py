@@ -209,6 +209,8 @@ class InstanceSegmenter:
         json_path = self.json_dir / f"{frame_index}_instance.json"
         with json_path.open("w", encoding="utf-8") as file:
             json.dump([], file)
+        if self.joint is not None:
+            self.joint.log_frame(self.json_dir.parent, frame_index, [])
         if self.visualize:
             render_saved_instances(
                 image_path, self.json_dir, frame_index
@@ -223,7 +225,7 @@ class InstanceSegmenter:
                         or (self.json_dir / f"{fid}.png").exists()]
             if existing:
                 raise FileExistsError(f"Existing frame output: {existing[0]}; use a fresh output folder")
-            self.joint.write_run_config(self.json_dir.parent, manifest_path, self.confidence_threshold)
+            self.joint.write_run_config(self.json_dir.parent, manifest_path, self.confidence_threshold, jobs)
 
         for frame_index, image_path, json_file in tqdm.tqdm(jobs):
 
@@ -520,6 +522,8 @@ class InstanceSegmenter:
                 json_out_path = self.json_dir / f"{frame_index}_instance.json"
                 with open(json_out_path, 'w') as f:
                     json.dump(image_info, f, indent=2)
+                if self.joint is not None:
+                    self.joint.log_frame(self.json_dir.parent, frame_index, image_info)
                 if self.visualize:
                     render_saved_instances(
                         image_path, self.json_dir, frame_index
@@ -752,13 +756,20 @@ if __name__ == "__main__":
     )
 
     parser.add_argument("--joint_config", default=None, help="Joint DINO/description scoring configuration")
+    parser.add_argument("--grounding_backend", choices=["florence", "dino"], default="florence",
+                        help="Default Florence crop evidence; select dino for the original detector")
+    parser.add_argument("--florence_model_dir", default=None,
+                        help="Local Florence checkpoint; defaults to FLORENCE_MODEL_DIR or ~/models/vision/Florence-2-large-ft")
     args = parser.parse_args()
     joint = None
     if args.joint_config:
-        if not args.manifest or args.external_proposals or args.external_output or args.render_saved or args.skip_existing:
-            parser.error("--joint_config requires manifest mode and cannot use external/render/skip modes")
+        if args.grounding_backend == "dino" or args.external_proposals or args.external_output or args.render_saved or args.skip_existing:
+            parser.error("--joint_config requires Florence detection and cannot use external/render/skip modes")
         from grounded_sam.grounded_sam.joint_grounding import JointGrounding
         joint = JointGrounding(args.joint_config)
+    elif args.grounding_backend == "florence" and not (args.external_proposals or args.external_output or args.render_saved):
+        from grounded_sam.grounded_sam.florence_grounding import FlorenceGrounding
+        joint = FlorenceGrounding(args.florence_model_dir)
     if args.external_proposals is not None:
         if not args.manifest or not args.external_output:
             parser.error(

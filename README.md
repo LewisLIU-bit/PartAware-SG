@@ -16,13 +16,21 @@ PartAware-SG preserves the saved ScanNet and Hypersim object pipelines and adds
 an independent object-part layer using official [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)
 knowledge and [VLPart](https://github.com/facebookresearch/VLPart) inference.
 The original object JSON format, 256-dimensional visual features, and
-384-dimensional text features are preserved. The default object association
+384-dimensional text features are preserved. Basic object detection now defaults to GroundingDINO proposals, Florence crop
+likelihood evidence, and SAM masks. ScanNet folders and Hypersim manifests keep
+their original interfaces; `--grounding_backend dino` restores the original
+frontend, or `GROUNDING_BACKEND=dino` selects it in the shell runner. Florence
+does not replace the 256-dimensional detector features or infer physical instance
+identity. `--joint_config` still accepts the existing scene-specific reference
+profiles. The portable default scores all input categories with soft evidence
+and needs no scene-specific reference images. See setup for the isolated runtime.
+The default object association
 remains `legacy`; append `--association_mode op3dsg` to `openset_ply_map` only
 for a separate association experiment. This is an adapted prior-graph pipeline;
 OP3DSG's LLM reasoning stage is not included.
 
 Only ScanNet and Hypersim are supported by the project-specific adapters.
-Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1`.
+Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1` or `<name>_v2`.
 The current WSL copy already contains the required runtime repositories, weights, and
 isolated part environment. Use `scannet-sg` for the object frontend and
 `.venv-vlpart/bin/python` for parts. See [reproducible setup](docs/PARTAWARE_SETUP.md)
@@ -34,8 +42,8 @@ cd /home/lewisliu/PartAware-SG
 conda activate scannet-sg
 cmake -S scannet -B scannet/build-partaware
 cmake --build scannet/build-partaware -j2
-# Use a new experiment name for an original ScanNet run.
-MAX_FRAMES=3 bash run_scannet_sg.sh scene0000_00 scannet_baseline_v1
+# Use a new experiment name; the basic frontend defaults to Florence.
+MAX_FRAMES=3 bash run_scannet_sg.sh scene0000_00 scannet_florence_v2
 ```
 
 After an object graph has been generated, run parts in a fresh output directory.
@@ -86,22 +94,36 @@ require annotated evaluation. The consolidated report is in [RESEARCH_LOG.md](RE
 
 ### Visualize the generated part graph
 
-The main experiment's `topology_map.json` is the saved object baseline. New parts
-are in `parts/partaware_graph.json` or `parts_refined/partaware_graph.json`.
-Re-fused object graphs are under the external experiment's `cpp_regression`.
+Object and refined part graphs now use the same `visualize_map_with_nodes`
+renderer. Without `--show_parts`, the original object geometry is unchanged.
+With it, smaller parent-colored child nodes and dashed `part_of` links are
+appended to the original point cloud, bounding boxes, relations, and picking.
+Unassigned or provisional parts are hidden by default; part point clouds are
+also hidden so the original map remains readable.
 
 ```bash
-.venv-vlpart/bin/python script/visualize_partaware.py \
-  --graph /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/parts_refined/partaware_graph.json \
-  --base-cloud /home/lewisliu/datasets/scannet-sg-processed/hypersim_joint_v4/hypersim/ai_001_002/instance_cloud_with_background.ply \
-  --show-object-edges
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+python script/visualize_map.py \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/hypersim_joint_v4/hypersim/ai_001_002/instance_cloud_with_background.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/parts_refined/partaware_graph.json \
+  --show_bboxes --show_edges --show_parts --enable_picking \
+  --node_radius 0.07 --part_radius 0.025
 ```
 
-Blue spheres represent objects; colored part clouds and spheres show confirmed
-tracks; green lines are `part_of`. The terminal lists node IDs and names.
-`--include-provisional` displays all tracks; `--nodes-only` hides part point clouds;
-`--check-only` validates geometry without opening a window. The original
-`script/visualize_map.py` remains available for object graphs.
+Remove `--show_parts` for the original object view. Add `--show_part_points`
+for diagnostic part clouds, `--include_provisional_parts` for all part tracks,
+or `--check_only` to validate the same geometry without a window.
+Shift + left click prints either an object or child node name in the same
+window. `script/visualize_partaware.py` remains a compatibility wrapper around
+this renderer; it no longer builds a separate scene. Use tracking-ID PLY files
+(`instance_cloud*.ply`), rather than already recolored RGB exports.
+
+The v1 graph keeps the saved object baseline; changing the default frontend
+does not retroactively rerun it. The new v2 smoke run contains fresh Florence
+segmentation, original C++ fusion, and part graphs for 5 Hypersim and 2 ScanNet
+frames. It is not a full-sequence accuracy benchmark. Its outputs are under
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_v2`.
 
 ## Dataset Download
 To download our dataset, please check [here](/download/Download_ScanNet_SG.md)
@@ -204,6 +226,8 @@ python script/read_map.py
 
 - Visualize a scene graph using the following command
 ```bash
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py --show_bboxes --show_edges
 ```
 Add `--map_ply_path xxx.ply --topology_map_path xxx.json` to specify the data. Add `--enable_picking` to use interactive mode: the name of a node will be printed when you press `Shift` and left-click the blue sphere of a node.

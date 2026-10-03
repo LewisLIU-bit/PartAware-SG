@@ -85,7 +85,7 @@ class FlorenceDescriptionScorer:
     """Reusable scoring backend; one region and one target sequence per forward."""
     def __init__(self, model_dir, device="cuda", max_tokens=96):
         import torch
-        from transformers import AutoModelForCausalLM, AutoProcessor
+        from transformers import AutoConfig, AutoModelForCausalLM, AutoProcessor
         self.torch = torch
         self.device = device
         self.max_tokens = max_tokens
@@ -96,9 +96,22 @@ class FlorenceDescriptionScorer:
         self.dtype = torch.float16 if device == "cuda" else torch.float32
         self.processor = AutoProcessor.from_pretrained(
             str(model_dir), trust_remote_code=True, local_files_only=True)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            str(model_dir), trust_remote_code=True, local_files_only=True,
-            torch_dtype=self.dtype, attn_implementation="eager").to(device).eval()
+        config = AutoConfig.from_pretrained(str(model_dir), trust_remote_code=True, local_files_only=True)
+        # Transformers' static import scan treats Florence's conditional FlashAttention import as mandatory.
+        # Eager attention never executes that branch; scope the workaround to this model load only.
+        from unittest.mock import patch
+        from transformers.dynamic_module_utils import get_imports
+        def eager_imports(filename):
+            imports = get_imports(filename)
+            if Path(filename).name == "modeling_florence2.py":
+                source = Path(filename).read_text()
+                if "if is_flash_attn_2_available():" in source:
+                    imports = [module for module in imports if module != "flash_attn"]
+            return imports
+        with patch("transformers.dynamic_module_utils.get_imports", eager_imports):
+            self.model = AutoModelForCausalLM.from_pretrained(
+                str(model_dir), config=config, trust_remote_code=True, local_files_only=True,
+                torch_dtype=self.dtype, attn_implementation="eager").to(device).eval()
 
     def score(self, image, descriptions):
         torch = self.torch

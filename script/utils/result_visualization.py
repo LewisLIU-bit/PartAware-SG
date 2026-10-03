@@ -1001,7 +1001,9 @@ def visualize_inference_results_points(results, map_ply_path, frame_ply_path, fr
     return tracking_id_colors
 
 
-def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=None, bias_meter=0.0, instance_colors=None, node_radius=0.1, show_bboxes=True, show_edges=True, hypothesis_id="default_hypothesis", enable_picking=False):
+def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=None, bias_meter=0.0, instance_colors=None, node_radius=0.1, show_bboxes=True, show_edges=True, hypothesis_id="default_hypothesis", enable_picking=False,
+                             show_parts=False, show_part_points=False, include_provisional_parts=False,
+                             part_radius=0.035, check_only=False, screenshot_path=None):
     """
     Visualize the map PLY file with object node positions from topology map highlighted.
     
@@ -1015,11 +1017,19 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
         show_bboxes: Whether to show bounding boxes for object nodes (default: True)
         show_edges: Whether to show edges between nodes (default: True)
         hypothesis_id: ID of the hypothesis to visualize edges for (default: "default_hypothesis")
-        enable_picking: If True, open an additional picking window to select node centers and print object names
+        enable_picking: Enable node picking in the same map window.
+        show_parts: Add child nodes and dashed hierarchy edges to this renderer.
+        show_part_points: Also show saved part point clouds; disabled to preserve map detail.
+        include_provisional_parts: Include unconfirmed child nodes.
+        part_radius: Radius of child nodes in world meters.
+        check_only: Prepare and validate the same geometry without a graphics window.
+        screenshot_path: Save the same scene using a hidden legacy window.
     
     Returns:
         tracking_id_colors: Dictionary mapping tracking IDs to colors
     """
+    if not np.isfinite(node_radius) or node_radius <= 0:
+        raise ValueError("Object radius must be finite and positive")
     print("\nVisualizing map with object node positions...")
     
     # Load topology map if not provided
@@ -1214,6 +1224,23 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
     if show_edges and edge_geometries:
         geometries.extend(edge_geometries)
     
+    # Append the part layer to the original scene instead of creating another viewer.
+    part_geometries, part_picks, part_stats = [], [], {}
+    if show_parts:
+        if topology_map_path is None:
+            raise ValueError("Part overlays require a saved graph path")
+        from utils.part_visualization import build_part_overlay
+        part_geometries, part_picks, part_stats = build_part_overlay(
+            topology_map_path, tracking_id_colors, part_radius, bias_meter,
+            show_part_points, include_provisional_parts)
+        geometries.extend(geom for _, geom in part_geometries)
+    print({"objects": len(node_spheres), "object_edges": len(edge_geometries),
+           "bounding_boxes": len(bbox_geometries), "base_points": len(map_cloud.points), **part_stats})
+    if check_only:
+        return tracking_id_colors
+    if screenshot_path:
+        enable_picking = False
+
     # Visualize
     print(f"Visualizing {len(geometries)} geometries...")
     print("Legend:")
@@ -1272,6 +1299,13 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
         for i, edge in enumerate(edge_geometries):
             scene_widget.scene.add_geometry(f"edge_{i}", edge, line_material)
 
+        part_line_material = rendering.MaterialRecord()
+        part_line_material.shader = "unlitLine"
+        part_line_material.line_width = 1.2
+        for index, (kind, geom) in enumerate(part_geometries):
+            material = {"mesh": mesh_material, "points": pcd_material, "line": part_line_material}[kind]
+            scene_widget.scene.add_geometry(f"part_overlay_{index}", geom, material)
+
         bounds = scene_widget.scene.bounding_box
         scene_widget.setup_camera(60.0, bounds, bounds.get_center())
 
@@ -1280,8 +1314,10 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
 
         window.set_on_layout(_on_layout)
 
-        node_names = [info["name"] for info in object_node_info]
-        node_ids = [info["id"] for info in object_node_info]
+        pick_infos = object_node_info + part_picks
+        pick_positions = np.vstack([biased_node_positions] + [p["position"][None, :] for p in part_picks])
+        node_names = [info["name"] for info in pick_infos]
+        node_ids = [info["id"] for info in pick_infos]
         pick_threshold = max(0.2, node_radius * 1.8)
 
         def _on_mouse(event):
@@ -1301,12 +1337,12 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
 
                     world = scene_widget.scene.camera.unproject(x, y, depth, w, h)
                     click_point = np.array(world, dtype=np.float32)
-                    dists = np.linalg.norm(biased_node_positions - click_point, axis=1)
+                    dists = np.linalg.norm(pick_positions - click_point, axis=1)
                     nearest_idx = int(np.argmin(dists))
                     nearest_dist = float(dists[nearest_idx])
 
                     if nearest_dist <= pick_threshold:
-                        print(f"Picked object: {node_names[nearest_idx]} (node id: {node_ids[nearest_idx]})")
+                        print(f"Picked node: {node_names[nearest_idx]} (node id: {node_ids[nearest_idx]})")
                     else:
                         print(f"Clicked point is not close to a node center (nearest distance: {nearest_dist:.3f}m)")
 
@@ -1324,7 +1360,7 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
             window_name="Map Visualization with Object Node Positions",
             width=1400,
             height=900,
-            visible=True,
+            visible=screenshot_path is None,
         )
         if not window_created:
             raise RuntimeError(
@@ -1345,7 +1381,18 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
         render_option.background_color = np.array([1.0, 1.0, 1.0])
         render_option.mesh_show_back_face = True
 
-        vis.run()
+        if screenshot_path:
+            view = vis.get_view_control()
+            view.set_lookat(map_cloud.get_center())
+            view.set_front([0.15, -0.85, 0.5])
+            view.set_up([0, 0, 1])
+            view.set_zoom(0.65)
+            for _ in range(5):
+                vis.poll_events()
+                vis.update_renderer()
+            vis.capture_screen_image(str(screenshot_path), do_render=True)
+        else:
+            vis.run()
         vis.destroy_window()
     
     print(f"Visualization complete. Displayed {len(biased_node_positions)} object nodes.")

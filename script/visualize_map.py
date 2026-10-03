@@ -18,6 +18,12 @@ if __name__ == "__main__":
     parser.add_argument("--show_edges", action="store_true")
     parser.add_argument("--enable_picking", action="store_true",
                         help="Enable node-center picking and print picked object names. Use 'Shift' + 'Left Click' on a node sphere to print object name")
+    parser.add_argument("--show_parts", action="store_true", help="Add part child nodes to the original map scene")
+    parser.add_argument("--show_part_points", action="store_true", help="Also display part point clouds")
+    parser.add_argument("--include_provisional_parts", action="store_true")
+    parser.add_argument("--part_radius", type=float, default=0.035)
+    parser.add_argument("--check_only", action="store_true")
+    parser.add_argument("--screenshot", default=None, help="Save a preview without an interactive window")
     args = parser.parse_args()
 
     example_map_ply_path = args.map_ply_path
@@ -33,6 +39,12 @@ if __name__ == "__main__":
                 show_bboxes=args.show_bboxes,
                 show_edges=args.show_edges,
                 enable_picking=args.enable_picking,
+                show_parts=args.show_parts,
+                show_part_points=args.show_part_points,
+                include_provisional_parts=args.include_provisional_parts,
+                part_radius=args.part_radius,
+                check_only=args.check_only,
+                screenshot_path=args.screenshot,
             )
             print(f"Successfully visualized map with {len(tracking_colors) if tracking_colors else 0} tracking IDs")
         except Exception as e:
