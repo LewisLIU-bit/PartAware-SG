@@ -1,0 +1,222 @@
+diff --git a/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/ms_deform_attn_cuda.cu b/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/ms_deform_attn_cuda.cu
+index d04fae8..7bf3f49 100644
+--- a/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/ms_deform_attn_cuda.cu
++++ b/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/ms_deform_attn_cuda.cu
+@@ -32,7 +32,7 @@ at::Tensor ms_deform_attn_cuda_forward(
+     AT_ASSERTM(sampling_loc.is_contiguous(), "sampling_loc tensor has to be contiguous");
+     AT_ASSERTM(attn_weight.is_contiguous(), "attn_weight tensor has to be contiguous");
+ 
+-    AT_ASSERTM(value.type().is_cuda(), "value must be a CUDA tensor");
++    AT_ASSERTM(value.is_cuda(), "value must be a CUDA tensor");
+     AT_ASSERTM(spatial_shapes.type().is_cuda(), "spatial_shapes must be a CUDA tensor");
+     AT_ASSERTM(level_start_index.type().is_cuda(), "level_start_index must be a CUDA tensor");
+     AT_ASSERTM(sampling_loc.type().is_cuda(), "sampling_loc must be a CUDA tensor");
+@@ -62,7 +62,7 @@ at::Tensor ms_deform_attn_cuda_forward(
+     for (int n = 0; n < batch/im2col_step_; ++n)
+     {
+         auto columns = output_n.select(0, n);
+-        AT_DISPATCH_FLOATING_TYPES(value.type(), "ms_deform_attn_forward_cuda", ([&] {
++        AT_DISPATCH_FLOATING_TYPES(value.scalar_type(), "ms_deform_attn_forward_cuda", ([&] {
+             ms_deformable_im2col_cuda(at::cuda::getCurrentCUDAStream(),
+                 value.data<scalar_t>() + n * im2col_step_ * per_value_size,
+                 spatial_shapes.data<int64_t>(),
+@@ -98,7 +98,7 @@ std::vector<at::Tensor> ms_deform_attn_cuda_backward(
+     AT_ASSERTM(attn_weight.is_contiguous(), "attn_weight tensor has to be contiguous");
+     AT_ASSERTM(grad_output.is_contiguous(), "grad_output tensor has to be contiguous");
+ 
+-    AT_ASSERTM(value.type().is_cuda(), "value must be a CUDA tensor");
++    AT_ASSERTM(value.is_cuda(), "value must be a CUDA tensor");
+     AT_ASSERTM(spatial_shapes.type().is_cuda(), "spatial_shapes must be a CUDA tensor");
+     AT_ASSERTM(level_start_index.type().is_cuda(), "level_start_index must be a CUDA tensor");
+     AT_ASSERTM(sampling_loc.type().is_cuda(), "sampling_loc must be a CUDA tensor");
+@@ -132,7 +132,7 @@ std::vector<at::Tensor> ms_deform_attn_cuda_backward(
+     for (int n = 0; n < batch/im2col_step_; ++n)
+     {
+         auto grad_output_g = grad_output_n.select(0, n);
+-        AT_DISPATCH_FLOATING_TYPES(value.type(), "ms_deform_attn_backward_cuda", ([&] {
++        AT_DISPATCH_FLOATING_TYPES(value.scalar_type(), "ms_deform_attn_backward_cuda", ([&] {
+             ms_deformable_col2im_cuda(at::cuda::getCurrentCUDAStream(),
+                                     grad_output_g.data<scalar_t>(),
+                                     value.data<scalar_t>() + n * im2col_step_ * per_value_size,
+diff --git a/GroundingDINO/groundingdino/util/inference.py b/GroundingDINO/groundingdino/util/inference.py
+index a2381eb..71d57fe 100644
+--- a/GroundingDINO/groundingdino/util/inference.py
++++ b/GroundingDINO/groundingdino/util/inference.py
+@@ -253,6 +253,177 @@ class Model:
+             boxes=boxes,
+             logits=logits)
+         return detections, phrases
++    def predict_with_descriptions(
++        self, image, queries,
++        box_threshold=0.2,
++        text_mode="description",
++    ):
++        """Run full-image queries with explicit target-token alignment."""
++        if text_mode not in {"name_only", "description"} or not queries:
++            raise ValueError("Invalid text mode or empty queries")
++
++        if not getattr(self.model.tokenizer, "is_fast", False):
++            raise RuntimeError("Target spans require a fast tokenizer")
++
++        processed = Model.preprocess_image(
++            image_bgr=image
++        ).to(self.device)
++
++        all_boxes, all_scores = [], []
++        all_features, all_classes = [], []
++        records, seen = [], set()
++
++        for class_id, query in enumerate(queries):
++            query_id = str(query["query_id"])
++            if query_id in seen:
++                raise ValueError(f"Duplicate query_id: {query_id}")
++            seen.add(query_id)
++
++            name = " ".join(query["name"].lower().split())
++            description = " ".join(
++                query["description"].lower().split()
++            )
++
++            if not name or (
++                text_mode == "description" and not description
++            ):
++                raise ValueError(
++                    f"Empty target or description: {query_id}"
++                )
++
++            # The description conditions the network, while the leading
++            # target name determines which token scores select boxes.
++            caption = (
++                name if text_mode == "name_only"
++                else f"{name}: {description}"
++            )
++            caption = preprocess_caption(caption)
++
++            tokenized = self.model.tokenizer(
++                caption,
++                return_offsets_mapping=True,
++                truncation=False,
++            )
++
++            limit = int(getattr(self.model, "max_text_len", 256))
++            if len(tokenized["input_ids"]) > limit:
++                raise ValueError(
++                    f"Query {query_id} exceeds {limit} tokens"
++                )
++
++            target_tokens = [
++                i
++                for i, (start, end) in enumerate(
++                    tokenized["offset_mapping"]
++                )
++                if end > start
++                and start < len(name)
++                and end > 0
++                and any(
++                    c.isalnum()
++                    for c in caption[start:min(end, len(name))]
++                )
++            ]
++            if not target_tokens:
++                raise ValueError(f"No target tokens: {query_id}")
++
++            captured = []
++
++            def capture_decoder(module, inputs, output):
++                captured.append(output[0][-1].detach())
++
++            hook = self.model.transformer.register_forward_hook(
++                capture_decoder
++            )
++            try:
++                with torch.no_grad():
++                    output = self.model(
++                        processed[None], captions=[caption]
++                    )
++            finally:
++                hook.remove()
++
++            if len(captured) != 1:
++                raise RuntimeError(
++                    "Expected one decoder feature capture"
++                )
++
++            logits = (
++                output["pred_logits"][0]
++                .detach().cpu().sigmoid()
++            )
++            boxes = output["pred_boxes"][0].detach().cpu()
++            features = captured[0][0].cpu()
++
++            if (
++                len(features) != len(boxes)
++                or len(logits) != len(boxes)
++            ):
++                raise RuntimeError(
++                    "Boxes, logits and features are misaligned"
++                )
++            if max(target_tokens) >= logits.shape[1]:
++                raise RuntimeError(
++                    "Target token was truncated by the detector"
++                )
++
++            target_scores = logits[
++                :, target_tokens
++            ].max(dim=1).values
++
++            global_scores = logits.max(dim=1).values
++
++            keep = (
++                (target_scores > box_threshold)
++                & torch.isfinite(target_scores)
++                & torch.isfinite(boxes).all(dim=1)
++                & (boxes[:, 2:] > 0).all(dim=1)
++            )
++            indices = torch.nonzero(
++                keep, as_tuple=False
++            ).flatten().tolist()
++
++            # Apply exactly the same selection to boxes and features.
++            all_boxes.append(boxes[keep])
++            all_scores.append(target_scores[keep])
++            all_features.append(features[keep])
++            all_classes.extend([class_id] * len(indices))
++
++            tokens = self.model.tokenizer.convert_ids_to_tokens(
++                tokenized["input_ids"]
++            )
++
++            for raw_index in indices:
++                records.append({
++                    "query_id": query_id,
++                    "dino_query_index": raw_index,
++                    "text_mode": text_mode,
++                    "grounding_caption": caption,
++                    "target_token_indices": target_tokens,
++                    "target_tokens": [
++                        tokens[i] for i in target_tokens
++                    ],
++                    "detector_score": float(
++                        target_scores[raw_index]
++                    ),
++                    "global_token_max": float(
++                        global_scores[raw_index]
++                    ),
++                })
++
++        boxes = torch.cat(all_boxes, dim=0)
++        scores = torch.cat(all_scores, dim=0)
++        features = torch.cat(all_features, dim=0)
++
++        height, width = image.shape[:2]
++        detections = Model.post_process_result(
++            height, width, boxes, scores
++        )
++        detections.class_id = np.asarray(
++            all_classes, dtype=np.int64
++        )
++
++        return detections, features, records
+ 
+     def predict_with_classes(
+         self,

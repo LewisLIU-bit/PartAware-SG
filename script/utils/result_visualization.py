@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import colorsys
 
+
 file_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(file_path))
 sys.path.append(file_path)  # Add current directory (script/utils/) to path
@@ -1318,11 +1319,28 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
         app.run()
     else:
         vis = o3d.visualization.VisualizerWithKeyCallback()
-        vis.create_window(window_name="Map Visualization with Object Node Positions", width=1400, height=900, visible=True)
+        # Stop if the graphics context cannot be created.
+        window_created = vis.create_window(
+            window_name="Map Visualization with Object Node Positions",
+            width=1400,
+            height=900,
+            visible=True,
+        )
+        if not window_created:
+            raise RuntimeError(
+                "Open3D window creation failed. "
+                "Check the display server and OpenGL rendering environment."
+            )
         for geom in geometries:
             vis.add_geometry(geom)
 
         render_option = vis.get_render_option()
+        if render_option is None:
+            vis.destroy_window()
+            raise RuntimeError(
+                "Open3D render options are unavailable: "
+                "graphics initialization did not complete."
+            )
         render_option.point_size = 1.5
         render_option.background_color = np.array([1.0, 1.0, 1.0])
         render_option.mesh_show_back_face = True

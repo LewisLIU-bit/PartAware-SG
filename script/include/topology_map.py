@@ -269,10 +269,20 @@ class TopologyMap:
                     hypothesis_id, 
                     hypothesis_data.get('confidence', 0.0)
                 )
-                if 'edges' in hypothesis_data:
-                    for edge_id, edge_data in hypothesis_data['edges'].items():
-                        edge = Edge.from_dict(edge_data)
-                        hypothesis.add_edge(edge)
+                # Missing or null edges represent an empty edge collection.
+                edge_records = hypothesis_data.get('edges')
+                if edge_records is None:
+                    edge_records = {}
+
+                if not isinstance(edge_records, dict):
+                    raise ValueError(
+                        f"Hypothesis {hypothesis_id}: "
+                        "edges must be an object or null"
+                    )
+
+                for edge_id, edge_data in edge_records.items():
+                    edge = Edge.from_dict(edge_data)
+                    hypothesis.add_edge(edge)
                 self.add_edge_hypothesis(hypothesis)
         else:
             print("No edge hypotheses found or edge_hypotheses is null")

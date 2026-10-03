@@ -1,0 +1,344 @@
+[
+  {
+    "chair": [
+      "A photo of a chair.",
+      "A seat for one person with a back, often supported by legs."
+    ]
+  },
+  {
+    "armchair": [
+      "A photo of a armchair.",
+      "An upholstered chair with a back and armrests."
+    ]
+  },
+  {
+    "sofa": [
+      "A photo of a sofa.",
+      "A long upholstered seat for several people with a back and armrests."
+    ]
+  },
+  {
+    "stool": [
+      "A photo of a stool.",
+      "A seat without a backrest."
+    ]
+  },
+  {
+    "bench": [
+      "A photo of a bench.",
+      "A long seat for more than one person."
+    ]
+  },
+  {
+    "coffee table": [
+      "A photo of a coffee table.",
+      "A low table usually placed in front of a sofa or seating area."
+    ]
+  },
+  {
+    "dining table": [
+      "A photo of a dining table.",
+      "A table used for eating meals."
+    ]
+  },
+  {
+    "desk": [
+      "A photo of a desk.",
+      "A work table used for writing or using a computer."
+    ]
+  },
+  {
+    "side table": [
+      "A photo of a side table.",
+      "A small table beside a chair, sofa, or bed."
+    ]
+  },
+  {
+    "cabinet": [
+      "A photo of a cabinet.",
+      "A storage unit with doors or drawers."
+    ]
+  },
+  {
+    "bookshelf": [
+      "A photo of a bookshelf.",
+      "A shelving unit used to hold books and other objects."
+    ]
+  },
+  {
+    "TV stand": [
+      "A photo of a tv stand.",
+      "A low furniture unit supporting a television or media equipment."
+    ]
+  },
+  {
+    "bed": [
+      "A photo of a bed.",
+      "A piece of furniture with a mattress used for sleeping."
+    ]
+  },
+  {
+    "nightstand": [
+      "A photo of a nightstand.",
+      "A small bedside cabinet or table."
+    ]
+  },
+  {
+    "wardrobe": [
+      "A photo of a wardrobe.",
+      "A tall cabinet used to store clothing."
+    ]
+  },
+  {
+    "speaker": [
+      "A photo of a speaker.",
+      "An audio loudspeaker with a box-shaped enclosure and sound-producing drivers, placed on the floor, furniture, or a stand."
+    ]
+  },
+  {
+    "subwoofer": [
+      "A photo of a subwoofer.",
+      "A box-shaped loudspeaker designed to reproduce low-frequency bass sounds."
+    ]
+  },
+  {
+    "audio amplifier": [
+      "A photo of a audio amplifier.",
+      "An electronic audio component with a rectangular enclosure, front controls, knobs, or a display."
+    ]
+  },
+  {
+    "television": [
+      "A photo of a television.",
+      "A flat display screen used for watching television, often on furniture or mounted on a wall."
+    ]
+  },
+  {
+    "computer monitor": [
+      "A photo of a computer monitor.",
+      "A display screen used with a computer, commonly supported by a desktop stand."
+    ]
+  },
+  {
+    "computer tower": [
+      "A photo of a computer tower.",
+      "A rectangular desktop computer case containing computing hardware."
+    ]
+  },
+  {
+    "laptop": [
+      "A photo of a laptop.",
+      "A portable computer with a hinged screen and keyboard."
+    ]
+  },
+  {
+    "keyboard": [
+      "A photo of a keyboard.",
+      "A panel of keys used to enter text into a computer."
+    ]
+  },
+  {
+    "mouse": [
+      "A photo of a mouse.",
+      "A small hand-operated computer pointing device."
+    ]
+  },
+  {
+    "remote control": [
+      "A photo of a remote control.",
+      "A handheld device with buttons for controlling electronic equipment."
+    ]
+  },
+  {
+    "projector": [
+      "A photo of a projector.",
+      "An optical electronic device with a lens that projects images onto a screen or wall."
+    ]
+  },
+  {
+    "floor lamp": [
+      "A photo of a floor lamp.",
+      "A tall freestanding light fixture supported by a base on the floor."
+    ]
+  },
+  {
+    "table lamp": [
+      "A photo of a table lamp.",
+      "A small light fixture placed on a table or cabinet."
+    ]
+  },
+  {
+    "ceiling light": [
+      "A photo of a ceiling light.",
+      "A light fixture attached to or suspended from the ceiling."
+    ]
+  },
+  {
+    "potted plant": [
+      "A photo of a potted plant.",
+      "A plant growing in a pot or planter."
+    ]
+  },
+  {
+    "vase": [
+      "A photo of a vase.",
+      "A decorative container often used to hold flowers."
+    ]
+  },
+  {
+    "book": [
+      "A photo of a book.",
+      "A bound collection of pages with a cover."
+    ]
+  },
+  {
+    "bottle": [
+      "A photo of a bottle.",
+      "A container with a narrow neck used to hold liquids."
+    ]
+  },
+  {
+    "cup": [
+      "A photo of a cup.",
+      "A small open drinking vessel, sometimes with a handle."
+    ]
+  },
+  {
+    "bowl": [
+      "A photo of a bowl.",
+      "A round open container used to hold food or other contents."
+    ]
+  },
+  {
+    "plate": [
+      "A photo of a plate.",
+      "A shallow dish used to serve food."
+    ]
+  },
+  {
+    "cushion": [
+      "A photo of a cushion.",
+      "A soft padded object placed on a seat or sofa."
+    ]
+  },
+  {
+    "curtain": [
+      "A photo of a curtain.",
+      "A hanging fabric panel covering a window or opening."
+    ]
+  },
+  {
+    "rug": [
+      "A photo of a rug.",
+      "A separate textile covering laid on a floor."
+    ]
+  },
+  {
+    "mirror": [
+      "A photo of a mirror.",
+      "A framed or unframed reflective panel."
+    ]
+  },
+  {
+    "framed picture": [
+      "A photo of a framed picture.",
+      "A picture or artwork enclosed in a physical frame."
+    ]
+  },
+  {
+    "clock": [
+      "A photo of a clock.",
+      "A physical device displaying the time."
+    ]
+  },
+  {
+    "door": [
+      "A photo of a door.",
+      "A movable panel used to open or close an entrance."
+    ]
+  },
+  {
+    "window": [
+      "A photo of a window.",
+      "A glazed opening in a wall with a surrounding frame."
+    ]
+  },
+  {
+    "refrigerator": [
+      "A photo of a refrigerator.",
+      "A large kitchen appliance with doors for keeping food cold."
+    ]
+  },
+  {
+    "oven": [
+      "A photo of a oven.",
+      "A kitchen appliance with an enclosed heated compartment for cooking."
+    ]
+  },
+  {
+    "microwave": [
+      "A photo of a microwave.",
+      "A countertop or built-in appliance with a door and controls for heating food."
+    ]
+  },
+  {
+    "sink": [
+      "A photo of a sink.",
+      "A basin with a drain, often beneath a faucet."
+    ]
+  },
+  {
+    "toilet": [
+      "A photo of a toilet.",
+      "A bathroom fixture with a bowl and seat."
+    ]
+  },
+  {
+    "bathtub": [
+      "A photo of a bathtub.",
+      "A large basin used for bathing."
+    ]
+  },
+  {
+    "washing machine": [
+      "A photo of a washing machine.",
+      "An appliance with a drum and door used to wash clothes."
+    ]
+  },
+  {
+    "box": [
+      "A photo of a box.",
+      "A rigid container with flat sides used for storage."
+    ]
+  },
+  {
+    "basket": [
+      "A photo of a basket.",
+      "An open container made from woven or perforated material."
+    ]
+  },
+  {
+    "backpack": [
+      "A photo of a backpack.",
+      "A bag with shoulder straps designed to be carried on the back."
+    ]
+  },
+  {
+    "floor": [
+      "A photo of a floor.",
+      "The lower horizontal surface of a room."
+    ]
+  },
+  {
+    "wall": [
+      "A photo of a wall.",
+      "A vertical structural surface enclosing or dividing a room."
+    ]
+  },
+  {
+    "ceiling": [
+      "A photo of a ceiling.",
+      "The upper interior surface of a room."
+    ]
+  }
+]

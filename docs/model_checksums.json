@@ -1,0 +1,10 @@
+{
+  "checkpoints/vlpart/swinbase_cascade_lvis_paco.pth": {
+    "sha256": "e524eb802224b0ac9069826122c7423fc612c436b4d28d76fad19dca0fd1d798",
+    "size": 563897579
+  },
+  "checkpoints/clip/RN50.pt": {
+    "sha256": "afeb0e10f9e5a86da6080e35cf09123aca3b358a0c3e3b6c78a7b63bc04b6762",
+    "size": 255827503
+  }
+}

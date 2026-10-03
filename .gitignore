@@ -17,3 +17,29 @@ gpt-*
 *.json
 build_read_and_visualize_map/
 test/
+# PartAware-SG local assets
+.venv-vlpart/
+checkpoints/
+scannet/build-partaware/
+scannet/script/thirdparty/OP3DSG/
+scannet/script/thirdparty/VLPart/
+scannet/script/thirdparty/detectron2/
+__pycache__/
+!scannet/CMakeLists.txt
+
+# Generated artifacts are stored outside the source project.
+validation/
+results/
+outputs/
+.idea/
+code_backups/
+scannet/script/qwen_tools/configs/
+
+# Curated runtime knowledge and reproducibility metadata are source files.
+!scannet/script/partaware/object_part_knowledge.json
+!scannet/script/ram/scannet_smoke_12.json
+!scannet/script/ram/hypersim_indoor_57.json
+!docs/sources.lock.json
+!docs/model_checksums.json
+!docs/environment_partaware.json
+!docs/partaware_requirements.txt

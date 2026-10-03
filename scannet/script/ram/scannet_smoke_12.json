@@ -1,0 +1,74 @@
+[
+  {
+    "chair": [
+      "a photo of a chair.",
+      "a piece of furniture designed for one person to sit on, usually with a back and legs."
+    ]
+  },
+  {
+    "computer": [
+      "a photo of a computer.",
+      "an electronic computing device, often consisting of a monitor or desktop computer."
+    ]
+  },
+  {
+    "desk": [
+      "a photo of a desk.",
+      "a table-like piece of furniture used for working, studying, or holding a computer."
+    ]
+  },
+  {
+    "curtain": [
+      "a photo of a curtain.",
+      "a hanging piece of fabric used to cover a window or divide a space."
+    ]
+  },
+  {
+    "table": [
+      "a photo of a table.",
+      "a piece of furniture with a flat horizontal top supported by legs."
+    ]
+  },
+  {
+    "drawer": [
+      "a photo of a drawer.",
+      "a sliding storage compartment in a desk, cabinet, or other piece of furniture."
+    ]
+  },
+  {
+    "speaker": [
+      "a photo of a speaker.",
+      "an electronic audio device that produces sound."
+    ]
+  },
+  {
+    "stool": [
+      "a photo of a stool.",
+      "a simple seat, usually without a back or arms."
+    ]
+  },
+  {
+    "bed": [
+      "a photo of a bed.",
+      "a piece of furniture used for sleeping, typically with a mattress."
+    ]
+  },
+  {
+    "cabinet": [
+      "a photo of a cabinet.",
+      "a storage piece of furniture with doors, shelves, or drawers."
+    ]
+  },
+  {
+    "bookshelf": [
+      "a photo of a bookshelf.",
+      "a piece of furniture with horizontal shelves used for storing books or objects."
+    ]
+  },
+  {
+    "lamp": [
+      "a photo of a lamp.",
+      "a device that produces light, often placed on a desk, table, or floor."
+    ]
+  }
+]

@@ -36,7 +36,8 @@ if __name__ == "__main__":
             )
             print(f"Successfully visualized map with {len(tracking_colors) if tracking_colors else 0} tracking IDs")
         except Exception as e:
-            print(f"Error during map visualization: {e}")
+            print(f"Error during map visualization: {e}",file=sys.stderr)
+            sys.exit(1)
     else:
         print("Example files not found. Please modify the paths above to match your actual files.")
         print(f"Map PLY path: {example_map_ply_path}")

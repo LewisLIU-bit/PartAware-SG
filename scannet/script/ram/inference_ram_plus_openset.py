@@ -147,6 +147,92 @@ class RAMPlusOpensetInference:
         with open(json_path, 'w') as f:
             json.dump(data, f)
 
+    def run_manifest(self, manifest_path, output_root):
+        """Run local tagging on every frame listed in a manifest."""
+        manifest_path = Path(manifest_path).expanduser().resolve()
+
+        with manifest_path.open("r", encoding="utf-8") as f:
+            manifest = json.load(f)
+
+        if manifest.get("format") != "scannet_sg_input":
+            raise ValueError("Expected a scannet_sg_input manifest")
+
+        def validate_component(value):
+            if (
+                not isinstance(value, str)
+                or not value.strip()
+                or value in {".", ".."}
+                or any(char in value for char in '/\\<>:"|?*\0')
+                or any(ord(char) < 32 for char in value)
+                or value.endswith((" ", "."))
+            ):
+                raise ValueError(f"Invalid path component: {value!r}")
+            return value
+
+        dataset = validate_component(manifest.get("dataset"))
+        scene_id = validate_component(manifest.get("scene_id"))
+
+        frames = manifest.get("frames")
+        if not isinstance(frames, list) or not frames:
+            raise ValueError("Manifest must contain a non-empty frames list")
+
+        output_dir = (
+            Path(output_root).expanduser().resolve()
+            / dataset / scene_id / "refined_instance"
+        )
+
+        jobs = []
+        seen_ids = set()
+
+        # Validate all input and output paths before inference.
+        for frame in frames:
+            frame_id = validate_component(frame["frame_id"])
+            if frame_id in seen_ids:
+                raise ValueError(f"Duplicate frame ID: {frame_id}")
+            seen_ids.add(frame_id)
+
+            image_path = Path(frame["rgb"]).expanduser()
+            if not image_path.is_absolute():
+                image_path = manifest_path.parent / image_path
+
+            if not image_path.is_file():
+                raise FileNotFoundError(image_path)
+
+            output_path = output_dir / f"{frame_id}.json"
+            if output_path.exists():
+                raise FileExistsError(output_path)
+
+            jobs.append((frame_id, image_path, output_path))
+
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        for frame_id, image_path, output_path in tqdm(jobs):
+            with Image.open(image_path) as image:
+                tensor = self.transform(
+                    image.convert("RGB")
+                ).unsqueeze(0).to(self.device)
+
+            with torch.inference_mode():
+                result = inference(tensor, self.model)
+
+            tags = [
+                tag.strip()
+                for tag in result[0].split(" | ")
+                if tag.strip()
+            ]
+            tags = list(dict.fromkeys(tags))
+
+            # Bypass semantic background filtering for this pilot.
+            data = self.create_objects_json(tags)
+
+            with output_path.open("x", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+                f.write("\n")
+
+            print(f"Frame {frame_id}: {tags}")
+
+        print(f"Saved {len(jobs)} tag files to {output_dir}")
+
 
     def run_inference(self, args):
         if args.save_json:

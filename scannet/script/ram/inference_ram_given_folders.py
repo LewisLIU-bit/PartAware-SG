@@ -73,9 +73,51 @@ if __name__ == "__main__":
                         metavar='DIR',
                         help='path to LLM tag descriptions',
                         default='/home/cc/chg_ws/ros_ws/topomap_ws/src/semantic_topo_map/scannet/script/ram/scannet509.json')
-
+    parser.add_argument("--manifest",
+                        type=str,
+                        default=None,
+                        help="Input manifest; omit to use the legacy ScanNet folder mode",
+    )
+    parser.add_argument("--output_root",
+                        type=str,
+                        default=None,
+                        help="Output root containing dataset and scene subdirectories",
+    )
 
     args = parser.parse_args()
+    if args.manifest is not None:
+        if not args.output_root:
+            parser.error("--output_root is required with --manifest")
+
+        manifest_path = Path(args.manifest).expanduser().resolve()
+        pretrained_path = Path(args.pretrained).expanduser().resolve()
+        tag_description_path = Path(args.llm_tag_des).expanduser().resolve()
+
+        for path in (
+            manifest_path,
+            pretrained_path,
+            tag_description_path,
+        ):
+            if not path.is_file():
+                parser.error(f"Input file does not exist: {path}")
+
+        print(f"Manifest: {manifest_path}")
+        print(f"Candidate categories: {tag_description_path}")
+        print("Processing all manifest frames without background filtering")
+
+        ram_plus_openset_inference = RAMPlusOpensetInference(
+            str(pretrained_path),
+            args.image_size,
+            str(tag_description_path),
+        )
+
+        ram_plus_openset_inference.run_manifest(
+            manifest_path=manifest_path,
+            output_root=args.output_root,
+        )
+
+        # Do not enter the legacy ScanNet folder loop.
+        sys.exit(0)
 
     # get all the folders in the scans folder
     print("Loading scan folders...")

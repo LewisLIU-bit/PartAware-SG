@@ -1,0 +1,39 @@
+{
+  "baseline": {
+    "repository": "https://github.com/tud-amr/ScanNet-SG",
+    "commit": "52766bba5b4bf7e4773480d1b6c9703c8d8069da",
+    "paper": "https://arxiv.org/abs/2605.10484"
+  },
+  "OP3DSG": {
+    "repository": "https://github.com/AutoCompSysLab/OP3DSG",
+    "paper": "https://arxiv.org/abs/2606.29786",
+    "integration": "Only official object_part_knowledge.json is vendored; adapted association uses project code",
+    "commit": "4fb31abf20e36483427663c5bfe41ab757a682a1",
+    "vendored_path": "scannet/script/partaware/object_part_knowledge.json"
+  },
+  "VLPart": {
+    "repository": "https://github.com/facebookresearch/VLPart",
+    "paper": "https://arxiv.org/abs/2305.11173",
+    "integration": "official model and dynamic category classifier",
+    "commit": "e48903ab0cb38e4dd5be7ce7da2e36c855eff53f"
+  },
+  "detectron2": {
+    "repository": "https://github.com/facebookresearch/detectron2",
+    "integration": "source-built inference runtime",
+    "commit": "1e3e13bbf607b54f62205c4c33922521822fb298"
+  },
+  "ConceptGraphs": {
+    "repository": "https://github.com/concept-graphs/concept-graphs",
+    "paper": "https://arxiv.org/abs/2309.16650",
+    "reviewed_file": "conceptgraph/slam/utils.py",
+    "integration": "adapted masked features and optional geometric cleanups; not vendored"
+  },
+  "OpenSGA_alignment": {
+    "official_page": "https://autonomousrobots.nl/paper_websites/opensga",
+    "status": "Public official alignment inference repository was not located during this review"
+  },
+  "dataset_scope": [
+    "scannet",
+    "hypersim"
+  ]
+}

@@ -17,6 +17,7 @@
 #include <set>
 #include <vector>
 #include <filesystem>
+#include <cmath>
 
 #include "topology_map.h"
 #include "utils.h"
@@ -298,27 +299,50 @@ TopologyMap buildTopologyMap(const std::vector<int>& instance_ids,
 }
 
 int main(int argc, char** argv) {
-    if (argc < 3) {
-        std::cerr << "Usage: ./generate_json <path_to_ply> <if_visualize 0 or 1> <use_three_channel_id 0 or 1, default is 0> <edge_threshold, default is 2.0>" << std::endl;
+    if (argc < 3 || argc > 6) {
+        std::cerr
+            << "Usage: ./generate_json <path_to_ply> <if_visualize>"
+            << " [use_three_channel_id=0] [edge_threshold=2.0]"
+            << " [max_instance_extent=3.0; 0 disables size filtering]"
+            << std::endl;
         return -1;
     }
 
-    int int_if_visualize = std::stoi(argv[2]);
-    bool if_visualize = int_if_visualize == 1;
+    bool if_visualize = false;
     bool use_three_channel_id = false;
     float edge_threshold = 2.0f;
+    float max_instance_extent = 3.0f;
 
-    if (argc == 4) {
-        int int_use_three_channel_id = std::stoi(argv[3]);
-        use_three_channel_id = int_use_three_channel_id == 1;
-    }else if (argc == 5) {
-        int int_use_three_channel_id = std::stoi(argv[3]);
-        use_three_channel_id = int_use_three_channel_id == 1;
-        edge_threshold = std::stof(argv[4]);
-    }else if (argc > 5) {
-        std::cerr << "Usage: ./generate_json <path_to_ply> <if_visualize 0 or 1> <use_three_channel_id 0 or 1, default is 0> <edge_threshold, default is 2.0>" << std::endl;
+    try {
+        if_visualize = std::stoi(argv[2]) == 1;
+
+        if (argc >= 4) {
+            use_three_channel_id = std::stoi(argv[3]) == 1;
+        }
+        if (argc >= 5) {
+            edge_threshold = std::stof(argv[4]);
+        }
+        if (argc >= 6) {
+            max_instance_extent = std::stof(argv[5]);
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl;
         return -1;
     }
+
+    if (!std::isfinite(edge_threshold) || edge_threshold <= 0.0f ||
+        !std::isfinite(max_instance_extent) || max_instance_extent < 0.0f) {
+        std::cerr
+            << "Edge threshold must be finite and positive; "
+            << "maximum instance extent must be finite and non-negative."
+            << std::endl;
+        return -1;
+    }
+
+    std::cout << "Maximum instance extent: "
+              << max_instance_extent
+              << " meters (0 disables size filtering)"
+              << std::endl;
 
     std::cout << "Use three channel id: " << use_three_channel_id << std::endl;
     std::cout << "Edge threshold: " << edge_threshold << std::endl;
@@ -397,11 +421,12 @@ int main(int argc, char** argv) {
 
         InstanceInfo info = computeOBB(inliers2);
 
-        // Igonore the instance if size is bigger than 3m
-        float size_threshold = 3.0f;
-        if (info.bbox_size.x() > size_threshold || info.bbox_size.y() > size_threshold || info.bbox_size.z() > size_threshold) 
-        {
-            std::cout << "Instance " << id << " is too big, ignored" << std::endl;
+        // Apply the optional size limit to the longest OBB dimension.
+        if (max_instance_extent > 0.0f &&
+            info.bbox_size.maxCoeff() > max_instance_extent) {
+            std::cout << "Instance " << id
+                      << " exceeds the configured size limit, ignored"
+                      << std::endl;
             continue;
         }
 

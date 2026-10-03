@@ -1,4 +1,4 @@
-# ScanNet-SG
+# PartAware-SG (based on ScanNet-SG)
 
 This repository contains the code for the __ScanNet-SG__ Dataset.
 
@@ -8,6 +8,80 @@ The dataset is mainly designed for frame-to-scan and subscan-to-subscan scene gr
 For more details, please refer to our paper:
 __ScanNet-SG: A Large-Scale Dataset for 3D Scene Graph Alignment__ and 
 __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
+
+
+## Optional PartAware-SG pipeline
+
+PartAware-SG preserves the saved ScanNet and Hypersim object pipelines and adds
+an independent object-part layer using official [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)
+knowledge and [VLPart](https://github.com/facebookresearch/VLPart) inference.
+The original object JSON format, 256-dimensional visual features, and
+384-dimensional text features are preserved. The default object association
+remains `legacy`; append `--association_mode op3dsg` to `openset_ply_map` only
+for a separate association experiment. This is an adapted prior-graph pipeline;
+OP3DSG's LLM reasoning stage is not included.
+
+Only ScanNet and Hypersim are supported by the project-specific adapters.
+Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1`.
+The current WSL copy already contains the required runtime repositories, weights, and
+isolated part environment. Use `scannet-sg` for the object frontend and
+`.venv-vlpart/bin/python` for parts. See [reproducible setup](docs/PARTAWARE_SETUP.md)
+for source revisions, dependencies, and official weight downloads. The upstream
+installation instructions below remain available for the original pipeline.
+
+```bash
+cd /home/lewisliu/PartAware-SG
+conda activate scannet-sg
+cmake -S scannet -B scannet/build-partaware
+cmake --build scannet/build-partaware -j2
+# Use a new experiment name for an original ScanNet run.
+MAX_FRAMES=3 bash run_scannet_sg.sh scene0000_00 scannet_baseline_v1
+```
+
+After an object graph has been generated, run parts in a fresh output directory.
+This verified ScanNet example uses the existing object baseline:
+
+```bash
+.venv-vlpart/bin/python scannet/script/run_partaware.py \
+  --image-dir /home/lewisliu/datasets/scannet/images/scans/scene0000_00 \
+  --processed-scene /home/lewisliu/datasets/scannet/processed/baseline30/openset_scans/scene0000_00 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/scannet/scene0000_00/parts_new \
+  --image-size 480 --limit 3 --visualize
+```
+
+Hypersim uses the preserved `scannet_sg_input` manifest interface:
+
+```bash
+.venv-vlpart/bin/python scannet/script/run_partaware.py \
+  --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002/manifest.json \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/hypersim_joint_v4/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/parts_new \
+  --image-size 480 --limit 3 --visualize
+```
+
+Remove `--limit 3` for all prepared frames. `--sam-checkpoint` optionally refines
+boxes with the preserved SAM weight. `--dbscan-eps 0.05`, `--subtract-contained`,
+and `--erode-pixels 1` are independent, disabled-by-default cleanup experiments.
+Containment cleanup requires the same resolved parent instance, and ambiguous
+ownership stays unresolved. `--part-overrides` accepts a JSON mapping from object
+names to part names; objects absent from the knowledge base get no guessed parts.
+
+Outputs include `partaware_graph.json`, independent per-frame Boolean masks,
+observed part point clouds, `run_config.json`, and Chinese `run_zh.jsonl` logs.
+The original `topology_map.json` is preserved. Parts have their own 1024-dimensional
+CLIP RN50 feature space; confirmed, attached tracks create `part_of` edges.
+See [interfaces](docs/PARTAWARE_INTERFACES.md) and the
+[consolidated Chinese report](RESEARCH_LOG.md).
+
+```bash
+.venv-vlpart/bin/python -m unittest discover -s scannet/script/tests_partaware -v
+```
+
+Real ScanNet and Hypersim object regression runs produced identical graphs with
+the saved binary and new default binary. Native VLPart and optional SAM runs
+completed on small samples. These runs establish functionality and compatibility;
+detector errors, duplicate parts, and uncertain ownership remain. Accuracy gains
+require annotated evaluation. The consolidated report is in [RESEARCH_LOG.md](RESEARCH_LOG.md); raw records and generated graphs are stored under `/home/lewisliu/datasets/scannet-sg-processed/partaware_v1`.
 
 
 ## Dataset Download
