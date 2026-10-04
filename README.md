@@ -80,6 +80,19 @@ The original `topology_map.json` is preserved. Parts have their own 1024-dimensi
 CLIP RN50 feature space; confirmed, attached tracks create `part_of` edges.
 See [interfaces](docs/PARTAWARE_INTERFACES.md) and the
 [consolidated Chinese report](RESEARCH_LOG.md).
+The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equations
+as embedded SVG and opens without runtime downloads. Editable
+[LaTeX source](RESEARCH_LOG.tex) is also provided.
+
+To rebuild the report with Node.js 20 or later:
+
+```bash
+npm install --prefix /tmp/partaware-report-renderer --ignore-scripts \
+  mathjax-full@3.2.2 marked@17.0.5
+node script/render_research_report.cjs \
+  --dependencies /tmp/partaware-report-renderer \
+  --latex-output RESEARCH_LOG.tex
+```
 
 ```bash
 .venv-vlpart/bin/python -m unittest discover -s scannet/script/tests_partaware -v
