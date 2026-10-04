@@ -31,6 +31,13 @@ The default runner now uses code-registered construction components. The origina
 when the fusion component is detached. This is an adapted prior-graph pipeline;
 OP3DSG's LLM reasoning stage is not included.
 
+Declared meter-scale Hypersim Z-up inputs automatically use the original
+multi-frame geometric floor guards before object association, including the
+legacy C++ fallback. The Python component records the accepted plane and support
+in `floor_filter.json`; the legacy path records them in its step log.
+Floor points remain in the background export but are
+excluded from object construction. Other coordinate conventions are not assumed.
+
 Only ScanNet and Hypersim are supported by the project-specific adapters.
 Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1`, `<name>_v2` or `<name>_v3`.
 The current WSL copy already contains the required runtime repositories, weights, and
@@ -144,6 +151,11 @@ completed on small samples. These runs establish functionality and compatibility
 detector errors, duplicate parts, and uncertain ownership remain. V3 uses independent
 official Hypersim instance labels and mesh boxes for adapted object evaluation;
 Hypersim does not provide part/hierarchy/functional-relation ground truth.
+Object evaluation also reports the predicted/annotated count ratio and symmetric
+absolute natural-log count error, `abs(log(N_pred / N_annotated))`. Lower is better;
+zero predictions with nonzero annotations have infinite error, represented by a
+JSON null plus an explicit status. Counts exclude structural background and parts.
+Missed and duplicate objects can cancel, so count error complements localization.
 These are not official ScanNet or UniGraph3D benchmark scores. See
 [RESEARCH_LOG.md](RESEARCH_LOG.md) for results and limitations.
 

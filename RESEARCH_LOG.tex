@@ -14,11 +14,41 @@
 \tableofcontents
 \clearpage
 
-更新：2026-10-04。本文合并研发、实验和评价记录。第 4、7、8 节保留 v1/v2 的数学与实验背景；第 11 节说明 v3 默认主流程、每三帧抽一帧的输入规则、独立 Hypersim 真值评价及同前端原始融合对照。公式继续提供离线 LaTeX 渲染版。完整旧记录及旧运行产物位于 \texttt{datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}partaware\_\allowbreak{}v1/\allowbreak{}history}。
+更新：2026-10-04。本文合并研发、实验和评价记录，先展示当前主流程。第 4、7、8 节保留 v1/v2 历史背景；第 11 节记录 v3 初版；第 12 节记录本轮默认几何地板过滤、物体数量对数误差与重跑结果。初版分数不能当作本轮重建后的分数。公式提供离线 LaTeX 渲染版，旧记录位于 \texttt{datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}partaware\_\allowbreak{}v1/\allowbreak{}history}。
 
 
 
 \textbf{公式阅读：} 打开 \href{RESEARCH\_LOG.html}{LaTeX 渲染版报告} 查看已排版的公式。该 HTML 内嵌由 MathJax 从本报告 LaTeX 生成的矢量公式，可离线阅读；本 Markdown 保留可编辑的 LaTeX 源码。
+
+
+
+\section*{0. 当前主脉络：从 RGB-D 到物体—部件场景图}
+\addcontentsline{toc}{section}{0. 当前主脉络：从 RGB-D 到物体—部件场景图}
+
+\textbf{输入与抽帧 → 千问类别/描述 → DINO 候选 + Florence 证据 + SAM 掩码 → 几何地板过滤 → 多视角物体融合 → 原空间图与精修 → VLPart 部件/父归属 → 正式图 → 独立评价与共用可视化。}
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+阶段 & 主要输入与作用 & 输出及核心代码 & 算法细节 \\ \hline
+\endfirsthead
+\hline
+阶段 & 主要输入与作用 & 输出及核心代码 & 算法细节 \\ \hline
+\endhead
+① 输入准备 & ScanNet 原 RGB-D 文件夹；Hypersim 完整帧列表每三帧选一帧，最多 150；校准光轴深度、米制位姿 & 既有文件夹或 \texttt{manifest.\allowbreak{}json}；\texttt{prepare\_\allowbreak{}hypersim.\allowbreak{}py} & 第 4.1、11.1 节 \\ \hline
+② 语义候选 & Qwen 逐帧读取 RGB，给开放类别及描述，不决定三维实例身份 & \texttt{vlm\_\allowbreak{}responses}、\texttt{vlm\_\allowbreak{}parsed}、类别 JSON；\texttt{qwen\_\allowbreak{}tools/\allowbreak{}run\_\allowbreak{}qwen\_\allowbreak{}categories.\allowbreak{}py} & 第 11.1 节 \\ \hline
+③ 前端分割 & GroundingDINO 给框和 256 维特征，Florence 计算裁剪描述证据，SAM 给实例掩码，SBERT 编码类别 & \texttt{refined\_\allowbreak{}instance/\allowbreak{}*.\allowbreak{}png}、\texttt{*\_\allowbreak{}instance.\allowbreak{}json}；\texttt{get\_\allowbreak{}seg\_\allowbreak{}openset.\allowbreak{}py}、\texttt{florence\_\allowbreak{}grounding.\allowbreak{}py} & 第 8、12.3 节 \\ \hline
+④ 几何地板过滤 & 在已声明的米制 Hypersim Z-up 输入中，从多帧深度和背景分布估计低处水平面，清除误标到地板的实例点 & \texttt{floor\_\allowbreak{}filter.\allowbreak{}json}、中文清除记录；\texttt{op3dsg\_\allowbreak{}fusion.\allowbreak{}py}，原 C++ 回退同策略 & 第 12.1 节 \\ \hline
+⑤ 物体融合与关联 & 逐帧世界投影；方向覆盖 + SBERT 门控；深度可见性、投影轮廓和颜色；含未匹配选项的 Hungarian；多帧特征累积 & 实例点云、\texttt{object\_\allowbreak{}tracks.\allowbreak{}json}、全局编号映射；\texttt{op3dsg\_\allowbreak{}fusion.\allowbreak{}py}、\texttt{multiview\_\allowbreak{}association.\allowbreak{}py} & 第 11.2、11.3 节 \\ \hline
+⑥ 原空间图与精修 & 调用原 \texttt{generate\_\allowbreak{}json} 生成物体位置、形状及空间边，再输出离群点/聚类精修点云和另存的精修框 & 原格式 \texttt{topology\_\allowbreak{}map.\allowbreak{}json}、\texttt{topology\_\allowbreak{}map\_\allowbreak{}cleaned.\allowbreak{}json}、\texttt{instance\_\allowbreak{}cloud\_\allowbreak{}cleaned.\allowbreak{}ply}；\texttt{map\_\allowbreak{}ply\_\allowbreak{}post\_\allowbreak{}filter.\allowbreak{}py} & 第 3、4、11.5 节 \\ \hline
+⑦ 部件及层级 & 原生 VLPart + SAM 检测部件；独立 RN50 特征、几何/颜色关联；跨帧父候选投票，确认后建子到父关系 & \texttt{parts}、\texttt{part\_\allowbreak{}nodes}、\texttt{part\_\allowbreak{}relations}、统一 \texttt{scene\_\allowbreak{}graph}；\texttt{vlpart\_\allowbreak{}graph.\allowbreak{}py}、\texttt{run\_\allowbreak{}partaware.\allowbreak{}py} & 第 4.5、11.4 节 \\ \hline
+⑧ 输出、评价与显示 & 正式图包含物体、确认部件、原空间边和 \texttt{part\_\allowbreak{}of}；评价独立读取官方真值；显示复用原版函数 & 评价 JSON；\texttt{evaluate\_\allowbreak{}hypersim.\allowbreak{}py}；\texttt{visualize\_\allowbreak{}map.\allowbreak{}py} & 第 7、10、12.2 节 \\ \hline
+\end{longtable}
+}
+
+\textbf{数据边界：} 真值 HDF5/官方物体框只流入评价阶段，构图不读取；部件阶段暂不反向修正物体身份。\texttt{--show\_\allowbreak{}parts} 控制显示，算法在显示前已执行。组件注册在 \texttt{pipeline\_\allowbreak{}components/\allowbreak{}\_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}.\allowbreak{}py}，移除采用代码注册编辑；恢复阶段参数只用于重新运行。
 
 
 
@@ -790,8 +820,8 @@ R_{\mathrm{node}}@K=\frac{1}{|V_{\mathrm{GT}}|}
 
 
 
-\section*{11. v3 默认主流程、融合数学与独立评价}
-\addcontentsline{toc}{section}{11. v3 默认主流程、融合数学与独立评价}
+\section*{11. v3 初版主流程、融合数学与独立评价（本轮地板修订前）}
+\addcontentsline{toc}{section}{11. v3 初版主流程、融合数学与独立评价（本轮地板修订前）}
 
 \subsection*{11.1 输入与全流程记录}
 \addcontentsline{toc}{subsection}{11.1 输入与全流程记录}
@@ -1008,6 +1038,174 @@ v3 新场景正式图有 138 个物体、2898 条原空间关系、619 条部件
 
 
 中文运行记录为 \texttt{pipeline\_\allowbreak{}zh.\allowbreak{}jsonl}、\texttt{object\_\allowbreak{}association\_\allowbreak{}zh.\allowbreak{}jsonl} 和 \texttt{parts/\allowbreak{}run\_\allowbreak{}zh.\allowbreak{}jsonl}；机器可读来源为 \texttt{pipeline\_\allowbreak{}provenance}、\texttt{object\_\allowbreak{}tracks.\allowbreak{}json}、\texttt{baseline\_\allowbreak{}validation.\allowbreak{}json} 及评价 JSON。代码、注释和 README 使用英语，完整实验日志留在外部 datasets。预期下一阶段提高可见表面覆盖和实例身份稳定性；在 AP50、部件/关系真值和多场景消融改善前，不承诺论文级领先精度。
+
+
+
+\section*{12. 本轮修订：几何地板过滤、数量误差与回退诊断}
+\addcontentsline{toc}{section}{12. 本轮修订：几何地板过滤、数量误差与回退诊断}
+
+\subsection*{12.1 地板为什么再次出现，以及实际过滤算法}
+\addcontentsline{toc}{subsection}{12.1 地板为什么再次出现，以及实际过滤算法}
+
+初版 v3 把原 C++ 物体融合换成 Python 组件，但遗漏原库已有的多帧几何地板过滤。前端虽然排除了 \texttt{floor} 标签，误把地板检测成 \texttt{table} 的掩码仍被融合成正式物体：旧场景 id=11 的大平面厚度约 1.4 毫米、中心 z 约 −0.25 米。仅删标签为 floor 的物体无法修正这种情况。这是接入遗漏，本轮已修复。
+
+
+
+现默认 Python 融合移植原 C++ 的几何保护条件，原 C++ 回退/对照也自动启用同一过滤政策；不增设运行时组件开关。只在 manifest 明确声明 \textbf{Hypersim、米制、Z-up 世界坐标} 时自动估计，ScanNet 原输入接口不套用未知坐标假设。所有估计都使用待处理 RGB-D、位姿和前端掩码，不读取真值语义。
+
+
+
+先在每帧以至少 16 像素步长稀疏投影深度，累积世界点 $p=(x,y,z)$，记前端掩码 id=0 的点为背景。至少有 1000 个有效点后，用高度 2\% 分位 $q_{0.02}$ 限制候选：
+
+
+
+\[
+\Delta z=0.02\ \mathrm m,\qquad
+c_k=(k+\tfrac12)\Delta z,\qquad
+c_k\le q_{0.02}+0.03\ \mathrm m.
+\]
+
+候选高度桶至少包含 100 点；在 $|z-c_k|\le0.02$ 米的至少 300 点中取中位数 $h$。令 $I_h=\{p:|z-h|\le0.01\ \mathrm m\}$，只有同时满足以下条件才接受：
+
+
+
+\begin{enumerate}
+\item $|I_h|\ge300$；
+
+
+\item 平面背景点覆盖至少 100 个 $0.10\times0.10$ 米 XY 网格单元；
+
+
+\item 至少三个不同帧各提供不少于 30 个平面背景点；
+
+
+\item 全部样本中，$z<h-0.03$ 米的比例不超过 2\%。
+
+\end{enumerate}
+
+
+候选按从低到高检查，接受首个有充分支持的平面。背景分布和低处分位共同降低误把桌面当地板的风险；缺乏证据时记录跳过，绝不假定世界地板恒为 z=0。
+
+
+
+融合前对每个实例投影点执行：
+
+
+
+\[
+P_{\mathrm{object}}=\{p\in P:|p_z-h|>0.01\ \mathrm m\}.
+\]
+
+地板带内点退出物体关联/物体图；在 \texttt{instance\_\allowbreak{}cloud\_\allowbreak{}with\_\allowbreak{}background.\allowbreak{}ply} 中作为背景保留，源 RGB-D 和掩码不改写。常用 \texttt{instance\_\allowbreak{}cloud\_\allowbreak{}cleaned.\allowbreak{}ply} 不再显示这些地板点。该方法针对近水平单一地面；坡面、多层台阶和接触地面的物体脚部仍有局限，不能当作通用表面分割。
+
+
+
+真实估计：\texttt{ai\_\allowbreak{}001\_\allowbreak{}002} 的 $h=-0.249992$ 米，有 57115 个平面样本、1500 个背景网格和 85 帧背景支持；\texttt{ai\_\allowbreak{}001\_\allowbreak{}010} 的 $h=0.000130$ 米，有 10442 个平面样本、1836 个背景网格和 62 帧支持。结果写入 \texttt{floor\_\allowbreak{}filter.\allowbreak{}json}，逐帧清除点数写入中文关联日志。旧场景正常点云的该一厘米地板带剩余点数已核对为 0。
+
+
+
+\subsection*{12.2 AP25/AP50 与用户指定的物体数量对数误差}
+\addcontentsline{toc}{subsection}{12.2 AP25/AP50 与用户指定的物体数量对数误差}
+
+AP 是平均精度。先把预测物体按置信分数排序，逐个与尚未匹配的标注物体对应；定位满足门限的预测计 TP，其余计 FP，未命中的标注计 FN。通过排序过程中不断变化的 Precision/Recall，计算精度—召回曲线的插值面积。它不是某一固定阈值下“正确物体数除以全部预测数”。
+
+
+
+本轮使用三维物体框的体积交并比：
+
+
+
+\[
+\operatorname{IoU}(B_p,B_g)=\frac{|B_p\cap B_g|}{|B_p\cup B_g|}.
+\]
+
+\textbf{AP25} 在 IoU≥0.25 下统计，\textbf{AP50} 在 IoU≥0.50 下统计；25/50 是定位匹配门限，不是准确率本身。例如 IoU=0.35 的预测能在 AP25 中命中，在 AP50 中失败。AP50 更严格，反映定位和几何形状要求；二者都不能单独判断所有图关系。重复预测只能有一个匹配同一 GT，剩余计 FP；低置信末尾的多余节点对 AP 的影响可能较弱，数量指标可额外检查总量。\href{https://kaldir.vc.in.tum.de/scannet\_benchmark/semantic\_instance\_3d}{ScanNet 官方指标说明}。
+
+
+
+我们的 \texttt{geometry\_\allowbreak{}only\_\allowbreak{}box\_\allowbreak{}AP25/\allowbreak{}AP50} 是类别无关框评价，不评价类别是否正确；ScanNet 官方实例 AP 用官方网格顶点的实例掩码并按有效类别评价，不能直接把本轮数字与其排行榜对比。
+
+
+
+按用户提出的形式，新增数量比与自然对数误差：
+
+
+
+\[
+r_N=\frac{N_{\mathrm{pred}}}{N_{\mathrm{ann}}},\qquad
+E_{\mathrm{count}}=|\ln r_N|.
+\]
+
+$r_N$ 越接近 1 越好，$E_{\mathrm{count}}$ 越接近 0 越好；$r_N=2$ 和 $r_N=0.5$ 均为 $\ln2\approx0.6931$，过检和欠检对称。分母采用相同选中帧内可见、符合固定观测支持规则的独立标注物体数；本轮为官方 Hypersim 实例标注，之后可替换为同口径人工标注。排除墙、地板、天花板，部件不计入物体数量。不能把完整场景人工数量与局部帧观测数量混比。
+
+
+
+零预测而有标注时，数学误差为 $+\infty$；JSON 用 \texttt{absolute\_\allowbreak{}log\_\allowbreak{}ratio=null} 和 \texttt{status=infinite\_\allowbreak{}no\_\allowbreak{}predictions} 明确表示，避免写入非标准 Infinity 或伪造为 0。没有标注时记 \texttt{undefined\_\allowbreak{}no\_\allowbreak{}ground\_\allowbreak{}truth}。常规正数场景输出有限数值，字段为 \texttt{object\_\allowbreak{}count\_\allowbreak{}consistency}。
+
+
+
+数量误差不能评价实例身份：漏掉一台功放同时把一台笔记本拆成两条轨迹，会抵消数量错误。因此保留 AP、严格一对一 P/R/F1 与逐物体诊断；不按数量接近 1 来调阈值或强行合并节点。
+
+
+
+\subsection*{12.3 笔记本、功放与重建发布的实际诊断}
+\addcontentsline{toc}{subsection}{12.3 笔记本、功放与重建发布的实际诊断}
+
+旧场景初版 v3 的笔记本 id=2 为 \texttt{laptop}，id=13 为 \texttt{monitor}，共同观测帧为空；在 3 厘米半径下，两个方向表面覆盖约 0.807/0.958，但 SBERT 标签相似度仅 0.471，低于 0.8 门控。最终恢复又要求同标签，因此同一笔记本的标签漂移被保留成两条轨迹。仅增加视角匹配不能跨越这个语义门控。这一问题本轮地板修订没有解决，也没有按用户期望数手工删掉 monitor。
+
+
+
+所有有效帧只有四个保留的 \texttt{audio amplifier} 掩码：两条明确覆盖右侧功放，一条包含大量桌子/背景污染，左侧功放只有 \texttt{cam\_\allowbreak{}03\_\allowbreak{}0057} 的一个可靠观测。确认规则要求至少两个不同帧，因此左侧单帧轨迹未进入正式图；相同前端的原始融合也只保留右侧一台。问题主要在前端候选/掩码支持不足，不能说两台被简单融合成一台。当前 portable Florence 对 \texttt{audio amplifier} 使用短默认模板，没有使用 \texttt{amplifier} 专用结构描述；候选类别、描述别名和掩码质量值得优先修正，但本轮没有重写这些前端条件或降低确认帧数。
+
+
+
+此外 speaker id=4/20 的 3 厘米双向覆盖约 0.967/0.973，但在两个帧里同时有两条前端观测；当前同帧排斥使它们保留分裂。这再次说明需要处理“同帧分割粒度冲突”，不能无限放宽关联把相邻同类物体合并。本轮只修复已验证的地板遗漏，以上问题继续明确保留。
+
+
+
+重建时原部件脚本要求新目录，本轮修复默认包装器：先在当前场景的临时子目录完整推理、融合和写图，成功后发布到正常 \texttt{parts}，保留旧中文日志并追加重建边界；失败时不替换旧部件目录，完成后不留下临时下载/重建文件。这样物体编号变化后可重新计算父归属，不混用前一次部件映射。
+
+
+
+\subsection*{12.4 本轮验证与最新结果}
+\addcontentsline{toc}{subsection}{12.4 本轮验证与最新结果}
+
+30 项回归检查通过，新增了多帧/背景覆盖不足时拒绝地板、支持地面存在时不选桌面，以及数量误差对称性/零预测表示的检查。真实 ScanNet 0、3、6 三帧在原始/默认两条融合路线仍各生成两个物体，临时检查产物已删除。
+
+
+
+两套 v3 和相同前端原始融合均以默认地板策略完成重建，逐帧前端与源数据不变。两场景的正常显示点云在估计地板上下 1 厘米内的剩余点数均为 \textbf{0}；记录见 \texttt{floor\_\allowbreak{}validation.\allowbreak{}json}，并重新生成实际可视化截图。旧场景正常点云从 246750 点变为 145100 点，新场景从 579518 点变为 579342 点。地面清除不代表所有背景污染均已消失：旧场景仍有周边墙脚误分割残留在 table 轨迹，物体总数未因此下降；未伪称这些残留已修好。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景 / 路线 & 预测 / 标注物体数 & 数量比 $r_N$ & 数量误差 $E_{\mathrm{count}}$ ↓ & Box AP25 & Box AP50 \\ \hline
+\endfirsthead
+\hline
+场景 / 路线 & 预测 / 标注物体数 & 数量比 $r_N$ & 数量误差 $E_{\mathrm{count}}$ ↓ & Box AP25 & Box AP50 \\ \hline
+\endhead
+ai\_001\_002：相同前端原始融合 & 10 / 10 & 1.0000 & 0.0000 & 20.00\% & 0\% \\ \hline
+ai\_001\_002：默认 v3 & 13 / 10 & 1.3000 & 0.2624 & 35.00\% & 0\% \\ \hline
+ai\_001\_010：相同前端原始融合 & 63 / 109 & 0.5780 & 0.5482 & 4.16\% & 0.31\% \\ \hline
+ai\_001\_010：默认 v3 & 138 / 109 & 1.2661 & 0.2359 & 14.92\% & 1.36\% \\ \hline
+\end{longtable}
+}
+
+旧场景数量误差反而是原始融合更好；新场景默认 v3 在数量误差和框 AP 上较好。这两个结论必须同时报告。原始融合旧场景数量正好匹配仍未恢复左侧功放，是漏检与多余节点抵消的实例；历史 v1 数量误差也为 0，但 Box AP25 只有 3.33\%。不能把数量指标当作全部精度。
+
+
+
+地板修订后的 v3 旧场景有 13 个物体、30 条部件轨迹，19 条确认、17 条 \texttt{part\_\allowbreak{}of}；新场景仍有 138 个物体、619 条部件轨迹，354 条确认、168 条 \texttt{part\_\allowbreak{}of}。新部件输出已重新构建，未复用旧父节点映射，临时目录均已清理。正常物体/部件可视化共用原接口，用户之前的命令路径保持不变。
+
+
+
+本轮地板过滤修复背景策略，但 v3 物体框 AP 未因此提高，笔记本标签漂移和左功放单帧支持问题仍在。上述结果是两场景适配试验；所有评价 JSON 已加入数量字段，真值仅用于评价。第 11 节明确保留修订前历史结果。
+
+
+
+最新离线 HTML 共渲染 31 个独立公式和 107 个行内公式，主脉络位于开头第 0 节；源码哈希、公式数量与渲染错误均逐项核对。HTML 无远程字体或公式脚本依赖，可直接离线打开。
 
 
 \end{document}

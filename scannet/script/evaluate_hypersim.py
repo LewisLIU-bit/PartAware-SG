@@ -3,6 +3,7 @@ import argparse
 from collections import Counter, defaultdict
 import hashlib
 import json
+import math
 from pathlib import Path
 import cv2
 import csv
@@ -85,6 +86,21 @@ def average_precision(matrix, confidences, threshold):
     precision = np.maximum.accumulate(precision[::-1])[::-1]
     increments = np.diff(np.r_[0, recall])
     return float(np.sum(increments * precision))
+
+
+def object_count_metrics(predicted, annotated):
+    """Report symmetric count error without encoding infinity as invalid JSON."""
+    if predicted < 0 or annotated < 0:
+        raise ValueError('Object counts cannot be negative')
+    ratio = predicted / annotated if annotated else None
+    error = abs(math.log(ratio)) if ratio is not None and ratio > 0 else None
+    return {'predicted': predicted, 'annotated': annotated, 'ratio': ratio,
+            'absolute_log_ratio': error, 'log_base': 'e',
+            'status': 'undefined_no_ground_truth' if not annotated else
+                      'infinite_no_predictions' if not predicted else 'finite',
+            'absolute_count_error': abs(predicted-annotated),
+            'scope': 'observable official object instances; exclude wall, floor, ceiling and parts',
+            'limitation': 'Missed and duplicate objects can cancel; pair with one-to-one localization metrics.'}
 
 
 def evaluate(args):
@@ -228,6 +244,7 @@ def evaluate(args):
               'input_manifest': str(manifest), 'processed_scene': str(scene), 'frames': len(jobs),
               'voxel_m': .01, 'projection_stride': 2, 'minimum_observed_gt_voxels': 100,
               'excluded_nyu40_ids': [1, 2, 22], 'gt_objects': len(truth), 'predicted_objects': len(predictions),
+              'object_count_consistency': object_count_metrics(len(predictions), len(truth)),
               'label_space': labels, 'clip_model': 'openai_ViT-B/16_text',
               'graph_sha256': hashlib.sha256(graph_path.read_bytes()).hexdigest(), 'gt_labels_sha256': label_digest.hexdigest(),
               'prediction_ply': str(prediction_ply), 'prediction_ply_sha256': hashlib.sha256(prediction_ply.read_bytes()).hexdigest(),

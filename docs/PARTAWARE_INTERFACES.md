@@ -1,5 +1,25 @@
 # PartAware-SG interfaces
 
+The main Hypersim construction path applies the existing multi-frame floor
+policy automatically for declared meter-scale Z-up data. The Python component's `floor_filter.json`
+records the accepted height, 1 cm removal band and background/frame support.
+Cleared points do not receive object identities; the background PLY retains them.
+The legacy fallback uses its existing floor filter, with the same guards,
+and records the accepted height and support in its step log.
+
+Evaluation JSON adds `object_count_consistency`, containing `predicted`,
+`annotated`, `ratio`, `absolute_log_ratio`, `log_base`, `status` and
+`absolute_count_error`. Ratios use observed independent GT objects, excluding
+walls, floors, ceilings and parts. With positive counts the error is
+`abs(log(predicted / annotated))`; lower is better. Zero predictions have null
+error and status `infinite_no_predictions`; zero GT uses
+`undefined_no_ground_truth`. JSON does not encode nonstandard infinity values.
+
+Repeated part construction runs in a fresh temporary child of the processed
+scene. Completed outputs replace `parts` and retain the prior Chinese log; a
+failed build does not replace the existing part directory. Registration-based
+component removal and original input/output contracts are unchanged.
+
 The legacy object graph ABI is unchanged. `object_nodes.nodes` contains object records
 with 256-dimensional GroundingDINO visual embeddings and 384-dimensional SBERT text
 embeddings. `edge_hypotheses` and `free_space_nodes` keep their existing structure.

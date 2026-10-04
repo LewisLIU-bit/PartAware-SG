@@ -9,11 +9,39 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'scannet/script'))
 sys.path.insert(0, str(ROOT / 'script/include'))
 from pipeline_components.multiview_association import assign, PartFusion
-from evaluate_hypersim import average_precision, box_overlap, node_bounds
+from evaluate_hypersim import average_precision, box_overlap, node_bounds, object_count_metrics
+from pipeline_components.op3dsg_fusion import supported_floor
 from topology_map import TopologyMap
 
 
 class PipelineChecks(unittest.TestCase):
+    def test_floor_requires_spread_background_in_multiple_frames(self):
+        x, y = np.meshgrid(np.linspace(0, 2, 25), np.linspace(0, 2, 25))
+        plane = np.column_stack([x.ravel(), y.ravel(), np.zeros(x.size)])
+        points = np.tile(plane, (3, 1))
+        frames = np.repeat(np.arange(3), len(plane))
+        result = supported_floor(points, np.ones(len(points), bool), frames)
+        self.assertEqual(result['height_m'], 0)
+        self.assertIsNone(supported_floor(points, np.zeros(len(points), bool), frames))
+        self.assertIsNone(supported_floor(points, np.ones(len(points), bool), np.zeros(len(points), int)))
+
+    def test_floor_does_not_choose_table_above_supported_ground(self):
+        x, y = np.meshgrid(np.linspace(0, 2, 25), np.linspace(0, 2, 25))
+        ground = np.column_stack([x.ravel(), y.ravel(), np.zeros(x.size)])
+        table = ground + [0, 0, .7]
+        points = np.tile(np.concatenate([ground, table]), (3, 1))
+        background = np.tile(np.r_[np.ones(len(ground), bool), np.zeros(len(table), bool)], 3)
+        frames = np.repeat(np.arange(3), len(ground)*2)
+        self.assertEqual(supported_floor(points, background, frames)['height_m'], 0)
+
+    def test_count_log_error_is_symmetric_and_zero_prediction_is_not_perfect(self):
+        self.assertAlmostEqual(object_count_metrics(20, 10)['absolute_log_ratio'],
+                               object_count_metrics(5, 10)['absolute_log_ratio'])
+        result = object_count_metrics(0, 10)
+        self.assertEqual(result['status'], 'infinite_no_predictions')
+        self.assertIsNone(result['absolute_log_ratio'])
+        json.dumps(result, allow_nan=False)
+
     def test_global_assignment_beats_greedy_and_keeps_unmatched(self):
         self.assertEqual(assign(np.array([[.9, .8], [.85, -.1], [-1e6, -1e6]])), {0: 1, 1: 0})
 

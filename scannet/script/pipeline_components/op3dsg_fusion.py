@@ -43,6 +43,61 @@ def coverages(a, b, radius=0.1):
             float(np.mean(cKDTree(a).query(b)[0] <= radius)))
 
 
+def supported_floor(samples, background, frames):
+    """Port the existing C++ floor guards; a low table alone is insufficient."""
+    if len(samples) < 1000:
+        return None
+    heights = samples[:, 2]
+    low_height = np.sort(heights)[len(heights)//50]
+    bins, counts = np.unique(np.floor(heights/.02).astype(int), return_counts=True)
+    for cell, count in zip(bins, counts):
+        center = (cell+.5)*.02
+        if center > low_height+.03:
+            break
+        if count < 100:
+            continue
+        local = heights[np.abs(heights-center) <= .02]
+        if len(local) < 300:
+            continue
+        candidate = float(np.partition(local, len(local)//2)[len(local)//2])
+        inliers = np.abs(heights-candidate) <= .01
+        bg = inliers & background
+        cells = np.unique(np.floor(samples[bg, :2]/.1).astype(int), axis=0)
+        _, support = np.unique(frames[bg], return_counts=True)
+        below = float(np.mean(heights < candidate-.03))
+        if inliers.sum() >= 300 and len(cells) >= 100 and np.count_nonzero(support >= 30) >= 3 and below <= .02:
+            return {'height_m': candidate, 'inlier_points': int(inliers.sum()),
+                    'background_cells': len(cells), 'supported_frames': int(np.count_nonzero(support >= 30)),
+                    'below_fraction': below, 'removal_band_m': .01}
+    return None
+
+
+def estimate_floor(context, data, jobs, kd, kc, scale):
+    if not (data.get('dataset') == 'hypersim' and data.get('world_frame') == 'hypersim_world_z_up'
+            and data.get('length_unit') == 'meter'):
+        context.event('跳过几何地板估计', reason='输入未声明已验证的米制 Hypersim Z-up 坐标')
+        return None
+    points, flags, indices = [], [], []
+    for index, job in enumerate(jobs):
+        mask = cv2.imread(str(context.scene/'refined_instance'/f"{job['frame_id']}.png"), cv2.IMREAD_UNCHANGED)
+        rgb, depth = cv2.imread(str(job['rgb'])), cv2.imread(str(job['depth']), cv2.IMREAD_UNCHANGED)
+        pose = np.loadtxt(job['pose'])
+        if mask is None or rgb is None or depth is None:
+            raise ValueError(f"Unreadable floor sample: {job['frame_id']}")
+        for region, is_background in [(mask == 0, True), (mask != 0, False)]:
+            sampled, _ = project_mask(region, rgb, depth, pose, kd, kc, scale,
+                                      stride=max(16, context.stride), max_depth=context.max_depth)
+            points.append(sampled)
+            flags.append(np.full(len(sampled), is_background, bool))
+            indices.append(np.full(len(sampled), index, int))
+    floor = supported_floor(np.concatenate(points), np.concatenate(flags), np.concatenate(indices))
+    context.event('几何地板估计通过' if floor else '跳过几何地板清除',
+                  **(floor or {'reason': '低处水平面缺少足够背景覆盖或跨帧支持'}))
+    (context.scene/'floor_filter.json').write_text(json.dumps({'algorithm': 'existing_cpp_multiframe_floor_guards',
+                                                             'estimate': floor}, indent=2)+'\n')
+    return floor
+
+
 def update(track, observation, fid):
     record = observation.record
     track.points = voxel_downsample(np.concatenate([track.points, observation.points]), 0.01)
@@ -60,6 +115,7 @@ def update(track, observation, fid):
 def fuse(context, association=None):
     scene = context.scene
     data, jobs, kd, kc, scale = load_capture(context.manifest, context.image_dir, scene / 'refined_instance')
+    floor = estimate_floor(context, data, jobs, kd, kc, scale)
     tracks, records_by_frame, audit, background = [], {}, [], []
     for job in jobs:
         fid = job['frame_id']
@@ -80,6 +136,14 @@ def fuse(context, association=None):
             region = mask == int(record['frame_instance_id'])
             points, colors = project_mask(region, rgb, depth, pose, kd, kc, scale,
                                            stride=context.stride, max_depth=context.max_depth)
+            if floor:
+                keep = np.abs(points[:, 2]-floor['height_m']) > floor['removal_band_m']
+                removed = int(np.count_nonzero(~keep))
+                if removed:
+                    background.append(voxel_downsample(points[~keep], .03))
+                    audit.append({'message': '清除几何地板上的实例标签', 'frame_id': fid,
+                                  'local_id': record['frame_instance_id'], 'removed_points': removed})
+                points, colors = points[keep], colors[keep]
             if len(points) < 16:
                 continue
             visual = np.asarray(record['feature'], float)

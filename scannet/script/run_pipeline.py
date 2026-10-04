@@ -44,8 +44,12 @@ class Context:
 def legacy_fusion(context):
     build = context.repo / 'scannet/build-partaware/openset_ply_map'
     if context.manifest:
-        context.execute([str(build), '--manifest', str(context.manifest), str(context.scene), str(context.max_depth), str(context.stride)],
-                        'ScanNet-SG 原始物体融合')
+        command = [str(build), '--manifest', str(context.manifest), str(context.scene), str(context.max_depth), str(context.stride)]
+        capture = json.loads(context.manifest.read_text())
+        if (capture.get('dataset') == 'hypersim' and capture.get('world_frame') == 'hypersim_world_z_up'
+                and capture.get('length_unit') == 'meter'):
+            command.append('--filter_floor')
+        context.execute(command, 'ScanNet-SG 原始物体融合')
         return
     command = [str(build), context.scene.name, '0', str(context.scene.parent),
                str(context.image_dir.parent) if context.image_dir else '-', str(context.max_depth), str(context.stride)]
