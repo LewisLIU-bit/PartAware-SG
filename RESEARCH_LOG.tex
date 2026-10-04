@@ -14,7 +14,7 @@
 \tableofcontents
 \clearpage
 
-更新：2026-10-04。本文合并原实验记录和集成记录，保留与当前 ScanNet/Hypersim 主线有关的结论。本次重点修订第 4 节，依据实际代码补充局部物体观测与部件融合的数学原理，并恢复 LaTeX 公式、增加离线渲染阅读版；未修改算法、接口或实验产物。完整旧记录及旧运行产物已移到 \texttt{datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}partaware\_\allowbreak{}v1/\allowbreak{}history}。
+更新：2026-10-04。本文合并原实验记录和集成记录，保留与当前 ScanNet/Hypersim 主线有关的结论。第 4 节依据实际代码解释局部观测与部件融合；本次核对论文及官方评测源码，修订第 6、9 节并新增第 10 节，确定已有评测协议及研究优先级，继续提供离线 LaTeX 渲染版。本次没有生成新的精度结果。完整旧记录及旧运行产物已移到 \texttt{datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}partaware\_\allowbreak{}v1/\allowbreak{}history}。
 
 
 
@@ -455,7 +455,7 @@ op3dsg 物体逐帧关联 & $G=1,\ Q_o=1+0.95=1.95$ & 门控满足时可以接�
 
 
 
-评价应区分错误拆分与错误合并：前者把一个真实物体分成多轨迹，后者把多个真实物体合成一轨迹；同时检查父归属正确率、部件召回与几何误差。减少节点数不能单独证明建图精度提高，当前无人工真值，不新增精度或 SOTA 声明。多视角 Florence、软父归属和可撤销合并仍属于第 9 节的规划。
+评价应区分错误拆分与错误合并：前者把一个真实物体分成多轨迹，后者把多个真实物体合成一轨迹；同时检查父归属正确率、部件召回与几何误差。减少节点数不能单独证明建图精度提高；此前实验未完成真值评测，不新增精度或 SOTA 声明。多视角 Florence、软父归属和可撤销合并仍属于第 9 节的规划，评测协议见第 10 节。
 
 
 
@@ -542,11 +542,11 @@ PartAware 还有 189 条已确认但无父归属的轨迹、194 条单帧轨迹�
 \section*{6. 结论与研究高度}
 \addcontentsline{toc}{section}{6. 结论与研究高度}
 
-交付已具备可运行、可消融、兼容旧接口的部件建图基线。未有人工真值，轨迹减少、确认数量和运行成功均不能证明精度提升。叠图曾出现桌架被标为桌腿、重复桌面；关联模式产生更多节点，也可能增加重复。因此默认算法仍保留 legacy。
+交付已具备可运行、可消融、兼容旧接口的部件建图基线。当前是模型与已有方法的集成，尚不能称为独立算法贡献或建图精度的本质突破。Florence 增强候选语义证据，VLPart 增加部件感知，OP3DSG 提供知识库和融合设计参考；默认物体关联仍为 legacy，附加部件层不回头纠正已有物体身份。此前轨迹数量与运行成功只能证明功能可用。
 
 
 
-下一阶段固定前端，在多个 ScanNet/Hypersim 场景按场景隔离评测实例/部件精确率与召回率、误合并/重复率、part\_of 正确率和几何误差，分别消融颜色、SAM、去噪及包含清理。若要形成独立算法贡献，应聚焦局部观测归属与粒度不一致，研究多假设归属、可撤销合并及跨扫描对应驱动的结构修正；该联合算法尚未实现。只有可重复的精度收益才支持替换默认算法。
+本次发现本地 ScanNet 实例真值，但尚未完成精度评测；部件、父子及功能关系真值仍需补齐。下一阶段采用第 10 节已有协议，固定前端和帧集后分别消融关联、颜色、SAM、去噪与父归属。潜在研究问题是：在部分可见、同类物体相邻和粒度不一致时，如何联合维护实例身份与部件归属，并在新证据到来后纠错。第 9 节将其分解为可验证步骤；这些步骤本身已有相关研究，独立贡献仍需新的方法差异、强基线与多场景证据。
 
 
 
@@ -611,33 +611,174 @@ v2 输出为 \texttt{datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}par
 
 
 
-\section*{9. 论文启发与下一步建议（尚未完整实现）}
-\addcontentsline{toc}{section}{9. 论文启发与下一步建议（尚未完整实现）}
+\section*{9. 论文含义与算法优先级（研究方案，尚未实现）}
+\addcontentsline{toc}{section}{9. 论文含义与算法优先级（研究方案，尚未实现）}
 
-结合当前 \texttt{PartFusion.\allowbreak{}add} 的同标签/同父实例关联、\texttt{select\_\allowbreak{}parent} 的单帧覆盖率，以及 C++ 几何/语义融合，优先级如下。以下是迁移建议，不能当作论文算法已复现或新精度结果。
+\subsection*{9.1 三种接入各自解决什么}
+\addcontentsline{toc}{subsection}{9.1 三种接入各自解决什么}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+模块 & 原研究与当前作用 & 对建图的边界 \\ \hline
+\endfirsthead
+\hline
+模块 & 原研究与当前作用 & 对建图的边界 \\ \hline
+\endhead
+Florence & 当前对 DINO 裁剪候选计算描述证据，辅助类别竞争 & 同类物体可以获得相同描述；描述不能证明实例身份，不能修复位姿或补出不可见表面 \\ \hline
+\href{https://openaccess.thecvf.com/content/ICCV2023/html/Sun\_Going\_Denser\_with\_Open-Vocabulary\_Part\_Segmentation\_ICCV\_2023\_paper.html}{VLPart，ICCV 2023} & 研究二维开放词汇部件分割；联合部件、物体及图像级监督，并利用稠密语义对应迁移到新类别。当前使用其预训练模型与动态分类器 & 有助于找把手、按钮等小部件；其 AP/mAP 是二维检测分割指标，不是三维图精度，模型也不负责跨帧身份或关系推理 \\ \hline
+\href{https://arxiv.org/html/2606.29786v1}{OP3DSG} & 研究物体、部件、空间/功能关系和可供性统一建图；结合知识引导、几何/语义/颜色融合与受几何约束的 LLM 推理 & 当前仅改编知识库和部分融合先验，未复现完整推理。部件关联颜色度量也不同于论文，不能直接沿用其实验成绩 \\ \hline
+\end{longtable}
+}
+
+改进潜力来自新增的可观察证据及约束，而不是模型名字或数量。漏检小部件可能由 VLPart 改善；局部观测碎片可能由关联改善；错误功能边需视觉证据和约束校验。这三类误差应分开消融。
+
+
+
+\subsection*{9.2 多视角关联：最高优先级，但不是已有流程之外的新概念}
+\addcontentsline{toc}{subsection}{9.2 多视角关联：最高优先级，但不是已有流程之外的新概念}
+
+原 ScanNet-SG 已执行 RGB-D 投影、跨帧关联及最终轨迹合并；当前主要限制是贪心决策、覆盖与文字门控、代表特征选择，以及缺少合并撤销。建议先修正第 4.7 节的轨迹均值权重，再实现以下两级关联：
 
 
 
 \begin{enumerate}
-\item \textbf{先解决碎片与身份，再扩展语义。} \href{https://concept-graphs.github.io/assets/pdf/2023-ConceptGraphs.pdf}{ConceptGraphs} 将几何覆盖和视觉相似度结合，并用多视角描述总结物体。建议每个物体保存少量高可见度裁剪，用 Florence 对多视角证据作稳健汇总；融合候选同时检查重投影掩码 IoU、深度一致性与几何覆盖。只有证据支持同一物理实例才合并，保留原编号映射、可撤销记录和独立完整实例的同帧冲突约束。Florence 的同类描述不能证明身份相同。
+\item \textbf{帧内先处理分割粒度，再进行跨帧身份匹配。} 完整且互相分离的同帧实例应提供排斥证据；同一物体被切成两块的候选需要连接、轮廓和多视角证据，不能把“同帧禁止融合”当作绝对规则，也不能放开后一律按类别合并。
 
 
-\item \textbf{不要让第一次归属锁死部件。} \href{https://arxiv.org/html/2605.15753v1}{Hierarchical and Holistic Open-Vocabulary Functional 3D Scene Graphs} 将图像证据、多线索关联和时序归属优化结合。建议把 \texttt{select\_\allowbreak{}parent} 的一次性父编号扩展为候选分布，累积多帧支持并保持歧义：$L_j=\sum_t w_t\,\operatorname{logit}(s_{tj})$，再结合熵正则与时间平滑选择父节点。这里只是拟议公式；当前 Florence 分数未经校准，不可直接代入概率 logit，必须先校准或使用有限幅度的 margin。避免相邻重复帧造成虚假高置信度。
-
-
-\item \textbf{改进遮挡与区域污染处理。} \href{https://arxiv.org/html/2402.12259v2}{Open3DSG} 利用深度检查可见性并聚合较好视角的特征。建议过滤遮挡/边缘裁剪，再评价功放与桌子的竞争；不能用透明桌面的大框覆盖作为语义归属依据。关系应由具体对象对及图像证据支持，不能把类别相似度直接当作 part\_of。
-
-
-\item \textbf{对代表特征做稳健聚合。} \href{https://arxiv.org/html/2403.17846v2}{HOV-SG} 结合区域/掩码/全图特征，利用多数特征簇减弱噪声，并支持重叠片段图合并。建议保留原特征维数，将部件的归一化递推特征更新改为去异常视角后聚合，并修正第 4.7 节的物体轨迹均值加权问题；规范 table/desk 等同义标签与部件名，同时记录原标签。按父实例及几何门控去重，防止同帧真实多条桌腿被错误合并。
+\item \textbf{跨帧使用可见性与投影一致性，保留拒绝匹配。} 仅将深度检查后可见的历史点回投当前图像，结合掩码覆盖、位置、外观和语义形成稀疏候选。在候选图上做带未匹配选项的一对一分配，减轻贪心顺序影响。完全无公共表面的正反面仍可能无法关联，需要中间视角或额外结构证据。
 
 \end{enumerate}
 
 
-建议的消融顺序：原 DINO → 默认 Florence → 多视角 Florence → 投影一致关联 → 软父归属。固定帧清单、旧接口和人工真值，以实例 split/merge 率、ID 一致性、mask IoU、part\_of 准确率、召回率及耗时评价。目标是减少错误碎片与归属且不牺牲真实物体召回；在这些指标通过前，不声称达到 SOTA 或以“节点更少”证明更精确。
+\href{https://arxiv.org/html/2605.15753v1}{层级功能图论文} 已使用投影、几何、颜色、语义及最大权一对一匹配，因此单独加入 Hungarian 算法不是创新。我们的额外问题是粒度冲突和错误决策可修正性，需要保留观测来源及编号映射，支持撤销错误合并，最后仍导出原接口。
 
 
 
-最终源码哈希、原版几何一致性检查、模型加载兼容与原路线回归均记录在 v2。环境版本与本地模型源码哈希见 \texttt{docs/\allowbreak{}environment\_\allowbreak{}florence.\allowbreak{}json}。
+Florence 多视角证据应只在实例身份初步可靠后汇总，选择视角有差异且可见度较好的裁剪；否则误并两台物体后得到“稳定描述”，会把错误强化。相邻重复帧并非独立证据。参考 \href{https://arxiv.org/html/2403.17846v2}{HOV-SG} 的特征去异常思想，稳健聚合与融合规则需分别消融。
+
+
+
+\subsection*{9.3 层级优化：对父归属有用，不能代替物体融合}
+\addcontentsline{toc}{subsection}{9.3 层级优化：对父归属有用，不能代替物体融合}
+
+当前 \texttt{select\_\allowbreak{}parent} 依靠单帧覆盖并给出固定父编号；后续 \texttt{PartFusion.\allowbreak{}add} 要求父编号严格相同。因此一次归属错误或 \texttt{None} 会使同一部件后续分裂，部件层也不能主动合并两个已有父物体。
+
+
+
+建议为部件保留多个父候选及“未知”状态，多帧更新后再确定归属。可参考上述层级论文的历史证据、熵正则和时间平滑，以下为迁移后的设计表达：
+
+
+
+\[
+\begin{aligned}
+L_j^{1:t}&=\sum_{\tau\le t}w_\tau\,\operatorname{logit}(s_{\tau j}),\\
+z_t^*&=\arg\max_{z\in\Delta}
+\left[z^TL^{1:t}+\lambda_H H(z)
+-\frac{\lambda_T}{2}\|z-z_{t-1}\|_2^2\right].
+\end{aligned}
+\]
+
+这里 $z$ 是父候选分布，熵项保留证据不足时的歧义，平滑项抑制跳变。当前 Florence margin、覆盖率及部件关联分数都不是校准概率，不可直接作为 $s_{\tau j}$；须校准并截断，或另外设计有界证据。候选缺席/遮挡不作为反证，相邻帧支持要折扣，平滑也不能阻止强新证据纠错。
+
+
+
+结构约束可检查 \texttt{part\_\allowbreak{}of} 无环、确定后只有一个直接结构父节点、尺度及包含相容。功能关系必须另存，允许多对多与远距离连接：把手属于抽屉不等于控制同场景任意柜子；遥控器和电视的空间接近也不能证明配对。新增功能边只会提高表达能力，只有真值关系指标提高才说明更准确。
+
+
+
+\subsection*{9.4 更深入的候选：不确定性融合}
+\addcontentsline{toc}{subsection}{9.4 更深入的候选：不确定性融合}
+
+\href{https://arxiv.org/html/2607.07170v1}{PUF} 将关联改为语义与空间似然，并用 Dirichlet 累积节点/关系分布。相较继续叠加检测器，它更直接涉及“如何相信和累积观测”。但\href{https://github.com/yyyyangyi/PUF}{官方实现} 消费完整类别和关系概率；当前开放词汇特征与描述 margin 不具备同一概率接口，不能把其算法直接插入便宣称复现。可研究在固定候选词表下校准证据、保留未知质量、延迟硬决策，并在原字段之外保存不确定性。该方向需要独立消融和身份冲突保护，软关联也可能把证据错误摊到多个相邻实例。
+
+
+
+实施顺序：评测基线 → 特征更新修正 → 投影与可见性关联 → 可撤销身份决策 → 软父归属 → 有证据的功能边；概率融合作为单独研究分支。全部保留 ScanNet/Hypersim 输入、旧输出字段与共用可视化。环境版本及模型源码哈希见 \texttt{docs/\allowbreak{}environment\_\allowbreak{}florence.\allowbreak{}json}。
+
+
+
+\section*{10. 采用已有评测协议（已选型，尚未运行）}
+\addcontentsline{toc}{section}{10. 采用已有评测协议（已选型，尚未运行）}
+
+\subsection*{10.1 来源与选定指标}
+\addcontentsline{toc}{subsection}{10.1 来源与选定指标}
+
+已有明确指标，无需另造一个“图看起来更好”的总分。\href{https://arxiv.org/html/2402.12259v2}{Open3DSG，CVPR 2024} 已分别评估物体、谓词和三元组的 R@K、mR@K；开放词汇结果映射到固定词表。其 3DSSG 数据与我们的 ScanNet/Hypersim 不同，复用定义不代表分数可以直接与原论文横向比较，也无需恢复 3RScan 专属接口。
+
+
+
+本项目选用下面的分层方案，论文原协议与适配检查分栏报告：
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+评测内容 & 采用指标 & 用途与限制 \\ \hline
+\endfirsthead
+\hline
+评测内容 & 采用指标 & 用途与限制 \\ \hline
+\endhead
+ScanNet 物体实例 & \href{https://kaldir.vc.in.tum.de/scannet\_benchmark/semantic\_instance\_3d}{官方 AP25、AP50、AP}，AP 对 0.50:0.05:0.95 重叠阈值平均 & 在官方网格顶点上评估实例掩码和类别，重复预测计为假阳性；能揭示拆分、误合并与边界污染。仅覆盖官方 18 个有效实例类别，不把功放等未覆盖类别伪装成该 benchmark 成绩 \\ \hline
+开放词汇物体、部件节点 & OP3DSG 节点 R@3、R@5；补报 R@3 的 IoU>0.10、IoP>0.25 定位敏感性 & 保留原论文的宽松 IoU>0 主协议；严格定位列独立报告，IoP 单独不能惩罚过小碎片 \\ \hline
+部件归属、功能三元组 & OP3DSG Assoc. Node 和 Triplet R@3、R@5、R@10 & 采用官方标签空间检索定义；无功能预测时不制造可供性或功能分数 \\ \hline
+完整有向空间图 & 在固定一对一节点对应下报告三元组 Precision/Recall/F1，按关系类别另报召回 & 属于项目适配评测，检查端点、方向与谓词；完整标注后才统计假阳性。补齐稳定三元组排名后，再按标准 R@50、mR@50 协议评价 \\ \hline
+\end{longtable}
+}
+
+全图 R@50、mR@50 的精确定义参考 \href{https://arxiv.org/html/2404.09616v1}{场景图指标论文及 SGBench}：从置信排序中取图的前 50 个三元组，并规定每对端点可选几个关系。\textbf{这与 OP3DSG 的标签检索 top-K 不同，禁止混写同名列。} 当前旧关系没有统一可靠排名，不用随意排序来生成 R@50。
+
+
+
+\subsection*{10.2 复用时必须保留的细节}
+\addcontentsline{toc}{subsection}{10.2 复用时必须保留的细节}
+
+本次检查了 OP3DSG 的\href{https://github.com/AutoCompSysLab/OP3DSG/blob/main/src/eval/eval\_uni.py}{官方评测源码}（访问：2026-10-04）。其标签候选 K 为 1、2、3、5、10；节点用 CLIP ViT-B/16，关系用 all-MiniLM-L6-v2，属于评测编码器，与部件检测时 RN50 特征无关。脚本计算轴对齐包围盒体积 IoU/IoP，并使用严格大于门限的判断；这与第 4 节邻域覆盖 H/G 完全不同。
+
+
+
+设真值节点为 $g$，预测为 $p$，$r_g(p)$ 为真值标签在固定词表中按文本相似度检索的名次，主节点协议可写为：
+
+
+
+\[
+R_{\mathrm{node}}@K=\frac{1}{|V_{\mathrm{GT}}|}
+\sum_{g\in V_{\mathrm{GT}}}
+\mathbf1\!\left[\exists p:\ \operatorname{IoU}_{3D}(g,p)>0,\ r_g(p)\le K\right].
+\]
+
+三元组还要求两个端点和关系标签同时检索命中。因此 R@5 不是“85\% 的实例身份一定正确”，也不是整张图只有五个候选。原脚本逐个真值寻找任意预测，\textbf{没有全局一对一匹配}；多余预测不会像 AP 那样直接被罚。
+
+
+
+此外该脚本的 SPATIAL triplet 只评 \texttt{part of}，关系端点允许互换，不能据此评价全部有向空间边。层级功能图论文明确增加 Hungarian 一对一评测以避免一个预测命中多个真值；我们另列这种严格对应检查，保留 \texttt{part\_\allowbreak{}of} 子到父方向，不能把修改后的分数冠为未改动的 OP3DSG 指标。固定词表、标签别名、坐标系、几何尺度、匹配规则及评测版本后再比较方法，禁止为每个方法临时修改词表或阈值。
+
+
+
+\subsection*{10.3 本地真值与当前可评范围}
+\addcontentsline{toc}{subsection}{10.3 本地真值与当前可评范围}
+
+已确认 \texttt{/\allowbreak{}home/\allowbreak{}lewisliu/\allowbreak{}datasets/\allowbreak{}scannet/\allowbreak{}scans/\allowbreak{}scene0000\_\allowbreak{}00} 存在 \texttt{aggregation.\allowbreak{}json}、\texttt{segs.\allowbreak{}json}、标注网格和 2D 实例 ZIP，可以准备官方实例评测。预测需落到 \texttt{vh\_\allowbreak{}clean\_\allowbreak{}2.\allowbreak{}ply} 的相同顶点顺序，并提供独立的实例置信排序；当前代表观测分数并非校准的轨迹置信度，不能未经记录便当作新的精度结论。
+
+
+
+现有 30 帧实验属于部分场景观测。全场景官方 AP 会计入未见物体造成的漏检；只评可见区域是另一个协议，应另列并固定可见性规则。一个场景的试评也不能称为 ScanNet 官方测试集成绩。
+
+
+
+用户指定 Hypersim 输入目录目前未发现语义/实例 HDF5 真值；已导出的深度和位姿不是关系标注。ZED \texttt{scene0802\_\allowbreak{}00} 也没有官方实例、部件与关系真值。二者需补充原始标注或独立人工标注，特别是功放碎片、相邻同类物体、部件父归属。ScanNet 自带实例标签不能凭空提供 \texttt{part\_\allowbreak{}of} 或功能关系；用待评算法的规则生成“真值”会构成循环验证。
+
+
+
+\subsection*{10.4 实验与贡献判断}
+\addcontentsline{toc}{subsection}{10.4 实验与贡献判断}
+
+固定同一帧清单、矫正位姿、词表和真值，按场景隔离开发与评测；调参只用开发场景。先建立 DINO/SAM+legacy 与 Florence/SAM+legacy 的物体对照，再在同一 Florence 前端下分别加入部件层、改进关联和软父归属。部件层前后物体字段相同，应只主张部件/关系表达的变化，不能把其作为物体融合收益。颜色、SAM、去噪再单独消融；新增层级时，同时报告相同粒度子图与完整新增层级，避免分母改变。
+
+
+
+报告分场景指标、跨场景汇总与耗时；AP 保留官方聚合，图检索记录原脚本计数及相应分母，另列场景均值。重复/误合并案例作为误差分析。没有足够场景时标注为试验结果；未预测或无真值的功能指标标为不可评，并说明原因。当前 scene0802 两路线同时改变前端和部件层，不能据其节点数归因于关联算法。上述协议已确定，但本次只完成文献、源码与数据核查，未执行评测或生成新实验产物。
 
 
 \end{document}
