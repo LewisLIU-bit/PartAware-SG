@@ -51,7 +51,11 @@ def build_part_overlay(graph_path, tracking_colors, radius, bias=0.0,
         picks.append({'id': key, 'name': f"{node['name']} (part of {node['parent_id']})",
                       'position': center, 'kind': 'part'})
         if show_points:
-            points = np.load(path.parent / f'{key}.points.npy', allow_pickle=False)
+            point_path = path.parent / f'{key}.points.npy'
+            if not point_path.is_file():
+                # The canonical graph lives above the standalone part artifacts.
+                point_path = path.parent / 'parts' / f'{key}.points.npy'
+            points = np.load(point_path, allow_pickle=False)
             if points.ndim != 2 or points.shape[1] != 3 or not np.isfinite(points).all():
                 raise ValueError(f'Invalid part point cloud: {key}')
             cloud = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(points + [bias, 0, 0]))

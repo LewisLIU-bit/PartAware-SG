@@ -567,7 +567,23 @@ def main():
             write_new_json(raw_path, record)
             validate_cached_record(record, expected)
 
-        parsed = parse_response(record)
+        for parse_attempt in range(3):
+            try:
+                parsed = parse_response(record)
+                break
+            except ValueError:
+                if parse_attempt == 2:
+                    raise
+                rejected = raw_dir / 'rejected'
+                rejected.mkdir(exist_ok=True)
+                digest = hashlib.sha256(raw_path.read_bytes()).hexdigest()[:16]
+                raw_path.replace(rejected / f'{frame_id}.{digest}.json')
+                print(f'模型响应无效，保留原文并重新识别：{frame_id}', flush=True)
+                record = request_image_tags(client=client, image_path=image_path, model_name=args.model,
+                                             prompt=prompt, prompt_version=prompt_version)
+                record.update(dataset=dataset, scene_id=scene_id, frame_id=frame_id)
+                write_new_json(raw_path, record)
+                validate_cached_record(record, expected)
 
         # Keep surface categories outside the instance segmentation input.
         tags = {"objects": parsed["objects"]}

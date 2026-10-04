@@ -1,0 +1,207 @@
+"""OP3DSG-inspired object fusion exporting the original ScanNet-SG interface."""
+from dataclasses import dataclass, field
+from collections import Counter
+import csv
+import json
+from pathlib import Path
+import cv2
+import numpy as np
+import open3d as o3d
+from scipy.spatial import cKDTree
+from partaware.geometry import load_capture, project_mask, voxel_downsample
+from partaware.fusion import normalize, color_histogram
+
+
+@dataclass
+class Observation:
+    record: dict
+    mask: np.ndarray
+    points: np.ndarray
+    color: np.ndarray
+    semantic: np.ndarray
+    visual: np.ndarray
+
+
+@dataclass
+class Track:
+    id: int
+    points: np.ndarray
+    semantic_sum: np.ndarray
+    visual_sum: np.ndarray
+    color: np.ndarray
+    observations: list = field(default_factory=list)
+    frames: set = field(default_factory=set)
+    names: Counter = field(default_factory=Counter)
+
+    @property
+    def semantic(self):
+        return normalize(self.semantic_sum)
+
+
+def coverages(a, b, radius=0.1):
+    return (float(np.mean(cKDTree(b).query(a)[0] <= radius)),
+            float(np.mean(cKDTree(a).query(b)[0] <= radius)))
+
+
+def update(track, observation, fid):
+    record = observation.record
+    track.points = voxel_downsample(np.concatenate([track.points, observation.points]), 0.01)
+    # Keep sums of unit observations, never repeatedly normalize an accumulated mean.
+    track.semantic_sum += observation.semantic
+    track.visual_sum += observation.visual
+    track.color = (track.color * len(track.observations) + observation.color) / (len(track.observations) + 1)
+    track.names[record['object_name']] += 1
+    track.frames.add(fid)
+    record['instance_id'] = track.id
+    track.observations.append({'frame_id': fid, 'local_id': record['frame_instance_id'],
+                               'confidence': record['confidence'], 'name': record['object_name']})
+
+
+def fuse(context, association=None):
+    scene = context.scene
+    data, jobs, kd, kc, scale = load_capture(context.manifest, context.image_dir, scene / 'refined_instance')
+    tracks, records_by_frame, audit, background = [], {}, [], []
+    for job in jobs:
+        fid = job['frame_id']
+        folder = scene / 'refined_instance'
+        records = json.loads((folder / f'{fid}_instance.json').read_text())
+        mask = cv2.imread(str(folder / f'{fid}.png'), cv2.IMREAD_UNCHANGED)
+        rgb = cv2.imread(str(job['rgb']))
+        depth = cv2.imread(str(job['depth']), cv2.IMREAD_UNCHANGED)
+        pose = np.loadtxt(job['pose'])
+        if any(x is None for x in [mask, rgb, depth]):
+            raise ValueError(f'Unreadable capture: {fid}')
+        frame = {'pose': pose, 'depth': depth, 'kd': kd, 'kc': kc, 'scale': scale}
+        bg, _ = project_mask(mask == 0, rgb, depth, pose, kd, kc, scale, stride=4)
+        background.append(voxel_downsample(bg, .03))
+        observations = []
+        for record in records:
+            record['instance_id'] = -1
+            region = mask == int(record['frame_instance_id'])
+            points, colors = project_mask(region, rgb, depth, pose, kd, kc, scale,
+                                           stride=context.stride, max_depth=context.max_depth)
+            if len(points) < 16:
+                continue
+            visual = np.asarray(record['feature'], float)
+            semantic = np.asarray(record['bert_embedding'], float)
+            if visual.shape != (256,) or semantic.shape != (384,):
+                raise ValueError('Expected separate DINO-256 and SBERT-384 feature spaces')
+            observations.append(Observation(record, region, voxel_downsample(points, .01),
+                                            color_histogram(colors), normalize(semantic), visual))
+        scores = np.full((len(observations), len(tracks)), -1e6)
+        evidence = {}
+        for i, observation in enumerate(observations):
+            for j, track in enumerate(tracks):
+                q = float(observation.semantic @ track.semantic)
+                if q < .8 or fid in track.frames:
+                    continue
+                if np.linalg.norm(observation.points.mean(0) - track.points.mean(0)) > 3:
+                    continue
+                a, b = coverages(observation.points, track.points)
+                g = max(a, b)
+                base = g + (q + 1) / 2
+                if g < .2 or base < 1.2:
+                    continue
+                details = {'geometry': g, 'semantic': q, 'directional_coverage': [a, b]}
+                if association:
+                    projection = association.visibility_score(observation, track, frame)
+                    if projection is None:
+                        continue
+                    details.update(projection)
+                    scores[i, j] = association.score(base, projection)
+                else:
+                    scores[i, j] = base
+                evidence[i, j] = details
+        if association:
+            assignments = association.assign(scores)
+        else:
+            assignments, used = {}, set()
+            for i in range(len(observations)):
+                valid = [j for j in range(len(tracks)) if j not in used and scores[i, j] > 0]
+                if valid:
+                    j = max(valid, key=lambda j: scores[i, j])
+                    assignments[i] = j
+                    used.add(j)
+        for i, observation in enumerate(observations):
+            if i in assignments:
+                j = assignments[i]
+                track = tracks[j]
+                details = evidence[i, j]
+                action = '关联历史物体'
+            else:
+                track = Track(len(tracks) + 1, np.empty((0, 3)), np.zeros(384), np.zeros(256), observation.color)
+                tracks.append(track)
+                details, action = {}, '新增物体轨迹'
+            update(track, observation, fid)
+            audit.append({'message': action, 'frame_id': fid, 'local_id': observation.record['frame_instance_id'],
+                          'global_id': track.id, **details})
+        records_by_frame[fid] = records
+        context.event('主流程物体关联完成', frame_id=fid, observations=len(observations), tracks=len(tracks), matched=len(assignments))
+    # Conservative recovery joins split histories only when they were never co-visible.
+    remap = {}
+    for i, left in enumerate(tracks):
+        if left.id in remap:
+            continue
+        for right in tracks[i+1:]:
+            if right.id in remap or left.frames & right.frames or min(len(left.frames), len(right.frames)) < 2:
+                continue
+            if left.names.most_common(1)[0][0] != right.names.most_common(1)[0][0]:
+                continue
+            if float(left.semantic @ right.semantic) < .9:
+                continue
+            if np.linalg.norm(left.points.mean(0) - right.points.mean(0)) > 3:
+                continue
+            a, b = coverages(left.points, right.points)
+            if max(a, b) < .7 or min(a, b) < .25:
+                continue
+            nl, nr = len(left.observations), len(right.observations)
+            left.points = voxel_downsample(np.concatenate([left.points, right.points]), .01)
+            left.semantic_sum += right.semantic_sum
+            left.visual_sum += right.visual_sum
+            left.color = (nl * left.color + nr * right.color) / (nl + nr)
+            left.frames |= right.frames
+            left.names.update(right.names)
+            left.observations += right.observations
+            remap[right.id] = left.id
+            audit.append({'message': '保守恢复跨帧碎片', 'source_id': right.id, 'target_id': left.id,
+                          'directional_coverage': [a, b]})
+    alive = {t.id: t for t in tracks if t.id not in remap and len(t.frames) >= 2}
+    for fid, records in records_by_frame.items():
+        for record in records:
+            gid = remap.get(record['instance_id'], record['instance_id'])
+            record['instance_id'] = gid if gid in alive else -1
+        (scene / 'refined_instance' / f'{fid}_updated_instance.json').write_text(json.dumps(records, indent=2) + '\n')
+    if not alive:
+        raise RuntimeError('No multi-frame object survived fusion')
+    points, colors, rgb_colors = [], [], []
+    rng = np.random.default_rng(0)
+    for track in alive.values():
+        points.append(track.points)
+        gid = track.id
+        encoded = np.array([gid % 255, (gid // 255) % 255, (gid // 255 // 255) % 255]) / 255
+        colors.append(np.tile(encoded, (len(track.points), 1)))
+        rgb_colors.append(np.tile(rng.uniform(.2, 1, 3), (len(track.points), 1)))
+    for filename, palette in [('instance_cloud.ply', colors), ('instance_cloud_with_background.ply', colors),
+                              ('instance_cloud_colored.ply', rgb_colors)]:
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(np.concatenate(points))
+        pcd.colors = o3d.utility.Vector3dVector(np.concatenate(palette))
+        if filename == 'instance_cloud_with_background.ply' and background:
+            bg = voxel_downsample(np.concatenate(background), .03)
+            pcd.points = o3d.utility.Vector3dVector(np.concatenate([np.concatenate(points), bg]))
+            pcd.colors = o3d.utility.Vector3dVector(np.concatenate([np.concatenate(palette), np.zeros_like(bg)]))
+        if not o3d.io.write_point_cloud(str(scene / filename), pcd):
+            raise IOError(filename)
+    with (scene / 'instance_name_map.csv').open('w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['instance_id', 'name'])
+        writer.writerows((t.id, t.names.most_common(1)[0][0]) for t in alive.values())
+    for filename, feature in [('averaged_instance_features.json', 'visual_sum'), ('instance_bert_embeddings.json', 'semantic_sum')]:
+        values = [{'instance_id': t.id, 'feature': (getattr(t, feature) / len(t.observations)).tolist()} for t in alive.values()]
+        (scene / filename).write_text(json.dumps(values, indent=2) + '\n')
+    (scene / 'object_tracks.json').write_text(json.dumps({str(t.id): {'observations': t.observations,
+        'observed_frames': sorted(t.frames), 'name_votes': dict(t.names), 'point_count': len(t.points),
+        'confidence': float(np.mean([x['confidence'] for x in t.observations]))} for t in alive.values()}, indent=2) + '\n')
+    (scene / 'object_association_zh.jsonl').write_text(''.join(json.dumps(x, ensure_ascii=False) + '\n' for x in audit))
+    context.event('主流程物体融合完成', confirmed_objects=len(alive), recovered_histories=len(remap),
+                  association='visibility_hungarian' if association else 'op3dsg_greedy')

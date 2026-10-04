@@ -409,6 +409,18 @@ fi
 # STAGE 3 — 3D instance fusion
 # ============================================================
 
+# Keep the existing frontend and positional CLI; default construction uses the
+# removable registry shared with Hypersim. This exits before legacy stage blocks.
+if [ "$START_NUM" -le 4 ]; then
+    PIPELINE_STAGE=fusion
+    if [ "$START_NUM" -eq 4 ]; then PIPELINE_STAGE=graph; fi
+    python "$REPO/scannet/script/run_pipeline.py" \
+        --image-dir "$PREPARED_SCENE" --processed-scene "$SCENE_OUTPUT" \
+        --start-stage "$PIPELINE_STAGE" --max-depth "$MAX_DEPTH" \
+        --stride "$SUBSAMPLE_FACTOR" --edge-threshold "$EDGE_THRESHOLD"
+    exit $?
+fi
+
 if [ "$START_NUM" -le 3 ]; then
 
     echo

@@ -6,5 +6,9 @@
   "checkpoints/clip/RN50.pt": {
     "sha256": "afeb0e10f9e5a86da6080e35cf09123aca3b358a0c3e3b6c78a7b63bc04b6762",
     "size": 255827503
+  },
+  "checkpoints/clip/ViT-B-16.pt": {
+    "sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+    "size": 350837078
   }
 }

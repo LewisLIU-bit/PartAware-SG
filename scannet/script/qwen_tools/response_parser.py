@@ -55,7 +55,9 @@ def decode_model_json(content):
 
         text = match.group(1).strip()
 
-    return json.loads(text)
+    # Accept literal line breaks inside model-generated strings; keep structure and
+    # finish_reason validation strict, and preserve the original raw response.
+    return json.loads(text, strict=False)
 
 
 def parse_response(record):

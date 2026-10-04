@@ -1,4 +1,4 @@
-"""Add an optional OP3DSG/VLPart part layer to an existing object scene graph."""
+"""Construct OP3DSG/VLPart parts using the existing RGB-D and object interfaces."""
 import argparse
 from copy import deepcopy
 import hashlib
@@ -81,7 +81,10 @@ def run(args):
         print(message, fields, flush=True)
     # Import large models only after CLI and sensor validation.
     backend = None
-    fusion = PartFusion(voxel=args.voxel, radius=args.radius, min_frames=args.min_frames,
+    import pipeline_components
+    association = getattr(pipeline_components, 'ASSOCIATION', None)
+    fusion_type = getattr(association, 'PartFusion', PartFusion)
+    fusion = fusion_type(voxel=args.voxel, radius=args.radius, min_frames=args.min_frames,
                         color_weight=args.color_weight, threshold=args.fusion_threshold)
     provenance = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}
     provenance.update(dataset=data['dataset'], scene_id=data['scene_id'],
@@ -220,6 +223,11 @@ def main():
         parser.error('Parameters must be finite')
     if not 0 <= args.score_threshold <= 1 or args.image_size < 32 or args.stride < 1 or args.max_depth < 0:
         parser.error('Invalid detector or projection parameters')
+    import fcntl
+    gpu_lock_dir = Path.home() / '.cache' / 'partaware-sg'
+    gpu_lock_dir.mkdir(parents=True, exist_ok=True)
+    gpu_lock = (gpu_lock_dir / 'gpu.lock').open('a')
+    fcntl.flock(gpu_lock.fileno(), fcntl.LOCK_EX)
     run(args)
 
 

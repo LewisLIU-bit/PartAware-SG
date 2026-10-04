@@ -822,6 +822,12 @@ if __name__ == "__main__":
             parser.error(
                 "--skip_existing is not yet supported in manifest mode"
             )
+    # Serialize GPU model stages across independent scene runs in the same environment.
+    import fcntl
+    gpu_lock_dir = Path.home() / '.cache' / 'partaware-sg'
+    gpu_lock_dir.mkdir(parents=True, exist_ok=True)
+    gpu_lock = (gpu_lock_dir / 'gpu.lock').open('a')
+    fcntl.flock(gpu_lock.fileno(), fcntl.LOCK_EX)
     segmenter = InstanceSegmenter(
         visualize=args.visualize,
         confidence_threshold=args.confidence_threshold,

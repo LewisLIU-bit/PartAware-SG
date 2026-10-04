@@ -1,4 +1,4 @@
-# Optional PartAware-SG interfaces
+# PartAware-SG interfaces
 
 The legacy object graph ABI is unchanged. `object_nodes.nodes` contains object records
 with 256-dimensional GroundingDINO visual embeddings and 384-dimensional SBERT text
@@ -46,6 +46,29 @@ CLI switches and should be evaluated separately.
 
 ## Object association
 
+V3's default `run_pipeline.py` and shell runner use the code registry in
+`pipeline_components/__init__.py`. `FUSION` exports original PLY/name/256D/384D
+files and updated local-to-global frame mappings. `ASSOCIATION` supplies
+visibility checks and Hungarian assignment with explicit unmatched observations.
+Its part fusion accumulates ownership evidence across frames and permits an
+initially unknown parent to become known. `GRAPH_COMPONENTS` publishes official
+VLPart predictions into canonical `topology_map.json`; `scene_graph.nodes` contains
+objects and confirmed parts, and `scene_graph.edges` contains spatial and hierarchy
+relations. The old object fields remain compatible. `TopologyMap.get_parts()` and
+`get_entity()` expose the added structure to downstream code.
+
+Detach modules by removing imports and entries from this registry, then rebuild
+in a fresh output directory. No backup restore or runtime feature flag is required.
+Removing the fusion entry invokes the original C++ implementation. The standalone
+part CLI remains available and preserves its input graph.
+
+`object_tracks.json` records distinct frames, label votes and mean observed
+confidence. `object_association_zh.jsonl` records geometric/semantic/projected
+evidence. `pipeline_zh.jsonl` records construction stages and failures. Results
+are separate from input manifests; logs are not consumed as prediction inputs.
+
+The following paragraph documents the retained original binary interface:
+
 Append `--association_mode op3dsg` to either original `openset_ply_map` invocation.
 `legacy` remains the default. Existing positional arguments, `--manifest`, and
 `--filter_floor` continue to work. The optional mode uses directional neighbor
@@ -68,6 +91,21 @@ The verified `partaware_v1` experiment contains `hypersim/ai_001_002`,
 `scannet/scene0000_00`, and external regression/history records. The source tree
 contains no generated run results. Only ScanNet and Hypersim dedicated routes
 are retained. The original generic manifest ABI is preserved.
+
+V3 has two independent roots: `partaware_ai_001_002_v3` and
+`partaware_ai_001_010_v3`. New Hypersim preparation uses the full ordered available
+frame list, selecting `[::3][:150]`, rather than selecting 150 candidates first.
+Official HDF5 sources are retained under each prepared input's `source_hdf5/`.
+An existing RGB/depth resolution disagreement is recorded and excluded, never
+silently resized or assigned an invented camera registration.
+
+`evaluate_hypersim.py` reads official labels and mesh boxes separately from
+construction. Node rank retrieval follows OP3DSG's CLIP ViT-B/16 text protocol,
+adapted to fixed NYU40 labels. Predicted boxes come from saved graph shapes;
+official oriented mesh boxes are converted to axis-aligned bounds. Category-free
+box AP and one-to-one geometric precision/recall are supplementary adaptations,
+not ScanNet mesh-mask AP. Voxel occupancy is a density-sensitive diagnostic only.
+Part and relation scores remain null when independent labels are unavailable.
 
 ## Florence and the common viewer
 

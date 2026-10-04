@@ -10,11 +10,13 @@ __ScanNet-SG: A Large-Scale Dataset for 3D Scene Graph Alignment__ and
 __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 
-## Optional PartAware-SG pipeline
+## Default PartAware-SG pipeline
 
-PartAware-SG preserves the saved ScanNet and Hypersim object pipelines and adds
-an independent object-part layer using official [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)
-knowledge and [VLPart](https://github.com/facebookresearch/VLPart) inference.
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v3 default
+constructs objects, parts and hierarchy in one canonical `topology_map.json`,
+using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
+visibility-aware one-to-one association and official
+[VLPart](https://github.com/facebookresearch/VLPart) inference.
 The original object JSON format, 256-dimensional visual features, and
 384-dimensional text features are preserved. Basic object detection now defaults to GroundingDINO proposals, Florence crop
 likelihood evidence, and SAM masks. ScanNet folders and Hypersim manifests keep
@@ -24,13 +26,13 @@ does not replace the 256-dimensional detector features or infer physical instanc
 identity. `--joint_config` still accepts the existing scene-specific reference
 profiles. The portable default scores all input categories with soft evidence
 and needs no scene-specific reference images. See setup for the isolated runtime.
-The default object association
-remains `legacy`; append `--association_mode op3dsg` to `openset_ply_map` only
-for a separate association experiment. This is an adapted prior-graph pipeline;
+The default runner now uses code-registered construction components. The original
+`openset_ply_map` binary and its `legacy` default remain available as the fallback
+when the fusion component is detached. This is an adapted prior-graph pipeline;
 OP3DSG's LLM reasoning stage is not included.
 
 Only ScanNet and Hypersim are supported by the project-specific adapters.
-Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1` or `<name>_v2`.
+Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1`, `<name>_v2` or `<name>_v3`.
 The current WSL copy already contains the required runtime repositories, weights, and
 isolated part environment. Use `scannet-sg` for the object frontend and
 `.venv-vlpart/bin/python` for parts. See [reproducible setup](docs/PARTAWARE_SETUP.md)
@@ -43,10 +45,46 @@ conda activate scannet-sg
 cmake -S scannet -B scannet/build-partaware
 cmake --build scannet/build-partaware -j2
 # Use a new experiment name; the basic frontend defaults to Florence.
-MAX_FRAMES=3 bash run_scannet_sg.sh scene0000_00 scannet_florence_v2
+MAX_FRAMES=3 bash run_scannet_sg.sh scene0000_00 scannet_partaware_v3
 ```
 
-After an object graph has been generated, run parts in a fresh output directory.
+Hypersim's full default pipeline uses the existing manifest, Qwen category
+descriptions, Florence/SAM objects and all registered construction components:
+
+```bash
+python scannet/script/run_pipeline.py \
+  --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v3/hypersim/ai_001_010
+```
+
+Qwen requires the existing private environment/file credentials; no secrets belong
+in the repository. The current tested model is `qwen3-vl-plus`. For a new official
+scene, sample its complete ordered frame list every third frame, capped at 150
+selected frames. Thus 300 available frames yield 100 inputs:
+
+```bash
+python scannet/script/prepare_hypersim.py \
+  --scene ai_001_010 \
+  --output /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3 \
+  --frame-step 3 --max-frames 150
+```
+
+Official candidate HDF5 files and independent labels stay in `source_hdf5/`.
+Only selected RGB-D frames appear in the manifest. No complete ZIP archive or
+download helper repository is retained. `--existing-manifest` reuses downloaded
+RGB-D without changing it and records dimension-invalid frames explicitly.
+
+Component attachment is centralized in
+`scannet/script/pipeline_components/__init__.py`. To detach an algorithm, remove
+its import and registry entry: `ASSOCIATION` returns object association and part
+ownership to their conservative base rules; `FUSION` returns object fusion to the
+original C++ implementation; entries in `GRAPH_COMPONENTS` determine graph
+extensions. Detachment uses code editing, not feature flags or backup restoration.
+Rebuild into a fresh result folder after editing the registry. Existing result
+files do not change automatically. `--start-stage` resumes a completed frontend;
+it is not a component-removal switch.
+
+The standalone part entry remains available for inspecting an existing object graph.
 This verified ScanNet example uses the existing object baseline:
 
 ```bash
@@ -76,7 +114,9 @@ names to part names; objects absent from the knowledge base get no guessed parts
 
 Outputs include `partaware_graph.json`, independent per-frame Boolean masks,
 observed part point clouds, `run_config.json`, and Chinese `run_zh.jsonl` logs.
-The original `topology_map.json` is preserved. Parts have their own 1024-dimensional
+The standalone command preserves its supplied `topology_map.json`; the default
+full pipeline publishes the returned parts into canonical `topology_map.json` and
+its `scene_graph` extension. Parts have their own 1024-dimensional
 CLIP RN50 feature space; confirmed, attached tracks create `part_of` edges.
 See [interfaces](docs/PARTAWARE_INTERFACES.md) and the
 [consolidated Chinese report](RESEARCH_LOG.md).
@@ -95,14 +135,24 @@ node script/render_research_report.cjs \
 ```
 
 ```bash
-.venv-vlpart/bin/python -m unittest discover -s scannet/script/tests_partaware -v
+python -m unittest discover -s scannet/script/tests_partaware -v
 ```
 
-Real ScanNet and Hypersim object regression runs produced identical graphs with
+Earlier ScanNet and Hypersim object regression runs produced identical graphs with
 the saved binary and new default binary. Native VLPart and optional SAM runs
 completed on small samples. These runs establish functionality and compatibility;
-detector errors, duplicate parts, and uncertain ownership remain. Accuracy gains
-require annotated evaluation. The consolidated report is in [RESEARCH_LOG.md](RESEARCH_LOG.md); raw records and generated graphs are stored under `/home/lewisliu/datasets/scannet-sg-processed/partaware_v1`.
+detector errors, duplicate parts, and uncertain ownership remain. V3 uses independent
+official Hypersim instance labels and mesh boxes for adapted object evaluation;
+Hypersim does not provide part/hierarchy/functional-relation ground truth.
+These are not official ScanNet or UniGraph3D benchmark scores. See
+[RESEARCH_LOG.md](RESEARCH_LOG.md) for results and limitations.
+
+```bash
+python scannet/script/evaluate_hypersim.py \
+  --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/evaluation_v3.json
+```
 
 
 ### Visualize the generated part graph
@@ -118,8 +168,8 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/hypersim_joint_v4/hypersim/ai_001_002/instance_cloud_with_background.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/parts_refined/partaware_graph.json \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/hypersim/ai_001_002/topology_map.json \
   --show_bboxes --show_edges --show_parts --enable_picking \
   --node_radius 0.07 --part_radius 0.025
 ```
@@ -131,6 +181,10 @@ Shift + left click prints either an object or child node name in the same
 window. `script/visualize_partaware.py` remains a compatibility wrapper around
 this renderer; it no longer builds a separate scene. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
+The second full v3 experiment is under
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v3/hypersim/ai_001_010`.
+Use that directory for both visualization paths. For its dense spatial graph,
+omit `--show_edges` when inspecting objects and part ownership.
 
 The v1 graph keeps the saved object baseline; changing the default frontend
 does not retroactively rerun it. The new v2 smoke run contains fresh Florence

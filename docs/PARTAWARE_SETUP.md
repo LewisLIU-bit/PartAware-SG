@@ -59,8 +59,22 @@ The optional SAM switch uses the already preserved
 
 ## Checks
 
+V3 adds only the official HDF5 reader to the existing object environment:
+
 ```bash
-.venv-vlpart/bin/python -m unittest discover \
+conda activate scannet-sg
+python -m pip install --no-deps h5py==3.11.0
+```
+
+The independent evaluator uses the already installed OpenAI `clip` package and
+official `ViT-B/16` weights, cached in `checkpoints/clip/ViT-B-16.pt`. These weights
+are used for label retrieval, separately from VLPart's RN50 masked image features.
+No global Python installation is modified. GPU model stages share an environment
+lock under `~/.cache/partaware-sg/gpu.lock` so separate scene runs do not load their
+large models simultaneously.
+
+```bash
+python -m unittest discover \
   -s scannet/script/tests_partaware -v
 .venv-vlpart/bin/python scannet/script/run_partaware.py --help
 cmake -S scannet -B scannet/build-partaware

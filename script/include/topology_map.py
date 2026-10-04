@@ -218,6 +218,18 @@ class TopologyMap:
         self.object_nodes = ObjectNodesHashTable()
         self.free_space_nodes = FreespaceNodesHashTable()
         self.edge_hypotheses: Dict[str, TopologyMapHypothesis] = {}
+        # Part embeddings belong to a distinct feature space from object embeddings.
+        self.part_nodes = {}
+        self.part_relations = []
+        self.scene_graph = {}
+
+    def get_parts(self, parent_id: str, confirmed_only: bool = True):
+        return [part for part in self.part_nodes.values()
+                if str(part.get('parent_id')) == str(parent_id)
+                and (not confirmed_only or part.get('status') == 'confirmed')]
+
+    def get_entity(self, entity_id: str):
+        return self.object_nodes.get_node(str(entity_id)) or self.part_nodes.get(str(entity_id))
 
     def add_edge_hypothesis(self, edge_hypothesis: TopologyMapHypothesis):
         self.edge_hypotheses[edge_hypothesis.id] = edge_hypothesis
@@ -244,6 +256,9 @@ class TopologyMap:
         self.object_nodes = ObjectNodesHashTable()
         self.free_space_nodes = FreespaceNodesHashTable()
         self.edge_hypotheses = {}
+        self.part_nodes = data.get('part_nodes') or {}
+        self.part_relations = data.get('part_relations') or []
+        self.scene_graph = data.get('scene_graph') or {}
 
         # Handle object nodes
         if data.get('object_nodes') and data['object_nodes'].get('nodes'):
@@ -294,6 +309,4 @@ class TopologyMap:
     #     Visualize the topology map.
     #     '''
     #     # Create a 3D plot
-    #     fig = plt.figure()  
-    
-        
+    #     fig = plt.figure()
