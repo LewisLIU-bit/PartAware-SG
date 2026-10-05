@@ -212,3 +212,13 @@ The completed second-scene controls are stored under
 `hypersim/ai_001_010` scene outputs and a root `evaluation.json`. Reproduction
 commands must use new output roots; the version chapters of `RESEARCH_LOG.html` records the
 four-route comparison and common visualization commands.
+
+
+## Independent AP75 audit
+
+The evaluator now exports `geometry_only_box_AP75`, alongside AP25/AP50,
+and one-to-one localization at IoU 0.75. Prediction records include exact
+canonical graph box bounds for diagnosis. This does not change masks,
+instance construction, graph geometry or the existing evaluation protocol.
+The requested AP75 audit covers v5 and the saved RAM/Qwen-DINO controls;
+v1-v4 historical scores are not recomputed. Future runs include AP75.

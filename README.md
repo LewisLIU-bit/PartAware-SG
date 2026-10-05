@@ -139,7 +139,8 @@ completed on small samples. These runs establish functionality and compatibility
 detector errors, duplicate parts, and uncertain ownership remain. V3 uses independent
 official Hypersim instance labels and mesh boxes for adapted object evaluation;
 Hypersim does not provide part/hierarchy/functional-relation ground truth.
-Object evaluation also reports the predicted/annotated count ratio and symmetric
+Object evaluation reports class-agnostic 3D box AP25, AP50 and AP75.
+It also reports the predicted/annotated count ratio and symmetric
 absolute natural-log count error, `abs(log(N_pred / N_annotated))`. Lower is better;
 zero predictions with nonzero annotations have infinite error, represented by a
 JSON null plus an explicit status. Counts exclude structural background and parts.

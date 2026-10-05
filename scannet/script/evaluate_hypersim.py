@@ -205,7 +205,7 @@ def evaluate(args):
     confidences = [x['confidence'] for x in predictions]
     spatial = {}
     bbox_spatial = {}
-    for threshold in [.25, .5]:
+    for threshold in [.25, .5, .75]:
         # Match the maximum number of valid pairs, then prefer the greater overlap.
         value = np.where(matrix >= threshold, 1 + matrix / (min(matrix.shape)+1), -1e6)
         padded = np.concatenate([value, np.zeros((len(predictions), len(predictions)))], axis=1)
@@ -254,6 +254,7 @@ def evaluate(args):
               'prediction_bbox_source': 'canonical_topology_node_shape_and_position_converted_to_aabb',
               'geometry_only_box_AP25': average_precision(bbox_iou, confidences, .25),
               'geometry_only_box_AP50': average_precision(bbox_iou, confidences, .5),
+              'geometry_only_box_AP75': average_precision(bbox_iou, confidences, .75),
               'geometry_only_box_AP': float(np.mean([average_precision(bbox_iou, confidences, t) for t in np.arange(.5, 1, .05)])),
               'one_to_one_bbox_geometry': bbox_spatial, 'op3dsg_adapted_object_label_recall': recalls,
               'voxel_occupancy_diagnostic': {'AP25': average_precision(matrix, confidences, .25),
@@ -264,11 +265,11 @@ def evaluate(args):
               'ground_truth_objects': [{'id': g['id'], 'label': g['label'], 'voxels': len(g['keys']),
                                         'bounds': np.asarray(g['bounds']).tolist()} for g in truth],
               'prediction_objects': [{'id': p['id'], 'label': p['label'], 'voxels': len(p['keys']),
-                                      'confidence': p['confidence']} for p in predictions]}
+                                      'confidence': p['confidence'], 'bounds': np.asarray(p['bounds']).tolist()} for p in predictions]}
     output = Path(args.output).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + '\n')
-    print('独立物体评价完成', {key: report[key] for key in ['gt_objects', 'predicted_objects', 'geometry_only_box_AP25', 'geometry_only_box_AP50']}, flush=True)
+    print('独立物体评价完成', {key: report[key] for key in ['gt_objects', 'predicted_objects', 'geometry_only_box_AP25', 'geometry_only_box_AP50', 'geometry_only_box_AP75']}, flush=True)
 
 
 if __name__ == '__main__':
