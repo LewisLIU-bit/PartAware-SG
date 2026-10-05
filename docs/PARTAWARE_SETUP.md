@@ -1,4 +1,4 @@
-# Reproducing the optional part environment
+# Reproducing the project inference environments
 
 The current WSL project is already installed and tested. Use the existing
 `scannet-sg` conda environment for the original object frontend and
@@ -131,3 +131,56 @@ Set `--grounding_backend dino` to reproduce the original frontend.
 Use a fresh output folder for new inference; existing complete runs can still
 be skipped with `--skip_existing`. Model and input failures are reported,
 and never silently converted to a DINO run.
+
+
+## V4 YOLOE and AdaPoinTr environments
+
+These isolated environments inherit the existing base packages without upgrading
+PyTorch, transformers or the original part runtime. The verified base is Python
+3.10, PyTorch 2.14/CUDA 13 and approximately 8 GB GPU memory. Install only these
+pinned additions; the GPU lock serializes large inference models.
+
+```bash
+BASE_PYTHON=/home/lewisliu/miniconda3/envs/scannet-sg/bin/python
+"$BASE_PYTHON" -m venv --system-site-packages .venv-yoloe
+.venv-yoloe/bin/python -m pip install --no-deps ultralytics==8.3.221 ultralytics-thop==2.2.2
+"$BASE_PYTHON" -m venv --system-site-packages .venv-completion
+.venv-completion/bin/python -m pip install --no-deps easydict==1.13 einops==0.8.1
+git clone https://github.com/yuxumin/PoinTr.git scannet/script/thirdparty/PoinTr
+git -C scannet/script/thirdparty/PoinTr checkout 4603257ed3db9e7dad349b712e1b2fe0da207015
+mkdir -p checkpoints/yoloe checkpoints/completion
+curl -fL --retry 3 https://huggingface.co/jameslahm/yoloe/resolve/main/yoloe-v8s-seg.pt \
+  -o checkpoints/yoloe/yoloe-v8s-seg.pt
+curl -fL --retry 3 https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts \
+  -o checkpoints/yoloe/mobileclip_blt.ts
+curl -fL --retry 3 \
+  'https://drive.usercontent.google.com/download?id=17pE2U2T2k4w1KfmDbL6U-GkEwD-duTaF&export=download&confirm=t' \
+  -o checkpoints/completion/AdaPoinTr_PCN.pth
+```
+
+The author-provided **PCN** checkpoint is used, not Projected-ShapeNet55. It is
+strictly loaded into the official AdaPoinTr architecture. The project adapter
+provides portable PyTorch FPS, gathering and interpolation for inference, avoiding
+historical CUDA extension builds. Its metric normalization and bounded alignment
+adapt real partial observations; this is not a PCN benchmark reproduction or a
+text-conditioned completion model. Verify hashes against `model_checksums.json`.
+
+The source and weights remain local ignored runtime assets. YOLOE/Ultralytics
+attribution and AGPL-3.0 provenance are recorded in `sources.lock.json`; AdaPoinTr's
+source license remains in its checkout. Training-only dependencies are not installed.
+
+## Offline mathematical report
+
+`docs/RESEARCH_REPORT.md` is the single editable Chinese research source. General
+sections describe the current version; individual version chapters contain history.
+`docs/render_research_report.cjs` builds both the offline SVG-math HTML and LaTeX.
+Use a Node.js >=20 runtime with `mathjax-full@3.2.2` and `marked@17.0.5` installed in
+a project-local build environment, then pass its directory with `--dependencies`:
+
+```bash
+node docs/render_research_report.cjs --source docs/RESEARCH_REPORT.md \
+  --output RESEARCH_LOG.html --latex-output RESEARCH_LOG.tex \
+  --dependencies /path/to/report-build-environment
+```
+
+The published HTML requires no CDN, JavaScript, remote font or network connection.

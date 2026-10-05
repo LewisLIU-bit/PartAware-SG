@@ -10,5 +10,17 @@
   "checkpoints/clip/ViT-B-16.pt": {
     "sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
     "size": 350837078
+  },
+  "checkpoints/yoloe/yoloe-v8s-seg.pt": {
+    "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+    "size": 31135890
+  },
+  "checkpoints/yoloe/mobileclip_blt.ts": {
+    "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+    "size": 599764649
+  },
+  "checkpoints/completion/AdaPoinTr_PCN.pth": {
+    "sha256": "f58a5650b348ca3d68fc8e01e3e88f57d5a889bbad5521fec7a2760eda664fa1",
+    "size": 389745620
   }
 }

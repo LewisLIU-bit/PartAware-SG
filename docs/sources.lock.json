@@ -35,5 +35,33 @@
   "dataset_scope": [
     "scannet",
     "hypersim"
-  ]
+  ],
+  "YOLOE": {
+    "repository": "https://github.com/THU-MIG/yoloe",
+    "paper": "https://arxiv.org/abs/2503.07465",
+    "runtime": "ultralytics==8.3.221",
+    "integration": "official YOLOE-v8-S weights and MobileCLIP text prompts; native segmentation",
+    "license": "AGPL-3.0"
+  },
+  "AdaPoinTr": {
+    "repository": "https://github.com/yuxumin/PoinTr",
+    "paper": "https://arxiv.org/abs/2301.04545",
+    "commit": "4603257ed3db9e7dad349b712e1b2fe0da207015",
+    "checkpoint": "official AdaPoinTr PCN",
+    "integration": "strict official model weights with portable inference operators; observation-constrained metric adaptation"
+  },
+  "MaskClustering": {
+    "repository": "https://github.com/PKU-EPIC/MaskClustering",
+    "paper": "https://arxiv.org/abs/2401.07745",
+    "integration": "view-consensus algorithm adapted; no full framework vendored"
+  },
+  "MV3DIS": {
+    "repository": "https://github.com/zybjn/MV3DIS",
+    "paper": "https://arxiv.org/abs/2604.08916",
+    "integration": "depth-weighted consistency concept adapted; no full framework vendored"
+  },
+  "DetailsMatter": {
+    "paper": "https://arxiv.org/abs/2507.23134",
+    "integration": "adapted inclusion consolidation and SMS; existing RN50 masked crops instead of Alpha-CLIP"
+  }
 }

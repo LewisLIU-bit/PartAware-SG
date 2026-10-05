@@ -110,7 +110,7 @@ def evaluate(args):
         raise ValueError('Official Hypersim labels must be prepared independently')
     native = Path(payload['ground_truth_source'])
     scene = Path(args.processed_scene).expanduser().resolve()
-    graph_path = scene / 'topology_map.json'
+    graph_path = Path(args.graph_file).expanduser().resolve() if args.graph_file else scene / 'topology_map.json'
     graph = json.loads(graph_path.read_text())
     nodes = graph['object_nodes']['nodes'] or {}
     _, jobs, kd, kc, scale = load_capture(manifest)
@@ -125,7 +125,9 @@ def evaluate(args):
     rgb_ids = np.round(np.asarray(cloud.colors) * 255).astype(np.int64)
     ids = rgb_ids[:, 0] + 255 * rgb_ids[:, 1] + 255**2 * rgb_ids[:, 2]
     predictions = []
-    tracks_path = scene / 'object_tracks.json'
+    tracks_path = scene / 'validated_object_tracks.json'
+    if not tracks_path.exists():
+        tracks_path = scene / 'object_tracks.json'
     tracks = json.loads(tracks_path.read_text()) if tracks_path.exists() else {}
     for key, node in nodes.items():
         region = points[ids == int(key)]
@@ -246,7 +248,7 @@ def evaluate(args):
               'excluded_nyu40_ids': [1, 2, 22], 'gt_objects': len(truth), 'predicted_objects': len(predictions),
               'object_count_consistency': object_count_metrics(len(predictions), len(truth)),
               'label_space': labels, 'clip_model': 'openai_ViT-B/16_text',
-              'graph_sha256': hashlib.sha256(graph_path.read_bytes()).hexdigest(), 'gt_labels_sha256': label_digest.hexdigest(),
+              'graph_path': str(graph_path), 'graph_sha256': hashlib.sha256(graph_path.read_bytes()).hexdigest(), 'gt_labels_sha256': label_digest.hexdigest(),
               'prediction_ply': str(prediction_ply), 'prediction_ply_sha256': hashlib.sha256(prediction_ply.read_bytes()).hexdigest(),
               'gt_bbox_source': 'official_mesh_object_aligned_2d_boxes_converted_to_aabb',
               'prediction_bbox_source': 'canonical_topology_node_shape_and_position_converted_to_aabb',
@@ -274,5 +276,6 @@ if __name__ == '__main__':
     parser.add_argument('--manifest', required=True)
     parser.add_argument('--processed-scene', required=True)
     parser.add_argument('--output', required=True)
+    parser.add_argument('--graph-file', help='Explicit saved graph hypothesis for a geometry ablation')
     parser.add_argument('--geometry-source', help='Explicit geometry source for older experiments that reused another object map')
     evaluate(parser.parse_args())

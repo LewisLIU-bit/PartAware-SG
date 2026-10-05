@@ -1,0 +1,25 @@
+{
+  "version": "v5",
+  "base_environment": "scannet-sg",
+  "python": "3.10",
+  "pytorch": "2.14.0",
+  "cuda": "13",
+  "qwen_api_calls": 0,
+  "isolated_environments": {
+    ".venv-yoloe": {
+      "ultralytics": "8.3.221",
+      "ultralytics-thop": "2.2.2"
+    },
+    ".venv-completion": {
+      "easydict": "1.13",
+      "einops": "0.8.1"
+    }
+  },
+  "operators": "portable torch inference; no added CUDA completion extensions",
+  "existing_environments": [
+    "scannet-sg",
+    "sg-florence",
+    ".venv-vlpart"
+  ],
+  "proposal_validation_model": "existing OpenAI RN50; no extra environment/dependencies"
+}

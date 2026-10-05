@@ -73,7 +73,9 @@ def filter_point_cloud_outliers(
         return np.asarray(pcd_filtered.points)
     
     largest_cluster_label = unique_labels[np.argmax(counts)]
-    mask = labels == largest_cluster_label
+    # Preserve substantial disconnected surfaces such as chair legs.
+    retained_labels = unique_labels[counts >= max(min_points, .1*counts.max())]
+    mask = np.isin(labels, retained_labels)
     
     return np.asarray(pcd_filtered.points)[mask]
 

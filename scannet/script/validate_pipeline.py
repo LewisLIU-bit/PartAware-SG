@@ -35,7 +35,34 @@ def validate_scene(scene):
             raise ValueError('Hierarchy edge lacks stable multi-view ownership')
         if edge not in graph['scene_graph']['edges']:
             raise ValueError('Hierarchy relation is only a visualization overlay')
-    tracks_path = scene/'object_tracks.json'
+    provenance = graph.get('geometry_provenance')
+    if provenance:
+        import open3d as o3d
+        from scipy.spatial.transform import Rotation
+        geometry = o3d.io.read_point_cloud(str(scene/provenance['source']))
+        points = np.asarray(geometry.points)
+        colors = np.rint(np.asarray(geometry.colors)*255).astype(int)
+        encoded = colors[:, 0]+255*colors[:, 1]+255**2*colors[:, 2]
+        if set(str(x) for x in np.unique(encoded) if x > 0) != set(nodes):
+            raise ValueError('Published geometry and canonical object IDs disagree')
+        for gid, node in nodes.items():
+            shape = node['shape']
+            rotation = Rotation.from_quat([shape['orientation'][k] for k in ['x', 'y', 'z', 'w']]).as_matrix()
+            local = (points[encoded == int(gid)]-np.asarray(node['position'])) @ rotation
+            extent = np.array([shape[k] for k in ['length','width','height']])
+            if not np.all(np.abs(local) <= extent/2+1e-5):
+                raise ValueError(f'Published box does not contain its geometry: {gid}')
+        for hypothesis in (graph.get('edge_hypotheses') or {}).values():
+            for edge in (hypothesis.get('edges') or {}).values():
+                a, b = edge['source_id'], edge['target_id']
+                delta = np.asarray(nodes[b]['position'])-nodes[a]['position']
+                distance = np.linalg.norm(delta)
+                if (not np.isclose(edge['distance'], distance, atol=1e-5)
+                        or not np.allclose(edge['direction'], delta/distance, atol=1e-5)):
+                    raise ValueError('Spatial edges do not describe current box centers')
+    tracks_path = scene/'validated_object_tracks.json'
+    if not tracks_path.exists():
+        tracks_path = scene/'object_tracks.json'
     fusion_module = graph.get('pipeline_provenance', {}).get('fusion_module')
     if fusion_module and fusion_module != 'legacy_cpp' and not tracks_path.exists():
         raise FileNotFoundError('Default component graph is missing object track provenance')
@@ -50,7 +77,7 @@ def validate_scene(scene):
 
 
 def scannet_smoke():
-    from run_pipeline import Context, legacy_fusion, build_graph
+    from run_pipeline import Context, legacy_fusion, build_graph, build_legacy_graph
     from pipeline_components import FUSION, ASSOCIATION
     source = Path.home() / 'datasets/scannet/processed/baseline30/openset_scans/scene0000_00/refined_instance'
     images = Path.home() / 'datasets/scannet/images/scans/scene0000_00'
@@ -75,7 +102,10 @@ def scannet_smoke():
                     legacy_fusion(context)
                 else:
                     FUSION.fuse(context, ASSOCIATION)
-                build_graph(context)
+                if title == 'legacy_cpp':
+                    build_legacy_graph(context)
+                else:
+                    build_graph(context)
                 graph = json.loads((scene / 'topology_map.json').read_text())
                 loader = TopologyMap()
                 loader.read_from_json(json.dumps(graph))
@@ -91,7 +121,7 @@ def scannet_smoke():
 def build_legacy_control(source_scene, manifest, control_scene):
     """Hold the exact frontend masks and features fixed for fusion comparison."""
     import hashlib
-    from run_pipeline import Context, legacy_fusion, build_graph
+    from run_pipeline import Context, legacy_fusion, build_graph, build_legacy_graph
     source, manifest, target = Path(source_scene).resolve(), Path(manifest).resolve(), Path(control_scene).resolve()
     if target.exists() and any(target.iterdir()):
         raise FileExistsError('The control output must be fresh')
@@ -109,7 +139,7 @@ def build_legacy_control(source_scene, manifest, control_scene):
                                       max_depth=0, stride=2, edge_threshold=2))
     try:
         legacy_fusion(context)
-        build_graph(context)
+        build_legacy_graph(context)
     finally:
         context.log.close()
     record = {'message': '同前端原始融合对照完成', 'frontend_source': str(source), 'control_output': str(target),
@@ -122,7 +152,7 @@ def build_frontend_control(manifest, scene_path, tag_source, reuse_from=None, st
     """Compare tag sources with fresh DINO/SAM and the same original C++ graph path."""
     import hashlib
     from partaware.geometry import load_capture
-    from run_pipeline import Context, legacy_fusion, build_graph
+    from run_pipeline import Context, legacy_fusion, build_graph, build_legacy_graph
     manifest = Path(manifest).expanduser().resolve()
     scene = Path(scene_path).expanduser().resolve()
     data, jobs, _, _, _ = load_capture(manifest)
@@ -185,7 +215,7 @@ def build_frontend_control(manifest, scene_path, tag_source, reuse_from=None, st
         if first <= 2:
             legacy_fusion(context)
         if first <= 3:
-            build_graph(context)
+            build_legacy_graph(context)
         graph_path = scene/'topology_map.json'
         graph = json.loads(graph_path.read_text())
         graph['benchmark_provenance'] = {key:value for key,value in record.items() if key != 'tag_sha256'}

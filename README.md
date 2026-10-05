@@ -12,16 +12,23 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v3 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v5 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
 [VLPart](https://github.com/facebookresearch/VLPart) inference.
 The original object JSON format, 256-dimensional visual features, and
-384-dimensional text features are preserved. Basic object detection now defaults to GroundingDINO proposals, Florence crop
-likelihood evidence, and SAM masks. ScanNet folders and Hypersim manifests keep
+384-dimensional text features are preserved. Basic observations use GroundingDINO proposals, local Florence crop evidence
+and SAM masks. V4 augments them with official YOLOE-v8-S segmentation, then applies
+multi-view instance consensus, observed-surface refinement and selective official
+AdaPoinTr-PCN completion before publishing geometry. V5 inserts observed proposal validation and masked-CLIP
+SMS filtering before completion; rejected candidates do not enter the canonical
+objects or their cleaned PLY. Logs retain all decisions and original fusion tracks. Generated surfaces never count
+as observed evidence. When the YOLOE frontend runs, object features use a consistent 256D projected
+DINO backbone ROI space; these differ from the older 256D decoder query features. ScanNet folders and Hypersim manifests keep
 their original interfaces; `--grounding_backend dino` restores the original
-frontend, or `GROUNDING_BACKEND=dino` selects it in the shell runner. Florence
+frontend, or `GROUNDING_BACKEND=dino` selects it in the shell runner. The retained legacy folder frontend keeps its original decoder features; do not
+mix them with ROI features inside one capture. Florence
 does not replace the 256-dimensional detector features or infer physical instance
 identity. `--joint_config` still accepts the existing scene-specific reference
 profiles. The portable default scores all input categories with soft evidence
@@ -31,18 +38,19 @@ The default runner now uses code-registered construction components. The origina
 when the fusion component is detached. This is an adapted prior-graph pipeline;
 OP3DSG's LLM reasoning stage is not included.
 
-Declared meter-scale Hypersim Z-up inputs automatically use the original
-multi-frame geometric floor guards before object association, including the
-legacy C++ fallback. The Python component records the accepted plane and support
-in `floor_filter.json`; the legacy path records them in its step log.
-Floor points remain in the background export but are
-excluded from object construction. Other coordinate conventions are not assumed.
+Declared meter-scale Hypersim Z-up inputs use supported floor and low-platform
+filtering before association. `floor_filter.json` records accepted heights and
+multi-view background evidence. Other coordinate conventions keep the original
+generic geometry path. Final boxes and spatial edges use the published cleaned
+or accepted completed cloud, without filtering it a second time. An independent
+`topology_map_observed.json` retains measured-only boxes for completion evaluation.
 
 Only ScanNet and Hypersim are supported by the project-specific adapters.
 Run artifacts are stored outside the source tree, under `datasets/scannet-sg-processed/<name>_v1`, `<name>_v2` or `<name>_v3`.
 The current WSL copy already contains the required runtime repositories, weights, and
 isolated part environment. Use `scannet-sg` for the object frontend and
-`.venv-vlpart/bin/python` for parts. See [reproducible setup](docs/PARTAWARE_SETUP.md)
+`.venv-vlpart/bin/python` for parts; YOLOE and completion use
+`.venv-yoloe` and `.venv-completion` in the project. See [reproducible setup](docs/PARTAWARE_SETUP.md)
 for source revisions, dependencies, and official weight downloads.
 
 ```bash
@@ -54,19 +62,21 @@ cmake --build scannet/build-partaware -j2
 MAX_FRAMES=3 bash run_scannet_sg.sh scene0000_00 scannet_partaware_v3
 ```
 
-Hypersim's full default pipeline uses the existing manifest, Qwen category
-descriptions, Florence/SAM objects and all registered construction components:
+Hypersim's full default pipeline reuses completed same-scene observations and
+cached Qwen category descriptions. It does **not call Qwen image recognition**.
+Missing category caches use the fixed indoor vocabulary locally. For the existing
+two scenes, use a fresh result directory and copy the prior observations:
 
 ```bash
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v3/hypersim/ai_001_010
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v3/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v5/hypersim/ai_001_010
 ```
 
-Qwen requires the existing private environment/file credentials; no secrets belong
-in the repository. The current tested model is `qwen3-vl-plus`. For a new official
-scene, sample its complete ordered frame list every third frame, capped at 150
-selected frames. Thus 300 available frames yield 100 inputs:
+For a new scene, omit `--reuse-scene`: local vocabulary, Florence/SAM and YOLOE
+produce the frontend without API credentials. Prepare its complete ordered frame
+list every third frame, capped at 150 selected frames; 300 frames yield 100 inputs:
 
 ```bash
 python scannet/script/prepare_hypersim.py \
@@ -74,6 +84,12 @@ python scannet/script/prepare_hypersim.py \
   --output /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3 \
   --frame-step 3 --max-frames 150
 ```
+
+The original ScanNet folder frontend remains in `run_scannet_sg.sh`. Feed its
+completed observations to the current construction path with
+`run_pipeline.py --image-dir <original_scene> --processed-scene <result_scene>
+--start-stage fusion`, preserving original files and IDs. The legacy folder
+frontend does not call Qwen.
 
 Official candidate HDF5 files and independent labels stay in `source_hdf5/`.
 Only selected RGB-D frames appear in the manifest. No complete ZIP archive or
@@ -85,7 +101,8 @@ Component attachment is centralized in
 its import and registry entry: `ASSOCIATION` returns object association and part
 ownership to their conservative base rules; `FUSION` returns object fusion to the
 original C++ implementation; entries in `GRAPH_COMPONENTS` determine graph
-extensions. Detachment uses code editing, not feature flags or backup restoration.
+extensions. `FRONTEND`, `INSTANCE_REFINEMENT`,
+`GEOMETRY_COMPONENTS`, `GEOMETRY_OUTPUT` and `OBJECT_VALIDATION` register the current additions. Detachment uses code editing, not feature flags or backup restoration.
 Rebuild into a fresh result folder after editing the registry. Existing result
 files do not change automatically. `--start-stage` resumes a completed frontend;
 it is not a component-removal switch.
@@ -108,7 +125,9 @@ CLIP RN50 feature space; confirmed, attached tracks create `part_of` edges.
 See [interfaces](docs/PARTAWARE_INTERFACES.md).
 The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equations
 as embedded SVG and opens without runtime downloads. Editable
-[LaTeX source](RESEARCH_LOG.tex) is also provided.
+[LaTeX source](RESEARCH_LOG.tex) and editable
+[Chinese research source](docs/RESEARCH_REPORT.md) are also provided. General
+flow, mathematics and interfaces describe v5; v1-v5 changes have separate chapters.
 
 ```bash
 python -m unittest discover -s scannet/script/tests_partaware -v
@@ -131,8 +150,8 @@ These are not official ScanNet or UniGraph3D benchmark scores. See
 ```bash
 python scannet/script/evaluate_hypersim.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/evaluation_v3.json
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/evaluation_v5.json
 ```
 
 
@@ -149,8 +168,8 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/hypersim/ai_001_002/instance_cloud_cleaned.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v3/hypersim/ai_001_002/topology_map.json \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/hypersim/ai_001_002/topology_map.json \
   --show_bboxes --show_edges --show_parts --enable_picking \
   --node_radius 0.07 --part_radius 0.025
 ```
@@ -161,8 +180,8 @@ or `--check_only` to validate the same geometry without a window.
 Shift + left click prints either an object or child node name in the same
 window. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
-The second full v3 experiment is under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v3/hypersim/ai_001_010`.
+The second full v5 experiment is under
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010`.
 Use that directory for both visualization paths. For its dense spatial graph,
 omit `--show_edges` when inspecting objects and part ownership.
 
@@ -171,7 +190,7 @@ The second-scene frontend controls are stored separately as
 `datasets/scannet-sg-processed`. Both recompute DINO/SAM and use the original
 C++ graph path. The Qwen control reuses cached tags without an API call.
 See [control interfaces](docs/PARTAWARE_INTERFACES.md#original-frontend-controls)
-and [report section 15](RESEARCH_LOG.html#frontend-comparison-20261005)
+and [version chapters of the report](RESEARCH_LOG.html)
 for the four-route AP25/AP50/count comparison and common visualization commands.
 
 ## Environment Installation

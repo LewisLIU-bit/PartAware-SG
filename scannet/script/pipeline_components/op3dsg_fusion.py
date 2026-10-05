@@ -91,9 +91,33 @@ def estimate_floor(context, data, jobs, kd, kc, scale):
             flags.append(np.full(len(sampled), is_background, bool))
             indices.append(np.full(len(sampled), index, int))
     floor = supported_floor(np.concatenate(points), np.concatenate(flags), np.concatenate(indices))
+    if floor:
+        samples, flags, indices = np.concatenate(points), np.concatenate(flags), np.concatenate(indices)
+        levels = [floor['height_m']]
+        heights = samples[:, 2]
+        bins, counts = np.unique(np.floor(heights[flags]/.02).astype(int), return_counts=True)
+        for cell, count in zip(bins, counts):
+            center = (cell+.5)*.02
+            if count < 300 or not floor['height_m']+.03 < center < floor['height_m']+.35:
+                continue
+            local = flags & (np.abs(heights-center) < .02)
+            candidate = float(np.median(heights[local]))
+            if min(abs(candidate-h) for h in levels) < .025:
+                continue
+            bg = flags & (np.abs(heights-candidate) <= .01)
+            cells = np.unique(np.floor(samples[bg, :2]/.1).astype(int), axis=0)
+            _, support = np.unique(indices[bg], return_counts=True)
+            local_count = np.count_nonzero(flags & (np.abs(heights-candidate) <= .02))
+            sharp_mode = int(bg.sum())/max(local_count, 1)
+            rectangle_cells = np.prod(np.maximum(np.ptp(cells, axis=0)+1, 1)) if len(cells) else 1
+            filled_fraction = len(cells)/rectangle_cells
+            if (len(cells) >= 100 and np.count_nonzero(support >= 30) >= 3
+                    and sharp_mode >= .8 and filled_fraction >= .25):
+                levels.append(candidate)
+        floor['levels_m'] = levels
     context.event('几何地板估计通过' if floor else '跳过几何地板清除',
                   **(floor or {'reason': '低处水平面缺少足够背景覆盖或跨帧支持'}))
-    (context.scene/'floor_filter.json').write_text(json.dumps({'algorithm': 'existing_cpp_multiframe_floor_guards',
+    (context.scene/'floor_filter.json').write_text(json.dumps({'algorithm': 'multiframe_floor_and_supported_low_platforms_v4',
                                                              'estimate': floor}, indent=2)+'\n')
     return floor
 
@@ -109,7 +133,8 @@ def update(track, observation, fid):
     track.frames.add(fid)
     record['instance_id'] = track.id
     track.observations.append({'frame_id': fid, 'local_id': record['frame_instance_id'],
-                               'confidence': record['confidence'], 'name': record['object_name']})
+                               'confidence': record['confidence'], 'name': record['object_name'],
+                               'mask_quality': record.get('sam_quality_score')})
 
 
 def fuse(context, association=None):
@@ -137,7 +162,7 @@ def fuse(context, association=None):
             points, colors = project_mask(region, rgb, depth, pose, kd, kc, scale,
                                            stride=context.stride, max_depth=context.max_depth)
             if floor:
-                keep = np.abs(points[:, 2]-floor['height_m']) > floor['removal_band_m']
+                keep = np.min(np.abs(points[:, 2:3]-np.asarray(floor.get('levels_m', [floor['height_m']]))), axis=1) > floor['removal_band_m']
                 removed = int(np.count_nonzero(~keep))
                 if removed:
                     background.append(voxel_downsample(points[~keep], .03))
@@ -154,17 +179,26 @@ def fuse(context, association=None):
                                             color_histogram(colors), normalize(semantic), visual))
         scores = np.full((len(observations), len(tracks)), -1e6)
         evidence = {}
+        track_trees = [cKDTree(t.points) for t in tracks]
+        track_bounds = [(t.points.min(0), t.points.max(0)) for t in tracks]
         for i, observation in enumerate(observations):
+            observation_tree = cKDTree(observation.points)
+            lower, upper = observation.points.min(0), observation.points.max(0)
             for j, track in enumerate(tracks):
                 q = float(observation.semantic @ track.semantic)
-                if q < .8 or fid in track.frames:
+                if fid in track.frames:
                     continue
                 if np.linalg.norm(observation.points.mean(0) - track.points.mean(0)) > 3:
                     continue
-                a, b = coverages(observation.points, track.points)
+                tlower, tupper = track_bounds[j]
+                separation = np.maximum(np.maximum(lower-tupper, tlower-upper), 0)
+                if np.linalg.norm(separation) > .100001:
+                    continue
+                a = float(np.mean(track_trees[j].query(observation.points)[0] <= .1))
+                b = float(np.mean(observation_tree.query(track.points)[0] <= .1))
                 g = max(a, b)
                 base = g + (q + 1) / 2
-                if g < .2 or base < 1.2:
+                if g < .2 or (q < .8 and min(a, b) < .7) or (q >= .8 and base < 1.2):
                     continue
                 details = {'geometry': g, 'semantic': q, 'directional_coverage': [a, b]}
                 if association:
@@ -201,35 +235,10 @@ def fuse(context, association=None):
                           'global_id': track.id, **details})
         records_by_frame[fid] = records
         context.event('主流程物体关联完成', frame_id=fid, observations=len(observations), tracks=len(tracks), matched=len(assignments))
-    # Conservative recovery joins split histories only when they were never co-visible.
-    remap = {}
-    for i, left in enumerate(tracks):
-        if left.id in remap:
-            continue
-        for right in tracks[i+1:]:
-            if right.id in remap or left.frames & right.frames or min(len(left.frames), len(right.frames)) < 2:
-                continue
-            if left.names.most_common(1)[0][0] != right.names.most_common(1)[0][0]:
-                continue
-            if float(left.semantic @ right.semantic) < .9:
-                continue
-            if np.linalg.norm(left.points.mean(0) - right.points.mean(0)) > 3:
-                continue
-            a, b = coverages(left.points, right.points)
-            if max(a, b) < .7 or min(a, b) < .25:
-                continue
-            nl, nr = len(left.observations), len(right.observations)
-            left.points = voxel_downsample(np.concatenate([left.points, right.points]), .01)
-            left.semantic_sum += right.semantic_sum
-            left.visual_sum += right.visual_sum
-            left.color = (nl * left.color + nr * right.color) / (nl + nr)
-            left.frames |= right.frames
-            left.names.update(right.names)
-            left.observations += right.observations
-            remap[right.id] = left.id
-            audit.append({'message': '保守恢复跨帧碎片', 'source_id': right.id, 'target_id': left.id,
-                          'directional_coverage': [a, b]})
-    alive = {t.id: t for t in tracks if t.id not in remap and len(t.frames) >= 2}
+    import pipeline_components as components
+    consensus = getattr(components, 'INSTANCE_REFINEMENT', None)
+    remap = consensus.process(context, tracks, records_by_frame, data, jobs, kd, kc, scale, audit) if consensus else {}
+    alive = {t.id: t for t in tracks if t.id not in remap and len(t.frames) >= 2 and len(t.points) >= 16}
     for fid, records in records_by_frame.items():
         for record in records:
             gid = remap.get(record['instance_id'], record['instance_id'])
@@ -265,7 +274,8 @@ def fuse(context, association=None):
         (scene / filename).write_text(json.dumps(values, indent=2) + '\n')
     (scene / 'object_tracks.json').write_text(json.dumps({str(t.id): {'observations': t.observations,
         'observed_frames': sorted(t.frames), 'name_votes': dict(t.names), 'point_count': len(t.points),
-        'confidence': float(np.mean([x['confidence'] for x in t.observations]))} for t in alive.values()}, indent=2) + '\n')
+        **getattr(t, 'quality', {}),
+        'confidence': getattr(t, 'quality', {}).get('confidence', float(np.mean([x['confidence'] for x in t.observations])))} for t in alive.values()}, indent=2) + '\n')
     (scene / 'object_association_zh.jsonl').write_text(''.join(json.dumps(x, ensure_ascii=False) + '\n' for x in audit))
     context.event('主流程物体融合完成', confirmed_objects=len(alive), recovered_histories=len(remap),
                   association='visibility_hungarian' if association else 'op3dsg_greedy')

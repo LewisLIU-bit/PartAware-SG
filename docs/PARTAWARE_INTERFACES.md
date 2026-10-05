@@ -1,11 +1,42 @@
 # PartAware-SG interfaces
 
-The main Hypersim construction path applies the existing multi-frame floor
-policy automatically for declared meter-scale Z-up data. The Python component's `floor_filter.json`
-records the accepted height, 1 cm removal band and background/frame support.
-Cleared points do not receive object identities; the background PLY retains them.
-The legacy fallback uses its existing floor filter, with the same guards,
-and records the accepted height and support in its step log.
+The v5 main Hypersim path applies multi-frame background-supported floors and
+low-platform filtering to declared meter-scale Z-up inputs. `floor_filter.json`
+records `levels_m`, support and a 1 cm removal band. Background exports retain
+cleared points. The legacy C++ fallback retains its original single-floor rule.
+Other world-axis conventions are not assumed.
+
+The frontend augments cached Florence/DINO/SAM observations with official YOLOE
+masks. When the YOLOE frontend runs, its visual object embedding is a 256D projected DINO backbone ROI
+feature, not the older decoder query feature. JSON dimensions are unchanged, but
+features from these two spaces must not be averaged or directly compared.
+Part features remain independent 1024D RN50 features.
+
+`FRONTEND`, `INSTANCE_REFINEMENT`, `GEOMETRY_COMPONENTS`, `GEOMETRY_OUTPUT` and `OBJECT_VALIDATION`
+register frontend union, instance consensus, completion and geometry publishing.
+Removing imports and entries detaches them; no feature flags or backups are needed.
+The completion component skips inputs without verified metric Z-up axes or observed
+track provenance, so the original ScanNet and C++ fallback contracts still work.
+`build_legacy_graph` preserves the original C++ graph generation path for controls
+with the shared cleanup policy. Historical control scores refer to their saved outputs.
+
+`frontend_cache/<id>.npz` stores original observations and RGB hashes for safe reuse;
+`frontend_provenance.json` records model/vocabulary signatures and actual candidate
+counts. `cache_reuse.json` records reused category hashes and zero Qwen API calls.
+The default main path contains no Qwen image request; absent caches use local tags.
+
+`object_validation.json` records candidate rejection and inclusion merges.
+`validated_object_tracks.json` provides the accepted observation histories to
+completion and evaluation; raw `object_tracks.json` is retained for reproducible
+graph-stage recovery. Frame-local mappings and observed PLY IDs are synchronized.
+The semantic validator uses RN50 masked crops, not Alpha-CLIP, and no Qwen calls.
+
+`completion_audit.json` records eligibility, model hashes, alignment and all rejection
+reasons. `instance_cloud_completed.ply` exists only when a candidate is accepted.
+Observed `instance_cloud_cleaned.ply` remains unchanged. Generated points are excluded
+from association, tracking confidence and observation counts. `topology_map_observed.json`
+is the measured-only geometry hypothesis; canonical `topology_map.json` uses measured
+or accepted completed geometry and recomputes spatial edges from its box centers.
 
 Evaluation JSON adds `object_count_consistency`, containing `predicted`,
 `annotated`, `ratio`, `absolute_log_ratio`, `log_base`, `status` and
@@ -21,7 +52,7 @@ failed build does not replace the existing part directory. Registration-based
 component removal and original input/output contracts are unchanged.
 
 The legacy object graph ABI is unchanged. `object_nodes.nodes` contains object records
-with 256-dimensional GroundingDINO visual embeddings and 384-dimensional SBERT text
+with 256-dimensional visual embeddings and 384-dimensional SBERT text
 embeddings. `edge_hypotheses` and `free_space_nodes` keep their existing structure.
 
 ## Capture inputs
@@ -66,7 +97,7 @@ CLI switches and should be evaluated separately.
 
 ## Object association
 
-V3's default `run_pipeline.py` and shell runner use the code registry in
+V5's default `run_pipeline.py` use the code registry in
 `pipeline_components/__init__.py`. `FUSION` exports original PLY/name/256D/384D
 files and updated local-to-global frame mappings. `ASSOCIATION` supplies
 visibility checks and Hungarian assignment with explicit unmatched observations.
@@ -82,8 +113,8 @@ in a fresh output directory. No backup restore or runtime feature flag is requir
 Removing the fusion entry invokes the original C++ implementation. The standalone
 part CLI remains available and preserves its input graph.
 
-`object_tracks.json` records distinct frames, label votes and mean observed
-confidence. `object_association_zh.jsonl` records geometric/semantic/projected
+`object_tracks.json` records distinct frames, label votes, reprojection support and quality-weighted observed
+confidence (uncalibrated). `object_association_zh.jsonl` records geometric/semantic/projected
 evidence. `pipeline_zh.jsonl` records construction stages and failures. Results
 are separate from input manifests; logs are not consumed as prediction inputs.
 
@@ -112,8 +143,8 @@ The verified `partaware_v1` experiment contains `hypersim/ai_001_002`,
 contains no generated run results. Only ScanNet and Hypersim dedicated routes
 are retained. The original generic manifest ABI is preserved.
 
-V3 has two independent roots: `partaware_ai_001_002_v3` and
-`partaware_ai_001_010_v3`. New Hypersim preparation uses the full ordered available
+The current v5 has two independent roots: `partaware_ai_001_002_v5` and
+`partaware_ai_001_010_v5`. The v3 inputs and historical outputs are retained. New Hypersim preparation uses the full ordered available
 frame list, selecting `[::3][:150]`, rather than selecting 150 candidates first.
 Official HDF5 sources are retained under each prepared input's `source_hdf5/`.
 An existing RGB/depth resolution disagreement is recorded and excluded, never
@@ -179,5 +210,5 @@ The completed second-scene controls are stored under
 `scannet-sg-processed/ai_001_010_ram_original_v1` and
 `scannet-sg-processed/ai_001_010_qwen_dino_v1`. Each contains the normal
 `hypersim/ai_001_010` scene outputs and a root `evaluation.json`. Reproduction
-commands must use new output roots; section 15 of `RESEARCH_LOG.html` records the
+commands must use new output roots; the version chapters of `RESEARCH_LOG.html` records the
 four-route comparison and common visualization commands.
