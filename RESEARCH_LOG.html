@@ -160,6 +160,7 @@ footer { border-top:1px solid var(--line); margin-top:40px; padding-top:18px; co
 @media(max-width:600px) { .layout { padding:10px; } main { padding:20px 16px; } h1 { font-size:24px; } h2 { font-size:21px; } table { display:block; overflow-x:auto; } .math-display { padding:14px 12px; font-size:.93em; } }
 @media print { :root { --paper:#fff; --ink:#111; --muted:#555; --line:#ddd; --accent:#222; --formula:#fff; } body { background:#fff; font-size:11pt; } .layout { display:block; padding:0; } nav { display:none; } main { border:0; box-shadow:none; padding:0; } .math-display { break-inside:avoid; overflow:visible; } h2,h3 { break-after:avoid; } a { color:inherit; } }
 </style>
+<meta name="revision-date" content="2026-10-05">
 </head>
 <body>
 <div class="layout">
@@ -202,10 +203,11 @@ footer { border-top:1px solid var(--line); margin-top:40px; padding-top:18px; co
 <a class="toc-depth-3" href="#section-12-1">12.1 地板为什么再次出现，以及实际过滤算法</a>
 <a class="toc-depth-3" href="#section-12-2">12.2 AP25/AP50 与用户指定的物体数量对数误差</a>
 <a class="toc-depth-3" href="#section-12-3">12.3 笔记本、功放与重建发布的实际诊断</a>
-<a class="toc-depth-3" href="#section-12-4">12.4 本轮验证与最新结果</a></nav>
+<a class="toc-depth-3" href="#section-12-4">12.4 本轮验证与最新结果</a><a href="#maintenance-20261005">13. 主流程代码清理</a><a href="#table-diagnosis-20261005">14. 桌子与低位误检诊断</a><a href="#frontend-comparison-20261005">15. 第二场景原始前端对照</a></nav>
 <main>
 <div class="edition">研究报告 · LaTeX 公式渲染版</div>
 <h1 id="heading-0">PartAware-SG 综合研发与实验报告</h1>
+<p><strong>2026-10-05 更新：</strong>主流程清理、桌子诊断及第二场景对照见第 13–15 节；原有算法、公式和实验记录保留。</p>
 <p>更新：2026-10-04。本文合并研发、实验和评价记录，先展示当前主流程。第 4、7、8 节保留 v1/v2 历史背景；第 11 节记录 v3 初版；第 12 节记录本轮默认几何地板过滤、物体数量对数误差与重跑结果。初版分数不能当作本轮重建后的分数。公式提供离线 LaTeX 渲染版，旧记录位于 <code>datasets/scannet-sg-processed/partaware_v1/history</code>。</p>
 <p><strong>公式阅读：</strong> 打开 <a href="RESEARCH_LOG.html">LaTeX 渲染版报告</a> 查看已排版的公式。该 HTML 内嵌由 MathJax 从本报告 LaTeX 生成的矢量公式，可离线阅读；本 Markdown 保留可编辑的 LaTeX 源码。</p>
 <h2 id="section-0">0. 当前主脉络：从 RGB-D 到物体—部件场景图</h2>
@@ -930,7 +932,58 @@ E_{\mathrm{count}}=|\ln r_N|."><mjx-container class="MathJax" jax="SVG" display=
 <p>本轮地板过滤修复背景策略，但 v3 物体框 AP 未因此提高，笔记本标签漂移和左功放单帧支持问题仍在。上述结果是两场景适配试验；所有评价 JSON 已加入数量字段，真值仅用于评价。第 11 节明确保留修订前历史结果。</p>
 <p>最新离线 HTML 共渲染 31 个独立公式和 107 个行内公式，主脉络位于开头第 0 节；源码哈希、公式数量与渲染错误均逐项核对。HTML 无远程字体或公式脚本依赖，可直接离线打开。</p>
 
-<footer>公式由 LaTeX 经 MathJax 排版，已内嵌为矢量图形。阅读无需联网。源码：RESEARCH_LOG.md。</footer>
+
+<!-- current-maintenance-start -->
+<h2 id="maintenance-20261005">13. 2026-10-05：主流程代码清理</h2>
+<p>按用户要求，删除 61 个已退出当前建图流程的旧脚本、示例或说明文件，包括旧批量对齐/子扫描、OpenAI 批处理、ROS 服务、旧发布包工具、独立查看器和无构建目标的 C++ 示例。完整清单见 <a href="docs/CLEANUP_LOG.md">中文清理日志</a>。用户已删除根目录 RESEARCH_LOG.md，本轮修正失效链接，保留本 HTML 和可编辑 LaTeX 源码。</p>
+<p>ScanNet/Hypersim 输入、RAM/Qwen、DINO/Florence/SAM、默认组件、原 C++ 回退、空间图、精修、部件、评价和共用可视化保留。grounded_sam_simple_demo.py 实际提供主分割器；align_instances.py 的函数仍被精修调用，不能按文件名误删。Shell 入口删除了共享 runner 退出之后永远不会执行的旧融合/空间图分支，位置参数和 clean 恢复入口保留。</p>
+<p>40 个保留 Python 文件的静态依赖核对未发现指向删除模块的导入或脚本路径；30 项回归检查通过。真实 ScanNet 三帧在原始/默认两条路线均生成两个物体，两套 v3 正式物体—部件图接口检查通过；CMake 两个核心目标构建成功。可视化旧开发者绝对默认路径改为项目自带样例，样例载入 48 个物体。源数据和现有实验未因清理而重建。</p>
+<h2 id="table-diagnosis-20261005">14. 2026-10-05：重复桌子与低位误检的实际诊断</h2>
+<p>用户拾取得到 desk=10、table=17、table=11。核对当前正常显示点云、物体轨迹和前端 RGB 后，前两者很可能对应同一张玻璃桌子的不同命名；11 号属于另一处低位结构误检，不能把三条轨迹直接都合并。</p>
+<table><thead><tr><th>节点</th><th>来源帧数 / 正常点数</th><th>实际证据</th></tr></thead><tbody>
+<tr><td>10：desk</td><td>7 / 21437</td><td>真实桌面及桌架；与 17 没有共同观测帧</td></tr>
+<tr><td>17：table</td><td>9 / 28439</td><td>与 10 的 3 厘米双向覆盖为 90.27% / 94.74%；10 厘米覆盖为 97.16% / 99.22%</td></tr>
+<tr><td>11：table</td><td>11 / 33627</td><td>与 10/17 的 10 厘米点云覆盖均为 0；高度中位数约 −0.025 米，主水平面占约 49%，XY 跨约 4.79 × 3.20 米</td></tr>
+</tbody></table>
+<p>desk/table 的 SBERT 相似度约 0.506，低于当前物体关联的 0.8 语义门槛；最终碎片恢复又要求同标签。因此即使几何高度重合、无同帧冲突，也无法合并。这与 laptop/monitor 的标签漂移属于相同问题：文本类别差异被误当成物理身份差异。</p>
+<p><strong>之前去地面的实际范围：</strong>从多帧背景支持估计最低水平面 h≈−0.25 米，清除其上下 1 厘米内的实例点，再构图。这个地板带剩余为 0，不代表所有高度的背景都已清除。当前 11 号的主水平面接近 0 米，距最低面约 25 厘米；原候选只检查低处分位附近，无法覆盖另一高度的地面/台阶周边结构。原 RGB 可见中央下沉区域和四周高边，不能再把全部残留统称为竖直墙脚。</p>
+<p><strong>解决路线（尚未加入默认构图）：</strong>① 增加几何证据充分时的跨标签身份复核，desk/table 只能在强双向表面覆盖、桌面高度一致、跨帧支持及无可信共现冲突时合并，不能全局降低语义门槛。② 将单一最低面过滤扩展为带背景证据的多平面/局部平面片判别，联合高度、法向、区域广度、多帧背景比例和三维连通性，避免仅凭水平面误删桌面。③ 清除结构性残留后，以实际保留的点重新计算物体位置/框和空间边，再同步部件父节点映射；保留原 JSON 字段接口。</p>
+<p>平面候选可使用已安装 Open3D 的 RANSAC 或局部平面片检测；其几何检测本身不能决定一个平面是否是地面，背景语义和跨帧证据仍需额外设计与验证。参见 <a href="https://www.open3d.org/docs/release/tutorial/geometry/pointcloud.html#plane-segmentation">Open3D 官方几何文档</a>。这些方案是根据本轮诊断提出的改造计划；本轮未按节点编号手动删除或合并物体，也未声称桌子问题已修好。</p>
+<!-- current-maintenance-end -->
+
+
+<!-- frontend-comparison-start -->
+<h2 id="frontend-comparison-20261005">15. ai_001_010：RAM 原始路线、复用 Qwen 的 DINO 路线与当前 v3</h2>
+<p>两组新增对照均完整处理同一 manifest 的 100 帧 RGB-D/位姿，分别存放在 ai_001_010_ram_original_v1 和 ai_001_010_qwen_dino_v1，不与当前 v3 混写。RAM 使用官方预训练 RAM++ 原生 4585 类及原生阈值；旧项目的 57 类室内词表未用于这次对照。Qwen 组逐文件复用当前 v3 的 100 个类别/描述 JSON，SHA-256 全部一致，未重新调用 API。</p>
+<p>两组均重新执行原始 DINO/SAM，置信门限 0.4，随后运行原始 C++ 融合、原空间图和点云精修；stride=2、max_depth=0、edge_threshold=2，保留相同背景类别排除和已声明 Hypersim 的地板保护政策。新对照没有 Florence、OP3DSG 改进融合、多视角关联或 VLPart 部件阶段。Qwen 的描述文件虽复用，DINO 路线没有 Florence 描述评分；不能说复用了前次 Florence 掩码。</p>
+<p>官方可见物体真值数均为 109，真值数据哈希和评价协议一致；各结果的图/点云 SHA-256 已与评价记录核对。以下为类别无关的三维框 AP，采用正式 topology_map 的位置和形状；与已有 v3 相同，不改换精修框以提高分数。数量指标不含部件，数量比越接近 1 越好，绝对自然对数误差越小越好。</p>
+<table><thead><tr><th>路线</th><th>预测 / 标注物体</th><th>Box AP25</th><th>Box AP50</th><th>数量比</th><th>数量对数误差 ↓</th></tr></thead><tbody>
+<tr><td>RAM++ 原生 → DINO/SAM → 原始 C++</td><td>50 / 109</td><td>0.43%</td><td>0.00%</td><td>0.4587</td><td>0.7793</td></tr>
+<tr><td>复用 Qwen → DINO/SAM → 原始 C++</td><td>46 / 109</td><td>1.73%</td><td>0.03%</td><td>0.4220</td><td>0.8627</td></tr>
+<tr><td>Qwen → Florence/SAM → 原始 C++（已有对照）</td><td>63 / 109</td><td>4.16%</td><td>0.31%</td><td>0.5780</td><td>0.5482</td></tr>
+<tr><td>当前 v3：Qwen → Florence/SAM → 默认融合/部件</td><td>138 / 109</td><td>14.92%</td><td>1.36%</td><td>1.2661</td><td>0.2359</td></tr>
+</tbody></table>
+<p>IoU≥0.25 的最大一对一定位统计依次为：RAM 4 TP / 46 FP / 105 FN；Qwen-DINO 8 / 38 / 101；已有 Qwen-Florence-C++ 对照 12 / 51 / 97；当前 v3 32 / 106 / 77。严格 IoU≥0.50 的命中依次为 0、1、1、5。该统计使用最大匹配，AP 则按置信排序贪心匹配并积分，二者不是同一算法，不能用 TP/GT 代替 AP。</p>
+<p>本场景上，Qwen-DINO 相比 RAM-DINO 的框定位 AP 有改善，但数量误差由 0.7793 上升到 0.8627；数量更少并不自动代表更准确。相同 Qwen 标签和原 C++ 后端下，Florence 路线优于纯 DINO，支持当前前端配置在此场景有效。已有同前端 C++ 与当前 v3 的差异支持改进物体融合/关联的整体收益；仍不能分离每个融合项或将物体 AP 的提升归因于 VLPart，部件暂未反向调整物体身份。</p>
+<p>当前 v3 四项主统计最好，但 AP50 仍只有 1.36%，且 IoU≥0.25 仍有 106 个 FP、77 个 FN。数量误差接近 0 也不能证明实例身份正确。两组新增原始对照没有部件；当前 v3 有 354 条确认部件轨迹、168 条 part_of，但缺乏部件/关系真值，不能转换成部件或完整图精度。</p>
+<p><strong>范围限制：</strong>原库默认引用的 scannet509.json 描述文件未包含在现有源码中，本轮使用 RAM++ 原生 4585 类与原生阈值；原始流程指 RAM/DINO/SAM/C++ 路线，不声称复现论文全部配置。非官方 ScanNet 网格实例 benchmark，非完整关系图评价；单场景结果。 RAM 原生输出仍可能含场景词、属性或重复类别，这些真实输出未按 GT 手工修正；现有逐帧结构背景排除政策一致。当前三维框协议不是官方 ScanNet 网格实例成绩，也不能直接与论文排行榜数值比较。</p>
+<p>新增评价记录位于各结果根目录的 evaluation.json；control_record.json 与中文 pipeline_zh.jsonl 位于场景目录，记录路线、输入哈希、复用文件哈希和阶段执行。新增点云和 topology_map 接口检查通过。</p>
+<h3>两组新增对照的共用可视化</h3>
+<p>在 WSL 的 scannet-sg 环境和 PartAware-SG 目录下，选定一个结果目录，再执行相同命令。原始对照没有部件，因此只显示物体、包围盒和关系。</p>
+<pre><code>conda activate scannet-sg
+cd /home/lewisliu/PartAware-SG
+# Choose one result directory.
+RESULT=/home/lewisliu/datasets/scannet-sg-processed/ai_001_010_ram_original_v1/hypersim/ai_001_010
+# RESULT=/home/lewisliu/datasets/scannet-sg-processed/ai_001_010_qwen_dino_v1/hypersim/ai_001_010
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+python script/visualize_map.py \
+  --map_ply_path "$RESULT/instance_cloud_cleaned.ply" \
+  --topology_map_path "$RESULT/topology_map.json" \
+  --show_bboxes --show_edges --enable_picking --node_radius 0.07</code></pre>
+<!-- frontend-comparison-end -->
+
+<footer>公式由 LaTeX 经 MathJax 排版，已内嵌为矢量图形。阅读无需联网。可编辑 LaTeX 源码：RESEARCH_LOG.tex。</footer>
 </main>
 </div>
 </body>

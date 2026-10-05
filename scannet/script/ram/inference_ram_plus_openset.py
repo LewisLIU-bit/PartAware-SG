@@ -54,20 +54,18 @@ class RAMPlusOpensetInference:
                                 vit='swin_l')
         
 
-        #######set openset interference
-        print('Building tag embedding:')
-        with open(llm_tag_des, 'rb') as fo:
-            llm_tag_des = json.load(fo)
-        openset_label_embedding, openset_categories = build_openset_llm_label_embedding(llm_tag_des)
-
-        self.model.tag_list = np.array(openset_categories)
-        
-        self.model.label_embed = nn.Parameter(openset_label_embedding.float())
-
-        self.model.num_class = len(openset_categories)
-        # the threshold: 0.6
-        self.model.class_threshold = torch.ones(self.model.num_class) * 0.75
-        #######
+        # Preserve checkpoint labels and calibrated thresholds for the native baseline.
+        if llm_tag_des is None:
+            print(f"使用 RAM++ 原生词表及原生阈值：{self.model.num_class} 类")
+        else:
+            print('构建开放类别描述特征')
+            with open(llm_tag_des, 'rb') as fo:
+                llm_tag_des = json.load(fo)
+            openset_label_embedding, openset_categories = build_openset_llm_label_embedding(llm_tag_des)
+            self.model.tag_list = np.array(openset_categories)
+            self.model.label_embed = nn.Parameter(openset_label_embedding.float())
+            self.model.num_class = len(openset_categories)
+            self.model.class_threshold = torch.ones(self.model.num_class) * 0.75
 
 
         self.model.eval()

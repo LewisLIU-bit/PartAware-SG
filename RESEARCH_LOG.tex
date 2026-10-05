@@ -8,7 +8,7 @@
 \renewcommand{\arraystretch}{1.25}
 \title{PartAware-SG 综合研发与实验报告}
 \author{}
-\date{2026-10-04}
+\date{2026-10-05}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -1208,4 +1208,34 @@ ai\_001\_010：默认 v3 & 138 / 109 & 1.2661 & 0.2359 & 14.92\% & 1.36\% \\ \hl
 最新离线 HTML 共渲染 31 个独立公式和 107 个行内公式，主脉络位于开头第 0 节；源码哈希、公式数量与渲染错误均逐项核对。HTML 无远程字体或公式脚本依赖，可直接离线打开。
 
 
+
+\section*{13. 2026-10-05：主流程代码清理}
+\addcontentsline{toc}{section}{13. 主流程代码清理}
+删除 61 个已退出当前建图流程的旧脚本、示例或说明文件；完整清单见项目 docs/CLEANUP\_LOG.md。保留 ScanNet/Hypersim 输入、RAM/Qwen、DINO/Florence/SAM、默认组件、原 C++ 回退、空间图、精修、部件、评价、共用可视化和检查。保留的 40 个 Python 文件依赖核对未发现删除模块引用；30 项检查通过，真实 ScanNet 原始/默认融合各生成 2 个物体，核心 CMake 构建成功。主目录原报告 Markdown 的删除保持不变；HTML 和本 LaTeX 源码保留。
+\section*{14. 桌子重复与低位误检诊断}
+\addcontentsline{toc}{section}{14. 桌子重复与低位误检诊断}
+desk 10 和 table 17 分别有 7、9 帧支持，3 厘米双向点云覆盖约 90.27\%/94.74\%，没有共同观测帧。其文本相似度仅 0.506，低于 0.8 门槛，最终恢复又要求同标签，因此很可能是同一张桌子的命名漂移。
+
+table 11 与两条桌子轨迹的 10 厘米点云覆盖均为 0，高度中位数约负 0.025 米，主水平面占约 49\%。之前过滤的是有多帧背景支持的最低面（约负 0.25 米）上下 1 厘米；该带剩余为 0，不能证明另一高度的背景已清除。源 RGB 可见下沉区域和周边高边，不能继续把全部残留统称为竖直墙脚。
+
+尚未实施的方案：强几何证据下复核跨标签物理身份；以多帧背景语义、法向、空间广度和连通性验证多平面/局部平面片，避免误删桌面；清除残留后按实际保留点同步位置、框、空间边和部件父归属。可复用已安装 Open3D 的几何检测，背景判别仍需设计验证。本轮没有按节点编号手动删改当前图。
+
+\section*{15. ai\_001\_010 原始前端对照}
+\addcontentsline{toc}{section}{15. ai\_001\_010 原始前端对照}
+两组新增对照完整处理相同 100 帧，官方可见物体真值为 109。RAM 使用权重自带的 4585 类和原生阈值；Qwen 组逐文件复用当前 v3 的 100 个类别 JSON，哈希完全一致，没有重新调用 API。两组均重新运行纯 DINO/SAM、原始 C++ 融合、原空间图和精修，不使用 Florence、OP3DSG 改进融合或 VLPart。
+
+所有路线保持相同真值和类别无关框评价协议，使用正式图的位置和形状；评价图/点云哈希已核对。数量指标不计部件。结果如下：
+{\small\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+路线 & 预测/标注 & AP25 & AP50 & 数量比 & 数量误差 \\ \hline
+RAM++ 原生  /  DINO/SAM  /  原始 C++ & 50/109 & 0.43\% & 0.00\% & 0.4587 & 0.7793 \\ \hline
+复用 Qwen  /  DINO/SAM  /  原始 C++ & 46/109 & 1.73\% & 0.03\% & 0.4220 & 0.8627 \\ \hline
+Qwen  /  Florence/SAM  /  原始 C++（已有对照） & 63/109 & 4.16\% & 0.31\% & 0.5780 & 0.5482 \\ \hline
+当前 v3：Qwen  /  Florence/SAM  /  默认融合/部件 & 138/109 & 14.92\% & 1.36\% & 1.2661 & 0.2359 \\ \hline
+\end{longtable}}
+IoU 至少 0.25 的最大一对一统计依次为 4/46/105、8/38/101、12/51/97、32/106/77（TP/FP/FN）。严格 0.50 的命中依次为 0、1、1、5。最大匹配与按置信排序计算 AP 的贪心匹配不是同一算法，不能用 TP/GT 替代 AP。
+
+本场景 Qwen-DINO 定位分数优于 RAM-DINO，但数量误差更大。相同 Qwen 标签及 C++ 后端下，Florence 前端更好；同前端 C++ 与当前 v3 的差异支持改进融合/关联的整体收益，不能单独归因于每个融合项或 VLPart。当前 AP50 仍只有 1.36\%，且仍存在大量假阳性和漏检，单场景不能证明完整图精度。
+
+原库默认引用的 scannet509.json 描述文件没有包含在现有源码中；本轮 RAM 为官方原生词表设置，不声称完全复现论文配置。完整记录与可视化命令见离线 HTML 第 15 节。
 \end{document}

@@ -43,8 +43,7 @@ Run artifacts are stored outside the source tree, under `datasets/scannet-sg-pro
 The current WSL copy already contains the required runtime repositories, weights, and
 isolated part environment. Use `scannet-sg` for the object frontend and
 `.venv-vlpart/bin/python` for parts. See [reproducible setup](docs/PARTAWARE_SETUP.md)
-for source revisions, dependencies, and official weight downloads. The upstream
-installation instructions below remain available for the original pipeline.
+for source revisions, dependencies, and official weight downloads.
 
 ```bash
 cd /home/lewisliu/PartAware-SG
@@ -91,28 +90,9 @@ Rebuild into a fresh result folder after editing the registry. Existing result
 files do not change automatically. `--start-stage` resumes a completed frontend;
 it is not a component-removal switch.
 
-The standalone part entry remains available for inspecting an existing object graph.
-This verified ScanNet example uses the existing object baseline:
-
-```bash
-.venv-vlpart/bin/python scannet/script/run_partaware.py \
-  --image-dir /home/lewisliu/datasets/scannet/images/scans/scene0000_00 \
-  --processed-scene /home/lewisliu/datasets/scannet/processed/baseline30/openset_scans/scene0000_00 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/scannet/scene0000_00/parts_new \
-  --image-size 480 --limit 3 --visualize
-```
-
-Hypersim uses the preserved `scannet_sg_input` manifest interface:
-
-```bash
-.venv-vlpart/bin/python scannet/script/run_partaware.py \
-  --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/hypersim_joint_v4/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/parts_new \
-  --image-size 480 --limit 3 --visualize
-```
-
-Remove `--limit 3` for all prepared frames. `--sam-checkpoint` optionally refines
+The standalone `scannet/script/run_partaware.py` entry remains available for
+inspecting an existing graph; its ScanNet and Hypersim contracts are documented
+in [interfaces](docs/PARTAWARE_INTERFACES.md). `--sam-checkpoint` optionally refines
 boxes with the preserved SAM weight. `--dbscan-eps 0.05`, `--subtract-contained`,
 and `--erode-pixels 1` are independent, disabled-by-default cleanup experiments.
 Containment cleanup requires the same resolved parent instance, and ambiguous
@@ -125,21 +105,10 @@ The standalone command preserves its supplied `topology_map.json`; the default
 full pipeline publishes the returned parts into canonical `topology_map.json` and
 its `scene_graph` extension. Parts have their own 1024-dimensional
 CLIP RN50 feature space; confirmed, attached tracks create `part_of` edges.
-See [interfaces](docs/PARTAWARE_INTERFACES.md) and the
-[consolidated Chinese report](RESEARCH_LOG.md).
+See [interfaces](docs/PARTAWARE_INTERFACES.md).
 The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equations
 as embedded SVG and opens without runtime downloads. Editable
 [LaTeX source](RESEARCH_LOG.tex) is also provided.
-
-To rebuild the report with Node.js 20 or later:
-
-```bash
-npm install --prefix /tmp/partaware-report-renderer --ignore-scripts \
-  mathjax-full@3.2.2 marked@17.0.5
-node script/render_research_report.cjs \
-  --dependencies /tmp/partaware-report-renderer \
-  --latex-output RESEARCH_LOG.tex
-```
 
 ```bash
 python -m unittest discover -s scannet/script/tests_partaware -v
@@ -157,7 +126,7 @@ zero predictions with nonzero annotations have infinite error, represented by a
 JSON null plus an explicit status. Counts exclude structural background and parts.
 Missed and duplicate objects can cancel, so count error complements localization.
 These are not official ScanNet or UniGraph3D benchmark scores. See
-[RESEARCH_LOG.md](RESEARCH_LOG.md) for results and limitations.
+[the HTML report](RESEARCH_LOG.html) for results and limitations.
 
 ```bash
 python scannet/script/evaluate_hypersim.py \
@@ -190,106 +159,28 @@ Remove `--show_parts` for the original object view. Add `--show_part_points`
 for diagnostic part clouds, `--include_provisional_parts` for all part tracks,
 or `--check_only` to validate the same geometry without a window.
 Shift + left click prints either an object or child node name in the same
-window. `script/visualize_partaware.py` remains a compatibility wrapper around
-this renderer; it no longer builds a separate scene. Use tracking-ID PLY files
+window. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
 The second full v3 experiment is under
 `/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v3/hypersim/ai_001_010`.
 Use that directory for both visualization paths. For its dense spatial graph,
 omit `--show_edges` when inspecting objects and part ownership.
 
-The v1 graph keeps the saved object baseline; changing the default frontend
-does not retroactively rerun it. The new v2 smoke run contains fresh Florence
-segmentation, original C++ fusion, and part graphs for 5 Hypersim and 2 ScanNet
-frames. It is not a full-sequence accuracy benchmark. Its outputs are under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_v2`.
-
-## Dataset Download
-To download our dataset, please check [here](/download/Download_ScanNet_SG.md)
-
+The second-scene frontend controls are stored separately as
+`ai_001_010_ram_original_v1` and `ai_001_010_qwen_dino_v1` under
+`datasets/scannet-sg-processed`. Both recompute DINO/SAM and use the original
+C++ graph path. The Qwen control reuses cached tags without an API call.
+See [control interfaces](docs/PARTAWARE_INTERFACES.md#original-frontend-controls)
+and [report section 15](RESEARCH_LOG.html#frontend-comparison-20261005)
+for the four-route AP25/AP50/count comparison and common visualization commands.
 
 ## Environment Installation
 
-This section explains how to prepare your machine to work with ScanNet-SG. What you install depends on how you plan to use the project: many users only need 1) a lightweight setup to load the data and run the Python utilities, while others will 2) reproduce our full pipeline for building new scene graphs and alignment data. The instructions below walk through both cases step by step. For 1), we provide both python and C++ usage interface and examples.
-
-Clone code:
-```bash
-git clone git@github.com:tud-amr/ScanNet-SG.git --recurse-submodule
-cd ScanNet-SG
-```
-
-__1) Usage only environment__
-
-If you only want to use the dataset, install the environment as follows (using mamba instead of conda will be much faster):
-```bash
-conda create -n scannet-sg python=3.10
-conda activate scannet-sg
-conda install -c conda-forge numpy matplotlib -y
-# If you wish to have the full visualization functions (for images in ScanNet), also install opencv with the following command
-pip install opencv-python open3d
-```
-
-To use C++ interface, do the following:
-```bash
-cmake -S src -B build_read_and_visualize_map
-cmake --build build_read_and_visualize_map
-```
-
-__2) Environment for building new scene graphs and alignment data__
-
-If you wish to generate new scene graphs and alignment data with our tools, install the environment by:
-
-```bash
-conda create -n scannet-sg python=3.10
-conda activate scannet-sg
-```
-
-The following environment installation basically follows the requirements of groundedSAM. (groundedSAM code requires python>=3.8, as well as pytorch>=1.7 and torchvision>=0.8):
-
-```bash
-cd scannet/script/thirdparty/Grounded-Segment-Anything
-export AM_I_DOCKER=False
-export BUILD_WITH_CUDA=True
-
-
-# Install PyTorch first (GroundingDINO editable install imports torch at build time).
-conda install -c pytorch -c nvidia pytorch torchvision torchaudio pytorch-cuda=11.8
-
-python -m pip install -e segment_anything
-pip install --no-build-isolation -e GroundingDINO
-pip install --upgrade diffusers[torch]
-
-git submodule update --init --recursive
-cd grounded-sam-osx && bash install.sh
-
-cd ..
-git clone https://github.com/xinyu1205/recognize-anything.git
-pip install -r ./recognize-anything/requirements.txt
-pip install -e ./recognize-anything/
-
-pip install -v ipython ipykernel
-pip install -v onnx onnxruntime
-pip install -v matplotlib opencv-python pycocotools
-pip install -v open3d
-```
-
-Then download pretrained weights of GroundedSeg and SAM
-```
-cd Grounded-Segment-Anything
-wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
-wget https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth
-```
-
-Install sentence transformers (pin versions to avoid `recognize-anything` / RAM++ and `sentence-transformers` / `transformers` incompatibilities):
-```
-pip uninstall -y transformers tokenizers sentence-transformers
-pip install "transformers==4.35.2" "tokenizers==0.14.1"
-pip install "sentence-transformers>=2.2.0,<3"
-```
-
-
-__Some generation scripts also call C++ tools__ (for example `openset_ply_map` and `generate_json`). 
-To compile these tools, please check [Build the C++ tools](scannet/readme_openset.md#build-the-c-tools-cmake)
+Use the existing WSL environments for normal runs. Installation and model setup
+are documented once in [reproducible setup](docs/PARTAWARE_SETUP.md).
+Original baseline installation is described in the
+[upstream ScanNet-SG README](https://github.com/tud-amr/ScanNet-SG#environment-installation).
+Build the required C++ tools with the commands in the default pipeline example above.
 
 
 ## Map Interface Usage
@@ -297,11 +188,6 @@ To compile these tools, please check [Build the C++ tools](scannet/readme_opense
 ### Python version:
 The Python class for I/O of the SceneGraph (or TopologyMap) JSON file is defined in `script/include/topology_map.py` as `TopologyMap`.
 Check the examples below to learn how to use the interface. (The interface also contains free-space nodes, but we do not use them in the current version.)
-
-- Read a scene graph from a json file
-```bash
-python script/read_map.py
-```
 
 - Visualize a scene graph using the following command
 ```bash
@@ -316,24 +202,21 @@ By default, example data in `sample_data/scans/scene0000_00` will be used. You w
 
 
 
-- Generate a random scene graph
-```bash
-python script/random_map_generator.py
-```
-
 ### C++ version:
 
 C++ data structure is defined in `include/topology_map.h` 
 Check the example in the following to know how to use the C++ version interface.
 
-- Read and visualize a scene graph
-```bash
-./read_and_visualize_map <map_file>
-```
+The C++ map structures remain in `include/topology_map.h` and are used by the
+retained `generate_json` target.
 
 
 ## Generate Scene Graphs with Your Own Data
-Please refer to [OpenSet F2S data generation](scannet/readme_openset.md) and [S2S data generation](scannet/readme_subscan.md)
+Use the ScanNet and Hypersim commands in the default pipeline section.
+Input/output formats are documented in [interfaces](docs/PARTAWARE_INTERFACES.md).
+Retired batch alignment, subscan generation, ROS examples, and duplicate viewers
+have been removed; the retained entry points and checks are recorded in
+[the Chinese cleanup log](docs/CLEANUP_LOG.md).
 
 
 ## Citation

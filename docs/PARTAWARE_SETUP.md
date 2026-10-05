@@ -3,8 +3,9 @@
 The current WSL project is already installed and tested. Use the existing
 `scannet-sg` conda environment for the original object frontend and
 `.venv-vlpart/bin/python` for the part frontend. This separation preserves the
-original timm dependency. Dataset preparation and baseline model installation
-still follow the original README.
+original timm dependency. Dataset preparation uses the commands in the main
+README. Original baseline model installation follows the
+[upstream ScanNet-SG README](https://github.com/tud-amr/ScanNet-SG#environment-installation).
 
 ## Fresh installation on the verified machine
 

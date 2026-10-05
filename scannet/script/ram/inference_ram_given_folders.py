@@ -22,7 +22,6 @@ from scannet.script.thirdparty.ensure_thirdparty import add_to_syspath, ensure_r
 # Lazily provision recognize-anything (provides the `ram` python package)
 add_to_syspath(ensure_recognize_anything(from_file=__file__))
 
-# from inference_ram_plus import run_inference
 from inference_ram_plus_openset import RAMPlusOpensetInference
 
 if __name__ == "__main__":
@@ -73,6 +72,8 @@ if __name__ == "__main__":
                         metavar='DIR',
                         help='path to LLM tag descriptions',
                         default='/home/cc/chg_ws/ros_ws/topomap_ws/src/semantic_topo_map/scannet/script/ram/scannet509.json')
+    parser.add_argument('--native-vocabulary', action='store_true',
+                        help='Use the RAM++ checkpoint vocabulary and calibrated thresholds')
     parser.add_argument("--manifest",
                         type=str,
                         default=None,
@@ -91,24 +92,20 @@ if __name__ == "__main__":
 
         manifest_path = Path(args.manifest).expanduser().resolve()
         pretrained_path = Path(args.pretrained).expanduser().resolve()
-        tag_description_path = Path(args.llm_tag_des).expanduser().resolve()
+        tag_description_path = None if args.native_vocabulary else Path(args.llm_tag_des).expanduser().resolve()
 
-        for path in (
-            manifest_path,
-            pretrained_path,
-            tag_description_path,
-        ):
+        for path in [manifest_path, pretrained_path] + ([tag_description_path] if tag_description_path else []):
             if not path.is_file():
                 parser.error(f"Input file does not exist: {path}")
 
         print(f"Manifest: {manifest_path}")
-        print(f"Candidate categories: {tag_description_path}")
+        print(f"候选类别来源：{tag_description_path or 'RAM++ 原生词表'}")
         print("Processing all manifest frames without background filtering")
 
         ram_plus_openset_inference = RAMPlusOpensetInference(
             str(pretrained_path),
             args.image_size,
-            str(tag_description_path),
+            str(tag_description_path) if tag_description_path else None,
         )
 
         ram_plus_openset_inference.run_manifest(
@@ -133,9 +130,10 @@ if __name__ == "__main__":
 
     print(f"Filtered scans folders: {filtered_scan_folders}")
 
-    ram_plus_openset_inference = RAMPlusOpensetInference(args.pretrained, args.image_size, args.llm_tag_des)
+    ram_plus_openset_inference = RAMPlusOpensetInference(
+        args.pretrained, args.image_size, None if args.native_vocabulary else args.llm_tag_des)
 
-    # for each filtered scans folder, run the inference_ram_plus.py
+    # Run the shared RAM++ frontend on each selected ScanNet folder.
     for scan_folder in tqdm(filtered_scan_folders):
         args.image = os.path.join(args.scans_folder, scan_folder)
 

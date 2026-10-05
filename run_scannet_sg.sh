@@ -410,7 +410,7 @@ fi
 # ============================================================
 
 # Keep the existing frontend and positional CLI; default construction uses the
-# removable registry shared with Hypersim. This exits before legacy stage blocks.
+# removable registry shared with Hypersim. Clean-only recovery remains below.
 if [ "$START_NUM" -le 4 ]; then
     PIPELINE_STAGE=fusion
     if [ "$START_NUM" -eq 4 ]; then PIPELINE_STAGE=graph; fi
@@ -420,109 +420,6 @@ if [ "$START_NUM" -le 4 ]; then
         --stride "$SUBSAMPLE_FACTOR" --edge-threshold "$EDGE_THRESHOLD"
     exit $?
 fi
-
-if [ "$START_NUM" -le 3 ]; then
-
-    echo
-    echo "========== [3/5] 3D Fusion =========="
-
-    MASK_COUNT="$(
-        find "$REFINED" -maxdepth 1 -type f \
-            -name '*.png' \
-            | wc -l
-    )"
-
-    if [ "$MASK_COUNT" -eq 0 ]; then
-        echo "ERROR: no SAM masks found."
-        echo "Cannot start 3D fusion."
-        exit 1
-    fi
-
-    # Remove old scene-level outputs from THIS run only.
-    rm -f \
-        "$SCENE_OUTPUT/instance_cloud.ply" \
-        "$SCENE_OUTPUT/instance_cloud_with_background.ply" \
-        "$SCENE_OUTPUT/colored_instances.ply" \
-        "$SCENE_OUTPUT/averaged_instance_features.json" \
-        "$SCENE_OUTPUT/instance_bert_embeddings.json" \
-        "$SCENE_OUTPUT/instance_name_map.csv" \
-        "$SCENE_OUTPUT/topology_map.json" \
-        "$SCENE_OUTPUT/instance_cloud_filtered.ply" \
-        "$SCENE_OUTPUT/topology_map_filtered.json" \
-        "$SCENE_OUTPUT/instance_cloud_cleaned.ply" \
-        "$SCENE_OUTPUT/topology_map_original.json"
-
-    # Old updated-instance JSON belongs to old fusion results.
-    find "$REFINED" -maxdepth 1 -type f \
-        -name '*_updated_instance.json' \
-        -delete
-
-    cd "$BUILD_DIR"
-
-    ./openset_ply_map \
-        "$SCENE" \
-        0 \
-        "$RUN_ROOT" \
-        "$IMAGE_ROOT" \
-        "$MAX_DEPTH" \
-        "$SUBSAMPLE_FACTOR"
-
-    cd "$REPO"
-
-    if [ ! -f "$SCENE_OUTPUT/instance_cloud.ply" ]; then
-        echo "ERROR: instance_cloud.ply was not generated."
-        exit 1
-    fi
-
-else
-
-    echo
-    echo "========== [3/5] 3D Fusion SKIPPED =========="
-
-fi
-
-
-# ============================================================
-# STAGE 4 — topology_map.json
-# ============================================================
-
-if [ "$START_NUM" -le 4 ]; then
-
-    echo
-    echo "========== [4/5] Scene Graph =========="
-
-    INSTANCE_CLOUD="$SCENE_OUTPUT/instance_cloud.ply"
-
-    if [ ! -f "$INSTANCE_CLOUD" ]; then
-        echo "ERROR: instance_cloud.ply does not exist."
-        echo "Cannot generate scene graph."
-        exit 1
-    fi
-
-    rm -f "$SCENE_OUTPUT/topology_map.json"
-
-    cd "$BUILD_DIR"
-
-    ./generate_json \
-        "$INSTANCE_CLOUD" \
-        0 \
-        1 \
-        "$EDGE_THRESHOLD"
-
-    cd "$REPO"
-
-    if [ ! -f "$SCENE_OUTPUT/topology_map.json" ]; then
-        echo "ERROR: topology_map.json was not generated."
-        exit 1
-    fi
-
-else
-
-    echo
-    echo "========== [4/5] Scene Graph SKIPPED =========="
-
-fi
-
 
 # ============================================================
 # STAGE 5 — cleaned instance cloud

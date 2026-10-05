@@ -145,6 +145,39 @@ for the last argument). Child geometry comes from `build_part_overlay`;
 the same legacy or GUI renderer displays both layers. Object geometry remains
 identical when parts are disabled and remains an unchanged prefix when enabled.
 Confirmed parts without a parent are shown only in diagnostic all-track mode.
-The compatibility wrapper preserves its existing flag names and infers the
-base PLY from the saved part-run configuration when that PLY exists; otherwise
-specify `--base-cloud`.
+The retired standalone visualization wrapper has been removed. Use
+`script/visualize_map.py` with explicit PLY and topology paths for both layers.
+
+## Original-frontend controls
+
+The existing `validate_pipeline.py` tool now supports two separate controls via
+`--frontend-control ram_native|qwen_reuse`, `--manifest`, `--control-scene`, and
+`--output`. The control scene must follow `output_root/dataset/scene_id` and be
+fresh. These controls run DINO/SAM at confidence 0.4, the original C++ fusion,
+spatial graph construction, and point-cloud cleanup. They do not invoke the
+registered default fusion, Florence, association, or part components. The same
+declared Hypersim floor guards remain active.
+
+`ram_native` passes `--native-vocabulary` to the existing RAM folder/manifest
+frontend, preserving the pretrained RAM++ 4585 labels and calibrated thresholds.
+Without this option, the original custom-description behavior is unchanged.
+The upstream default `scannet509.json` description file is absent from this
+checkout; native RAM is a route comparison, not a full paper configuration reproduction.
+
+`qwen_reuse` additionally requires `--reuse-tags-from <completed_scene>`. It
+verifies the source graph's manifest hash, copies each frame's tag JSON byte for
+byte, and records its SHA-256; it does not invoke the Qwen API or reuse source
+segmentation masks. Both controls recompute DINO/SAM observations.
+
+`--control-start-stage segmentation|fusion|graph` resumes an existing control.
+Its saved tag source and manifest hash must match. `control_record.json` and
+Chinese `pipeline_zh.jsonl` identify the route; `benchmark_provenance` is added
+without replacing original object fields. Legacy controls legitimately lack
+`object_tracks.json`; default registered-fusion validation still requires it.
+
+The completed second-scene controls are stored under
+`scannet-sg-processed/ai_001_010_ram_original_v1` and
+`scannet-sg-processed/ai_001_010_qwen_dino_v1`. Each contains the normal
+`hypersim/ai_001_010` scene outputs and a root `evaluation.json`. Reproduction
+commands must use new output roots; section 15 of `RESEARCH_LOG.html` records the
+four-route comparison and common visualization commands.

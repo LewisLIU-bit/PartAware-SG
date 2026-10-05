@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+from pathlib import Path
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(file_path))
@@ -11,8 +12,9 @@ from utils.result_visualization import visualize_map_with_nodes
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--map_ply_path", type=str, default="/home/cc/chg_ws/ros_ws/topomap_ws/src/data/scans/scene0000_00/instance_cloud.ply")
-    parser.add_argument("--topology_map_path", type=str, default="/home/cc/chg_ws/ros_ws/topomap_ws/src/data/scans/scene0000_00/topology_map.json")
+    example_scene = Path(__file__).resolve().parents[1] / "sample_data/scans/scene0000_00"
+    parser.add_argument("--map_ply_path", type=str, default=str(example_scene / "instance_cloud_cleaned.ply"))
+    parser.add_argument("--topology_map_path", type=str, default=str(example_scene / "topology_map.json"))
     parser.add_argument("--node_radius", type=float, default=0.1)
     parser.add_argument("--show_bboxes", action="store_true")
     parser.add_argument("--show_edges", action="store_true")
