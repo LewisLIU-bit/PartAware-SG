@@ -14,3 +14,6 @@ GEOMETRY_COMPONENTS = [shape_completion]
 GEOMETRY_OUTPUT = canonical_geometry
 
 OBJECT_VALIDATION = proposal_validation
+
+from . import background_consensus
+BACKGROUND_VALIDATION = background_consensus

@@ -12,7 +12,7 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v5 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v6 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
@@ -70,8 +70,9 @@ two scenes, use a fresh result directory and copy the prior observations:
 ```bash
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v3/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v5/hypersim/ai_001_010
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v6/hypersim/ai_001_010 \
+  --start-stage graph
 ```
 
 For a new scene, omit `--reuse-scene`: local vocabulary, Florence/SAM and YOLOE
@@ -102,10 +103,12 @@ its import and registry entry: `ASSOCIATION` returns object association and part
 ownership to their conservative base rules; `FUSION` returns object fusion to the
 original C++ implementation; entries in `GRAPH_COMPONENTS` determine graph
 extensions. `FRONTEND`, `INSTANCE_REFINEMENT`,
-`GEOMETRY_COMPONENTS`, `GEOMETRY_OUTPUT` and `OBJECT_VALIDATION` register the current additions. Detachment uses code editing, not feature flags or backup restoration.
+`GEOMETRY_COMPONENTS`, `GEOMETRY_OUTPUT`, `OBJECT_VALIDATION` and `BACKGROUND_VALIDATION` register the current additions. Detachment uses code editing, not feature flags or backup restoration.
 Rebuild into a fresh result folder after editing the registry. Existing result
 files do not change automatically. `--start-stage` resumes a completed frontend;
 it is not a component-removal switch.
+
+V6 adds one removable pointwise held-out-view background check to the existing validator. Large mixed identities must agree with independent depth-consistent views; source masks cannot validate themselves. The stable v5 segmentation, association, inclusion and confidence rules remain in use. Results are regenerated from cached raw fusion outputs, not edited by hand; no new Qwen calls or input-depth changes occur. Earlier combined SAVPE/partition experiments were withdrawn and stored separately as `_v6_trial`.
 
 The standalone `scannet/script/run_partaware.py` entry remains available for
 inspecting an existing graph; its ScanNet and Hypersim contracts are documented
@@ -127,7 +130,7 @@ The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equatio
 as embedded SVG and opens without runtime downloads. Editable
 [LaTeX source](RESEARCH_LOG.tex) and editable
 [Chinese research source](docs/RESEARCH_REPORT.md) are also provided. General
-flow, mathematics and interfaces describe v5; v1-v5 changes have separate chapters.
+flow, mathematics and interfaces describe v6; v1-v5 changes and the withdrawn v6 trial have separate chapters.
 
 ```bash
 python -m unittest discover -s scannet/script/tests_partaware -v
@@ -151,8 +154,8 @@ These are not official ScanNet or UniGraph3D benchmark scores. See
 ```bash
 python scannet/script/evaluate_hypersim.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/evaluation_v5.json
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/evaluation_v6.json
 ```
 
 
@@ -160,8 +163,7 @@ python scannet/script/evaluate_hypersim.py \
 
 Object and refined part graphs now use the same `visualize_map_with_nodes`
 renderer. Without `--show_parts`, the original object geometry is unchanged.
-With it, smaller parent-colored child nodes and dashed `part_of` links are
-appended to the original point cloud, bounding boxes, relations, and picking.
+With it, smaller parent-colored child nodes are appended; dashed `part_of` links require `--show_edges`. These overlays are appended to the original point cloud, bounding boxes, relations, and picking.
 Unassigned or provisional parts are hidden by default; part point clouds are
 also hidden so the original map remains readable.
 
@@ -169,9 +171,9 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/hypersim/ai_001_002/instance_cloud_cleaned.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v5/hypersim/ai_001_002/topology_map.json \
-  --show_bboxes --show_edges --show_parts --enable_picking \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/hypersim/ai_001_002/topology_map.json \
+  --show_bboxes --show_parts \
   --node_radius 0.07 --part_radius 0.025
 ```
 
@@ -182,7 +184,7 @@ Shift + left click prints either an object or child node name in the same
 window. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
 The second full v5 experiment is under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010`.
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v6/hypersim/ai_001_010`.
 Use that directory for both visualization paths. For its dense spatial graph,
 omit `--show_edges` when inspecting objects and part ownership.
 

@@ -172,7 +172,8 @@ def main():
                                       'frontend_module': getattr(getattr(components, 'FRONTEND', None), '__name__', None),
                                       'instance_refinement': getattr(getattr(components, 'INSTANCE_REFINEMENT', None), '__name__', None),
                                       'input_manifest': str(context.manifest), 'start_stage': args.start_stage,
-                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v5',
+                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v6',
+                                      'background_validation': getattr(getattr(components, 'BACKGROUND_VALIDATION', None), '__name__', None),
                                       'object_validation': getattr(getattr(components, 'OBJECT_VALIDATION', None), '__name__', None)}
         graph_path.write_text(json.dumps(graph, indent=2) + '\n')
         context.event('完整主流程完成', output=str(graph_path))

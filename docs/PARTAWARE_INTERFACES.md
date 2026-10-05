@@ -1,6 +1,6 @@
 # PartAware-SG interfaces
 
-The v5 main Hypersim path applies multi-frame background-supported floors and
+The v6 main Hypersim path applies multi-frame background-supported floors and
 low-platform filtering to declared meter-scale Z-up inputs. `floor_filter.json`
 records `levels_m`, support and a 1 cm removal band. Background exports retain
 cleared points. The legacy C++ fallback retains its original single-floor rule.
@@ -12,7 +12,7 @@ feature, not the older decoder query feature. JSON dimensions are unchanged, but
 features from these two spaces must not be averaged or directly compared.
 Part features remain independent 1024D RN50 features.
 
-`FRONTEND`, `INSTANCE_REFINEMENT`, `GEOMETRY_COMPONENTS`, `GEOMETRY_OUTPUT` and `OBJECT_VALIDATION`
+`FRONTEND`, `INSTANCE_REFINEMENT`, `GEOMETRY_COMPONENTS`, `GEOMETRY_OUTPUT`, `OBJECT_VALIDATION` and `BACKGROUND_VALIDATION`
 register frontend union, instance consensus, completion and geometry publishing.
 Removing imports and entries detaches them; no feature flags or backups are needed.
 The completion component skips inputs without verified metric Z-up axes or observed
@@ -97,7 +97,7 @@ CLI switches and should be evaluated separately.
 
 ## Object association
 
-V5's default `run_pipeline.py` use the code registry in
+V6's default `run_pipeline.py` uses the code registry in
 `pipeline_components/__init__.py`. `FUSION` exports original PLY/name/256D/384D
 files and updated local-to-global frame mappings. `ASSOCIATION` supplies
 visibility checks and Hungarian assignment with explicit unmatched observations.
@@ -143,8 +143,8 @@ The verified `partaware_v1` experiment contains `hypersim/ai_001_002`,
 contains no generated run results. Only ScanNet and Hypersim dedicated routes
 are retained. The original generic manifest ABI is preserved.
 
-The current v5 has two independent roots: `partaware_ai_001_002_v5` and
-`partaware_ai_001_010_v5`. The v3 inputs and historical outputs are retained. New Hypersim preparation uses the full ordered available
+The current v6 has two independent roots: `partaware_ai_001_002_v6` and
+`partaware_ai_001_010_v6`. The v3 inputs and historical outputs are retained. New Hypersim preparation uses the full ordered available
 frame list, selecting `[::3][:150]`, rather than selecting 150 candidates first.
 Official HDF5 sources are retained under each prepared input's `source_hdf5/`.
 An existing RGB/depth resolution disagreement is recorded and excluded, never
@@ -222,3 +222,11 @@ canonical graph box bounds for diagnosis. This does not change masks,
 instance construction, graph geometry or the existing evaluation protocol.
 The requested AP75 audit covers v5 and the saved RAM/Qwen-DINO controls;
 v1-v4 historical scores are not recomputed. Future runs include AP75.
+
+## V6 pointwise held-out-view background validation
+
+`BACKGROUND_VALIDATION` is the sole new algorithm attachment. `background_consensus.py` checks existing candidates over 3 m against up to 100 cached views, excluding their source observation frames. A point requires at least three depth-consistent held-out observations. Rejection requires at least 50% supported points, a strict majority of those points with at least 80% weighted background, and five background-dominant held-out views. Unknown/occluded views do not vote. This is a project adaptation of multi-view mask verification, not a full MaskClustering or Open3DIS reproduction.
+
+`proposal_validation.py` records `direct_background_consensus` and rejection reasons, then regenerates normal PLY IDs, frame mappings, graph boxes/edges and parts. No input depth or completed graph is patched. Raw fusion and background exports remain available. Confidence and prior gates are unchanged. Delete the registry entry/import to detach this component; no backup or runtime flag is required.
+
+The viewer decodes unchanged base-255 RGB IDs across all channels. `--show_edges` controls spatial and part-of links; provided commands omit it and `--enable_picking`. The kitchen opening is not a mirror. The failed combined experiment lives under `_v6_trial`, with `experiment_status.json`; its patch is `/home/lewisliu/datasets/scannet-sg-processed/v6_algorithm_trial.patch`. Those results are not prediction inputs.

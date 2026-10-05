@@ -14,14 +14,14 @@
 \tableofcontents
 \clearpage
 
-更新：2026-10-05。当前实现为 v5。本文前六章只描述最新代码；v1—v5 的变化和历史分数独立列在后面的版本章节。报告 HTML 将 LaTeX 公式预先渲染成内嵌 SVG，离线打开即可阅读。
+更新：2026-10-05。当前默认实现为v6：在v5基础上仅增加逐点留出视角的背景身份核验。多项联合改动的前置试验已回退。本文前六章只描述默认代码；v1—v6的变化、失败试验及历史分数独立列在后面的版本章节。报告 HTML 将 LaTeX 公式预先渲染成内嵌 SVG，离线打开即可阅读。
 
 
 
 \section*{1. 当前主脉络}
 \addcontentsline{toc}{section}{1. 当前主脉络}
 
-\textbf{ScanNet/Hypersim RGB-D 与位姿 → 复用类别、描述及 Florence/DINO/SAM 观测 → 本地 YOLOE 检测与原生分割 → 深度投影、地面及低平台过滤 → 一对一关联与全局实例共识 → 实测表面精修 → 包含残片合并及候选验收 → 选择性 AdaPoinTr 补全及观测验收 → 正式几何框与空间边 → VLPart 部件与父归属 → 独立评价与原版可视化。}
+\textbf{ScanNet/Hypersim RGB-D 与位姿 → 复用类别、描述及 Florence/DINO/SAM 观测 → 本地 YOLOE 检测与原生分割 → 深度投影、地面及低平台过滤 → 一对一关联与全局实例共识 → 实测表面精修 → 包含残片合并、逐点留出视角核验及候选验收 → 选择性 AdaPoinTr 补全及观测验收 → 正式几何框与空间边 → VLPart 部件与父归属 → 独立评价与原版可视化。}
 
 
 
@@ -42,7 +42,7 @@
 投影与背景 & 使用光轴深度、两套内参与米制位姿；背景支持的地面和低平台不获得物体身份 & \texttt{op3dsg\_\allowbreak{}fusion.\allowbreak{}py}；\texttt{floor\_\allowbreak{}filter.\allowbreak{}json} \\ \hline
 实例身份 & 在线 Hungarian 关联，随后用第三视角完整物体掩码复核重复与互补片段 & \texttt{multiview\_\allowbreak{}association.\allowbreak{}py}、\texttt{instance\_\allowbreak{}consensus.\allowbreak{}py}；映射、轨迹与中文日志 \\ \hline
 实测精修 & 清除多次可见且反复被否定的点；保留未知/遮挡区域和重要断开表面 & \texttt{instance\_\allowbreak{}consensus.\allowbreak{}py}、\texttt{map\_\allowbreak{}ply\_\allowbreak{}post\_\allowbreak{}filter.\allowbreak{}py}；\texttt{instance\_\allowbreak{}cloud\_\allowbreak{}cleaned.\allowbreak{}ply} \\ \hline
-候选验收 & 基于实测表面的残片合并、跨视角反证及标准化语义过滤 & \texttt{proposal\_\allowbreak{}validation.\allowbreak{}py}；\texttt{object\_\allowbreak{}validation.\allowbreak{}json}、\texttt{validated\_\allowbreak{}object\_\allowbreak{}tracks.\allowbreak{}json} \\ \hline
+候选验收 & 保留v5残片合并和语义门控；增加逐点留出视角的背景身份反证 & \texttt{proposal\_\allowbreak{}validation.\allowbreak{}py}、\texttt{background\_\allowbreak{}consensus.\allowbreak{}py}；\texttt{object\_\allowbreak{}validation.\allowbreak{}json}、\texttt{validated\_\allowbreak{}object\_\allowbreak{}tracks.\allowbreak{}json} \\ \hline
 形状补全 & 官方 AdaPoinTr-PCN 生成候选；有界 Sim(3) 对齐；表面、自由空间及可见掩码验收 & \texttt{completion\_\allowbreak{}model.\allowbreak{}py}、\texttt{shape\_\allowbreak{}completion.\allowbreak{}py}；\texttt{completion\_\allowbreak{}audit.\allowbreak{}json} \\ \hline
 正式几何 & 不对精修点云重复执行破坏性过滤；用已验证的竖直轴拟合框，同步空间边 & \texttt{canonical\_\allowbreak{}geometry.\allowbreak{}py}；\texttt{topology\_\allowbreak{}map.\allowbreak{}json}、\texttt{topology\_\allowbreak{}map\_\allowbreak{}observed.\allowbreak{}json} \\ \hline
 部件与层级 & 官方 VLPart 检测部件；独立 RN50 特征融合；多视角父归属投票 & \texttt{vlpart\_\allowbreak{}graph.\allowbreak{}py}、\texttt{run\_\allowbreak{}partaware.\allowbreak{}py}；\texttt{part\_\allowbreak{}nodes}、\texttt{part\_\allowbreak{}relations} \\ \hline
@@ -275,6 +275,44 @@ c_i^*=\arg\max_cL_{ic},\qquad
 
 
 
+\subsection*{3.5 外部取景与开口：逐点留出视角的身份核验}
+\addcontentsline{toc}{subsection}{3.5 外部取景与开口：逐点留出视角的身份核验}
+
+外部相机可以通过开口观测到室内真实物体。二维大掩码可能把墙、窗、吊柜及远处物体一起叫成\texttt{mirror}或其他单一类别；每个点的深度仍然正确，但它们不一定属于同一个物体。v6不改变深度或假设镜面，改的是这个整体身份的准入算法。借鉴\href{https://arxiv.org/abs/2401.07745}{MaskClustering}的跨视角反证，并结合\href{https://arxiv.org/abs/2312.10671}{Open3DIS}指出的二维掩码可能混入邻近物体/背景的问题；这里是项目适配，未完整移植两篇网络。
+
+
+
+仅核验最长世界轴跨度超过3米的已有候选，以限制当前规则对小物体漏检的影响。候选原观测帧集合为 $S$；以确定性步长采样候选实测点云，记采样集合为 $P$。从最多100个已缓存帧中留出 $S$，以其他帧检查点归属。点与实测深度不一致、遮挡或投影无效时，沿用现有深度权重置零，不计反对票。
+
+
+
+\[
+k(p)=\sum_{t\notin S}\mathbf1[w_t(p)>0],\qquad
+b(p)=\frac{\sum_{t\notin S}w_t(p)\mathbf1[M_t(\pi_t(p))=0]}{\sum_{t\notin S}w_t(p)},\qquad
+H=\{p:k(p)\ge3\}.
+\]
+
+掩码0表示未分配给前景实例，不能单独当成材质真值。至少三个留出视角实际看见该点才纳入 $H$；逐点背景权重占比≥0.8才计为反证。候选的覆盖和反证比例为：
+
+
+
+\[
+\phi=\frac{|H|}{|P|},\qquad
+B=\frac{1}{|H|}\sum_{p\in H}\mathbf1[b(p)\ge0.8].
+\]
+
+只有当 $\phi\ge0.5$、$B>0.5$，且至少5个留出帧各有16个深度一致可见采样点、这些点的加权背景占比≥0.8时，否决这个大物体身份。这里的0.5是多数实测点门槛，不按场景名、节点ID或类别决定。逐点统计允许大混合区域在不同视角仅部分可见，避免要求每个视角同时看见整个候选。
+
+
+
+删除的是错误整体身份在正式图中的资格。原始RGB-D、位姿、原始融合及含背景导出保留；其他有效物体的几何、置信度和合并规则保持v5。后续正式PLY、映射、框、空间边和部件由正常流水线重新生成，没有手动删除成品节点。未被其他前景解释的实测点保留在原始/背景导出中，不冒充新物体。
+
+
+
+每个候选的\texttt{direct\_\allowbreak{}background\_\allowbreak{}consensus}记录源帧留出后的覆盖、背景反证比例及视角数；代码挂接项是\texttt{BACKGROUND\_\allowbreak{}VALIDATION}，删除注册项与对应导入即可撤除。未知/遮挡的点不构成否决。该规则当前针对大混合区域，不等于已经解决所有小物体识别，也未训练“外部相机”分类器。
+
+
+
 \section*{4. 选择性形状补全}
 \addcontentsline{toc}{section}{4. 选择性形状补全}
 
@@ -424,7 +462,7 @@ S=2\left[(1-0.6)(G+S_p)+0.6S_c\right],\qquad S\ge1.5.
 \end{longtable}
 }
 
-组件唯一挂接点是 \texttt{pipeline\_\allowbreak{}components/\allowbreak{}\_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}.\allowbreak{}py}：\texttt{FRONTEND}、\texttt{ASSOCIATION}、\texttt{FUSION}、\texttt{INSTANCE\_\allowbreak{}REFINEMENT}、\texttt{GEOMETRY\_\allowbreak{}COMPONENTS}、\texttt{GEOMETRY\_\allowbreak{}OUTPUT}、\texttt{OBJECT\_\allowbreak{}VALIDATION}、\texttt{GRAPH\_\allowbreak{}COMPONENTS}。移除采用删除导入与注册项的代码编辑，之后在新结果目录重建。不是靠备份或开关参数模拟移除。\texttt{--start-stage} 只用于恢复阶段，\texttt{--reuse-scene} 只指定同场景缓存。
+组件唯一挂接点是 \texttt{pipeline\_\allowbreak{}components/\allowbreak{}\_\allowbreak{}\_\allowbreak{}init\_\allowbreak{}\_\allowbreak{}.\allowbreak{}py}：\texttt{FRONTEND}、\texttt{ASSOCIATION}、\texttt{FUSION}、\texttt{INSTANCE\_\allowbreak{}REFINEMENT}、\texttt{GEOMETRY\_\allowbreak{}COMPONENTS}、\texttt{GEOMETRY\_\allowbreak{}OUTPUT}、\texttt{OBJECT\_\allowbreak{}VALIDATION}、\texttt{GRAPH\_\allowbreak{}COMPONENTS}及\texttt{BACKGROUND\_\allowbreak{}VALIDATION}。移除采用删除导入与注册项的代码编辑，之后在新结果目录重建。不是靠备份或开关参数模拟移除。\texttt{--start-stage} 只用于恢复阶段，\texttt{--reuse-scene} 只指定同场景缓存。
 
 
 
@@ -440,7 +478,7 @@ S=2\left[(1-0.6)(G+S_p)+0.6S_c\right],\qquad S\ge1.5.
 \mathrm{AP}_\tau=\sum_k(R_k-R_{k-1})\max_{j\ge k}P_j.
 \]
 
-AP25、AP50、AP75分别要求 IoU≥0.25、≥0.5、≥0.75。预测按质量分数排序并贪心一对一匹配。另用最大一对一几何匹配统计 TP、FP、FN、precision、recall 和 F1；这个匹配不等同于 AP 的排序匹配。当前评价程序默认输出这三个阈值和预测框坐标，后续版本沿用。AP75本次只补测v5及第二场景的原始RAM、复用Qwen基线，不补测v1—v4。
+AP25、AP50、AP75分别要求 IoU≥0.25、≥0.5、≥0.75。预测按质量分数排序并贪心一对一匹配。另用最大一对一几何匹配统计 TP、FP、FN、precision、recall 和 F1；这个匹配不等同于 AP 的排序匹配。当前评价程序默认输出这三个阈值和预测框坐标，后续版本沿用。历史AP75补测覆盖v5及第二场景原始RAM、复用Qwen基线，后续评价默认包含AP75；v6试验分数另列，不补测v1—v4。
 
 
 
@@ -655,7 +693,7 @@ env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
   python script/visualize_map.py \
   --map_ply_path "$RESULT/instance_cloud_cleaned.ply" \
   --topology_map_path "$RESULT/topology_map.json" \
-  --show_bboxes --show_edges --enable_picking --show_parts
+  --show_bboxes --show_parts
 \end{verbatim}
 
 
@@ -740,44 +778,30 @@ ai\_001\_010 / 复用Qwen→DINO/SAM→C++ & 46 / 109 & 1.73\% & 0.03\% & 0.00\%
 \end{itemize}
 
 
-\subsection*{11.5 左上异常点云与镜面反射诊断}
-\addcontentsline{toc}{subsection}{11.5 左上异常点云与镜面反射诊断}
+\subsection*{11.5 左上异常点云：开口误标，撤回镜面解释}
+\addcontentsline{toc}{subsection}{11.5 左上异常点云：开口误标，撤回镜面解释}
 
-异常区域的重要来源定位到\texttt{mirror}节点281：点数38670，正式框长轴约5.30米。它来自\texttt{cam\_\allowbreak{}02\_\allowbreak{}0079/\allowbreak{}0085/\allowbreak{}0088/\allowbreak{}0091}四帧的镜子掩码，原RGB确有墙面镜子。对0079帧，镜子掩码覆盖82312像素；对应官方语义中墙47289、天花板23834，说明该区域的深度/标签包含反射内容。真值仅用于这次离线诊断，不进入建图算法。
-
-
-
-在掩码外侧15像素环带的实测深度上拟合平面，不用真值选点：0079帧平面内点率约73.2\%，镜子区域原深度中位数5.028米，周围平面的相交深度中位数约2.891米，84.0\%的有效掩码像素比该平面远超过20厘米。另三帧同类比例约81.4\%、78.9\%、93.6\%。这是镜面反射被当作直射场景几何的强证据；周围平面仍是估计，不能作为已经确认的真实镜面精确标注。
+用户确认该矩形区域是从外部透过开口拍到室内，\textbf{不是镜面}。之前根据检测器名称\texttt{mirror}和“深度在周围墙平面之后”判断为镜子是错误的：开口也满足这个深度条件。原RGB、周边平面拟合及标签名称均不能单独证明镜面材质；旧报告“原RGB确有墙面镜子”和“反射强证据”两项结论撤回。
 
 
 
-四帧的Hypersim径向距离转光轴深度误差中位数约0.25毫米、99\%分位约0.50毫米，与毫米量化一致，当前证据不支持首先修改全局深度尺度或位姿。图中规则点阵还受到隔像素采样影响；点阵样式本身不证明几何错误。
+v5误标节点281的2578个采样点中，77.35\%能在另一直接视角\texttt{cam\_\allowbreak{}01\_\allowbreak{}0092}与真实深度一致，平均深度权重0.948。对应标签大多是背景，也有真实厨房物体，说明问题主要是把开口后不同真实表面套进了一个错误的大掩码与物体身份。前置拆分试验的节点编号发生变化，不能把试验的同编号子节点当成原误标；正式v6保持其余v5编号。
 
 
 
-\textbf{拟议修复，尚未接入：} 参考\href{https://arxiv.org/abs/2106.06629}{Mirror3D}，把镜面检测、平面估计放在实例投影之前；可靠时以射线—镜面交点提供镜面几何，反射中的内容不再产生普通物体点。平面不可靠时暂缓该区域的几何融合。不要删除整个\texttt{mirror}类别，也不要把窗口一并当成镜子。
-
-
-
-\[
-\Pi:\ \mathbf n^\top\mathbf x+d=0,\qquad
-\mathbf x=\mathbf C+t\mathbf r,\qquad
-t=-\frac{\mathbf n^\top\mathbf C+d}{\mathbf n^\top\mathbf r}.
-\]
-
-平面、相机中心和射线必须处于同一坐标系；只接受正的交点距离、充分平面支持及多视角一致结果。\href{https://arxiv.org/abs/2111.15234}{NeRFReN}进一步解释了稳定反射为什么会被重建成虚拟几何。它适合作为反射建模参考，本项目暂不改成NeRF路线。
+原四帧径向距离转光轴深度的误差中位数约0.25毫米、99\%分位约0.50毫米，属于毫米量化范围；这个结果只核验深度转换，不证明镜面。镜面平面替换试验已全部撤回，派生深度缓存已删除，第二场景从原始深度重新融合。最终流程只对物体身份和混合/背景候选做验收，保留开口后真实几何来源。
 
 
 
 \subsection*{11.6 针对稀有组合物体的论文方案与推荐顺序}
 \addcontentsline{toc}{subsection}{11.6 针对稀有组合物体的论文方案与推荐顺序}
 
-下述方案均为研究建议，尚未安装新模型或修改物体主流程。继续复用Qwen缓存。
+以下记录v5之后的研究顺序；薄物体合并保护、有界几何分区和局部视觉提示在v6试验中运行，但未保留到默认流程。其他建议保持研究状态，继续复用Qwen缓存。
 
 
 
 \begin{enumerate}
-\item \textbf{先修反射与薄物体误合并。} 借鉴Mirror3D的镜面平面深度处理；用深度噪声和局部尺度调整表面容差，并让可靠的独立实例分离证据阻止合并。发现混合区域时先尝试拆分，再分别验收，避免直接删除整个组合物体。
+\item \textbf{先修开口误标与薄物体误合并。} 不改开口后的真实深度；按局部尺度调整表面容差，并让可靠的独立实例分离证据阻止合并。发现混合区域时先尝试拆分，再分别验收，避免直接删除整个组合物体。
 
 
 \item \textbf{补充类别无关的几何实例救援。} \href{https://arxiv.org/abs/2312.11557}{SAI3D}把几何超点按多视角SAM掩码亲和度逐步合并；\href{https://arxiv.org/abs/2311.17707}{SAMPro3D}把提示点固定在3D中并投影到各视角。建议只对未被可靠物体解释的残余区域触发，几何可靠而类别不确定时保留\texttt{unknown\_\allowbreak{}object}身份；不要因为模型叫不出专用名称就删除物体。两篇方法仍依赖掩码和位姿质量，不保证所有稀有对象都能恢复。
@@ -806,8 +830,260 @@ A_{ij}=\frac{\sum_v w_v\,\mathbf 1[Q_i,Q_j\text{ 在可见视角 }v\text{ 属于
 
 
 
-\section*{12. 论文依据与实际采用范围}
-\addcontentsline{toc}{section}{12. 论文依据与实际采用范围}
+\section*{12. v6前置试验（未采纳）：局部视觉提示、薄物体保护与有界几何分区}
+\addcontentsline{toc}{section}{12. v6前置试验（未采纳）：局部视觉提示、薄物体保护与有界几何分区}
+
+本节记录已回退的前置试验；正式v6的单项修复见第13章。前置局部精修和薄物体/几何分区组合虽然改善AP50，却增加第二场景FP、降低第一场景AP75；没有同时满足降低假阳性、假阴性与提高严格定位的目标，因此整组算法已撤出默认主流程。两套\texttt{\_\allowbreak{}v6\_\allowbreak{}trial}目录是试验结果，不能当作正式推荐版本。
+
+
+
+\subsection*{12.1 实现与回退记录}
+\addcontentsline{toc}{subsection}{12.1 实现与回退记录}
+
+\begin{enumerate}
+\item 试验时将官方已安装YOLOE SAVPE接入前端；每帧最多复核4个已有ROI，不生成新独立候选。重新提取实际框的DINO特征，保存中文\texttt{local\_\allowbreak{}refinement.\allowbreak{}json}。两场景分别接受225和192次局部掩码复核；这些是逐帧观测数，不能当成新增物体数。
+
+
+\item 包含验收改成8—18毫米尺度容差；至少2个独立分离视角不可被“重复”捷径覆盖。薄物体与相邻实例先保留独立身份。几何分区在第二场景执行了3组二分，之后每个子节点独立验收；第一场景没有通过的拆分。
+
+
+\item 恢复v5的保守SMS拒绝条件，保留强回投影几何保护；增加大范围背景一致性拒绝和软质量排序。首轮过度放宽产生18个第一场景节点、AP50降到78.74\%，已回退。第二轮允许低SMS但至少3帧支持，第二场景产生102节点、27TP/75FP/82FN，假阳性比v5多16个，也已回退。最终表使用恢复保守语义门控后的结果。
+
+
+\item 错误镜面分支全部移除并从原始深度重新融合；撤回记录保留，输入RGB-D及位姿不改。
+
+
+\item 原可视化沿用同一PLY与正式图。关闭边时也关闭部件父子连接；命令默认不启用点选。修复拆分节点显式ID，按原base-255三通道解码高于255的编号，避免新子节点别名或颜色身份混淆，原接口不变。
+
+\end{enumerate}
+
+
+试验设计中，撤除\texttt{LOCAL\_\allowbreak{}REFINEMENT}或\texttt{PROPOSAL\_\allowbreak{}PARTITION}只需删注册项和对应导入；前端与验收会退回没有该组件的路径。验收规则修改集中在\texttt{proposal\_\allowbreak{}validation.\allowbreak{}py}，删除\texttt{OBJECT\_\allowbreak{}VALIDATION}仍可整体撤除验收组件。重新构建时使用新结果目录，不能假设旧图自动变化。
+
+
+
+\subsection*{12.2 试验算法数学原理}
+\addcontentsline{toc}{subsection}{12.2 试验算法数学原理}
+
+\textbf{局部视觉提示。}
+
+
+
+使用已安装 YOLOE-v8-S 同一预训练权重的官方 SAVPE 预测器，另一实例与全图文字提示预测器隔离。每帧最多复核4个已有候选：至少48像素，面积不超过全图18\%，且框最长边小于256像素、宽高比小于0.25，或已知SAM质量低于0.7。局部裁剪留至少24像素或最长边25\%的边界，再以640像素推理。框由缓存观测自动提供，没有人工框、GT提示、新Qwen请求或新独立候选。
+
+
+
+旧掩码为 $M$、视觉提示候选为 $M'$、其他实例占有区域为 $O$。准入为：
+
+
+
+\[
+c=\frac{|M\cap M'|}{|M|}\ge0.7,\qquad
+0.65\le\rho=\frac{|M'|}{|M|}\le2,\qquad
+\nu=\frac{|M'\cap O|}{|M'|}\le0.05.
+\]
+
+预测分数还需达到0.3；同一提示的多个结果按与旧掩码IoU选择。通过后仍移除所有邻居已占像素，继承旧名称与身份，并重新计算实际掩码框和256维DINO ROI特征。未通过则保留旧掩码。这是局部视觉提示复核，不是重新执行LLM识图。高SAM质量的小物体仍可进入局部复核；其收益与风险由整条流程对照衡量，不能把高分提示视为正确边界保证。
+
+
+
+\textbf{薄物体尺度约束与包含残片合并。} 原来的固定3厘米验收容差改成与实例最薄正轴跨度相关的8—18毫米容差；在线关联及全局共识的原规则仍在各自阶段使用。设 $e_i$ 为最小正轴跨度：
+
+
+
+\[
+\varepsilon_i=\operatorname{clip}(0.15e_i,0.008,0.018),\qquad
+\varepsilon_{ab}=\min(\varepsilon_a,\varepsilon_b),\qquad
+r_{a\to b}=\frac{1}{|P_a|}\sum_{p\in P_a}\mathbf1[d(p,P_b)\le\varepsilon_{ab}].
+\]
+
+这项修改按实测物体尺度调整，不是已经实现了传感器噪声估计。候选先通过95\%的三维包围包含检查及语义余弦≥0.6。至少2个独立视角把两组表面分别置于可靠原始掩码时，一律否决包含合并。否则要求语义≥0.8且双向表面覆盖均≥0.95的直接重复，或者至少3个完整掩码支持视角、共识≥0.6且小到大表面覆盖≥0.85。去掉单向0.99覆盖可独自触发合并的捷径。合并只统一身份，不扩张原完整几何，避免残片拉大正确框。
+
+
+
+\textbf{有证据才拆分混合实例。} 借鉴\href{https://arxiv.org/abs/2312.11557}{SAI3D}的几何超点与多视角掩码分组思想，先将已有候选按1.5厘米体素粗化并估计5厘米邻域法向。点对连接条件为：
+
+
+
+\[
+\|p_i-p_j\|\le0.026,\qquad |n_i^Tn_j|\ge0.8,\qquad
+\max(|(p_j-p_i)^Tn_i|,|(p_j-p_i)^Tn_j|)\le0.01.
+\]
+
+保留至少64点且达到原候选8\%的连通块。仅考虑2—4块、总保留率≥85\%的划分；每对块必须有至少2个原始掩码分离视角。将原观测分配到块时，最佳投影覆盖需≥0.6且比次优高≥0.3，每个子实例至少得到3个不同帧。子节点获得独立全局ID，保留原物体字段并继续验收。共享完整掩码不能凭空产生子身份，证据不够时保留整体。当前只拆分已有候选，没有扫描所有背景并自动生成未知物体，也没有完整移植SAI3D的余弦亲和度和渐进区域生长。
+
+
+
+v6候选验收再加入有界排序因子：
+
+
+
+\[
+s_i^{\mathrm{final}}=s_i\left(0.75+0.25\min\left(\frac{N_i^{\mathrm{support}}}{5},1\right)\right)
+\left(0.8+0.2\frac{1}{1+\exp(-\mathrm{SMS}_i)}\right).
+\]
+
+它只改变已有候选的排序，不校准概率。未定位到匹配物体的高分候选仍会降低AP；该因子在第一场景改善AP50排序，但整个前置试验的AP75仍可能低于v5。
+
+
+
+大范围背景试验规则：最长轴跨度超过3米时核验最多100个视角；至少5个视角看到50\%以上采样点且加权背景占比≥80\%，并且这些视角占有效可见视角超过60\%，才拒绝物体身份。它没有修改任何深度或把开口后真实物体压到墙平面。该规则与其他v6验收修改一起撤回，未保留到默认流程。
+
+
+
+\subsection*{12.3 同协议实测}
+\addcontentsline{toc}{subsection}{12.3 同协议实测}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景 / 版本 & 预测 / GT & AP25 & AP50 & AP75 & TP50 / FP50 / FN50 & 数量对数误差 \\ \hline
+\endfirsthead
+\hline
+场景 / 版本 & 预测 / GT & AP25 & AP50 & AP75 & TP50 / FP50 / FN50 & 数量对数误差 \\ \hline
+\endhead
+ai\_001\_002 / v5 & 13 / 10 & 94.06\% & 81.54\% & 32.14\% & 10 / 3 / 0 & 0.2624 \\ \hline
+ai\_001\_002 / v6前置试验 & 13 / 10 & 93.08\% & 84.15\% & 29.21\% & 10 / 3 / 0 & 0.2624 \\ \hline
+ai\_001\_010 / v5 & 80 / 109 & 18.47\% & 7.53\% & 0.60\% & 21 / 59 / 88 & 0.3093 \\ \hline
+ai\_001\_010 / v6前置试验 & 98 / 109 & 18.96\% & 9.40\% & 0.64\% & 25 / 73 / 84 & 0.1064 \\ \hline
+\end{longtable}
+}
+
+第一场景的AP75达标GT仍是5个，没有丢失原来的5个一对一几何匹配。AP75下降主要涉及预测排序及正确桌面候选的身份/分数变化；桌子的IoU从0.929变为0.900，一个音箱从0.832提高到0.955，不能声称所有框都更准确。两场景均未接受形状补全候选，所以本轮成绩来自实测分割、关联和验收，不能归功于生成补全。
+
+
+
+数量误差只作为补充；必须同时查看FP、FN和AP75。尤其第二场景大量小道具仍无法稳定达到IoU0.5，灯杆、细灯头、遮挡和实例粒度仍未完全解决。两条新组件同时变化，目前不是严格单组件消融，不能分别归因各自提高了多少AP。
+
+
+
+\subsection*{12.4 预期高度与验证边界}
+\addcontentsline{toc}{subsection}{12.4 预期高度与验证边界}
+
+目标是在不改变ScanNet/Hypersim接口、零新增Qwen识图的前提下，减少近邻薄物体误合并并恢复小物体定位，使AP50和召回提高，同时控制FP与数量误差。AP75还需要更完整的边界、稳定身份和质量排序；当前分数不支持“全面提升”或高精度场景图的结论。两个开发场景不足以建立泛化保证。
+
+
+
+试验时42项核心回归测试通过；当时回退后的v5运行37项回归测试。独立核对两场景正式节点key与显式ID、PLY物体编号、GT哈希、评价引用的正式图哈希一致；用原版可视化预览两套结果，不显示边或启用点选。缓存类别逐帧复用，Qwen API调用为0。保留两个\texttt{\_\allowbreak{}v6\_\allowbreak{}trial}独立结果根目录，版本历史分数不重写。试验代码差异保存为\texttt{/\allowbreak{}home/\allowbreak{}lewisliu/\allowbreak{}datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}v6\_\allowbreak{}algorithm\_\allowbreak{}trial.\allowbreak{}patch}，主源码中删除未采用组件，当时撤回默认注册及算法至v5；随后仅接入第13章的独立核验组件。
+
+
+
+\subsection*{12.5 真正镜面的未来处理：研究讨论，不进入当前流程}
+\addcontentsline{toc}{subsection}{12.5 真正镜面的未来处理：研究讨论，不进入当前流程}
+
+本场景没有经核验的镜面。对将来出现的真实镜面，不能只用\texttt{mirror}类别或墙后深度判断；需镜面分割、边界与法向、多视角直射/反射一致性，并排除窗口和开口。\href{https://arxiv.org/abs/2106.06629}{Mirror3D}研究镜面区域与法向估计以及深度纠正；该模型未安装、未作为v6组件。
+
+
+
+镜面内RGB不必全部丢弃。\href{https://arxiv.org/abs/2509.20607}{Reflect3r}利用镜面形成虚拟视角及对称相机约束，说明可靠反射可以补充背面/遮挡区域观测。已知单位法向平面、相机中心和射线时：
+
+
+
+\[
+\Pi:n^Tx+d=0,\qquad t=-\frac{n^TC+d}{n^Tr},\qquad
+C_v=C-2n(n^TC+d),\qquad r_v=(I-2nn^T)r.
+\]
+
+平面可靠时交点可表示镜面本身；反射RGB需配合虚拟视角关联再用于物体几何。反射矩阵行列式为−1，实际构造正交相机姿态时还需正确处理图像翻转与坐标手性，不能把反射矩阵直接当普通旋转。未校准的反射深度不能按普通直射深度融合。可以保留RGB作为语义线索并暂缓不可靠几何；不应直接删除所有影像信息，也不把论文的潜在收益写成当前项目实测。
+
+
+
+\subsection*{12.6 试验可视化与当前流程}
+\addcontentsline{toc}{subsection}{12.6 试验可视化与当前流程}
+
+\begin{verbatim}
+cd /home/lewisliu/PartAware-SG
+conda activate scannet-sg
+SCENE=ai_001_010  # Use ai_001_002 for the other scene.
+RESULT=/home/lewisliu/datasets/scannet-sg-processed/partaware_${SCENE}_v6_trial/hypersim/${SCENE}
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+python script/visualize_map.py \
+  --map_ply_path "$RESULT/instance_cloud_cleaned.ply" \
+  --topology_map_path "$RESULT/topology_map.json" \
+  --show_bboxes --show_parts --node_radius 0.07 --part_radius 0.025
+\end{verbatim}
+
+
+不看部件时去掉\texttt{--show\_\allowbreak{}parts}。当前默认新建实验应复用同场景v5或正式v6观测；下述命令只运行当前源码，不复现本节已撤回算法：
+
+
+
+\begin{verbatim}
+python scannet/script/run_pipeline.py \
+  --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/${SCENE}_v3/manifest.json \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_${SCENE}_v6/hypersim/${SCENE} \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_${SCENE}_v5/hypersim/${SCENE}
+\end{verbatim}
+
+
+\section*{13. 正式v6：开口大掩码的逐点留出视角核验}
+\addcontentsline{toc}{section}{13. 正式v6：开口大掩码的逐点留出视角核验}
+
+\subsection*{13.1 主流程的实际改变}
+\addcontentsline{toc}{subsection}{13.1 主流程的实际改变}
+
+前置多项联合改动退回v5后，只新增\texttt{background\_\allowbreak{}consensus.\allowbreak{}py}和注册项\texttt{BACKGROUND\_\allowbreak{}VALIDATION}。在现有候选验收器中自动调用它，数学原理统一见第3.5节。没有新增分割模型、局部提示候选、薄物体合并规则、质量排序或镜面深度替换；语义、关联及置信度继续沿用v5，严格隔离本项修复的影响。
+
+
+
+两套正式v6均从v5原始融合PLY、轨迹和逐帧缓存重建图阶段及以后，含补全审查、正式几何、边和VLPart部件。新结果不复用旧成品图，不逐节点手动删除。全部类别缓存逐帧校验复用，Qwen新增识图调用0；构图算法不读取GT。
+
+
+
+\subsection*{13.2 两场景实测}
+\addcontentsline{toc}{subsection}{13.2 两场景实测}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景 / 版本 & 预测 / GT & AP25 & AP50 & AP75 & TP50 / FP50 / FN50 & 数量对数误差 \\ \hline
+\endfirsthead
+\hline
+场景 / 版本 & 预测 / GT & AP25 & AP50 & AP75 & TP50 / FP50 / FN50 & 数量对数误差 \\ \hline
+\endhead
+ai\_001\_002 / v5 & 13 / 10 & 94.06\% & 81.54\% & 32.14\% & 10 / 3 / 0 & 0.2624 \\ \hline
+ai\_001\_002 / v6 & 13 / 10 & 94.06\% & 81.54\% & 32.14\% & 10 / 3 / 0 & 0.2624 \\ \hline
+ai\_001\_010 / v5 & 80 / 109 & 18.47\% & 7.53\% & 0.60\% & 21 / 59 / 88 & 0.3093 \\ \hline
+ai\_001\_010 / v6 & 79 / 109 & 18.74\% & 7.62\% & 0.61\% & 21 / 58 / 88 & 0.3219 \\ \hline
+\end{longtable}
+}
+
+原误节点281跨度4.87米，99.16\%的采样点得到至少三次留出视角支持，其中59.13\%的支持点反复落在未分配前景的区域；26帧提供背景反证，因此由通用规则自动否决。正常大节点82的对应背景比例33.87\%，未被否决。两场景的其他物体节点（含几何、特征和置信度）逐项与v5完全相同。
+
+
+
+保留该修复的条件是：异常大节点由算法自动否决，原先可匹配物体没有新增漏检，第一场景AP75不回退。第二场景少一个错误物体身份会使预测/GT数量比远离1；这再次说明虚假节点可让数量指标看起来更好，必须配合FP和FN。
+
+
+
+本次成果集中于开口后错误整体身份。真实大型物体若大量漏分割仍可能触发背景反证，因此设置大尺度、三次逐点可见、半数覆盖和五次背景视角联合门槛；两场景通过不等于跨场景无误。外部取景仍可贡献正确点，不丢弃整帧。本次两个场景的AdaPoinTr候选均未通过补全验收，接受数为0；完整对象分割和几何补全的剩余不足继续看AP50、AP75，不以一处修复宣称全部识别问题解决。
+
+
+
+\subsection*{13.3 验证、移除与可视化}
+\addcontentsline{toc}{subsection}{13.3 验证、移除与可视化}
+
+41项测试通过，覆盖小物体不触发、遮挡不反对、源掩码不能自证和多数边界。结果通过正式节点/PLY编号、GT及图哈希对照；用原ScanNet-SG渲染器预览两场景，默认不显示关系边或启用pick。移除新模块仅删\texttt{BACKGROUND\_\allowbreak{}VALIDATION}注册和导入，无需备份或开关参数；重新构建时自动跳过该核验。
+
+
+
+\begin{verbatim}
+cd /home/lewisliu/PartAware-SG
+conda activate scannet-sg
+SCENE=ai_001_010  # Use ai_001_002 for the other scene.
+RESULT=/home/lewisliu/datasets/scannet-sg-processed/partaware_${SCENE}_v6/hypersim/${SCENE}
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+python script/visualize_map.py \
+  --map_ply_path "$RESULT/instance_cloud_cleaned.ply" \
+  --topology_map_path "$RESULT/topology_map.json" \
+  --show_bboxes --show_parts --node_radius 0.07 --part_radius 0.025
+\end{verbatim}
+
+
+\section*{14. 论文依据与实际采用范围}
+\addcontentsline{toc}{section}{14. 论文依据与实际采用范围}
 
 {\small
 \begin{longtable}{|p{\dimexpr\linewidth/2-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/2-2\tabcolsep-2\arrayrulewidth\relax}|}
@@ -823,7 +1099,9 @@ A_{ij}=\frac{\sum_v w_v\,\mathbf 1[Q_i,Q_j\text{ 在可见视角 }v\text{ 属于
 \href{https://arxiv.org/abs/2401.07745}{MaskClustering} & 完整掩码视角共识的算法思想 \\ \hline
 \href{https://arxiv.org/abs/2312.10671}{Open3DIS} & 几何实例与语义分离、二维指导三维实例的设计参考 \\ \hline
 \href{https://arxiv.org/abs/2604.08916}{MV3DIS} & 深度权重与跨视角掩码一致性的适配；未移植整个框架 \\ \hline
-\href{https://arxiv.org/abs/2503.07465}{YOLOE} & 官方预训练 YOLOE-v8-S 原生检测与分割 \\ \hline
+\href{https://arxiv.org/abs/2503.07465}{YOLOE} & 默认执行原生检测分割；v6试验运行SAVPE后撤回 \\ \hline
+\href{https://arxiv.org/abs/2312.11557}{SAI3D} & v6几何分区与跨视角分离思想试验，未采纳；未完整移植 \\ \hline
+\href{https://arxiv.org/abs/2106.06629}{Mirror3D}、\href{https://arxiv.org/abs/2509.20607}{Reflect3r} & 真镜面研究讨论；本场景不是镜面，当前不执行镜面处理 \\ \hline
 \href{https://arxiv.org/abs/2006.04388}{Generalized Focal Loss} & 质量感知排序思想；未训练 GFL 损失 \\ \hline
 \href{https://arxiv.org/abs/2507.23134}{Details Matter} & 包含残片清理和 SMS 公式的适配；未安装 Alpha-CLIP \\ \hline
 \href{https://arxiv.org/abs/2311.02873}{OVIR-3D} & 可见检测频率的验收参考 \\ \hline

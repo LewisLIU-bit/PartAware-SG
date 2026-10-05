@@ -1145,30 +1145,20 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
     map_cloud_points[:, 0] += bias_meter  # Add bias_meter meters to x-coordinate
     map_cloud.points = o3d.utility.Vector3dVector(map_cloud_points)
     
-    # Assign random colors based on tracking IDs from R channel
-    print("Assigning random colors based on tracking IDs...")
-    
-    # Get tracking IDs from R channel of point cloud
-    map_colors = np.asarray(map_cloud.colors)
-    
-    # Extract tracking IDs from R channel (assuming R channel contains tracking IDs)
-    map_tracking_ids = (map_colors[:, 0] * 255).astype(int)
-    
-    # Get unique tracking IDs
+    # Decode the unchanged base-255 instance encoding across all RGB channels.
+    encoded = np.rint(np.asarray(map_cloud.colors) * 255).astype(np.int64)
+    map_tracking_ids = encoded[:, 0] + 255 * encoded[:, 1] + 255**2 * encoded[:, 2]
     unique_map_ids = np.unique(map_tracking_ids)
     print(f"Found {len(unique_map_ids)} unique tracking IDs in map")
-    
-    # Create a color map for tracking IDs (same style as visualize_map_with_filter.py)
     if instance_colors is None:
         instance_colors = generate_instance_colors(0, 255, use_colormap=True)
-
-    gray_color = np.array([0.4, 0.4, 0.4])
-    new_map_colors = instance_colors[map_tracking_ids] / 255.0
-    new_map_colors[map_tracking_ids == 0] = gray_color
-    # Apply alpha transparency (default map_alpha=0.8)
-    map_alpha = 0.8
-    new_map_colors = new_map_colors * map_alpha + (1 - map_alpha) * 0.5
-    tracking_id_colors = {i: instance_colors[i] / 255.0 for i in unique_map_ids}
+    # Keep the original palette for legacy IDs and extend it deterministically.
+    palette_indices = map_tracking_ids % len(instance_colors)
+    new_map_colors = instance_colors[palette_indices] / 255.0
+    new_map_colors[map_tracking_ids == 0] = np.array([0.4, 0.4, 0.4])
+    new_map_colors = new_map_colors * 0.8 + 0.1
+    tracking_id_colors = {int(i): instance_colors[int(i) % len(instance_colors)] / 255.0
+                          for i in unique_map_ids}
 
     map_cloud.colors = o3d.utility.Vector3dVector(new_map_colors)
     if len(map_cloud.points) > 0:
@@ -1233,6 +1223,9 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
         part_geometries, part_picks, part_stats = build_part_overlay(
             topology_map_path, tracking_id_colors, part_radius, bias_meter,
             show_part_points, include_provisional_parts)
+        if not show_edges:
+            part_geometries = [(kind, geom) for kind, geom in part_geometries if kind != 'line']
+            part_stats['part_of_links'] = 0
         geometries.extend(geom for _, geom in part_geometries)
     print({"objects": len(node_spheres), "object_edges": len(edge_geometries),
            "bounding_boxes": len(bbox_geometries), "base_points": len(map_cloud.points), **part_stats})

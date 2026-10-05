@@ -244,6 +244,8 @@ def main():
             metrics[gid].update(sms=float(sms[i]), semantic_best_class=names[int(scores[i, :len(names)].argmax())],
                 semantic_object_score=float(scores[i, :len(names)].max()),
                 semantic_background_score=float(scores[i, len(names):].max()), semantic_views=counts[gid])
+    import pipeline_components as components
+    background_validator = getattr(components, 'BACKGROUND_VALIDATION', None)
     survivors = []
     for gid in active:
         m = metrics[gid]
@@ -259,6 +261,11 @@ def main():
         if ('semantic_object_score' in m and m['semantic_object_score']-m['semantic_background_score'] < .02
                 and not reliable_geometry):
             reasons.append('物体与结构背景的语义对比不足')
+        if background_validator is not None:
+            background = background_validator.measure(geometry[gid], views, tracks[gid]['observed_frames'])
+            m['direct_background_consensus'] = background
+            if background_validator.rejection(background):
+                reasons.append('大范围物体身份与多数直接可见背景观测冲突')
         audit.append({'message': '物体候选验收', 'instance_id': gid, 'accepted': not reasons,
                       'reasons': reasons, **m})
         if not reasons:
@@ -283,11 +290,12 @@ def main():
     graph['object_nodes']['nodes'] = {gid: nodes[gid] for gid in survivors}
     graph_path.write_text(json.dumps(graph, indent=2)+'\n')
     (scene/'validated_object_tracks.json').write_text(json.dumps({gid: tracks[gid] for gid in survivors}, indent=2)+'\n')
-    report = {'algorithm': 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
+    report = {'algorithm': 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
         'merged_fragments': len(remap), 'accepted_objects': len(survivors),
         'rejected_objects': len(active)-len(survivors), 'remap': remap, 'qwen_api_calls': 0,
         'thresholds': {'bbox_inclusion': .95, 'surface_inclusion': .99, 'background_margin': .02, 'whole_mask_consensus': .8, 'sms': 0, 'mixed_view_fraction': .2, 'view_detection_rate': .2, 'strong_reprojection_support': .6},
         'semantic_model': 'OpenAI RN50 masked square crops; not Alpha-CLIP', 'vocabulary': names,
+        'background_component_sha256': hashlib.sha256(Path(background_validator.__file__).read_bytes()).hexdigest() if background_validator else None,
         'model_sha256': hashlib.sha256((repo/'checkpoints/clip/RN50.pt').read_bytes()).hexdigest(), 'evidence': audit}
     (scene/'object_validation.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
     print('候选验收完成', {k: report[k] for k in ['candidate_objects', 'merged_fragments', 'accepted_objects', 'rejected_objects']}, flush=True)
