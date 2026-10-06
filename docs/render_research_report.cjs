@@ -201,7 +201,7 @@ nav { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px)
 nav strong { display:block; color:var(--muted); font-size:12px; letter-spacing:.12em; margin-bottom:14px; }
 nav a { display:block; padding:5px 0; color:var(--muted); }
 nav .toc-depth-3 { padding-left:14px; font-size:12px; }
-main { min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:42px 48px; box-shadow:0 8px 32px #152d4c06; }
+main { min-width:0; overflow-wrap:anywhere; background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:42px 48px; box-shadow:0 8px 32px #152d4c06; }
 .edition { color:var(--accent); font-size:13px; font-weight:600; letter-spacing:.08em; margin-bottom:16px; }
 h1 { font-size:30px; line-height:1.4; margin:0 0 24px; }
 h2 { font-size:23px; line-height:1.5; margin:44px 0 18px; padding-top:20px; border-top:1px solid var(--line); }

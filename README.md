@@ -12,7 +12,7 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v7 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v8 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
@@ -50,6 +50,18 @@ diagnostics distinguish geometric completeness from instance ownership; they do
 not replace AP or supply unavailable part ground truth. See the current mathematics
 and version-specific results in [the research report](docs/RESEARCH_REPORT.md).
 
+V8 adds measured thin-surface recovery with dense cached masks, three-view depth
+consensus and automatic projected 3D SAM point/ROI prompts. It uses no new language
+prompts or Qwen calls. Independent unrelated point arrays are preserved exactly.
+A second component groups uniquely attached axial supports and upper crossbars,
+retains every source coordinate as a geometric part, and republishes the same
+object boxes, hierarchy and spatial edges. Strict AP and confidence sorting are
+unchanged. Detach either component by removing its import/list item from
+`MEASURED_REFINEMENT`; rebuild from raw observations in a fresh directory.
+No additional model or dependency installation is required. These are adaptations
+of SAMPro3D/SAI3D principles, not complete reproductions. Recovery adds only
+observed RGB-D points; unsupported hanging rods are not fabricated.
+
 Declared meter-scale Hypersim Z-up inputs use supported floor and low-platform
 filtering before association. `floor_filter.json` records accepted heights and
 multi-view background evidence. Other coordinate conventions keep the original
@@ -83,7 +95,7 @@ two scenes, use a fresh result directory and copy the prior observations:
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
   --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v7/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v8/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
@@ -166,8 +178,8 @@ These are not official ScanNet or UniGraph3D benchmark scores. See
 ```bash
 python scannet/script/evaluate_hypersim.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/evaluation_v6.json
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/evaluation_v8.json
 ```
 
 
@@ -183,8 +195,8 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/hypersim/ai_001_002/instance_cloud_cleaned.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v6/hypersim/ai_001_002/topology_map.json \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/hypersim/ai_001_002/topology_map.json \
   --show_bboxes --show_parts \
   --node_radius 0.07 --part_radius 0.025
 ```
@@ -192,11 +204,10 @@ python script/visualize_map.py \
 Remove `--show_parts` for the original object view. Add `--show_part_points`
 for diagnostic part clouds, `--include_provisional_parts` for all part tracks,
 or `--check_only` to validate the same geometry without a window.
-Shift + left click prints either an object or child node name in the same
-window. Use tracking-ID PLY files
+Add `--enable_picking` only when Shift + left click should print a node name. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
-The second full v5 experiment is under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v6/hypersim/ai_001_010`.
+The current second-scene experiment is under
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v8/hypersim/ai_001_010`.
 Use that directory for both visualization paths. For its dense spatial graph,
 omit `--show_edges` when inspecting objects and part ownership.
 

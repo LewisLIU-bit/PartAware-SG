@@ -263,3 +263,36 @@ predicted parent links. Mixed-instance geometry may have high geometric coverage
 but fail the pure-fragment test. Coverage recall is not AP. `part_PQ` remains null
 because Hypersim does not annotate parts. Registered `part_nodes` already remain
 excluded from object AP and object-count metrics.
+
+## V8 measured recovery and whole-object attachments
+
+`MEASURED_REFINEMENT = [thin_geometry, axial_assembly]` runs after
+`PART_GEOMETRY`. Each component preserves the existing object schema, base-255
+PLY identity encoding, 256D visual and 384D text embeddings. Remove its import and
+list item to detach it, then rebuild from raw fusion into a fresh result root.
+
+- `thin_geometry.construct(context)` recovers under-resolved accepted objects
+  from cached masks and dense RGB-D with at least three distinct supporting views.
+  Automatic 3D point/derived ROI prompts use the existing SAM model. Other accepted
+  object arrays are immutable. `thin_geometry_audit.json` records component SHA,
+  candidate/accepted counts, view evidence and zero synthetic points.
+- `axial_assembly.construct(context)` requires declared metric Z-up, unique
+  geometric attachment and at least three jointly supporting ownership views.
+  Axial supports require stem/base shape and alignment. Upper crossbars require
+  an accepted recovered parent, upper position, axis agreement and measured contact;
+  all input views use jointly registered strict depth/mask validation. Multiple
+  crossbars may attach to one parent, while each crossbar has one eligible parent.
+- Source coordinates are concatenated without resampling; geometric `body`,
+  `support` and `crossbar` parts include `source_object_id`, `point_count`,
+  `observed_frames`, `semantic_embedding: null`, and
+  `semantic_feature_space: geometry_only_no_visual_embedding`. Their point files
+  are `parts/assembly_<source>_<role>.points.npy`. They are not visual VLPart embeddings.
+- `object_identity_aliases` retains source identity; updated frame mappings and
+  existing part parents follow the canonical body. `assembly_audit.json` records
+  contact/axis measurements, source counts and supporting frames. Whole-object
+  confidence and embeddings remain those of the original accepted body.
+- `topology_map.json`, `topology_map_observed.json`, canonical PLY and
+  `parts/partaware_graph.json` are republished together. Evaluation uses the same
+  strict one-to-one object protocol, with parts excluded. No GT is read during
+  either construction component. Static contact is evidence for an assembly
+  hypothesis, not proof of mechanical rigidity or articulations.

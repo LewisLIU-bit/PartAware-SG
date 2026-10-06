@@ -29,3 +29,6 @@ SURFACE_VALIDATION = specular_consensus
 
 from . import part_geometry
 PART_GEOMETRY = part_geometry
+
+from . import thin_geometry, axial_assembly
+MEASURED_REFINEMENT = [thin_geometry, axial_assembly]
