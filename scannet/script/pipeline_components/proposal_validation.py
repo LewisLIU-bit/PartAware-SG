@@ -270,7 +270,12 @@ def main():
             reasons.append('多个独立实例混合于一个候选')
         if m['visible_views'] >= 5 and m['view_detection_rate'] < .2:
             reasons.append('可见视角缺少足够检测支持')
-        reliable_geometry = tracks[gid].get('reprojection_support', 0) >= .6
+        observed_validator = getattr(components, 'OBSERVED_VALIDATION', None)
+        consensus = observed_validator.measure(geometry[gid], gid, views, records, resolve, remap) if observed_validator else None
+        if consensus is not None:
+            m['joint_observed_consensus'] = consensus
+        reliable_geometry = (tracks[gid].get('reprojection_support', 0) >= .6 or
+            (consensus is not None and observed_validator.confirms_existence(consensus, m['undersegmented_view_fraction'])))
         m['strong_observed_geometry'] = reliable_geometry
         if m.get('sms', 0) < 0 and not reliable_geometry:
             reasons.append('物体语义分数低于该类别场景平均水平')
@@ -288,6 +293,17 @@ def main():
             m['planar_surface_consensus'] = surface
             if surface_validator.rejection(surface):
                 reasons.append('近水平平面水槽身份缺少凹面证据且被留出视角支持台面/背景反复否定')
+        semantic_reasons = {'物体语义分数低于该类别场景平均水平', '物体与结构背景的语义对比不足'}
+        if observed_validator is not None and reasons and set(reasons) <= semantic_reasons:
+            core, core_evidence = observed_validator.verified_core(geometry[gid], gid, views, records, resolve, remap)
+            m['verified_surface_rescue'] = core_evidence
+            if observed_validator.confirms_core(consensus, core_evidence, m['undersegmented_view_fraction']):
+                geometry[gid] = core
+                reasons = []
+                m['verified_surface_rescue']['accepted'] = True
+                m['strong_observed_geometry'] = True
+            else:
+                m['verified_surface_rescue']['accepted'] = False
         audit.append({'message': '物体候选验收', 'instance_id': gid, 'accepted': not reasons,
                       'reasons': reasons, **m})
         if not reasons:
@@ -315,11 +331,12 @@ def main():
         value['canonical_id'] = resolve(value['canonical_id'], remap)
     graph_path.write_text(json.dumps(graph, indent=2)+'\n')
     (scene/'validated_object_tracks.json').write_text(json.dumps({gid: tracks[gid] for gid in survivors}, indent=2)+'\n')
-    report = {'algorithm': 'masked_clip_identity_background_v7' if identity_validator else 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
+    report = {'algorithm': 'joint_observed_consensus_semantic_validation_v9' if observed_validator else 'masked_clip_identity_background_v7' if identity_validator else 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
         'merged_fragments': len(remap), 'accepted_objects': len(survivors),
         'rejected_objects': len(active)-len(survivors), 'remap': remap, 'qwen_api_calls': 0,
         'thresholds': {'bbox_inclusion': .95, 'surface_inclusion': .99, 'background_margin': .02, 'whole_mask_consensus': .8, 'sms': 0, 'mixed_view_fraction': .2, 'view_detection_rate': .2, 'strong_reprojection_support': .6},
         'semantic_model': 'OpenAI RN50 masked square crops; not Alpha-CLIP', 'vocabulary': names,
+        'observed_consensus_component_sha256': hashlib.sha256(Path(observed_validator.__file__).read_bytes()).hexdigest() if observed_validator else None,
         'surface_component_sha256': hashlib.sha256(Path(surface_validator.__file__).read_bytes()).hexdigest() if surface_validator else None,
         'identity_component_sha256': hashlib.sha256(Path(identity_validator.__file__).read_bytes()).hexdigest() if identity_validator else None,
         'identity_aliases': graph['object_identity_aliases'],

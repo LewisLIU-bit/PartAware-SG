@@ -296,3 +296,12 @@ list item to detach it, then rebuild from raw fusion into a fresh result root.
   strict one-to-one object protocol, with parts excluded. No GT is read during
   either construction component. Static contact is evidence for an assembly
   hypothesis, not proof of mechanical rigidity or articulations.
+
+## V9 observed evidence, bounded cuboids and MVO
+
+- `OBSERVED_VALIDATION` validates jointly registered depth and local mask ownership. Stable measured-core rescue applies only to semantic-only rejection; mixed/held-out-background/sink vetoes remain independent. `object_validation.json` stores per-view evidence and core bounds.
+- `GEOMETRY_COMPONENTS` appends `backed_cuboid` after AdaPoinTr. It uses an observed front, side support, parallel measured rear plane and all-view free-space checks. Hypotheses carry `geometry_hypothesis.measured=false`; `cuboid_completion_audit.json` keeps acceptance assumptions. It never mutates the measured PLY or supplies association evidence.
+- `MEASURED_REFINEMENT` appends `assembly_density` after axial assembly. Only accepted crossbars receive verified dense RGB-D points. Corresponding part geometry, tracks, canonical boxes and edges are republished.
+- Detach each component by removing its import/registry entry, then rebuild from raw observations in a fresh result root. No backup/feature flag is needed.
+- `maximum_volume_overlap` in new evaluations includes MVO AP25/AP50 and one-to-one TP/FP/FN. Historical `evaluation_mvo.json` files reference frozen evaluation hashes and fixed boxes. MVO uses strictly greater thresholds; legacy IoU AP still uses greater-or-equal thresholds.
+- The saved graph remains the same object/edge/part interface. Generated geometry belongs only in `instance_cloud_completed.ply`, and `topology_map_observed.json` remains measured-only.

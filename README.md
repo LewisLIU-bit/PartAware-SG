@@ -12,7 +12,7 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v8 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v9 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
@@ -62,6 +62,18 @@ No additional model or dependency installation is required. These are adaptation
 of SAMPro3D/SAI3D principles, not complete reproductions. Recovery adds only
 observed RGB-D points; unsupported hanging rods are not fabricated.
 
+V9 adds joint registered depth/mask evidence and stable measured-core rescue for
+semantic-only rejections. Mixed-instance and background vetoes remain active. An
+independent geometric cuboid component uses an observed front, side support and a
+parallel measured rear structure; all capture views check free space and foreign
+objects. Accepted inferred surfaces are stored separately and affect the common
+graph boxes. This is not a learned refrigerator/CAD model. Verified crossbar
+measurements are densified after attachment, preserving unrelated geometry.
+Remove `OBSERVED_VALIDATION`, the `backed_cuboid` geometry entry or the
+`assembly_density` measured-refinement entry to detach them independently.
+The evaluator adds user-defined MVO = intersection / max(box volumes), with
+strict >25% and >50% thresholds, while original IoU AP is unchanged.
+
 Declared meter-scale Hypersim Z-up inputs use supported floor and low-platform
 filtering before association. `floor_filter.json` records accepted heights and
 multi-view background evidence. Other coordinate conventions keep the original
@@ -95,7 +107,7 @@ two scenes, use a fresh result directory and copy the prior observations:
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
   --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v8/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v9/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
@@ -154,7 +166,7 @@ The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equatio
 as embedded SVG and opens without runtime downloads. Editable
 [LaTeX source](RESEARCH_LOG.tex) and editable
 [Chinese research source](docs/RESEARCH_REPORT.md) are also provided. General
-flow, mathematics and interfaces describe v6; v1-v5 changes and the withdrawn v6 trial have separate chapters.
+flow, mathematics and interfaces describe v9; each version change and the withdrawn v6 trial have separate chapters.
 
 ```bash
 python -m unittest discover -s scannet/script/tests_partaware -v
@@ -178,8 +190,8 @@ These are not official ScanNet or UniGraph3D benchmark scores. See
 ```bash
 python scannet/script/evaluate_hypersim.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/evaluation_v8.json
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/evaluation_v9.json
 ```
 
 
@@ -195,8 +207,8 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/hypersim/ai_001_002/instance_cloud_cleaned.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v8/hypersim/ai_001_002/topology_map.json \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/hypersim/ai_001_002/topology_map.json \
   --show_bboxes --show_parts \
   --node_radius 0.07 --part_radius 0.025
 ```
@@ -207,7 +219,9 @@ or `--check_only` to validate the same geometry without a window.
 Add `--enable_picking` only when Shift + left click should print a node name. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
 The current second-scene experiment is under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v8/hypersim/ai_001_010`.
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v9/hypersim/ai_001_010`.
+Use `instance_cloud_completed.ply` to view its accepted inferred cuboid surfaces;
+use the cleaned PLY with `topology_map_observed.json` for measured-only geometry.
 Use that directory for both visualization paths. For its dense spatial graph,
 omit `--show_edges` when inspecting objects and part ownership.
 

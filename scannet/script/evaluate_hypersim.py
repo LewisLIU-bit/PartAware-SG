@@ -52,6 +52,13 @@ def box_overlap(gt, prediction):
     return intersection / max(vg+vp-intersection, 1e-12), intersection / max(vp, 1e-12)
 
 
+def max_volume_overlap(gt, prediction):
+    """Intersection normalized by the larger AABB volume (user-defined MVO)."""
+    size = np.maximum(np.minimum(gt[1], prediction[1])-np.maximum(gt[0], prediction[0]), 0)
+    volumes = [float(np.prod(np.maximum(box[1]-box[0], 0))) for box in [gt, prediction]]
+    return float(np.prod(size))/max(*volumes, 1e-12)
+
+
 def node_bounds(node):
     """Evaluate the saved graph shape exactly as the common viewer presents it."""
     shape = node['shape']
@@ -67,10 +74,11 @@ def node_bounds(node):
     return box.min(0), box.max(0)
 
 
-def average_precision(matrix, confidences, threshold):
+def average_precision(matrix, confidences, threshold, strict=False):
     used, hits = set(), []
     for i in sorted(range(len(confidences)), key=lambda i: (-confidences[i], i)):
-        available = [j for j in range(matrix.shape[1]) if j not in used and matrix[i, j] >= threshold]
+        available = [j for j in range(matrix.shape[1]) if j not in used and
+                     (matrix[i, j] > threshold if strict else matrix[i, j] >= threshold)]
         if available:
             best = max(available, key=lambda j: matrix[i, j])
             used.add(best)
@@ -86,6 +94,28 @@ def average_precision(matrix, confidences, threshold):
     precision = np.maximum.accumulate(precision[::-1])[::-1]
     increments = np.diff(np.r_[0, recall])
     return float(np.sum(increments * precision))
+
+
+def mvo_metrics(predictions, truth):
+    """Keep the original AP protocol intact; MVO uses strictly greater thresholds."""
+    overlap = np.array([[max_volume_overlap(np.asarray(g['bounds']), np.asarray(p['bounds']))
+                         for g in truth] for p in predictions]).reshape(len(predictions), len(truth))
+    result = {'name': 'maximum_volume_overlap', 'formula': 'intersection / max(prediction_volume, ground_truth_volume)',
+              'box_convention': 'AABB in meters, same saved graph shapes and official GT as strict AP',
+              'threshold_operator': '>', 'official_benchmark_metric': False, 'one_to_one': {},
+              'limitation': 'Contained thin boxes have the same MVO and IoU; this does not repair missing geometry.'}
+    for threshold in [.25, .5]:
+        result[f'AP{int(threshold*100)}'] = average_precision(overlap, [p['confidence'] for p in predictions], threshold, strict=True)
+        value = np.where(overlap > threshold, 1+overlap/(min(overlap.shape)+1), -1e6)
+        padded = np.concatenate([value, np.zeros((len(predictions), len(predictions)))], axis=1)
+        rows, columns = linear_sum_assignment(-padded)
+        pairs = [(int(i), int(j)) for i, j in zip(rows, columns) if j < len(truth) and overlap[i, j] > threshold]
+        tp, fp, fn = len(pairs), len(predictions)-len(pairs), len(truth)-len(pairs)
+        precision, recall = tp/max(len(predictions), 1), tp/max(len(truth), 1)
+        result['one_to_one'][str(threshold)] = {'TP': tp, 'FP': fp, 'FN': fn, 'precision': precision, 'recall': recall,
+            'F1': 2*precision*recall/max(precision+recall, 1e-12), 'matches': [
+                {'prediction_id': predictions[i]['id'], 'gt_id': truth[j]['id'], 'mvo': float(overlap[i, j])} for i, j in pairs]}
+    return result
 
 
 def object_count_metrics(predicted, annotated):
@@ -257,6 +287,7 @@ def evaluate(args):
               'geometry_only_box_AP75': average_precision(bbox_iou, confidences, .75),
               'geometry_only_box_AP': float(np.mean([average_precision(bbox_iou, confidences, t) for t in np.arange(.5, 1, .05)])),
               'one_to_one_bbox_geometry': bbox_spatial, 'op3dsg_adapted_object_label_recall': recalls,
+              'maximum_volume_overlap': mvo_metrics(predictions, truth),
               'voxel_occupancy_diagnostic': {'AP25': average_precision(matrix, confidences, .25),
                   'AP50': average_precision(matrix, confidences, .5), 'one_to_one': spatial,
                   'limitation': 'Exact occupied-cell overlap is sensitive to output point density; do not interpret it as official mask AP or evidence of algorithmic improvement.'},

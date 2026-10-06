@@ -1,0 +1,190 @@
+{
+  "version": "v9",
+  "date": "2026-10-07",
+  "tests_passed": 72,
+  "new_qwen_calls": 0,
+  "ground_truth_used_for_construction": false,
+  "metrics_protocol": "class_agnostic_canonical_AABB_against_observable_official_Hypersim_asset_AABB",
+  "metric_thresholds": {
+    "legacy_IoU": ">=",
+    "MVO": ">"
+  },
+  "results": [
+    {
+      "scene": "ai_001_002",
+      "predicted": 10,
+      "ground_truth": 10,
+      "AP25": 1,
+      "AP50": 1,
+      "AP75": 0.625,
+      "MVO_AP25": 1,
+      "MVO_AP50": 1,
+      "count_absolute_log_error": 0,
+      "IoU50": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 0
+      }
+    },
+    {
+      "scene": "ai_001_010",
+      "predicted": 75,
+      "ground_truth": 109,
+      "AP25": 0.22092754822836908,
+      "AP50": 0.08881520804664304,
+      "AP75": 0.011789212427425432,
+      "MVO_AP25": 0.22092754822836908,
+      "MVO_AP50": 0.12441996386950517,
+      "count_absolute_log_error": 0.37385976869283327,
+      "IoU50": {
+        "TP": 23,
+        "FP": 52,
+        "FN": 86
+      }
+    }
+  ],
+  "integrity": [
+    {
+      "scene": "ai_001_002",
+      "checks": {
+        "unrelated_measured_points_identical": true,
+        "original_lamp_points_retained": true,
+        "measured_fridge_identical": true,
+        "completion_only_changes_accepted_ids": true,
+        "raw_fusion_identical": true,
+        "raw_background_fusion_identical": true,
+        "frontend_and_instance_masks_identical": true,
+        "cached_record_semantics_and_features_identical": true,
+        "instance_id_changes_only_newly_accepted_object": true,
+        "graph_cloud_and_track_ids_equal": true,
+        "existing_features_and_names_preserved": true,
+        "part_parents_known_or_explicitly_unassigned": true,
+        "part_of_edges_have_valid_parents": true,
+        "graph_evaluation_hash_matches": true,
+        "ply_evaluation_hash_matches": true,
+        "gt_scope_identical": true,
+        "qwen_api_calls_zero": true
+      },
+      "geometry_counts": {},
+      "box_changes": {}
+    },
+    {
+      "scene": "ai_001_010",
+      "checks": {
+        "unrelated_measured_points_identical": true,
+        "original_lamp_points_retained": true,
+        "measured_fridge_identical": true,
+        "completion_only_changes_accepted_ids": true,
+        "raw_fusion_identical": true,
+        "raw_background_fusion_identical": true,
+        "frontend_and_instance_masks_identical": true,
+        "cached_record_semantics_and_features_identical": true,
+        "instance_id_changes_only_newly_accepted_object": true,
+        "graph_cloud_and_track_ids_equal": true,
+        "existing_features_and_names_preserved": true,
+        "part_parents_known_or_explicitly_unassigned": true,
+        "part_of_edges_have_valid_parents": true,
+        "graph_evaluation_hash_matches": true,
+        "ply_evaluation_hash_matches": true,
+        "gt_scope_identical": true,
+        "qwen_api_calls_zero": true
+      },
+      "geometry_counts": {
+        "4": {
+          "v8": 25132,
+          "v9": 25132,
+          "v9_completed": 37477
+        },
+        "37": {
+          "v8": 0,
+          "v9": 539,
+          "v9_completed": 539
+        },
+        "226": {
+          "v8": 14981,
+          "v9": 24723,
+          "v9_completed": 24723
+        }
+      },
+      "box_changes": {
+        "4": {
+          "label": "refrigerator",
+          "gt_id": 67,
+          "gt_label": "refrigerator",
+          "v9_box_iou": 0.9495297032191045,
+          "v8_box_iou": 0.5764269239108912
+        },
+        "37": {
+          "label": "paper towel dispenser",
+          "gt_id": 106,
+          "gt_label": "otherprop",
+          "v9_box_iou": 0.7120151672177627,
+          "v8_box_iou": null
+        },
+        "226": {
+          "label": "lamp",
+          "gt_id": 1,
+          "gt_label": "lamp",
+          "v9_box_iou": 0.3197691613713387,
+          "v8_box_iou": 0.317817371330337
+        }
+      }
+    }
+  ],
+  "documentation": {
+    "html_validation": {
+      "source": "RESEARCH_LOG.html",
+      "formula_expectation": {
+        "display": 49,
+        "inline": 26
+      },
+      "viewports": [
+        {
+          "size": {
+            "width": 1400,
+            "height": 1000
+          },
+          "checks": {
+            "formulas": 75,
+            "display": 49,
+            "inline": 26,
+            "missingSVG": 0,
+            "mathErrors": 0,
+            "pageOverflow": false,
+            "version9": true,
+            "missingResults": false
+          },
+          "errors": []
+        },
+        {
+          "size": {
+            "width": 390,
+            "height": 844
+          },
+          "checks": {
+            "formulas": 75,
+            "display": 49,
+            "inline": 26,
+            "missingSVG": 0,
+            "mathErrors": 0,
+            "pageOverflow": false,
+            "version9": true,
+            "missingResults": false
+          },
+          "errors": []
+        }
+      ],
+      "passed": true
+    },
+    "source_sha256": "56b2378658994d8d7112d60935aa4f4d056ea08394c2906d477bdaa181c419db",
+    "latex_source_sha256": "70215db8b15b41b12a12e3bbebbf97b29f3c67df2344c49ae8e5760a18b9bcce",
+    "latex_compilation_confirmed": false,
+    "compiler_error": "Unable to find standard directories for platform"
+  },
+  "limitations": [
+    "两个开发场景不代表独立测试集泛化",
+    "第二场景FP50仍为52，整体柜架归属和大量小物件漏检未解决",
+    "冰箱新增是有条件的几何体积假设，不是学习到的身份条件CAD或真实隐藏表面",
+    "灯具横梁更密，整体IoU仍低于0.5，细悬挂杆不完整"
+  ]
+}

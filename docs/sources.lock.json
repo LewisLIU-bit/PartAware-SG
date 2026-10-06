@@ -63,5 +63,36 @@
   "DetailsMatter": {
     "paper": "https://arxiv.org/abs/2507.23134",
     "integration": "adapted inclusion consolidation and SMS; existing RN50 masked crops instead of Alpha-CLIP"
+  },
+  "v9_research": {
+    "CubeSLAM": {
+      "paper": "https://arxiv.org/abs/1806.00557",
+      "integration": "Structural cuboid proposal principles adapted in backed_cuboid; no SLAM or bundle adjustment port"
+    },
+    "Total3DUnderstanding": {
+      "paper": "https://arxiv.org/abs/2002.12212",
+      "integration": "Object/layout constraint principle adapted; no learned network port"
+    },
+    "Clutt3RSeg": {
+      "paper": "https://arxiv.org/abs/2602.11660",
+      "integration": "Reviewed parent-mask hierarchy and residual conditional selection; not installed"
+    },
+    "ShapeFormer": {
+      "paper": "https://arxiv.org/abs/2201.10326",
+      "integration": "Reviewed ambiguous completion distributions; not installed"
+    },
+    "Scan2CAD": {
+      "repository": "https://github.com/skanti/Scan2CAD",
+      "integration": "Reviewed CAD retrieval/alignment requirements; no CAD database or model installed"
+    },
+    "ROCA": {
+      "paper": "https://arxiv.org/abs/2112.01988",
+      "repository": "https://github.com/cangumeli/ROCA",
+      "integration": "Reviewed correspondence-based CAD alignment; not installed"
+    },
+    "SAHI": {
+      "paper": "https://arxiv.org/abs/2202.06934",
+      "integration": "Reviewed small-object sliced inference; not added to current pipeline"
+    }
   }
 }

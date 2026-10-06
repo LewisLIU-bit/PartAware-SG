@@ -94,6 +94,9 @@ def main():
     if args.max_depth < 0 or args.stride < 1 or args.edge_threshold <= 0:
         parser.error('Invalid geometry settings')
     context = Context(args)
+    if args.start_stage == 'parts':
+        completed = context.scene/'instance_cloud_completed.ply'
+        context.graph_geometry = completed if completed.exists() else context.scene/'instance_cloud_cleaned.ply'
     try:
         if args.reuse_scene:
             source = Path(args.reuse_scene).expanduser().resolve()
@@ -177,7 +180,8 @@ def main():
                                       'frontend_module': getattr(getattr(components, 'FRONTEND', None), '__name__', None),
                                       'instance_refinement': getattr(getattr(components, 'INSTANCE_REFINEMENT', None), '__name__', None),
                                       'input_manifest': str(context.manifest), 'start_stage': args.start_stage,
-                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v8',
+                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v9',
+                                      'observed_validation': getattr(getattr(components, 'OBSERVED_VALIDATION', None), '__name__', None),
                                       'measured_refinement': [x.__name__ for x in getattr(components, 'MEASURED_REFINEMENT', [])],
                                       'part_geometry': getattr(getattr(components, 'PART_GEOMETRY', None), '__name__', None),
                                       'surface_validation': getattr(getattr(components, 'SURFACE_VALIDATION', None), '__name__', None),

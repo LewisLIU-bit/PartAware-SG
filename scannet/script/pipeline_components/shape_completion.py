@@ -142,10 +142,14 @@ def main():
             name = max(track['name_votes'], key=track['name_votes'].get).lower()
             supported_class = any(word in name for word in ['chair', 'table', 'desk', 'cabinet', 'sofa', 'lamp'])
             entry = {'instance_id': gid, 'name': name, 'observed_points': len(observed)}
-            if (not supported_class or len(observed) < 128 or len(track['observed_frames']) < 3
-                    or track['confidence'] < .4 or track.get('reprojection_support', 0) < .55
-                    or np.max(np.ptp(observed, axis=0)) > 3):
-                audit.append({**entry, 'status': 'not_eligible', 'reason': '类别、观测支持或几何尺度未满足准入条件'})
+            eligibility = {'supported_training_family': supported_class, 'minimum_points': len(observed) >= 128,
+                'minimum_views': len(track['observed_frames']) >= 3, 'minimum_quality': track['confidence'] >= .4,
+                'minimum_reprojection': track.get('reprojection_support', 0) >= .55,
+                'bounded_extent': bool(len(observed) and np.max(np.ptp(observed, axis=0)) <= 3)}
+            entry['eligibility'] = eligibility
+            if not all(eligibility.values()):
+                audit.append({**entry, 'status': 'not_eligible', 'reason': '未满足模型准入条件',
+                              'failed_conditions': [k for k, valid in eligibility.items() if not valid]})
                 continue
             candidate = model.predict(observed)
             candidate, alignment = align_candidate(observed, candidate)
