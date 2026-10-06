@@ -17,3 +17,15 @@ OBJECT_VALIDATION = proposal_validation
 
 from . import background_consensus
 BACKGROUND_VALIDATION = background_consensus
+
+from . import identity_consensus
+IDENTITY_VALIDATION = identity_consensus
+
+from . import granularity_metrics
+EVALUATION_DIAGNOSTICS = granularity_metrics
+
+from . import specular_consensus
+SURFACE_VALIDATION = specular_consensus
+
+from . import part_geometry
+PART_GEOMETRY = part_geometry

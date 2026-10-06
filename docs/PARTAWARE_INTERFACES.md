@@ -1,6 +1,6 @@
 # PartAware-SG interfaces
 
-The v6 main Hypersim path applies multi-frame background-supported floors and
+The v7 main Hypersim path applies multi-frame background-supported floors and
 low-platform filtering to declared meter-scale Z-up inputs. `floor_filter.json`
 records `levels_m`, support and a 1 cm removal band. Background exports retain
 cleared points. The legacy C++ fallback retains its original single-floor rule.
@@ -33,7 +33,8 @@ The semantic validator uses RN50 masked crops, not Alpha-CLIP, and no Qwen calls
 
 `completion_audit.json` records eligibility, model hashes, alignment and all rejection
 reasons. `instance_cloud_completed.ply` exists only when a candidate is accepted.
-Observed `instance_cloud_cleaned.ply` remains unchanged. Generated points are excluded
+Generated completion points are never written to observed `instance_cloud_cleaned.ply`.
+V7 may add depth-verified measured sink part points to that observed file. Generated points are excluded
 from association, tracking confidence and observation counts. `topology_map_observed.json`
 is the measured-only geometry hypothesis; canonical `topology_map.json` uses measured
 or accepted completed geometry and recomputes spatial edges from its box centers.
@@ -97,7 +98,7 @@ CLI switches and should be evaluated separately.
 
 ## Object association
 
-V6's default `run_pipeline.py` uses the code registry in
+V7's default `run_pipeline.py` uses the code registry in
 `pipeline_components/__init__.py`. `FUSION` exports original PLY/name/256D/384D
 files and updated local-to-global frame mappings. `ASSOCIATION` supplies
 visibility checks and Hungarian assignment with explicit unmatched observations.
@@ -143,8 +144,8 @@ The verified `partaware_v1` experiment contains `hypersim/ai_001_002`,
 contains no generated run results. Only ScanNet and Hypersim dedicated routes
 are retained. The original generic manifest ABI is preserved.
 
-The current v6 has two independent roots: `partaware_ai_001_002_v6` and
-`partaware_ai_001_010_v6`. The v3 inputs and historical outputs are retained. New Hypersim preparation uses the full ordered available
+The current v7 has two independent roots: `partaware_ai_001_002_v7` and
+`partaware_ai_001_010_v7`. The formal v6 controls are retained. The v3 inputs and historical outputs are retained. New Hypersim preparation uses the full ordered available
 frame list, selecting `[::3][:150]`, rather than selecting 150 candidates first.
 Official HDF5 sources are retained under each prepared input's `source_hdf5/`.
 An existing RGB/depth resolution disagreement is recorded and excluded, never
@@ -230,3 +231,35 @@ v1-v4 historical scores are not recomputed. Future runs include AP75.
 `proposal_validation.py` records `direct_background_consensus` and rejection reasons, then regenerates normal PLY IDs, frame mappings, graph boxes/edges and parts. No input depth or completed graph is patched. Raw fusion and background exports remain available. Confidence and prior gates are unchanged. Delete the registry entry/import to detach this component; no backup or runtime flag is required.
 
 The viewer decodes unchanged base-255 RGB IDs across all channels. `--show_edges` controls spatial and part-of links; provided commands omit it and `--enable_picking`. The kitchen opening is not a mirror. The failed combined experiment lives under `_v6_trial`, with `experiment_status.json`; its patch is `/home/lewisliu/datasets/scannet-sg-processed/v6_algorithm_trial.patch`. Those results are not prediction inputs.
+
+## V7 identity, measured part geometry and evaluation diagnostics
+
+Four independent entries attach the new components in `pipeline_components/__init__.py`:
+
+| Entry | Attachment and contract |
+| --- | --- |
+| `IDENTITY_VALIDATION` | Extends proposal validation for conflicting duplicate names; preserves the accepted object's embeddings and adds `object_identity_aliases` with source IDs, names and evidence. Part vocabulary uses accepted parent identity. |
+| `SURFACE_VALIDATION` | Rejects planar sink claims only with held-out depth-consistent background/countertop consensus; unsupported axes and occluded views abstain. It does not classify specular materials. |
+| `PART_GEOMETRY` | Runs after `GRAPH_COMPONENTS`; measured basin/faucet/drain points need three supporting part-mask views and seed connectivity. Republishes observed PLY, canonical boxes and spatial edges, preserving other objects' accepted completion geometry. |
+| `EVALUATION_DIAGNOSTICS` | Evaluation only: adds `granularity_surface_diagnostic`, without changing strict AP, matching or construction. |
+
+Remove the relevant import and registration entry, then rebuild from raw fusion
+observations in a fresh output root. No runtime switch or backup is required.
+`part_geometry_audit.json` records component SHA-256, generated point count (zero),
+part IDs, candidate/accepted/published point counts and frame evidence. All augmented
+points remain measurements. The original object IDs and feature dimensions remain
+compatible. Measured sink augmentation currently requires declared Hypersim metric
+Z-up input; unknown-axis ScanNet captures keep their original generic path.
+
+The surface diagnostic uses observed 1 cm voxel centers and a 2 cm distance
+tolerance. `surface_precision`, `weighted_geometric_surface_coverage`,
+`macro_geometric_surface_coverage`, `geometric_surface_F1` and
+`geometric_gt_coverage_recall50/75` ignore identity and inspect geometric completeness.
+They cannot prove correct semantics or ownership. `weighted_surface_coverage`,
+`macro_surface_coverage`, `surface_F1` and `gt_coverage_recall50/75` instead require
+dominant GT-assignment purity >= 0.8; `pure_fragment_excess` counts redundant pure
+object fragments. GT grouping is evaluation only and is never written into
+predicted parent links. Mixed-instance geometry may have high geometric coverage
+but fail the pure-fragment test. Coverage recall is not AP. `part_PQ` remains null
+because Hypersim does not annotate parts. Registered `part_nodes` already remain
+excluded from object AP and object-count metrics.

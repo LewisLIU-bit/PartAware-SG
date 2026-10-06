@@ -100,6 +100,16 @@ def run(args):
         for job in jobs:
             fid = job['frame_id']
             parents = json.loads((scene / 'refined_instance' / f'{fid}_updated_instance.json').read_text())
+            import pipeline_components as components
+            if getattr(components, 'IDENTITY_VALIDATION', None) is not None:
+                for parent in parents:
+                    gid = str(parent.get('instance_id', -1))
+                    if gid in graph_ids:
+                        stable = graph['object_nodes']['nodes'][gid]['name']
+                        if canonical(parent['object_name']) != canonical(stable):
+                            event('部件词表采用正式父物体身份而非单帧误标签', frame_id=fid,
+                                  parent_id=gid, observation_name=parent['object_name'], canonical_name=stable)
+                        parent['object_name'] = stable
             labels = sorted({f'{canonical(p["object_name"])}: {part}' for p in parents
                              if str(p.get('instance_id', -1)) in graph_ids
                              for part in mapping.get(canonical(p['object_name']), [])})

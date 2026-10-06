@@ -133,7 +133,9 @@ def main():
             return pose, depth, self.source_masks[fid]
     original = OriginalViews(context, jobs, kd, kc, scale, records)
     original.source_masks = {}
-    remap, audit = {}, []
+    import pipeline_components as components
+    identity_validator = getattr(components, 'IDENTITY_VALIDATION', None)
+    remap, audit, aliases = {}, [], {}
     # Prefer a fuller observed object, rather than a high-scoring small fragment.
     keys = sorted(nodes, key=lambda gid: -len(geometry[gid]))
     for big in keys:
@@ -148,7 +150,7 @@ def main():
             a = np.asarray(nodes[big]['text_embedding'])
             b = np.asarray(nodes[small]['text_embedding'])
             similarity = float(a @ b/max(np.linalg.norm(a)*np.linalg.norm(b), 1e-8))
-            if similarity < .6:
+            if similarity < .6 and identity_validator is None:
                 continue
             coverage = float(np.mean(cKDTree(geometry[big]).query(geometry[small])[0] <= .03))
             reverse_coverage = float(np.mean(cKDTree(geometry[small]).query(geometry[big])[0] <= .03))
@@ -156,9 +158,13 @@ def main():
             evidence = raw_pair_evidence(geometry[big][::max(1, len(geometry[big])//2048)],
                 geometry[small][::max(1, len(geometry[small])//2048)], original,
                 tracks[big]['observed_frames']+tracks[small]['observed_frames'])
+            identity_duplicate = (similarity < .6 and identity_validator is not None
+                and identity_validator.contained_duplicate(bbox_inclusion, coverage, evidence))
+            if similarity < .6 and not identity_duplicate:
+                continue
             if evidence['independent_separation_views'] and not strong_surface:
                 continue
-            if not (strong_surface or coverage >= .99 or (evidence['whole_mask_support_views'] >= 3 and evidence['whole_mask_consensus'] >= .8)):
+            if not (identity_duplicate or strong_surface or coverage >= .99 or (evidence['whole_mask_support_views'] >= 3 and evidence['whole_mask_consensus'] >= .8)):
                 continue
             remap[small] = big
             # Inclusion removal keeps the full measured geometry; duplicate fringe
@@ -167,11 +173,20 @@ def main():
             if not strong_surface and coverage < .99:
                 geometry[big] = voxel_downsample(np.concatenate([geometry[big], geometry[small]]), .01)
             nb, ns = len(tracks[big]['observations']), len(tracks[small]['observations'])
-            for field in ['visual_embedding', 'text_embedding']:
-                nodes[big][field] = ((nb*np.asarray(nodes[big][field])+ns*np.asarray(nodes[small][field]))/(nb+ns)).tolist()
+            if not identity_duplicate:
+                for field in ['visual_embedding', 'text_embedding']:
+                    nodes[big][field] = ((nb*np.asarray(nodes[big][field])+ns*np.asarray(nodes[small][field]))/(nb+ns)).tolist()
+            else:
+                aliases[small] = {'canonical_id': big, 'source_name': nodes[small]['name'],
+                    'role': 'duplicate_observation', 'evidence': evidence}
+                audit.append({'message': '实测包含表面与独立完整掩码消解冲突身份',
+                    'source_id': small, 'target_id': big, 'source_name': nodes[small]['name'],
+                    'canonical_name': nodes[big]['name'], 'bbox_inclusion': bbox_inclusion,
+                    'surface_inclusion_3cm': coverage, **evidence})
             tracks[big]['observations'] += tracks[small]['observations']
             tracks[big]['observed_frames'] = sorted(set(tracks[big]['observed_frames']+tracks[small]['observed_frames']))
-            tracks[big]['confidence'] = (nb*tracks[big]['confidence']+ns*tracks[small]['confidence'])/(nb+ns)
+            if not identity_duplicate:
+                tracks[big]['confidence'] = (nb*tracks[big]['confidence']+ns*tracks[small]['confidence'])/(nb+ns)
             audit.append({'message': '完整实例吸收同义包含残片', 'source_id': small, 'target_id': big,
                           'surface_inclusion_3cm': coverage, 'reverse_surface_coverage_3cm': reverse_coverage,
                           'strong_surface_duplicate': strong_surface, 'bbox_inclusion': bbox_inclusion, 'semantic': similarity, **evidence})
@@ -246,6 +261,7 @@ def main():
                 semantic_background_score=float(scores[i, len(names):].max()), semantic_views=counts[gid])
     import pipeline_components as components
     background_validator = getattr(components, 'BACKGROUND_VALIDATION', None)
+    surface_validator = getattr(components, 'SURFACE_VALIDATION', None)
     survivors = []
     for gid in active:
         m = metrics[gid]
@@ -266,6 +282,12 @@ def main():
             m['direct_background_consensus'] = background
             if background_validator.rejection(background):
                 reasons.append('大范围物体身份与多数直接可见背景观测冲突')
+        if surface_validator is not None:
+            surface = surface_validator.measure(nodes[gid]['name'], geometry[gid], views,
+                tracks[gid]['observed_frames'], data.get('world_frame') == 'hypersim_world_z_up')
+            m['planar_surface_consensus'] = surface
+            if surface_validator.rejection(surface):
+                reasons.append('近水平平面水槽身份缺少凹面证据且被留出视角支持台面/背景反复否定')
         audit.append({'message': '物体候选验收', 'instance_id': gid, 'accepted': not reasons,
                       'reasons': reasons, **m})
         if not reasons:
@@ -288,13 +310,19 @@ def main():
     if not o3d.io.write_point_cloud(str(cloud_path), output):
         raise IOError('Could not publish validated observed geometry')
     graph['object_nodes']['nodes'] = {gid: nodes[gid] for gid in survivors}
+    graph['object_identity_aliases'] = {gid: value for gid, value in aliases.items() if resolve(value['canonical_id'], remap) in survivors}
+    for value in graph['object_identity_aliases'].values():
+        value['canonical_id'] = resolve(value['canonical_id'], remap)
     graph_path.write_text(json.dumps(graph, indent=2)+'\n')
     (scene/'validated_object_tracks.json').write_text(json.dumps({gid: tracks[gid] for gid in survivors}, indent=2)+'\n')
-    report = {'algorithm': 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
+    report = {'algorithm': 'masked_clip_identity_background_v7' if identity_validator else 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
         'merged_fragments': len(remap), 'accepted_objects': len(survivors),
         'rejected_objects': len(active)-len(survivors), 'remap': remap, 'qwen_api_calls': 0,
         'thresholds': {'bbox_inclusion': .95, 'surface_inclusion': .99, 'background_margin': .02, 'whole_mask_consensus': .8, 'sms': 0, 'mixed_view_fraction': .2, 'view_detection_rate': .2, 'strong_reprojection_support': .6},
         'semantic_model': 'OpenAI RN50 masked square crops; not Alpha-CLIP', 'vocabulary': names,
+        'surface_component_sha256': hashlib.sha256(Path(surface_validator.__file__).read_bytes()).hexdigest() if surface_validator else None,
+        'identity_component_sha256': hashlib.sha256(Path(identity_validator.__file__).read_bytes()).hexdigest() if identity_validator else None,
+        'identity_aliases': graph['object_identity_aliases'],
         'background_component_sha256': hashlib.sha256(Path(background_validator.__file__).read_bytes()).hexdigest() if background_validator else None,
         'model_sha256': hashlib.sha256((repo/'checkpoints/clip/RN50.pt').read_bytes()).hexdigest(), 'evidence': audit}
     (scene/'object_validation.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')

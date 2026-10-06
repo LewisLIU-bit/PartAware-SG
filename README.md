@@ -12,7 +12,7 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v6 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v7 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
@@ -37,6 +37,18 @@ The default runner now uses code-registered construction components. The origina
 `openset_ply_map` binary and its `legacy` default remain available as the fallback
 when the fusion component is detached. This is an adapted prior-graph pipeline;
 OP3DSG's LLM reasoning stage is not included.
+
+V7 resolves conflicting duplicate identities only with contained observed surfaces
+and independent complete-mask evidence. A separate planar-surface validator rejects
+sink claims contradicted by held-out background or countertop observations. After
+VLPart fusion, measured sink component points require three depth-consistent part
+mask views before augmenting object geometry; boxes and spatial edges are then
+republished through the same interface. This is not a general specular-material
+classifier. No ground truth or new Qwen image call enters construction.
+Strict AP25/AP50/AP75 remain unchanged. Additional surface coverage and pure-fragment
+diagnostics distinguish geometric completeness from instance ownership; they do
+not replace AP or supply unavailable part ground truth. See the current mathematics
+and version-specific results in [the research report](docs/RESEARCH_REPORT.md).
 
 Declared meter-scale Hypersim Z-up inputs use supported floor and low-platform
 filtering before association. `floor_filter.json` records accepted heights and
@@ -71,7 +83,7 @@ two scenes, use a fresh result directory and copy the prior observations:
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
   --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v6/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v7/hypersim/ai_001_010 \
   --start-stage graph
 ```
 

@@ -46,7 +46,7 @@ def fit_box(points, upright=False):
 
 
 def publish(context):
-    source = context.scene/'topology_map_cleaned.json'
+    source = getattr(context, 'canonical_geometry_input', context.scene/'topology_map_cleaned.json')
     graph = json.loads(source.read_text())
     cloud = o3d.io.read_point_cloud(str(context.graph_geometry))
     points, colors = np.asarray(cloud.points), np.rint(np.asarray(cloud.colors)*255).astype(int)

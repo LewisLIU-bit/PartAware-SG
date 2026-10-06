@@ -161,6 +161,9 @@ def main():
         if first <= 4:
             for component in getattr(components, 'GRAPH_COMPONENTS', []):
                 component.construct(context)
+        part_geometry = getattr(components, 'PART_GEOMETRY', None)
+        if part_geometry is not None:
+            part_geometry.construct(context)
         graph_path = context.scene / 'topology_map.json'
         graph = json.loads(graph_path.read_text())
         registry = REPO / 'scannet/script/pipeline_components/__init__.py'
@@ -172,7 +175,10 @@ def main():
                                       'frontend_module': getattr(getattr(components, 'FRONTEND', None), '__name__', None),
                                       'instance_refinement': getattr(getattr(components, 'INSTANCE_REFINEMENT', None), '__name__', None),
                                       'input_manifest': str(context.manifest), 'start_stage': args.start_stage,
-                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v6',
+                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v7',
+                                      'part_geometry': getattr(getattr(components, 'PART_GEOMETRY', None), '__name__', None),
+                                      'surface_validation': getattr(getattr(components, 'SURFACE_VALIDATION', None), '__name__', None),
+                                      'identity_validation': getattr(getattr(components, 'IDENTITY_VALIDATION', None), '__name__', None),
                                       'background_validation': getattr(getattr(components, 'BACKGROUND_VALIDATION', None), '__name__', None),
                                       'object_validation': getattr(getattr(components, 'OBJECT_VALIDATION', None), '__name__', None)}
         graph_path.write_text(json.dumps(graph, indent=2) + '\n')

@@ -8,20 +8,20 @@
 \renewcommand{\arraystretch}{1.25}
 \title{PartAware-SG 综合研发与实验报告}
 \author{}
-\date{2026-10-05}
+\date{2026-10-06}
 \begin{document}
 \maketitle
 \tableofcontents
 \clearpage
 
-更新：2026-10-05。当前默认实现为v6：在v5基础上仅增加逐点留出视角的背景身份核验。多项联合改动的前置试验已回退。本文前六章只描述默认代码；v1—v6的变化、失败试验及历史分数独立列在后面的版本章节。报告 HTML 将 LaTeX 公式预先渲染成内嵌 SVG，离线打开即可阅读。
+更新：2026-10-06。当前默认实现为v7：在v6基础上增加冲突身份消解、平面台面候选核验和经三视角验证的实测水槽部件回填。原严格AP保留，新增几何覆盖及纯碎片诊断。本文前六章只描述默认代码；v1—v7的变化、失败试验及历史分数独立列在后面的版本章节。报告HTML将LaTeX公式预先渲染成内嵌SVG，离线打开即可阅读。
 
 
 
 \section*{1. 当前主脉络}
 \addcontentsline{toc}{section}{1. 当前主脉络}
 
-\textbf{ScanNet/Hypersim RGB-D 与位姿 → 复用类别、描述及 Florence/DINO/SAM 观测 → 本地 YOLOE 检测与原生分割 → 深度投影、地面及低平台过滤 → 一对一关联与全局实例共识 → 实测表面精修 → 包含残片合并、逐点留出视角核验及候选验收 → 选择性 AdaPoinTr 补全及观测验收 → 正式几何框与空间边 → VLPart 部件与父归属 → 独立评价与原版可视化。}
+\textbf{ScanNet/Hypersim RGB-D 与位姿 → 复用类别、描述及 Florence/DINO/SAM 观测 → 本地 YOLOE 检测与原生分割 → 深度投影、地面及低平台过滤 → 一对一关联与全局实例共识 → 实测表面精修 → 包含残片合并、冲突身份消解、逐点留出视角与台面身份核验 → 选择性 AdaPoinTr 补全及观测验收 → 正式几何框与空间边 → VLPart部件与父归属 → 三视角实测部件回填整体、同步框与边 → 严格AP及表面/碎片评价 → 原版可视化。}
 
 
 
@@ -42,10 +42,10 @@
 投影与背景 & 使用光轴深度、两套内参与米制位姿；背景支持的地面和低平台不获得物体身份 & \texttt{op3dsg\_\allowbreak{}fusion.\allowbreak{}py}；\texttt{floor\_\allowbreak{}filter.\allowbreak{}json} \\ \hline
 实例身份 & 在线 Hungarian 关联，随后用第三视角完整物体掩码复核重复与互补片段 & \texttt{multiview\_\allowbreak{}association.\allowbreak{}py}、\texttt{instance\_\allowbreak{}consensus.\allowbreak{}py}；映射、轨迹与中文日志 \\ \hline
 实测精修 & 清除多次可见且反复被否定的点；保留未知/遮挡区域和重要断开表面 & \texttt{instance\_\allowbreak{}consensus.\allowbreak{}py}、\texttt{map\_\allowbreak{}ply\_\allowbreak{}post\_\allowbreak{}filter.\allowbreak{}py}；\texttt{instance\_\allowbreak{}cloud\_\allowbreak{}cleaned.\allowbreak{}ply} \\ \hline
-候选验收 & 保留v5残片合并和语义门控；增加逐点留出视角的背景身份反证 & \texttt{proposal\_\allowbreak{}validation.\allowbreak{}py}、\texttt{background\_\allowbreak{}consensus.\allowbreak{}py}；\texttt{object\_\allowbreak{}validation.\allowbreak{}json}、\texttt{validated\_\allowbreak{}object\_\allowbreak{}tracks.\allowbreak{}json} \\ \hline
+候选验收 & 保留v5语义门控和v6留出背景反证；增加冲突身份消解与平面台面核验 & \texttt{proposal\_\allowbreak{}validation.\allowbreak{}py}、\texttt{background\_\allowbreak{}consensus.\allowbreak{}py}；\texttt{object\_\allowbreak{}validation.\allowbreak{}json}、\texttt{validated\_\allowbreak{}object\_\allowbreak{}tracks.\allowbreak{}json} \\ \hline
 形状补全 & 官方 AdaPoinTr-PCN 生成候选；有界 Sim(3) 对齐；表面、自由空间及可见掩码验收 & \texttt{completion\_\allowbreak{}model.\allowbreak{}py}、\texttt{shape\_\allowbreak{}completion.\allowbreak{}py}；\texttt{completion\_\allowbreak{}audit.\allowbreak{}json} \\ \hline
 正式几何 & 不对精修点云重复执行破坏性过滤；用已验证的竖直轴拟合框，同步空间边 & \texttt{canonical\_\allowbreak{}geometry.\allowbreak{}py}；\texttt{topology\_\allowbreak{}map.\allowbreak{}json}、\texttt{topology\_\allowbreak{}map\_\allowbreak{}observed.\allowbreak{}json} \\ \hline
-部件与层级 & 官方 VLPart 检测部件；独立 RN50 特征融合；多视角父归属投票 & \texttt{vlpart\_\allowbreak{}graph.\allowbreak{}py}、\texttt{run\_\allowbreak{}partaware.\allowbreak{}py}；\texttt{part\_\allowbreak{}nodes}、\texttt{part\_\allowbreak{}relations} \\ \hline
+部件与层级 & 官方VLPart检测部件；独立RN50融合及父归属；审核实测水槽部件并回填整体 & \texttt{vlpart\_\allowbreak{}graph.\allowbreak{}py}、\texttt{run\_\allowbreak{}partaware.\allowbreak{}py}；\texttt{part\_\allowbreak{}nodes}、\texttt{part\_\allowbreak{}relations} \\ \hline
 评价及显示 & 同一图接口；评价正式图的框，点云保留实测证据；沿用原可视化并添加部件节点 & \texttt{evaluate\_\allowbreak{}hypersim.\allowbreak{}py}、\texttt{script/\allowbreak{}visualize\_\allowbreak{}map.\allowbreak{}py} \\ \hline
 \end{longtable}
 }
@@ -313,6 +313,38 @@ B=\frac{1}{|H|}\sum_{p\in H}\mathbf1[b(p)\ge0.8].
 
 
 
+\subsection*{3.6 冲突身份消解与反光台面候选核验}
+\addcontentsline{toc}{subsection}{3.6 冲突身份消解与反光台面候选核验}
+
+v7增加两个独立组件，构图时只使用实测几何、缓存掩码及位姿。对于语义余弦低于0.6的包含候选，不能仅因名称不同而保留第二个物体。记小候选在大物体框中的包含率为 $I$、距大物体表面3厘米内的点占比为 $C$，独立完整掩码支持帧数为 $V_+$、明确分离帧数为 $V_-$、共同可见帧数为 $V$。新身份消解条件为：
+
+
+
+\[
+I\ge0.95,\quad C\ge0.99,\quad V_+\ge3,\quad
+\frac{V_+}{\max(V,1)}\ge0.5,\quad V_-=0.
+\]
+
+通过时将小候选记为完整物体的重复观测，保留来源名称、帧与证据。不会将错误名称的嵌入平均进父物体，也不把框内任意物体当部件。既有高语义相似分支保留原有规则。此规则修复凳子座面被误认成独立水槽/椅子的身份，不能单凭几何接近证明机器人已理解功能。
+
+
+
+反光台面的核验只针对水槽身份声明及已声明竖直轴的米制输入。用点集协方差最小特征向量拟合平面法向 $n$，计算：
+
+
+
+\[
+\phi=\frac{1}{|P|}\sum_{p\in P}\mathbf1\bigl[|n^T(p-\bar p)|\le0.01\bigr],
+\qquad \phi\ge0.9,\quad |n_z|\ge0.95.
+\]
+
+几何通过后，再检查不属于候选自身来源帧的留出视角。深度不一致、遮挡或未知情况不投否定票；投影落在背景或台面/桌面掩码才是反证。使用3.5节相同的逐点权重比：至少3个深度一致视角、有效覆盖率≥0.5、超过80\%的有效点负证据比例≥0.8，且至少5帧负证据占比≥0.8，才撤销该候选的水槽身份。保留原始融合数据及中文拒绝记录。
+
+
+
+这不是通用反光材质分类器，没有依据亮度或颜色直接删点，也未安装SpecSeg模型。真实盆缘可同样较薄，平面性单独不能触发拒绝；其他视角的身份反证不可缺少。构图时不读取真值，不修改RGB或深度。
+
+
 \section*{4. 选择性形状补全}
 \addcontentsline{toc}{section}{4. 选择性形状补全}
 
@@ -426,8 +458,32 @@ S=2\left[(1-0.6)(G+S_p)+0.6S_c\right],\qquad S\ge1.5.
 
 
 
-部件现在确实进入正式 \texttt{scene\_\allowbreak{}graph}，但尚未反向改变物体身份。可视化的 \texttt{--show\_\allowbreak{}parts} 只控制显示。
+部件进入正式 \texttt{scene\_\allowbreak{}graph}。v7还将审核通过的实测水槽部件点回填整体物体几何；身份消解由独立物体证据决定。可视化的 \texttt{--show\_\allowbreak{}parts} 只控制显示。
 
+
+
+\subsection*{5.1 从实测部件回填整体几何}
+\addcontentsline{toc}{subsection}{5.1 从实测部件回填整体几何}
+
+部件词表优先依据已验收的物体名称构建，避免帧级错误名称给凳子附上马桶或水槽部件。v7新增可撤除的 \texttt{PART\_\allowbreak{}GEOMETRY}：在正式部件融合后，将已确认的水槽盆体、龙头、排水口实测点审核后回填整体水槽，重新计算原接口中的框与空间边。\texttt{--show\_\allowbreak{}parts}仍只控制显示。
+
+
+
+候选部件须与整体水槽名称一致、父编号一致，至少出现于3帧，至少3票支持该父节点且占有效父归属证据一半。每个点再次接受深度与对应部件掩码核验：
+
+
+
+\[
+v(p)=\sum_f\mathbf1[\text{depth consistent}]\,
+\mathbf1[\pi_f(p)\in M_f^{\mathrm{part}}],\qquad
+P_{\mathrm{accept}}=\{p:v(p)\ge3\}.
+\]
+
+盆体种子周边的XY扩展量为各自跨度与0.15米的较大值，Z上下各0.5米。审核点与原实测点建立3.5厘米连接图，只保留连接到原种子的分量；最终最大跨度不得超过2米，以1厘米体素合并重复观测。这些约束限制部件掩码泄漏，不根据真值调整边界。
+
+
+
+所有回填点来自实测深度，生成点数为零。原物体编号、256维/384维特征接口保持不变；若其他物体存在已验收补全，其生成几何被保留并与实测文件分开。组件跳过未知竖直轴输入，ScanNet原始接口仍可运行。\texttt{part\_\allowbreak{}geometry\_\allowbreak{}audit.\allowbreak{}json}记录候选、三视角支持、最终点数、部件编号、逐帧证据与代码哈希。该组件当前只支持水槽，不宣称已解决所有类别的部件回填。
 
 
 \section*{6. 接口、组件撤除与评价}
@@ -466,6 +522,9 @@ S=2\left[(1-0.6)(G+S_p)+0.6S_c\right],\qquad S\ge1.5.
 
 
 
+v7新增独立注册项 \texttt{IDENTITY\_\allowbreak{}VALIDATION}、\texttt{SURFACE\_\allowbreak{}VALIDATION}、\texttt{PART\_\allowbreak{}GEOMETRY} 和 \texttt{EVALUATION\_\allowbreak{}DIAGNOSTICS}。前两项插入原候选验收；部件几何在 \texttt{GRAPH\_\allowbreak{}COMPONENTS} 后发布；评价诊断只挂入评价程序。各自删除导入与注册即可撤除。新增 \texttt{object\_\allowbreak{}identity\_\allowbreak{}aliases} 保留重复观测来源，\texttt{part\_\allowbreak{}geometry\_\allowbreak{}audit.\allowbreak{}json} 保存实测回填证据，\texttt{granularity\_\allowbreak{}surface\_\allowbreak{}diagnostic} 保存新增统计。
+
+
 \subsection*{6.2 指标与边界}
 \addcontentsline{toc}{subsection}{6.2 指标与边界}
 
@@ -496,6 +555,52 @@ E_N=\left|\ln\frac{N_{\mathrm{pred}}}{N_{\mathrm{GT}}}\right|.
 
 评价只覆盖当前所选帧可观测、达到最小观测体素数量的官方物体。不是官方 ScanNet 掩码 AP，也不是完整 scene graph 关系正确率。Hypersim没有部件和关系三元组真值，相关指标保持不可用。两场景是本轮开发对照，不能据此宣称跨场景泛化成绩。
 
+
+
+\subsection*{6.3 粒度、表面覆盖与实例精度分别统计}
+\addcontentsline{toc}{subsection}{6.3 粒度、表面覆盖与实例精度分别统计}
+
+一个椅子能被理解为整体，也能有座面和底座等部件；正确层级应同时表达两者。当前严格AP本来就只统计 \texttt{object\_\allowbreak{}nodes}，不统计独立 \texttt{part\_\allowbreak{}nodes}。座面若仍占一个独立物体编号且未建立可靠归属，属于实例碎片，不能仅凭人工解释免除FP。
+
+
+
+保留同一AP25/AP50/AP75与数量对数误差协议，另增加两个诊断层次。第一层仅检查几何是否观测出来：将1厘米体素中心作为点，以2厘米邻近容差，令所有预测实测点的并集为 $P$、可观测前景真值为 $G=\bigcup_jG_j$，定义：
+
+
+
+\[
+\operatorname{Prec}_{s}=\frac{\sum_i\sum_{p\in P_i}\mathbf1[d(p,G)\le0.02]}{\sum_i|P_i|},\qquad
+c_j=\frac{\sum_{g\in G_j}\mathbf1[d(g,P)\le0.02]}{|G_j|},
+\qquad R_s=\frac{\sum_j|G_j|c_j}{\sum_j|G_j|}.
+\]
+
+\[
+F_s=\frac{2\operatorname{Prec}_{s}R_s}{\operatorname{Prec}_{s}+R_s},\qquad
+C_t=\frac1{N_{\mathrm{GT}}}\sum_j\mathbf1[c_j\ge t],\quad t\in\{0.5,0.75\}.
+\]
+
+同时输出物体平均覆盖率。$C_{0.5}$、$C_{0.75}$是覆盖召回，不是AP50/AP75。这层忽略实例名称与归属：错误水槽落在真实台面上也可能有高表面精度，因此不能替代身份、语义和框评价；把全部前景混成一物体同样可能得到高几何覆盖。
+
+
+
+第二层检查碎片与混合实例。每个预测点找到2厘米内最近真值物体，预测 $P_i$ 的主要归属纯度为：
+
+
+
+\[
+\rho_i=\frac{\max_j\#\{p\in P_i:d(p,G)\le0.02,\ \operatorname{nearestGT}(p)=j\}}{|P_i|},
+\qquad\rho_i\ge0.8.
+\]
+
+仅满足纯度的预测进入对应真值的碎片并集，另统计纯碎片覆盖和每个真值的碎片个数 $K_j$。超额碎片量为：
+
+
+
+\[
+E_{\mathrm{frag}}=\sum_j\max(K_j-1,0).
+\]
+
+这里的真值分组只用于评价诊断，不写回预测父子关系，也不将GT自动组合作为算法。混合了两个物体的预测可能保有几何覆盖，却不能获得纯碎片覆盖。所有新增结果均在 \texttt{granularity\_\allowbreak{}surface\_\allowbreak{}diagnostic}，严格AP字段不变。Hypersim缺少部件级真值，PartPQ和真实层级准确率保持不可用；本轮采用PartPQ关于物体/部件分层评价的原则，没有伪造完整PartPQ分数。
 
 
 \section*{7. 版本 v1：部件分支建立}
@@ -1082,8 +1187,119 @@ python script/visualize_map.py \
 \end{verbatim}
 
 
-\section*{14. 论文依据与实际采用范围}
-\addcontentsline{toc}{section}{14. 论文依据与实际采用范围}
+\section*{14. 正式v7：台面误检、冲突身份与粒度评价（2026-10-06）}
+\addcontentsline{toc}{section}{14. 正式v7：台面误检、冲突身份与粒度评价（2026-10-06）}
+
+\subsection*{14.1 先定位真实盆位与错误候选}
+\addcontentsline{toc}{subsection}{14.1 先定位真实盆位与错误候选}
+
+用户指出两个真实盆位存在，但右盆漏识别，左盆左侧的台面阴影被误识别为另一水槽。此前根据裁剪中出现另一个盆位就认定候选正确的判断不成立。现以原分辨率掩码叠加、位姿投影和水龙头朝向核对：62是左盆，67覆盖盆外台面，右盆未进入物体级水槽掩码。67的1厘米平面内点占比94.55\%，85.97\%的有效点有至少80\%留出背景/台面反证，37个视角支持撤销其水槽身份。
+
+
+
+这次台面反光问题与此前左上开口误标是不同位置、不同成因。不能把反光台面解释为镜子。阴影是定位线索，当前算法只验证候选身份，没有证明物理成因全由反光导致。
+
+
+
+\subsection*{14.2 主流程中的算法改变}
+\addcontentsline{toc}{subsection}{14.2 主流程中的算法改变}
+
+\begin{enumerate}
+\item 通过独立完整掩码与实测包含表面消解冲突名称，第二场景97→7、183→5，保留两个完整凳子；第一场景消解37→13的监视器重复身份。删除的是重复独立身份，原始融合及来源日志保留。
+
+
+\item 平面几何与留出台面反证联合撤销67，真实左盆62未被平面规则拒绝。102仍存在语义误认，不能宣称全部错误水槽均已解决。
+
+
+\item VLPart根据已验收父名称构建词表，并将实测盆体/龙头/排水口点通过三视角深度和部件掩码审核后回填整体62。2475个种子点，5031个候选点，4475个点有三视角支持，最终发布4528个1厘米实测点；原始物体编号未增加。
+
+
+\item 严格AP及数量指标保留，增加几何覆盖、纯碎片和混合实例诊断。已归属部件本来就不计作独立物体FP，独立碎片需由算法消解或建立可验证层级。
+
+\end{enumerate}
+
+
+\subsection*{14.3 两场景同协议实测}
+\addcontentsline{toc}{subsection}{14.3 两场景同协议实测}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & TP/FP/FN@50 & 数量对数误差 \\ \hline
+\endfirsthead
+\hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & TP/FP/FN@50 & 数量对数误差 \\ \hline
+\endhead
+ai\_001\_002/v6 & 13/10 & 94.056\% & 81.538\% & 32.143\% & 10/3/0 & 0.2624 \\ \hline
+ai\_001\_002/v7 & 12/10 & 96.333\% & 86.667\% & 32.698\% & 10/2/0 & 0.1823 \\ \hline
+ai\_001\_010/v6 & 79/109 & 18.738\% & 7.620\% & 0.606\% & 21/58/88 & 0.3219 \\ \hline
+ai\_001\_010/v7 & 76/109 & 20.187\% & 8.336\% & 0.611\% & 22/54/87 & 0.3606 \\ \hline
+\end{longtable}
+}
+
+两场景真值范围、99/100帧观测与原AP协议一致，代码不读取GT建图，Qwen新增识图调用为零。第二场景TP50从21到22、FP50从58到54、FN50从88到87。水槽62的框IoU为0.6551，进入AP50定位匹配，但没有跨过0.75。AP75的TP仍为5，微小AP75上涨主要来自重复/错误候选减少后的排序变化。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景/版本 & 表面精度 & 几何加权覆盖 & 几何F1 & 纯碎片加权覆盖 & 超额纯碎片 \\ \hline
+\endfirsthead
+\hline
+场景/版本 & 表面精度 & 几何加权覆盖 & 几何F1 & 纯碎片加权覆盖 & 超额纯碎片 \\ \hline
+\endhead
+ai\_001\_002/v6 & 99.967\% & 90.054\% & 94.752\% & 85.272\% & 2 \\ \hline
+ai\_001\_002/v7 & 99.967\% & 90.054\% & 94.752\% & 83.297\% & 2 \\ \hline
+ai\_001\_010/v6 & 91.061\% & 67.894\% & 77.790\% & 53.484\% & 19 \\ \hline
+ai\_001\_010/v7 & 90.987\% & 67.673\% & 77.617\% & 53.261\% & 16 \\ \hline
+\end{longtable}
+}
+
+第二场景水槽149的可观测纯碎片表面覆盖从52.05\%到93.51\%，同一实测整体包含更完整的盆体与龙头。几何覆盖使用所选帧可观测表面，不能宣称完整隐藏背面已经重建。整体表面与数量指标没有全部改善：删除假阳性会让预测数离109更远，数量对数误差从0.3219变为0.3606；这说明数量比不能独立判断正确性。
+
+
+
+第一场景纯碎片覆盖下降的主要原因是监视器13的GT主要归属纯度约0.75，低于0.8门槛；移除纯重复37后，该GT不再获得纯碎片并集信用。这与严格框TP仍为10不同，体现了几何完整、实例纯度与框精度各自的统计意义，不能隐去不利诊断。几何覆盖另列，不受这个纯度门槛影响。
+
+
+
+\subsection*{14.4 验证、边界与可撤除接口}
+\addcontentsline{toc}{subsection}{14.4 验证、边界与可撤除接口}
+
+54项相关检查通过，包括独立分离视角否决、遮挡不得算负证据、错误父名称不回填、点须有三视角掩码支持、其他物体已验收补全被保留、混合实例不得获得纯碎片信用。两场景从原始融合结果重新生成正式图，未手工修改成品；原版可视化已生成隐藏窗口预览，没有显示边或开启拾取。原始融合、类别缓存、GT范围与历史正式分数保留。
+
+
+
+四个新增注册项可各自删除后在新目录重建；原ScanNet/Hypersim接口、物体特征维度和旧可视化保持兼容。当前只在已声明Hypersim米制Z轴输入上运行平面台面核验与水槽回填，泛化到其他坐标系需要明确重力信息。没有安装新的视觉大模型，未执行GARField、Part2Object或SpecSeg的完整网络；论文提供的是层级及审核设计依据。
+
+
+
+这轮达到的是减少指定错误身份并恢复已实测水槽表面。第二场景AP50约8.34\%、AP75约0.61\%仍低，主要全场漏检、其他家具碎片及整物体几何边界问题尚未解决。不得把局部水槽覆盖94\%解释为全场精度94\%。
+
+
+
+\subsection*{14.5 可视化与正式产物}
+\addcontentsline{toc}{subsection}{14.5 可视化与正式产物}
+
+结果位于 \texttt{/\allowbreak{}home/\allowbreak{}lewisliu/\allowbreak{}datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}partaware\_\allowbreak{}ai\_\allowbreak{}001\_\allowbreak{}002\_\allowbreak{}v7/\allowbreak{}hypersim/\allowbreak{}ai\_\allowbreak{}001\_\allowbreak{}002} 和 \texttt{/\allowbreak{}home/\allowbreak{}lewisliu/\allowbreak{}datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}partaware\_\allowbreak{}ai\_\allowbreak{}001\_\allowbreak{}010\_\allowbreak{}v7/\allowbreak{}hypersim/\allowbreak{}ai\_\allowbreak{}001\_\allowbreak{}010}。目录内保留正常点云、拓扑图、部件、审核记录及 \texttt{evaluation\_\allowbreak{}v7.\allowbreak{}json}。
+
+
+
+\begin{verbatim}
+cd /home/lewisliu/PartAware-SG
+conda activate scannet-sg
+RESULT=/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v7/hypersim/ai_001_010
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+python script/visualize_map.py \
+  --map_ply_path "$RESULT/instance_cloud_cleaned.ply" \
+  --topology_map_path "$RESULT/topology_map.json" \
+  --show_bboxes --show_parts --node_radius 0.07 --part_radius 0.025
+\end{verbatim}
+
+\section*{15. 论文依据与实际采用范围}
+\addcontentsline{toc}{section}{15. 论文依据与实际采用范围}
 
 {\small
 \begin{longtable}{|p{\dimexpr\linewidth/2-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/2-2\tabcolsep-2\arrayrulewidth\relax}|}
@@ -1113,6 +1329,9 @@ python script/visualize_map.py \
 }
 
 SAM 3/SAM 3D Objects、DiffComplete 等已研究但未接入本版本。SAM 3D Objects 官方默认要求至少32GB显存，当前约8GB显存环境未安装它。论文公开基准数值不替代本项目的同协议实测结果。
+
+
+v7还参考 \href{https://arxiv.org/abs/2401.09419}{GARField} 的层级粒度观点、\href{https://arxiv.org/abs/2407.10084}{Part2Object} 的从部分到物体组合设计、\href{https://arxiv.org/abs/2106.06351}{Part-aware Panoptic Segmentation} 的物体与部件分层评价原则，以及 \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC9460179/}{SpecSeg} 关于反光高光不能单凭颜色可靠判断的分析。采用相应设计原则和独立审核，没有宣称完整复现这些模型；缺少部件真值时不报告PartPQ。
 
 
 \end{document}

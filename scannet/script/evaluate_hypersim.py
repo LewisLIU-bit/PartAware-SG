@@ -266,6 +266,11 @@ def evaluate(args):
                                         'bounds': np.asarray(g['bounds']).tolist()} for g in truth],
               'prediction_objects': [{'id': p['id'], 'label': p['label'], 'voxels': len(p['keys']),
                                       'confidence': p['confidence'], 'bounds': np.asarray(p['bounds']).tolist()} for p in predictions]}
+    import pipeline_components as components
+    diagnostics = getattr(components, 'EVALUATION_DIAGNOSTICS', None)
+    if diagnostics is not None:
+        report['granularity_surface_diagnostic'] = diagnostics.surface_diagnostics(predictions, truth)
+        report['granularity_component_sha256'] = hashlib.sha256(Path(diagnostics.__file__).read_bytes()).hexdigest()
     output = Path(args.output).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + '\n')
