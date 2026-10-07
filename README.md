@@ -12,7 +12,7 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v9 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v11 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
@@ -62,7 +62,7 @@ No additional model or dependency installation is required. These are adaptation
 of SAMPro3D/SAI3D principles, not complete reproductions. Recovery adds only
 observed RGB-D points; unsupported hanging rods are not fabricated.
 
-V9 adds joint registered depth/mask evidence and stable measured-core rescue for
+The default path uses joint registered depth/mask evidence and stable measured-core rescue for
 semantic-only rejections. Mixed-instance and background vetoes remain active. An
 independent geometric cuboid component uses an observed front, side support and a
 parallel measured rear structure; all capture views check free space and foreign
@@ -107,7 +107,7 @@ two scenes, use a fresh result directory and copy the prior observations:
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
   --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v9/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v10/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
@@ -166,7 +166,7 @@ The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equatio
 as embedded SVG and opens without runtime downloads. Editable
 [LaTeX source](RESEARCH_LOG.tex) and editable
 [Chinese research source](docs/RESEARCH_REPORT.md) are also provided. General
-flow, mathematics and interfaces describe v9; each version change and the withdrawn v6 trial have separate chapters.
+flow, mathematics and interfaces describe v10; each version change and the withdrawn v6 trial have separate chapters.
 
 ```bash
 python -m unittest discover -s scannet/script/tests_partaware -v
@@ -190,8 +190,8 @@ These are not official ScanNet or UniGraph3D benchmark scores. See
 ```bash
 python scannet/script/evaluate_hypersim.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/evaluation_v9.json
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v10/evaluation_v10.json
 ```
 
 
@@ -207,8 +207,8 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/hypersim/ai_001_002/instance_cloud_cleaned.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v9/hypersim/ai_001_002/topology_map.json \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002/topology_map.json \
   --show_bboxes --show_parts \
   --node_radius 0.07 --part_radius 0.025
 ```
@@ -219,7 +219,7 @@ or `--check_only` to validate the same geometry without a window.
 Add `--enable_picking` only when Shift + left click should print a node name. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
 The current second-scene experiment is under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v9/hypersim/ai_001_010`.
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v11/hypersim/ai_001_010`.
 Use `instance_cloud_completed.ply` to view its accepted inferred cuboid surfaces;
 use the cleaned PLY with `topology_map_observed.json` for measured-only geometry.
 Use that directory for both visualization paths. For its dense spatial graph,
@@ -232,6 +232,15 @@ C++ graph path. The Qwen control reuses cached tags without an API call.
 See [control interfaces](docs/PARTAWARE_INTERFACES.md#original-frontend-controls)
 and [version chapters of the report](RESEARCH_LOG.html)
 for the four-route AP25/AP50/count comparison and common visualization commands.
+
+V10 restores bounded measured cabinet/countertop surfaces from cached identities
+and original depth evidence, resolves closed storage identity from cached category votes plus measured facade/side evidence, then recovers measured upper fixture bodies before final canonical publication.
+Thin member proposals additionally require shaft continuity; aligned endpoints
+are insufficient, and zero full rods pass the current scene verification. No new Qwen image request is made. Geometry-only
+parts remain separate from the VLPart RN50 feature space. Detach the two recovery
+components through their code registry entries. Optional --view-front,
+--view-lookat and --view-zoom affect only the common viewer camera.
+See the current mathematics and measured limitations in the research report.
 
 ## Environment Installation
 
@@ -252,7 +261,7 @@ Check the examples below to learn how to use the interface. (The interface also 
 ```bash
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
-python script/visualize_map.py --show_bboxes --show_edges
+python script/visualize_map.py --show_bboxes
 ```
 Add `--map_ply_path xxx.ply --topology_map_path xxx.json` to specify the data. Add `--enable_picking` to use interactive mode: the name of a node will be printed when you press `Shift` and left-click the blue sphere of a node.
 By default, example data in `sample_data/scans/scene0000_00` will be used. You will see an image like the following:
@@ -292,3 +301,9 @@ have been removed; the retained entry points and checks are recorded in
 ## Licence
 The code in this repo uses the Apache-2.0 licence.
 The dataset uses CC BY-NC 4.0 licence.
+
+### V11 instance granularity and error diagnostics
+
+The default graph stage now resolves unique shared-surface duplicates before structural recovery and completion. It requires contained measured points, semantic compatibility, at least five complete-mask consensus views and no independent separation evidence. Existing coordinates and public graph fields remain intact; `instance_granularity_audit.json` records the decisions. Detached-region transfer is independently gated and no transfer was accepted in the two current scenes. Remove the import and `GEOMETRY_COMPONENTS` entry to detach this adapter.
+
+The evaluator adds `object_error_diagnostic`, with per-GT best IoU, optimal one-to-one matches and the actual AP confidence-ranking assignments. These diagnostics never change AP or GT. The latest two-scene results and direct visualization commands are in [the consolidated report](docs/RESEARCH_REPORT.md#18-正式v11实例粒度消解与低ap逐对象诊断2026-10-07).

@@ -1,6 +1,6 @@
 # PartAware-SG interfaces
 
-The v7 main Hypersim path applies multi-frame background-supported floors and
+The default Hypersim path applies multi-frame background-supported floors and
 low-platform filtering to declared meter-scale Z-up inputs. `floor_filter.json`
 records `levels_m`, support and a 1 cm removal band. Background exports retain
 cleared points. The legacy C++ fallback retains its original single-floor rule.
@@ -305,3 +305,40 @@ list item to detach it, then rebuild from raw fusion into a fresh result root.
 - Detach each component by removing its import/registry entry, then rebuild from raw observations in a fresh result root. No backup/feature flag is needed.
 - `maximum_volume_overlap` in new evaluations includes MVO AP25/AP50 and one-to-one TP/FP/FN. Historical `evaluation_mvo.json` files reference frozen evaluation hashes and fixed boxes. MVO uses strictly greater thresholds; legacy IoU AP still uses greater-or-equal thresholds.
 - The saved graph remains the same object/edge/part interface. Generated geometry belongs only in `instance_cloud_completed.ply`, and `topology_map_observed.json` remains measured-only.
+
+## V10 bounded measured structures and original-pixel suspension members
+
+GEOMETRY_COMPONENTS places structural_surfaces before completion. FINAL_GEOMETRY
+contains suspension_geometry after measured assembly refinements. Both require
+declared metric Z-up; other inputs preserve the original fallback. New nodes
+retain the original id/name/position/shape/256D/384D contract. Only rejected local
+observation IDs may be remapped; original PNG/feature/name caches remain fixed.
+The first component checks cached compatible identities, measured front/rear
+boundaries and three-view depth support. The second projects automatically
+derived body-to-ceiling ROIs at stride 1 and 3 mm voxel size, first recovers seed-connected measured upper-body surfaces within 25 cm of the
+existing facet. Separate rod candidates require PCA line shape, at least 10 of
+12 occupied height bins, unique contact and three-view depth support; endpoints
+alone cannot establish a shaft. The current final run accepts upper-body geometry
+and zero continuous rods.
+Other accepted measured objects are protected and every original point remains.
+
+structural_surface_audit.json and suspension_geometry_audit.json store geometric
+acceptance evidence, source identities, measured additions, zero generated points
+and zero Qwen calls. Suspension parts carry no visual feature and use geometry-only
+provenance. Accepted generated cuboids remain distinct in the completed PLY.
+
+Final canonical publication runs after all components, synchronizing boxes, edges,
+scene_graph and parts/partaware_graph.json. --start-stage final_geometry resumes
+the complete recovery stage; --start-stage publish only resumes publication.
+Component removal still requires deleting its import and registry entry, then
+rebuilding a fresh result from raw observations, without feature flags or backups.
+The original viewer accepts optional --view-front, --view-lookat, --view-zoom.
+These change the camera only; edges and picking remain opt-in.
+
+Closed storage identity is inferred before part construction from cached cabinet/cupboard observations in at least three distinct frames, facade grid occupancy >= 0.60, at least 128 measured side points and side extension to half the independently measured depth. The existing depth/baseline checks still apply. storage_identity records the evidence separately; cached labels and 256D/384D features are not rewritten. Open racks and sheets do not gain a closed cabinet label. Whole-cabinet mask-tree grouping remains a research proposal.
+
+## V11 instance granularity and per-object diagnostics
+
+`GEOMETRY_COMPONENTS` runs `instance_granularity` before structural recovery. The adapter reads accepted measured geometry, cached masks and validated tracks. Unique shared-surface duplicates retain the largest parent ID, name, feature vectors and confidence. All source coordinates are concatenated, local ownership and aliases are resolved transitively, and tracks record `granularity_source_ids`. It writes `instance_granularity_audit.json`; no GT or language request enters construction. Independently gated region transfer never creates a new node and was not accepted in the current runs. Detach by removing its import and list entry, then rebuild from raw caches in a new result directory.
+
+`object_error_diagnostic` is evaluation only. `per_gt` stores the best three predictions, `one_to_one_matches` at 0.25/0.5/0.75 and surface diagnostics. `per_prediction` and `AP_ranking` distinguish matched objects, duplicate competition and localization below threshold. Ranking follows the existing greedy AP rule; optimal one-to-one counts can differ. These fields do not alter boxes, scores or GT.

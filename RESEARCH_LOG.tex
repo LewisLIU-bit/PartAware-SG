@@ -14,14 +14,14 @@
 \tableofcontents
 \clearpage
 
-更新：2026-10-07。当前默认实现为v9：新增联合实测存在核验、稳定表面核心救援、后方结构约束的完整体积推断和已确认横梁的密集恢复。严格AP和缓存保持原协议，新MVO单独输出。前六章维护最新主流程与数学原理，各版本变化和实测结果独立记录。HTML中的LaTeX公式预先渲染为内嵌SVG，可离线阅读。
+更新：2026-10-07。当前默认实现为v11：保留v10柜体、台面和上部灯具实测恢复，进一步用完整掩码共识与共享实测表面消解重复实例。前六章只维护最新主流程、数学原理与接口，各版本变化独立记录。严格AP、MVO和观测真值范围保持原协议；逐物体低分列表与GT定位附图见17.7，v11对照见18章。
 
 
 
 \section*{1. 当前主脉络}
 \addcontentsline{toc}{section}{1. 当前主脉络}
 
-\textbf{ScanNet/Hypersim RGB-D 与位姿 → 复用类别、描述及 Florence/DINO/SAM 观测 → 本地 YOLOE 检测与原生分割 → 深度投影、地面及低平台过滤 → 一对一关联与全局实例共识 → 实测表面精修 → 包含残片合并、冲突身份消解、逐点留出视角与台面身份核验 → 联合深度/掩码存在核验及稳定表面核心 → 选择性 AdaPoinTr 与实测后方结构约束的完整体积推断、观测验收 → 正式几何框与空间边 → VLPart部件与父归属 → 三视角实测部件回填整体 → 稀疏几何触发、密集深度/掩码共识与自动三维种子分割 → 唯一轴向支撑与上部横梁纳入整体并保留部件、同步框与边 → 已确认横梁的密集实测恢复 → 严格AP、MVO及表面/碎片评价 → 原版可视化。}
+\textbf{ScanNet/Hypersim RGB-D 与位姿 → 复用类别、描述及 Florence/DINO/SAM 观测 → 本地 YOLOE 检测与原生分割 → 深度投影、地面及低平台过滤 → 一对一关联与全局实例共识 → 实测表面精修 → 包含残片合并、冲突身份消解、逐点留出视角与台面身份核验 → 联合深度/掩码存在核验及稳定表面核心 → 共享表面与完整掩码消解重复、稳定区域所有权复核 → 缓存身份授权的有界实测柜体/台面恢复及封闭柜体身份判定 → 选择性 AdaPoinTr 与实测后方结构约束的完整体积推断、观测验收 → 正式几何框与空间边 → VLPart部件与父归属 → 三视角实测部件回填整体 → 稀疏几何触发、密集深度/掩码共识与自动三维种子分割 → 唯一轴向支撑与上部横梁纳入整体并保留部件、同步框与边 → 已确认横梁的密集实测恢复 → 原始像素上部本体测量、杆身连续性验收与父归属 → 最终统一发布物体/部件图与框边 → 严格AP、MVO及表面/碎片评价 → 原版可视化。}
 
 
 
@@ -43,12 +43,15 @@
 实例身份 & 在线 Hungarian 关联，随后用第三视角完整物体掩码复核重复与互补片段 & \texttt{multiview\_\allowbreak{}association.\allowbreak{}py}、\texttt{instance\_\allowbreak{}consensus.\allowbreak{}py}；映射、轨迹与中文日志 \\ \hline
 实测精修 & 清除多次可见且反复被否定的点；保留未知/遮挡区域和重要断开表面 & \texttt{instance\_\allowbreak{}consensus.\allowbreak{}py}、\texttt{map\_\allowbreak{}ply\_\allowbreak{}post\_\allowbreak{}filter.\allowbreak{}py}；\texttt{instance\_\allowbreak{}cloud\_\allowbreak{}cleaned.\allowbreak{}ply} \\ \hline
 候选验收 & 语义门控、背景/台面反证、冲突身份消解及联合实测存在/稳定核心审核 & \texttt{proposal\_\allowbreak{}validation.\allowbreak{}py}、\texttt{background\_\allowbreak{}consensus.\allowbreak{}py}；\texttt{object\_\allowbreak{}validation.\allowbreak{}json}、\texttt{validated\_\allowbreak{}object\_\allowbreak{}tracks.\allowbreak{}json} \\ \hline
+实例粒度复核 & 仅在共享表面、完整掩码、多帧共识和唯一归属通过时合并；错误区域转移独立验收 & \texttt{instance\_\allowbreak{}granularity.\allowbreak{}py}；\texttt{instance\_\allowbreak{}granularity\_\allowbreak{}audit.\allowbreak{}json} \\ \hline
+结构表面恢复 & 缓存储物/台面身份、前后平面和多视角深度共同授权；以封闭立面及缓存类别复核柜体 & \texttt{structural\_\allowbreak{}surfaces.\allowbreak{}py}；\texttt{structural\_\allowbreak{}surface\_\allowbreak{}audit.\allowbreak{}json} \\ \hline
 形状补全 & AdaPoinTr-PCN及后方结构约束长方体分别提案；实测与自由空间验收，明确区分生成表面 & \texttt{shape\_\allowbreak{}completion.\allowbreak{}py}、\texttt{backed\_\allowbreak{}cuboid.\allowbreak{}py}；两份completion审核 \\ \hline
 正式几何 & 不对精修点云重复执行破坏性过滤；用已验证的竖直轴拟合框，同步空间边 & \texttt{canonical\_\allowbreak{}geometry.\allowbreak{}py}；\texttt{topology\_\allowbreak{}map.\allowbreak{}json}、\texttt{topology\_\allowbreak{}map\_\allowbreak{}observed.\allowbreak{}json} \\ \hline
 部件与层级 & 官方VLPart检测部件；独立RN50融合及父归属；审核实测水槽部件并回填整体 & \texttt{vlpart\_\allowbreak{}graph.\allowbreak{}py}、\texttt{run\_\allowbreak{}partaware.\allowbreak{}py}；\texttt{part\_\allowbreak{}nodes}、\texttt{part\_\allowbreak{}relations} \\ \hline
 细结构恢复 & 稀疏几何触发；密集投影、三视角确认、自动几何种子SAM和连通验收；其他点云冻结 & \texttt{thin\_\allowbreak{}geometry.\allowbreak{}py}；\texttt{thin\_\allowbreak{}geometry\_\allowbreak{}audit.\allowbreak{}json}、\texttt{geometry\_\allowbreak{}recovery} \\ \hline
 整体粒度 & 唯一同轴支撑或欠解析本体的上部横梁，须有接触与多帧所有权；保留部件及全部原点 & \texttt{axial\_\allowbreak{}assembly.\allowbreak{}py}；\texttt{assembly\_\allowbreak{}audit.\allowbreak{}json}、几何部件 \\ \hline
 横梁密集测量 & 对已确认crossbar用缓存深度和掩码密集回填，保护其他物体 & \texttt{assembly\_\allowbreak{}density.\allowbreak{}py}；\texttt{assembly\_\allowbreak{}density\_\allowbreak{}audit.\allowbreak{}json} \\ \hline
+原始像素上部结构 & 3毫米测量、与既有本体连接、三视角深度；连续杆身独立验收 & \texttt{suspension\_\allowbreak{}geometry.\allowbreak{}py}；\texttt{suspension\_\allowbreak{}geometry\_\allowbreak{}audit.\allowbreak{}json} \\ \hline
 评价及显示 & 同一图接口；评价正式图的框，点云保留实测证据；沿用原可视化并添加部件节点 & \texttt{evaluate\_\allowbreak{}hypersim.\allowbreak{}py}、\texttt{script/\allowbreak{}visualize\_\allowbreak{}map.\allowbreak{}py} \\ \hline
 \end{longtable}
 }
@@ -437,6 +440,170 @@ P_* = \{p:\sum_t a_t(p)\ge3,\quad \sum_t a_t(p)/\max(\sum_t v_t(p),1)\ge0.65\}.
 
 
 
+\subsection*{3.10 缓存身份与前后边界联合恢复平面物体}
+\addcontentsline{toc}{subsection}{3.10 缓存身份与前后边界联合恢复平面物体}
+
+大柜门和台面可能与墙/地面相似，前端局部掩码或语义验收会删掉本来存在的表面。当前先保留原判定，再从含背景原始实测云提出几何区域；不能把“平面”直接当作“物体”。借鉴SAI3D的几何区域与多视角证据结合思想，但没有移植其完整超点图与网络。\href{https://arxiv.org/html/2312.11557v2}{SAI3D}
+
+
+
+在1.2厘米体素云上以9毫米RANSAC拟合平面，用4.5厘米邻接分量形成有界区域。至少700点，两条面内跨度分别至少0.5/1米。已声明Z轴时，储物立面要求 $|n_z|<0.01$，台面要求 $|n_z|>0.995$：
+
+
+
+\[
+\mathcal F=\{p:|n^Tp-h_f|\le0.009\},\qquad \|n\|_2=1.
+\]
+
+身份来自已有缓存的shelf/shelves/cabinet/bookshelf或counter/countertop轨迹；wall、floor、ceiling、sink、stove等不能授权这个分支。身份轨迹至少出现3帧，其中至少55\%的点距平面小于2.5厘米，且至少256个点受到支持。没有新语言提示词、Qwen请求或GT坐标。这是类别族约束的几何适配器，不是一个训练好的通用物体模型。
+
+
+
+储物立面在后方0.12至0.8米、台面在下方0.04至0.22米查找独立实测平行面。最多考察8个RANSAC假设，要求法向相容度至少0.995、至少256个平面点；不能让不平行的大墙面挡住较小的合法后界。只在实测前后边界和切向跨度内取原始点：
+
+
+
+\[
+\mathcal B=\{p:h_f-d+0.012\le n^Tp\le h_f+0.015,\quad a_k-0.015\le r_k^Tp\le b_k+0.015\}.
+\]
+
+台面还要求切向投影距实际前表面小于3.5厘米，保留L形足迹，不把包围矩形填满室内。距任何已验收物体小于1.5厘米的点排除；旧点和已有物体身份不删除。若同族旧物体至少90\%位于区域内，则追加它的点；否则从原始编号最大值之后分配新整体编号。名称和256/384维特征继承最有支持的缓存身份。
+
+
+
+原始全部帧提供逐点深度验收，精度容差为 $0.004+0.001z$ 米；中央及相邻像素仅处理采样误差，遮挡不算反证。每点至少3视角实测支持，且不能有2帧自由空间反证；自由空间容差为 $0.012+0.003D$ 米：
+
+
+
+\[
+s(p)=\sum_t\mathbf1[|z_t(p)-D_t(\pi_t(p))|\le0.004+0.001z_t(p)],\qquad
+P_{new}=\{p\in\mathcal B:s(p)\ge3,\ b(p)<2\}.
+\]
+
+最终至少512点、保留候选至少65\%、有效相机基线至少8厘米。新增的每一个点都是深度测量，不是长方体生成点。只把此前已拒绝的对应局部记录从负编号映射到已验收整体，其他字段、原PNG和特征缓存不改。实际帧观察历史与编号同步，不能把几何验证帧冒充新的识图观测。
+
+
+
+\subsection*{3.11 原始像素中的上部本体恢复与杆身连续性}
+\addcontentsline{toc}{subsection}{3.11 原始像素中的上部本体恢复与杆身连续性}
+
+现有物体掩码可能只留下柔性灯头或长条本体的局部面。当前在含背景实测云中估计上方水平面，从已有本体的水平几何面自动提出ROI，再投影全部原始RGB-D像素，步长1、体素3毫米。先恢复本体真实深度表面，随后才检查独立杆件。这里的上方平面是搜索边界，不能把外部屋顶安装点直接当作室内杆身。
+
+
+
+几何种子面至少128点，近水平，短边至少3.5厘米、长边至少30厘米。本体到上方边界距离0.3至1米，短边最多0.6米、长短比至少3。上部本体候选仅位于种子面上方25厘米内、种子XY足迹各外扩2厘米。要求每点三视角实测支持且无两帧自由空间反证；距其他已验收对象至少1.5厘米。以1.8厘米邻接连接到原本体，孤立屋顶点和无法连接的几何不进入整体：
+
+
+
+\[
+P_{body}=\{p\in P_{RGBD}:s(p)\ge3,\ b(p)<2,\ p\leftrightarrow P_{seed}\},\qquad
+\|p_i-p_j\|\le0.018\ \text{for each connectivity edge}.
+\]
+
+去掉距旧本体3毫米内的重复点后，至少256个新增点、有效相机基线至少8厘米才发布。所有旧实测坐标保留；生成几何不被替换为实测子集。上部本体纳入整体点云、正式框与空间边，同时导出无视觉特征的geometry-only部件。这是实测表面恢复，不是根据标签生成长方体。
+
+
+
+悬挂细杆独立要求竖直方向PCA特征值比至少50、竖直轴对齐至少0.98、跨度至少15厘米、横向最多5.5厘米，唯一父物体接触及上方端点接近条件保留：
+
+
+
+\[
+\Sigma=\frac1N\sum_i(p_i-\bar p)(p_i-\bar p)^T,\qquad
+\frac{\lambda_1}{\lambda_2+\lambda_3}\ge50,\qquad |v_1^Te_z|\ge0.98.
+\]
+
+仅两端对齐也会满足PCA，这不足以证明中间有杆。按高度分12段，至少10段有真实点，且在新增点通过三视角支持、其他物体保护和重复过滤后再次检验连续性：
+
+
+
+\[
+o_k=\mathbf1[\exists p:z(p)\in I_k],\qquad \sum_{k=1}^{12}o_k\ge10.
+\]
+
+不足的杆件保持拒绝，不能把端点跨度或外包络框写成整杆恢复，也不插值伪造杆身。自动几何ROI方向参考\href{https://mutianxu.github.io/sampro3d/}{SAMPro3D}，当前没有移植完整网络。完整的多视角线段三角化可参考\href{https://openaccess.thecvf.com/content/CVPR2023/html/Liu\_3D\_Line\_Mapping\_Revisited\_CVPR\_2023\_paper.html}{LIMAP}及\href{https://github.com/cvg/limap}{官方实现}；本轮轴线匹配试验没有足够可靠RGB支持，未把推断圆柱加入成品。
+
+
+
+FINAL\_GEOMETRY=[suspension\_geometry] 仍为独立挂接处；当前悬挂杆候选均未通过连续性，实际采用的是上部本体实测恢复。未知重力轴输入保持原ScanNet接口。期待恢复可见但被掩码遗漏的结构表面，不能保证恢复数据没有提供的真实隐藏结构。完整阶段的恢复参数不是组件开关，撤除仍通过代码注册项。
+
+
+
+\subsection*{3.12 封闭柜体身份与墙体/开放格架的区分}
+\addcontentsline{toc}{subsection}{3.12 封闭柜体身份与墙体/开放格架的区分}
+
+本轮源码核查发现，检测标签0只说明没有物体掩码，不提供wall类别真值。background\_consensus仍以可见未分配区域作为大候选的背景反证；这一反证可抑制外部错误投影，也会在系统性漏检柜面时误伤真实储物结构。当前采用有界结构恢复处理该冲突，没有全局取消背景过滤。其授权来自缓存身份、有限纵深、三视角实测点及自由空间核验。
+
+
+
+原恢复代码直接继承最强种子轨迹的多数名称。一个完整柜面的局部观测多数为shelf，少数帧却已明确给出cabinet/cupboard；仅取多数名称会在几何恢复后继续丢失柜体身份。现汇总全部兼容种子的不同帧证据，结合闭合立面与侧面作有限语义推断。该逻辑位于structural\_surfaces.storage\_identity，在构图时执行，先于VLPart部件识别；原始缓存名称、掩码和特征均不改写。
+
+
+
+将正面投影到其切平面，以2.5厘米网格计算实测占据率；侧面只能来自已通过多视角深度验收的点：
+
+
+
+\[
+C_f=\frac{|\{\text{occupied facade cells}\}|}{N_{\text{facade cells}}},\qquad
+V_c=\{t:\exists\text{ cached observation at }t\text{ named cabinet/cupboard}\}.
+\]
+
+设正面到实测后方边界的距离为d，侧面点需在正面外框3厘米邻域内，且向后延伸至少0.15d。N\_s为这些侧面点数，D\_s为它们最大后向距离。柜体身份门控为：
+
+
+
+\[
+\text{closed cabinet}=\mathbf1[C_f\ge0.60\ \land\ N_s\ge128\ \land\ D_s\ge d/2\ \land\ |V_c|\ge3].
+\]
+
+这条门控还必须通过第3.10节的缓存身份、实测后界、三视角深度和相机基线检查，不能单独把平面变成柜子。开放格架的正面填充不足、没有侧面的薄片、没有cabinet类别缓存或同一帧的重复投票均保持原身份。名称和纵深不从GT取值；本轮没有新增文字提示或千问调用。256维视觉特征与384维语义特征仍继承原兼容轨迹，几何推断类别另外记录来源和门控证据。
+
+
+
+整体/部件粒度尚需另一层证据。参考\href{https://www.ecva.net/papers/eccv\_2024/papers\_ECCV/papers/02657.pdf}{Part2Object}的多层聚类与物体性选择、\href{https://arxiv.org/html/2602.11660v1}{Clutt3R-Seg}的条件父掩码替代，下一项应建立多个尺度的父掩码树，并以多视角完整掩码和共有柜架边界选择整柜层；柜门、抽屉保留part\_of。单凭共面、邻近或同名不能证明一个整体。此次共面柜门试验缺少可靠后界，未采用强并。
+
+
+
+\href{https://momasg.cs.uni-freiburg.de/}{MoMa-SG}进一步提供柜门运动与容器层级的路线，但其关键输入包括物体开合观测；当前静态Hypersim帧不能提供该运动证据，未宣称已经接入关节推断。这些论文支持分层方案的研究方向，不能保证本项目门槛的泛化，也不是其完整模型的复现。
+
+
+
+\subsection*{3.13 共享表面与完整掩码的重复实例消解}
+\addcontentsline{toc}{subsection}{3.13 共享表面与完整掩码的重复实例消解}
+
+当前主流程在物体候选验收之后、结构恢复和补全之前调用 instance\_granularity。以实测点数从大到小比较实例，不依赖某个场景的类别提示词、坐标、对象编号或GT。重复判定同时需要：小候选至少128个点；95\%以上点在大候选实测AABB加2.5厘米容差内；80\%以上小候选点距大候选实测表面不超过1.5厘米；384维SBERT语义余弦至少0.6。
+
+
+
+\[
+C(B\!\to\!A)=\frac1{|B|}\sum_{b\in B}\mathbf1[d(b,A)\le0.015],\qquad
+q=\frac{s_A^{T}s_B}{\|s_A\|\|s_B\|}.
+\]
+
+遍历均匀选取的至多24帧共同可见视图。每个区域每帧至少16个深度一致点，只有同一个非背景局部掩码各覆盖双方80\%以上加权可见点才算完整掩码支持。支持至少5帧、支持率至少0.5，并且独立分离视角数必须为零；同时出现不同主掩码、双方各80\%以上支持时构成独立分离反证。参考 MaskClustering 的多视角共识原则，但这是项目适配器，不是完整论文实现。
+
+
+
+\[
+\mathrm{merge}(B,A)=\mathbf1[I(B,A)\ge0.95]\mathbf1[C(B\!\to\!A)\ge0.8]\mathbf1[q\ge0.6]\mathbf1[V_{\mathrm{whole}}\ge5]\mathbf1[V_{\mathrm{whole}}/V_{\mathrm{joint}}\ge0.5]\mathbf1[V_{\mathrm{sep}}=0].
+\]
+
+每个小候选必须有唯一合格父候选。按实测点数建立无环映射并解析最终父编号，保留全部原坐标，以逐点拼接并入父节点；保持父节点原名称、特征和置信度，不以GT调分，不人为提高排序。更新轨迹、局部映射与来源别名；既有别名也重新解析到最终父节点。合并发生在部件检测之前，之后所有部件、正式框和边仍走原主流程。瓶子与格架仅凭包含关系不能合并；只有同语义、共享表面及完整掩码共同支持时才会合并。
+
+
+
+\subsection*{3.14 断开小区域的既有所有权复核}
+\addcontentsline{toc}{subsection}{3.14 断开小区域的既有所有权复核}
+
+对最大跨度不超过1米、至少256点的实例，2厘米DBSCAN（邻域至少5点）形成几何分量；至少64点的分量才提供稳定分离证据。弱小岛只在距稳定分量3厘米以内时加入最近稳定分量，其余未知点保留原归属。候选与其他稳定分量距离至少3厘米，并要求至少3个独立分离视角、零完整共掩码支持。
+
+
+
+候选区域只能转移到已经存在且唯一的对象：该对象AABB内包含率至少95\%，1.5厘米表面覆盖至少65\%，SBERT余弦至少0.6；至少8帧主掩码提供80\%以上加权所有权支持；目标获得至少70\%的有效帧主归属票；旧来源支持帧数不超过目标支持帧数的25\%；相机基线至少8厘米。所有点坐标保留，不新增候选节点。该分支已接入，但本次两场景没有区域通过最终全部门槛，因此不能写成已经解决了混合盘堆或挂架。
+
+
+
 \section*{4. 选择性形状补全}
 \addcontentsline{toc}{section}{4. 选择性形状补全}
 
@@ -696,6 +863,7 @@ P_{\mathrm{whole}}=P_{\mathrm{body}}\mathbin{\Vert}P_{S_1}\mathbin{\Vert}\cdots\
 \texttt{frontend\_\allowbreak{}cache/\allowbreak{}*.\allowbreak{}npz} & 原始前端观测和 RGB 校验值，支持恢复及避免重复融合 \\ \hline
 \texttt{object\_\allowbreak{}tracks.\allowbreak{}json} & 原始融合的实测视角、名称票、质量分数和点数，供阶段恢复 \\ \hline
 \texttt{validated\_\allowbreak{}object\_\allowbreak{}tracks.\allowbreak{}json} & 验收后的物体与合并观测；正式评价和补全使用它 \\ \hline
+\texttt{instance\_\allowbreak{}granularity\_\allowbreak{}audit.\allowbreak{}json} & 重复合并与断开区域归属证据、点坐标保留、代码哈希及零Qwen调用 \\ \hline
 \texttt{object\_\allowbreak{}validation.\allowbreak{}json} & 包含合并、语义分数及逐个拒绝原因，不读取真值 \\ \hline
 \texttt{instance\_\allowbreak{}cloud\_\allowbreak{}cleaned.\allowbreak{}ply} & 身份确认后的实测点云，评价及部件证据使用它 \\ \hline
 \texttt{instance\_\allowbreak{}cloud\_\allowbreak{}completed.\allowbreak{}ply} & 仅在补全验收通过时出现，生成点不会冒充实测点 \\ \hline
@@ -719,6 +887,14 @@ P_{\mathrm{whole}}=P_{\mathrm{body}}\mathbin{\Vert}P_{S_1}\mathbin{\Vert}\cdots\
 
 
 当前\texttt{MEASURED\_\allowbreak{}REFINEMENT=[thin\_\allowbreak{}geometry, axial\_\allowbreak{}assembly, assembly\_\allowbreak{}density]}在部件回填之后执行。删除某个列表项和对应import即可独立移除算法，再从原始融合在新目录重建；无需参数开关或备份。三个模块均只写正常图、点云、部件和审核产物。\texttt{OBSERVED\_\allowbreak{}VALIDATION=observed\_\allowbreak{}consensus}插入候选验收；\texttt{GEOMETRY\_\allowbreak{}COMPONENTS=[shape\_\allowbreak{}completion, backed\_\allowbreak{}cuboid]}依次提出独立补全候选。分别删除导入与注册项即可移除，恢复原框必须从原始融合重建，不能沿用已补全成品。细结构算法兼容原ScanNet/Hypersim投影接口；轴向组合在未知重力方向输入上停止。
+
+
+
+结构表面恢复位于 \texttt{GEOMETRY\_\allowbreak{}COMPONENTS} 首项，悬挂杆位于独立 \texttt{FINAL\_\allowbreak{}GEOMETRY}。新增审核文件记录实测点数、缓存身份来源、有效深度帧、连接/后界证据、代码哈希以及零Qwen调用。原物体字段（包括 \texttt{id}）、点云编码和特征维度不变；最终发布同时同步对象图、实测图、scene\_graph和部件图。原可视化新增可选 \texttt{--view-front}、\texttt{--view-lookat}、\texttt{--view-zoom}，只改变相机，不改变几何。
+
+
+
+独立评价还输出 \texttt{object\_\allowbreak{}error\_\allowbreak{}diagnostic}：全部GT的前三个最佳预测、25/50/75最优一对一匹配，以及全部预测按AP规则的排序命中/重复竞争/低IoU原因。它只解释原指标，不改变匹配、GT或对象。AP不是单个物体指标；单物体报告IoU与阈值命中。
 
 
 
@@ -1707,9 +1883,9 @@ ai\_001\_010/v9 & 75/109 & 22.093\% & 8.882\% & 1.179\% & 23/52/86 & 6/69/103 & 
 
 
 
-\$
-N\_\{\textbackslash{}mathrm\{GT\}\}-N\_\{\textbackslash{}mathrm\{pred\}\}=\textbackslash{}mathrm\{FN\}-\textbackslash{}mathrm\{FP\}.
-\$
+\[
+N_{\mathrm{GT}}-N_{\mathrm{pred}}=\mathrm{FN}-\mathrm{FP}.
+\]
 
 
 
@@ -1792,8 +1968,656 @@ XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 
 
 
-\section*{17. 论文依据与实际采用范围}
-\addcontentsline{toc}{section}{17. 论文依据与实际采用范围}
+\section*{17. 正式v10：柜体、台面和上部灯具的实测恢复（2026-10-07）}
+\addcontentsline{toc}{section}{17. 正式v10：柜体、台面和上部灯具的实测恢复（2026-10-07）}
+
+\subsection*{17.1 缺失发生在哪里}
+\addcontentsline{toc}{subsection}{17.1 缺失发生在哪里}
+
+v9未解决大上柜和大片台面。独立诊断发现：GT30上柜原前景已覆盖89.54\%的观测表面，精修后仅2.82\%；GT57另一组上柜93.38\%降至36.42\%；GT148台面96.44\%降至38.24\%。缺失既来自掩码遗漏，也来自平面物体语义验收和身份碎片过滤。开放格架GT45原来已有89.76\%几何覆盖，不能把所有shelf都说成“没有点云”。所有这些GT编号仅供事后审核，没有进入构图条件。
+
+
+
+灯具的原始像素ROI中，大部分真实点在1.91至2.03米，对应上部长方体。早期候选把低处本体和2.68至2.72米的孤立上端点误配为六根完整杆，但中间高度为空。三维轴线投影也未与RGB杆身稳定重合。这证明仅PCA和端点验收存在漏洞，不能归因为全部杆身已恢复。
+
+
+
+\subsection*{17.2 采用及拒绝的算法}
+\addcontentsline{toc}{subsection}{17.2 采用及拒绝的算法}
+
+采用第3.10、3.11节的有界恢复。一次全平面扩展试验会把stove种子带到整片台面，未采用；一个法向略倾斜的候选还会长到冰箱/墙体方向，增加重力法向约束后拒绝；找不到合法后界的区域保持未知。后界寻找不能仅取最大平面，否则台面下方合法水平边界会被垂直面遮蔽，现检查8个假设。早期六根杆的端点恢复试验因缺少杆身中段被淘汰，错误产物已删除并从原融合缓存完整重建；正式算法改为先回填与本体接触的真实长方体表面，再按12段连续性验收杆件。早期六根杆的端点恢复试验因缺少杆身中段被淘汰，错误产物已删除并从原融合缓存完整重建；正式算法改为先回填与本体接触的真实长方体表面，再按12段连续性验收杆件。没有通过放宽背景门槛来吞并墙壁，也没有按场景手动填写目标坐标或修改成品。
+
+
+
+本轮再次核对\href{https://arxiv.org/html/2312.11557v2}{SAI3D}、\href{https://arxiv.org/html/2602.11660v1}{Clutt3R-Seg}、\href{https://mutianxu.github.io/sampro3d/}{SAMPro3D}。借鉴几何区域、多视角验证和条件层级的设计原则。SAI3D完整超点亲和图、Clutt3R-Seg掩码父树替换和新模型训练均未部署。当前保守恢复物体表面，完整柜门父树仍是下一步；不能把方法名当作已实现能力。
+
+
+
+\subsection*{17.3 最终点云与同协议评价}
+\addcontentsline{toc}{subsection}{17.3 最终点云与同协议评价}
+
+第二场景实测更改：143 countertop从9,863到52,861点；26 shelf从15,720到59,253点（结构分支先恢复至19,939点，上部本体测量再加39,314点）；新增282 cabinet为71,921点、283 cabinet为35,298点。226 lamp保留24,723个旧点，追加41,032个上部本体实测点，总计65,755点。正式算法接受上部长方体表面，接受连续悬挂杆数为0。没有将早期1,898个端点写成完整杆，也没有通过插值制造中段。
+
+
+
+其他原有实测对象逐点一致，原始点和识图缓存不删除。两块新上柜由闭合立面、实测侧面和多帧缓存类别联合判定为cabinet；开放格架保持shelf。此判定只解决这两个有充分证据的恢复区域，不代表所有柜体的整体身份已解决。完整图框中282与GT30 IoU为81.46\%，143与GT148为50.78\%，灯具226与GT1为32.26\%。283和其他柜体碎片尚未统一成唯一整体，表面恢复不等同于实例层级已解决。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & MVO AP50 & 绝对对数数量误差 \\ \hline
+\endfirsthead
+\hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & MVO AP50 & 绝对对数数量误差 \\ \hline
+\endhead
+ai\_001\_002 v9 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 100.00\% & 0.0000 \\ \hline
+ai\_001\_002 v10 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 100.00\% & 0.0000 \\ \hline
+ai\_001\_010 v9 & 75/109 & 22.09\% & 8.88\% & 1.18\% & 12.44\% & 0.3739 \\ \hline
+ai\_001\_010 v10 & 77/109 & 24.33\% & 9.65\% & 1.29\% & 13.40\% & 0.3475 \\ \hline
+\end{longtable}
+}
+
+第二场景IoU0.50的一对一TP/FP/FN从23/52/86到25/52/84；IoU0.75为7/70/102。预测77小于GT109说明净漏检多，不代表无假阳性。指标仍低，不能称高精度。没有用GT合并柜门、豁免FP或放宽评价阈值。原始RAM、复用Qwen-DINO及v8新指标仍见第16.4节，不重写冻结对照。
+
+
+
+独立表面审核使用5毫米观测体素、2厘米距离容差，统计全部预测几何的并集覆盖，不要求正确唯一身份，因此不是AP：
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+官方实例编号 & v9实测覆盖 & v10实测覆盖 \\ \hline
+\endfirsthead
+\hline
+官方实例编号 & v9实测覆盖 & v10实测覆盖 \\ \hline
+\endhead
+30 & 2.82\% & 97.82\% \\ \hline
+57 & 36.42\% & 95.36\% \\ \hline
+45 & 89.76\% & 90.02\% \\ \hline
+68 & 93.77\% & 93.77\% \\ \hline
+148 & 38.24\% & 95.55\% \\ \hline
+1 & 62.96\% & 80.52\% \\ \hline
+\end{longtable}
+}
+
+冰箱实测25,132点完全保留；完整体积假设重新拟合和验收，正式完成点云由v9的37,477点到36,850点，框IoU由94.95\%到94.89\%。生成后方表面仍单独存入completed PLY，不声明逐点等同旧假设或隐藏细节真实。查看这个文件才会显示已验收推断几何。
+
+
+
+\subsection*{17.4 验证、接口与剩余问题}
+\addcontentsline{toc}{subsection}{17.4 验证、接口与剩余问题}
+
+两场景均从原融合及识图缓存重建graph之后的主流程，VLPart、部件融合和已有精修实际执行；千问调用为零。89项算法反例与接口检查通过，包括单薄平面不能凭空产生纵深、水平横梁不能冒充杆、两根杆不能经横梁错误合并、仅两端不能证明杆身、长方体本体增长不能跳到断开的屋顶，以及新物体通过原版TopologyMap加载器。独立保留审核确认全部旧实测点保留、未涉及物体数组一致、原融合/特征/掩码缓存一致，以及仅已拒绝局部编号被重映射。
+
+
+
+最终发布曾发现新对象缺少原接口必需id字段，已修复核心节点创建及公共发布器；由正式publish阶段重新发布对象框、边、scene\_graph和部件图，没有修改可视化加载器来迁就成品。每份最终评价记录真实图/点云哈希。部件允许显式未归属，但不允许指向不存在的父物体；几何恢复部件与VLPart特征分开。
+
+
+
+结构恢复从GEOMETRY\_COMPONENTS删除structural\_surfaces即可撤除，悬挂杆从FINAL\_GEOMETRY删除suspension\_geometry即可撤除；从原观测在新根目录重建，避免旧产物继续充当输入。不依赖备份、手改成品或算法开关。ScanNet和Hypersim原接口、基本构图与原可视化仍保留。
+
+
+
+仍需解决：真实悬挂细杆的RGB/深度/三维轴线对应与可靠重建；整排柜体/柜门的父层级选择，避免多个局部柜门分别计FP；低置信但高质量整体的排序；完整柜体隐藏结构与复杂灯具弯曲件。不能用按GT合并、抹掉FP、同类物体全合并来提高指标。两开发场景上的门槛和改善还没有独立测试集泛化验证。
+
+
+
+\subsection*{17.5 直接可视化命令与产物}
+\addcontentsline{toc}{subsection}{17.5 直接可视化命令与产物}
+
+第二场景（包含单独标记的冰箱推断表面）：
+
+
+
+\begin{verbatim}
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python /home/lewisliu/PartAware-SG/script/visualize_map.py \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v10/hypersim/ai_001_010/instance_cloud_completed.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v10/hypersim/ai_001_010/topology_map.json \
+  --show_bboxes --node_radius 0.03
+\end{verbatim}
+
+
+第一场景：
+
+
+
+\begin{verbatim}
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python /home/lewisliu/PartAware-SG/script/visualize_map.py \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v10/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v10/hypersim/ai_001_002/topology_map.json \
+  --show_bboxes --node_radius 0.03
+\end{verbatim}
+
+
+命令不显示边、不启用拾取。需要部件才加--show\_parts；第二场景纯实测视图同时改用instance\_cloud\_cleaned.ply和topology\_map\_observed.json。局部观察可加--view-lookat -0.05 -0.1 2.25 --view-front 0.1 -1 0.15 --view-zoom 0.18。默认原可视化道路没有换，以上仅设置相机。
+
+
+
+正式输出在scannet-sg-processed下partaware\_ai\_001\_002\_v10与partaware\_ai\_001\_010\_v10两个目录，与旧版本同级。中文阶段日志、两份恢复审核、独立评价在各场景内；复核记录和整体/局部截图在本报告同级outputs中。源码仓库不包含实验点云或临时下载/探测目录。
+
+
+
+\subsection*{17.6 柜体后续核查：真实GT、漏失链和身份修正}
+\addcontentsline{toc}{subsection}{17.6 柜体后续核查：真实GT、漏失链和身份修正}
+
+本次100帧的独立可评价GT里，30、57、68为NYU40 cabinet（类别3），45为shelves（类别15）。另为各对象选取覆盖最大的帧，分别读取原始semantic\_instance.hdf5与semantic.hdf5，对该帧区域内每个像素复核类别，结果与100帧评价一致。因此柜子不能以“数据集未标物体”为由排除；柜门是否独立计数要遵循GT实例粒度。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+官方实例 & 官方类别 & NYU40编号 & v9源前端覆盖像素 & v9最终保留像素 \\ \hline
+\endfirsthead
+\hline
+官方实例 & 官方类别 & NYU40编号 & v9源前端覆盖像素 & v9最终保留像素 \\ \hline
+\endhead
+30 & cabinet & 3 & 4.40\% & 0.63\% \\ \hline
+57 & cabinet & 3 & 25.42\% & 12.87\% \\ \hline
+68 & cabinet & 3 & 23.11\% & 62.99\% \\ \hline
+45 & shelves & 15 & 53.21\% & 32.16\% \\ \hline
+\end{longtable}
+}
+
+以上像素比例反映识别/归属，不能与5毫米体素、2厘米容差的表面覆盖混用。GT30的源前端只有4.40\%像素带物体掩码；加入YOLOE后为25.75\%，最终验收保留0.63\%。主要候选142多数名称为window，其masked-CLIP物体/背景差值约−0.00228，且没有逐点三视角稳定核心，被语义门拒绝。大候选98则被称为mirror，其23个留出背景视角和约63.44\%的背景点反证参与拒绝。这里没有证明真实表面是镜面或墙；它揭示了候选标签错误与未分配区域反证的叠加。
+
+
+
+GT57的局部候选28多数叫shelf；13个可见视角中4帧被判为多个局部实例混合，混合比30.77\%超过20\%门槛，再加物体/背景语义差不足而被拒绝。GT68则大部分表面已保留，但被拆成柜门/局部节点。三个问题必须分别处理：恢复可测表面、判定物体类别、选择整体层级。
+
+
+
+本轮在构建算法中增加第3.12节判定，从原融合与识图缓存重新运行两场景graph及以后流程，没有修改成品名称或点坐标，没有新调用千问：
+
+
+
+\begin{itemize}
+\item 正式节点282：cabinet；正面实测占据68.36\%，侧面566点，cabinet/cupboard缓存证据4个不同帧。
+
+
+\item 正式节点283：cabinet；正面实测占据64.91\%，侧面141点，cabinet/cupboard缓存证据3个不同帧。
+
+\end{itemize}
+
+
+开放格架仍为shelf；无完整证据的其他区域没有一律改名。严格几何AP主要依赖框和排序，名称纠正本身不会提高这项AP；不能把cabinet名称变多写成AP50提升。完整柜体的框与父归属仍有欠缺，本轮不以GT替预测合并柜门，也不豁免其严格FP。
+
+
+
+已试验从柜门种子扩展共面、连通的正面并寻找有限后界。下柜候选后界不可靠，未接受整体合并。后续应优先保留多尺度SAM原生候选，构造跨视角父掩码树，再通过共有柜架和完整父掩码确认整体；同时保留门板和开放格架为可查询子节点。该方案有论文依据，但当前没有完整父树，不能把设计方案写成已经实现。此轮失败试验与官方逐像素核查见v10\_cabinet\_review.json。
+
+
+
+\subsection*{17.7 为什么画面不错而 AP25 仍低：逐物体核查}
+\addcontentsline{toc}{subsection}{17.7 为什么画面不错而 AP25 仍低：逐物体核查}
+
+本节使用正式 v10 保存图与官方 GT，第二场景 AP25=24.33\%、AP50=9.65\%、AP75=1.29\%。AP 是全场景按置信度排序积分得到的指标，单个物体不叫“AP”，这里逐物体列出最佳 IoU、是否通过一对一阈值、可见表面覆盖和重复竞争。所有 GT 在独立评价中读取，绝不反馈给构建算法。
+
+
+
+109 个 GT 中有 88 个 otherprop；柜子、台面、冰箱等大物体在画面中占主要面积，小物体在 AP 中仍各计一项。按 AP25 的最优一对一定位匹配，TP=44、FP=33、FN=65，precision=57.14\%、recall=40.37\%。该 TP/FP 表使用最优一对一匹配；AP 本身仍使用原有的置信度排序贪心匹配，两者不可混称。
+
+
+
+可见 GT 表面的总体几何覆盖为 95.09\%，宏平均几何覆盖为 87.94\%，输出点对 GT 前景表面的精度为 91.97\%；这些是 2 厘米容差的表面诊断，既不计物体身份，也不是 AP。严格纯实例归属后的宏平均表面覆盖只有 25.38\%。这正是“点看起来齐了，但物体理解没有分对”的证据。不能据此宣称 AP 已达到 95\%。
+
+
+
+65 个 AP25 未匹配 GT 的诊断分解：7 个具有过阈值候选但输在一对一竞争，48 个有至少 50\% 的几何表面却被混在别的实例或整体框不完整，5 个表面覆盖低于 10\%，另外 5 个只恢复了局部表面。这些分类是几何诊断而非人工确认的语义归因。
+
+
+
+最典型的问题是成叠方盘和挂架：GT 逐盘、逐厨具计数，系统却输出盘堆或整条挂架；下柜则反过来，官方整套 U 形柜体是一个 GT，而系统输出多个门板。窗口与百叶帘也被混成同一节点。现有补全只能调整已有实例，不能自动把混合实例分成正确对象；不能靠放大所有框或改 GT 解决。
+
+
+
+代表对象如下。外观名称由官方掩码在 RGB 上的位置人工核查，仅帮助定位；官方 NYU40 标签和实例号保持不变，细小组件名称可能仍不确定。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+GT / 外观 & 最佳预测 ID / 名称 & 最佳 IoU & 25 / 50 / 75 匹配 & 几何覆盖 \\ \hline
+\endfirsthead
+\hline
+GT / 外观 & 最佳预测 ID / 名称 & 最佳 IoU & 25 / 50 / 75 匹配 & 几何覆盖 \\ \hline
+\endhead
+1 整套悬挂灯具 & 226 lamp & 32.26\% & ✓ / × / × & 77.35\% \\ \hline
+26 窗体 & 78 window & 17.85\% & × / × / × & 92.20\% \\ \hline
+28 百叶帘/窗帘 & 78 window & 2.60\% & × / × / × & 99.76\% \\ \hline
+57 后侧/转角上柜 & 283 cabinet & 39.29\% & ✓ / × / × & 95.53\% \\ \hline
+68 整套 U 形下柜 & 82 kitchen counter & 26.08\% & ✓ / × / × & 93.72\% \\ \hline
+69 嵌入式烤箱 & 52 oven & 12.08\% & × / × / × & 99.62\% \\ \hline
+33 案板 & 102 \_sink & 16.96\% & × / × / × & 99.67\% \\ \hline
+61 容器 & 30 bottle & 23.01\% & × / × / × & 99.00\% \\ \hline
+99 锅铲 & 43 utensil & 16.50\% & × / × / × & 99.09\% \\ \hline
+100 汤勺 & 49 towel rack & 7.91\% & × / × / × & 96.56\% \\ \hline
+103 长柄勺 & 47 utensil & 21.51\% & × / × / × & 98.62\% \\ \hline
+112 玻璃容器组/支架 & 15 cup & 15.92\% & × / × / × & 98.49\% \\ \hline
+117 面包 & 25 toaster & 16.10\% & × / × / × & 97.62\% \\ \hline
+133 小容器/支架 & 14 faucet & 7.32\% & × / × / × & 98.22\% \\ \hline
+151 切片器 & 143 countertop & 0.02\% & × / × / × & 42.92\% \\ \hline
+153 案板 & 143 countertop & 0.04\% & × / × / × & 93.34\% \\ \hline
+\end{longtable}
+}
+
+\subsection*{17.7.1 全部 109 个 GT 的逐物体列表}
+\addcontentsline{toc}{subsection}{17.7.1 全部 109 个 GT 的逐物体列表}
+
+“25/50/75”列是最优一对一定位匹配的通过结果；“最佳预测”可以指向同一个预测多次，因此最佳 IoU 过阈值也不保证匹配成功。覆盖率只证明表面存在，不能证明预测身份正确。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+GT / 外观 & 官方类 & 最佳预测 ID / 类 & IoU & 25 / 50 / 75 & 几何覆盖 \\ \hline
+\endfirsthead
+\hline
+GT / 外观 & 官方类 & 最佳预测 ID / 类 & IoU & 25 / 50 / 75 & 几何覆盖 \\ \hline
+\endhead
+1 整套悬挂灯具 & lamp & 226 lamp & 32.26\% & ✓ / × / × & 77.35\% \\ \hline
+2 岛台水壶 & otherprop & 99 cup & 61.36\% & ✓ / ✓ / × & 100.00\% \\ \hline
+3 独立浅盘 & otherprop & 157 napkin & 39.76\% & × / × / × & 100.00\% \\ \hline
+4 独立浅盘 & otherprop & 157 napkin & 49.23\% & ✓ / × / × & 99.95\% \\ \hline
+5 堆叠方盘 & otherprop & 31 plate & 46.71\% & ✓ / × / × & 100.00\% \\ \hline
+6 堆叠方盘 & otherprop & 31 plate & 46.71\% & × / × / × & 100.00\% \\ \hline
+7 堆叠方盘 & otherprop & 31 plate & 46.71\% & × / × / × & 100.00\% \\ \hline
+8 堆叠方盘 & otherprop & 31 plate & 46.71\% & × / × / × & 100.00\% \\ \hline
+9 堆叠方盘 & otherprop & 31 plate & 46.71\% & × / × / × & 96.71\% \\ \hline
+10 堆叠方盘 & otherprop & 31 plate & 46.71\% & × / × / × & 93.81\% \\ \hline
+11 堆叠方盘 & otherprop & 27 napkin & 21.35\% & × / × / × & 100.00\% \\ \hline
+12 堆叠方盘 & otherprop & 27 napkin & 21.35\% & × / × / × & 100.00\% \\ \hline
+13 堆叠方盘 & otherprop & 27 napkin & 21.35\% & × / × / × & 100.00\% \\ \hline
+14 堆叠方盘 & otherprop & 27 napkin & 21.35\% & × / × / × & 100.00\% \\ \hline
+15 堆叠方盘 & otherprop & 27 napkin & 21.35\% & × / × / × & 100.00\% \\ \hline
+16 堆叠方盘 & otherprop & 27 napkin & 21.35\% & × / × / × & 100.00\% \\ \hline
+17 杯子 & otherprop & 51 cup & 56.27\% & ✓ / ✓ / × & 100.00\% \\ \hline
+18 杯碟 & otherprop & 59 plate & 52.76\% & ✓ / ✓ / × & 100.00\% \\ \hline
+19 杯子 & otherprop & 212 cup & 53.07\% & ✓ / ✓ / × & 100.00\% \\ \hline
+20 杯碟 & otherprop & 70 plate & 37.02\% & ✓ / × / × & 100.00\% \\ \hline
+21 杯子 & otherprop & 36 bowl & 13.27\% & × / × / × & 97.87\% \\ \hline
+22 杯碟 & otherprop & 36 bowl & 9.54\% & × / × / × & 78.81\% \\ \hline
+23 岛台 & counter & 1 kitchen island & 94.20\% & ✓ / ✓ / ✓ & 99.22\% \\ \hline
+24 吧椅 & chair & 7 stool & 70.10\% & ✓ / ✓ / × & 97.55\% \\ \hline
+25 吧椅 & chair & 5 stool & 94.90\% & ✓ / ✓ / ✓ & 99.41\% \\ \hline
+26 窗体 & window & 78 window & 17.85\% & × / × / × & 92.20\% \\ \hline
+27 窗体 & window & 78 window & 17.85\% & × / × / × & 95.57\% \\ \hline
+28 百叶帘/窗帘 & blinds & 78 window & 2.60\% & × / × / × & 99.76\% \\ \hline
+29 百叶帘/窗帘 & blinds & 78 window & 1.78\% & × / × / × & 99.95\% \\ \hline
+30 右侧上柜 & cabinet & 282 cabinet & 81.46\% & ✓ / ✓ / ✓ & 97.84\% \\ \hline
+31 微波炉 & otherprop & 119 microwave & 40.13\% & ✓ / × / × & 97.07\% \\ \hline
+32 案板把手/附属件 & otherprop & 102 \_sink & 3.41\% & × / × / × & 100.00\% \\ \hline
+33 案板 & otherprop & 102 \_sink & 16.96\% & × / × / × & 99.67\% \\ \hline
+36 墙边杯子 & otherprop & 62 sink & 0.46\% & × / × / × & 0.70\% \\ \hline
+37 格架内杯/碟 & otherprop & 134 bottle & 35.54\% & ✓ / × / × & 100.00\% \\ \hline
+38 格架内杯/碟 & otherprop & 135 bottle & 7.23\% & × / × / × & 90.74\% \\ \hline
+40 格架内杯/碟 & otherprop & 135 bottle & 45.87\% & ✓ / × / × & 100.00\% \\ \hline
+41 格架内杯/碟 & otherprop & 137 bottle & 46.76\% & ✓ / × / × & 100.00\% \\ \hline
+43 格架内杯/碟 & otherprop & 137 bottle & 2.50\% & × / × / × & 100.00\% \\ \hline
+44 格架内杯/碟 & otherprop & 140 shelf & 0.21\% & × / × / × & 98.29\% \\ \hline
+45 开放格架 & shelves & 140 shelf & 55.95\% & ✓ / ✓ / × & 90.66\% \\ \hline
+47 格架内杯/碟 & otherprop & 140 shelf & 0.39\% & × / × / × & 98.80\% \\ \hline
+49 格架内杯/碟 & otherprop & 140 shelf & 0.16\% & × / × / × & 70.30\% \\ \hline
+50 格架内杯/碟 & otherprop & 140 shelf & 0.18\% & × / × / × & 91.53\% \\ \hline
+51 格架内长筒容器 & otherprop & 132 bottle & 23.37\% & × / × / × & 75.85\% \\ \hline
+52 格架内长筒容器 & otherprop & 132 bottle & 51.56\% & ✓ / ✓ / × & 100.00\% \\ \hline
+53 格架内长筒容器 & otherprop & 133 bottle & 47.50\% & ✓ / × / × & 99.31\% \\ \hline
+54 格架内长筒容器 & otherprop & 133 bottle & 21.99\% & × / × / × & 73.61\% \\ \hline
+55 格架内长筒容器 & otherprop & 105 bottle & 15.33\% & × / × / × & 85.11\% \\ \hline
+56 格架内长筒容器 & otherprop & 105 bottle & 59.27\% & ✓ / ✓ / × & 99.70\% \\ \hline
+57 后侧/转角上柜 & cabinet & 283 cabinet & 39.29\% & ✓ / × / × & 95.53\% \\ \hline
+58 冰箱上方凸出结构 & otherstructure & 22 shelf & 51.80\% & ✓ / ✓ / × & 98.52\% \\ \hline
+60 容器附属件 & otherprop & 167 range hood & 0.87\% & × / × / × & 96.45\% \\ \hline
+61 容器 & otherprop & 30 bottle & 23.01\% & × / × / × & 99.00\% \\ \hline
+62 容器附属件 & otherprop & 30 bottle & 16.03\% & × / × / × & 13.54\% \\ \hline
+63 杯子 & otherprop & 167 range hood & 1.26\% & × / × / × & 2.21\% \\ \hline
+67 冰箱 & refrigerator & 4 refrigerator & 94.89\% & ✓ / ✓ / ✓ & 90.09\% \\ \hline
+68 整套 U 形下柜 & cabinet & 82 kitchen counter & 26.08\% & ✓ / × / × & 93.72\% \\ \hline
+69 嵌入式烤箱 & otherstructure & 52 oven & 12.08\% & × / × / × & 99.62\% \\ \hline
+70 瓶体/倒酒器 & otherprop & 24 faucet & 55.50\% & ✓ / ✓ / × & 98.06\% \\ \hline
+71 瓶体/倒酒器 & otherprop & 24 faucet & 52.66\% & × / × / × & 71.51\% \\ \hline
+75 水果 & otherprop & 71 bowl & 2.81\% & × / × / × & 97.67\% \\ \hline
+80 水果 & otherprop & 71 bowl & 0.87\% & × / × / × & 99.01\% \\ \hline
+86 果篮 & otherprop & 71 bowl & 61.42\% & ✓ / ✓ / × & 98.62\% \\ \hline
+89 置物架内圆盘 & otherprop & 174 shelf & 8.88\% & × / × / × & 100.00\% \\ \hline
+90 置物架内圆盘 & otherprop & 174 shelf & 8.88\% & × / × / × & 100.00\% \\ \hline
+91 置物架内圆盘 & otherprop & 174 shelf & 8.88\% & × / × / × & 99.17\% \\ \hline
+94 壁挂置物架 & otherstructure & 174 shelf & 88.82\% & ✓ / ✓ / ✓ & 92.91\% \\ \hline
+95 燃气灶面 & otherstructure & 40 stove & 39.57\% & ✓ / × / × & 100.00\% \\ \hline
+96 电灶面 & otherstructure & 39 stove & 29.16\% & ✓ / × / × & 99.74\% \\ \hline
+97 水壶 & otherprop & 60 pot & 56.33\% & ✓ / ✓ / × & 99.67\% \\ \hline
+98 锅 & otherprop & 148 pot & 66.93\% & ✓ / ✓ / × & 100.00\% \\ \hline
+99 锅铲 & otherprop & 43 utensil & 16.50\% & × / × / × & 99.09\% \\ \hline
+100 汤勺 & otherprop & 49 towel rack & 7.91\% & × / × / × & 96.56\% \\ \hline
+101 漏勺 & otherprop & 49 towel rack & 4.38\% & × / × / × & 98.51\% \\ \hline
+102 叉形厨具 & otherprop & 49 towel rack & 0.51\% & × / × / × & 97.83\% \\ \hline
+103 长柄勺 & otherprop & 47 utensil & 21.51\% & × / × / × & 98.62\% \\ \hline
+104 厨具挂杆 & otherprop & 49 towel rack & 5.90\% & × / × / × & 99.75\% \\ \hline
+105 锅 & otherprop & 150 pot & 79.23\% & ✓ / ✓ / ✓ & 99.34\% \\ \hline
+106 壁挂纸卷架 & otherprop & 37 paper towel dispenser & 71.20\% & ✓ / ✓ / × & 64.39\% \\ \hline
+112 玻璃容器组/支架 & otherprop & 15 cup & 15.92\% & × / × / × & 98.49\% \\ \hline
+113 堆叠薄板/托盘 & otherprop & 15 cup & 2.10\% & × / × / × & 21.56\% \\ \hline
+114 堆叠薄板/托盘 & otherprop & 1 kitchen island & 0.00\% & × / × / × & 0.00\% \\ \hline
+116 堆叠薄板/托盘 & otherprop & 143 countertop & 0.03\% & × / × / × & 38.34\% \\ \hline
+117 面包 & otherprop & 25 toaster & 16.10\% & × / × / × & 97.62\% \\ \hline
+118 面包下托盘 & otherprop & 25 toaster & 1.46\% & × / × / × & 100.00\% \\ \hline
+119 面包切片器 & otherprop & 25 toaster & 79.38\% & ✓ / ✓ / ✓ & 95.33\% \\ \hline
+120 调料罐/盖等组件 & otherprop & 187 bottle & 51.39\% & ✓ / ✓ / × & 100.00\% \\ \hline
+121 调料罐/盖等组件 & otherprop & 56 spice rack & 2.19\% & × / × / × & 100.00\% \\ \hline
+122 调料罐/盖等组件 & otherprop & 56 spice rack & 2.19\% & × / × / × & 99.32\% \\ \hline
+123 调料罐/盖等组件 & otherprop & 188 bottle & 49.04\% & ✓ / × / × & 100.00\% \\ \hline
+124 调料罐/盖等组件 & otherprop & 189 bottle & 47.13\% & ✓ / × / × & 100.00\% \\ \hline
+125 调料罐/盖等组件 & otherprop & 192 bottle & 47.43\% & ✓ / × / × & 100.00\% \\ \hline
+126 调料架 & otherprop & 56 spice rack & 35.51\% & ✓ / × / × & 98.26\% \\ \hline
+127 面包盒 & otherprop & 29 toaster & 61.13\% & ✓ / ✓ / × & 100.00\% \\ \hline
+128 刀架 & otherprop & 73 knife block & 36.59\% & ✓ / × / × & 96.13\% \\ \hline
+133 小容器/支架 & otherprop & 14 faucet & 7.32\% & × / × / × & 98.22\% \\ \hline
+134 小容器/支架 & otherprop & 14 faucet & 0.18\% & × / × / × & 62.75\% \\ \hline
+135 小容器附属件 & otherprop & 14 faucet & 0.85\% & × / × / × & 5.77\% \\ \hline
+137 小容器/支架 & otherprop & 143 countertop & 0.00\% & × / × / × & 1.38\% \\ \hline
+138 小容器附属件 & otherprop & 143 countertop & 0.00\% & × / × / × & 36.11\% \\ \hline
+139 墙边置物托条 & otherprop & 14 faucet & 1.58\% & × / × / × & 73.78\% \\ \hline
+146 挂杯 & otherprop & 123 towel rack & 5.31\% & × / × / × & 90.38\% \\ \hline
+147 杯子挂架 & otherstructure & 123 towel rack & 46.46\% & ✓ / × / × & 98.03\% \\ \hline
+148 厨房台面 & counter & 143 countertop & 50.78\% & ✓ / ✓ / × & 95.01\% \\ \hline
+149 水槽及龙头组 & sink & 62 sink & 65.51\% & ✓ / ✓ / × & 94.05\% \\ \hline
+151 切片器 & otherprop & 143 countertop & 0.02\% & × / × / × & 42.92\% \\ \hline
+152 黄油/块状食物 & otherprop & 143 countertop & 0.01\% & × / × / × & 52.54\% \\ \hline
+153 案板 & otherprop & 143 countertop & 0.04\% & × / × / × & 93.34\% \\ \hline
+\end{longtable}
+}
+
+\subsection*{17.7.2 AP25 排序中的全部未命中预测}
+\addcontentsline{toc}{subsection}{17.7.2 AP25 排序中的全部未命中预测}
+
+这里采用与 AP 相同的排序贪心匹配。高 IoU 但未命中的岛台节点属于重复竞争；柜门有很高的 GT 表面纯度却缺少整体柜体框，属于实例粒度/框问题。纯度低且与任何 GT 几乎无重叠的节点，才更接近错误前景或背景身份问题。纯度不是正确率，GT 也可能把装配体组件单独标注。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+预测 ID / 类 & AP 排名 & 最佳 GT & 最佳 IoU & 主 GT 表面纯度 & 诊断 \\ \hline
+\endfirsthead
+\hline
+预测 ID / 类 & AP 排名 & 最佳 GT & 最佳 IoU & 主 GT 表面纯度 & 诊断 \\ \hline
+\endhead
+74 faucet & 1 & 149 & 14.62\% & 64.19\% & 混合实例、背景附带或漏恢复 \\ \hline
+52 oven & 6 & 69 & 12.08\% & 93.16\% & 真实表面残片/框未达阈值 \\ \hline
+181 desk & 8 & 23 & 91.13\% & 99.86\% & 同一 GT 重复竞争 \\ \hline
+1 kitchen island & 11 & 23 & 94.20\% & 99.80\% & 同一 GT 重复竞争 \\ \hline
+6 shelf & 12 & 68 & 0.27\% & 100.00\% & 真实表面残片/框未达阈值 \\ \hline
+172 window & 13 & 1 & 0.00\% & 0.42\% & 混合实例、背景附带或漏恢复 \\ \hline
+103 shelf & 16 & 68 & 0.26\% & 99.99\% & 真实表面残片/框未达阈值 \\ \hline
+101 shelf & 17 & 68 & 0.53\% & 97.55\% & 真实表面残片/框未达阈值 \\ \hline
+104 shelf & 18 & 68 & 0.32\% & 99.97\% & 真实表面残片/框未达阈值 \\ \hline
+10 shelf & 19 & 68 & 0.55\% & 96.56\% & 真实表面残片/框未达阈值 \\ \hline
+21 shelf & 20 & 68 & 0.23\% & 99.98\% & 真实表面残片/框未达阈值 \\ \hline
+36 bowl & 23 & 21 & 13.27\% & 69.95\% & 混合实例、背景附带或漏恢复 \\ \hline
+77 shelf & 24 & 68 & 0.27\% & 99.99\% & 真实表面残片/框未达阈值 \\ \hline
+167 range hood & 25 & 58 & 20.40\% & 99.07\% & 真实表面残片/框未达阈值 \\ \hline
+23 shelf & 26 & 149 & 1.05\% & 99.98\% & 真实表面残片/框未达阈值 \\ \hline
+100 cabinet & 30 & 68 & 0.38\% & 100.00\% & 真实表面残片/框未达阈值 \\ \hline
+33 shelf & 35 & 68 & 0.29\% & 99.94\% & 真实表面残片/框未达阈值 \\ \hline
+58 shelf & 39 & 68 & 0.38\% & 100.00\% & 真实表面残片/框未达阈值 \\ \hline
+32 shelf & 40 & 68 & 0.56\% & 99.97\% & 真实表面残片/框未达阈值 \\ \hline
+27 napkin & 43 & 11 & 21.35\% & 38.06\% & 混合实例、背景附带或漏恢复 \\ \hline
+233 range hood & 45 & 58 & 0.00\% & 2.22\% & 混合实例、背景附带或漏恢复 \\ \hline
+64 plate & 46 & 4 & 23.91\% & 58.09\% & 混合实例、背景附带或漏恢复 \\ \hline
+30 bottle & 48 & 61 & 23.01\% & 78.27\% & 混合实例、背景附带或漏恢复 \\ \hline
+26 shelf & 50 & 58 & 10.93\% & 69.37\% & 混合实例、背景附带或漏恢复 \\ \hline
+78 window & 51 & 26 & 17.85\% & 34.76\% & 混合实例、背景附带或漏恢复 \\ \hline
+43 utensil & 52 & 99 & 16.50\% & 71.85\% & 混合实例、背景附带或漏恢复 \\ \hline
+49 towel rack & 58 & 100 & 7.91\% & 14.31\% & 混合实例、背景附带或漏恢复 \\ \hline
+72 shelf & 59 & 69 & 3.71\% & 98.62\% & 真实表面残片/框未达阈值 \\ \hline
+89 cabinet & 60 & 68 & 4.83\% & 99.82\% & 真实表面残片/框未达阈值 \\ \hline
+47 utensil & 62 & 103 & 21.51\% & 51.52\% & 混合实例、背景附带或漏恢复 \\ \hline
+15 cup & 66 & 112 & 15.92\% & 58.28\% & 混合实例、背景附带或漏恢复 \\ \hline
+102 \_sink & 70 & 33 & 16.96\% & 49.95\% & 混合实例、背景附带或漏恢复 \\ \hline
+14 faucet & 73 & 133 & 7.32\% & 42.58\% & 混合实例、背景附带或漏恢复 \\ \hline
+\end{longtable}
+}
+
+\subsection*{17.7.3 第一场景低 AP75 对象}
+\addcontentsline{toc}{subsection}{17.7.3 第一场景低 AP75 对象}
+
+第一场景 AP25=100\%、AP50=100\%，AP75=62.5\%。下表列出未通过 AP75 的 GT；这仍是单物体定位问题，不叫“该物体 AP75”。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+GT / 官方类 & 最佳预测 & IoU & 25 / 50 / 75 & 几何覆盖 \\ \hline
+\endfirsthead
+\hline
+GT / 官方类 & 最佳预测 & IoU & 25 / 50 / 75 & 几何覆盖 \\ \hline
+\endhead
+1 otherprop & 13 laptop & 58.83\% & ✓ / ✓ / × & 99.53\% \\ \hline
+2 otherprop & 3 audio amplifier & 57.23\% & ✓ / ✓ / × & 75.18\% \\ \hline
+3 otherprop & 49 audio amplifier & 56.05\% & ✓ / ✓ / × & 59.43\% \\ \hline
+\end{longtable}
+}
+
+\subsection*{17.7.4 GT 外观附图}
+\addcontentsline{toc}{subsection}{17.7.4 GT 外观附图}
+
+黄色高亮是官方该实例在最佳可见帧中的像素，不是预测掩码。附图用于定位表格中的物体，构建算法不能读取这些掩码。每格保留官方实例号、NYU40 类、最佳预测 IoU 和帧号。
+
+
+
+\textit{第二场景逐物体 GT 外观诊断，第 1 页（见HTML版附图）}
+
+
+
+\textit{第二场景逐物体 GT 外观诊断，第 2 页（见HTML版附图）}
+
+
+
+\textit{第二场景逐物体 GT 外观诊断，第 3 页（见HTML版附图）}
+
+
+
+\textit{第二场景逐物体 GT 外观诊断，第 4 页（见HTML版附图）}
+
+
+
+\textit{第二场景逐物体 GT 外观诊断，第 5 页（见HTML版附图）}
+
+
+
+\textit{第二场景逐物体 GT 外观诊断，第 6 页（见HTML版附图）}
+
+
+
+\section*{18. 正式v11：实例粒度消解与低AP逐对象诊断（2026-10-07）}
+\addcontentsline{toc}{section}{18. 正式v11：实例粒度消解与低AP逐对象诊断（2026-10-07）}
+
+\subsection*{18.1 实际改动与主流程接入}
+\addcontentsline{toc}{subsection}{18.1 实际改动与主流程接入}
+
+新增可移除核心组件 instance\_granularity，登记在 GEOMETRY\_COMPONENTS 第一项，先处理重复身份，再执行v10结构恢复、补全、VLPart与所有几何阶段。保持原图与特征接口；新增审核文件和来源别名。构图不读取GT、不调用Qwen、没有类别特化提示词。
+
+
+
+实际合并：181 desk→1 kitchen island（14个完整掩码支持视角）、19 kitchen island→181→1（8视角），以及101 shelf→89 cabinet（5视角）。三个来源点集全部拼接保留，其他物体的实测区域逐点多重集完全相同。两处原speaker整体装配保留，第一场景没有新的合并。
+
+
+
+区域转移分支没有候选通过全部证据；不声称盘堆、挂架和窗帘混合身份已拆开。统一裁成高置信核心的试验会损伤真物体，未采用。没有对成品点云、节点编号或GT分组做人工修补。
+
+
+
+\subsection*{18.2 两场景严格评价}
+\addcontentsline{toc}{subsection}{18.2 两场景严格评价}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & MVO-AP50 & 绝对对数数量误差 \\ \hline
+\endfirsthead
+\hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & MVO-AP50 & 绝对对数数量误差 \\ \hline
+\endhead
+ai\_001\_002 v10 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 100.00\% & 0.0000 \\ \hline
+ai\_001\_002 v11 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 100.00\% & 0.0000 \\ \hline
+ai\_001\_010 v10 & 77/109 & 24.33\% & 9.65\% & 1.29\% & 13.40\% & 0.3475 \\ \hline
+ai\_001\_010 v11 & 74/109 & 25.42\% & 10.49\% & 1.31\% & 14.47\% & 0.3873 \\ \hline
+\end{longtable}
+}
+
+第二场景AP25提高1.09个百分点、AP50提高0.84个百分点、AP75提高0.02个百分点，提升有限。最优一对一TP25仍44，FP25从33降到30，FN25仍65；TP50仍25、TP75仍7。这轮主要提升精度与AP排序，没有增加召回。原有补全受场景内碰撞约束，完整推断框可能有轻微变化；全部既有实测点和其他物体实测区域均通过坐标核验。
+
+
+
+数量误差反而从0.3475升到0.3873：删除重复让预测数离109更远，因为旧重复曾抵消漏检。数量一致性必须配合TP/FP/FN使用，不能为改善比值而保留重复。严格AP、GT可见范围、墙/地面/天花板排除项和MVO定义都没有改变。
+
+
+
+\subsection*{18.3 v11全部低AP25物体}
+\addcontentsline{toc}{subsection}{18.3 v11全部低AP25物体}
+
+下表列出最新图仍未通过AP25最优一对一匹配的65个GT。完整外观定位图及v10逐对象基线见17.7；最新全部109个GT和74个预测、排序匹配均保存在evaluation\_v11.json的object\_error\_diagnostic。名称仅用于定位，不重标注GT。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+GT / 外观 & 最佳预测 ID / 类 & 最佳 IoU & 几何覆盖 & 主要定位问题 \\ \hline
+\endfirsthead
+\hline
+GT / 外观 & 最佳预测 ID / 类 & 最佳 IoU & 几何覆盖 & 主要定位问题 \\ \hline
+\endhead
+3 独立浅盘 & 157 napkin & 39.76\% & 100.00\% & 同一预测竞争多个GT \\ \hline
+6 堆叠方盘 & 31 plate & 46.71\% & 100.00\% & 同一预测竞争多个GT \\ \hline
+7 堆叠方盘 & 31 plate & 46.71\% & 100.00\% & 同一预测竞争多个GT \\ \hline
+8 堆叠方盘 & 31 plate & 46.71\% & 100.00\% & 同一预测竞争多个GT \\ \hline
+9 堆叠方盘 & 31 plate & 46.71\% & 96.71\% & 同一预测竞争多个GT \\ \hline
+10 堆叠方盘 & 31 plate & 46.71\% & 93.81\% & 同一预测竞争多个GT \\ \hline
+11 堆叠方盘 & 27 napkin & 21.35\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+12 堆叠方盘 & 27 napkin & 21.35\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+13 堆叠方盘 & 27 napkin & 21.35\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+14 堆叠方盘 & 27 napkin & 21.35\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+15 堆叠方盘 & 27 napkin & 21.35\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+16 堆叠方盘 & 27 napkin & 21.35\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+21 杯子 & 36 bowl & 13.27\% & 97.87\% & 混合身份或整体框不完整 \\ \hline
+22 杯碟 & 36 bowl & 9.54\% & 78.81\% & 混合身份或整体框不完整 \\ \hline
+26 窗体 & 78 window & 17.85\% & 92.20\% & 混合身份或整体框不完整 \\ \hline
+27 窗体 & 78 window & 17.85\% & 95.57\% & 混合身份或整体框不完整 \\ \hline
+28 百叶帘/窗帘 & 78 window & 2.60\% & 99.76\% & 混合身份或整体框不完整 \\ \hline
+29 百叶帘/窗帘 & 78 window & 1.78\% & 99.95\% & 混合身份或整体框不完整 \\ \hline
+32 案板把手/附属件 & 102 \_sink & 3.41\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+33 案板 & 102 \_sink & 16.96\% & 99.67\% & 混合身份或整体框不完整 \\ \hline
+36 墙边杯子 & 62 sink & 0.46\% & 0.70\% & 可见表面严重漏检 \\ \hline
+38 格架内杯/碟 & 135 bottle & 7.23\% & 90.74\% & 混合身份或整体框不完整 \\ \hline
+43 格架内杯/碟 & 137 bottle & 2.50\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+44 格架内杯/碟 & 140 shelf & 0.21\% & 98.29\% & 混合身份或整体框不完整 \\ \hline
+47 格架内杯/碟 & 140 shelf & 0.39\% & 98.80\% & 混合身份或整体框不完整 \\ \hline
+49 格架内杯/碟 & 140 shelf & 0.16\% & 70.30\% & 混合身份或整体框不完整 \\ \hline
+50 格架内杯/碟 & 140 shelf & 0.18\% & 91.53\% & 混合身份或整体框不完整 \\ \hline
+51 格架内长筒容器 & 132 bottle & 23.37\% & 75.85\% & 混合身份或整体框不完整 \\ \hline
+54 格架内长筒容器 & 133 bottle & 21.99\% & 73.61\% & 混合身份或整体框不完整 \\ \hline
+55 格架内长筒容器 & 105 bottle & 15.33\% & 85.11\% & 混合身份或整体框不完整 \\ \hline
+60 容器附属件 & 167 range hood & 0.87\% & 96.45\% & 混合身份或整体框不完整 \\ \hline
+61 容器 & 30 bottle & 23.01\% & 99.00\% & 混合身份或整体框不完整 \\ \hline
+62 容器附属件 & 30 bottle & 16.03\% & 13.54\% & 仅局部恢复 \\ \hline
+63 杯子 & 167 range hood & 1.26\% & 2.21\% & 可见表面严重漏检 \\ \hline
+69 嵌入式烤箱 & 52 oven & 12.08\% & 99.62\% & 混合身份或整体框不完整 \\ \hline
+71 瓶体/倒酒器 & 24 faucet & 52.66\% & 71.51\% & 同一预测竞争多个GT \\ \hline
+75 水果 & 71 bowl & 2.81\% & 97.67\% & 混合身份或整体框不完整 \\ \hline
+80 水果 & 71 bowl & 0.87\% & 99.01\% & 混合身份或整体框不完整 \\ \hline
+89 置物架内圆盘 & 174 shelf & 8.88\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+90 置物架内圆盘 & 174 shelf & 8.88\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+91 置物架内圆盘 & 174 shelf & 8.88\% & 99.17\% & 混合身份或整体框不完整 \\ \hline
+99 锅铲 & 43 utensil & 16.50\% & 99.09\% & 混合身份或整体框不完整 \\ \hline
+100 汤勺 & 49 towel rack & 7.91\% & 96.56\% & 混合身份或整体框不完整 \\ \hline
+101 漏勺 & 49 towel rack & 4.38\% & 98.51\% & 混合身份或整体框不完整 \\ \hline
+102 叉形厨具 & 49 towel rack & 0.51\% & 97.83\% & 混合身份或整体框不完整 \\ \hline
+103 长柄勺 & 47 utensil & 21.51\% & 98.62\% & 混合身份或整体框不完整 \\ \hline
+104 厨具挂杆 & 49 towel rack & 5.90\% & 99.75\% & 混合身份或整体框不完整 \\ \hline
+112 玻璃容器组/支架 & 15 cup & 15.92\% & 98.49\% & 混合身份或整体框不完整 \\ \hline
+113 堆叠薄板/托盘 & 15 cup & 2.10\% & 21.56\% & 仅局部恢复 \\ \hline
+114 堆叠薄板/托盘 & 1 kitchen island & 0.00\% & 0.00\% & 可见表面严重漏检 \\ \hline
+116 堆叠薄板/托盘 & 143 countertop & 0.03\% & 38.34\% & 仅局部恢复 \\ \hline
+117 面包 & 25 toaster & 16.10\% & 97.62\% & 混合身份或整体框不完整 \\ \hline
+118 面包下托盘 & 25 toaster & 1.46\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+121 调料罐/盖等组件 & 56 spice rack & 2.19\% & 100.00\% & 混合身份或整体框不完整 \\ \hline
+122 调料罐/盖等组件 & 56 spice rack & 2.19\% & 99.32\% & 混合身份或整体框不完整 \\ \hline
+133 小容器/支架 & 14 faucet & 7.32\% & 98.22\% & 混合身份或整体框不完整 \\ \hline
+134 小容器/支架 & 14 faucet & 0.18\% & 62.75\% & 混合身份或整体框不完整 \\ \hline
+135 小容器附属件 & 14 faucet & 0.85\% & 5.77\% & 可见表面严重漏检 \\ \hline
+137 小容器/支架 & 143 countertop & 0.00\% & 1.38\% & 可见表面严重漏检 \\ \hline
+138 小容器附属件 & 143 countertop & 0.00\% & 36.11\% & 仅局部恢复 \\ \hline
+139 墙边置物托条 & 14 faucet & 1.58\% & 73.78\% & 混合身份或整体框不完整 \\ \hline
+146 挂杯 & 123 towel rack & 5.31\% & 90.38\% & 混合身份或整体框不完整 \\ \hline
+151 切片器 & 143 countertop & 0.02\% & 42.92\% & 仅局部恢复 \\ \hline
+152 黄油/块状食物 & 143 countertop & 0.01\% & 52.54\% & 混合身份或整体框不完整 \\ \hline
+153 案板 & 143 countertop & 0.04\% & 93.34\% & 混合身份或整体框不完整 \\ \hline
+\end{longtable}
+}
+
+\subsection*{18.4 后续应优先解决的算法瓶颈}
+\addcontentsline{toc}{subsection}{18.4 后续应优先解决的算法瓶颈}
+
+成叠盘子（GT5–16）、厨具挂杆与挂勺（GT99–104）、窗体/帘（GT26–29）和调料罐组件，是当前多对一混合身份的主要案例。下一步需要保留SAM多尺度原生掩码并构造跨视角实例树，使用可靠完整父掩码确认整体、独立子掩码确认组件，结合任务所需整体粒度与原始严格GT粒度分别报告；不能按GT拆/并预测来抬AP。整套下柜GT68虽有很高表面覆盖，当前仍只有部分柜门身份，没有可靠完整父掩码或封闭后界，仍属未解决。连续吊杆缺少通过验收的原始深度点，不能生成虚假实测几何。
+
+
+
+\subsection*{18.5 验证与产物}
+\addcontentsline{toc}{subsection}{18.5 验证与产物}
+
+95项核心测试通过；两场景从graph阶段使用同场景原始融合与前端缓存重新构建。原始融合、类别/描述、DINO/SBERT特征与前端缓存哈希一致；实测坐标保留、非合并实测区域完全一致；部件父编号合法、parts图与正式图同步、256/384维接口与原图加载器核验通过。构建与诊断代码执行哈希、正式图/PLY哈希和GT哈希均记录在validation\_v11.json。
+
+
+
+输出仍在scannet-sg-processed下的partaware\_ai\_001\_002\_v11和partaware\_ai\_001\_010\_v11，与旧版同级。原版可视化命令如下，默认无边、无pick；需要部件时自行添加--show\_parts。
+
+
+
+\textbf{ai\_001\_002}
+
+
+
+\begin{verbatim}
+cd /home/lewisliu/PartAware-SG
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python script/visualize_map.py \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002/topology_map.json \
+  --show_bboxes --node_radius 0.02
+\end{verbatim}
+
+
+\textbf{ai\_001\_010}
+
+
+
+\begin{verbatim}
+cd /home/lewisliu/PartAware-SG
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python script/visualize_map.py \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v11/hypersim/ai_001_010/instance_cloud_completed.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v11/hypersim/ai_001_010/topology_map.json \
+  --show_bboxes --node_radius 0.02
+\end{verbatim}
+
+
+\section*{19. 论文依据与实际采用范围}
+\addcontentsline{toc}{section}{19. 论文依据与实际采用范围}
 
 {\small
 \begin{longtable}{|p{\dimexpr\linewidth/2-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/2-2\tabcolsep-2\arrayrulewidth\relax}|}
@@ -1803,14 +2627,14 @@ XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 \hline
 论文 & 实际采用范围 \\ \hline
 \endhead
-\href{https://arxiv.org/abs/2605.10484}{ScanNet-SG} & 原始输入、图接口、空间边及可视化根基 \\ \hline
+\href{https://github.com/tud-amr/ScanNet-SG}{ScanNet-SG代码}、\href{https://arxiv.org/abs/2605.10484}{配套OpenSGA论文} & 原始输入、图接口、空间边及可视化根基；论文正式题名为OpenSGA \\ \hline
 \href{https://arxiv.org/abs/2606.29786}{OP3DSG} & 物体—部件知识和关联适配；未执行其在线 LLM 推理 \\ \hline
 \href{https://arxiv.org/abs/2305.11173}{VLPart} & 官方模型、原生部件预测和类别分类器 \\ \hline
 \href{https://arxiv.org/abs/2401.07745}{MaskClustering} & 完整掩码视角共识的算法思想 \\ \hline
 \href{https://arxiv.org/abs/2312.10671}{Open3DIS} & 几何实例与语义分离、二维指导三维实例的设计参考 \\ \hline
 \href{https://arxiv.org/abs/2604.08916}{MV3DIS} & 深度权重与跨视角掩码一致性的适配；未移植整个框架 \\ \hline
 \href{https://arxiv.org/abs/2503.07465}{YOLOE} & 默认执行原生检测分割；v6试验运行SAVPE后撤回 \\ \hline
-\href{https://arxiv.org/abs/2312.11557}{SAI3D} & v8实测几何与多视角掩码连通共识思想；未完整移植网络或超点算法 \\ \hline
+\href{https://arxiv.org/abs/2312.11557}{SAI3D} & v8/v10实测几何区域与多视角验证思想；未完整移植网络或超点算法 \\ \hline
 \href{https://arxiv.org/abs/2311.17707}{SAMPro3D}、\href{https://github.com/GAP-LAB-CUHK-SZ/SAMPro3D}{官方代码} & v8投影三维种子及最远点自动提示；使用已有SAM，不复制完整框架 \\ \hline
 \href{https://arxiv.org/abs/2106.06629}{Mirror3D}、\href{https://arxiv.org/abs/2509.20607}{Reflect3r} & 真镜面研究讨论；本场景不是镜面，当前不执行镜面处理 \\ \hline
 \href{https://arxiv.org/abs/2006.04388}{Generalized Focal Loss} & 质量感知排序思想；未训练 GFL 损失 \\ \hline
@@ -1830,6 +2654,12 @@ SAM 3/SAM 3D Objects、DiffComplete 等已研究但未接入本版本。SAM 3D O
 v7还参考 \href{https://arxiv.org/abs/2401.09419}{GARField} 的层级粒度观点、\href{https://arxiv.org/abs/2407.10084}{Part2Object} 的从部分到物体组合设计、\href{https://arxiv.org/abs/2106.06351}{Part-aware Panoptic Segmentation} 的物体与部件分层评价原则，以及 \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC9460179/}{SpecSeg} 关于反光高光不能单凭颜色可靠判断的分析。采用相应设计原则和独立审核，没有宣称完整复现这些模型；缺少部件真值时不报告PartPQ。
 
 
+
+v10与当前v11另参考\href{https://arxiv.org/html/2602.11660v1}{Clutt3R-Seg}及\href{https://github.com/jeonghonoh/clutt3rseg}{官方代码}的条件层级选择；完整父掩码树尚未接入。SAI3D\href{https://github.com/yd-yin/SAI3D}{官方代码}和SAMPro3D官方实现用于方法复核，没有宣称移植完整网络。
+
+
+
+实例粒度消解参考\href{https://openaccess.thecvf.com/content/CVPR2024/papers/Yan\_MaskClustering\_View\_Consensus\_based\_Mask\_Graph\_Clustering\_for\_Open-Vocabulary\_3D\_CVPR\_2024\_paper.pdf}{MaskClustering论文}及\href{https://github.com/PKU-EPIC/MaskClustering}{官方代码}的多视角共识。复核\href{https://arxiv.org/abs/2006.04388}{GFL}与\href{https://arxiv.org/abs/2011.12885}{GFLV2}后确认定位质量排序会影响AP；本轮没有训练或接入GFL网络，没有用GT重新赋置信度。
 
 
 \end{document}

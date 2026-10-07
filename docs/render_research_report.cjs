@@ -45,6 +45,7 @@ function buildLaTeX(tokens) {
       if (token.type === 'strong') return `\\textbf{${inline(token.tokens)}}`;
       if (token.type === 'em') return `\\emph{${inline(token.tokens)}}`;
       if (token.type === 'link') return `\\href{${escapeTeX(token.href)}}{${inline(token.tokens)}}`;
+      if (token.type === 'image') return `\\textit{${escapeTeX(token.text)}（见HTML版附图）}`;
       if (token.type === 'codespan') return `\\texttt{${escapeTeX(token.text).replace(/([/.:])/g, '$1\\allowbreak{}').replaceAll('\\_', '\\_\\allowbreak{}')}}`;
       if (token.type === 'br') return '\\\\';
       return token.tokens ? inline(token.tokens) : escapeTeX(token.text || '');
@@ -121,7 +122,12 @@ async function buildReport(options) {
   const markdown = fs.readFileSync(source, 'utf8').replace(/\r\n/g, '\n');
 
   function renderMath(expression, display) {
-    const node = document.convert(expression, { display, em: 16, ex: 8, containerWidth: 800 });
+    let node;
+    try {
+      node = document.convert(expression, { display, em: 16, ex: 8, containerWidth: 800 });
+    } catch (error) {
+      throw new Error(`Could not render LaTeX expression: ${expression}`, { cause: error });
+    }
     const rendered = adaptor.outerHTML(node);
     if (/data-mml-node="merror"|data-mjx-error=/.test(rendered)) {
       throw new Error(`Invalid LaTeX expression: ${expression}`);
@@ -155,6 +161,16 @@ async function buildReport(options) {
     ],
     renderer: {
       html(token) { return escapeHTML(token.text); },
+      image(token) {
+        if (/^[a-z]+:|^[/\\]/i.test(token.href)) throw new Error('Report images must be local relative paths');
+        const imagePath = path.resolve(path.dirname(source), token.href);
+        const relative = path.relative(path.dirname(source), imagePath);
+        if (relative.startsWith('..') || path.isAbsolute(relative)) throw new Error('Image outside report directory');
+        const extension = path.extname(imagePath).toLowerCase();
+        const mime = {'.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg'}[extension];
+        if (!mime) throw new Error('Unsupported report image format');
+        return `<img src="data:${mime};base64,${fs.readFileSync(imagePath).toString('base64')}" alt="${escapeHTML(token.text)}" loading="lazy">`;
+      },
       heading(token) {
         const label = this.parser.parseInline(token.tokens);
         const number = /^(\d+(?:\.\d+)*)(?:\.|\s)/.exec(token.text);
@@ -214,6 +230,7 @@ code { font-family:Consolas,"SFMono-Regular",monospace; font-size:.88em; backgro
 pre { overflow:auto; padding:16px; background:var(--formula); border:1px solid var(--line); border-radius:8px; line-height:1.65; }
 pre code { padding:0; background:none; overflow-wrap:normal; }
 table { border-collapse:collapse; width:100%; font-size:14px; line-height:1.7; margin:20px 0; }
+img { max-width:100%; height:auto; border:1px solid #d9e1ec; border-radius:6px; }
 th,td { padding:10px 12px; border:1px solid var(--line); text-align:left; vertical-align:top; }
 th { background:var(--formula); font-weight:650; }
 .math-display { overflow-x:auto; overflow-y:hidden; padding:18px 20px; margin:22px 0; background:var(--formula); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:7px; font-size:1.04em; }

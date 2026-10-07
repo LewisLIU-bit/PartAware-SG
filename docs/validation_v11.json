@@ -1,0 +1,1389 @@
+{
+  "version": "v11",
+  "date": "2026-10-07",
+  "tests_passed": 95,
+  "ground_truth_used_for_construction": false,
+  "qwen_api_calls": 0,
+  "scenes": [
+    {
+      "scene": "ai_001_002",
+      "checks": {
+        "qwen_calls_zero": true,
+        "graph_stage_rebuilt": true,
+        "version_correct": true,
+        "raw_evidence_frozen": true,
+        "original_coordinates_preserved": true,
+        "unrelated_regions_exact": true,
+        "graph_and_tracks_and_cloud_ids_equal": true,
+        "legacy_graph_loader": true,
+        "embedding_dimensions": true,
+        "part_parents_valid": true,
+        "parts_graph_synchronized": true,
+        "gt_scope_unchanged": true,
+        "final_evaluation_graph_hash": true,
+        "final_evaluation_ply_hash": true,
+        "construction_hash_current": true,
+        "diagnostic_hash_current": true
+      },
+      "raw_files": {
+        "instance_cloud.ply": true,
+        "instance_cloud_with_background.ply": true,
+        "object_tracks.json": true,
+        "averaged_instance_features.json": true,
+        "instance_bert_embeddings.json": true
+      },
+      "caches": {
+        "frontend_cache": true,
+        "refined_instance": true
+      },
+      "region_multisets_identical": {
+        "1": true,
+        "3": true,
+        "4": true,
+        "5": true,
+        "6": true,
+        "7": true,
+        "8": true,
+        "9": true,
+        "13": true,
+        "49": true
+      },
+      "coordinate_distance_if_not_identical": {},
+      "merged_aliases": {},
+      "metrics": {
+        "frames": 99,
+        "gt_objects": 10,
+        "predicted_objects": 10,
+        "geometry_only_box_AP25": 1,
+        "geometry_only_box_AP50": 1,
+        "geometry_only_box_AP75": 0.625,
+        "one_to_one_bbox_geometry": {
+          "0.25": {
+            "TP": 10,
+            "FP": 0,
+            "FN": 0,
+            "precision": 1,
+            "recall": 1,
+            "F1": 1,
+            "matches": [
+              {
+                "prediction_id": "1",
+                "gt_id": 4,
+                "iou": 0.9290064614768286
+              },
+              {
+                "prediction_id": "5",
+                "gt_id": 7,
+                "iou": 0.9579794939170253
+              },
+              {
+                "prediction_id": "4",
+                "gt_id": 9,
+                "iou": 0.954976449857486
+              },
+              {
+                "prediction_id": "6",
+                "gt_id": 5,
+                "iou": 0.9633774931977588
+              },
+              {
+                "prediction_id": "8",
+                "gt_id": 6,
+                "iou": 0.8316499165858449
+              },
+              {
+                "prediction_id": "7",
+                "gt_id": 10,
+                "iou": 0.9709047420994608
+              },
+              {
+                "prediction_id": "9",
+                "gt_id": 8,
+                "iou": 0.9626718157636797
+              },
+              {
+                "prediction_id": "13",
+                "gt_id": 1,
+                "iou": 0.5882702391663067
+              },
+              {
+                "prediction_id": "3",
+                "gt_id": 2,
+                "iou": 0.5722966088154836
+              },
+              {
+                "prediction_id": "49",
+                "gt_id": 3,
+                "iou": 0.5605491186094167
+              }
+            ]
+          },
+          "0.5": {
+            "TP": 10,
+            "FP": 0,
+            "FN": 0,
+            "precision": 1,
+            "recall": 1,
+            "F1": 1,
+            "matches": [
+              {
+                "prediction_id": "1",
+                "gt_id": 4,
+                "iou": 0.9290064614768286
+              },
+              {
+                "prediction_id": "5",
+                "gt_id": 7,
+                "iou": 0.9579794939170253
+              },
+              {
+                "prediction_id": "4",
+                "gt_id": 9,
+                "iou": 0.954976449857486
+              },
+              {
+                "prediction_id": "6",
+                "gt_id": 5,
+                "iou": 0.9633774931977588
+              },
+              {
+                "prediction_id": "8",
+                "gt_id": 6,
+                "iou": 0.8316499165858449
+              },
+              {
+                "prediction_id": "7",
+                "gt_id": 10,
+                "iou": 0.9709047420994608
+              },
+              {
+                "prediction_id": "9",
+                "gt_id": 8,
+                "iou": 0.9626718157636797
+              },
+              {
+                "prediction_id": "13",
+                "gt_id": 1,
+                "iou": 0.5882702391663067
+              },
+              {
+                "prediction_id": "3",
+                "gt_id": 2,
+                "iou": 0.5722966088154836
+              },
+              {
+                "prediction_id": "49",
+                "gt_id": 3,
+                "iou": 0.5605491186094167
+              }
+            ]
+          },
+          "0.75": {
+            "TP": 7,
+            "FP": 3,
+            "FN": 3,
+            "precision": 0.7,
+            "recall": 0.7,
+            "F1": 0.7,
+            "matches": [
+              {
+                "prediction_id": "1",
+                "gt_id": 4,
+                "iou": 0.9290064614768286
+              },
+              {
+                "prediction_id": "5",
+                "gt_id": 7,
+                "iou": 0.9579794939170253
+              },
+              {
+                "prediction_id": "4",
+                "gt_id": 9,
+                "iou": 0.954976449857486
+              },
+              {
+                "prediction_id": "6",
+                "gt_id": 5,
+                "iou": 0.9633774931977588
+              },
+              {
+                "prediction_id": "8",
+                "gt_id": 6,
+                "iou": 0.8316499165858449
+              },
+              {
+                "prediction_id": "7",
+                "gt_id": 10,
+                "iou": 0.9709047420994608
+              },
+              {
+                "prediction_id": "9",
+                "gt_id": 8,
+                "iou": 0.9626718157636797
+              }
+            ]
+          }
+        },
+        "maximum_volume_overlap": {
+          "name": "maximum_volume_overlap",
+          "formula": "intersection / max(prediction_volume, ground_truth_volume)",
+          "box_convention": "AABB in meters, same saved graph shapes and official GT as strict AP",
+          "threshold_operator": ">",
+          "official_benchmark_metric": false,
+          "one_to_one": {
+            "0.25": {
+              "TP": 10,
+              "FP": 0,
+              "FN": 0,
+              "precision": 1,
+              "recall": 1,
+              "F1": 1,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 4,
+                  "mvo": 0.9558670872370715
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 7,
+                  "mvo": 0.9680573001820596
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 9,
+                  "mvo": 0.9666747634741677
+                },
+                {
+                  "prediction_id": "6",
+                  "gt_id": 5,
+                  "mvo": 0.9722038603187803
+                },
+                {
+                  "prediction_id": "8",
+                  "gt_id": 6,
+                  "mvo": 0.8316499165858448
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 10,
+                  "mvo": 0.9737644397405889
+                },
+                {
+                  "prediction_id": "9",
+                  "gt_id": 8,
+                  "mvo": 0.9626718157636797
+                },
+                {
+                  "prediction_id": "13",
+                  "gt_id": 1,
+                  "mvo": 0.5902504193425505
+                },
+                {
+                  "prediction_id": "3",
+                  "gt_id": 2,
+                  "mvo": 0.5757364183787239
+                },
+                {
+                  "prediction_id": "49",
+                  "gt_id": 3,
+                  "mvo": 0.5607153668434883
+                }
+              ]
+            },
+            "0.5": {
+              "TP": 10,
+              "FP": 0,
+              "FN": 0,
+              "precision": 1,
+              "recall": 1,
+              "F1": 1,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 4,
+                  "mvo": 0.9558670872370715
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 7,
+                  "mvo": 0.9680573001820596
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 9,
+                  "mvo": 0.9666747634741677
+                },
+                {
+                  "prediction_id": "6",
+                  "gt_id": 5,
+                  "mvo": 0.9722038603187803
+                },
+                {
+                  "prediction_id": "8",
+                  "gt_id": 6,
+                  "mvo": 0.8316499165858448
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 10,
+                  "mvo": 0.9737644397405889
+                },
+                {
+                  "prediction_id": "9",
+                  "gt_id": 8,
+                  "mvo": 0.9626718157636797
+                },
+                {
+                  "prediction_id": "13",
+                  "gt_id": 1,
+                  "mvo": 0.5902504193425505
+                },
+                {
+                  "prediction_id": "3",
+                  "gt_id": 2,
+                  "mvo": 0.5757364183787239
+                },
+                {
+                  "prediction_id": "49",
+                  "gt_id": 3,
+                  "mvo": 0.5607153668434883
+                }
+              ]
+            }
+          },
+          "limitation": "Contained thin boxes have the same MVO and IoU; this does not repair missing geometry.",
+          "AP25": 1,
+          "AP50": 1
+        },
+        "object_count_consistency": {
+          "predicted": 10,
+          "annotated": 10,
+          "ratio": 1,
+          "absolute_log_ratio": 0,
+          "log_base": "e",
+          "status": "finite",
+          "absolute_count_error": 0,
+          "scope": "observable official object instances; exclude wall, floor, ceiling and parts",
+          "limitation": "Missed and duplicate objects can cancel; pair with one-to-one localization metrics."
+        }
+      }
+    },
+    {
+      "scene": "ai_001_010",
+      "checks": {
+        "qwen_calls_zero": true,
+        "graph_stage_rebuilt": true,
+        "version_correct": true,
+        "raw_evidence_frozen": true,
+        "original_coordinates_preserved": true,
+        "unrelated_regions_exact": true,
+        "graph_and_tracks_and_cloud_ids_equal": true,
+        "legacy_graph_loader": true,
+        "embedding_dimensions": true,
+        "part_parents_valid": true,
+        "parts_graph_synchronized": true,
+        "gt_scope_unchanged": true,
+        "final_evaluation_graph_hash": true,
+        "final_evaluation_ply_hash": true,
+        "construction_hash_current": true,
+        "diagnostic_hash_current": true
+      },
+      "raw_files": {
+        "instance_cloud.ply": true,
+        "instance_cloud_with_background.ply": true,
+        "object_tracks.json": true,
+        "averaged_instance_features.json": true,
+        "instance_bert_embeddings.json": true
+      },
+      "caches": {
+        "frontend_cache": true,
+        "refined_instance": true
+      },
+      "region_multisets_identical": {
+        "1": true,
+        "4": true,
+        "5": true,
+        "6": true,
+        "7": true,
+        "10": true,
+        "14": true,
+        "15": true,
+        "21": true,
+        "22": true,
+        "23": true,
+        "24": true,
+        "25": true,
+        "26": true,
+        "27": true,
+        "29": true,
+        "30": true,
+        "31": true,
+        "32": true,
+        "33": true,
+        "36": true,
+        "37": true,
+        "39": true,
+        "40": true,
+        "43": true,
+        "47": true,
+        "49": true,
+        "51": true,
+        "52": true,
+        "56": true,
+        "58": true,
+        "59": true,
+        "60": true,
+        "62": true,
+        "64": true,
+        "70": true,
+        "71": true,
+        "72": true,
+        "73": true,
+        "74": true,
+        "77": true,
+        "78": true,
+        "82": true,
+        "89": true,
+        "99": true,
+        "100": true,
+        "102": true,
+        "103": true,
+        "104": true,
+        "105": true,
+        "119": true,
+        "123": true,
+        "132": true,
+        "133": true,
+        "134": true,
+        "135": true,
+        "137": true,
+        "140": true,
+        "143": true,
+        "148": true,
+        "150": true,
+        "157": true,
+        "167": true,
+        "172": true,
+        "174": true,
+        "187": true,
+        "188": true,
+        "189": true,
+        "192": true,
+        "212": true,
+        "226": true,
+        "233": true,
+        "282": true,
+        "283": true
+      },
+      "coordinate_distance_if_not_identical": {},
+      "merged_aliases": {
+        "19": "1",
+        "101": "89",
+        "181": "1"
+      },
+      "metrics": {
+        "frames": 100,
+        "gt_objects": 109,
+        "predicted_objects": 74,
+        "geometry_only_box_AP25": 0.25417188536454594,
+        "geometry_only_box_AP50": 0.10490025515284204,
+        "geometry_only_box_AP75": 0.01311959312498978,
+        "one_to_one_bbox_geometry": {
+          "0.25": {
+            "TP": 44,
+            "FP": 30,
+            "FN": 65,
+            "precision": 0.5945945945945946,
+            "recall": 0.4036697247706422,
+            "F1": 0.4808743169398907,
+            "matches": [
+              {
+                "prediction_id": "1",
+                "gt_id": 23,
+                "iou": 0.915983359067017
+              },
+              {
+                "prediction_id": "82",
+                "gt_id": 68,
+                "iou": 0.26075303256915205
+              },
+              {
+                "prediction_id": "4",
+                "gt_id": 67,
+                "iou": 0.9519124982001863
+              },
+              {
+                "prediction_id": "140",
+                "gt_id": 45,
+                "iou": 0.5594645545646433
+              },
+              {
+                "prediction_id": "22",
+                "gt_id": 58,
+                "iou": 0.5179632154277738
+              },
+              {
+                "prediction_id": "143",
+                "gt_id": 148,
+                "iou": 0.5077523868391913
+              },
+              {
+                "prediction_id": "5",
+                "gt_id": 25,
+                "iou": 0.9489564441044365
+              },
+              {
+                "prediction_id": "7",
+                "gt_id": 24,
+                "iou": 0.7009821698541132
+              },
+              {
+                "prediction_id": "119",
+                "gt_id": 31,
+                "iou": 0.40128186127825916
+              },
+              {
+                "prediction_id": "39",
+                "gt_id": 96,
+                "iou": 0.29162022680116134
+              },
+              {
+                "prediction_id": "56",
+                "gt_id": 126,
+                "iou": 0.35508577020249554
+              },
+              {
+                "prediction_id": "174",
+                "gt_id": 94,
+                "iou": 0.888225047458725
+              },
+              {
+                "prediction_id": "62",
+                "gt_id": 149,
+                "iou": 0.6551187813369298
+              },
+              {
+                "prediction_id": "40",
+                "gt_id": 95,
+                "iou": 0.395699218224611
+              },
+              {
+                "prediction_id": "31",
+                "gt_id": 5,
+                "iou": 0.4671488718847559
+              },
+              {
+                "prediction_id": "29",
+                "gt_id": 127,
+                "iou": 0.6113236793210639
+              },
+              {
+                "prediction_id": "25",
+                "gt_id": 119,
+                "iou": 0.7937525146885809
+              },
+              {
+                "prediction_id": "71",
+                "gt_id": 86,
+                "iou": 0.6142312252405837
+              },
+              {
+                "prediction_id": "37",
+                "gt_id": 106,
+                "iou": 0.7120151672177627
+              },
+              {
+                "prediction_id": "157",
+                "gt_id": 4,
+                "iou": 0.49232545783893855
+              },
+              {
+                "prediction_id": "70",
+                "gt_id": 20,
+                "iou": 0.3702257209847296
+              },
+              {
+                "prediction_id": "123",
+                "gt_id": 147,
+                "iou": 0.46457284134599797
+              },
+              {
+                "prediction_id": "60",
+                "gt_id": 97,
+                "iou": 0.5633184940709812
+              },
+              {
+                "prediction_id": "73",
+                "gt_id": 128,
+                "iou": 0.3659278758531671
+              },
+              {
+                "prediction_id": "59",
+                "gt_id": 18,
+                "iou": 0.5275539501956077
+              },
+              {
+                "prediction_id": "24",
+                "gt_id": 70,
+                "iou": 0.5549832484299294
+              },
+              {
+                "prediction_id": "148",
+                "gt_id": 98,
+                "iou": 0.6692792813078329
+              },
+              {
+                "prediction_id": "99",
+                "gt_id": 2,
+                "iou": 0.6135716135825922
+              },
+              {
+                "prediction_id": "150",
+                "gt_id": 105,
+                "iou": 0.7923301052806679
+              },
+              {
+                "prediction_id": "212",
+                "gt_id": 19,
+                "iou": 0.5307041131194765
+              },
+              {
+                "prediction_id": "51",
+                "gt_id": 17,
+                "iou": 0.562658719329827
+              },
+              {
+                "prediction_id": "226",
+                "gt_id": 1,
+                "iou": 0.32264772690815985
+              },
+              {
+                "prediction_id": "132",
+                "gt_id": 52,
+                "iou": 0.5155873560443978
+              },
+              {
+                "prediction_id": "105",
+                "gt_id": 56,
+                "iou": 0.5926830360812618
+              },
+              {
+                "prediction_id": "133",
+                "gt_id": 53,
+                "iou": 0.47504994405056844
+              },
+              {
+                "prediction_id": "135",
+                "gt_id": 40,
+                "iou": 0.4586636088046208
+              },
+              {
+                "prediction_id": "137",
+                "gt_id": 41,
+                "iou": 0.46758935312178757
+              },
+              {
+                "prediction_id": "188",
+                "gt_id": 123,
+                "iou": 0.4904077143794652
+              },
+              {
+                "prediction_id": "187",
+                "gt_id": 120,
+                "iou": 0.5138864111964051
+              },
+              {
+                "prediction_id": "192",
+                "gt_id": 125,
+                "iou": 0.4743459995756436
+              },
+              {
+                "prediction_id": "134",
+                "gt_id": 37,
+                "iou": 0.3553528780164469
+              },
+              {
+                "prediction_id": "189",
+                "gt_id": 124,
+                "iou": 0.47129440270561085
+              },
+              {
+                "prediction_id": "282",
+                "gt_id": 30,
+                "iou": 0.814617905545318
+              },
+              {
+                "prediction_id": "283",
+                "gt_id": 57,
+                "iou": 0.39293816192025793
+              }
+            ]
+          },
+          "0.5": {
+            "TP": 25,
+            "FP": 49,
+            "FN": 84,
+            "precision": 0.33783783783783783,
+            "recall": 0.22935779816513763,
+            "F1": 0.27322404371584696,
+            "matches": [
+              {
+                "prediction_id": "1",
+                "gt_id": 23,
+                "iou": 0.915983359067017
+              },
+              {
+                "prediction_id": "4",
+                "gt_id": 67,
+                "iou": 0.9519124982001863
+              },
+              {
+                "prediction_id": "140",
+                "gt_id": 45,
+                "iou": 0.5594645545646433
+              },
+              {
+                "prediction_id": "22",
+                "gt_id": 58,
+                "iou": 0.5179632154277738
+              },
+              {
+                "prediction_id": "143",
+                "gt_id": 148,
+                "iou": 0.5077523868391913
+              },
+              {
+                "prediction_id": "5",
+                "gt_id": 25,
+                "iou": 0.9489564441044365
+              },
+              {
+                "prediction_id": "7",
+                "gt_id": 24,
+                "iou": 0.7009821698541132
+              },
+              {
+                "prediction_id": "174",
+                "gt_id": 94,
+                "iou": 0.888225047458725
+              },
+              {
+                "prediction_id": "62",
+                "gt_id": 149,
+                "iou": 0.6551187813369298
+              },
+              {
+                "prediction_id": "29",
+                "gt_id": 127,
+                "iou": 0.6113236793210639
+              },
+              {
+                "prediction_id": "25",
+                "gt_id": 119,
+                "iou": 0.7937525146885809
+              },
+              {
+                "prediction_id": "71",
+                "gt_id": 86,
+                "iou": 0.6142312252405837
+              },
+              {
+                "prediction_id": "37",
+                "gt_id": 106,
+                "iou": 0.7120151672177627
+              },
+              {
+                "prediction_id": "60",
+                "gt_id": 97,
+                "iou": 0.5633184940709812
+              },
+              {
+                "prediction_id": "59",
+                "gt_id": 18,
+                "iou": 0.5275539501956077
+              },
+              {
+                "prediction_id": "24",
+                "gt_id": 70,
+                "iou": 0.5549832484299294
+              },
+              {
+                "prediction_id": "148",
+                "gt_id": 98,
+                "iou": 0.6692792813078329
+              },
+              {
+                "prediction_id": "99",
+                "gt_id": 2,
+                "iou": 0.6135716135825922
+              },
+              {
+                "prediction_id": "150",
+                "gt_id": 105,
+                "iou": 0.7923301052806679
+              },
+              {
+                "prediction_id": "212",
+                "gt_id": 19,
+                "iou": 0.5307041131194765
+              },
+              {
+                "prediction_id": "51",
+                "gt_id": 17,
+                "iou": 0.562658719329827
+              },
+              {
+                "prediction_id": "132",
+                "gt_id": 52,
+                "iou": 0.5155873560443978
+              },
+              {
+                "prediction_id": "105",
+                "gt_id": 56,
+                "iou": 0.5926830360812618
+              },
+              {
+                "prediction_id": "187",
+                "gt_id": 120,
+                "iou": 0.5138864111964051
+              },
+              {
+                "prediction_id": "282",
+                "gt_id": 30,
+                "iou": 0.814617905545318
+              }
+            ]
+          },
+          "0.75": {
+            "TP": 7,
+            "FP": 67,
+            "FN": 102,
+            "precision": 0.0945945945945946,
+            "recall": 0.06422018348623854,
+            "F1": 0.07650273224043716,
+            "matches": [
+              {
+                "prediction_id": "1",
+                "gt_id": 23,
+                "iou": 0.915983359067017
+              },
+              {
+                "prediction_id": "4",
+                "gt_id": 67,
+                "iou": 0.9519124982001863
+              },
+              {
+                "prediction_id": "5",
+                "gt_id": 25,
+                "iou": 0.9489564441044365
+              },
+              {
+                "prediction_id": "174",
+                "gt_id": 94,
+                "iou": 0.888225047458725
+              },
+              {
+                "prediction_id": "25",
+                "gt_id": 119,
+                "iou": 0.7937525146885809
+              },
+              {
+                "prediction_id": "150",
+                "gt_id": 105,
+                "iou": 0.7923301052806679
+              },
+              {
+                "prediction_id": "282",
+                "gt_id": 30,
+                "iou": 0.814617905545318
+              }
+            ]
+          }
+        },
+        "maximum_volume_overlap": {
+          "name": "maximum_volume_overlap",
+          "formula": "intersection / max(prediction_volume, ground_truth_volume)",
+          "box_convention": "AABB in meters, same saved graph shapes and official GT as strict AP",
+          "threshold_operator": ">",
+          "official_benchmark_metric": false,
+          "one_to_one": {
+            "0.25": {
+              "TP": 44,
+              "FP": 30,
+              "FN": 65,
+              "precision": 0.5945945945945946,
+              "recall": 0.4036697247706422,
+              "F1": 0.4808743169398907,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 23,
+                  "mvo": 0.9256254083342698
+                },
+                {
+                  "prediction_id": "82",
+                  "gt_id": 68,
+                  "mvo": 0.4001508087738539
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 67,
+                  "mvo": 0.9695043056174335
+                },
+                {
+                  "prediction_id": "140",
+                  "gt_id": 45,
+                  "mvo": 0.5777165549248041
+                },
+                {
+                  "prediction_id": "22",
+                  "gt_id": 58,
+                  "mvo": 0.5212584799722499
+                },
+                {
+                  "prediction_id": "143",
+                  "gt_id": 148,
+                  "mvo": 0.5375699877781694
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 25,
+                  "mvo": 0.9611237659763132
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 24,
+                  "mvo": 0.7011174012944272
+                },
+                {
+                  "prediction_id": "119",
+                  "gt_id": 31,
+                  "mvo": 0.40128186127825916
+                },
+                {
+                  "prediction_id": "39",
+                  "gt_id": 96,
+                  "mvo": 0.29259876897112197
+                },
+                {
+                  "prediction_id": "56",
+                  "gt_id": 126,
+                  "mvo": 0.35508577020249554
+                },
+                {
+                  "prediction_id": "174",
+                  "gt_id": 94,
+                  "mvo": 0.8952116955287486
+                },
+                {
+                  "prediction_id": "62",
+                  "gt_id": 149,
+                  "mvo": 0.7553403933782635
+                },
+                {
+                  "prediction_id": "40",
+                  "gt_id": 95,
+                  "mvo": 0.5513660981281174
+                },
+                {
+                  "prediction_id": "31",
+                  "gt_id": 5,
+                  "mvo": 0.46802341733415126
+                },
+                {
+                  "prediction_id": "29",
+                  "gt_id": 127,
+                  "mvo": 0.6113236793210639
+                },
+                {
+                  "prediction_id": "25",
+                  "gt_id": 119,
+                  "mvo": 0.808481107525996
+                },
+                {
+                  "prediction_id": "71",
+                  "gt_id": 86,
+                  "mvo": 0.6216123984441604
+                },
+                {
+                  "prediction_id": "37",
+                  "gt_id": 106,
+                  "mvo": 0.743784847087961
+                },
+                {
+                  "prediction_id": "157",
+                  "gt_id": 4,
+                  "mvo": 0.5385786667118286
+                },
+                {
+                  "prediction_id": "70",
+                  "gt_id": 20,
+                  "mvo": 0.3702257209847296
+                },
+                {
+                  "prediction_id": "123",
+                  "gt_id": 147,
+                  "mvo": 0.46457284134599797
+                },
+                {
+                  "prediction_id": "60",
+                  "gt_id": 97,
+                  "mvo": 0.6711678492724177
+                },
+                {
+                  "prediction_id": "73",
+                  "gt_id": 128,
+                  "mvo": 0.3659278758531671
+                },
+                {
+                  "prediction_id": "59",
+                  "gt_id": 18,
+                  "mvo": 0.5486142439547448
+                },
+                {
+                  "prediction_id": "24",
+                  "gt_id": 70,
+                  "mvo": 0.5828080570925737
+                },
+                {
+                  "prediction_id": "148",
+                  "gt_id": 98,
+                  "mvo": 0.6750281019639894
+                },
+                {
+                  "prediction_id": "99",
+                  "gt_id": 2,
+                  "mvo": 0.631915092738341
+                },
+                {
+                  "prediction_id": "150",
+                  "gt_id": 105,
+                  "mvo": 0.8098409410834058
+                },
+                {
+                  "prediction_id": "212",
+                  "gt_id": 19,
+                  "mvo": 0.5389664498289509
+                },
+                {
+                  "prediction_id": "51",
+                  "gt_id": 17,
+                  "mvo": 0.5792706688941117
+                },
+                {
+                  "prediction_id": "226",
+                  "gt_id": 1,
+                  "mvo": 0.3226611919842012
+                },
+                {
+                  "prediction_id": "132",
+                  "gt_id": 52,
+                  "mvo": 0.5413359552297948
+                },
+                {
+                  "prediction_id": "105",
+                  "gt_id": 56,
+                  "mvo": 0.6113107657005966
+                },
+                {
+                  "prediction_id": "133",
+                  "gt_id": 53,
+                  "mvo": 0.48704183125678924
+                },
+                {
+                  "prediction_id": "135",
+                  "gt_id": 40,
+                  "mvo": 0.5378872518178323
+                },
+                {
+                  "prediction_id": "137",
+                  "gt_id": 41,
+                  "mvo": 0.5941415054852941
+                },
+                {
+                  "prediction_id": "188",
+                  "gt_id": 123,
+                  "mvo": 0.5300021772124984
+                },
+                {
+                  "prediction_id": "187",
+                  "gt_id": 120,
+                  "mvo": 0.5702026554054536
+                },
+                {
+                  "prediction_id": "192",
+                  "gt_id": 125,
+                  "mvo": 0.5099407519251925
+                },
+                {
+                  "prediction_id": "134",
+                  "gt_id": 37,
+                  "mvo": 0.38072596483327514
+                },
+                {
+                  "prediction_id": "189",
+                  "gt_id": 124,
+                  "mvo": 0.4888249950896381
+                },
+                {
+                  "prediction_id": "282",
+                  "gt_id": 30,
+                  "mvo": 0.8615229167585833
+                },
+                {
+                  "prediction_id": "283",
+                  "gt_id": 57,
+                  "mvo": 0.39293816192025793
+                }
+              ]
+            },
+            "0.5": {
+              "TP": 31,
+              "FP": 43,
+              "FN": 78,
+              "precision": 0.4189189189189189,
+              "recall": 0.28440366972477066,
+              "F1": 0.33879781420765026,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 23,
+                  "mvo": 0.9256254083342698
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 67,
+                  "mvo": 0.9695043056174335
+                },
+                {
+                  "prediction_id": "140",
+                  "gt_id": 45,
+                  "mvo": 0.5777165549248041
+                },
+                {
+                  "prediction_id": "22",
+                  "gt_id": 58,
+                  "mvo": 0.5212584799722499
+                },
+                {
+                  "prediction_id": "143",
+                  "gt_id": 148,
+                  "mvo": 0.5375699877781694
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 25,
+                  "mvo": 0.9611237659763132
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 24,
+                  "mvo": 0.7011174012944272
+                },
+                {
+                  "prediction_id": "174",
+                  "gt_id": 94,
+                  "mvo": 0.8952116955287486
+                },
+                {
+                  "prediction_id": "62",
+                  "gt_id": 149,
+                  "mvo": 0.7553403933782635
+                },
+                {
+                  "prediction_id": "40",
+                  "gt_id": 95,
+                  "mvo": 0.5513660981281174
+                },
+                {
+                  "prediction_id": "29",
+                  "gt_id": 127,
+                  "mvo": 0.6113236793210639
+                },
+                {
+                  "prediction_id": "25",
+                  "gt_id": 119,
+                  "mvo": 0.808481107525996
+                },
+                {
+                  "prediction_id": "71",
+                  "gt_id": 86,
+                  "mvo": 0.6216123984441604
+                },
+                {
+                  "prediction_id": "37",
+                  "gt_id": 106,
+                  "mvo": 0.743784847087961
+                },
+                {
+                  "prediction_id": "157",
+                  "gt_id": 4,
+                  "mvo": 0.5385786667118286
+                },
+                {
+                  "prediction_id": "60",
+                  "gt_id": 97,
+                  "mvo": 0.6711678492724177
+                },
+                {
+                  "prediction_id": "59",
+                  "gt_id": 18,
+                  "mvo": 0.5486142439547448
+                },
+                {
+                  "prediction_id": "24",
+                  "gt_id": 70,
+                  "mvo": 0.5828080570925737
+                },
+                {
+                  "prediction_id": "148",
+                  "gt_id": 98,
+                  "mvo": 0.6750281019639894
+                },
+                {
+                  "prediction_id": "99",
+                  "gt_id": 2,
+                  "mvo": 0.631915092738341
+                },
+                {
+                  "prediction_id": "150",
+                  "gt_id": 105,
+                  "mvo": 0.8098409410834058
+                },
+                {
+                  "prediction_id": "212",
+                  "gt_id": 19,
+                  "mvo": 0.5389664498289509
+                },
+                {
+                  "prediction_id": "51",
+                  "gt_id": 17,
+                  "mvo": 0.5792706688941117
+                },
+                {
+                  "prediction_id": "132",
+                  "gt_id": 52,
+                  "mvo": 0.5413359552297948
+                },
+                {
+                  "prediction_id": "105",
+                  "gt_id": 56,
+                  "mvo": 0.6113107657005966
+                },
+                {
+                  "prediction_id": "135",
+                  "gt_id": 40,
+                  "mvo": 0.5378872518178323
+                },
+                {
+                  "prediction_id": "137",
+                  "gt_id": 41,
+                  "mvo": 0.5941415054852941
+                },
+                {
+                  "prediction_id": "188",
+                  "gt_id": 123,
+                  "mvo": 0.5300021772124984
+                },
+                {
+                  "prediction_id": "187",
+                  "gt_id": 120,
+                  "mvo": 0.5702026554054536
+                },
+                {
+                  "prediction_id": "192",
+                  "gt_id": 125,
+                  "mvo": 0.5099407519251925
+                },
+                {
+                  "prediction_id": "282",
+                  "gt_id": 30,
+                  "mvo": 0.8615229167585833
+                }
+              ]
+            }
+          },
+          "limitation": "Contained thin boxes have the same MVO and IoU; this does not repair missing geometry.",
+          "AP25": 0.25417188536454594,
+          "AP50": 0.14471062222358594
+        },
+        "object_count_consistency": {
+          "predicted": 74,
+          "annotated": 109,
+          "ratio": 0.6788990825688074,
+          "absolute_log_ratio": 0.3872827890249739,
+          "log_base": "e",
+          "status": "finite",
+          "absolute_count_error": 35,
+          "scope": "observable official object instances; exclude wall, floor, ceiling and parts",
+          "limitation": "Missed and duplicate objects can cancel; pair with one-to-one localization metrics."
+        }
+      }
+    }
+  ],
+  "limitations_zh": "本轮确实消解三处重复；混合实例拆分、整套下柜父身份和连续灯具杆身仍未解决。错误区域转移未通过本次验收。",
+  "report_sha256": "d527c6457c01ab9cd81360cdef870f7a1df3a258acd930be347c06dbdf067109",
+  "report_validation": {
+    "formula_expectation": {
+      "display": 60,
+      "inline": 30
+    },
+    "viewports": [
+      {
+        "size": {
+          "width": 1400,
+          "height": 1000
+        },
+        "checks": {
+          "formulas": 90,
+          "display": 60,
+          "inline": 30,
+          "missingSVG": 0,
+          "mathErrors": 0,
+          "pageOverflow": false,
+          "version10": true,
+          "version11": true,
+          "diagnosis": true,
+          "embeddedFigures": 6,
+          "decodedFigures": 6,
+          "measuredRods": true,
+          "currentMain": true
+        },
+        "errors": []
+      },
+      {
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "checks": {
+          "formulas": 90,
+          "display": 60,
+          "inline": 30,
+          "missingSVG": 0,
+          "mathErrors": 0,
+          "pageOverflow": false,
+          "version10": true,
+          "version11": true,
+          "diagnosis": true,
+          "embeddedFigures": 6,
+          "decodedFigures": 6,
+          "measuredRods": true,
+          "currentMain": true
+        },
+        "errors": []
+      }
+    ],
+    "latex": {
+      "source": "RESEARCH_LOG.tex",
+      "verified_compile": false,
+      "compiler_error": "Unable to find standard directories for platform"
+    }
+  },
+  "visualization_verified": [
+    "v11_scene002_overview.png",
+    "v11_scene010_overview.png",
+    "v11_scene010_storage_counter.png"
+  ]
+}

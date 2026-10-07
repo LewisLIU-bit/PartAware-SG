@@ -79,3 +79,52 @@ def surface_diagnostics(predictions, truth, tolerance=.02, purity_threshold=.8):
         'per_gt': per_gt, 'per_prediction': per_prediction,
         'part_PQ': None,
         'limitation': 'Geometric coverage ignores identity, with surface precision penalizing non-GT points. Other coverage fields require pure GT-assigned fragments. GT groups are evaluation only; this is not AP, official mask IoU, or proof of predicted parent ownership; Hypersim has no part GT.'}
+
+
+def box_diagnostics(predictions, truth, spatial, surfaces):
+    """Expose errors of individual objects without changing AP or GT identity."""
+    def overlap(a, b):
+        lo, hi = np.maximum(a[0], b[0]), np.minimum(a[1], b[1])
+        intersection = float(np.prod(np.maximum(hi-lo, 0)))
+        va = float(np.prod(np.maximum(np.asarray(a[1])-a[0], 0)))
+        vb = float(np.prod(np.maximum(np.asarray(b[1])-b[0], 0)))
+        return intersection/max(va+vb-intersection, 1e-12)
+    matrix = np.array([[overlap(p['bounds'], g['bounds']) for g in truth] for p in predictions])
+    gt_surface = {g['gt_id']: g for g in surfaces.get('per_gt', [])}
+    pred_surface = {str(p['prediction_id']): p for p in surfaces.get('per_prediction', [])}
+    per_gt = []
+    for j, gt in enumerate(truth):
+        order = np.argsort(-matrix[:, j], kind='stable')
+        candidates = [{'prediction_id': predictions[i]['id'], 'label': predictions[i]['label'],
+            'IoU': float(matrix[i, j]), 'confidence': float(predictions[i]['confidence'])} for i in order[:3]]
+        matches = {str(t): next((p for p in spatial[str(t)]['matches'] if p['gt_id'] == gt['id']), None)
+                   for t in [.25, .5, .75]}
+        per_gt.append({'gt_id': gt['id'], 'label': gt['label'], 'observed_voxels': len(gt['keys']),
+            'best_predictions': candidates, 'one_to_one_matches': matches,
+            'surface': gt_surface.get(gt['id'])})
+    rank = sorted(range(len(predictions)), key=lambda i: (-predictions[i]['confidence'], i))
+    per_prediction = []
+    ranking = {str(t): [] for t in [.25, .5, .75]}
+    for t in [.25, .5, .75]:
+        used = set()
+        for r, i in enumerate(rank):
+            available = [j for j in range(len(truth)) if matrix[i, j] >= t and j not in used]
+            best = max(available, key=lambda j: matrix[i, j]) if available else None
+            if best is not None:
+                used.add(best)
+            j = int(matrix[i].argmax())
+            ranking[str(t)].append({'rank': r+1, 'prediction_id': predictions[i]['id'],
+                'true_positive': best is not None, 'matched_gt_id': truth[best]['id'] if best is not None else None,
+                'matched_IoU': float(matrix[i, best]) if best is not None else None,
+                'best_gt_id': truth[j]['id'], 'best_IoU': float(matrix[i, j]),
+                'reason': 'matched' if best is not None else 'duplicate_competition' if matrix[i, j] >= t else 'localization_below_threshold'})
+    for i, prediction in enumerate(predictions):
+        j = int(matrix[i].argmax())
+        per_prediction.append({'prediction_id': prediction['id'], 'label': prediction['label'],
+            'confidence': float(prediction['confidence']), 'best_gt_id': truth[j]['id'],
+            'best_gt_label': truth[j]['label'], 'best_IoU': float(matrix[i, j]),
+            'surface': pred_surface.get(str(prediction['id'])),
+            'ranking': {t: next(r for r in rows if r['prediction_id'] == prediction['id']) for t, rows in ranking.items()}})
+    return {'protocol': 'per_object_diagnostic_not_individual_AP', 'ground_truth_used_for_construction': False,
+            'per_gt': per_gt, 'per_prediction': per_prediction, 'AP_ranking': ranking,
+            'limitation': 'Best IoU can refer to a neighboring object. Surface dominant identity and one-to-one matching must also be checked. Diagnostic grouping never changes GT or predictions.'}

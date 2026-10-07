@@ -1003,7 +1003,8 @@ def visualize_inference_results_points(results, map_ply_path, frame_ply_path, fr
 
 def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=None, bias_meter=0.0, instance_colors=None, node_radius=0.1, show_bboxes=True, show_edges=True, hypothesis_id="default_hypothesis", enable_picking=False,
                              show_parts=False, show_part_points=False, include_provisional_parts=False,
-                             part_radius=0.035, check_only=False, screenshot_path=None):
+                             part_radius=0.035, check_only=False, screenshot_path=None,
+                             view_front=None, view_lookat=None, view_zoom=None):
     """
     Visualize the map PLY file with object node positions from topology map highlighted.
     
@@ -1374,12 +1375,13 @@ def visualize_map_with_nodes(map_ply_path, topology_map_path=None, topology_map=
         render_option.background_color = np.array([1.0, 1.0, 1.0])
         render_option.mesh_show_back_face = True
 
-        if screenshot_path:
+        if screenshot_path or view_front is not None or view_lookat is not None or view_zoom is not None:
             view = vis.get_view_control()
-            view.set_lookat(map_cloud.get_center())
-            view.set_front([0.15, -0.85, 0.5])
+            view.set_lookat(map_cloud.get_center() if view_lookat is None else view_lookat)
+            view.set_front([0.15, -0.85, 0.5] if view_front is None else view_front)
             view.set_up([0, 0, 1])
-            view.set_zoom(0.65)
+            view.set_zoom(0.65 if view_zoom is None else view_zoom)
+        if screenshot_path:
             for _ in range(5):
                 vis.poll_events()
                 vis.update_renderer()

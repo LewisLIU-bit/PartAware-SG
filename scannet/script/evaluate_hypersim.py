@@ -301,6 +301,7 @@ def evaluate(args):
     diagnostics = getattr(components, 'EVALUATION_DIAGNOSTICS', None)
     if diagnostics is not None:
         report['granularity_surface_diagnostic'] = diagnostics.surface_diagnostics(predictions, truth)
+        report['object_error_diagnostic'] = diagnostics.box_diagnostics(predictions, truth, bbox_spatial, report['granularity_surface_diagnostic'])
         report['granularity_component_sha256'] = hashlib.sha256(Path(diagnostics.__file__).read_bytes()).hexdigest()
     output = Path(args.output).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)

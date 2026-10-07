@@ -89,12 +89,12 @@ def main():
     parser.add_argument('--stride', type=int, default=2)
     parser.add_argument('--edge-threshold', type=float, default=2)
     # Stages support recovery, not removal of individual construction components.
-    parser.add_argument('--start-stage', choices=['tags', 'segmentation', 'fusion', 'graph', 'parts'], default='tags')
+    parser.add_argument('--start-stage', choices=['tags', 'segmentation', 'fusion', 'graph', 'parts', 'final_geometry', 'publish'], default='tags')
     args = parser.parse_args()
     if args.max_depth < 0 or args.stride < 1 or args.edge_threshold <= 0:
         parser.error('Invalid geometry settings')
     context = Context(args)
-    if args.start_stage == 'parts':
+    if args.start_stage in ['parts', 'final_geometry', 'publish']:
         completed = context.scene/'instance_cloud_completed.ply'
         context.graph_geometry = completed if completed.exists() else context.scene/'instance_cloud_cleaned.ply'
     try:
@@ -123,7 +123,7 @@ def main():
             (context.scene/'cache_reuse.json').write_text(json.dumps({'source': str(source),
                 'cached_category_sha256': hashes, 'qwen_api_calls': 0}, indent=2)+'\n')
             context.event('复制并校验同场景观测缓存', source=str(source), cached_categories=len(hashes))
-        stages = ['tags', 'segmentation', 'fusion', 'graph', 'parts']
+        stages = ['tags', 'segmentation', 'fusion', 'graph', 'parts', 'final_geometry', 'publish']
         first = stages.index(args.start_stage)
         if first <= 1 and not context.manifest:
             raise ValueError('Legacy ScanNet frontend remains available through run_scannet_sg.sh; use fusion with its outputs')
@@ -165,12 +165,22 @@ def main():
             for component in getattr(components, 'GRAPH_COMPONENTS', []):
                 component.construct(context)
         part_geometry = getattr(components, 'PART_GEOMETRY', None)
-        if part_geometry is not None:
+        if part_geometry is not None and first <= 4:
             part_geometry.construct(context)
-        for component in getattr(components, 'MEASURED_REFINEMENT', []):
-            component.construct(context)
+        if first <= 4:
+            for component in getattr(components, 'MEASURED_REFINEMENT', []):
+                component.construct(context)
+        if first <= 5:
+            for component in getattr(components, 'FINAL_GEOMETRY', []):
+                component.construct(context)
         graph_path = context.scene / 'topology_map.json'
+        publisher = getattr(components, 'GEOMETRY_OUTPUT', None)
+        if publisher is not None:
+            context.canonical_geometry_input = graph_path
+            publisher.publish(context)
         graph = json.loads(graph_path.read_text())
+        previous_provenance = graph.get('pipeline_provenance', {})
+        construction_stage = (args.start_stage if first <= 3 else previous_provenance.get('construction_start_stage', previous_provenance.get('start_stage', args.start_stage)))
         registry = REPO / 'scannet/script/pipeline_components/__init__.py'
         graph['pipeline_provenance'] = {'registry_sha256': hashlib.sha256(registry.read_bytes()).hexdigest(),
                                       'registry_modules': [x.__name__ for x in getattr(components, 'GRAPH_COMPONENTS', [])],
@@ -180,15 +190,19 @@ def main():
                                       'frontend_module': getattr(getattr(components, 'FRONTEND', None), '__name__', None),
                                       'instance_refinement': getattr(getattr(components, 'INSTANCE_REFINEMENT', None), '__name__', None),
                                       'input_manifest': str(context.manifest), 'start_stage': args.start_stage,
-                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v9',
+                                      'construction_start_stage': construction_stage,
+                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v11',
                                       'observed_validation': getattr(getattr(components, 'OBSERVED_VALIDATION', None), '__name__', None),
                                       'measured_refinement': [x.__name__ for x in getattr(components, 'MEASURED_REFINEMENT', [])],
+                                      'final_geometry': [x.__name__ for x in getattr(components, 'FINAL_GEOMETRY', [])],
                                       'part_geometry': getattr(getattr(components, 'PART_GEOMETRY', None), '__name__', None),
                                       'surface_validation': getattr(getattr(components, 'SURFACE_VALIDATION', None), '__name__', None),
                                       'identity_validation': getattr(getattr(components, 'IDENTITY_VALIDATION', None), '__name__', None),
                                       'background_validation': getattr(getattr(components, 'BACKGROUND_VALIDATION', None), '__name__', None),
                                       'object_validation': getattr(getattr(components, 'OBJECT_VALIDATION', None), '__name__', None)}
         graph_path.write_text(json.dumps(graph, indent=2) + '\n')
+        if (context.scene/'parts/partaware_graph.json').exists():
+            (context.scene/'parts/partaware_graph.json').write_text(json.dumps(graph, indent=2)+'\n')
         context.event('完整主流程完成', output=str(graph_path))
     except Exception as error:
         context.event('主流程失败', error=str(error))

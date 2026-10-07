@@ -1,0 +1,645 @@
+{
+  "version": "v10",
+  "date": "2026-10-07",
+  "tests_passed": 89,
+  "construction_ground_truth_used": false,
+  "qwen_api_calls": 0,
+  "scenes": [
+    {
+      "scene": "ai_001_002",
+      "checks": {
+        "final_graph_hash": true,
+        "final_prediction_ply_hash": true,
+        "ground_truth_scope_unchanged": true,
+        "full_graph_stage_rebuilt": true,
+        "qwen_calls_zero": true,
+        "parts_graph_synchronized": true,
+        "component_execution_hashes_match": true,
+        "measured_recovery_only": true,
+        "no_false_complete_rods": true
+      },
+      "evaluation": {
+        "frames": 99,
+        "gt_objects": 10,
+        "predicted_objects": 10,
+        "geometry_only_box_AP25": 1.0,
+        "geometry_only_box_AP50": 1.0,
+        "geometry_only_box_AP75": 0.625,
+        "object_count_consistency": {
+          "predicted": 10,
+          "annotated": 10,
+          "ratio": 1.0,
+          "absolute_log_ratio": 0.0,
+          "log_base": "e",
+          "status": "finite",
+          "absolute_count_error": 0,
+          "scope": "observable official object instances; exclude wall, floor, ceiling and parts",
+          "limitation": "Missed and duplicate objects can cancel; pair with one-to-one localization metrics."
+        },
+        "maximum_volume_overlap": {
+          "name": "maximum_volume_overlap",
+          "formula": "intersection / max(prediction_volume, ground_truth_volume)",
+          "box_convention": "AABB in meters, same saved graph shapes and official GT as strict AP",
+          "threshold_operator": ">",
+          "official_benchmark_metric": false,
+          "one_to_one": {
+            "0.25": {
+              "TP": 10,
+              "FP": 0,
+              "FN": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "F1": 1.0,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 4,
+                  "mvo": 0.9558670872370715
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 7,
+                  "mvo": 0.9680573001820596
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 9,
+                  "mvo": 0.9666747634741677
+                },
+                {
+                  "prediction_id": "6",
+                  "gt_id": 5,
+                  "mvo": 0.9722038603187803
+                },
+                {
+                  "prediction_id": "8",
+                  "gt_id": 6,
+                  "mvo": 0.8316499165858448
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 10,
+                  "mvo": 0.9737644397405889
+                },
+                {
+                  "prediction_id": "9",
+                  "gt_id": 8,
+                  "mvo": 0.9626718157636797
+                },
+                {
+                  "prediction_id": "13",
+                  "gt_id": 1,
+                  "mvo": 0.5902504193425505
+                },
+                {
+                  "prediction_id": "3",
+                  "gt_id": 2,
+                  "mvo": 0.5757364183787239
+                },
+                {
+                  "prediction_id": "49",
+                  "gt_id": 3,
+                  "mvo": 0.5607153668434883
+                }
+              ]
+            },
+            "0.5": {
+              "TP": 10,
+              "FP": 0,
+              "FN": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "F1": 1.0,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 4,
+                  "mvo": 0.9558670872370715
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 7,
+                  "mvo": 0.9680573001820596
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 9,
+                  "mvo": 0.9666747634741677
+                },
+                {
+                  "prediction_id": "6",
+                  "gt_id": 5,
+                  "mvo": 0.9722038603187803
+                },
+                {
+                  "prediction_id": "8",
+                  "gt_id": 6,
+                  "mvo": 0.8316499165858448
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 10,
+                  "mvo": 0.9737644397405889
+                },
+                {
+                  "prediction_id": "9",
+                  "gt_id": 8,
+                  "mvo": 0.9626718157636797
+                },
+                {
+                  "prediction_id": "13",
+                  "gt_id": 1,
+                  "mvo": 0.5902504193425505
+                },
+                {
+                  "prediction_id": "3",
+                  "gt_id": 2,
+                  "mvo": 0.5757364183787239
+                },
+                {
+                  "prediction_id": "49",
+                  "gt_id": 3,
+                  "mvo": 0.5607153668434883
+                }
+              ]
+            }
+          },
+          "limitation": "Contained thin boxes have the same MVO and IoU; this does not repair missing geometry.",
+          "AP25": 1.0,
+          "AP50": 1.0
+        }
+      },
+      "graph_sha256": "be5b1c0d20303bc8001b6a669fd8a2b782dd6b5d1290e74803b6821559e69095",
+      "ply_sha256": "a8b505d2fddcd5e9193645ae7c95913dc24326b4b89713cd2ef5306ba295b08f",
+      "structural_recovered_objects": [],
+      "measured_upper_body_additions": []
+    },
+    {
+      "scene": "ai_001_010",
+      "checks": {
+        "final_graph_hash": true,
+        "final_prediction_ply_hash": true,
+        "ground_truth_scope_unchanged": true,
+        "full_graph_stage_rebuilt": true,
+        "qwen_calls_zero": true,
+        "parts_graph_synchronized": true,
+        "component_execution_hashes_match": true,
+        "measured_recovery_only": true,
+        "no_false_complete_rods": true
+      },
+      "evaluation": {
+        "frames": 100,
+        "gt_objects": 109,
+        "predicted_objects": 77,
+        "geometry_only_box_AP25": 0.2432503276539974,
+        "geometry_only_box_AP50": 0.09646910867514742,
+        "geometry_only_box_AP75": 0.012907208798150781,
+        "object_count_consistency": {
+          "predicted": 77,
+          "annotated": 109,
+          "ratio": 0.7064220183486238,
+          "absolute_log_ratio": 0.3475424603754599,
+          "log_base": "e",
+          "status": "finite",
+          "absolute_count_error": 32,
+          "scope": "observable official object instances; exclude wall, floor, ceiling and parts",
+          "limitation": "Missed and duplicate objects can cancel; pair with one-to-one localization metrics."
+        },
+        "maximum_volume_overlap": {
+          "name": "maximum_volume_overlap",
+          "formula": "intersection / max(prediction_volume, ground_truth_volume)",
+          "box_convention": "AABB in meters, same saved graph shapes and official GT as strict AP",
+          "threshold_operator": ">",
+          "official_benchmark_metric": false,
+          "one_to_one": {
+            "0.25": {
+              "TP": 44,
+              "FP": 33,
+              "FN": 65,
+              "precision": 0.5714285714285714,
+              "recall": 0.4036697247706422,
+              "F1": 0.4731182795698925,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 23,
+                  "mvo": 0.9522219661172089
+                },
+                {
+                  "prediction_id": "82",
+                  "gt_id": 68,
+                  "mvo": 0.4001508087738539
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 67,
+                  "mvo": 0.9663319837969798
+                },
+                {
+                  "prediction_id": "140",
+                  "gt_id": 45,
+                  "mvo": 0.5777165549248041
+                },
+                {
+                  "prediction_id": "22",
+                  "gt_id": 58,
+                  "mvo": 0.5212584799722499
+                },
+                {
+                  "prediction_id": "143",
+                  "gt_id": 148,
+                  "mvo": 0.5375699877781694
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 25,
+                  "mvo": 0.9611237659763132
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 24,
+                  "mvo": 0.7011174012944272
+                },
+                {
+                  "prediction_id": "119",
+                  "gt_id": 31,
+                  "mvo": 0.40128186127825916
+                },
+                {
+                  "prediction_id": "39",
+                  "gt_id": 96,
+                  "mvo": 0.29259876897112197
+                },
+                {
+                  "prediction_id": "56",
+                  "gt_id": 126,
+                  "mvo": 0.35508577020249554
+                },
+                {
+                  "prediction_id": "174",
+                  "gt_id": 94,
+                  "mvo": 0.8952116955287486
+                },
+                {
+                  "prediction_id": "62",
+                  "gt_id": 149,
+                  "mvo": 0.7553403933782635
+                },
+                {
+                  "prediction_id": "40",
+                  "gt_id": 95,
+                  "mvo": 0.5513660981281174
+                },
+                {
+                  "prediction_id": "31",
+                  "gt_id": 5,
+                  "mvo": 0.46802341733415126
+                },
+                {
+                  "prediction_id": "29",
+                  "gt_id": 127,
+                  "mvo": 0.6113236793210639
+                },
+                {
+                  "prediction_id": "25",
+                  "gt_id": 119,
+                  "mvo": 0.808481107525996
+                },
+                {
+                  "prediction_id": "71",
+                  "gt_id": 86,
+                  "mvo": 0.6216123984441604
+                },
+                {
+                  "prediction_id": "37",
+                  "gt_id": 106,
+                  "mvo": 0.743784847087961
+                },
+                {
+                  "prediction_id": "157",
+                  "gt_id": 4,
+                  "mvo": 0.5385786667118286
+                },
+                {
+                  "prediction_id": "70",
+                  "gt_id": 20,
+                  "mvo": 0.3702257209847296
+                },
+                {
+                  "prediction_id": "123",
+                  "gt_id": 147,
+                  "mvo": 0.46457284134599797
+                },
+                {
+                  "prediction_id": "60",
+                  "gt_id": 97,
+                  "mvo": 0.6711678492724177
+                },
+                {
+                  "prediction_id": "73",
+                  "gt_id": 128,
+                  "mvo": 0.3659278758531671
+                },
+                {
+                  "prediction_id": "59",
+                  "gt_id": 18,
+                  "mvo": 0.5486142439547448
+                },
+                {
+                  "prediction_id": "24",
+                  "gt_id": 70,
+                  "mvo": 0.5828080570925737
+                },
+                {
+                  "prediction_id": "148",
+                  "gt_id": 98,
+                  "mvo": 0.6750281019639894
+                },
+                {
+                  "prediction_id": "99",
+                  "gt_id": 2,
+                  "mvo": 0.631915092738341
+                },
+                {
+                  "prediction_id": "150",
+                  "gt_id": 105,
+                  "mvo": 0.8098409410834058
+                },
+                {
+                  "prediction_id": "212",
+                  "gt_id": 19,
+                  "mvo": 0.5389664498289509
+                },
+                {
+                  "prediction_id": "51",
+                  "gt_id": 17,
+                  "mvo": 0.5792706688941117
+                },
+                {
+                  "prediction_id": "226",
+                  "gt_id": 1,
+                  "mvo": 0.3226611919842012
+                },
+                {
+                  "prediction_id": "132",
+                  "gt_id": 52,
+                  "mvo": 0.5413359552297948
+                },
+                {
+                  "prediction_id": "105",
+                  "gt_id": 56,
+                  "mvo": 0.6113107657005966
+                },
+                {
+                  "prediction_id": "133",
+                  "gt_id": 53,
+                  "mvo": 0.48704183125678924
+                },
+                {
+                  "prediction_id": "135",
+                  "gt_id": 40,
+                  "mvo": 0.5378872518178323
+                },
+                {
+                  "prediction_id": "137",
+                  "gt_id": 41,
+                  "mvo": 0.5941415054852941
+                },
+                {
+                  "prediction_id": "188",
+                  "gt_id": 123,
+                  "mvo": 0.5300021772124984
+                },
+                {
+                  "prediction_id": "187",
+                  "gt_id": 120,
+                  "mvo": 0.5702026554054536
+                },
+                {
+                  "prediction_id": "192",
+                  "gt_id": 125,
+                  "mvo": 0.5099407519251925
+                },
+                {
+                  "prediction_id": "134",
+                  "gt_id": 37,
+                  "mvo": 0.38072596483327514
+                },
+                {
+                  "prediction_id": "189",
+                  "gt_id": 124,
+                  "mvo": 0.4888249950896381
+                },
+                {
+                  "prediction_id": "282",
+                  "gt_id": 30,
+                  "mvo": 0.8615229167585833
+                },
+                {
+                  "prediction_id": "283",
+                  "gt_id": 57,
+                  "mvo": 0.39293816192025793
+                }
+              ]
+            },
+            "0.5": {
+              "TP": 31,
+              "FP": 46,
+              "FN": 78,
+              "precision": 0.4025974025974026,
+              "recall": 0.28440366972477066,
+              "F1": 0.3333333333333333,
+              "matches": [
+                {
+                  "prediction_id": "1",
+                  "gt_id": 23,
+                  "mvo": 0.9522219661172089
+                },
+                {
+                  "prediction_id": "4",
+                  "gt_id": 67,
+                  "mvo": 0.9663319837969798
+                },
+                {
+                  "prediction_id": "140",
+                  "gt_id": 45,
+                  "mvo": 0.5777165549248041
+                },
+                {
+                  "prediction_id": "22",
+                  "gt_id": 58,
+                  "mvo": 0.5212584799722499
+                },
+                {
+                  "prediction_id": "143",
+                  "gt_id": 148,
+                  "mvo": 0.5375699877781694
+                },
+                {
+                  "prediction_id": "5",
+                  "gt_id": 25,
+                  "mvo": 0.9611237659763132
+                },
+                {
+                  "prediction_id": "7",
+                  "gt_id": 24,
+                  "mvo": 0.7011174012944272
+                },
+                {
+                  "prediction_id": "174",
+                  "gt_id": 94,
+                  "mvo": 0.8952116955287486
+                },
+                {
+                  "prediction_id": "62",
+                  "gt_id": 149,
+                  "mvo": 0.7553403933782635
+                },
+                {
+                  "prediction_id": "40",
+                  "gt_id": 95,
+                  "mvo": 0.5513660981281174
+                },
+                {
+                  "prediction_id": "29",
+                  "gt_id": 127,
+                  "mvo": 0.6113236793210639
+                },
+                {
+                  "prediction_id": "25",
+                  "gt_id": 119,
+                  "mvo": 0.808481107525996
+                },
+                {
+                  "prediction_id": "71",
+                  "gt_id": 86,
+                  "mvo": 0.6216123984441604
+                },
+                {
+                  "prediction_id": "37",
+                  "gt_id": 106,
+                  "mvo": 0.743784847087961
+                },
+                {
+                  "prediction_id": "157",
+                  "gt_id": 4,
+                  "mvo": 0.5385786667118286
+                },
+                {
+                  "prediction_id": "60",
+                  "gt_id": 97,
+                  "mvo": 0.6711678492724177
+                },
+                {
+                  "prediction_id": "59",
+                  "gt_id": 18,
+                  "mvo": 0.5486142439547448
+                },
+                {
+                  "prediction_id": "24",
+                  "gt_id": 70,
+                  "mvo": 0.5828080570925737
+                },
+                {
+                  "prediction_id": "148",
+                  "gt_id": 98,
+                  "mvo": 0.6750281019639894
+                },
+                {
+                  "prediction_id": "99",
+                  "gt_id": 2,
+                  "mvo": 0.631915092738341
+                },
+                {
+                  "prediction_id": "150",
+                  "gt_id": 105,
+                  "mvo": 0.8098409410834058
+                },
+                {
+                  "prediction_id": "212",
+                  "gt_id": 19,
+                  "mvo": 0.5389664498289509
+                },
+                {
+                  "prediction_id": "51",
+                  "gt_id": 17,
+                  "mvo": 0.5792706688941117
+                },
+                {
+                  "prediction_id": "132",
+                  "gt_id": 52,
+                  "mvo": 0.5413359552297948
+                },
+                {
+                  "prediction_id": "105",
+                  "gt_id": 56,
+                  "mvo": 0.6113107657005966
+                },
+                {
+                  "prediction_id": "135",
+                  "gt_id": 40,
+                  "mvo": 0.5378872518178323
+                },
+                {
+                  "prediction_id": "137",
+                  "gt_id": 41,
+                  "mvo": 0.5941415054852941
+                },
+                {
+                  "prediction_id": "188",
+                  "gt_id": 123,
+                  "mvo": 0.5300021772124984
+                },
+                {
+                  "prediction_id": "187",
+                  "gt_id": 120,
+                  "mvo": 0.5702026554054536
+                },
+                {
+                  "prediction_id": "192",
+                  "gt_id": 125,
+                  "mvo": 0.5099407519251925
+                },
+                {
+                  "prediction_id": "282",
+                  "gt_id": 30,
+                  "mvo": 0.8615229167585833
+                }
+              ]
+            }
+          },
+          "limitation": "Contained thin boxes have the same MVO and IoU; this does not repair missing geometry.",
+          "AP25": 0.2432503276539974,
+          "AP50": 0.1339711664482307
+        }
+      },
+      "graph_sha256": "917ef623e7b28ff2e2a1e5de4ff8b4668c939d6c9e2f1c8557202b9c52d0892b",
+      "ply_sha256": "1bbeb00eca5ceaecb0f4a5b24a4d8876ccfa46fe959ef78e241602459caeebca",
+      "structural_recovered_objects": [
+        "143",
+        "282",
+        "283",
+        "26"
+      ],
+      "measured_upper_body_additions": [
+        {
+          "instance_id": "26",
+          "name": "shelf",
+          "original_points": 19939,
+          "added_measured_points": 39314
+        },
+        {
+          "instance_id": "226",
+          "name": "lamp",
+          "original_points": 24723,
+          "added_measured_points": 41032
+        }
+      ]
+    }
+  ],
+  "integrity_audit_sha256": "c71d1d476902b55cbd83305138a26e6e3bfa2e17c64956647619a6b5e58ef95b",
+  "report_validation_sha256": "a726b71d69dca3be615d9c7f24298040dca8f11ff3efc59380345367fa124977",
+  "rejected_preliminary_rod_trial": "v10_rejected_rod_diagnosis.json",
+  "cabinet_review_sha256": "0ce73d74fea979d49fb66bb9ba99f8fb3ec3903104ac3e2a8db6c4c9bc34fe56",
+  "limitations_zh": "两个恢复上柜已通过闭合结构和缓存类别判定；柜体整体层级和假阳性仍未完全解决，真实连续吊杆未通过验收。HTML公式已验证，内置LaTeX编译器因平台目录错误不可用。"
+}

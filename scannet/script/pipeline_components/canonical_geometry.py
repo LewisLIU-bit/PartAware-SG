@@ -45,6 +45,33 @@ def fit_box(points, upright=False):
     return center.tolist(), shape
 
 
+def synchronize_recovered_tracks(scene, nodes):
+    path = scene/'validated_object_tracks.json'
+    if not path.exists(): return
+    tracks = json.loads(path.read_text())
+    recovered = {gid for gid in nodes if nodes[gid].get('structural_surface_recovery')}
+    if not recovered: return
+    ownership = {}
+    for file in sorted((scene/'refined_instance').glob('*_updated_instance.json')):
+        fid = file.name.removesuffix('_updated_instance.json')
+        for record in json.loads(file.read_text()):
+            gid = str(record.get('instance_id', -1))
+            if gid in recovered:
+                ownership[(fid, int(record['frame_instance_id']))] = gid
+    seen = {gid: {(o['frame_id'], int(o['local_id'])) for o in tracks[gid]['observations']} for gid in recovered}
+    raw = json.loads((scene/'object_tracks.json').read_text())
+    for original in raw.values():
+        for observation in original['observations']:
+            key = (observation['frame_id'], int(observation['local_id']))
+            gid = ownership.get(key)
+            if gid is not None and key not in seen[gid]:
+                tracks[gid]['observations'].append(observation)
+                seen[gid].add(key)
+    for gid in recovered:
+        tracks[gid]['observed_frames'] = sorted({o['frame_id'] for o in tracks[gid]['observations']})
+    path.write_text(json.dumps(tracks, indent=2)+'\n')
+
+
 def publish(context):
     source = getattr(context, 'canonical_geometry_input', context.scene/'topology_map_cleaned.json')
     graph = json.loads(source.read_text())
@@ -59,7 +86,11 @@ def publish(context):
         if len(local) < 16:
             del nodes[gid]
             continue
+        if str(nodes[gid].get('id', gid)) != str(gid):
+            raise ValueError(f'Object node identifier disagrees with graph key: {gid}')
+        nodes[gid]['id'] = str(gid)
         nodes[gid]['position'], nodes[gid]['shape'] = fit_box(local, upright)
+    synchronize_recovered_tracks(context.scene, nodes)
     # Store an observation-only geometric hypothesis for the completion ablation.
     measured_cloud = o3d.io.read_point_cloud(str(context.scene/'instance_cloud_cleaned.ply'))
     measured_points = np.asarray(measured_cloud.points)
@@ -95,6 +126,13 @@ def publish(context):
                     'direction': (delta/distance).tolist(), 'description': 'next to'}
     observed_graph['edge_hypotheses'] = {'default_hypothesis': {'id': 'default_hypothesis', 'confidence': 1., 'edges': observed_edges}}
     observed_graph['geometry_provenance'] = {**graph['geometry_provenance'], 'source': 'instance_cloud_cleaned.ply'}
+    for current in [graph, observed_graph]:
+        if 'scene_graph' in current:
+            scene_nodes = current['scene_graph'].setdefault('nodes', {})
+            for gid, node in current['object_nodes']['nodes'].items():
+                scene_nodes[gid] = {**scene_nodes.get(gid, {}), **node, 'node_type': 'object'}
+            current['scene_graph']['edges'] = [e for h in current['edge_hypotheses'].values()
+                for e in h['edges'].values()] + current.get('part_relations', [])
     (context.scene/'topology_map_observed.json').write_text(json.dumps(observed_graph, indent=2)+'\n')
     (context.scene/'topology_map.json').write_text(json.dumps(graph, indent=2)+'\n')
     context.event('正式图几何与空间关系同步完成', objects=len(nodes), edges=len(edges), source=context.graph_geometry.name)

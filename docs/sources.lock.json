@@ -94,5 +94,40 @@
       "paper": "https://arxiv.org/abs/2202.06934",
       "integration": "Reviewed small-object sliced inference; not added to current pipeline"
     }
+  },
+  "Clutt3R_Seg": {
+    "paper": "https://arxiv.org/html/2602.11660v1",
+    "repository": "https://github.com/jeonghonoh/clutt3rseg",
+    "integration": "Reviewed conditional hierarchy; no complete mask-tree model transplanted"
+  },
+  "v10_measured_recovery": {
+    "version": "v10",
+    "ground_truth_used_for_construction": false,
+    "qwen_api_calls": 0,
+    "structural_component": "scannet/script/pipeline_components/structural_surfaces.py",
+    "suspension_component": "scannet/script/pipeline_components/suspension_geometry.py",
+    "method": "Project adaptation of geometric boundaries and multiview evidence; not full SAI3D or SAMPro3D reproduction",
+    "closed_storage_identity": "Cached multi-view category evidence gated by closed facade and measured side extension; no new language prompt or GT label"
+  },
+  "LIMAP": {
+    "paper": "https://openaccess.thecvf.com/content/CVPR2023/html/Liu_3D_Line_Mapping_Revisited_CVPR_2023_paper.html",
+    "repository": "https://github.com/cvg/limap",
+    "integration": "Reviewed multiview line mapping; projected-axis trial lacked reliable support; full system not installed"
+  },
+  "MoMa_SG": {
+    "paper": "https://momasg.cs.uni-freiburg.de/",
+    "integration": "Reviewed articulation/container hierarchy; static scenes lack interaction evidence; no model transplanted"
+  },
+  "v11_instance_granularity": {
+    "paper": "https://openaccess.thecvf.com/content/CVPR2024/papers/Yan_MaskClustering_View_Consensus_based_Mask_Graph_Clustering_for_Open-Vocabulary_3D_CVPR_2024_paper.pdf",
+    "repository": "https://github.com/PKU-EPIC/MaskClustering",
+    "integration": "Project-specific contained shared-surface complete-mask consensus; three duplicates merged. Detached ownership transfer gated but no candidate accepted. No full mask tree transplanted.",
+    "qwen_api_calls": 0,
+    "construction_ground_truth_used": false
+  },
+  "GFL_review": {
+    "paper": "https://arxiv.org/abs/2006.04388",
+    "GFLV2": "https://arxiv.org/abs/2011.12885",
+    "integration": "Reviewed localization-quality ranking; no model trained or transplanted and no GT confidence relabeling."
   }
 }

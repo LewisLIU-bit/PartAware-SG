@@ -26,6 +26,9 @@ if __name__ == "__main__":
     parser.add_argument("--part_radius", type=float, default=0.035)
     parser.add_argument("--check_only", action="store_true")
     parser.add_argument("--screenshot", default=None, help="Save a preview without an interactive window")
+    parser.add_argument('--view-front', nargs=3, type=float, default=None)
+    parser.add_argument('--view-lookat', nargs=3, type=float, default=None)
+    parser.add_argument('--view-zoom', type=float, default=None)
     args = parser.parse_args()
 
     example_map_ply_path = args.map_ply_path
@@ -47,6 +50,9 @@ if __name__ == "__main__":
                 part_radius=args.part_radius,
                 check_only=args.check_only,
                 screenshot_path=args.screenshot,
+                view_front=args.view_front,
+                view_lookat=args.view_lookat,
+                view_zoom=args.view_zoom,
             )
             print(f"Successfully visualized map with {len(tracking_colors) if tracking_colors else 0} tracking IDs")
         except Exception as e:

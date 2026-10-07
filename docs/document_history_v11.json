@@ -1,0 +1,14 @@
+{
+  "chapters_7_to_16_unchanged": false,
+  "historical_chapters_sha256": "06eb5fd85f06a479cc728c851ff9b26c2d886707c21d607ba4e4c36052f257c1",
+  "version10_chapter": true,
+  "tex_chapters_7_to_16_unchanged": false,
+  "tex_history_sha256": "7505b951100bb1e83c5924b2ea87cebd446f5e0d094c4f4db79f412197303e0f",
+  "historical_claims_and_measurements_unchanged": true,
+  "historical_math_format_only_repair": "16.3 count equation: repair display delimiters and escaped TeX; no content or metric changed",
+  "historical_tex_chapters_sha256": "59c55f7dd5b95c851fa735374b4d92ed5027d1e8489062f70ceedc8c975e4916",
+  "current_historical_chapters_sha256": "c99bbbfa83e4443eaba5c5a6260aa4deed3e38ba36b4d5f5f2ba67fbc0e9e3fd",
+  "cabinet_current_mathematics": true,
+  "tex_source_sha256": "57e09f36dd602348158006d08d1fcaba16b9265a59488bd70069aae316e5262e",
+  "version": "v11"
+}

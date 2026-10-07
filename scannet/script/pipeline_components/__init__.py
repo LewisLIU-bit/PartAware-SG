@@ -9,8 +9,8 @@ GRAPH_COMPONENTS = [vlpart_graph]
 INSTANCE_REFINEMENT = instance_consensus
 
 FRONTEND = yoloe_frontend
-from . import backed_cuboid
-GEOMETRY_COMPONENTS = [shape_completion, backed_cuboid]
+from . import backed_cuboid, structural_surfaces, instance_granularity
+GEOMETRY_COMPONENTS = [instance_granularity, structural_surfaces, shape_completion, backed_cuboid]
 
 GEOMETRY_OUTPUT = canonical_geometry
 
@@ -34,5 +34,6 @@ SURFACE_VALIDATION = specular_consensus
 from . import part_geometry
 PART_GEOMETRY = part_geometry
 
-from . import thin_geometry, axial_assembly, assembly_density
+from . import thin_geometry, axial_assembly, assembly_density, suspension_geometry
 MEASURED_REFINEMENT = [thin_geometry, axial_assembly, assembly_density]
+FINAL_GEOMETRY = [suspension_geometry]
