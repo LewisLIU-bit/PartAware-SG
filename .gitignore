@@ -9,9 +9,6 @@ __pycache__/
 *.out
 *.txt
 *.csv
-gpt-4o-mini
-gpt-4.1-nano
-gpt-*
 .vscode/
 *.jsonl
 *.json
@@ -50,3 +47,9 @@ scannet/script/qwen_tools/configs/
 .venv-yoloe/
 .venv-completion/
 scannet/script/thirdparty/PoinTr/
+
+.local-secrets/
+!docs/vision_api.example.json
+scannet/script/thirdparty/Hunyuan3D/
+scannet/script/thirdparty/TripoSR/
+scannet/script/thirdparty/MGPC/

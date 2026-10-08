@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 from scipy.spatial import cKDTree
 from partaware.geometry import load_capture, voxel_downsample
+from pipeline_components.fine_instances import sampling_resolution
 
 
 class Views:
@@ -45,6 +46,20 @@ class Views:
         return indices, weights, labels
 
 
+
+class CoarseViews(Views):
+    """Coarse measurements remain independent of a nested fine-mask overlay."""
+    def get(self, fid):
+        pose, depth, mask = super().get(fid)
+        path = self.context.scene/'fine_frontend_cache'/f'{fid}.npz'
+        if path.is_file():
+            if not hasattr(self, 'coarse_masks'): self.coarse_masks = {}
+            if fid not in self.coarse_masks:
+                with np.load(path) as saved: self.coarse_masks[fid] = saved['source_mask'].copy()
+            mask = self.coarse_masks[fid]
+        return pose, depth, mask
+
+
 def pair_evidence(left, right, views):
     """Require whole-object agreement and veto independent separation evidence."""
     fids = sorted(left.frames | right.frames)
@@ -80,6 +95,8 @@ def reconcile(tracks, views, audit):
         if left.id in remap:
             continue
         for right in tracks[i+1:]:
+            if left.fine_scale != right.fine_scale:
+                continue
             if right.id in remap or min(len(left.points), len(right.points)) < 32:
                 continue
             if np.linalg.norm(left.points.mean(0)-right.points.mean(0)) > 1.5:
@@ -100,7 +117,9 @@ def reconcile(tracks, views, audit):
             if evidence['conflict_views'] or evidence['support_views'] < minimum_views or evidence['consensus'] < minimum_consensus:
                 continue
             nl, nr = len(left.observations), len(right.observations)
-            left.points = voxel_downsample(np.concatenate([left.points, right.points]), .01)
+            left.points = voxel_downsample(np.concatenate([left.points, right.points]),
+                min(sampling_resolution(left.points), sampling_resolution(right.points))
+                if left.fine_scale and right.fine_scale else .01)
             left.semantic_sum += right.semantic_sum
             left.visual_sum += right.visual_sum
             left.color = (nl*left.color+nr*right.color)/(nl+nr)
@@ -161,8 +180,13 @@ def refine(tracks, views, remap, audit):
 
 def process(context, tracks, records, data, jobs, kd, kc, scale, audit):
     views = Views(context, jobs, kd, kc, scale, records)
-    remap = reconcile(tracks, views, audit)
-    refine(tracks, views, remap, audit)
+    coarse = [track for track in tracks if not track.fine_scale]
+    fine = [track for track in tracks if track.fine_scale]
+    coarse_views = CoarseViews(context, jobs, kd, kc, scale, records)
+    remap = reconcile(coarse, coarse_views, audit)
+    remap.update(reconcile(fine, views, audit))
+    refine(coarse, coarse_views, remap, audit)
+    refine(fine, views, remap, audit)
     context.event('物体共识精修完成', merged_duplicates=len(remap),
                   removed_points=sum(getattr(t, 'quality', {}).get('removed_points', 0) for t in tracks))
     return remap

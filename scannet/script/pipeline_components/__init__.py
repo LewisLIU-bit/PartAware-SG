@@ -1,4 +1,6 @@
 """Default construction components; remove an import/entry to detach a component."""
+from . import gpt_recognition
+RECOGNITION = gpt_recognition
 from . import multiview_association, op3dsg_fusion, vlpart_graph, instance_consensus, yoloe_frontend, shape_completion, canonical_geometry, proposal_validation
 
 # This code registry is the only attachment point, not a runtime feature switch.

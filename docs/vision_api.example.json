@@ -1,0 +1,11 @@
+{
+  "base_url": "https://YOUR_RELAY_HOST/v1",
+  "model": "YOUR_VISION_MODEL",
+  "api_key_env": "PARTAWARE_GPT_API_KEY",
+  "protocol": "chat_completions",
+  "response_format": "prompt_json",
+  "image_detail": "high",
+  "max_output_tokens": 4096,
+  "chat_token_parameter": "max_completion_tokens",
+  "timeout_seconds": 180
+}

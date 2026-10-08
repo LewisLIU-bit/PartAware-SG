@@ -32,6 +32,7 @@ class Track:
     observations: list = field(default_factory=list)
     frames: set = field(default_factory=set)
     names: Counter = field(default_factory=Counter)
+    fine_scale: bool = False
 
     @property
     def semantic(self):
@@ -82,6 +83,10 @@ def estimate_floor(context, data, jobs, kd, kc, scale):
         mask = cv2.imread(str(context.scene/'refined_instance'/f"{job['frame_id']}.png"), cv2.IMREAD_UNCHANGED)
         rgb, depth = cv2.imread(str(job['rgb'])), cv2.imread(str(job['depth']), cv2.IMREAD_UNCHANGED)
         pose = np.loadtxt(job['pose'])
+        coarse_cache = context.scene/'fine_frontend_cache'/f"{job['frame_id']}.npz"
+        if coarse_cache.is_file():
+            with np.load(coarse_cache) as cached:
+                mask = cached['source_mask'].copy()
         if mask is None or rgb is None or depth is None:
             raise ValueError(f"Unreadable floor sample: {job['frame_id']}")
         for region, is_background in [(mask == 0, True), (mask != 0, False)]:
@@ -122,9 +127,13 @@ def estimate_floor(context, data, jobs, kd, kc, scale):
     return floor
 
 
+from pipeline_components.fine_instances import sampling_resolution, association_radius
+
 def update(track, observation, fid):
     record = observation.record
-    track.points = voxel_downsample(np.concatenate([track.points, observation.points]), 0.01)
+    track.points = voxel_downsample(np.concatenate([track.points, observation.points]),
+        sampling_resolution(observation.points) if record.get('fine_scale_instance') else .01)
+    track.fine_scale = track.fine_scale or bool(record.get('fine_scale_instance'))
     # Keep sums of unit observations, never repeatedly normalize an accumulated mean.
     track.semantic_sum += observation.semantic
     track.visual_sum += observation.visual
@@ -155,10 +164,16 @@ def fuse(context, association=None):
         frame = {'pose': pose, 'depth': depth, 'kd': kd, 'kc': kc, 'scale': scale}
         bg, _ = project_mask(mask == 0, rgb, depth, pose, kd, kc, scale, stride=4)
         background.append(voxel_downsample(bg, .03))
+        coarse_mask = mask
+        coarse_cache = scene/'fine_frontend_cache'/f'{fid}.npz'
+        if coarse_cache.is_file():
+            with np.load(coarse_cache) as cached:
+                coarse_mask = cached['source_mask'].copy()
         observations = []
         for record in records:
             record['instance_id'] = -1
-            region = mask == int(record['frame_instance_id'])
+            evidence_mask = mask if record.get('fine_scale_instance') else coarse_mask
+            region = evidence_mask == int(record['frame_instance_id'])
             points, colors = project_mask(region, rgb, depth, pose, kd, kc, scale,
                                            stride=context.stride, max_depth=context.max_depth)
             if floor:
@@ -175,7 +190,7 @@ def fuse(context, association=None):
             semantic = np.asarray(record['bert_embedding'], float)
             if visual.shape != (256,) or semantic.shape != (384,):
                 raise ValueError('Expected separate DINO-256 and SBERT-384 feature spaces')
-            observations.append(Observation(record, region, voxel_downsample(points, .01),
+            observations.append(Observation(record, region, voxel_downsample(points, sampling_resolution(points) if record.get('fine_scale_instance') else .01),
                                             color_histogram(colors), normalize(semantic), visual))
         scores = np.full((len(observations), len(tracks)), -1e6)
         evidence = {}
@@ -185,6 +200,10 @@ def fuse(context, association=None):
             observation_tree = cKDTree(observation.points)
             lower, upper = observation.points.min(0), observation.points.max(0)
             for j, track in enumerate(tracks):
+                # Independently verified fine instances cannot rename or enlarge
+                # a coarse object through an asymmetric surface-overlap match.
+                if bool(observation.record.get('fine_scale_instance')) != track.fine_scale:
+                    continue
                 q = float(observation.semantic @ track.semantic)
                 if fid in track.frames:
                     continue
@@ -192,15 +211,17 @@ def fuse(context, association=None):
                     continue
                 tlower, tupper = track_bounds[j]
                 separation = np.maximum(np.maximum(lower-tupper, tlower-upper), 0)
-                if np.linalg.norm(separation) > .100001:
+                radius = (association_radius(observation.points, track.points)
+                    if observation.record.get('fine_scale_instance') and track.fine_scale else .1)
+                if np.linalg.norm(separation) > radius+1e-6:
                     continue
-                a = float(np.mean(track_trees[j].query(observation.points)[0] <= .1))
-                b = float(np.mean(observation_tree.query(track.points)[0] <= .1))
+                a = float(np.mean(track_trees[j].query(observation.points)[0] <= radius))
+                b = float(np.mean(observation_tree.query(track.points)[0] <= radius))
                 g = max(a, b)
                 base = g + (q + 1) / 2
                 if g < .2 or (q < .8 and min(a, b) < .7) or (q >= .8 and base < 1.2):
                     continue
-                details = {'geometry': g, 'semantic': q, 'directional_coverage': [a, b]}
+                details = {'geometry': g, 'semantic': q, 'directional_coverage': [a, b], 'association_radius_m': radius}
                 if association:
                     projection = association.visibility_score(observation, track, frame)
                     if projection is None:
@@ -274,6 +295,7 @@ def fuse(context, association=None):
         (scene / filename).write_text(json.dumps(values, indent=2) + '\n')
     (scene / 'object_tracks.json').write_text(json.dumps({str(t.id): {'observations': t.observations,
         'observed_frames': sorted(t.frames), 'name_votes': dict(t.names), 'point_count': len(t.points),
+        'fine_scale_instance': t.fine_scale,
         **getattr(t, 'quality', {}),
         'confidence': getattr(t, 'quality', {}).get('confidence', float(np.mean([x['confidence'] for x in t.observations])))} for t in alive.values()}, indent=2) + '\n')
     (scene / 'object_association_zh.jsonl').write_text(''.join(json.dumps(x, ensure_ascii=False) + '\n' for x in audit))

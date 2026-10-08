@@ -184,3 +184,9 @@ node docs/render_research_report.cjs --source docs/RESEARCH_REPORT.md \
 ```
 
 The published HTML requires no CDN, JavaScript, remote font or network connection.
+
+## GPT relay and v12 fine inference
+
+GPT image categories use the existing scannet-sg OpenAI SDK. See [VISION_API.md](VISION_API.md) for local credential setup, shared caches and direct comparison commands.
+
+V12 fine inference uses the existing .venv-yoloe environment and public YOLOE-v8-L weights. SAM3 access was rejected and its abandoned runtime was removed. See CLEANUP_LOG.md and the research report for the retirement record.

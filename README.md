@@ -12,6 +12,21 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
+GPT category recognition now supports an OpenAI-compatible relay through
+`scannet/script/vision_api.py`. Each scene keeps one shared image-category cache
+for the original DINO/SAM pipeline, v11, and the v12 fine-instance experiment.
+The GPT original comparison replaces RAM category acquisition; it is distinct
+from the frozen RAM baseline. No new Qwen recognition is performed. See
+[GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
+The existing ScanNet and Hypersim interfaces remain unchanged.
+
+V12 fine inference uses public YOLOE-v8-L full-image, tile and region inference,
+with separate coarse and fine RGB-D evidence. It does not require SAM3.
+Two-scene trials are complete, but fine-instance recognition and reliable
+whole-object completion remain unsolved. The validated default remains v11;
+research comparison workers select their construction profile in an isolated
+process and share the same evaluation protocol.
+
 PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v11 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,

@@ -21,6 +21,8 @@ class Context:
         self.image_dir = Path(args.image_dir).expanduser().resolve() if args.image_dir else None
         self.scene = Path(args.processed_scene).expanduser().resolve()
         self.scene.mkdir(parents=True, exist_ok=True)
+        self.recognition_config = getattr(args, 'recognition_config', None)
+        self.recognition_cache = getattr(args, 'recognition_cache', None)
         self.max_depth, self.stride, self.edge_threshold = args.max_depth, args.stride, args.edge_threshold
         self.log = (self.scene / 'pipeline_zh.jsonl').open('a', encoding='utf-8')
         self.environment = os.environ.copy()
@@ -85,6 +87,8 @@ def main():
     parser.add_argument('--processed-scene', required=True)
     parser.add_argument('--reuse-scene', help='Existing observations and cached tags from the same scene')
     parser.add_argument('--qwen-model', default='qwen3-vl-plus', help='Cached tag provenance only; no API call')
+    parser.add_argument('--recognition-config', help='Local GPT relay settings; explicitly acquire or reuse image categories')
+    parser.add_argument('--recognition-cache', help='Shared GPT cache root, separate from version outputs')
     parser.add_argument('--max-depth', type=float, default=0)
     parser.add_argument('--stride', type=int, default=2)
     parser.add_argument('--edge-threshold', type=float, default=2)
@@ -112,6 +116,8 @@ def main():
                 shutil.copytree(source/'frontend_cache', context.scene/'frontend_cache')
             if (source/'frontend_provenance.json').is_file():
                 shutil.copyfile(source/'frontend_provenance.json', context.scene/'frontend_provenance.json')
+            if (source/'recognition_provenance.json').is_file():
+                shutil.copyfile(source/'recognition_provenance.json', context.scene/'recognition_provenance.json')
             if args.start_stage == 'graph':
                 for name in ['instance_cloud.ply', 'instance_cloud_colored.ply', 'instance_cloud_with_background.ply',
                              'instance_name_map.csv', 'averaged_instance_features.json', 'instance_bert_embeddings.json',
@@ -131,6 +137,11 @@ def main():
             data, jobs, _, _, _ = load_capture(context.manifest)
             if context.scene.name != data['scene_id'] or context.scene.parent.name != data['dataset']:
                 raise ValueError('Processed scene must have the existing output_root/dataset/scene_id layout')
+            if context.recognition_config:
+                recognizer = getattr(components, 'RECOGNITION', None)
+                if recognizer is None:
+                    raise ValueError('GPT recognition is not attached to the component registry')
+                recognizer.recognize(context)
             missing = [j['frame_id'] for j in jobs if not (context.scene/'refined_instance'/f"{j['frame_id']}.json").is_file()]
             if missing:
                 vocabulary = json.loads((REPO/'scannet/script/ram/hypersim_indoor_57.json').read_text())
@@ -146,10 +157,12 @@ def main():
             complete = all((context.scene/'refined_instance'/f"{j['frame_id']}_instance.json").exists()
                            and (context.scene/'refined_instance'/f"{j['frame_id']}.png").exists() for j in jobs)
             if not complete:
+                grounding_backend = getattr(components, 'GROUNDING_BACKEND', 'florence')
                 context.execute([sys.executable, str(REPO / 'scannet/script/grounded_sam/scannet_process/get_seg_openset.py'),
                     '--manifest', str(context.manifest), '--json_folder', str(context.scene/'refined_instance'),
-                    '--grounding_backend', 'florence', '--florence_model_dir',
-                    str(Path.home()/'models/vision/Florence-2-large-ft'), '--visualize'], 'Florence 物体定位与 SAM 分割')
+                    '--grounding_backend', grounding_backend, '--florence_model_dir',
+                    str(Path.home()/'models/vision/Florence-2-large-ft'), '--visualize'],
+                    '原始 DINO 定位与 SAM 分割' if grounding_backend == 'dino' else 'Florence 物体定位与 SAM 分割')
             frontend = getattr(components, 'FRONTEND', None)
             if frontend is not None:
                 frontend.segment(context)
@@ -182,7 +195,11 @@ def main():
         previous_provenance = graph.get('pipeline_provenance', {})
         construction_stage = (args.start_stage if first <= 3 else previous_provenance.get('construction_start_stage', previous_provenance.get('start_stage', args.start_stage)))
         registry = REPO / 'scannet/script/pipeline_components/__init__.py'
-        graph['pipeline_provenance'] = {'registry_sha256': hashlib.sha256(registry.read_bytes()).hexdigest(),
+        from pipeline_components.flow import process_tree
+        recognition_path = context.scene/'recognition_provenance.json'
+        recognition = json.loads(recognition_path.read_text()) if recognition_path.is_file() else None
+        graph['pipeline_provenance'] = {'functional_tree': process_tree(components, recognition),
+                                      'registry_sha256': hashlib.sha256(registry.read_bytes()).hexdigest(),
                                       'registry_modules': [x.__name__ for x in getattr(components, 'GRAPH_COMPONENTS', [])],
                                       'fusion_module': getattr(getattr(components, 'FUSION', None), '__name__', 'legacy_cpp'),
                                       'association_module': getattr(getattr(components, 'ASSOCIATION', None), '__name__', None),
@@ -191,7 +208,10 @@ def main():
                                       'instance_refinement': getattr(getattr(components, 'INSTANCE_REFINEMENT', None), '__name__', None),
                                       'input_manifest': str(context.manifest), 'start_stage': args.start_stage,
                                       'construction_start_stage': construction_stage,
-                                      'qwen_model': args.qwen_model, 'qwen_api_calls': 0, 'version': 'v11',
+                                      'qwen_model': None if recognition else args.qwen_model,
+                                      'qwen_api_calls': 0, 'version': getattr(components, 'VERSION', 'v11'),
+                                      'grounding_backend': getattr(components, 'GROUNDING_BACKEND', 'florence'),
+                                      'recognition': recognition,
                                       'observed_validation': getattr(getattr(components, 'OBSERVED_VALIDATION', None), '__name__', None),
                                       'measured_refinement': [x.__name__ for x in getattr(components, 'MEASURED_REFINEMENT', [])],
                                       'final_geometry': [x.__name__ for x in getattr(components, 'FINAL_GEOMETRY', [])],

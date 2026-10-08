@@ -212,7 +212,7 @@ def main():
             np.savez_compressed(cache, source_mask=old_mask, source_records=json.dumps(old_records),
                                 rgb_sha256=hashlib.sha256(Path(job['rgb']).read_bytes()).hexdigest())
             print('本地 YOLOE 掩码融合完成', fid, '原候选', len(old_records), '新总数', len(records), flush=True)
-        (scene/'frontend_provenance.json').write_text(json.dumps({'algorithm': 'yoloe_v8s_union_cached_florence_v4',
+        (scene/'frontend_provenance.json').write_text(json.dumps({'algorithm': 'yoloe_union_roi_v4',
             'qwen_api_calls': 0, 'vocabulary': names, 'model_sha256': model_sha, 'text_encoder_sha256': text_sha, 'cache_signature': signature,
             'feature_space': 'groundingdino_projected_backbone_roi_256',
             'new_uncorroborated_observations': total_new, 'original_observations': total_old}, indent=2)+'\n')

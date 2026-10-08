@@ -79,3 +79,13 @@ README 删除重复安装、旧 v1/v2 示例、已退休脚本和失效路径；
 - `script/visualize_gt_subscan.py`
 - `script/visualize_partaware.py`
 - `src/read_and_visualize_map.cpp`
+
+## 2026-10-08：旧接口与未采用试验清理
+
+核对实际源码及忽略路径后，旧 GPT-4o 的 chatgpt_image、chatgpt_text 和 openai_tools 批处理代码已在前次清理中删除；本轮确认无活跃调用，移除废弃 GPT-4o/GPT-4.1-nano 输出目录忽略项。新的中转 GPT 接口位于 vision_api.py，不复活旧接口。
+
+删除未注册、无调用者的两个失败原型：pipeline_components/sam_fine.py、gated_sam.py。失败算法的实验说明留在研究报告第19章；保留实际使用的 FOVEA、YOLOE-L、粗细实测证据隔离及回归检查。
+
+SAM3访问被作者拒绝，用户决定放弃，删除 .env-sam3（7.6 GB）、thirdparty/SAM3 和仅含失败下载缓存的 checkpoints/sam3。未采用的 YOLOE-26 提示自由试验删除 .venv-fovea26 及 yoloe-26x-seg-pf.pt（185 MB）。移除两份过时 SAM3 操作文档及安装清单，最新环境入口改为 VISION_API.md。Hugging Face账号令牌、Windows/WSL已修复的网络配置、现行环境和公开YOLOE-v8-S/L权重保留。
+
+本轮仍保留已真实验证但尚未获收益的通用补全核心，避免删除尚在研究的原始点云/图像联合适配；第三方源码和大权重作为本地运行资源忽略，不混入核心源码提交。清理前逐一核实递归目标的绝对实际路径在 PartAware-SG 内；没有修改数据输入、旧试验成品或当前GPT缓存。ScanNet/Hypersim、RAM原始对照、Qwen缓存、DINO/Florence/SAM、VLPart、原C++回退、独立评价和共用可视化保留。
