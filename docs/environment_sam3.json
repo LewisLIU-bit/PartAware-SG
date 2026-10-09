@@ -17,5 +17,12 @@
   "trained_model_smoke_tested": true,
   "checkpoint_verified": true,
   "new_gpt_calls": 0,
-  "public_visual_dimensions": 256
+  "public_visual_dimensions": 256,
+  "whole_object_consensus": {
+    "component": "pipeline_components/whole_object_consensus.py",
+    "second_scene_status": "running",
+    "first_scene_accepted": true,
+    "tests": 167,
+    "registration": "v12 WHOLE_OBJECT_VALIDATION"
+  }
 }

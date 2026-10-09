@@ -216,6 +216,7 @@ def main():
                 crop_views.append((fraction, fid))
         metrics[gid] = {'visible_views': visible, 'support_views': support,
             'mixed_views': mixed, 'undersegmented_view_fraction': mixed/max(visible, 1), 'view_detection_rate': support/max(visible, 1)}
+        semantic_centers = []
         for fraction, fid in sorted(crop_views, reverse=True)[:5]:
             image = cv2.imread(str(views.jobs[fid]['rgb']))
             mask = views.get(fid)[2]
@@ -223,6 +224,10 @@ def main():
             crop = masked_crop(image, np.isin(mask, member_ids))
             if crop is not None:
                 crops.append((gid, fraction, crop))
+                semantic_centers.append(views.get(fid)[0][:3, 3])
+        centers = np.asarray(semantic_centers)
+        metrics[gid]['semantic_camera_baseline_m'] = float(np.max(np.linalg.norm(
+            centers[:, None]-centers[None, :], axis=2))) if len(centers) >= 2 else 0.
     vocabulary = {key for value in json.loads((repo/'scannet/script/ram/hypersim_indoor_57.json').read_text()) for key in value}
     for values in records.values():
         vocabulary.update(r['object_name'].replace('_', ' ').strip().lower() for r in values)
@@ -317,6 +322,11 @@ def main():
     ownership_validator = getattr(components, 'OWNERSHIP_VALIDATION', None)
     if ownership_validator is not None:
         survivors = ownership_validator.prune(survivors, geometry, tracks, metrics, views, records, remap, audit, nodes)
+    validated_before_whole_association = len(survivors)
+    whole_validator = getattr(components, 'WHOLE_OBJECT_VALIDATION', None)
+    if whole_validator is not None:
+        survivors = whole_validator.reconcile(survivors, geometry, tracks, metrics, views, records,
+            remap, audit, nodes, aliases, embeddings)
     if not survivors:
         raise RuntimeError('No object passed observed proposal validation; inspect evidence')
     for fid, values in records.items():
@@ -340,13 +350,14 @@ def main():
     (scene/'validated_object_tracks.json').write_text(json.dumps({gid: tracks[gid] for gid in survivors}, indent=2)+'\n')
     report = {'algorithm': 'visible_ownership_competition_v12' if ownership_validator else 'joint_observed_consensus_semantic_validation_v9' if observed_validator else 'masked_clip_identity_background_v7' if identity_validator else 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
         'merged_fragments': len(remap), 'accepted_objects': len(survivors),
-        'rejected_objects': len(active)-len(survivors), 'remap': remap, 'qwen_api_calls': 0,
+        'rejected_objects': len(active)-validated_before_whole_association, 'remap': remap, 'qwen_api_calls': 0,
         'thresholds': {'bbox_inclusion': .95, 'surface_inclusion': .99, 'background_margin': .02, 'whole_mask_consensus': .8, 'sms': 0, 'mixed_view_fraction': .2, 'view_detection_rate': .2, 'strong_reprojection_support': .6},
         'semantic_model': 'OpenAI RN50 masked square crops; not Alpha-CLIP', 'vocabulary': names,
         'ownership_component_sha256': hashlib.sha256(Path(ownership_validator.__file__).read_bytes()).hexdigest() if ownership_validator else None,
         'observed_consensus_component_sha256': hashlib.sha256(Path(observed_validator.__file__).read_bytes()).hexdigest() if observed_validator else None,
         'surface_component_sha256': hashlib.sha256(Path(surface_validator.__file__).read_bytes()).hexdigest() if surface_validator else None,
         'identity_component_sha256': hashlib.sha256(Path(identity_validator.__file__).read_bytes()).hexdigest() if identity_validator else None,
+        'whole_object_component_sha256': whole_validator.component_sha256() if whole_validator else None,
         'identity_aliases': graph['object_identity_aliases'],
         'background_component_sha256': hashlib.sha256(Path(background_validator.__file__).read_bytes()).hexdigest() if background_validator else None,
         'model_sha256': hashlib.sha256((repo/'checkpoints/clip/RN50.pt').read_bytes()).hexdigest(), 'evidence': audit}

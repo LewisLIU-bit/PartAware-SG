@@ -35,8 +35,9 @@ def configure_profile(version, registry):
                     'MEASURED_REFINEMENT', 'FINAL_GEOMETRY'):
             setattr(registry, key, [])
     elif version == 'v12':
-        from pipeline_components import sam3_frontend
+        from pipeline_components import sam3_frontend, whole_object_consensus
         registry.FRONTEND = sam3_frontend
+        registry.WHOLE_OBJECT_VALIDATION = whole_object_consensus
 
 
 def run_worker(args):
@@ -120,7 +121,7 @@ def compare(args):
                     'recognition_fingerprint': json.loads((cache/'recognition_provenance.json').read_text())['request_fingerprint'],
                     'driver_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     'construction_sha256': construction_fingerprint()}
-        print('同场景三版本共用 GPT 识图缓存', {'scene': scene_id, 'frames': len(frames)}, flush=True)
+        print('v12复用同场景既有 GPT 识图缓存', {'scene': scene_id, 'frames': len(frames)}, flush=True)
         for version in ACTIVE_VERSIONS:
             target = scene_directory(root, version, dataset, scene_id)
             target.mkdir(parents=True, exist_ok=True)

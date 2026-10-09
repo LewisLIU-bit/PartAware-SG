@@ -1,0 +1,106 @@
+{
+  "updated": "2026-10-09",
+  "recognition_sources": {
+    "original": "RAM",
+    "v11": "existing_Qwen",
+    "v12": "existing_GPT"
+  },
+  "additional_vision_api_calls": 0,
+  "tests": 167,
+  "first_scene_accepted": true,
+  "second_scene_complete": false,
+  "rows": [
+    {
+      "id": "002",
+      "revision": "sam3r1",
+      "label": "SAM3初次构建",
+      "complete": true,
+      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r1\\hypersim\\ai_001_002",
+      "report": {
+        "predicted": 13,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 0.9633333333333334,
+        "AP75": 0.855,
+        "absolute_log_count_error": 0.26236426446749106,
+        "graph_sha256": "b35124fdb8882c21b89a8ed8ac1a53271bebba93396d0d341e7e4b5293b87054",
+        "prediction_ply_sha256": "9cccee06b2d0d1d66ec3a146459b94072d767791b45d2844d26d6e300ce8adbb"
+      }
+    },
+    {
+      "id": "002",
+      "revision": "sam3r2",
+      "label": "共享表面去重",
+      "complete": true,
+      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r2\\hypersim\\ai_001_002",
+      "report": {
+        "predicted": 12,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 0.9727272727272727,
+        "AP75": 0.8636363636363636,
+        "absolute_log_count_error": 0.1823215567939546,
+        "graph_sha256": "18c8af7c8d69adaeabb58ab1b5cb0b9b8efd9f87f74f6861935b5fe23274f7c6",
+        "prediction_ply_sha256": "2a277d999f6914d51bb542dd87bfdc6bedd10ddea3feddf3bc9816adf2659ab5"
+      }
+    },
+    {
+      "id": "002",
+      "revision": "sam3r3",
+      "label": "图像身份与相机基线",
+      "complete": true,
+      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r3\\hypersim\\ai_001_002",
+      "report": {
+        "predicted": 11,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 1,
+        "AP75": 0.88,
+        "absolute_log_count_error": 0.09531017980432493,
+        "graph_sha256": "7abf3be8d92db81ad14fae4d02b618ae79ea5e06324b03ecaae28ca84218ea8f",
+        "prediction_ply_sha256": "bf92fea4f1b3ea8376ea798f7f2c2c1d22e084054cfea9405ca75d30f6aa5db1"
+      }
+    },
+    {
+      "id": "002",
+      "revision": "sam3r4",
+      "label": "细长平面评分与规范身份",
+      "complete": true,
+      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r4\\hypersim\\ai_001_002",
+      "report": {
+        "predicted": 11,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 1,
+        "AP75": 0.88,
+        "absolute_log_count_error": 0.09531017980432493,
+        "graph_sha256": "154e903fd89f9a67fecb35c491e619448c23c47766a75dd12611a7c75338b5d9",
+        "prediction_ply_sha256": "bf92fea4f1b3ea8376ea798f7f2c2c1d22e084054cfea9405ca75d30f6aa5db1"
+      }
+    },
+    {
+      "id": "002",
+      "revision": "sam3r5",
+      "label": "稳健主平面WOC",
+      "complete": true,
+      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r5\\hypersim\\ai_001_002",
+      "report": {
+        "predicted": 10,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 1,
+        "AP75": 1,
+        "absolute_log_count_error": 0,
+        "graph_sha256": "869948261fac4f9891af81660ba7f10d6593476a849870665c8c97e9af8f725b",
+        "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d"
+      }
+    },
+    {
+      "id": "010",
+      "revision": "sam3r1",
+      "label": "SAM3与WOC完整流程",
+      "complete": false,
+      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_010_v12_sam3r1\\hypersim\\ai_001_010"
+    }
+  ]
+}

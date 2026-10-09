@@ -14,7 +14,7 @@
 \tableofcontents
 \clearpage
 
-更新：2026-10-09。默认版本来源：原始版RAM、v11既有Qwen缓存、v12既有GPT缓存。停止GPT v11调优，只推进v12；SAM3权重校验及两个场景的单帧真实推理通过，完整场景构建和AP验收进行中。通用隐藏形状补全及盘堆逐片识别未解决。
+更新：2026-10-09。原始版RAM、v11既有Qwen、v12既有GPT。SAM3与WOC经过连续修订，第一场景保持10个物体及AP25/AP50 100\%，AP75由80\%升至100\%并通过严格准入；第二场景完整验证进行中。通用隐藏形状补全及盘堆逐片识别未解决。
 
 
 
@@ -59,7 +59,7 @@
 
 
 \begin{itemize}
-\item v12研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两个场景单帧验证通过，完整建图验收进行中；旧YOLOE-L结果单列为对照。
+\item v12研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；第一场景完整验收通过，第二场景继续验证；旧YOLOE-L结果单列为对照。
 
 
 \item 物体特征统一为 DINO 256维和 SBERT 384维，部件 RN50 1024维独立保留。
@@ -97,8 +97,19 @@
 
 
 \begin{itemize}
-\item 完整物体掩码、独立视角及共享实测表面共同判断重复与互补表面。
+\item \textbf{WOC — Whole Object Consensus｜完整物体表面共识}
 
+
+\begin{itemize}
+\item 共享实测表面去重；图像身份与相机基线消解跨名称互补面。
+
+
+\item 稳健主平面恢复有界末端面归属；多个独立分离视角否决错合并。
+
+
+\item 只合并实际测量，互为唯一兼容归属；公开特征及接口保持一致。
+
+\end{itemize}
 
 \item 保留可靠分离证据；候选验收、冲突身份及背景/台面反证决定最终独立物体。
 
@@ -386,6 +397,55 @@ P_k'=\operatorname{Voxel}_{0.01}\left(P_k\cup\{p\in P_i\cap B_k:d(p,P_\ell)>0.03
 
 
 这些规则受到MaskClustering多视角完整掩码共识及Details Matter包含残片思想启发，是本项目适配，未宣称完整复现其网络。数量阈值不是指定场景必须输出几个物体；构建代码中没有GT编号或目标物体数。
+
+
+
+\subsection*{2.6 WOC：图像身份与完整物体表面共识（v12）}
+\addcontentsline{toc}{subsection}{2.6 WOC：图像身份与完整物体表面共识（v12）}
+
+WOC（Whole Object Consensus）在MICA候选验收后、部件识别前执行。它解决同一物体被分成不同名称或不同可见表面的情况，借鉴\href{https://github.com/PKU-EPIC/MaskClustering}{MaskClustering的多视角掩码共识}及\href{https://arxiv.org/abs/1903.00268}{对象级RGB-D语义建图的几何与身份关联}。下面的联合规则是本项目适配，不能写成上述论文原算法的完整复现。
+
+
+
+\textbf{图像身份。} 沿用候选验收已经算出的多视角遮罩RN50向量 $z_i$ 和物体/背景文本分数，不额外调用VLM。对两候选 $i,j$，图像特征余弦为：
+
+
+
+\$
+s\_\{ij\}\textasciicircum{}\{\textbackslash{}mathrm\{image\}\}=\textbackslash{}frac\{z\_i\textasciicircum{}\textbackslash{}top z\_j\}\{|z\_i|\_2|z\_j|\emph{2\},\textbackslash{}qquad
+b\_i=\textbackslash{}max}\{t,u\textbackslash{}in\textbackslash{}mathcal T\_i\}|c\_t-c\_u|\_2.
+\$
+
+
+
+两者分别至少有2个实际图像裁剪、相机基线 $b_i,b_j\ge0.08$ 米、最佳图像类别一致、物体分数减背景分数至少0.01、图像余弦至少0.8才允许跨名称关联。类别相同本身不是合并理由；公开DINO 256维与SBERT 384维特征不替换成RN50，也不把物体图像特征混入部件特征。
+
+
+
+\textbf{可见完整物体共识。} 只让深度一致且两候选均有至少16个投影点的帧参与。某一原始局部掩码分别承接双方不少于60\%的加权可见点时计为完整物体支持 $H_{ij}$；各自被不同掩码承接时计为独立分离 $D_{ij}$。未见或被遮挡的区域不计作反证：
+
+
+
+\$
+C\_\{ij\}=\textbackslash{}frac\{H\_\{ij\}\}\{N\_\{ij\}\},\textbackslash{}qquad
+Q\_\{ij\}=\textbackslash{}min\textbackslash{}left(\textbackslash{}frac\{|\{p\textbackslash{}in P\_i:d(p,P\_j)\textbackslash{}le0.03\}|\}\{|P\_i|\},\textbackslash{}frac\{|\{p\textbackslash{}in P\_j:d(p,P\_i)\textbackslash{}le0.03\}|\}\{|P\_j|\}\textbackslash{}right).
+\$
+
+
+
+共享实测表面去重要求框IoU至少0.9、双向3厘米表面覆盖 $Q_{ij}\ge0.8$、名称SBERT余弦至少0.6、至少5帧完整支持、$C_{ij}\ge0.5$、$D_{ij}=0$。它可消解同一桌面被分别命名为table/desk的重复，不因容器把内容物包在框内就合并。
+
+
+
+互补实体表面要求上述图像身份成立、框IoU至少0.6、最近实测距离不超过4厘米、至少3帧完整支持、$C_{ij}\ge0.8$、$D_{ij}=0$。这允许不同名词覆盖同一实体的不同表面，而不让名称向量成为唯一否决条件。
+
+
+
+\textbf{有界末端面关联。} 对缺少框重叠的前后表面，先用1厘米距离容差、固定种子的RANSAC取实测主平面，至少70\%的采样点必须支持该面，再计算其协方差特征值 $\lambda_0\le\lambda_1\le\lambda_2$ 满足 $(\lambda_1-\lambda_0)/\lambda_1\ge0.8$，即法向噪声小于较小切向方差的20\%。不用最大切向方差归一化，以免细长矩形面被误判。法向与当前世界坐标轴余弦至少0.9。切向交叠面积除两侧较大切向面积至少0.8；该面法向跨度不超过另一侧一半，归并后的法向跨度不超过另一侧1.7倍。还要求最近实测距离不超过5厘米、至少1帧完整支持、至少2帧双方可见、$C_{ij}\ge0.5$、独立分离不超过1帧，以及图像身份成立。该分支是坐标轴对齐的实测表面适配，对任意旋转物体不宣称有效。
+
+
+
+所有通过规则的候选还必须互为唯一兼容归属；多个目标均兼容则保留分离，不按GT选择。归并只并入已有测量，5毫米体素每格保留一个原始采样点，更新普通物体轨迹、别名与正式几何。跨名称关联后的规范名称取已存在候选中物体与背景分差更高的一方，并保留其对应SBERT向量；它不是新增提示或VLM重新识图。\textbf{没有填入隐藏背面，没有生成新点；对完全不可见厚度及堆叠盘子的未知数量，本算法仍不能提供通用补全。} 决策及否决原因写入object\_validation.json，移除v12的WHOLE\_OBJECT\_VALIDATION导入/注册即可拆卸。
 
 
 
@@ -1365,6 +1425,13 @@ Q=\operatorname{SHA256}(\text{model, URL, protocol, prompt, request settings}).
 
 
 缓存失败恢复明确记录每次实际token预算、协议、指纹与失败响应原文的SHA256。仅输出预算不足或缺终止事件的失败允许显式恢复；完整成功帧禁止因增大预算重识别。串行失败停止在当前帧，不提前付费请求全场景。非流恢复保留失败流证据，超时仍报告失败，不接受半份JSON。
+
+
+
+\subsection*{6.7 WOC完整物体关联接口}
+\addcontentsline{toc}{subsection}{6.7 WOC完整物体关联接口}
+
+whole\_object\_consensus.reconcile接收候选ID、实测点、原轨迹、既有遮罩RN50特征与语义验证结果，以及缓存RGB-D可见性；返回归并后的普通候选ID，更新原节点特征、轨迹、名称别名和实测点归属。它位于proposal\_validation的可见所有权审核之后、公开PLY/JSON写入之前。WHOLE\_OBJECT\_VALIDATION只在v12的configure\_profile中注册；删除导入与该注册即可撤除，不用备份恢复或新增算法开关。算法和源码哈希保存在object\_validation.json，证据及否决日志为中文，源代码和注释为英文。
 
 
 
@@ -3242,7 +3309,7 @@ SAM3接入前151项完整离线测试通过，包含独立评价门控、非流�
 \subsection*{22.2 接口改变与拆卸}
 \addcontentsline{toc}{subsection}{22.2 接口改变与拆卸}
 
-新增核心文件为pipeline\_components/sam3\_frontend.py及sam3\_worker.py。v12的configure\_profile注册点把FRONTEND指向sam3\_frontend；仅移除该导入/注册并指回原fovea即可撤除，不需要恢复整个工程，也没有新增逐算法开关。历史原始版/v11配置和普通ScanNet/Hypersim入口保留。
+新增核心文件为pipeline\_components/sam3\_frontend.py及sam3\_worker.py；完整物体关联另由whole\_object\_consensus.py挂接到v12的WHOLE\_OBJECT\_VALIDATION。移除这个导入/注册即可独立撤除WOC。v12的configure\_profile注册点把FRONTEND指向sam3\_frontend；仅移除该导入/注册并指回原fovea即可撤除，不需要恢复整个工程，也没有新增逐算法开关。历史原始版/v11配置和普通ScanNet/Hypersim入口保留。
 
 
 
@@ -3254,18 +3321,65 @@ SAM3缓存以RGB、权重、源码、类别查询和裁剪区域组成签名；�
 
 
 
-\subsection*{22.3 实际验收状态}
-\addcontentsline{toc}{subsection}{22.3 实际验收状态}
+\subsection*{22.3 持续修订与实际结果}
+\addcontentsline{toc}{subsection}{22.3 持续修订与实际结果}
 
-权重下载及平台SHA256校验已完成；SAM3接口与158项完整离线回归测试通过。两个场景分别完成1帧真实训练权重推理及公共特征附加：ai\_001\_002得到17个二维观测、耗时19.50秒，ai\_001\_010得到95个二维观测、耗时25.37秒；峰值已分配显存约5.34 GB。这里统计的是单帧掩码观测，不是最终物体数，也不是准确率。完整场景构建正在运行，AP验收尚未完成，不宣称SAM3已提高场景精度。
-
-
-
-单帧审核保存在outputs/sam3\_smoke\_validation.json，实际模型、固定源码及环境清单为docs/environment\_sam3.json与docs/sam3\_requirements.txt。新实验分开写入partaware\_gpt\_ai\_001\_002\_v12\_sam3r1及partaware\_gpt\_ai\_001\_010\_v12\_sam3r1；不替换已经验收的旧产物。第二场景SAM3接入前的GPT v12为98/109、AP25 22.33\%、AP50 11.83\%、AP75 2.94\%，整体准入未通过；它是本轮明确需要改进的对照。
+SAM3原生权重推理及公共特征接口已实际运行，当前167项离线回归通过。两个真实单帧smoke及完整构建分开记账；不是只加载模型就宣称提高。第一场景完整99帧SAM3观测只生成一次，后续从同一原始融合PLY、轨迹和二维观测重新构图，不修改旧成品；第二场景复用100帧GPT语义和已有本地SAM3推理缓存，继续完整重建。新增GPT/Qwen请求均为0。
 
 
 
-当前主要预期是减少同一物体不同名词产生的重复面、提高小物体可见掩码及完整物体表面覆盖。是否有效由相同Hypersim可观测GT的AP25/AP50/AP75、数量绝对对数误差及逐物体TP/FP/FN判断，不能保证先验提升百分比。隐藏体积补全与完全遮挡盘子的数量恢复仍需独立方法，不把SAM3加载或某张掩码成功写成这些问题已解决。
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景/算法修订 & 预测/GT & AP25 & AP50 & AP75 & 数量绝对对数误差 \\ \hline
+\endfirsthead
+\hline
+场景/算法修订 & 预测/GT & AP25 & AP50 & AP75 & 数量绝对对数误差 \\ \hline
+\endhead
+002 SAM3初次构建 & 13/10 & 100.00\% & 96.33\% & 85.50\% & 0.2624 \\ \hline
+002 共享表面去重 & 12/10 & 100.00\% & 97.27\% & 86.36\% & 0.1823 \\ \hline
+002 图像身份与相机基线 & 11/10 & 100.00\% & 100.00\% & 88.00\% & 0.0953 \\ \hline
+002 细长平面评分与规范身份 & 11/10 & 100.00\% & 100.00\% & 88.00\% & 0.0953 \\ \hline
+002 稳健主平面WOC & 10/10 & 100.00\% & 100.00\% & 100.00\% & 0.0000 \\ \hline
+010 SAM3与WOC完整流程 & 构建/验收进行中 & — & — & — & — \\ \hline
+\end{longtable}
+}
 
+第一场景已验收的SAM3前GPT v12是10/10、100\%/100\%/80\%。SAM3初次结果AP75有所改善，但13个预测导致AP50与数量回退，因此没有直接发布成默认成果，也没有在首次失败后放弃。先以双向实测表面消解重复桌面，再复用现有遮罩RN50图像身份和真实相机基线处理不同名称的互补表面；最后用稳健主平面而非整云方差处理带有边缘回波的后表面。原始名称和来源保留为别名；两台相邻实物的多帧分离证据仍构成否决。数学和阈值维护于2.6。没有硬编码对象ID、GT类别或目标数量。
+
+
+
+最终第一场景10/10、AP25/AP50/AP75为100.00\%/100.00\%/100.00\%。相对旧GPT v12，AP75提高20个百分点、数量误差保持0；独立严格准入及公共节点/部件父归属验证通过。正式图有10个物体、19个确认部件、15条part\_of关系。以下为真实Open3D预览，沿用原可视化，不展示边、不启用pick。
+
+
+
+\textit{第一场景SAM3与WOC正式图（见HTML版附图）}
+
+
+
+第二场景的对照固定为SAM3前GPT v12：98/109、AP25/AP50/AP75 22.33\%/11.83\%/2.94\%；旧Qwen v12为91/109、27.04\%/11.82\%/1.49\%。必须同时报告这两种参照，不因选有利指标宣称全面提高。第二场景未完成时不套用第一场景结论；若回退，保留有证据的局部改进，继续以独立视角和实测几何修订算法，不能用GT指导构建。
+
+
+
+\subsection*{22.4 保留范围、限制与产物}
+\addcontentsline{toc}{subsection}{22.4 保留范围、限制与产物}
+
+本轮保留SAM3的可见实例分割及WOC的共享/互补实测表面归并，作为v12的FOVEA/MICA部分。第一场景的100\%是当前可观测GT、类无关AABB几何框的项目适配评价；不是官方benchmark、不是语义关系全部正确，更不是隐藏表面100\%补全。薄片、未知背面和完全遮挡的盘子仍不能普遍恢复。仅有两个场景的结果也不能保证未见厨房数据同样提高。
+
+
+
+第一场景接受产物为partaware\_gpt\_ai\_001\_002\_v12\_sam3r5/hypersim/ai\_001\_002；第二场景当前研究产物为partaware\_gpt\_ai\_001\_010\_v12\_sam3r1/hypersim/ai\_001\_010。各自产物包含正式topology\_map.json、instance\_cloud\_cleaned.ply、原观测/轨迹、object\_validation.json和evaluation.json；外部验收仅检查这些固定成品。完整代码指纹及零新增识图调用记于construction\_completed.json，第二场景未完成则仅有construction\_start.json。
+
+
+
+\begin{verbatim}
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
+/home/lewisliu/PartAware-SG/script/visualize_map.py \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r5/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r5/hypersim/ai_001_002/topology_map.json \
+--show_bboxes --node_radius 0.02
+\end{verbatim}
 
 \end{document}
