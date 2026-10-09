@@ -1,6 +1,6 @@
 # PartAware-SG 综合研发与实验报告
 
-更新：2026-10-09。原始版RAM、v11既有Qwen、v12既有GPT。SAM3与WOC经过连续修订，第一场景保持10个物体及AP25/AP50 100%，AP75由80%升至100%并通过严格准入；第二场景完整验证进行中。通用隐藏形状补全及盘堆逐片识别未解决。
+更新：2026-10-09。默认原始版RAM、v11既有Qwen、v12既有GPT。两场景SAM3完整构建已结束；第一场景AP25/AP50/AP75均100%，第二场景为32.21%/18.86%/6.17%。13块柜体面板保留为部件，其他实测点不变。第二场景严格全指标门控仍未通过，通用隐藏形状补全及盘堆逐片识别未解决。
 
 ## 1. 当前主脉络
 
@@ -15,7 +15,7 @@
     - 当前v12由SAM3直接产生整图概念实例与局部放大掩码；GroundingDINO保留256维视觉特征接口。
     - 原始版及v11保留既有定位/分割路径；Florence、SAM和YOLOE的旧组合不作为SAM3前端的重复步骤。
   - **精细证据与统一接口**
-    - v12研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；第一场景完整验收通过，第二场景继续验证；旧YOLOE-L结果单列为对照。
+    - v12研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两场景完整构建结束，第一场景全面验收通过、第二场景保留局部改善；旧YOLOE-L结果单列为对照。
     - 物体特征统一为 DINO 256维和 SBERT 384维，部件 RN50 1024维独立保留。
 - **MICA — Multiview Instance Consensus and Association｜多视角实例共识**
   - **实测投影与背景**
@@ -29,6 +29,8 @@
       - 共享实测表面去重；图像身份与相机基线消解跨名称互补面。
       - 稳健主平面恢复有界末端面归属；多个独立分离视角否决错合并。
       - 只合并实际测量，互为唯一兼容归属；公开特征及接口保持一致。
+      - 原生整图掩码核验接触体，逐次重新审核合体；独立分离证据否决。
+      - 原生整图掩码核验接触体，逐次重新审核合体；独立分离证据否决。
     - 保留可靠分离证据；候选验收、冲突身份及背景/台面反证决定最终独立物体。
     - GPT比较流程新增可见归属竞争、局部地板反证与唯一完整物体锚定；同一实测面不重复计数，精细实例受保护。
 - **SHAPE — Scene-constrained Hypotheses Anchored to Physical Evidence｜场景约束几何**
@@ -48,6 +50,9 @@
   - **部件与层级图**
     - 官方 VLPart 检测部件，独立 RN50 特征和 OP3DSG 关联适配负责融合及父归属。
     - 独立物体、部件节点和 `part_of` 关系共存；部件不重复计入物体数。
+    - **BHA — Body Hierarchy Association｜整物体与面板层级**
+      - 唯一完整实测体、边界平面与至少3帧共同观测确定父归属。
+      - 原分实例保留为可查询部件，不生成柜深；含糊归属保留独立。
   - **兼容接口与审计**
     - 保持 ScanNet/Hypersim 输入及原 `topology_map.json` 对象接口；按代码注册点拆卸组件。
     - 输出实测/生成来源、轨迹、接受与拒绝原因及中文日志；真值只进入独立评价。
@@ -202,6 +207,45 @@ $
 **有界末端面关联。** 对缺少框重叠的前后表面，先用1厘米距离容差、固定种子的RANSAC取实测主平面，至少70%的采样点必须支持该面，再计算其协方差特征值 $\lambda_0\le\lambda_1\le\lambda_2$ 满足 $(\lambda_1-\lambda_0)/\lambda_1\ge0.8$，即法向噪声小于较小切向方差的20%。不用最大切向方差归一化，以免细长矩形面被误判。法向与当前世界坐标轴余弦至少0.9。切向交叠面积除两侧较大切向面积至少0.8；该面法向跨度不超过另一侧一半，归并后的法向跨度不超过另一侧1.7倍。还要求最近实测距离不超过5厘米、至少1帧完整支持、至少2帧双方可见、$C_{ij}\ge0.5$、独立分离不超过1帧，以及图像身份成立。该分支是坐标轴对齐的实测表面适配，对任意旋转物体不宣称有效。
 
 所有通过规则的候选还必须互为唯一兼容归属；多个目标均兼容则保留分离，不按GT选择。归并只并入已有测量，5毫米体素每格保留一个原始采样点，更新普通物体轨迹、别名与正式几何。跨名称关联后的规范名称取已存在候选中物体与背景分差更高的一方，并保留其对应SBERT向量；它不是新增提示或VLM重新识图。**没有填入隐藏背面，没有生成新点；对完全不可见厚度及堆叠盘子的未知数量，本算法仍不能提供通用补全。** 决策及否决原因写入object_validation.json，移除v12的WHOLE_OBJECT_VALIDATION导入/注册即可拆卸。
+
+### 2.7 原生整图掩码与接触体关联
+
+公共标签每像素只有一个实例；因此直接用标签图判断完整物体，会丢掉重叠整图掩码的支持。当前MICA中的 `native_assembly` 回溯签名、RGB哈希均一致的SAM3打包缓存，仅查询整图掩码，排除放大局部候选。对物体 $i$ 在帧 $t$ 的深度可见点，原生掩码 $m$ 的支持为：
+
+$
+A_{itm}=\frac{\sum_{p\in P_i}v_t(p)w_t(p)\mathbf1[\pi_t(p)\in m]}{\sum_{p\in P_i}v_t(p)w_t(p)+\epsilon}.
+$
+
+有效可见点不足16个不投票。同一原生掩码同时支持两个候选至少0.6时，记一次整物体支持；独立掩码分别支持各自至少0.8时，记分离证据。要求至少3个完整支持视角、共识至少0.6、分离视角为0、SBERT身份余弦至少0.8、最近实测接触距离不超过3厘米、合体最长跨度至少50厘米。最后一项用于保护相邻小盘子，不能靠接触把它们合成一件。逐次归并后重新检查整个合体，不允许仅凭相邻接触形成无界链。
+
+只保留原实测坐标；5毫米体素选实际样本而非生成体素中心。第一场景没有新增归并，第二场景确认两处实测残片归属；它没有解决整柜与门板的层级差异。
+
+### 2.8 BHA：整物体—实测面板层级关联
+
+**BHA — Body Hierarchy Association** 接受一个已有完整实测体作为父物体，并保留其边界上的原分实例为面板部件。它不是训练好的柜门语义模型，也不从薄片猜测隐藏柜深。设父物体实测定向框坐标为 $q=R^T(p-c)$，边界为 $l,u$，源面板为 $P_i$，身份余弦为 $s_{ij}$，共同观测帧集合为 $T_{ij}$：
+
+$
+I_{ij}=\frac{1}{|P_i|}\sum_{p\in P_i}\mathbf1[l-0.025\le R^T(p-c)\le u+0.025],\qquad
+\rho_{ij}=\frac{\prod_k(u_k-l_k)}{\prod_k\operatorname{span}_k(R^T(P_i-c))+\epsilon}.
+$
+
+要求 $I_{ij}\ge0.98$、$\rho_{ij}\ge8$、$s_{ij}\ge0.8$、$|T_{ij}|\ge3$，且父实测框每轴跨度至少15厘米。源点协方差特征值为 $\lambda_0\le\lambda_1\le\lambda_2$，对应最小特征值的单位法向为 $n$。只有平面性与父框边界方向同时成立才关联：
+
+$
+F_i=\frac{\lambda_1-\lambda_0}{\lambda_1+\epsilon}\ge0.9,\qquad
+a=\arg\max_k|n^TR_k|,\qquad |n^TR_a|\ge0.95.
+$
+
+源面在法向轴的中位位置 $\mu_a$ 距离父实测边界不超过3.5厘米；源面法向跨度不超过父跨度的0.2，两个切向跨度各至少10厘米：
+
+$
+\min(|\mu_a-l_a|,|\mu_a-u_a|)\le0.035.
+$
+
+只接受唯一兼容父物体；存在两个候选父体或依赖归并时保留独立实例。随后 $P_j'=P_j\cup P_i$，原 $P_i$ 完整保存为 `parts/assembly_<id>_panel.points.npy`，对应可查询的 `part_nodes` 和正式 `part_of` 边。原名称、ID、测量坐标、帧证据均保留，公开对象仍用256维DINO和384维SBERT；几何部件的视觉向量为null，明确不同于1024维VLPart视觉部件。
+
+整物体AP继续按原GT、一对一匹配计算，不把每个子部件再次算作独立物体，也不修改GT标注。机器人可以查询子实例的位置与实测面板；仅凭面板尚不能宣称完整单柜、门的开合状态或内部容积已经恢复。没有部件级GT时，只统计部件数、父归属验证和测量保留，不捏造Part AP。该做法与[PartNet的多层级评价](https://arxiv.org/abs/1812.02713)和[Part2Object的层级实例建模](https://github.com/SooLab/Part2Object)方向一致，当前BHA是本项目几何适配，未复现或接入这些论文的训练网络。
+
 
 ## 3. 背景、表面精修与正式几何
 
@@ -857,9 +901,13 @@ $$
 
 缓存失败恢复明确记录每次实际token预算、协议、指纹与失败响应原文的SHA256。仅输出预算不足或缺终止事件的失败允许显式恢复；完整成功帧禁止因增大预算重识别。串行失败停止在当前帧，不提前付费请求全场景。非流恢复保留失败流证据，超时仍报告失败，不接受半份JSON。
 
-### 6.7 WOC完整物体关联接口
+### 6.7 完整物体与层级关联接口
 
-whole_object_consensus.reconcile接收候选ID、实测点、原轨迹、既有遮罩RN50特征与语义验证结果，以及缓存RGB-D可见性；返回归并后的普通候选ID，更新原节点特征、轨迹、名称别名和实测点归属。它位于proposal_validation的可见所有权审核之后、公开PLY/JSON写入之前。WHOLE_OBJECT_VALIDATION只在v12的configure_profile中注册；删除导入与该注册即可撤除，不用备份恢复或新增算法开关。算法和源码哈希保存在object_validation.json，证据及否决日志为中文，源代码和注释为英文。
+whole_object_consensus.reconcile与native_assembly.reconcile位于proposal_validation内部，分别使用已有图像身份/共享面和原生整图掩码，返回普通候选ID并同步原实测点、轨迹和别名。WHOLE_OBJECT_VALIDATION、SURFACE_ASSEMBLY只在v12的configure_profile中挂接。
+
+part_body_assembly.construct位于MEASURED_REFINEMENT，thin_geometry之后、axial_assembly之前；已有VLPart部件阶段已经完成。它只接收当前实测PLY、节点及观测轨迹，将满足唯一边界关系的原实例保存为几何部件，再同步正式PLY、对象轨迹、每帧instance_id、part_nodes、part_relations、scene_graph和身份别名，调用原canonical_geometry发布框及空间关系。
+
+删除相应导入与注册即可独立撤除这些适配，不用备份恢复或逐算法开关。BHA没有柜子专属提示词，不依赖GT；中文审核与源码哈希写入part_body_assembly_audit.json。ScanNet未声明同一米制Z-up约定时BHA不执行，基础ScanNet和Hypersim接口保留。
 
 ## 7. 版本 v1：部件分支建立
 
@@ -2016,39 +2064,99 @@ OWNS_COARSE_SEGMENTATION声明该后端直接生成完整二维实例。运行�
 
 SAM3缓存以RGB、权重、源码、类别查询和裁剪区域组成签名；输入变化时拒绝静默复用。原类别JSON与外部源观测保留，SAM3输出在新的processed实验目录重新投影、关联、构图，不修改旧版本最终PLY/JSON。sam3_inference_audit.json、frontend_provenance.json以及原pipeline_zh.jsonl记录中文过程、模型来源、候选变化及零识图调用；部分测试不标为全场景完成。
 
-### 22.3 持续修订与实际结果
+### 22.3 持续修订与完整实测
 
-SAM3原生权重推理及公共特征接口已实际运行，当前167项离线回归通过。两个真实单帧smoke及完整构建分开记账；不是只加载模型就宣称提高。第一场景完整99帧SAM3观测只生成一次，后续从同一原始融合PLY、轨迹和二维观测重新构图，不修改旧成品；第二场景复用100帧GPT语义和已有本地SAM3推理缓存，继续完整重建。新增GPT/Qwen请求均为0。
+两个场景分别复用99帧、100帧已经完成的GPT语义与本地SAM3观测。后续均从同一原始融合PLY、轨迹和二维缓存重新构图；新增GPT/Qwen请求为0。178项离线回归、两场景公共图与父归属验证通过。真实ScanNet三帧输入的原C++与默认融合两条路径也通过，临时产物已清理。不是逐ID编辑成品或读取GT来构图。
 
 | 场景/算法修订 | 预测/GT | AP25 | AP50 | AP75 | 数量绝对对数误差 |
 | --- | --- | --- | --- | --- | --- |
 | 002 SAM3初次构建 | 13/10 | 100.00% | 96.33% | 85.50% | 0.2624 |
 | 002 共享表面去重 | 12/10 | 100.00% | 97.27% | 86.36% | 0.1823 |
 | 002 图像身份与相机基线 | 11/10 | 100.00% | 100.00% | 88.00% | 0.0953 |
-| 002 细长平面评分与规范身份 | 11/10 | 100.00% | 100.00% | 88.00% | 0.0953 |
+| 002 平面评分与规范身份 | 11/10 | 100.00% | 100.00% | 88.00% | 0.0953 |
 | 002 稳健主平面WOC | 10/10 | 100.00% | 100.00% | 100.00% | 0.0000 |
-| 010 SAM3与WOC完整流程 | 构建/验收进行中 | — | — | — | — |
+| 002 原生整图掩码关联 | 10/10 | 100.00% | 100.00% | 100.00% | 0.0000 |
+| 002 BHA层级回归 | 10/10 | 100.00% | 100.00% | 100.00% | 0.0000 |
+| 010 SAM3与WOC | 141/109 | 29.41% | 17.40% | 5.99% | 0.2574 |
+| 010 原生整图掩码关联 | 139/109 | 29.74% | 17.52% | 5.98% | 0.2431 |
+| 010 BHA整物体与面板 | 126/109 | 32.21% | 18.86% | 6.17% | 0.1449 |
 
-第一场景已验收的SAM3前GPT v12是10/10、100%/100%/80%。SAM3初次结果AP75有所改善，但13个预测导致AP50与数量回退，因此没有直接发布成默认成果，也没有在首次失败后放弃。先以双向实测表面消解重复桌面，再复用现有遮罩RN50图像身份和真实相机基线处理不同名称的互补表面；最后用稳健主平面而非整云方差处理带有边缘回波的后表面。原始名称和来源保留为别名；两台相邻实物的多帧分离证据仍构成否决。数学和阈值维护于2.6。没有硬编码对象ID、GT类别或目标数量。
+第一场景SAM3初次构建虽然提高AP75，却产生13个物体，AP50及数量回退，因此没有直接作为最终成果。随后保留共享实测面、多视角图像身份及真实相机基线，用稳健主平面处理末端面归属。最终10/10，AP25/AP50/AP75均100%，相对SAM3前GPT v12的AP75 80%改善；严格准入通过。新增原生掩码及BHA没有破坏第一场景。当前10个物体、19个确认部件、15条part_of关系。
 
-最终第一场景10/10、AP25/AP50/AP75为100.00%/100.00%/100.00%。相对旧GPT v12，AP75提高20个百分点、数量误差保持0；独立严格准入及公共节点/部件父归属验证通过。正式图有10个物体、19个确认部件、15条part_of关系。以下为真实Open3D预览，沿用原可视化，不展示边、不启用pick。
+### 22.4 第二场景：保留实测进步，如实记录代价
 
-![第一场景SAM3与WOC正式图](figures/sam3_woc_002.png)
+| 参照 | 预测/GT | AP25 | AP50 | AP75 | 数量绝对对数误差 | MVO25 | MVO50 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 旧Qwen v12 | 91/109 | 27.04% | 11.82% | 1.49% | 0.1805 | 28.29% | 14.58% |
+| SAM3前GPT v12 | 98/109 | 22.33% | 11.83% | 2.94% | 0.1064 | 24.72% | 11.94% |
+| 当前GPT+SAM3+BHA v12 | 126/109 | 32.21% | 18.86% | 6.17% | 0.1449 | 32.21% | 22.81% |
 
-第二场景的对照固定为SAM3前GPT v12：98/109、AP25/AP50/AP75 22.33%/11.83%/2.94%；旧Qwen v12为91/109、27.04%/11.82%/1.49%。必须同时报告这两种参照，不因选有利指标宣称全面提高。第二场景未完成时不套用第一场景结论；若回退，保留有证据的局部改进，继续以独立视角和实测几何修订算法，不能用GT指导构建。
+| IoU阈值 | 旧Qwen TP/FP/FN | 旧GPT TP/FP/FN | 当前 TP/FP/FN |
+| --- | --- | --- | --- |
+| 0.25 | 47/44/62 | 40/58/69 | 64/62/45 |
+| 0.5 | 28/63/81 | 23/75/86 | 45/81/64 |
+| 0.75 | 9/82/100 | 10/88/99 | 19/107/90 |
 
-### 22.4 保留范围、限制与产物
+相对本轮BHA前139个物体，当前126个：13块面板转为有证据的部件，TP及FN保持，三档FP减少13，AP与数量误差均改善，局部严格准入通过。相对SAM3初次141个物体，共减少15个独立身份。相比旧GPT及旧Qwen，三档AP和TP/召回均提高，但IoU阈值下FP仍更多；相比旧GPT数量误差也回退。因此“两场景全部指标不退步”的严格门控仍不通过，不把它改成宽松规则来宣布成功。按用户要求保留已有改善作为v12，而不是丢弃有效部分。
 
-本轮保留SAM3的可见实例分割及WOC的共享/互补实测表面归并，作为v12的FOVEA/MICA部分。第一场景的100%是当前可观测GT、类无关AABB几何框的项目适配评价；不是官方benchmark、不是语义关系全部正确，更不是隐藏表面100%补全。薄片、未知背面和完全遮挡的盘子仍不能普遍恢复。仅有两个场景的结果也不能保证未见厨房数据同样提高。
+![第一场景最新v12实测图](figures/sam3_bha_002.png)
 
-第一场景接受产物为partaware_gpt_ai_001_002_v12_sam3r5/hypersim/ai_001_002；第二场景当前研究产物为partaware_gpt_ai_001_010_v12_sam3r1/hypersim/ai_001_010。各自产物包含正式topology_map.json、instance_cloud_cleaned.ply、原观测/轨迹、object_validation.json和evaluation.json；外部验收仅检查这些固定成品。完整代码指纹及零新增识图调用记于construction_completed.json，第二场景未完成则仅有construction_start.json。
+![第二场景最新v12实测图](figures/sam3_bha_010.png)
+
+### 22.5 柜体与单柜：物体层、部件层分别解释
+
+GT中cabinet有3个整柜实例；原生掩码关联后仍有33个cabinet预测，很多是真实门板、抽屉面或局部柜体。机器人需要细分，标注却用整排柜体，二者是粒度差异，不能简单说GT错误。新增BHA不含柜子专属词表：同身份、唯一完整实测体、边界平面、共同观测至少3帧共同决定父归属。13块面板共同观测13～27帧，位于原完整实测柜体边界约1.3～1.6厘米处。保留整柜为object，原分实例作为可查询part；数学和阈值见2.8。
+
+现有VLPart没有把这13块源实例确认成柜门。BHA因此采用geometry_only_no_visual_embedding，明确记录semantic_part_label_inferred=false，名称为observed panel；没有伪造1024维视觉特征。它实现了“整柜—原子面板”的查询层级，但还不能保证面板就是一整个单柜，更不能给出开合状态或内部容量。已确认的VLPart把手等部件继续保留，父归属同步到整物体。
+
+实测坐标逐点集合核验：13块面板完整保存，父体由原点并集构成，没有额外生成点，其他物体坐标变化为0；第一场景没有被此策略归并。整物体AP、数量误差仍按原GT一对一计算；没有部件级真值时，不报告虚构的Part AP，另记确认部件数及父归属接口验证。第二场景当前344个确认部件、126条part_of边。
+
+### 22.6 低AP诊断与仍未解决的问题
+
+下表直接取当前独立GT诊断。表面覆盖是归到同一GT的纯净预测片段的实测表面并集诊断；它使用GT作事后解释，不能作为构建输入，也不是AP或完成率。
+
+| GT编号/类别 | 最佳预测 | 最佳框IoU | 纯净片段表面并集覆盖 | 纯净片段数 |
+| --- | --- | --- | --- | --- |
+| 1 lamp | 298 ceiling light | 6.72% | 93.65% | 6 |
+| 23 counter | 3 countertop | 94.02% | 99.16% | 2 |
+| 30 cabinet | 162 cabinet | 86.70% | 97.29% | 3 |
+| 45 shelves | 78 cabinet | 43.03% | 59.13% | 3 |
+| 57 cabinet | 78 cabinet | 7.25% | 68.61% | 8 |
+| 67 refrigerator | 18 door | 5.35% | 41.25% | 3 |
+| 68 cabinet | 3 countertop | 18.60% | 60.88% | 10 |
+| 148 counter | 141 countertop | 56.27% | 82.12% | 2 |
+| 149 sink | 131 sink | 82.92% | 99.42% | 2 |
+
+灯的GT把多段灯具作为一个实例：6个纯净片段的并集表面覆盖约93.65%，最佳单框IoU仍约6.72%。这不是“只有6.72%的灯点被恢复”，而是大GT框与多个局部框口径不同。剩余灯件与已有大框虽然框内包含，最近实测间距却有20厘米至超过1米；没有完整掩码或物理连接证据，不能仅因同名就再强行归并。部分上柜也只有前表面，缺乏完整实测体锚点，BHA对此弃权。
+
+新SAM3改善可见实例掩码，BHA解决一类层级重复，均不等于通用隐藏物体补全。完整冰箱背面、未知柜深、完全遮挡盘片仍不能可靠恢复；不把放大框、低置信生成点或论文阅读算作完成。[官方SAM 3D Objects设置](https://github.com/facebookresearch/sam-3d-objects/blob/main/doc/setup.md)要求至少32GB显存及模型访问条件，当前约8GB环境未完成该模型测试；SAM3二维分割本身不承担三维补全。后续需要部件级标注或人工仅用于评价的层级映射，并采用真实形状先验、自由空间约束和独立视角验证；当前没有证据支持继续放宽包含阈值来吞并相邻物体。
+
+### 22.7 当前产物、日志与可视化命令
+
+第一场景当前产物：partaware_gpt_ai_001_002_v12_sam3r7/hypersim/ai_001_002；第二场景：partaware_gpt_ai_001_010_v12_sam3r3/hypersim/ai_001_010。完整构建已结束，evaluation.json绑定真实图与PLY哈希；construction_completed.json保存当时构建指纹与零新增识图请求。随后只修复最小注册接口兼容性及描述树，不改变两份实验几何。BHA中文日志为part_body_assembly_audit.json，原生整图掩码证据在object_validation.json；统一流程记录在pipeline_zh.jsonl。
+
+场景ai_001_002：
 
 ```bash
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
 /home/lewisliu/PartAware-SG/script/visualize_map.py \
---map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r5/hypersim/ai_001_002/instance_cloud_cleaned.ply \
---topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r5/hypersim/ai_001_002/topology_map.json \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r7/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r7/hypersim/ai_001_002/topology_map.json \
 --show_bboxes --node_radius 0.02
 ```
+
+场景ai_001_010：
+
+```bash
+env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
+XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
+/home/lewisliu/PartAware-SG/script/visualize_map.py \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_010_v12_sam3r3/hypersim/ai_001_010/instance_cloud_cleaned.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_010_v12_sam3r3/hypersim/ai_001_010/topology_map.json \
+--show_bboxes --node_radius 0.02
+```
+
+需要查看部件时，自行在同一命令末尾加 --show_parts --show_part_points；默认没有边和pick。

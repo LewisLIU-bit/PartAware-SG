@@ -25,6 +25,7 @@ def process_tree(registry, recognition=None):
                          'visual_part_dimensions': 1024, 'geometry_only_part_embedding': None}}},
         'MICA': {'name': 'Multiview Instance Consensus and Association', 'children': {
             'association': {'modules': modules('ASSOCIATION', 'FUSION', 'INSTANCE_REFINEMENT')},
+            'whole_object': {'modules': modules('WHOLE_OBJECT_VALIDATION', 'SURFACE_ASSEMBLY')},
             'validation': {'modules': modules('OBJECT_VALIDATION', 'OBSERVED_VALIDATION', 'BACKGROUND_VALIDATION', 'IDENTITY_VALIDATION', 'SURFACE_VALIDATION', 'OWNERSHIP_VALIDATION')}}},
         'SHAPE': {'name': 'Scene-constrained Hypotheses Anchored to Physical Evidence', 'children': {
             'geometry': {'modules': modules('GEOMETRY_COMPONENTS')},

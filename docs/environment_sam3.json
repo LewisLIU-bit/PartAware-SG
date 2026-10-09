@@ -6,7 +6,7 @@
   "torchvision": "0.25.0+cu128",
   "source_owner_independently_verified": false,
   "python": "3.12.14",
-  "two_scene_full_accuracy_verified": false,
+  "two_scene_full_accuracy_verified": true,
   "license": "SAM License",
   "environment": "/home/lewisliu/miniconda3/envs/sg-sam3",
   "source_archive_sha256": "d2642773a805ce7be87cbf152e6560449a974346b1cdb32da4191d27550c08da",
@@ -20,9 +20,17 @@
   "public_visual_dimensions": 256,
   "whole_object_consensus": {
     "component": "pipeline_components/whole_object_consensus.py",
-    "second_scene_status": "running",
+    "second_scene_status": "complete_partial_improvement",
     "first_scene_accepted": true,
-    "tests": 167,
+    "tests": 178,
     "registration": "v12 WHOLE_OBJECT_VALIDATION"
+  },
+  "two_scene_all_metric_acceptance": false,
+  "body_hierarchy": {
+    "component": "pipeline_components/part_body_assembly.py",
+    "registration": "v12 MEASURED_REFINEMENT",
+    "measured_panels_retained": 13,
+    "unexpected_geometry_changes": 0,
+    "local_all_metric_acceptance": true
   }
 }

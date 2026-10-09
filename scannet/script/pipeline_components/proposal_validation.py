@@ -327,6 +327,10 @@ def main():
     if whole_validator is not None:
         survivors = whole_validator.reconcile(survivors, geometry, tracks, metrics, views, records,
             remap, audit, nodes, aliases, embeddings)
+    assembly_validator = getattr(components, 'SURFACE_ASSEMBLY', None)
+    if assembly_validator is not None:
+        survivors = assembly_validator.reconcile(survivors, geometry, tracks, metrics, views, records,
+            remap, audit, nodes, aliases)
     if not survivors:
         raise RuntimeError('No object passed observed proposal validation; inspect evidence')
     for fid, values in records.items():
@@ -358,6 +362,7 @@ def main():
         'surface_component_sha256': hashlib.sha256(Path(surface_validator.__file__).read_bytes()).hexdigest() if surface_validator else None,
         'identity_component_sha256': hashlib.sha256(Path(identity_validator.__file__).read_bytes()).hexdigest() if identity_validator else None,
         'whole_object_component_sha256': whole_validator.component_sha256() if whole_validator else None,
+        'surface_assembly_component_sha256': assembly_validator.component_sha256() if assembly_validator else None,
         'identity_aliases': graph['object_identity_aliases'],
         'background_component_sha256': hashlib.sha256(Path(background_validator.__file__).read_bytes()).hexdigest() if background_validator else None,
         'model_sha256': hashlib.sha256((repo/'checkpoints/clip/RN50.pt').read_bytes()).hexdigest(), 'evidence': audit}

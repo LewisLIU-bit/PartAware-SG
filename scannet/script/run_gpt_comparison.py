@@ -21,6 +21,10 @@ def configure_profile(version, registry):
     if version not in VERSIONS:
         raise ValueError('Unknown comparison version')
     registry.VERSION = version + '_gpt'
+    registry.WHOLE_OBJECT_VALIDATION = None
+    registry.SURFACE_ASSEMBLY = None
+    registry.MEASURED_REFINEMENT = [entry for entry in getattr(registry, 'MEASURED_REFINEMENT', [])
+        if entry.__name__.rsplit('.', 1)[-1] != 'part_body_assembly']
     if version != 'original':
         from pipeline_components import visibility_ownership
         registry.OWNERSHIP_VALIDATION = visibility_ownership
@@ -35,9 +39,11 @@ def configure_profile(version, registry):
                     'MEASURED_REFINEMENT', 'FINAL_GEOMETRY'):
             setattr(registry, key, [])
     elif version == 'v12':
-        from pipeline_components import sam3_frontend, whole_object_consensus
+        from pipeline_components import sam3_frontend, whole_object_consensus, native_assembly, part_body_assembly
         registry.FRONTEND = sam3_frontend
         registry.WHOLE_OBJECT_VALIDATION = whole_object_consensus
+        registry.SURFACE_ASSEMBLY = native_assembly
+        registry.MEASURED_REFINEMENT.insert(1, part_body_assembly)
 
 
 def run_worker(args):

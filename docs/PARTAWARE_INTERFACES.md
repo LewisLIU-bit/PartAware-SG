@@ -342,3 +342,19 @@ Closed storage identity is inferred before part construction from cached cabinet
 `GEOMETRY_COMPONENTS` runs `instance_granularity` before structural recovery. The adapter reads accepted measured geometry, cached masks and validated tracks. Unique shared-surface duplicates retain the largest parent ID, name, feature vectors and confidence. All source coordinates are concatenated, local ownership and aliases are resolved transitively, and tracks record `granularity_source_ids`. It writes `instance_granularity_audit.json`; no GT or language request enters construction. Independently gated region transfer never creates a new node and was not accepted in the current runs. Detach by removing its import and list entry, then rebuild from raw caches in a new result directory.
 
 `object_error_diagnostic` is evaluation only. `per_gt` stores the best three predictions, `one_to_one_matches` at 0.25/0.5/0.75 and surface diagnostics. `per_prediction` and `AP_ranking` distinguish matched objects, duplicate competition and localization below threshold. Ranking follows the existing greedy AP rule; optimal one-to-one counts can differ. These fields do not alter boxes, scores or GT.
+
+## V12 native masks and measured body hierarchy
+
+`SURFACE_ASSEMBLY` registers `native_assembly.reconcile` only in v12. It resolves
+signed complete-mask cache provenance from `cache_reuse.json`, queries packed
+original masks, and returns canonical measured candidates before publication.
+
+The v12 `MEASURED_REFINEMENT` list runs `part_body_assembly.construct` after thin
+recovery. BHA accepts unique measured boundary ownership and creates queryable
+geometry-only panel parts with null visual embeddings. It synchronizes measured
+PLY, validated tracks, frame IDs, aliases, parts, hierarchy edges and canonical
+spatial geometry. It cannot infer door semantics or concealed cabinet depth.
+Detach either component by deleting its import and registry entry, then rebuild
+from raw observations. Current receipts and unchanged-GT metrics are in
+`docs/sam3_woc_results.json` and report chapter 22. Object AP excludes parts;
+part AP remains unavailable without part annotations.

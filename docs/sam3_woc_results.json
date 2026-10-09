@@ -6,16 +6,56 @@
     "v12": "existing_GPT"
   },
   "additional_vision_api_calls": 0,
-  "tests": 167,
+  "tests": 178,
   "first_scene_accepted": true,
-  "second_scene_complete": false,
+  "second_scene_complete": true,
+  "second_scene_local_gain_accepted": true,
+  "second_scene_all_metric_gate_accepted": false,
+  "geometry_preservation": [
+    {
+      "scene": "ai_001_002",
+      "objects_before": 10,
+      "objects_after": 10,
+      "parts_created": 0,
+      "unexpected_geometry_changes": [],
+      "all_panel_measurements_preserved": true,
+      "background_geometry_modified": false
+    },
+    {
+      "scene": "ai_001_010",
+      "objects_before": 139,
+      "objects_after": 126,
+      "parts_created": 13,
+      "unexpected_geometry_changes": [],
+      "all_panel_measurements_preserved": true,
+      "background_geometry_modified": false
+    }
+  ],
+  "scannet_smoke": [
+    {
+      "message": "ScanNet 基础输入建图验证通过",
+      "path": "legacy_cpp",
+      "frames": 3,
+      "objects": 2,
+      "temporary_outputs_removed": true
+    },
+    {
+      "message": "ScanNet 基础输入建图验证通过",
+      "path": "default_components",
+      "frames": 3,
+      "objects": 2,
+      "temporary_outputs_removed": true
+    }
+  ],
+  "current": {
+    "ai_001_002": "/home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r7/hypersim/ai_001_002",
+    "ai_001_010": "/home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_010_v12_sam3r3/hypersim/ai_001_010"
+  },
   "rows": [
     {
       "id": "002",
       "revision": "sam3r1",
       "label": "SAM3初次构建",
-      "complete": true,
-      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r1\\hypersim\\ai_001_002",
       "report": {
         "predicted": 13,
         "gt": 10,
@@ -31,8 +71,6 @@
       "id": "002",
       "revision": "sam3r2",
       "label": "共享表面去重",
-      "complete": true,
-      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r2\\hypersim\\ai_001_002",
       "report": {
         "predicted": 12,
         "gt": 10,
@@ -48,8 +86,6 @@
       "id": "002",
       "revision": "sam3r3",
       "label": "图像身份与相机基线",
-      "complete": true,
-      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r3\\hypersim\\ai_001_002",
       "report": {
         "predicted": 11,
         "gt": 10,
@@ -64,9 +100,7 @@
     {
       "id": "002",
       "revision": "sam3r4",
-      "label": "细长平面评分与规范身份",
-      "complete": true,
-      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r4\\hypersim\\ai_001_002",
+      "label": "平面评分与规范身份",
       "report": {
         "predicted": 11,
         "gt": 10,
@@ -82,8 +116,6 @@
       "id": "002",
       "revision": "sam3r5",
       "label": "稳健主平面WOC",
-      "complete": true,
-      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_002_v12_sam3r5\\hypersim\\ai_001_002",
       "report": {
         "predicted": 10,
         "gt": 10,
@@ -96,11 +128,79 @@
       }
     },
     {
+      "id": "002",
+      "revision": "sam3r6",
+      "label": "原生整图掩码关联",
+      "report": {
+        "predicted": 10,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 1,
+        "AP75": 1,
+        "absolute_log_count_error": 0,
+        "graph_sha256": "f94be92ade8f8f164fd068c1c2da97dece212a4debcb790e17d33101276ab227",
+        "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d"
+      }
+    },
+    {
+      "id": "002",
+      "revision": "sam3r7",
+      "label": "BHA层级回归",
+      "report": {
+        "predicted": 10,
+        "gt": 10,
+        "AP25": 1,
+        "AP50": 1,
+        "AP75": 1,
+        "absolute_log_count_error": 0,
+        "graph_sha256": "2514f0c6a4ffe22fb804b297a6ed515a0b992695070b8fd25d9b6c163a71e9d9",
+        "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d"
+      }
+    },
+    {
       "id": "010",
       "revision": "sam3r1",
-      "label": "SAM3与WOC完整流程",
-      "complete": false,
-      "folder": "\\\\wsl.localhost\\Ubuntu-D\\home\\lewisliu\\datasets\\scannet-sg-processed\\partaware_gpt_ai_001_010_v12_sam3r1\\hypersim\\ai_001_010"
+      "label": "SAM3与WOC",
+      "report": {
+        "predicted": 141,
+        "gt": 109,
+        "AP25": 0.2940929025880523,
+        "AP50": 0.17398251215001825,
+        "AP75": 0.05991362917739329,
+        "absolute_log_count_error": 0.2574120081490246,
+        "graph_sha256": "619a2add9b39bbb7e0c3c4ed6313a81b2feb45122a700d42d92948b6b544fa62",
+        "prediction_ply_sha256": "3a4430598b5d556c4fe258bc58ef1c5f342ae105739474673d424cb718318272"
+      }
+    },
+    {
+      "id": "010",
+      "revision": "sam3r2",
+      "label": "原生整图掩码关联",
+      "report": {
+        "predicted": 139,
+        "gt": 109,
+        "AP25": 0.2974005885107657,
+        "AP50": 0.17521052620551003,
+        "AP75": 0.05978357909607784,
+        "absolute_log_count_error": 0.24312605090154799,
+        "graph_sha256": "2b3b866b55709c95f41e01420594a9311dd253696608623179dbd3932d3ec521",
+        "prediction_ply_sha256": "98c2d9c20cbecb70682cfbf3de7f125f89d32702609bfcd9ecf1aa041f5a739b"
+      }
+    },
+    {
+      "id": "010",
+      "revision": "sam3r3",
+      "label": "BHA整物体与面板",
+      "report": {
+        "predicted": 126,
+        "gt": 109,
+        "AP25": 0.3220847673745414,
+        "AP50": 0.18858767400277404,
+        "AP75": 0.06174408150177959,
+        "absolute_log_count_error": 0.14493402472233427,
+        "graph_sha256": "0af789b8ba1ebd2180001c9320d60e9cf6a59f31d4013236c33ea885e64cb940",
+        "prediction_ply_sha256": "d99e25a7311546fd40bca3814509e039d35a03f6cf1f62e901151ff321739ae6"
+      }
     }
   ]
 }

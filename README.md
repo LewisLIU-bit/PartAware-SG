@@ -12,20 +12,23 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 ## Default PartAware-SG pipeline
 
-GPT category recognition now supports an OpenAI-compatible relay through
-`scannet/script/vision_api.py`. Each scene keeps one shared image-category cache
-for the original DINO/SAM pipeline, v11, and the v12 fine-instance experiment.
-The GPT original comparison replaces RAM category acquisition; it is distinct
-from the frozen RAM baseline. No new Qwen recognition is performed. See
+GPT category recognition supports an OpenAI-compatible relay through
+`scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
+for v12; construction makes no new GPT or Qwen image requests. Report defaults
+remain original RAM, existing Qwen for v11, and existing GPT for v12. Historical
+GPT original/v11 comparisons remain separate. See
 [GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
 The existing ScanNet and Hypersim interfaces remain unchanged.
 
-V12 fine inference uses public YOLOE-v8-L full-image, tile and region inference,
-with separate coarse and fine RGB-D evidence. It does not require SAM3.
-Two-scene trials are complete, but fine-instance recognition and reliable
-whole-object completion remain unsolved. The validated default remains v11;
-research comparison workers select their construction profile in an isolated
-process and share the same evaluation protocol.
+The v12 research profile now uses local SAM3 concept masks and adaptive crops,
+measured whole-object consensus, and queryable measured panel parts. Both full
+scenes are complete: AP25/AP50/AP75 are 100%/100%/100% for ai_001_002 and
+32.21%/18.86%/6.17% for ai_001_010. The second scene improves AP and recall but
+still has more threshold-level false positives than historical baselines; it
+does not pass the strict all-metric gate. Ordinary entry points retain their
+validated existing components. The earlier YOLOE-L v12 trial is historical.
+Reliable hidden-object completion and fully occluded plate separation remain
+unsolved; SAM3 predicts visible 2D masks, not hidden 3D geometry.
 
 PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v11 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
@@ -331,8 +334,31 @@ The historical GPT comparison profiles validate visible surface ownership and me
 
 Default recognition sources in the report are RAM for the original baseline, existing Qwen caches for v11, and the existing shared GPT cache for v12. Further GPT v11 tuning is stopped. The current comparison driver constructs only v12 and refuses incomplete recognition caches instead of making a new image API request.
 
-The v12 research registration now uses `pipeline_components.sam3_frontend`: local SAM3 concept masks and adaptive crops feed the retained uint8 mask, 256D DINO and 384D SBERT interfaces. SAM3 weights are downloaded from [ModelScope](https://modelscope.cn/models/facebook/sam3) and checked against its SHA256; inference uses the pinned [Meta source](https://github.com/facebookresearch/sam3) in the managed WSL Conda environment `sg-sam3`. Both real single-frame smoke tests pass. After measured whole-object consensus revisions, the first full scene retains 10 objects, AP25/AP50 stay at 100%, and AP75 improves from 80% to 100%; the second full scene remains under evaluation. SAM3 does not generate unobserved 3D surfaces. Change the v12 `FRONTEND` code registration back to `fovea` to detach this backend. See [the interface and direct commands](docs/VISION_API.md) and report chapter 22.
+The v12 research registration now uses `pipeline_components.sam3_frontend`: local SAM3 concept masks and adaptive crops feed the retained uint8 mask, 256D DINO and 384D SBERT interfaces. SAM3 weights are downloaded from [ModelScope](https://modelscope.cn/models/facebook/sam3) and checked against its SHA256; inference uses the pinned [Meta source](https://github.com/facebookresearch/sam3) in the managed WSL Conda environment `sg-sam3`. Both real single-frame smoke tests pass. After measured whole-object consensus revisions, the first full scene retains 10 objects, AP25/AP50 stay at 100%, and AP75 improves from 80% to 100%; the second full scene improves AP25/AP50/AP75 to 32.21%/18.86%/6.17%, while the strict all-metric gate remains unpassed. SAM3 does not generate unobserved 3D surfaces. Change the v12 `FRONTEND` code registration back to `fovea` to detach this backend. See [the interface and direct commands](docs/VISION_API.md) and report chapter 22.
 
 ### V12 whole-object surface consensus
 
-`whole_object_consensus.reconcile` reuses existing masked RN50 identity features, measured RGB-D surfaces and complete-mask view evidence after proposal ownership validation. Shared-surface duplicates, differently named complementary bodies and a dominant measured terminal face require mutually unique ownership; independently separated objects remain distinct. Robust planar fitting supports elongated faces with minority edge returns. No hidden points or ground-truth dimensions are generated. Remove the v12 `WHOLE_OBJECT_VALIDATION` import/registration to detach this adapter. The first scene passes strict metric acceptance and publication checks; [chapter 22](docs/RESEARCH_REPORT.md) records every measured trial. The full 167-test offline suite passes. Latest metrics and artifact hashes are in [the result receipt](docs/sam3_woc_results.json).
+`whole_object_consensus.reconcile` reuses existing masked RN50 identity features, measured RGB-D surfaces and complete-mask view evidence after proposal ownership validation. Shared-surface duplicates, differently named complementary bodies and a dominant measured terminal face require mutually unique ownership; independently separated objects remain distinct. Robust planar fitting supports elongated faces with minority edge returns. No hidden points or ground-truth dimensions are generated. Remove the v12 `WHOLE_OBJECT_VALIDATION` import/registration to detach this adapter. The first scene passes strict metric acceptance and publication checks; [chapter 22](docs/RESEARCH_REPORT.md) records every measured trial. The full 178-test offline suite passes. Latest metrics and artifact hashes are in [the result receipt](docs/sam3_woc_results.json).
+### V12 measured body hierarchy
+
+`native_assembly.reconcile` queries signed original SAM3 masks rather than only
+the exclusive public label image. Repeated whole-mask support and measured
+contact can associate fragments, while separate small dishes remain protected.
+Detach the v12 `SURFACE_ASSEMBLY` import/registration to remove this adapter.
+
+`part_body_assembly.construct` adds BHA (Body Hierarchy Association) after thin
+geometry recovery and before axial assembly. A planar measured subinstance
+requires a unique volumetric measured anchor, matching identity, an aligned
+boundary and at least three common observed frames. The original points remain
+queryable as `assembly_<id>_panel` parts with geometry-only provenance; no door
+semantics or hidden depth is invented. Delete its v12 `MEASURED_REFINEMENT`
+import/registration to detach it. In ai_001_010 it retains 13 measured panels,
+reduces standalone objects from 139 to 126, and preserves every other object's
+point coordinates. Object AP uses the unchanged GT; part quality has no AP
+without part-level annotations. See report sections 2.7/2.8, 6.7 and chapter 22.
+
+Current results are `partaware_gpt_ai_001_002_v12_sam3r7` and
+`partaware_gpt_ai_001_010_v12_sam3r3` under `scannet-sg-processed`, each containing
+`hypersim/<scene_id>`. Direct viewer commands are in report section 22.7;
+`--show_parts --show_part_points` optionally displays the retained panel parts.
+Edges and picking remain opt-in.
