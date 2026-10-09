@@ -144,8 +144,7 @@ The verified `partaware_v1` experiment contains `hypersim/ai_001_002`,
 contains no generated run results. Only ScanNet and Hypersim dedicated routes
 are retained. The original generic manifest ABI is preserved.
 
-The current v7 has two independent roots: `partaware_ai_001_002_v7` and
-`partaware_ai_001_010_v7`. The formal v6 controls are retained. The v3 inputs and historical outputs are retained. New Hypersim preparation uses the full ordered available
+Each version now has one final package, `partaware_vN`, containing the retained scenes. Intermediate trials are deleted; the v3 inputs remain available. New Hypersim preparation uses the full ordered available
 frame list, selecting `[::3][:150]`, rather than selecting 150 candidates first.
 Official HDF5 sources are retained under each prepared input's `source_hdf5/`.
 An existing RGB/depth resolution disagreement is recorded and excluded, never
@@ -303,7 +302,7 @@ list item to detach it, then rebuild from raw fusion into a fresh result root.
 - `GEOMETRY_COMPONENTS` appends `backed_cuboid` after AdaPoinTr. It uses an observed front, side support, parallel measured rear plane and all-view free-space checks. Hypotheses carry `geometry_hypothesis.measured=false`; `cuboid_completion_audit.json` keeps acceptance assumptions. It never mutates the measured PLY or supplies association evidence.
 - `MEASURED_REFINEMENT` appends `assembly_density` after axial assembly. Only accepted crossbars receive verified dense RGB-D points. Corresponding part geometry, tracks, canonical boxes and edges are republished.
 - Detach each component by removing its import/registry entry, then rebuild from raw observations in a fresh result root. No backup/feature flag is needed.
-- `maximum_volume_overlap` in new evaluations includes MVO AP25/AP50 and one-to-one TP/FP/FN. Historical `evaluation_mvo.json` files reference frozen evaluation hashes and fixed boxes. MVO uses strictly greater thresholds; legacy IoU AP still uses greater-or-equal thresholds.
+- `maximum_volume_overlap` in new evaluations includes MVO AP25/AP50 and one-to-one TP/FP/FN. Each retained scene has one final `evaluation.json`; existing historical MVO values are consolidated in its `maximum_volume_overlap` field without changing fixed boxes or scores. MVO uses strictly greater thresholds; legacy IoU AP still uses greater-or-equal thresholds.
 - The saved graph remains the same object/edge/part interface. Generated geometry belongs only in `instance_cloud_completed.ply`, and `topology_map_observed.json` remains measured-only.
 
 ## V10 bounded measured structures and original-pixel suspension members
@@ -356,5 +355,5 @@ PLY, validated tracks, frame IDs, aliases, parts, hierarchy edges and canonical
 spatial geometry. It cannot infer door semantics or concealed cabinet depth.
 Detach either component by deleting its import and registry entry, then rebuild
 from raw observations. Current receipts and unchanged-GT metrics are in
-`docs/sam3_woc_results.json` and report chapter 22. Object AP excludes parts;
+`docs/sam3_woc_results.json` and report chapters 18–21. Object AP excludes parts;
 part AP remains unavailable without part annotations.

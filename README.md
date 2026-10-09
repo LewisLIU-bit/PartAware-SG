@@ -15,8 +15,8 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
 for v12; construction makes no new GPT or Qwen image requests. Report defaults
-remain original RAM, existing Qwen for v11, and existing GPT for v12. Historical
-GPT original/v11 comparisons remain separate. See
+remain original RAM, existing Qwen for v11, and existing GPT for v12. The GPT original pipeline is retained as a separate baseline and compared
+with RAM, Qwen-to-DINO and v12 using the same scene cache as v12. See
 [GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
 The existing ScanNet and Hypersim interfaces remain unchanged.
 
@@ -26,7 +26,7 @@ scenes are complete: AP25/AP50/AP75 are 100%/100%/100% for ai_001_002 and
 32.21%/18.86%/6.17% for ai_001_010. The second scene improves AP and recall but
 still has more threshold-level false positives than historical baselines; it
 does not pass the strict all-metric gate. Ordinary entry points retain their
-validated existing components. The earlier YOLOE-L v12 trial is historical.
+validated existing components. Only the final result for each retained version is published.
 Reliable hidden-object completion and fully occluded plate separation remain
 unsolved; SAM3 predicts visible 2D masks, not hidden 3D geometry.
 
@@ -124,7 +124,7 @@ two scenes, use a fresh result directory and copy the prior observations:
 ```bash
 python scannet/script/run_pipeline.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v5/hypersim/ai_001_010 \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v5/hypersim/ai_001_010 \
   --processed-scene /home/lewisliu/datasets/scannet-sg-processed/my_hypersim_v10/hypersim/ai_001_010 \
   --start-stage graph
 ```
@@ -208,8 +208,8 @@ These are not official ScanNet or UniGraph3D benchmark scores. See
 ```bash
 python scannet/script/evaluate_hypersim.py \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/manifest.json \
-  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002 \
-  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v10/evaluation_v10.json
+  --processed-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_002 \
+  --output /home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_002/evaluation.json
 ```
 
 
@@ -225,8 +225,8 @@ also hidden so the original map remains readable.
 env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 python script/visualize_map.py \
-  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002/instance_cloud_cleaned.ply \
-  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_002_v11/hypersim/ai_001_002/topology_map.json \
+  --map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+  --topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_002/topology_map.json \
   --show_bboxes --show_parts \
   --node_radius 0.07 --part_radius 0.025
 ```
@@ -237,7 +237,7 @@ or `--check_only` to validate the same geometry without a window.
 Add `--enable_picking` only when Shift + left click should print a node name. Use tracking-ID PLY files
 (`instance_cloud*.ply`), rather than already recolored RGB exports.
 The current second-scene experiment is under
-`/home/lewisliu/datasets/scannet-sg-processed/partaware_ai_001_010_v11/hypersim/ai_001_010`.
+`/home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_010`.
 Use `instance_cloud_completed.ply` to view its accepted inferred cuboid surfaces;
 use the cleaned PLY with `topology_map_observed.json` for measured-only geometry.
 Use that directory for both visualization paths. For its dense spatial graph,
@@ -324,21 +324,21 @@ The dataset uses CC BY-NC 4.0 licence.
 
 The default graph stage now resolves unique shared-surface duplicates before structural recovery and completion. It requires contained measured points, semantic compatibility, at least five complete-mask consensus views and no independent separation evidence. Existing coordinates and public graph fields remain intact; `instance_granularity_audit.json` records the decisions. Detached-region transfer is independently gated and no transfer was accepted in the two current scenes. Remove the import and `GEOMETRY_COMPONENTS` entry to detach this adapter.
 
-The evaluator adds `object_error_diagnostic`, with per-GT best IoU, optimal one-to-one matches and the actual AP confidence-ranking assignments. These diagnostics never change AP or GT. The latest two-scene results and direct visualization commands are in [the consolidated report](docs/RESEARCH_REPORT.md#18-正式v11实例粒度消解与低ap逐对象诊断2026-10-07).
+The evaluator adds `object_error_diagnostic`, with per-GT best IoU, optimal one-to-one matches and the actual AP confidence-ranking assignments. These diagnostics never change AP or GT. The latest two-scene results and direct visualization commands are in [the consolidated report](docs/RESEARCH_REPORT.md).
 
 ### GPT cache compatibility and measured ownership refinement
 
-The historical GPT comparison profiles validate visible surface ownership and measured floor boundaries, resolve a unique full-object anchor among contained fragments, and trim contradicted fringes only around a verified observed core. Fine instances and independently visible objects remain protected. This changes construction from cached observations; it does not delete selected final nodes or infer hidden dimensions. Detach it at the `OWNERSHIP_VALIDATION` code registration in `run_gpt_comparison.configure_profile`. The first scene reaches AP25/AP50 of 100% and AP75 of 80%. The second-scene GPT v12 before SAM3 has AP25/AP50/AP75 of 22.33%/11.83%/2.94% and fails overall acceptance. Mathematical details and actual results are in [the consolidated Chinese report](docs/RESEARCH_REPORT.md).
+The historical GPT comparison profiles validate visible surface ownership and measured floor boundaries, resolve a unique full-object anchor among contained fragments, and trim contradicted fringes only around a verified observed core. Fine instances and independently visible objects remain protected. This changes construction from cached observations; it does not delete selected final nodes or infer hidden dimensions. Detach it at the `OWNERSHIP_VALIDATION` code registration in `run_gpt_comparison.configure_profile`. Current final metrics are reported for the SAM3-based v12 below; superseded intermediate results have been removed. Mathematical details and actual results are in [the consolidated Chinese report](docs/RESEARCH_REPORT.md).
 
 ### V12 GPT cache and SAM3 observation backend
 
-Default recognition sources in the report are RAM for the original baseline, existing Qwen caches for v11, and the existing shared GPT cache for v12. Further GPT v11 tuning is stopped. The current comparison driver constructs only v12 and refuses incomplete recognition caches instead of making a new image API request.
+Default recognition sources in the report are RAM for the original baseline, existing Qwen caches for v11, and the existing shared GPT cache for v12. Further GPT v11 tuning is stopped. New construction uses the v12 profile and refuses incomplete recognition caches instead of making a new image API request. Retained GPT original results participate in the final baseline and v12 comparison.
 
-The v12 research registration now uses `pipeline_components.sam3_frontend`: local SAM3 concept masks and adaptive crops feed the retained uint8 mask, 256D DINO and 384D SBERT interfaces. SAM3 weights are downloaded from [ModelScope](https://modelscope.cn/models/facebook/sam3) and checked against its SHA256; inference uses the pinned [Meta source](https://github.com/facebookresearch/sam3) in the managed WSL Conda environment `sg-sam3`. Both real single-frame smoke tests pass. After measured whole-object consensus revisions, the first full scene retains 10 objects, AP25/AP50 stay at 100%, and AP75 improves from 80% to 100%; the second full scene improves AP25/AP50/AP75 to 32.21%/18.86%/6.17%, while the strict all-metric gate remains unpassed. SAM3 does not generate unobserved 3D surfaces. Change the v12 `FRONTEND` code registration back to `fovea` to detach this backend. See [the interface and direct commands](docs/VISION_API.md) and report chapter 22.
+The v12 research registration now uses `pipeline_components.sam3_frontend`: local SAM3 concept masks and adaptive crops feed the retained uint8 mask, 256D DINO and 384D SBERT interfaces. SAM3 weights are downloaded from [ModelScope](https://modelscope.cn/models/facebook/sam3) and checked against its SHA256; inference uses the pinned [Meta source](https://github.com/facebookresearch/sam3) in the managed WSL Conda environment `sg-sam3`. Both real single-frame smoke tests pass. After measured whole-object consensus revisions, the first full scene retains 10 objects, AP25/AP50 stay at 100%, and AP75 reaches 100%; the second full scene improves AP25/AP50/AP75 to 32.21%/18.86%/6.17%, while the strict all-metric gate remains unpassed. SAM3 does not generate unobserved 3D surfaces. Change the v12 `FRONTEND` code registration back to `fovea` to detach this backend. See [the interface and direct commands](docs/VISION_API.md) and report chapters 18–21.
 
 ### V12 whole-object surface consensus
 
-`whole_object_consensus.reconcile` reuses existing masked RN50 identity features, measured RGB-D surfaces and complete-mask view evidence after proposal ownership validation. Shared-surface duplicates, differently named complementary bodies and a dominant measured terminal face require mutually unique ownership; independently separated objects remain distinct. Robust planar fitting supports elongated faces with minority edge returns. No hidden points or ground-truth dimensions are generated. Remove the v12 `WHOLE_OBJECT_VALIDATION` import/registration to detach this adapter. The first scene passes strict metric acceptance and publication checks; [chapter 22](docs/RESEARCH_REPORT.md) records every measured trial. The full 178-test offline suite passes. Latest metrics and artifact hashes are in [the result receipt](docs/sam3_woc_results.json).
+`whole_object_consensus.reconcile` reuses existing masked RN50 identity features, measured RGB-D surfaces and complete-mask view evidence after proposal ownership validation. Shared-surface duplicates, differently named complementary bodies and a dominant measured terminal face require mutually unique ownership; independently separated objects remain distinct. Robust planar fitting supports elongated faces with minority edge returns. No hidden points or ground-truth dimensions are generated. Remove the v12 `WHOLE_OBJECT_VALIDATION` import/registration to detach this adapter. The first scene passes strict metric acceptance and publication checks; [the consolidated report](docs/RESEARCH_REPORT.md) records final results only. The full 178-test offline suite passes. Latest metrics and artifact hashes are in [the result receipt](docs/sam3_woc_results.json).
 ### V12 measured body hierarchy
 
 `native_assembly.reconcile` queries signed original SAM3 masks rather than only
@@ -355,10 +355,10 @@ semantics or hidden depth is invented. Delete its v12 `MEASURED_REFINEMENT`
 import/registration to detach it. In ai_001_010 it retains 13 measured panels,
 reduces standalone objects from 139 to 126, and preserves every other object's
 point coordinates. Object AP uses the unchanged GT; part quality has no AP
-without part-level annotations. See report sections 2.7/2.8, 6.7 and chapter 22.
+without part-level annotations. See report sections 2.7/2.8, 6.7 and chapter 18.
 
-Current results are `partaware_gpt_ai_001_002_v12_sam3r7` and
-`partaware_gpt_ai_001_010_v12_sam3r3` under `scannet-sg-processed`, each containing
-`hypersim/<scene_id>`. Direct viewer commands are in report section 22.7;
+Current results share `scannet-sg-processed/partaware_v12/hypersim/`, with
+`ai_001_002` and `ai_001_010` as sibling scenes. Direct viewer commands are in
+report section 21;
 `--show_parts --show_part_points` optionally displays the retained panel parts.
 Edges and picking remain opt-in.

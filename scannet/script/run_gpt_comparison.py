@@ -77,8 +77,8 @@ def execute(command, logfile):
 
 
 def scene_directory(root, version, dataset, scene_id):
-    experiment = ('gpt_original_' + scene_id if version == 'original'
-                  else 'partaware_gpt_' + scene_id + '_' + version)
+    experiment = ('gpt_original_v1' if version == 'original'
+                  else 'partaware_v12' if version == 'v12' else 'partaware_gpt_v11')
     return root/experiment/dataset/scene_id
 
 

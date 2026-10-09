@@ -1,206 +1,426 @@
 {
   "updated": "2026-10-09",
+  "retention_policy": "one final package per version; no intermediate trials or data backups",
   "recognition_sources": {
     "original": "RAM",
     "v11": "existing_Qwen",
-    "v12": "existing_GPT"
+    "v12": "existing_GPT",
+    "gpt_original_control": "existing_GPT"
   },
   "additional_vision_api_calls": 0,
   "tests": 178,
   "first_scene_accepted": true,
-  "second_scene_complete": true,
-  "second_scene_local_gain_accepted": true,
   "second_scene_all_metric_gate_accepted": false,
-  "geometry_preservation": [
-    {
-      "scene": "ai_001_002",
-      "objects_before": 10,
-      "objects_after": 10,
-      "parts_created": 0,
-      "unexpected_geometry_changes": [],
-      "all_panel_measurements_preserved": true,
-      "background_geometry_modified": false
-    },
-    {
-      "scene": "ai_001_010",
-      "objects_before": 139,
-      "objects_after": 126,
-      "parts_created": 13,
-      "unexpected_geometry_changes": [],
-      "all_panel_measurements_preserved": true,
-      "background_geometry_modified": false
-    }
-  ],
-  "scannet_smoke": [
-    {
-      "message": "ScanNet 基础输入建图验证通过",
-      "path": "legacy_cpp",
-      "frames": 3,
-      "objects": 2,
-      "temporary_outputs_removed": true
-    },
-    {
-      "message": "ScanNet 基础输入建图验证通过",
-      "path": "default_components",
-      "frames": 3,
-      "objects": 2,
-      "temporary_outputs_removed": true
-    }
-  ],
-  "current": {
-    "ai_001_002": "/home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_002_v12_sam3r7/hypersim/ai_001_002",
-    "ai_001_010": "/home/lewisliu/datasets/scannet-sg-processed/partaware_gpt_ai_001_010_v12_sam3r3/hypersim/ai_001_010"
-  },
+  "scene0802_retained": true,
   "rows": [
     {
-      "id": "002",
-      "revision": "sam3r1",
-      "label": "SAM3初次构建",
-      "report": {
-        "predicted": 13,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 0.9633333333333334,
-        "AP75": 0.855,
-        "absolute_log_count_error": 0.26236426446749106,
-        "graph_sha256": "b35124fdb8882c21b89a8ed8ac1a53271bebba93396d0d341e7e4b5293b87054",
-        "prediction_ply_sha256": "9cccee06b2d0d1d66ec3a146459b94072d767791b45d2844d26d6e300ce8adbb"
+      "profile": "ram_original_v1",
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/ram_original_v1/hypersim/ai_001_010",
+      "predicted": 50,
+      "gt": 109,
+      "AP25": 0.004317323259579061,
+      "AP50": 0,
+      "AP75": 0,
+      "absolute_log_count_error": 0.7793248768009976,
+      "graph_sha256": "24ec7a2e70c9aebcd9e48fb9f47f7e4c7121aca1ee66fad586a4c24cc9ce4618",
+      "prediction_ply_sha256": "9c557ab231ebf18e7914451ee45a4cff3d14d5cbf6143d3eb1e1b83d8ab27637",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/ram_original_v1/hypersim/ai_001_010/evaluation.json"
+    },
+    {
+      "profile": "qwen_dino_v1",
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/qwen_dino_v1/hypersim/ai_001_010",
+      "predicted": 46,
+      "gt": 109,
+      "AP25": 0.017269293038316244,
+      "AP50": 0.00028669724770642203,
+      "AP75": 0,
+      "absolute_log_count_error": 0.8627064857400486,
+      "graph_sha256": "7ed5218da467032728ccce960c227482f84c15b4caae1a011ccd2bce0e572de2",
+      "prediction_ply_sha256": "d887b2950209ebede6dd8398a2e3dbeb8f5a5e6d0ad74d98774db4ad0a436178",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/qwen_dino_v1/hypersim/ai_001_010/evaluation.json"
+    },
+    {
+      "profile": "gpt_original_v1",
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/gpt_original_v1/hypersim/ai_001_002",
+      "predicted": 14,
+      "gt": 10,
+      "AP25": 0.17333333333333334,
+      "AP50": 0,
+      "AP75": 0,
+      "absolute_log_count_error": 0.3364722366212129,
+      "graph_sha256": "d353f32eecedb0169af2355f572e72cee31db9d65da207a78ba6d1279792a122",
+      "prediction_ply_sha256": "4d266aec0e8c5ab1f4f4c79eef98524d9476e4a2ba820c3fc1a1ba488e0cb1d8",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/gpt_original_v1/hypersim/ai_001_002/evaluation.json"
+    },
+    {
+      "profile": "gpt_original_v1",
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/gpt_original_v1/hypersim/ai_001_010",
+      "predicted": 75,
+      "gt": 109,
+      "AP25": 0.04970529067432737,
+      "AP50": 0.0017474879860200961,
+      "AP75": 0.0005096839959225281,
+      "absolute_log_count_error": 0.37385976869283327,
+      "graph_sha256": "e0c230f79460ac1a0afc1964ecf3e98e0f2ff459a66532e761cdb872bf0c22d5",
+      "prediction_ply_sha256": "c69ad8fd95b2b86026a4f2894b63a01c80e89d53e8a895824f15aac0a704e90d",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/gpt_original_v1/hypersim/ai_001_010/evaluation.json"
+    },
+    {
+      "profile": "partaware_v12",
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_002",
+      "predicted": 10,
+      "gt": 10,
+      "AP25": 1,
+      "AP50": 1,
+      "AP75": 1,
+      "absolute_log_count_error": 0,
+      "graph_sha256": "2514f0c6a4ffe22fb804b297a6ed515a0b992695070b8fd25d9b6c163a71e9d9",
+      "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_002/evaluation.json"
+    },
+    {
+      "profile": "partaware_v12",
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010",
+      "predicted": 126,
+      "gt": 109,
+      "AP25": 0.3220847673745414,
+      "AP50": 0.18858767400277404,
+      "AP75": 0.06174408150177959,
+      "absolute_log_count_error": 0.14493402472233427,
+      "graph_sha256": "0af789b8ba1ebd2180001c9320d60e9cf6a59f31d4013236c33ea885e64cb940",
+      "prediction_ply_sha256": "d99e25a7311546fd40bca3814509e039d35a03f6cf1f62e901151ff321739ae6",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010/evaluation.json"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002",
+      "graph_sha256": "c11e7a47f6070a8187a9ec05bd0659a5f1e7697bb901f52c46a47448dd34202c",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v1/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v1",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": false,
+        "geometry_evaluation_hash_equal": false
       }
     },
     {
-      "id": "002",
-      "revision": "sam3r2",
-      "label": "共享表面去重",
-      "report": {
-        "predicted": 12,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 0.9727272727272727,
-        "AP75": 0.8636363636363636,
-        "absolute_log_count_error": 0.1823215567939546,
-        "graph_sha256": "18c8af7c8d69adaeabb58ab1b5cb0b9b8efd9f87f74f6861935b5fe23274f7c6",
-        "prediction_ply_sha256": "2a277d999f6914d51bb542dd87bfdc6bedd10ddea3feddf3bc9816adf2659ab5"
+      "version": 2,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v2/hypersim/ai_001_002",
+      "graph_sha256": "6077794516033097510c8674062537a7bcca625c12124d2d81a2ea6e1187c440",
+      "evaluation": null
+    },
+    {
+      "version": 3,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v3/hypersim/ai_001_002",
+      "graph_sha256": "8f9d5dd3ab8665a739aeb6abe5ec4a92cc01fe0377462599fd7c117592802bd4",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v3/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v3",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "002",
-      "revision": "sam3r3",
-      "label": "图像身份与相机基线",
-      "report": {
-        "predicted": 11,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 1,
-        "AP75": 0.88,
-        "absolute_log_count_error": 0.09531017980432493,
-        "graph_sha256": "7abf3be8d92db81ad14fae4d02b618ae79ea5e06324b03ecaae28ca84218ea8f",
-        "prediction_ply_sha256": "bf92fea4f1b3ea8376ea798f7f2c2c1d22e084054cfea9405ca75d30f6aa5db1"
+      "version": 3,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v3/hypersim/ai_001_010",
+      "graph_sha256": "cfc72c3f21e7201e69363068770e620a33db1d84d0eb91f722cca33f5cbe4f34",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v3/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v3",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "002",
-      "revision": "sam3r4",
-      "label": "平面评分与规范身份",
-      "report": {
-        "predicted": 11,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 1,
-        "AP75": 0.88,
-        "absolute_log_count_error": 0.09531017980432493,
-        "graph_sha256": "154e903fd89f9a67fecb35c491e619448c23c47766a75dd12611a7c75338b5d9",
-        "prediction_ply_sha256": "bf92fea4f1b3ea8376ea798f7f2c2c1d22e084054cfea9405ca75d30f6aa5db1"
+      "version": 4,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v4/hypersim/ai_001_002",
+      "graph_sha256": "2d12c034333d76d574534c977301f5b3741d70193dfda1dd264963a7e9b98750",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v4/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v4",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "002",
-      "revision": "sam3r5",
-      "label": "稳健主平面WOC",
-      "report": {
-        "predicted": 10,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 1,
-        "AP75": 1,
-        "absolute_log_count_error": 0,
-        "graph_sha256": "869948261fac4f9891af81660ba7f10d6593476a849870665c8c97e9af8f725b",
-        "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d"
+      "version": 4,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v4/hypersim/ai_001_010",
+      "graph_sha256": "2c097b7f970f0f1cd25dff8b1645e1140df552992bffa5b1b1d5c6b013bfcddf",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v4/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v4",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": false,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "002",
-      "revision": "sam3r6",
-      "label": "原生整图掩码关联",
-      "report": {
-        "predicted": 10,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 1,
-        "AP75": 1,
-        "absolute_log_count_error": 0,
-        "graph_sha256": "f94be92ade8f8f164fd068c1c2da97dece212a4debcb790e17d33101276ab227",
-        "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d"
+      "version": 5,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v5/hypersim/ai_001_002",
+      "graph_sha256": "9409beccb8877d33b8df11d4bd5fadaa83d6295bc43d6bd53dd6446f89410197",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v5/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v5",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "002",
-      "revision": "sam3r7",
-      "label": "BHA层级回归",
-      "report": {
-        "predicted": 10,
-        "gt": 10,
-        "AP25": 1,
-        "AP50": 1,
-        "AP75": 1,
-        "absolute_log_count_error": 0,
-        "graph_sha256": "2514f0c6a4ffe22fb804b297a6ed515a0b992695070b8fd25d9b6c163a71e9d9",
-        "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d"
+      "version": 5,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v5/hypersim/ai_001_010",
+      "graph_sha256": "9ebf8cad83585beb58eb0e44acb8194761d0bd56a25c41ebce050fc6a87a3964",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v5/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v5",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "010",
-      "revision": "sam3r1",
-      "label": "SAM3与WOC",
-      "report": {
-        "predicted": 141,
-        "gt": 109,
-        "AP25": 0.2940929025880523,
-        "AP50": 0.17398251215001825,
-        "AP75": 0.05991362917739329,
-        "absolute_log_count_error": 0.2574120081490246,
-        "graph_sha256": "619a2add9b39bbb7e0c3c4ed6313a81b2feb45122a700d42d92948b6b544fa62",
-        "prediction_ply_sha256": "3a4430598b5d556c4fe258bc58ef1c5f342ae105739474673d424cb718318272"
+      "version": 6,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v6/hypersim/ai_001_002",
+      "graph_sha256": "72aa907727a80bfc04641d013635878ad81250b36c6060ad3bfc10bd97c55878",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v6/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v6",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "010",
-      "revision": "sam3r2",
-      "label": "原生整图掩码关联",
-      "report": {
-        "predicted": 139,
-        "gt": 109,
-        "AP25": 0.2974005885107657,
-        "AP50": 0.17521052620551003,
-        "AP75": 0.05978357909607784,
-        "absolute_log_count_error": 0.24312605090154799,
-        "graph_sha256": "2b3b866b55709c95f41e01420594a9311dd253696608623179dbd3932d3ec521",
-        "prediction_ply_sha256": "98c2d9c20cbecb70682cfbf3de7f125f89d32702609bfcd9ecf1aa041f5a739b"
+      "version": 6,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v6/hypersim/ai_001_010",
+      "graph_sha256": "51df9904d9b2be4625aef3564117a5537906115aa796d4384900883617160212",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v6/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v6",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     },
     {
-      "id": "010",
-      "revision": "sam3r3",
-      "label": "BHA整物体与面板",
-      "report": {
-        "predicted": 126,
-        "gt": 109,
-        "AP25": 0.3220847673745414,
-        "AP50": 0.18858767400277404,
-        "AP75": 0.06174408150177959,
-        "absolute_log_count_error": 0.14493402472233427,
-        "graph_sha256": "0af789b8ba1ebd2180001c9320d60e9cf6a59f31d4013236c33ea885e64cb940",
-        "prediction_ply_sha256": "d99e25a7311546fd40bca3814509e039d35a03f6cf1f62e901151ff321739ae6"
+      "version": 7,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v7/hypersim/ai_001_002",
+      "graph_sha256": "025f00dbbd5a14b269a004f276c847bc038a57c6640f0f993a425ab41c242963",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v7/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v7",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 7,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v7/hypersim/ai_001_010",
+      "graph_sha256": "c5cbf455b8ec067f6906fedcf7b0a2dfef78b16e3d6d1e82c6b0cc8d16293215",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v7/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v7",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 8,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v8/hypersim/ai_001_002",
+      "graph_sha256": "cc703536d032b68f69278b1b92fa0f7a91b58737e4f386bf04c663e378861938",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v8/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v8",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 8,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v8/hypersim/ai_001_010",
+      "graph_sha256": "9ef7ff8d987d23777a5a09fc207065669adc2c6af1fb4893e2f8a349fd8eb1d1",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v8/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v8",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 9,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v9/hypersim/ai_001_002",
+      "graph_sha256": "2ab46fc9831a04e51c4c701b13cd0924a0b82592667fb017fc6bb3c1fb8964d6",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v9/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v9",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 9,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v9/hypersim/ai_001_010",
+      "graph_sha256": "6f7fb3c97beb8323c511813a5536e38afc76d0cfc008f0bee5a68dd8b2615eb0",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v9/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v9",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 10,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v10/hypersim/ai_001_002",
+      "graph_sha256": "be5b1c0d20303bc8001b6a669fd8a2b782dd6b5d1290e74803b6821559e69095",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v10/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v10",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 10,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v10/hypersim/ai_001_010",
+      "graph_sha256": "917ef623e7b28ff2e2a1e5de4ff8b4668c939d6c9e2f1c8557202b9c52d0892b",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v10/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v10",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 11,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_002",
+      "graph_sha256": "bfb7bea07f9813115c21daca666cd91ee9639639e0ec1c5c6bf1ac1f86240592",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v11",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 11,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_010",
+      "graph_sha256": "e8008bb731e7731d22b3f380b13ce21bf4c2f33efa76682128fa6f5f0e56c999",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v11/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v11",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 12,
+      "scene_id": "ai_001_002",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_002",
+      "graph_sha256": "2514f0c6a4ffe22fb804b297a6ed515a0b992695070b8fd25d9b6c163a71e9d9",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_002/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v12",
+        "scene_id": "ai_001_002",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
+      }
+    },
+    {
+      "version": 12,
+      "scene_id": "ai_001_010",
+      "scene": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010",
+      "graph_sha256": "0af789b8ba1ebd2180001c9320d60e9cf6a59f31d4013236c33ea885e64cb940",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010/evaluation.json",
+      "artifact_status": {
+        "version": "partaware_v12",
+        "scene_id": "ai_001_010",
+        "graph_available": true,
+        "graph_evaluation_hash_equal": true,
+        "source_geometry_available": true,
+        "geometry_evaluation_hash_equal": true
       }
     }
-  ]
+  ],
+  "retention_warning_zh": "清理时误删v1依赖的hypersim_joint_v4共享点云。图、部件及已记录历史评分保留；尚未找到同SHA256副本，原点云可视化暂不可复现。没有使用其他版本点云或生成点替代。"
 }
