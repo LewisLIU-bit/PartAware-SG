@@ -1,0 +1,1022 @@
+{
+  "date": "2026-10-09",
+  "scene": "ai_001_010",
+  "scope": "Current final outputs only; offline diagnosis and unimplemented repair design",
+  "new_gpt_calls": 0,
+  "new_qwen_calls": 0,
+  "algorithm_changes": false,
+  "production_output_changes": false,
+  "final_input_sha256": {
+    "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010/topology_map.json": "0af789b8ba1ebd2180001c9320d60e9cf6a59f31d4013236c33ea885e64cb940",
+    "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010/instance_cloud_cleaned.ply": "d99e25a7311546fd40bca3814509e039d35a03f6cf1f62e901151ff321739ae6",
+    "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010/object_validation.json": "e5abb12c803a577fe0effff75a8611b5455abc172e592d549f3ac649a163f24b",
+    "/home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010/sam3_cache/cam_00_0006.npz": "46ce733a2c9f853a34c04d8de405baa501a930123cef303300e30c16f52c16c9"
+  },
+  "whole_candidates_rejected_before_native_assembly": [
+    {
+      "track_id": "138",
+      "observations": 18,
+      "names": [
+        "refrigerator"
+      ],
+      "evidence": {
+        "accepted": false,
+        "reasons": [
+          "多个独立实例混合于一个候选"
+        ],
+        "visible_views": 20,
+        "support_views": 20,
+        "mixed_views": 5,
+        "undersegmented_view_fraction": 0.25,
+        "view_detection_rate": 1.0,
+        "strong_observed_geometry": true
+      }
+    },
+    {
+      "track_id": "156",
+      "observations": 9,
+      "names": [
+        "window"
+      ],
+      "evidence": {
+        "accepted": false,
+        "reasons": [
+          "多个独立实例混合于一个候选",
+          "物体与结构背景的语义对比不足"
+        ],
+        "visible_views": 24,
+        "support_views": 21,
+        "mixed_views": 8,
+        "undersegmented_view_fraction": 0.3333333333333333,
+        "view_detection_rate": 0.875,
+        "strong_observed_geometry": false
+      }
+    },
+    {
+      "track_id": "218",
+      "observations": 8,
+      "names": [
+        "window"
+      ],
+      "evidence": {
+        "accepted": false,
+        "reasons": [
+          "多个独立实例混合于一个候选",
+          "物体与结构背景的语义对比不足"
+        ],
+        "visible_views": 23,
+        "support_views": 12,
+        "mixed_views": 7,
+        "undersegmented_view_fraction": 0.30434782608695654,
+        "view_detection_rate": 0.5217391304347826,
+        "strong_observed_geometry": false
+      }
+    }
+  ],
+  "published_rack_and_plate_nodes": [
+    {
+      "id": "21",
+      "name": "utensil rack",
+      "position": [
+        -2.947772526937404,
+        -0.3067677490733889,
+        1.2876421262908238
+      ],
+      "shape": {
+        "length": 0.09023392854176038,
+        "width": 0.381189609533421,
+        "height": 0.4993751903783168,
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.001980670508311195,
+          "w": 0.999998038470245
+        }
+      },
+      "published_cloud_points": 1688
+    },
+    {
+      "id": "58",
+      "name": "plate",
+      "position": [
+        -2.956061229019985,
+        -0.20749517615707683,
+        1.2823398804122164
+      ],
+      "shape": {
+        "length": 0.03848951807731149,
+        "width": 0.13718063448911855,
+        "height": 0.0990406494569589,
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.10154892112110339,
+          "w": 0.9948305466857861
+        }
+      },
+      "published_cloud_points": 211
+    },
+    {
+      "id": "59",
+      "name": "plate",
+      "position": [
+        -2.9475716633464244,
+        -0.38119474782744484,
+        1.2735266004475516
+      ],
+      "shape": {
+        "length": 0.10647164214194887,
+        "width": 0.09053045252072334,
+        "height": 0.12476353821893782,
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.69563415322485,
+          "w": 0.718396217185994
+        }
+      },
+      "published_cloud_points": 211
+    },
+    {
+      "id": "61",
+      "name": "plate",
+      "position": [
+        -2.954037213315574,
+        -0.2961814795182982,
+        1.2713297556973582
+      ],
+      "shape": {
+        "length": 0.08065110668019093,
+        "width": 0.1068701790224319,
+        "height": 0.12825243354432603,
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.22444502951334191,
+          "w": 0.9744867514372656
+        }
+      },
+      "published_cloud_points": 212
+    },
+    {
+      "id": "84",
+      "name": "plate",
+      "position": [
+        0.8298342385056842,
+        0.17493111145479562,
+        1.0106782686530948
+      ],
+      "shape": {
+        "length": 0.2819846352269601,
+        "width": 0.2655612793824381,
+        "height": 0.06795320885578482,
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.44769033707861455,
+          "w": 0.894188661349738
+        }
+      },
+      "published_cloud_points": 1605
+    }
+  ],
+  "raw_rack_plate_masks": [
+    {
+      "object_name": "plate",
+      "confidence": 0.69921875,
+      "segmentation_box": [
+        210,
+        397,
+        233,
+        415
+      ],
+      "is_zoom_proposal": false
+    },
+    {
+      "object_name": "plate",
+      "confidence": 0.67578125,
+      "segmentation_box": [
+        181,
+        398,
+        199,
+        417
+      ],
+      "is_zoom_proposal": false
+    },
+    {
+      "object_name": "plate",
+      "confidence": 0.578125,
+      "segmentation_box": [
+        194,
+        398,
+        213,
+        416
+      ],
+      "is_zoom_proposal": false
+    },
+    {
+      "object_name": "plate",
+      "confidence": 0.890625,
+      "segmentation_box": [
+        207,
+        397,
+        234,
+        421
+      ],
+      "is_zoom_proposal": true
+    },
+    {
+      "object_name": "plate",
+      "confidence": 0.87890625,
+      "segmentation_box": [
+        181,
+        398,
+        199,
+        423
+      ],
+      "is_zoom_proposal": true
+    },
+    {
+      "object_name": "plate",
+      "confidence": 0.875,
+      "segmentation_box": [
+        194,
+        397,
+        212,
+        422
+      ],
+      "is_zoom_proposal": true
+    }
+  ],
+  "surface_transfer": {
+    "tolerance_m": 0.015,
+    "meaning": "Version-to-version proximity of measured surfaces; not GT accuracy or exact point identity",
+    "objects": [
+      {
+        "old_id": "4",
+        "old_name": "refrigerator",
+        "old_points": 25132,
+        "retained_within_15mm": 0.46200063663854846,
+        "v12_owners": [
+          {
+            "id": "18",
+            "name": "door",
+            "old_point_fraction": 0.35210090720993154
+          },
+          {
+            "id": "140",
+            "name": "door",
+            "old_point_fraction": 0.09704758873149769
+          },
+          {
+            "id": "424",
+            "name": "shelf",
+            "old_point_fraction": 0.012175712239376094
+          },
+          {
+            "id": "141",
+            "name": "countertop",
+            "old_point_fraction": 0.0006764284577431164
+          }
+        ]
+      },
+      {
+        "old_id": "78",
+        "old_name": "window",
+        "old_points": 32621,
+        "retained_within_15mm": 0.19821587321050857,
+        "v12_owners": [
+          {
+            "id": "191",
+            "name": "curtain",
+            "old_point_fraction": 0.09919990190368168
+          },
+          {
+            "id": "192",
+            "name": "curtain",
+            "old_point_fraction": 0.050335673339259986
+          },
+          {
+            "id": "204",
+            "name": "curtain",
+            "old_point_fraction": 0.048680297967566906
+          }
+        ]
+      },
+      {
+        "old_id": "49",
+        "old_name": "towel rack",
+        "old_points": 2760,
+        "retained_within_15mm": 0.8076086956521739,
+        "v12_owners": [
+          {
+            "id": "49",
+            "name": "backsplash",
+            "old_point_fraction": 0.26557971014492754
+          },
+          {
+            "id": "27",
+            "name": "spoon",
+            "old_point_fraction": 0.19166666666666668
+          },
+          {
+            "id": "60",
+            "name": "spoon",
+            "old_point_fraction": 0.13949275362318841
+          },
+          {
+            "id": "70",
+            "name": "cooking utensil",
+            "old_point_fraction": 0.12608695652173912
+          },
+          {
+            "id": "32",
+            "name": "spoon",
+            "old_point_fraction": 0.08478260869565217
+          }
+        ]
+      },
+      {
+        "old_id": "62",
+        "old_name": "sink",
+        "old_points": 4528,
+        "retained_within_15mm": 0.9944787985865724,
+        "v12_owners": [
+          {
+            "id": "131",
+            "name": "sink",
+            "old_point_fraction": 0.9812279151943463
+          },
+          {
+            "id": "149",
+            "name": "faucet",
+            "old_point_fraction": 0.013250883392226149
+          }
+        ]
+      },
+      {
+        "old_id": "123",
+        "old_name": "towel rack",
+        "old_points": 911,
+        "retained_within_15mm": 0.9363336992316136,
+        "v12_owners": [
+          {
+            "id": "96",
+            "name": "utensil rack",
+            "old_point_fraction": 0.9363336992316136
+          }
+        ]
+      },
+      {
+        "old_id": "64",
+        "old_name": "plate",
+        "old_points": 2009,
+        "retained_within_15mm": 0.1911398705823793,
+        "v12_owners": [
+          {
+            "id": "22",
+            "name": "plate",
+            "old_point_fraction": 0.10054753608760578
+          },
+          {
+            "id": "3",
+            "name": "countertop",
+            "old_point_fraction": 0.08013937282229965
+          },
+          {
+            "id": "19",
+            "name": "plate",
+            "old_point_fraction": 0.010452961672473868
+          }
+        ]
+      },
+      {
+        "old_id": "31",
+        "old_name": "plate",
+        "old_points": 1852,
+        "retained_within_15mm": 0.9325053995680346,
+        "v12_owners": [
+          {
+            "id": "84",
+            "name": "plate",
+            "old_point_fraction": 0.9195464362850972
+          },
+          {
+            "id": "3",
+            "name": "countertop",
+            "old_point_fraction": 0.012958963282937365
+          }
+        ]
+      },
+      {
+        "old_id": "70",
+        "old_name": "plate",
+        "old_points": 996,
+        "retained_within_15mm": 0.998995983935743,
+        "v12_owners": [
+          {
+            "id": "7",
+            "name": "plate",
+            "old_point_fraction": 0.7198795180722891
+          },
+          {
+            "id": "22",
+            "name": "plate",
+            "old_point_fraction": 0.178714859437751
+          },
+          {
+            "id": "3",
+            "name": "countertop",
+            "old_point_fraction": 0.08835341365461848
+          },
+          {
+            "id": "5",
+            "name": "cup",
+            "old_point_fraction": 0.012048192771084338
+          }
+        ]
+      },
+      {
+        "old_id": "59",
+        "old_name": "plate",
+        "old_points": 833,
+        "retained_within_15mm": 0.9771908763505402,
+        "v12_owners": [
+          {
+            "id": "22",
+            "name": "plate",
+            "old_point_fraction": 0.9063625450180072
+          },
+          {
+            "id": "3",
+            "name": "countertop",
+            "old_point_fraction": 0.06362545018007203
+          },
+          {
+            "id": "10",
+            "name": "cup",
+            "old_point_fraction": 0.007202881152460984
+          }
+        ]
+      }
+    ]
+  },
+  "final_version_metric_comparison": [
+    {
+      "version": "partaware_v11",
+      "counts": {
+        "kitchen island": 1,
+        "window": 2,
+        "kitchen counter": 1,
+        "refrigerator": 1,
+        "shelf": 15,
+        "cabinet": 4,
+        "range hood": 2,
+        "oven": 1,
+        "countertop": 1,
+        "stool": 2,
+        "microwave": 1,
+        "towel rack": 2,
+        "stove": 2,
+        "spice rack": 1,
+        "sink": 1,
+        "plate": 4,
+        "_sink": 1,
+        "toaster": 2,
+        "napkin": 2,
+        "bowl": 2,
+        "paper towel dispenser": 1,
+        "pot": 3,
+        "faucet": 3,
+        "knife block": 1,
+        "cup": 4,
+        "bottle": 11,
+        "utensil": 2,
+        "lamp": 1
+      },
+      "targets": [
+        {
+          "gt": 1,
+          "label": "lamp",
+          "best": {
+            "prediction_id": "226",
+            "label": "lamp",
+            "IoU": 0.32264772690815985,
+            "confidence": 0.3050706346068713
+          },
+          "surface": {
+            "gt_id": 1,
+            "label": "lamp",
+            "union_surface_coverage": 0.7583174748999278,
+            "geometric_surface_coverage": 0.7735415709692237,
+            "pure_fragment_count": 1
+          }
+        },
+        {
+          "gt": 23,
+          "label": "counter",
+          "best": {
+            "prediction_id": "1",
+            "label": "kitchen island",
+            "IoU": 0.915983359067017,
+            "confidence": 0.4554802217123851
+          },
+          "surface": {
+            "gt_id": 23,
+            "label": "counter",
+            "union_surface_coverage": 0.9848115299334812,
+            "geometric_surface_coverage": 0.9922236300285081,
+            "pure_fragment_count": 1
+          }
+        },
+        {
+          "gt": 26,
+          "label": "window",
+          "best": {
+            "prediction_id": "78",
+            "label": "window",
+            "IoU": 0.17853145470029605,
+            "confidence": 0.3203900387749058
+          },
+          "surface": {
+            "gt_id": 26,
+            "label": "window",
+            "union_surface_coverage": 0.0,
+            "geometric_surface_coverage": 0.9220132380889967,
+            "pure_fragment_count": 0
+          }
+        },
+        {
+          "gt": 27,
+          "label": "window",
+          "best": {
+            "prediction_id": "78",
+            "label": "window",
+            "IoU": 0.1785314342323308,
+            "confidence": 0.3203900387749058
+          },
+          "surface": {
+            "gt_id": 27,
+            "label": "window",
+            "union_surface_coverage": 0.0,
+            "geometric_surface_coverage": 0.9556796250344638,
+            "pure_fragment_count": 0
+          }
+        },
+        {
+          "gt": 30,
+          "label": "cabinet",
+          "best": {
+            "prediction_id": "282",
+            "label": "cabinet",
+            "IoU": 0.814617905545318,
+            "confidence": 0.2599481019502916
+          },
+          "surface": {
+            "gt_id": 30,
+            "label": "cabinet",
+            "union_surface_coverage": 0.9527114613209762,
+            "geometric_surface_coverage": 0.9784430404295061,
+            "pure_fragment_count": 1
+          }
+        },
+        {
+          "gt": 45,
+          "label": "shelves",
+          "best": {
+            "prediction_id": "140",
+            "label": "shelf",
+            "IoU": 0.5594645545646433,
+            "confidence": 0.39382604691722894
+          },
+          "surface": {
+            "gt_id": 45,
+            "label": "shelves",
+            "union_surface_coverage": 0.0,
+            "geometric_surface_coverage": 0.9065610859728507,
+            "pure_fragment_count": 0
+          }
+        },
+        {
+          "gt": 57,
+          "label": "cabinet",
+          "best": {
+            "prediction_id": "283",
+            "label": "cabinet",
+            "IoU": 0.39293816192025793,
+            "confidence": 0.2364347906801387
+          },
+          "surface": {
+            "gt_id": 57,
+            "label": "cabinet",
+            "union_surface_coverage": 0.5899776309361582,
+            "geometric_surface_coverage": 0.9552747281001722,
+            "pure_fragment_count": 1
+          }
+        },
+        {
+          "gt": 67,
+          "label": "refrigerator",
+          "best": {
+            "prediction_id": "4",
+            "label": "refrigerator",
+            "IoU": 0.9519124982001863,
+            "confidence": 0.539990469195766
+          },
+          "surface": {
+            "gt_id": 67,
+            "label": "refrigerator",
+            "union_surface_coverage": 0.8679005092048571,
+            "geometric_surface_coverage": 0.9009009009009009,
+            "pure_fragment_count": 1
+          }
+        },
+        {
+          "gt": 68,
+          "label": "cabinet",
+          "best": {
+            "prediction_id": "82",
+            "label": "kitchen counter",
+            "IoU": 0.26075303256915205,
+            "confidence": 0.2709430163978052
+          },
+          "surface": {
+            "gt_id": 68,
+            "label": "cabinet",
+            "union_surface_coverage": 0.9201267627585331,
+            "geometric_surface_coverage": 0.9371958646247626,
+            "pure_fragment_count": 12
+          }
+        },
+        {
+          "gt": 148,
+          "label": "counter",
+          "best": {
+            "prediction_id": "143",
+            "label": "countertop",
+            "IoU": 0.5077523868391913,
+            "confidence": 0.3222973957599655
+          },
+          "surface": {
+            "gt_id": 148,
+            "label": "counter",
+            "union_surface_coverage": 0.8544818132863368,
+            "geometric_surface_coverage": 0.9500579298640688,
+            "pure_fragment_count": 1
+          }
+        },
+        {
+          "gt": 149,
+          "label": "sink",
+          "best": {
+            "prediction_id": "62",
+            "label": "sink",
+            "IoU": 0.6551187813369298,
+            "confidence": 0.3797430580721222
+          },
+          "surface": {
+            "gt_id": 149,
+            "label": "sink",
+            "union_surface_coverage": 0.9351247600767755,
+            "geometric_surface_coverage": 0.9404990403071017,
+            "pure_fragment_count": 1
+          }
+        }
+      ],
+      "files": [
+        "assembly_audit.json",
+        "assembly_density_audit.json",
+        "averaged_instance_features.json",
+        "cache_reuse.json",
+        "completion_audit.json",
+        "cuboid_completion_audit.json",
+        "evaluation.json",
+        "floor_filter.json",
+        "instance_bert_embeddings.json",
+        "instance_cloud.ply",
+        "instance_cloud_cleaned.ply",
+        "instance_cloud_colored.ply",
+        "instance_cloud_completed.ply",
+        "instance_cloud_with_background.ply",
+        "instance_granularity_audit.json",
+        "instance_name_map.csv",
+        "object_association_zh.jsonl",
+        "object_tracks.json",
+        "object_validation.json",
+        "part_geometry_audit.json",
+        "pipeline_zh.jsonl",
+        "structural_surface_audit.json",
+        "suspension_geometry_audit.json",
+        "thin_geometry_audit.json",
+        "topology_map.json",
+        "topology_map_cleaned.json",
+        "topology_map_observed.json",
+        "validated_object_tracks.json"
+      ]
+    },
+    {
+      "version": "partaware_v12",
+      "counts": {
+        "countertop": 3,
+        "backsplash tile": 1,
+        "kitchen island": 2,
+        "backsplash": 1,
+        "cabinet": 20,
+        "window": 2,
+        "range hood": 3,
+        "oven": 1,
+        "bar stool": 2,
+        "door": 2,
+        "curtain": 3,
+        "shelf": 6,
+        "cooktop": 1,
+        "sink": 1,
+        "microwave": 1,
+        "utensil rack": 3,
+        "plate": 8,
+        "stovetop": 1,
+        "toaster": 1,
+        "cutting board": 3,
+        "utensil holder": 7,
+        "paper towel holder": 1,
+        "dish rack": 1,
+        "bowl": 1,
+        "kettle": 1,
+        "kitchen utensil": 5,
+        "spoon": 3,
+        "bottle": 5,
+        "pot": 2,
+        "bread": 1,
+        "knife block": 1,
+        "faucet": 1,
+        "drinking glass": 3,
+        "glass": 5,
+        "cooking utensil": 1,
+        "cup": 3,
+        "box": 1,
+        "light fixture": 2,
+        "ceiling light": 5,
+        "knife": 4,
+        "jar": 6,
+        "fruit": 1,
+        "butter": 1
+      },
+      "targets": [
+        {
+          "gt": 1,
+          "label": "lamp",
+          "best": {
+            "prediction_id": "298",
+            "label": "ceiling light",
+            "IoU": 0.06722582725322909,
+            "confidence": 0.49246428294768674
+          },
+          "surface": {
+            "gt_id": 1,
+            "label": "lamp",
+            "union_surface_coverage": 0.9365443926766848,
+            "geometric_surface_coverage": 0.9465844215499705,
+            "pure_fragment_count": 6
+          }
+        },
+        {
+          "gt": 23,
+          "label": "counter",
+          "best": {
+            "prediction_id": "3",
+            "label": "countertop",
+            "IoU": 0.9402362865961675,
+            "confidence": 0.7153965703329238
+          },
+          "surface": {
+            "gt_id": 23,
+            "label": "counter",
+            "union_surface_coverage": 0.9915663604687995,
+            "geometric_surface_coverage": 0.99562876148242,
+            "pure_fragment_count": 2
+          }
+        },
+        {
+          "gt": 26,
+          "label": "window",
+          "best": {
+            "prediction_id": "192",
+            "label": "curtain",
+            "IoU": 0.06035635017878159,
+            "confidence": 0.6181174483079007
+          },
+          "surface": {
+            "gt_id": 26,
+            "label": "window",
+            "union_surface_coverage": 0.0,
+            "geometric_surface_coverage": 0.02955632741332984,
+            "pure_fragment_count": 0
+          }
+        },
+        {
+          "gt": 27,
+          "label": "window",
+          "best": {
+            "prediction_id": "191",
+            "label": "curtain",
+            "IoU": 0.21511498405116122,
+            "confidence": 0.6042096493868794
+          },
+          "surface": {
+            "gt_id": 27,
+            "label": "window",
+            "union_surface_coverage": 0.0,
+            "geometric_surface_coverage": 0.05334987593052109,
+            "pure_fragment_count": 0
+          }
+        },
+        {
+          "gt": 30,
+          "label": "cabinet",
+          "best": {
+            "prediction_id": "162",
+            "label": "cabinet",
+            "IoU": 0.8669771879355135,
+            "confidence": 0.6846457937101634
+          },
+          "surface": {
+            "gt_id": 30,
+            "label": "cabinet",
+            "union_surface_coverage": 0.9728802833433701,
+            "geometric_surface_coverage": 0.9772182131811825,
+            "pure_fragment_count": 3
+          }
+        },
+        {
+          "gt": 45,
+          "label": "shelves",
+          "best": {
+            "prediction_id": "78",
+            "label": "cabinet",
+            "IoU": 0.4302758625961778,
+            "confidence": 0.44260630399427187
+          },
+          "surface": {
+            "gt_id": 45,
+            "label": "shelves",
+            "union_surface_coverage": 0.5913273001508296,
+            "geometric_surface_coverage": 0.9604826546003017,
+            "pure_fragment_count": 3
+          }
+        },
+        {
+          "gt": 57,
+          "label": "cabinet",
+          "best": {
+            "prediction_id": "78",
+            "label": "cabinet",
+            "IoU": 0.0725109910607009,
+            "confidence": 0.44260630399427187
+          },
+          "surface": {
+            "gt_id": 57,
+            "label": "cabinet",
+            "union_surface_coverage": 0.6860874707530918,
+            "geometric_surface_coverage": 0.7512920062736225,
+            "pure_fragment_count": 8
+          }
+        },
+        {
+          "gt": 67,
+          "label": "refrigerator",
+          "best": {
+            "prediction_id": "18",
+            "label": "door",
+            "IoU": 0.05354026853739087,
+            "confidence": 0.6691183278614725
+          },
+          "surface": {
+            "gt_id": 67,
+            "label": "refrigerator",
+            "union_surface_coverage": 0.412521216869043,
+            "geometric_surface_coverage": 0.4266549157853506,
+            "pure_fragment_count": 3
+          }
+        },
+        {
+          "gt": 68,
+          "label": "cabinet",
+          "best": {
+            "prediction_id": "3",
+            "label": "countertop",
+            "IoU": 0.18601078721456699,
+            "confidence": 0.7153965703329238
+          },
+          "surface": {
+            "gt_id": 68,
+            "label": "cabinet",
+            "union_surface_coverage": 0.6088018148547943,
+            "geometric_surface_coverage": 0.755375583737885,
+            "pure_fragment_count": 10
+          }
+        },
+        {
+          "gt": 148,
+          "label": "counter",
+          "best": {
+            "prediction_id": "141",
+            "label": "countertop",
+            "IoU": 0.5626843636178653,
+            "confidence": 0.5495023462725652
+          },
+          "surface": {
+            "gt_id": 148,
+            "label": "counter",
+            "union_surface_coverage": 0.8212251758293762,
+            "geometric_surface_coverage": 0.8676098627633361,
+            "pure_fragment_count": 2
+          }
+        },
+        {
+          "gt": 149,
+          "label": "sink",
+          "best": {
+            "prediction_id": "131",
+            "label": "sink",
+            "IoU": 0.8292032925398117,
+            "confidence": 0.6033528088413735
+          },
+          "surface": {
+            "gt_id": 149,
+            "label": "sink",
+            "union_surface_coverage": 0.9942418426103646,
+            "geometric_surface_coverage": 0.9942418426103646,
+            "pure_fragment_count": 2
+          }
+        }
+      ],
+      "files": [
+        "assembly_audit.json",
+        "assembly_density_audit.json",
+        "averaged_instance_features.json",
+        "cache_reuse.json",
+        "completion_audit.json",
+        "construction_completed.json",
+        "construction_start.json",
+        "cuboid_completion_audit.json",
+        "evaluation.json",
+        "floor_filter.json",
+        "frontend_provenance.json",
+        "instance_bert_embeddings.json",
+        "instance_cloud.ply",
+        "instance_cloud_cleaned.ply",
+        "instance_cloud_colored.ply",
+        "instance_cloud_with_background.ply",
+        "instance_granularity_audit.json",
+        "instance_name_map.csv",
+        "object_association_zh.jsonl",
+        "object_tracks.json",
+        "object_validation.json",
+        "part_body_assembly_audit.json",
+        "part_geometry_audit.json",
+        "pipeline_zh.jsonl",
+        "recognition_provenance.json",
+        "retention_record.json",
+        "sam3_inference_audit.json",
+        "sam3_jobs.json",
+        "structural_surface_audit.json",
+        "suspension_geometry_audit.json",
+        "thin_geometry_audit.json",
+        "topology_map.json",
+        "topology_map_cleaned.json",
+        "topology_map_observed.json",
+        "validated_object_tracks.json"
+      ]
+    }
+  ],
+  "planned_components": [
+    {
+      "name": "HMG",
+      "implemented": false
+    },
+    {
+      "name": "MVT",
+      "implemented": false
+    },
+    {
+      "name": "FBP",
+      "implemented": false
+    }
+  ],
+  "math_render_check": {
+    "desktop": {
+      "trees": 1,
+      "branches": 18,
+      "formulas": 126,
+      "formulaErrors": 0,
+      "overflow": false,
+      "images": true,
+      "collapseWorks": true
+    },
+    "mobile": {
+      "overflow": false
+    },
+    "errors": []
+  },
+  "latex_compile_status": "Compiler unavailable: Unable to find standard directories for platform"
+}
