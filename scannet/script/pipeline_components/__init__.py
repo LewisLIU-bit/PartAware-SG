@@ -39,3 +39,12 @@ PART_GEOMETRY = part_geometry
 from . import thin_geometry, axial_assembly, assembly_density, suspension_geometry
 MEASURED_REFINEMENT = [thin_geometry, axial_assembly, assembly_density]
 FINAL_GEOMETRY = [suspension_geometry]
+
+# Forward a complete comparison profile to isolated model subprocesses.
+# Detachment remains a code registry edit, not a per-component runtime switch.
+import os as _os
+import sys as _sys
+_profile = _os.environ.get('PARTAWARE_COMPARISON_PROFILE')
+if _profile:
+    from run_gpt_comparison import configure_profile as _configure_profile
+    _configure_profile(_profile, _sys.modules[__name__])

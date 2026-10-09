@@ -23,7 +23,11 @@ def validate_scene(scene):
         if np.asarray(node['visual_embedding']).shape != (256,) or np.asarray(node['text_embedding']).shape != (384,):
             raise ValueError(f'Object feature interface changed: {key}')
     for key, part in (graph.get('part_nodes') or {}).items():
-        if np.asarray(part['semantic_embedding']).shape != (1024,):
+        geometry_only = part.get('semantic_feature_space') == 'geometry_only_no_visual_embedding'
+        if geometry_only and (part['semantic_embedding'] is not None
+                or len(set(part.get('observed_frames', []))) < 2):
+            raise ValueError(f'Geometry-only part has invalid feature or frame evidence: {key}')
+        if not geometry_only and np.asarray(part['semantic_embedding']).shape != (1024,):
             raise ValueError(f'Part feature space changed: {key}')
         if part['parent_id'] is not None and str(part['parent_id']) not in nodes:
             raise ValueError(f'Part references a removed parent: {key}')
@@ -31,7 +35,10 @@ def validate_scene(scene):
             raise ValueError('Unified entity query lost a part')
     for edge in graph.get('part_relations') or []:
         part = graph['part_nodes'][edge['source_id']]
-        if part['status'] != 'confirmed' or part['parent_id'] != edge['target_id'] or part.get('parent_evidence_frames', 0) < 2:
+        geometry_only = part.get('semantic_feature_space') == 'geometry_only_no_visual_embedding'
+        evidence = (min(len(set(part.get('observed_frames', []))), edge.get('evidence_frames', 0))
+                    if geometry_only else part.get('parent_evidence_frames', 0))
+        if part['status'] != 'confirmed' or part['parent_id'] != edge['target_id'] or evidence < 2:
             raise ValueError('Hierarchy edge lacks stable multi-view ownership')
         if edge not in graph['scene_graph']['edges']:
             raise ValueError('Hierarchy relation is only a visualization overlay')

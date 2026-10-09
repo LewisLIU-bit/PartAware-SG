@@ -1,0 +1,21 @@
+{
+  "public_semantic_dimensions": 384,
+  "checkpoint_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+  "checkpoint_source": "https://modelscope.cn/models/facebook/sam3",
+  "pip_check": true,
+  "torchvision": "0.25.0+cu128",
+  "source_owner_independently_verified": false,
+  "python": "3.12.14",
+  "two_scene_full_accuracy_verified": false,
+  "license": "SAM License",
+  "environment": "/home/lewisliu/miniconda3/envs/sg-sam3",
+  "source_archive_sha256": "d2642773a805ce7be87cbf152e6560449a974346b1cdb32da4191d27550c08da",
+  "new_qwen_calls": 0,
+  "official_source": "https://github.com/facebookresearch/sam3",
+  "source_revision": "0570b3a5be9c4e694f23d85232fb55f4a6f1f7fc",
+  "torch": "2.10.0+cu128",
+  "trained_model_smoke_tested": true,
+  "checkpoint_verified": true,
+  "new_gpt_calls": 0,
+  "public_visual_dimensions": 256
+}

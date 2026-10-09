@@ -53,3 +53,6 @@ scannet/script/thirdparty/PoinTr/
 scannet/script/thirdparty/Hunyuan3D/
 scannet/script/thirdparty/TripoSR/
 scannet/script/thirdparty/MGPC/
+scannet/script/thirdparty/SAM3/
+!docs/environment_sam3.json
+!docs/sam3_requirements.txt

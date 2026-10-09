@@ -1,4 +1,4 @@
-"""Compare original, v11 and v12 construction using one GPT cache per scene."""
+"""Construct v12 using one existing GPT cache per scene; keep historical profiles."""
 import argparse
 import hashlib
 import json
@@ -8,11 +8,12 @@ import subprocess
 import sys
 
 from qwen_tools.manifest_io import load_manifest_images
-from vision_api import Settings, recognize_manifest, attach_cache, atomic_json
+from vision_api import attach_cache, atomic_json
 
 REPO = Path(__file__).resolve().parents[2]
 DEFAULT_DATA = Path.home() / 'datasets'
 VERSIONS = ('original', 'v11', 'v12')
+ACTIVE_VERSIONS = ('v12',)
 
 
 def configure_profile(version, registry):
@@ -20,22 +21,27 @@ def configure_profile(version, registry):
     if version not in VERSIONS:
         raise ValueError('Unknown comparison version')
     registry.VERSION = version + '_gpt'
+    if version != 'original':
+        from pipeline_components import visibility_ownership
+        registry.OWNERSHIP_VALIDATION = visibility_ownership
     if version == 'original':
         registry.GROUNDING_BACKEND = 'dino'
         for key in ('FRONTEND', 'FUSION', 'ASSOCIATION', 'INSTANCE_REFINEMENT',
                     'GEOMETRY_OUTPUT', 'OBJECT_VALIDATION', 'OBSERVED_VALIDATION',
                     'BACKGROUND_VALIDATION', 'IDENTITY_VALIDATION', 'SURFACE_VALIDATION',
-                    'PART_GEOMETRY'):
+                    'PART_GEOMETRY', 'OWNERSHIP_VALIDATION'):
             setattr(registry, key, None)
         for key in ('GRAPH_COMPONENTS', 'GEOMETRY_COMPONENTS',
                     'MEASURED_REFINEMENT', 'FINAL_GEOMETRY'):
             setattr(registry, key, [])
     elif version == 'v12':
-        from pipeline_components import fovea
-        registry.FRONTEND = fovea
+        from pipeline_components import sam3_frontend
+        registry.FRONTEND = sam3_frontend
 
 
 def run_worker(args):
+    # Model subprocesses must inherit the same code-defined experimental registry.
+    os.environ['PARTAWARE_COMPARISON_PROFILE'] = args.worker
     import run_pipeline
     source = Path(args.reuse_scene or args.processed_scene)
     provenance = json.loads((source/'recognition_provenance.json').read_text())
@@ -73,6 +79,8 @@ def construction_fingerprint():
     script = REPO/'scannet/script'
     files = [Path(__file__), script/'run_pipeline.py', script/'vision_api.py',
              script/'grounded_sam/scannet_process/get_seg_openset.py',
+             *sorted((script/'grounded_sam/grounded_sam').glob('*.py')),
+             *sorted((script/'qwen_tools').glob('*.py')),
              *sorted((script/'pipeline_components').glob('*.py')),
              *sorted((script/'partaware').glob('*.py')),
              REPO/'scannet/build-partaware/openset_ply_map',
@@ -93,24 +101,27 @@ def summarize(report):
 
 
 def compare(args):
-    if not args.config:
-        raise ValueError('Comparison requires --config with local relay settings')
-    settings = Settings.load(args.config)
     manifests = args.manifest or [str(DEFAULT_DATA/'scannet-sg-input/hypersim'/name/'manifest.json')
                                   for name in ('ai_001_002_v3', 'ai_001_010_v3')]
     root = Path(args.output_root).expanduser().resolve()
     records = []
     for manifest in manifests:
         dataset, scene_id, frames = load_manifest_images(manifest)
-        # All image requests are centralized here, before any construction worker.
-        cache = recognize_manifest(manifest, args.cache_root, settings, workers=args.recognition_workers)
+        # Construction never makes a new VLM request, including incomplete caches.
+        cache = Path(args.cache_root).expanduser().resolve()/dataset/scene_id
+        provenance_file = cache/'recognition_provenance.json'
+        if not provenance_file.is_file():
+            raise FileNotFoundError('Acquire the shared GPT cache explicitly before construction')
+        provenance = json.loads(provenance_file.read_text())
+        if provenance.get('provider') != 'relay_gpt' or not provenance.get('complete'):
+            raise ValueError('Shared GPT cache is incomplete; no image API request was made')
         expected = {'manifest': str(Path(manifest).resolve()),
                     'manifest_sha256': hashlib.sha256(Path(manifest).read_bytes()).hexdigest(),
                     'recognition_fingerprint': json.loads((cache/'recognition_provenance.json').read_text())['request_fingerprint'],
                     'driver_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     'construction_sha256': construction_fingerprint()}
         print('同场景三版本共用 GPT 识图缓存', {'scene': scene_id, 'frames': len(frames)}, flush=True)
-        for version in VERSIONS:
+        for version in ACTIVE_VERSIONS:
             target = scene_directory(root, version, dataset, scene_id)
             target.mkdir(parents=True, exist_ok=True)
             marker = target/'gpt_comparison.json'
@@ -130,11 +141,7 @@ def compare(args):
             else:
                 command = [sys.executable, str(Path(__file__)), '--worker', version,
                            '--manifest', str(manifest), '--processed-scene', str(target)]
-                if version == 'v12' and not (target/'refined_instance').exists():
-                    source = scene_directory(root, 'v11', dataset, scene_id)
-                    command += ['--reuse-scene', str(source), '--start-stage', 'segmentation']
-                else:
-                    attach_cache(cache, target, manifest)
+                attach_cache(cache, target, manifest)
                 execute(command, target/'comparison_steps.log')
                 atomic_json(completed, {'graph_sha256': hashlib.sha256((target/'topology_map.json').read_bytes()).hexdigest(),
                                         'recognition_cache': str(cache), 'consumer_api_calls': 0})
@@ -156,7 +163,7 @@ def compare(args):
             combined = {(r['scene_id'], r['version']): r for r in previous}
             combined.update({(r['scene_id'], r['version']): r for r in records})
             atomic_json(summary_path, {
-                'recognition_scope': 'one shared GPT cache per scene, reused by all three versions',
+                'recognition_scope': 'v12 uses existing shared GPT cache; historical comparisons remain unchanged',
                 'qwen_api_calls': 0, 'results': list(combined.values()),
                 'evaluation_protocol': 'observed_hypersim_adaptation_not_official_benchmark',
                 'learned_universal_completion_solved': False})

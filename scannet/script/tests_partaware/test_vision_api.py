@@ -5,6 +5,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import unittest
+import os
+import subprocess
+import sys
 from unittest.mock import patch
 
 from PIL import Image
@@ -116,6 +119,33 @@ class APIContractChecks(unittest.TestCase):
                 self.assertEqual(request.call_count, 1)
                 self.assertTrue((root/'cache/hypersim/test_scene/vlm_responses/0.json').exists())
 
+    def test_budget_recovery_preserves_failed_evidence_and_never_repeats_success(self):
+        settings = replace(self.settings, protocol='responses')
+        incomplete = {'status': 'incomplete', 'incomplete_details': {'reason': 'max_output_tokens'}, 'output': []}
+        with TemporaryDirectory() as directory:
+            root = Path(directory); manifest = self.fixture(root, 2)
+            with patch('vision_api.request_image', side_effect=[responses_response(), incomplete]) as request:
+                with self.assertRaises(ValueError):
+                    recognize_manifest(manifest, root/'cache', settings, client=object())
+                self.assertEqual(request.call_count, 2)
+            with patch('vision_api.request_image', return_value=responses_response()) as retry:
+                scene = recognize_manifest(manifest, root/'cache', settings, client=object(), retry_max_output_tokens=16384)
+                self.assertEqual(retry.call_count, 1)
+                self.assertEqual(retry.call_args.args[1].max_output_tokens, 16384)
+                saved = json.loads((scene/'vlm_responses/1.json').read_text())
+                self.assertEqual(saved['request_settings']['max_output_tokens'], 16384)
+                self.assertNotEqual(saved['request_fingerprint'], saved['cache_request_fingerprint'])
+                self.assertTrue(Path(saved['budget_recovery']['archived_response']).is_file())
+                recognize_manifest(manifest, root/'cache', settings, client=object())
+                for version in ['original', 'v11', 'v12']:
+                    attach_cache(scene, root/version/'hypersim/test_scene', manifest)
+                self.assertEqual(retry.call_count, 1)
+            with patch('vision_api.request_image') as retry:
+                Path(saved['budget_recovery']['archived_response']).write_text('{}')
+                with self.assertRaises(ValueError):
+                    recognize_manifest(manifest, root/'cache', settings, client=object())
+                retry.assert_not_called()
+
     def test_smoke_cache_cannot_build_full_scene_but_full_cache_survives_smoke_reuse(self):
         with TemporaryDirectory() as directory:
             root = Path(directory); manifest = self.fixture(root, 2)
@@ -127,6 +157,49 @@ class APIContractChecks(unittest.TestCase):
                 attach_cache(scene, root/'out/hypersim/test_scene', manifest)
                 self.assertEqual(request.call_count, 2)
                 self.assertTrue((root/'out/hypersim/test_scene/refined_instance/1.json').exists())
+
+    def test_explicit_new_budget_is_recorded_and_replayed_without_another_request(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory); manifest = self.fixture(root)
+            settings = replace(self.settings, protocol='responses')
+            with patch('vision_api.request_image', return_value=responses_response()) as request:
+                scene = recognize_manifest(manifest, root/'cache', settings, client=object(), new_max_output_tokens=16384)
+                raw = json.loads((scene/'vlm_responses/0.json').read_text())
+                self.assertEqual(raw['request_settings']['max_output_tokens'], 16384)
+                self.assertEqual(raw['explicit_budget_override']['configured_max_output_tokens'], 4096)
+                recognize_manifest(manifest, root/'cache', settings, client=object())
+                self.assertEqual(request.call_count, 1)
+
+    def test_serial_failure_stops_before_requesting_another_frame(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory); manifest = self.fixture(root, 3)
+            settings = replace(self.settings, protocol='responses')
+            missing = {'status':'incomplete', 'output': [], 'error':'Missing terminal Responses event'}
+            with patch('vision_api.request_image', return_value=missing) as request:
+                with self.assertRaises(ValueError):
+                    recognize_manifest(manifest, root/'cache', settings, client=object())
+                self.assertEqual(request.call_count, 1)
+            with patch('vision_api.request_image', return_value=responses_response()) as request:
+                recognize_manifest(manifest, root/'cache', settings, client=object(), retry_transport_failures=True)
+                self.assertEqual(request.call_count, 3)
+
+    def test_non_stream_recovery_keeps_failed_stream_evidence_and_successful_cache(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory); manifest = self.fixture(root, 2)
+            settings = replace(self.settings, protocol='responses', stream=True)
+            missing = {'status':'incomplete', 'output':[], 'error':'Missing terminal Responses event'}
+            with patch('vision_api.request_image', side_effect=[responses_response(), missing]):
+                with self.assertRaises(ValueError):
+                    recognize_manifest(manifest, root/'cache', settings, client=object())
+            with patch('vision_api.request_image', return_value=responses_response()) as retry:
+                scene = recognize_manifest(manifest, root/'cache', settings, client=object(),
+                    retry_transport_failures=True, recover_non_stream=True)
+                self.assertEqual(retry.call_count, 1)
+                self.assertFalse(retry.call_args.args[1].stream)
+                saved = json.loads((scene/'vlm_responses/1.json').read_text())
+                self.assertTrue(saved['budget_recovery']['non_stream_recovery'])
+                recognize_manifest(manifest, root/'cache', settings, client=object())
+                self.assertEqual(retry.call_count, 1)
 
     def test_foreign_scene_or_existing_qwen_tags_cannot_be_overwritten(self):
         with TemporaryDirectory() as directory:
@@ -201,8 +274,20 @@ class APIContractChecks(unittest.TestCase):
         self.assertEqual(registry.GRAPH_COMPONENTS, [])
         second = SimpleNamespace(FRONTEND='coarse', FUSION='fusion')
         configure_profile('v12', second)
-        self.assertEqual(second.FRONTEND.__name__, 'pipeline_components.fovea')
+        self.assertEqual(second.FRONTEND.__name__, 'pipeline_components.sam3_frontend')
+        self.assertTrue(second.FRONTEND.OWNS_COARSE_SEGMENTATION)
         self.assertEqual(second.FUSION, 'fusion')
+
+    def test_comparison_profile_reaches_model_subprocesses_without_changing_default(self):
+        environment = os.environ.copy()
+        code = "import pipeline_components as c; import json; print(json.dumps({'version':getattr(c,'VERSION',None),'ownership':getattr(getattr(c,'OWNERSHIP_VALIDATION',None),'__name__',None)}))"
+        environment['PARTAWARE_COMPARISON_PROFILE'] = 'v12'
+        result = json.loads(subprocess.check_output([sys.executable, '-c', code], env=environment, text=True))
+        self.assertEqual(result['ownership'], 'pipeline_components.visibility_ownership')
+        self.assertEqual(result['version'], 'v12_gpt')
+        environment.pop('PARTAWARE_COMPARISON_PROFILE')
+        result = json.loads(subprocess.check_output([sys.executable, '-c', code], env=environment, text=True))
+        self.assertIsNone(result['ownership'])
 
     def test_comparison_summary_does_not_mix_mvo_and_iou(self):
         report = {key: 0 for key in ('gt_objects', 'predicted_objects', 'geometry_only_box_AP25',

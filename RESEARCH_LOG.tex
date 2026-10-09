@@ -14,7 +14,7 @@
 \tableofcontents
 \clearpage
 
-更新：2026-10-08。默认经验证构建为v11；v12双层细实例已完成两场景试验，通用完整形状补全仍未解决。当前新增GPT类别接口并开展共用缓存的原始/v11/v12对比，停止使用被拒绝访问的SAM3。主脉络、数学与接口集中维护在前六章，各版本变化单列。
+更新：2026-10-09。默认版本来源：原始版RAM、v11既有Qwen缓存、v12既有GPT缓存。停止GPT v11调优，只推进v12；SAM3权重校验及两个场景的单帧真实推理通过，完整场景构建和AP验收进行中。通用隐藏形状补全及盘堆逐片识别未解决。
 
 
 
@@ -37,7 +37,7 @@
 \item 复用原类别、描述及已完成观测；两个既有场景新增 Qwen 识图请求为零。
 
 
-\item 可显式调用GPT视觉类别接口：每场景只识别一遍，原始/v11/v12共享缓存；缺少缓存且未配置API时采用固定室内词表。
+\item 原始版使用RAM，v11保留既有Qwen缓存；v12使用同场景已完成的GPT缓存，构建入口不再调用任何VLM识图。
 
 
 \item RGB、模型、协议和提示版本做哈希核验，保留原始响应与来源，不重新调用Qwen。
@@ -48,10 +48,10 @@
 
 
 \begin{itemize}
-\item Florence 提供局部身份证据，GroundingDINO 保留视觉特征接口，SAM 产生掩码。
+\item 当前v12由SAM3直接产生整图概念实例与局部放大掩码；GroundingDINO保留256维视觉特征接口。
 
 
-\item YOLOE-v8-S 补充检测与原生实例掩码；既有候选仍需后续三维验收。
+\item 原始版及v11保留既有定位/分割路径；Florence、SAM和YOLOE的旧组合不作为SAM3前端的重复步骤。
 
 \end{itemize}
 
@@ -59,7 +59,7 @@
 
 
 \begin{itemize}
-\item v12研究分支使用 YOLOE-v8-L、重叠切片和检测区域再放大；未验证的自动 SAM 碎片不得直接进入默认构图。
+\item v12研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两个场景单帧验证通过，完整建图验收进行中；旧YOLOE-L结果单列为对照。
 
 
 \item 物体特征统一为 DINO 256维和 SBERT 384维，部件 RN50 1024维独立保留。
@@ -101,6 +101,9 @@
 
 
 \item 保留可靠分离证据；候选验收、冲突身份及背景/台面反证决定最终独立物体。
+
+
+\item GPT比较流程新增可见归属竞争、局部地板反证与唯一完整物体锚定；同一实测面不重复计数，精细实例受保护。
 
 \end{itemize}
 \end{itemize}
@@ -187,29 +190,59 @@
 
 
 
+\subsection*{1.1 默认版本与识图来源}
+\addcontentsline{toc}{subsection}{1.1 默认版本与识图来源}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+报告默认版本 & 识图来源 & 本轮是否重新识图 \\ \hline
+\endfirsthead
+\hline
+报告默认版本 & 识图来源 & 本轮是否重新识图 \\ \hline
+\endhead
+原始版 & RAM & 否，保留已完成基线 \\ \hline
+v11 & 既有Qwen缓存 & 否，停止GPT v11调优 \\ \hline
+v12 & 既有GPT缓存 & 否，复用同场景完整响应 \\ \hline
+\end{longtable}
+}
+
+只有v12的默认来源改为GPT。GPT原始版、GPT v11及旧Qwen v12均明确列为历史补充对照，不混入默认三版本比较。SAM3是v12本地分割后端，不新增GPT或Qwen识图。
+
+
+
 \section*{2. 前端与实例关联的数学原理}
 \addcontentsline{toc}{section}{2. 前端与实例关联的数学原理}
 
-\subsection*{2.1 候选并集与特征接口}
-\addcontentsline{toc}{subsection}{2.1 候选并集与特征接口}
+\subsection*{2.1 v12 SAM3实例分割与公共特征接口}
+\addcontentsline{toc}{subsection}{2.1 v12 SAM3实例分割与公共特征接口}
 
-YOLOE 使用缓存类别与固定室内词表，输出框、类别和原生实例掩码。候选采用并集：
+v12读取同场景已完成的GPT类别缓存，并合并项目既有室内词表；没有新GPT或Qwen识图。模型从ModelScope公开下载，使用固定提交的Meta官方图像推理代码，显式指定本地权重且关闭Hugging Face自动下载。每帧图像骨干只编码一次，随后逐个名词查询得到多个独立实例。原始版及v11继续保留各自既有算法。
+
+
+
+官方处理器把检测分数与概念存在分数相乘：
 
 
 
 \[
-\mathcal D=\mathcal D_{\mathrm{cached\ Florence/DINO/SAM}}\cup\mathcal D_{\mathrm{YOLOE}}.
+s_{qk}=\sigma(\ell_{qk})\,\sigma(\ell_q^{\mathrm{presence}}),\qquad
+M_{qk}(u)=\mathbf1[\sigma(L_{qk}(u))>0.5].
 \]
 
-掩码 IoU≥0.6 时作为同一局部候选的双来源证据；只有当 YOLOE 面积为原掩码的0.65至1.5倍时才采用其边界。原候选即使未被 YOLOE 检测到也保留；独立新增 YOLOE 候选要求分数≥0.3，仍需后续三维确认。分数是未校准模型分数，不是准确概率。
+仅保留 $s_{qk}>0.5$、面积不少于32像素且不超过当前区域80\%的掩码。该乘积仍是模型的未校准分数，不能写成正确概率。不同名词得到同一实测面时，掩码IoU不低于0.65才去重并保存查询别名；两个不相交瓶子不会因同名而合并。
 
 
 
-模型掩码先去掉少于64像素或超过图像80\%的异常区域；保持原 uint8 标签接口。大区域先绘制，小物体保留其内部区域的所有权。该规则仍可能受完整物体/局部部件粒度冲突影响，需要多视角复核。
+对面积不超过图像12\%的SAM3整图检测及已有二维源观测，生成边长256至512像素的通用局部窗口；裁剪重叠IoU不低于0.5时去重，每帧最多4处。不增加针对当前场景的描述提示词。离裁剪边缘不足3像素且越过原图内部窗口边界的结果拒绝作为新实例。
 
 
 
-运行 YOLOE 前端后的物体视觉特征统一来自 GroundingDINO 投影后的256维骨干特征图，在物体框内平均池化：
+放大新增掩码先经实测深度反投影，要求至少32个采样点、2\%至98\%分位跨度每轴不超过35厘米。与整图掩码IoU不低于0.55的区域视为已有实例。若至少70\%落在同一粗掩码内，还必须存在同名、面积比0.25至4、相交比例低于0.1的独立兄弟实例；单个局部部件不直接充当新物体。随后仍接受MICA的多视角验证，不以二维候选数作为最终物体数。
+
+
+
+大区域先绘制，小实例占据内部像素；保存的局部ID、实际像素数和包围框保持一致。物体视觉特征继续从GroundingDINO投影后的骨干特征图作ROI平均池化：
 
 
 
@@ -217,7 +250,7 @@ YOLOE 使用缓存类别与固定室内词表，输出框、类别和原生实�
 f_i=\frac{1}{|\Omega_i|}\sum_{u\in\Omega_i}F_{\mathrm{DINO}}(u),\qquad f_i\in\mathbb R^{256}.
 \]
 
-这是新的 ROI 特征提取方式，不能声称与旧版解码器查询特征数值相同。语义特征仍为384维 SBERT；部件特征仍为独立1024维 RN50，三者不混用。原 JSON 字段与维度保持兼容。保留的 ScanNet 文件夹前端仍可使用原256维解码器特征；同一批关联数据不能混合这两种特征空间。
+语义向量仍为384维SBERT，部件为独立1024维RN50，保持现有JSON字段和原uint8标签接口。SAM3的内部特征不冒充DINO特征；三种特征不混用。SAM3改善的是二维可见实例掩码，本身不生成隐藏三维表面，也不能保证把完全遮挡的堆叠盘子逐片分开。
 
 
 
@@ -280,26 +313,18 @@ C(A,B)=\frac{N_{\mathrm{same\ whole\ mask}}}{N_{\mathrm{jointly\ visible}}}.
 
 
 
-\subsection*{2.4 精细候选、尺度与观测隔离（v12研究分支）}
-\addcontentsline{toc}{subsection}{2.4 精细候选、尺度与观测隔离（v12研究分支）}
+\subsection*{2.4 SAM3精细候选、尺度与公共标签}
+\addcontentsline{toc}{subsection}{2.4 SAM3精细候选、尺度与公共标签}
 
-新分支使用官方 YOLOE-v8-L 权重，整图、512像素重叠切片与检测区域再放大共用同一词表；词表来自现有缓存和固定室内类别，不增加针对盘子、柜体或单个场景的专用提示词。512像素窗口重叠25\%，再放大的候选取整图最高分的前24项，框面积不超过整图12\%。内部切片边界截断的掩码不直接发布；回到原图后按掩码IoU 0.55抑制重复。
-
-
-
-\[
-\mathcal D_{\mathrm{fine}}=\operatorname{MaskNMS}_{0.55}\left(\mathcal D_{\mathrm{full}}\cup\bigcup_kT_k^{-1}\mathcal D_{\mathrm{tile},k}\cup\bigcup_jT_j^{-1}\mathcal D_{\mathrm{zoom},j}\right).
-\]
-
-新候选需有至少32个有效实测点，2\%至98\%分位的最大物理跨度不超过0.35米。单个候选若70\%以上位于已有掩码内部，不能仅凭更高局部分数就变成独立物体：还要求同一父掩码内存在同类别、面积比0.25至4、相交占较小掩码面积不足10\%的独立兄弟候选。该规则能否区分真实盘子与部件仍须完整建图检验，不是实例正确性的证明。
+当前v12使用第2.1节的SAM3整图实例及最多4个通用放大窗口。旧YOLOE-L切片、粗细独立观测方案仅记录在第19—21章；不把其缓存或候选数冒充SAM3结果。SAM3整图掩码去重后重建本轮局部编号、DINO/SBERT特征；原GPT类别及响应缓存完整复用。
 
 
 
-粗实例用原掩码反投影，细实例用新增掩码反投影，分别构建点云证据层；不能让细掩码覆盖像素后永久侵蚀台面等粗实例。设粗、细掩码分别为 $M^c_t,M^f_t$，实测点对应为 $P^c_t=\mathcal P(D_t,M^c_t)$、$P^f_t=\mathcal P(D_t,M^f_t)$；各自的有效深度点保留，后续仍需物体身份验收。
+放大候选映射回原图，先拒绝裁剪边界截断、重复区域及仅有单一父物体局部的碎片，再按第2.1节的物理尺度和独立兄弟证据验收。SAM3原始重叠掩码另存打包缓存以供审核，公共uint8标签中每个像素只归属一个实例，小实例占据大实例内部像素。因此不能宣称公共标签保留了所有重叠整物体掩码；父物体表面完整性仍需多视角实测恢复。
 
 
 
-新掩码追加局部编号，不重新编号原候选；旧DINO/SBERT向量原样保留，只有新候选提取新特征。为了防止小碎片通过单向几何覆盖吞并大物体，细实例与粗实例的关联和轨迹共识合并被分通道处理：
+新增独立放大实例标记为fine\_scale\_instance，并与整图实例分别关联，以免小区域单向覆盖吞并大物体：
 
 
 
@@ -308,11 +333,59 @@ C(A,B)=\frac{N_{\mathrm{same\ whole\ mask}}}{N_{\mathrm{jointly\ visible}}}.
 r(d)=\begin{cases}\operatorname{clip}(0.08d,0.006,0.02),&d<0.25\text{ m}\\0.1,&\text{其他}.\end{cases}
 \]
 
-只有双方均是新增细实例时使用尺度半径；原粗实例仍用10厘米半径和1厘米体素。新细实例的体素取 $h(d)=\operatorname{clip}(d/80,0.002,0.005)$ 米，最大跨度不小于0.25米时仍取0.01米。所有新增点都是实测RGB-D投影，不以生成点建立新物体。分通道只能避免一种错误合并，不能保证候选无假阳性，也可能让跨尺度重复暂时保留。
+双方均为细实例时采用尺度半径；整图实例仍用10厘米半径及1厘米体素。细实例体素为 $h(d)=\operatorname{clip}(d/80,0.002,0.005)$ 米，跨度不小于25厘米时仍用1厘米体素。只保留实测RGB-D投影，不用生成点建立独立物体。分通道可避免一种吞并，也可能暂留跨尺度重复；最终仍需MICA多视角共识与候选验收，不能把某帧95个掩码写成95个正确物体。
 
 
 
-独立SAM局部自动掩码也进行了实测研究，但尚未注册进默认流程。单纯放大、更多采样点和CLIP命名不能可靠区别杯碟、餐巾、薄层盘子、纹理条带与阴影；本轮拒绝把这些自动碎片未经独立验证写进正式图。
+\subsection*{2.5 可见归属竞争与有界实测残片归并（当前GPT v12）}
+\addcontentsline{toc}{subsection}{2.5 可见归属竞争与有界实测残片归并（当前GPT v12）}
+
+GPT仍只提供类别与描述。新算法使用既有RGB-D、原掩码及缓存SBERT特征；不调用GPT或Qwen，不读取GT。遮挡、缺失深度和未命名区域均不能直接视为物体不存在。令可见深度一致指示为 $v_t(p)$、投影权重为 $w_t(p)$、当前物体归属为 $a_{it}(p)$，则：
+
+
+
+\[
+R_i(p)=\frac{\sum_t v_t(p)w_t(p)a_{it}(p)}{\sum_t v_t(p)w_t(p)+\epsilon},\qquad
+n_i(p)=\sum_t v_t(p)a_{it}(p).
+\]
+
+至少3次可见、至少2次正归属且 $R_i(p)\ge0.6$ 才计作稳定归属。相同实物在不同帧中的名称可变，兼容类别另用缓存语义余弦不低于0.8计算，不能把所有未关联区域当成背景。
+
+
+
+\textbf{局部地板反证。} 从已估计的Hypersim米制Z-up地板高度与背景深度取XY支撑。候选在地板高度下方35厘米内、XY距该背景支撑不超过35厘米的点占比不低于0.7，同时至少5帧可见、稳定归属低于0.2、兼容类别稳定点低于0.3、重投影支持低于0.6，才否定低平台误检。该限制针对实际地板边界，不能泛化为“平面都删掉”，也不能迁移到未声明同一坐标约定的输入。
+
+
+
+\textbf{完整物体锚定。} 对同时混入地板和多个前景的弱大候选，寻找重投影支持至少0.6的实测种子。候选与种子语义余弦至少0.6，体积比至少3、种子点位于大候选框内的比例至少0.95、种子到候选表面的3厘米覆盖至少0.85。若多个种子只是完整物体及其残片，用包含偏序消除伪歧义：
+
+
+
+\[
+j\prec k\iff V_k\ge2V_j\ \land\ \operatorname{inside}(P_j,B_k)\ge0.95.
+\]
+
+只有唯一极大的实测种子可以成为归属目标；两个互不包含的物体仍是歧义。转移点为候选中的真实测量，并限制在原目标框内，同时排除距其他独立前景种子3厘米内的点：
+
+
+
+\[
+P_k'=\operatorname{Voxel}_{0.01}\left(P_k\cup\{p\in P_i\cap B_k:d(p,P_\ell)>0.03,\ \ell\ne k\}\right).
+\]
+
+这里不会扩大框、产生隐藏点或使用GT尺寸。兼容的同物体残片不充当“独立前景”；其余种子仍保持独立。
+
+
+
+\textbf{重复实测面与粗物体残片。} 三厘米表面覆盖至少0.85、框包含至少0.95是共同前提。严格重复路径要求至少3个完整掩码支持视角且没有独立分离证据。粗物体局部身份还要求至少5帧可见、稳定归属低于0.05、加权归属低于0.2、语义余弦至少0.6，父物体体积至少两倍且重投影支持至少0.6；至少2个完整掩码支持、独立分离视角不超过1。精细实例不走这条粗残片路径。表面覆盖与语义、视角证据缺一不可，不能因瓶子位于台面框内就吞并。
+
+
+
+\textbf{强实测核心边缘净化。} 只有至少80\%的点由3帧及归属比例0.65共同确认，才考虑删除至少5次可见、至少3次负归属、归属比例低于0.65的边缘点。保留点仍须不少于128、原点数的80\%，且每轴跨度保留不低于0.6。未知和被遮挡的点保留。此次笔记本改善来自去掉桌面边缘混入，而非补全隐藏形状。
+
+
+
+这些规则受到MaskClustering多视角完整掩码共识及Details Matter包含残片思想启发，是本项目适配，未宣称完整复现其网络。数量阈值不是指定场景必须输出几个物体；构建代码中没有GT编号或目标物体数。
 
 
 
@@ -1265,16 +1338,33 @@ Q=\operatorname{SHA256}(\text{model, URL, protocol, prompt, request settings}).
 
 
 
-主流程的组件挂接为 \texttt{RECOGNITION = gpt\_\allowbreak{}recognition}，显式提供
-\texttt{--recognition-config} 才获取或绑定缓存；未配置时保留旧缓存/固定词表。
-删除注册项和导入即可移除。v12细识别集中挂接 \texttt{FRONTEND = fovea}，移除时
-恢复 \texttt{yoloe\_\allowbreak{}frontend}；通用补全候选未通过验收，不强行挂接默认。
+报告默认来源为原始版RAM、v11既有Qwen缓存、v12既有GPT缓存。v12比较入口只核验并绑定完整GPT缓存，缺失即报错，不调用GPT或Qwen；独立识图接口保留用于用户明确授权的新输入。
+当前v12细识别挂接 \texttt{FRONTEND = sam3\_\allowbreak{}frontend}，由 \texttt{OWNS\_\allowbreak{}COARSE\_\allowbreak{}SEGMENTATION} 声明承担整图分割。删除该导入/注册并指回既有 \texttt{fovea} 即可撤除SAM3；通用补全候选未通过验收，不强行挂接默认。
 配置、密钥及数据产物在Git忽略路径中；源码只保留无密钥模板。
 直接命令和版本对照详见项目 \texttt{docs/\allowbreak{}VISION\_\allowbreak{}API.\allowbreak{}md}。
 
 
 
 类别解析版本为 \texttt{envelope\_\allowbreak{}noun\_\allowbreak{}exclusion\_\allowbreak{}v2}：同时检查两栏英文名称的末尾名词，墙、地板、天花板及带修饰词的对应名称归入房间边界；\texttt{tiled wall}不会进入物体候选，\texttt{wall-mounted cabinet}、\texttt{floor lamp}、\texttt{ceiling light}与\texttt{countertop}仍保留。它是有限的类别归类规则，不能替代三维物体验收。修改解析时只重读已保存原始响应，新识图调用为零；绑定前核验规则版本，拒绝直接使用旧解析缓存。
+
+
+
+\subsection*{6.6 GPT适配验收与拆卸接口}
+\addcontentsline{toc}{subsection}{6.6 GPT适配验收与拆卸接口}
+
+新增组件为 \texttt{pipeline\_\allowbreak{}components/\allowbreak{}visibility\_\allowbreak{}ownership.\allowbreak{}py}，在 \texttt{proposal\_\allowbreak{}validation} 的初次候选验收后、实测粒度处理前调用。\texttt{prune} 返回仍成立的物体ID，更新实测点归属、轨迹、别名映射及中文审核；不修改公共节点字段。\texttt{observed\_\allowbreak{}consensus.\allowbreak{}refine\_\allowbreak{}verified\_\allowbreak{}surface} 返回净化后的实测表面及保留跨度审核。随后仍沿用原图构建、VLPart部件、整体实测修复与统一几何发布。
+
+
+
+挂接在 \texttt{run\_\allowbreak{}gpt\_\allowbreak{}comparison.\allowbreak{}configure\_\allowbreak{}profile} 的代码注册点 \texttt{OWNERSHIP\_\allowbreak{}VALIDATION}；删去导入和注册即可撤除。未通过两场景验收前，普通Qwen/ScanNet默认注册不启用它。比较进程把完整研究配置传给模型子进程，避免子进程错误加载默认配置而令算法名义挂接、实际没执行；这不是新增逐算法运行开关。原始DINO/C++对照不启用此组件。
+
+
+
+新增独立 \texttt{compare\_\allowbreak{}evaluations.\allowbreak{}py} 核验真实产物哈希及同一GT口径，要求AP25/AP50/AP75、数量绝对对数误差与各阈值TP/FP/FN均不退步，且至少一项实测改善。100\%的指标允许保持100\%。验收只用于本次场景，不能保证其他输入也提高，GT不反馈到构建。
+
+
+
+缓存失败恢复明确记录每次实际token预算、协议、指纹与失败响应原文的SHA256。仅输出预算不足或缺终止事件的失败允许显式恢复；完整成功帧禁止因增大预算重识别。串行失败停止在当前帧，不提前付费请求全场景。非流恢复保留失败流证据，超时仍报告失败，不接受半份JSON。
 
 
 
@@ -2889,8 +2979,8 @@ XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 \end{verbatim}
 
 
-\section*{19. v12：精细实例与完整形状先验研究（2026-10-08）}
-\addcontentsline{toc}{section}{19. v12：精细实例与完整形状先验研究（2026-10-08）}
+\section*{19. 旧Qwen v12：精细实例与完整形状先验研究（2026-10-08）}
+\addcontentsline{toc}{section}{19. 旧Qwen v12：精细实例与完整形状先验研究（2026-10-08）}
 
 \subsection*{19.1 两场景已经完成的细实例试验}
 \addcontentsline{toc}{subsection}{19.1 两场景已经完成的细实例试验}
@@ -2908,9 +2998,9 @@ XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 场景/版本 & 预测/GT & AP25 & AP50 & AP75 & 数量绝对对数误差 \\ \hline
 \endhead
 ai\_001\_002 v11 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 0 \\ \hline
-ai\_001\_002 双层v12 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 0 \\ \hline
+ai\_001\_002 旧Qwen双层v12 & 10/10 & 100.00\% & 100.00\% & 62.50\% & 0 \\ \hline
 ai\_001\_010 v11 & 74/109 & 25.42\% & 10.49\% & 1.31\% & 0.3873 \\ \hline
-ai\_001\_010 双层v12 & 91/109 & 27.04\% & 11.82\% & 1.49\% & 0.1805 \\ \hline
+ai\_001\_010 旧Qwen双层v12 & 91/109 & 27.04\% & 11.82\% & 1.49\% & 0.1805 \\ \hline
 \end{longtable}
 }
 
@@ -3017,63 +3107,165 @@ v12复核并实际运行：\href{https://arxiv.org/abs/2202.06934}{SAHI论文}�
 
 
 
-\section*{21. GPT共用识图缓存的三版本对比（2026-10-08）}
-\addcontentsline{toc}{section}{21. GPT共用识图缓存的三版本对比（2026-10-08）}
+\section*{21. GPT共用识图缓存及算法适配（2026-10-08—09）}
+\addcontentsline{toc}{section}{21. GPT共用识图缓存及算法适配（2026-10-08—09）}
 
-\subsection*{21.1 本轮改动及主流程挂接}
-\addcontentsline{toc}{subsection}{21.1 本轮改动及主流程挂接}
+\subsection*{21.1 已完成识图与历史对照范围}
+\addcontentsline{toc}{subsection}{21.1 已完成识图与历史对照范围}
 
-停止SAM3，保留公开YOLOE-L的细实例路线。新增可移除GPT识图组件，接口
-真实调用已成功，返回类别包括盘子、杯子、玻璃杯、上下柜与置物架等。
-这仅证明类别获取可用，不说明已经分开盘堆中的每个盘子。
+两个场景的识图已经完成：ai\_001\_002为99帧，ai\_001\_010为100帧。每场景仅有一组有效GPT响应，原始/v11/v12全部复用；成功帧未重新请求，Qwen新增调用为0。卡扣AI返回的模型ID为gpt-6.1-sol，上游实现未独立验证。失败请求可能计费，199份有效响应不等于总请求数。
 
 
+
+GPT原始版保留DINO/SAM、原C++融合和图处理，只替换类别来源；v11使用Florence/SAM、YOLOE-S及PartAware主流程；v12追加公开YOLOE-L切片、放大及粗细观测隔离，不依赖SAM3。GPT仍不是实例分割器或可信隐藏点云生成器。
+
+
+
+原始版和v11的GPT结果均为历史补充对照，不是这些版本的默认识图来源。默认原始版仍为RAM，默认v11仍为既有Qwen，默认v12才使用GPT。下表的v12结果是SAM3接入前的YOLOE-L方案，不能冒充SAM3实测。
+
+
+
+\subsection*{21.2 SAM3接入前的实际结果}
+\addcontentsline{toc}{subsection}{21.2 SAM3接入前的实际结果}
 
 {\small
-\begin{longtable}{|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|}
+\begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
 \hline
-版本 & 类别来源 & 后续算法 \\ \hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & 数量绝对对数误差 \\ \hline
 \endfirsthead
 \hline
-版本 & 类别来源 & 后续算法 \\ \hline
+场景/版本 & 预测/GT & AP25 & AP50 & AP75 & 数量绝对对数误差 \\ \hline
 \endhead
-GPT原始版 & 同场景共用GPT缓存 & 原DINO/SAM、原C++融合与原图后处理，替换RAM类别获取 \\ \hline
-GPT v11 & 同一缓存 & Florence/SAM、YOLOE-S与现有PartAware构建 \\ \hline
-GPT v12 & 同一缓存及v11粗观测 & 追加YOLOE-L切片/放大，粗细证据分层，使用同一三维图接口 \\ \hline
+002 GPT original & 14/10 & 17.33\% & 0.00\% & 0.00\% & 0.3365 \\ \hline
+002 GPT v11 & 10/10 & 100.00\% & 100.00\% & 80.00\% & 0.0000 \\ \hline
+002 GPT v12 & 10/10 & 100.00\% & 100.00\% & 80.00\% & 0.0000 \\ \hline
+010 GPT original & 75/109 & 4.97\% & 0.17\% & 0.05\% & 0.3739 \\ \hline
+010 GPT v11 & 86/109 & 20.97\% & 8.16\% & 2.32\% & 0.2370 \\ \hline
+010 GPT v12 & 98/109 & 22.33\% & 11.83\% & 2.94\% & 0.1064 \\ \hline
 \end{longtable}
 }
 
-对比配置在独立进程应用，默认注册仍为经验证的v11。GPT原始版与之前的
-RAM原始对照分别保留，不能混称。所有版本使用相同RGB-D、位姿、GT口径
-及AP/MVO协议，Qwen新增识图请求为零。
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+对比基线 & 预测/GT & AP25 & AP50 & AP75 \\ \hline
+\endfirsthead
+\hline
+对比基线 & 预测/GT & AP25 & AP50 & AP75 \\ \hline
+\endhead
+002 Qwen v11 & 10/10 & 100.00\% & 100.00\% & 62.50\% \\ \hline
+002 Qwen v12 & 10/10 & 100.00\% & 100.00\% & 62.50\% \\ \hline
+010 Qwen v11 & 74/109 & 25.42\% & 10.49\% & 1.31\% \\ \hline
+010 Qwen v12 & 91/109 & 27.04\% & 11.82\% & 1.49\% \\ \hline
+\end{longtable}
+}
+
+这是相同可观测GT与置信度排序的项目适配几何框评价，不是官方benchmark。第一场景GPT v11与v12均由18个预测降到10个，AP25/AP50为100\%，AP75由54.44\%升到80\%，高于原Qwen的62.5\%。IoU0.5最大一对一匹配TP/FP/FN为10/0/0，数量误差0；两版独立验收已通过。提高不只是少输出物体，10个GT都仍能定位。两件功放的框IoU仍仅约0.671与0.561，隐藏形状补全没有解决。第二场景GPT v12接入SAM3前为98/109、AP25 22.33\%、AP50 11.83\%、AP75 2.94\%。相比旧Qwen v12的27.04\%/11.82\%/1.49\%，AP50几乎持平、AP75改善，AP25及TP/FP/FN仍有回退，独立准入未通过。GPT v11的第二场景也未通过；按用户要求停止GPT v11调优，只继续v12。
 
 
 
-\subsection*{21.2 完成状态与审计}
-\addcontentsline{toc}{subsection}{21.2 完成状态与审计}
-
-本节记录真实单图测试与接口验收；两个场景的完整批量识图和六组构建正在
-执行。未完成的结果不填入AP表，也不复用旧Qwen试验冒充GPT数据。完成后
-从各结果目录的 \texttt{evaluation.\allowbreak{}json} 汇总，统一记录AP25/AP50/AP75、MVO25/
-MVO50、TP/FP/FN、预测数量和绝对对数比值。
+第二场景v12的100帧本地精细审核：4545个原始细粒度提议，822个通过跨尺度检查，537个通过独立实例检查；既有3220个逐帧粗观测完整保留，总观测为3757个。这些是跨帧重复观察的二维候选，不是最终物体总数；多视角融合和最终验收仍决定哪些实例进入图。该数字证明本地组件确实执行，不能证明盘堆逐片识别已经解决。
 
 
 
-GPT缓存位于 \texttt{datasets/\allowbreak{}scannet-sg-processed/\allowbreak{}gpt\_\allowbreak{}vision\_\allowbreak{}cache/\allowbreak{}hypersim/\allowbreak{}<scene>}；
-产物分别位于 \texttt{gpt\_\allowbreak{}original\_\allowbreak{}<scene>}、\texttt{partaware\_\allowbreak{}gpt\_\allowbreak{}<scene>\_\allowbreak{}v11} 和
-\texttt{partaware\_\allowbreak{}gpt\_\allowbreak{}<scene>\_\allowbreak{}v12}。构建输出记录共用响应哈希与模型来源，API密钥
-不会进入产物或报告。当前已经观察到一次SDK流事件兼容失败；原始解析修复
-后继续复用已有成功帧，不将失败请求可能计费隐藏为零。
+\subsection*{21.3 为什么更换识图模型会影响建图}
+\addcontentsline{toc}{subsection}{21.3 为什么更换识图模型会影响建图}
+
+第一版GPT v11/v12均为18个物体、AP25为99.09\%、AP50为86.99\%、AP75为54.44\%；GPT原始版为14个物体、AP25仅17.33\%、AP50/AP75为0。这说明类别识别、二维分割、关联、背景过滤及完整几何是不同环节。GPT提供的audio equipment、audio receiver等与旧描述存在差异，旧关联对词语稳定性的依赖会使同一测量分裂；误检的大表面还混入低平台。不能据此证明GPT视觉模型本身低于Qwen，也不能期待同类VLM输出完全相同的候选。
 
 
 
-\subsection*{21.3 预期与边界}
-\addcontentsline{toc}{subsection}{21.3 预期与边界}
+用户担心的扬声器支撑杆在这次18物体中已由轴向组件归并，不是剩余8个假阳性的来源。8个多余身份中5个是地板低平台，另外是覆盖过大的桌面候选、重复薄面和同一桌面的局部候选。新算法从原观测与原融合点重新构图、限定实测归属，未逐ID删除成品或用10个GT指定输出数。
 
-主要测试GPT类别相较缓存Qwen对细物体的语义错误是否减少，以及同一语义
-输入下v12是否优于v11与原DINO流程。没有预先设定能达到的分数，结果必须
-由完整实验得到。GPT没有直接输出实例掩码或可信隐藏点云，补全与细实例
-仍须分别研究和验收，不能宣称更换语言模型已经彻底解决两项核心要求。
+
+
+同一输入帧、去除背景名并按帧去重后的缓存审计：002场景GPT/Qwen每帧平均类别数为3.47/1.56，跨帧不同名称64/15；010场景为17.55/5.46，跨帧不同名称221/62。这是名称与粒度差异，不是准确率或物体实例数；同义词和部件名称也会计入。旧Qwen缓存未保存足够的提示词来源，不能假设它使用现在的提示词，也不能将此实验写成相同提示词下的模型能力排名。实际SBERT编码输入是类别名，不能把描述长短直接当成其特征漂移原因。完整逐帧审计保存在outputs/gpt\_qwen\_category\_audit.json。
+
+
+
+原始DINO对照010日志中出现51次标作“random label”的短语回退。源码实际返回类别索引0，是把解析失败短语归到当前列表第一个类别，不是真随机抽样。这可能污染多类别查询的分类结果；当前Florence逐类别查询列表只有一个类，回退不改变该次类别。此处记录的是对照实现限制，未更改用户已有第三方子模块，也未把它当作所有低AP的充分原因。
+
+
+
+\subsection*{21.4 接受与拒绝的算法试验}
+\addcontentsline{toc}{subsection}{21.4 接受与拒绝的算法试验}
+
+仅按可见归属不足压候选，可能误删第二场景的真实小瓶子与柜体，已拒绝作为通用过滤。跨名称DINO外观关联试验减少拆分却发生错合并，第一场景AP50降到81\%，已撤回。当前保留原在线关联，以局部地板、完整物体包含偏序、共享实测面及多视角冲突证据控制重复。v12中途12物体试验AP50为90.91\%、AP75为71.11\%，仍未通过整体准入；最终10物体两版均为100\%/100\%/80\%。失败试验单列，不充当默认成果。
+
+
+
+严格边缘净化使笔记本框IoU约从0.588升到0.962。该过程删除反复被原掩码否定的桌面混入，同时保存可靠核心、未知与遮挡点，不能称作通用形状补全。参考MaskClustering和Details Matter的多视角/残片思想，数学、阈值、核心接口与拆卸点集中维护于2.5和6.6。
+
+
+
+2026-10-09补充修复：第二场景某帧有164个描述候选，原128个硬上限使前端中止。现在Florence默认分批评分全部候选，每个模型批次最多8个裁剪，类别/特征对齐与后续NMS不变；不是提高物体输出上限或静默截断。真实4裁剪验证中批处理与逐裁剪平均对数似然最大差0.003016，耗时由2.229秒降到0.820秒，数值不是逐位完全相同，最终仍需独立AP验收。同一Florence模型在一帧的各类别间保持驻留，阶段结束后再移到CPU；不同模型仍顺序换出，保护显存。第一场景复用此前冻结的二维观测，仅重构三维阶段；第二场景运行完整修正前端，来源分别记录。
+
+
+
+逐帧缓存点云质心的性能试验在四帧真实观测上得到完全相同的融合点云、轨迹、特征与关联哈希，但耗时仅改善约4.5\%，未作为主要瓶颈修复并入。哈希与耗时保留于outputs/fusion\_centroid\_equivalence.json，临时派生产物已清理；不把性能试验计作准确率提升。
+
+
+
+\subsection*{21.5 缓存恢复、核验和产物}
+\addcontentsline{toc}{subsection}{21.5 缓存恢复、核验和产物}
+
+中转接口真实发生输出预算耗尽、Missing terminal Responses event、供应商upstream\_stream\_read\_error与非流超时。输出预算失败显式提高到16384；保留实际请求参数及失败原始响应，不伪造缓存指纹，不重识别成功图像。仅恢复缺失/失败帧，串行失败不继续请求后续帧，未完成响应不得作为成功空类别。缓存仍为gpt\_vision\_cache/hypersim/各场景。
+
+
+
+第一场景修正版产物为partaware\_gpt\_ai\_001\_002\_v11r10及partaware\_gpt\_ai\_001\_002\_v12r5下的hypersim/ai\_001\_002；各自evaluation.json、repair\_provenance.json及Windows的gpt\_v11/v12\_acceptance\_002.json记录指标、来源哈希与验收。基础DINO结果和原18物体融合观测保留为比较来源。新结果通过同一公共节点、特征维度、部件父归属及正式点云核验；真实Open3D预览保存为outputs/gpt\_repaired\_002.png。默认可视化不展示边、不启用pick。
+
+
+
+SAM3接入前151项完整离线测试通过，包含独立评价门控、非流失败恢复、164候选不截断、逐裁剪分数对齐及共享模型去重调度。ScanNet/Hypersim输入和原C++接口保留，普通默认配置未挂接待两场景验收的归属组件，第三方子模块既有更改不动。盘堆逐片识别与可靠通用隐藏几何仍未解决，不把论文研究或模型加载写成已完成成果。
+
+
+
+\section*{22. v12修订：GPT缓存与ModelScope SAM3（2026-10-09）}
+\addcontentsline{toc}{section}{22. v12修订：GPT缓存与ModelScope SAM3（2026-10-09）}
+
+\subsection*{22.1 版本边界与来源}
+\addcontentsline{toc}{subsection}{22.1 版本边界与来源}
+
+本轮只推进v12。报告的默认识图来源固定为：原始版RAM、v11既有Qwen缓存、v12既有GPT缓存。已有GPT原始版、GPT v11仅作为历史实验留档；不重跑v11、不删除v12依赖的共享观测缓存。v12的构建入口缺少完整GPT缓存就报错，不发起新增VLM识图。
+
+
+
+采用\href{https://modelscope.cn/models/facebook/sam3}{ModelScope的facebook/sam3仓库}公开的原生sam3.pt，文件大小3,450,062,241字节，平台公布SHA256为9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e。下载时不使用Hugging Face凭据。公开模型元数据记录为USER\_UPLOAD，不能仅凭facebook命名空间就宣称已独立核实是Meta官方上传；校验平台哈希证明下载完整性，不等于独立来源认证。
+
+
+
+推理源码来自\href{https://github.com/facebookresearch/sam3}{Meta官方SAM3仓库}，固定提交0570b3a5be9c4e694f23d85232fb55f4a6f1f7fc。保留模型随附SAM License；官方代码的包分类字段与实际许可文本不同，记录依据实际LICENSE。ModelScope是权重获取来源，具体推理通过官方Sam3Processor在本地运行。
+
+
+
+\subsection*{22.2 接口改变与拆卸}
+\addcontentsline{toc}{subsection}{22.2 接口改变与拆卸}
+
+新增核心文件为pipeline\_components/sam3\_frontend.py及sam3\_worker.py。v12的configure\_profile注册点把FRONTEND指向sam3\_frontend；仅移除该导入/注册并指回原fovea即可撤除，不需要恢复整个工程，也没有新增逐算法开关。历史原始版/v11配置和普通ScanNet/Hypersim入口保留。
+
+
+
+OWNS\_COARSE\_SEGMENTATION声明该后端直接生成完整二维实例。运行器因此跳过重复Florence/SAM定位步骤；GroundingDINO继续只提供原256维对象特征。SAM3实例阶段、DINO特征阶段顺序使用同一GPU锁，防止与VLPart争抢约8GB显存。依赖隔离在WSL的/home/lewisliu/miniconda3/envs/sg-sam3，不升级基础scannet-sg环境。
+
+
+
+SAM3缓存以RGB、权重、源码、类别查询和裁剪区域组成签名；输入变化时拒绝静默复用。原类别JSON与外部源观测保留，SAM3输出在新的processed实验目录重新投影、关联、构图，不修改旧版本最终PLY/JSON。sam3\_inference\_audit.json、frontend\_provenance.json以及原pipeline\_zh.jsonl记录中文过程、模型来源、候选变化及零识图调用；部分测试不标为全场景完成。
+
+
+
+\subsection*{22.3 实际验收状态}
+\addcontentsline{toc}{subsection}{22.3 实际验收状态}
+
+权重下载及平台SHA256校验已完成；SAM3接口与158项完整离线回归测试通过。两个场景分别完成1帧真实训练权重推理及公共特征附加：ai\_001\_002得到17个二维观测、耗时19.50秒，ai\_001\_010得到95个二维观测、耗时25.37秒；峰值已分配显存约5.34 GB。这里统计的是单帧掩码观测，不是最终物体数，也不是准确率。完整场景构建正在运行，AP验收尚未完成，不宣称SAM3已提高场景精度。
+
+
+
+单帧审核保存在outputs/sam3\_smoke\_validation.json，实际模型、固定源码及环境清单为docs/environment\_sam3.json与docs/sam3\_requirements.txt。新实验分开写入partaware\_gpt\_ai\_001\_002\_v12\_sam3r1及partaware\_gpt\_ai\_001\_010\_v12\_sam3r1；不替换已经验收的旧产物。第二场景SAM3接入前的GPT v12为98/109、AP25 22.33\%、AP50 11.83\%、AP75 2.94\%，整体准入未通过；它是本轮明确需要改进的对照。
+
+
+
+当前主要预期是减少同一物体不同名词产生的重复面、提高小物体可见掩码及完整物体表面覆盖。是否有效由相同Hypersim可观测GT的AP25/AP50/AP75、数量绝对对数误差及逐物体TP/FP/FN判断，不能保证先验提升百分比。隐藏体积补全与完全遮挡盘子的数量恢复仍需独立方法，不把SAM3加载或某张掩码成功写成这些问题已解决。
 
 
 \end{document}

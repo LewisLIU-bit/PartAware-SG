@@ -43,6 +43,14 @@ class FlorenceWorker:
         return self._request({'op': 'score', 'image': base64.b64encode(buffer.getvalue()).decode('ascii'),
                               'descriptions': descriptions})
 
+    def score_many(self, images, descriptions):
+        payload = []
+        for image in images:
+            buffer = io.BytesIO()
+            image.save(buffer, format='PNG')
+            payload.append(base64.b64encode(buffer.getvalue()).decode('ascii'))
+        return self._request({'op': 'score_many', 'images': payload, 'descriptions': descriptions})
+
     def close(self):
         if self.process.poll() is None:
             self.process.stdin.close()
@@ -95,6 +103,12 @@ def run_worker():
                 elif request['op'] == 'score':
                     with Image.open(io.BytesIO(base64.b64decode(request['image']))) as image:
                         result = scorer.score(image.convert('RGB'), request['descriptions'])
+                elif request['op'] == 'score_many':
+                    images = []
+                    for encoded in request['images']:
+                        with Image.open(io.BytesIO(base64.b64decode(encoded))) as image:
+                            images.append(image.convert('RGB'))
+                    result = scorer.score_many(images, request['descriptions'])
                 else:
                     raise ValueError('Unknown Florence worker operation')
             reply = {'result': result}

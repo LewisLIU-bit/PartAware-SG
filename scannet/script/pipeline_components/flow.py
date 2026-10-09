@@ -21,10 +21,11 @@ def process_tree(registry, recognition=None):
                           'shared_cache': recognition.get('shared_cache') if recognition else None,
                           'qwen_api_calls': 0},
             'observations': {'modules': modules('FRONTEND')},
-            'features': {'object_visual_dimensions': 256, 'object_semantic_dimensions': 384, 'part_dimensions': 1024}}},
+            'features': {'object_visual_dimensions': 256, 'object_semantic_dimensions': 384,
+                         'visual_part_dimensions': 1024, 'geometry_only_part_embedding': None}}},
         'MICA': {'name': 'Multiview Instance Consensus and Association', 'children': {
             'association': {'modules': modules('ASSOCIATION', 'FUSION', 'INSTANCE_REFINEMENT')},
-            'validation': {'modules': modules('OBJECT_VALIDATION', 'OBSERVED_VALIDATION', 'BACKGROUND_VALIDATION', 'IDENTITY_VALIDATION', 'SURFACE_VALIDATION')}}},
+            'validation': {'modules': modules('OBJECT_VALIDATION', 'OBSERVED_VALIDATION', 'BACKGROUND_VALIDATION', 'IDENTITY_VALIDATION', 'SURFACE_VALIDATION', 'OWNERSHIP_VALIDATION')}}},
         'SHAPE': {'name': 'Scene-constrained Hypotheses Anchored to Physical Evidence', 'children': {
             'geometry': {'modules': modules('GEOMETRY_COMPONENTS')},
             'measured_recovery': {'modules': modules('PART_GEOMETRY', 'MEASURED_REFINEMENT', 'FINAL_GEOMETRY')},

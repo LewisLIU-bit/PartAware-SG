@@ -2,7 +2,7 @@
 import argparse
 import base64
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 import fcntl
 import hashlib
@@ -240,7 +240,60 @@ def request_image(client, settings, image_bytes, image_format):
     return json.loads(settings.redact(raw))
 
 
-def recognize_manifest(manifest, cache_root, settings, limit=0, client=None, workers=1):
+def request_fingerprint(settings):
+    return hashlib.sha256(json.dumps({'settings': settings.public(),
+        'prompt_version': PROMPT_VERSION, 'prompt': PROMPT}, sort_keys=True).encode()).hexdigest()
+
+
+def budget_exhausted(record):
+    response = record.get('response', {})
+    return (response.get('status') == 'incomplete'
+            and (response.get('incomplete_details') or {}).get('reason') == 'max_output_tokens')
+
+
+def transport_failed(record):
+    response = record.get('response', {})
+    return (response.get('status') == 'incomplete'
+            and response.get('error') == 'Missing terminal Responses event')
+
+
+def validate_cached_request(record, settings, fingerprint):
+    actual = replace(settings, **record['request_settings'])
+    actual.validate()
+    if record.get('request_fingerprint') != request_fingerprint(actual):
+        raise ValueError('Saved actual request settings do not match their fingerprint')
+    if actual.public() == settings.public() and record['request_fingerprint'] == fingerprint:
+        return
+    recovery = record.get('budget_recovery', {})
+    if (replace(actual, max_output_tokens=settings.max_output_tokens, stream=settings.stream).public() != settings.public()
+            or actual.max_output_tokens < settings.max_output_tokens
+            or record.get('cache_request_fingerprint') != fingerprint):
+        raise ValueError('GPT cache model/settings changed; choose a fresh cache root')
+    override = record.get('explicit_budget_override', {})
+    if (actual.stream == settings.stream and override.get('configured_max_output_tokens') == settings.max_output_tokens
+            and override.get('requested_max_output_tokens') == actual.max_output_tokens):
+        return
+    if recovery.get('reason') not in ('max_output_tokens', 'missing_terminal_event'):
+        raise ValueError('Changed request budget has no explicit override or failed-response evidence')
+    archive = Path(recovery['archived_response'])
+    if not archive.is_file() or hashlib.sha256(archive.read_bytes()).hexdigest() != recovery['sha256']:
+        raise ValueError('Budget recovery is missing its unchanged failed-response evidence')
+    previous = json.loads(archive.read_text())
+    valid_failure = (budget_exhausted(previous) if recovery['reason'] == 'max_output_tokens' else transport_failed(previous))
+    if (not valid_failure or previous['image_sha256'] != record['image_sha256']
+            or previous['frame_id'] != record['frame_id']
+            or (recovery['reason'] == 'max_output_tokens'
+                and previous['request_settings']['max_output_tokens'] >= actual.max_output_tokens)):
+        raise ValueError('Budget recovery cannot replace a successful or unrelated response')
+    if actual.stream != settings.stream and not (settings.stream and not actual.stream
+            and recovery['reason'] == 'missing_terminal_event' and recovery.get('non_stream_recovery')):
+        raise ValueError('Changed transport requires explicit failed-stream recovery evidence')
+    validate_cached_request(previous, settings, fingerprint)
+
+
+def recognize_manifest(manifest, cache_root, settings, limit=0, client=None, workers=1,
+                       retry_max_output_tokens=0, retry_transport_failures=False, new_max_output_tokens=0,
+                       recover_non_stream=False):
     settings.validate()
     dataset, scene_id, frames = load_manifest_images(manifest)
     if limit < 0:
@@ -251,9 +304,11 @@ def recognize_manifest(manifest, cache_root, settings, limit=0, client=None, wor
     frames = frames[:limit] if limit else frames
     scene = Path(cache_root).expanduser().resolve() / dataset / scene_id
     scene.mkdir(parents=True, exist_ok=True)
-    fingerprint = hashlib.sha256(json.dumps({
-        'settings': settings.public(), 'prompt_version': PROMPT_VERSION, 'prompt': PROMPT},
-        sort_keys=True).encode()).hexdigest()
+    if retry_max_output_tokens and not settings.max_output_tokens < retry_max_output_tokens <= 32768:
+        raise ValueError('Explicit recovery budget must exceed the configured budget, up to 32768')
+    if new_max_output_tokens and not settings.max_output_tokens < new_max_output_tokens <= 32768:
+        raise ValueError('Explicit new-request budget must exceed the configured budget, up to 32768')
+    fingerprint = request_fingerprint(settings)
     counts = {'api_calls': 0, 'reused_frames': 0}
     records = []
     with (scene / '.recognition.lock').open('a') as lock:
@@ -277,51 +332,89 @@ def recognize_manifest(manifest, cache_root, settings, limit=0, client=None, wor
             raw_path = scene / 'vlm_responses' / f'{fid}.json'
             if raw_path.exists():
                 record = json.loads(raw_path.read_text(encoding='utf-8'))
-                if record.get('image_sha256') != digest or record.get('request_fingerprint') != fingerprint:
+                if record.get('image_sha256') != digest:
                     raise ValueError('GPT cache input/model/settings changed; choose a fresh cache root')
                 if (record.get('dataset'), record.get('scene_id'), record.get('frame_id')) != (dataset, scene_id, fid):
                     raise ValueError('GPT raw cache scene/frame identities differ')
-                parse_response(record['response'], settings.protocol)
+                validate_cached_request(record, settings, fingerprint)
+                try:
+                    parse_response(record['response'], settings.protocol)
+                except ValueError:
+                    if not ((retry_max_output_tokens and budget_exhausted(record)
+                            and retry_max_output_tokens > record['request_settings']['max_output_tokens'])
+                            or (retry_transport_failures and transport_failed(record))):
+                        raise
             else:
                 record = None
             inputs.append((fid, image_bytes, image_format, size, digest, raw_path, record))
-        if client is None and any(item[-1] is None for item in inputs):
+        if client is None and any(item[-1] is None or budget_exhausted(item[-1]) or transport_failed(item[-1]) for item in inputs):
             client = settings.client()
 
         def process_frame(item):
             fid, image_bytes, image_format, size, digest, raw_path, record = item
+            recovery = None
+            actual = replace(settings, max_output_tokens=new_max_output_tokens) if record is None and new_max_output_tokens else settings
+            if record is not None and (budget_exhausted(record) or transport_failed(record)):
+                digest_failed = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+                archive = scene/'vlm_failed_responses'/f'{fid}_{digest_failed[:16]}.json'
+                atomic_json(archive, record)
+                recovery = {'reason': 'max_output_tokens' if budget_exhausted(record) else 'missing_terminal_event', 'archived_response': str(archive),
+                            'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
+                            'previous_budget': record['request_settings']['max_output_tokens']}
+                actual = replace(settings, max_output_tokens=max(retry_max_output_tokens,
+                    record['request_settings']['max_output_tokens'], settings.max_output_tokens))
+                if recover_non_stream and transport_failed(record):
+                    actual = replace(actual, stream=False)
+                    recovery['non_stream_recovery'] = True
+                record = None
             requested = record is None
             if requested:
                 print('GPT识图请求', {'scene': scene_id, 'frame': fid}, flush=True)
                 try:
-                    response = request_image(client, settings, image_bytes, image_format)
+                    response = request_image(client, actual, image_bytes, image_format)
                 except Exception as error:
                     raise RuntimeError('GPT request failed: ' + settings.redact(str(error))) from None
                 record = {'provider': 'relay_gpt', 'dataset': dataset, 'scene_id': scene_id,
                           'frame_id': fid, 'image_sha256': digest, 'image_size': list(size),
-                          'request_fingerprint': fingerprint, 'requested_model': settings.model,
-                          'request_settings': settings.public(), 'prompt_version': PROMPT_VERSION,
+                          'request_fingerprint': request_fingerprint(actual), 'requested_model': settings.model,
+                          'request_settings': actual.public(), 'prompt_version': PROMPT_VERSION,
                           'prompt_sha256': hashlib.sha256(PROMPT.encode()).hexdigest(),
                           'received_at_utc': datetime.now(timezone.utc).isoformat(), 'response': response}
+                if recovery:
+                    record.update(cache_request_fingerprint=fingerprint, budget_recovery=recovery)
+                elif actual.max_output_tokens != settings.max_output_tokens:
+                    record.update(cache_request_fingerprint=fingerprint, explicit_budget_override={
+                        'configured_max_output_tokens': settings.max_output_tokens,
+                        'requested_max_output_tokens': actual.max_output_tokens})
                 atomic_json(raw_path, record)
             # Preserve invalid raw responses and stop instead of silently paying to retry.
             parsed = parse_response(record['response'], settings.protocol)
             atomic_json(scene / 'vlm_parsed' / f'{fid}.json', parsed)
             tags = {'objects': parsed['objects'], 'source': 'relay_gpt',
                     'recognition_cache': str(raw_path), 'image_sha256': digest,
-                    'requested_model': settings.model, 'request_fingerprint': fingerprint}
+                    'requested_model': settings.model, 'request_fingerprint': record['request_fingerprint']}
             atomic_json(scene / 'refined_instance' / f'{fid}.json', tags)
             frame_record = {'frame_id': fid, 'image_sha256': digest,
                             'raw_response_sha256': hashlib.sha256(raw_path.read_bytes()).hexdigest(),
-                            'categories': len(parsed['objects'])}
+                            'categories': len(parsed['objects']),
+                            'request_fingerprint': record['request_fingerprint'],
+                            'actual_max_output_tokens': record['request_settings']['max_output_tokens']}
             print('GPT识图缓存就绪', {'scene': scene_id, 'frame': fid,
                                    'categories': len(parsed['objects'])}, flush=True)
             return frame_record, requested
 
-        with ThreadPoolExecutor(max_workers=workers) as pool:
-            for record, requested in pool.map(process_frame, inputs):
+        def consume(results):
+            for record, requested in results:
                 records.append(record)
                 counts['api_calls' if requested else 'reused_frames'] += 1
+        if workers == 1:
+            consume(map(process_frame, inputs))
+        else:
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                # Bound paid work to one concurrent batch; a failure cannot
+                # silently dispatch the remainder of an entire scene.
+                for start in range(0, len(inputs), workers):
+                    consume(pool.map(process_frame, inputs[start:start+workers]))
         if previous:
             selected = {record['frame_id']: record for record in records}
             for old in previous.get('frames', []):
@@ -384,6 +477,14 @@ def main():
     parser.add_argument('--cache-root')
     parser.add_argument('--limit', type=int, default=0)
     parser.add_argument('--workers', type=int, default=1)
+    parser.add_argument('--retry-max-output-tokens', type=int, default=0,
+                        help='Explicitly retry only saved output-budget failures with a larger budget')
+    parser.add_argument('--retry-transport-failures', action='store_true',
+                        help='Explicitly retry only saved streams missing a terminal response')
+    parser.add_argument('--new-max-output-tokens', type=int, default=0,
+                        help='Explicit larger budget for frames that have never been requested')
+    parser.add_argument('--recover-non-stream', action='store_true',
+                        help='Retry failed upstream streams using one non-streaming Responses request')
     parser.add_argument('--list-models', action='store_true')
     args = parser.parse_args()
     settings = Settings.load(args.config, require_model=not args.list_models)
@@ -396,7 +497,11 @@ def main():
         return
     if not args.manifest or not args.cache_root:
         parser.error('--manifest and --cache-root are required for image recognition')
-    recognize_manifest(args.manifest, args.cache_root, settings, args.limit, workers=args.workers)
+    recognize_manifest(args.manifest, args.cache_root, settings, args.limit, workers=args.workers,
+                       retry_max_output_tokens=args.retry_max_output_tokens,
+                       retry_transport_failures=args.retry_transport_failures,
+                       new_max_output_tokens=args.new_max_output_tokens,
+                       recover_non_stream=args.recover_non_stream)
 
 
 if __name__ == '__main__':

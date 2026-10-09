@@ -1,4 +1,4 @@
-# GPT 视觉接口、缓存与三版本对比
+# GPT 视觉接口、v12缓存与SAM3接入
 
 ## 接入状态
 
@@ -8,9 +8,12 @@
 `gpt-6.1-sol`，Responses 流式图像请求已通过真实 Hypersim 图片测试。
 这是中转站报告的模型 ID，本项目不能独立证明其上游实现。
 
-SAM3 权重访问被作者拒绝，用户已决定停止使用。当前细实例试验使用公开
-YOLOE-v8-L 权重、切片与区域放大，不依赖 SAM3。已经运行的局部 SAM 研究
-使用原有 SAM ViT-H；其自动碎片路线未通过验收，没有替代主流程。
+Hugging Face 的 SAM3 权重访问此前被作者拒绝。本轮改用 ModelScope 公开
+facebook/sam3 仓库的 sam3.pt，平台 SHA256 已核验，固定 Meta 官方源码本地推理。
+来源元数据记录为 USER_UPLOAD，不把命名空间当作独立官方身份认证。
+SAM3 在独立 WSL Conda 环境 sg-sam3 中运行，两个场景的真实单帧推理及
+原DINO/SBERT接口已通过，完整场景精度仍待验收。它只处理可见二维掩码，
+不能声称解决隐藏三维补全。
 
 ## 配置与直接命令
 
@@ -36,18 +39,19 @@ cd /home/lewisliu/PartAware-SG
   --limit 1
 ```
 
-两场景各用一份类别缓存，并生成原始、v11、v12 三种构建结果：
+本轮只构建v12，直接使用两场景已完成的GPT类别缓存。默认原始版仍用RAM，
+默认v11仍为原有Qwen缓存；已经生成的GPT原始版/GPT v11只作为历史对照。
+以下入口不会新增GPT或Qwen识图，缓存不完整就停止。输出根目录选一个新的
+实验目录，以免覆盖此前的完整结果：
 
 ```bash
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
-  --config .gpt-vision.local.json \
   --cache-root /home/lewisliu/datasets/scannet-sg-processed/gpt_vision_cache \
-  --output-root /home/lewisliu/datasets/scannet-sg-processed \
-  --recognition-workers 1
+  --output-root /home/lewisliu/datasets/scannet-sg-processed/gpt_sam3_v12
 ```
 
 也可重复指定 `--manifest` 选择场景，不改变输入采样。运行失败后，已完成
-识图和成品按哈希校验复用；不重新调用 Qwen。完整模型与输入变化应使用
+SAM3推理和成品按哈希校验复用；不重新调用VLM。完整模型与输入变化应使用
 新的缓存目录，不能覆盖原结果。网络请求失败没有隐式重试；已收到但
 不完整或无法解析的响应保留并停止，不能当成成功的空类别结果。
 
@@ -69,16 +73,16 @@ cd /home/lewisliu/PartAware-SG
 与 Hypersim manifest 接口保留，256维物体视觉、384维语义、1024维部件
 特征互不混用。
 
-| 对比版本 | 类别输入 | 后续构建 |
+| 默认版本 | 类别输入 | 后续构建 |
 | --- | --- | --- |
-| GPT 原始版 | 共用 GPT 缓存 | GroundingDINO/SAM、原 C++ 融合与原图后处理；不启用 PartAware 改进组件 |
-| GPT v11 | 相同缓存 | Florence/SAM、YOLOE-S、现有实例共识与实测修复、VLPart 和正式几何发布 |
-| GPT v12 | 相同缓存及 v11 粗观测 | 追加 YOLOE-L 整图/切片/放大细实例；粗细观测分层，继续同一三维构建与发布接口 |
+| 原始版 | RAM | GroundingDINO/SAM、原 C++ 融合与原图后处理 |
+| v11 | 既有Qwen缓存 | Florence/SAM、YOLOE-S、现有实例共识与实测修复、VLPart和正式几何发布 |
+| v12 | 既有GPT缓存 | SAM3概念实例与局部放大、原DINO/SBERT特征、同一三维构建和发布接口；完整精度待验收 |
 
-这里的 GPT 原始版仅替换原 RAM 类别获取，不等于已经冻结的 RAM 原始
-对照。比较配置在独立子进程中应用，不改写默认组件注册，也不使用
-运行参数让默认算法相互混杂。v12 细分支集中由 `fovea.segment` 挂接，
-切回 `FRONTEND = yoloe_frontend` 就可移除。默认经验证流程仍为 v11。
+已有GPT原始版/GPT v11保留为历史补充对照，不作为默认识图来源。
+比较配置在独立子进程中应用，不改写历史组件注册。v12分支集中由
+`sam3_frontend.segment`挂接，代码注册改回`fovea`即可撤除SAM3。
+完整ScanNet/Hypersim输入及公共图节点字段继续使用原接口。
 
 ## 缓存原理与审计
 
@@ -114,3 +118,17 @@ GPT 可以提供新的类别证据；能否纠正“盘子/餐巾”等错误须
 也不生成真实完整物体点云。当前双层细实例试验已完成两场景；第二场景
 AP50 为11.82%，仍不足以称高精度。TripoSR、Hunyuan3D 和 MGPC 形状
 试验均未证明通用补全可靠，严格验收下不能宣称薄片问题已解决。
+
+## 2026-10-08：GPT 缓存恢复与构建适配
+
+识图成功帧不重新请求。显式失败恢复命令可以加 `--retry-max-output-tokens 16384 --retry-transport-failures --new-max-output-tokens 16384`，只能恢复已保存的失败响应或首次请求，实际请求预算与失败 SHA256 记录在缓存内。`--recover-non-stream` 只适用于缺终止事件的失败流；本次非流恢复实际超时，没有把它当作成功结果。完整缓存不会因为恢复参数改变而重付费识图。
+
+GPT v11/v12 对比配置在 `run_gpt_comparison.configure_profile` 注册 `OWNERSHIP_VALIDATION`，并传递给独立模型进程。`visibility_ownership.prune` 处理局部地板反证、唯一完整实测物体锚定与重复粗残片；`observed_consensus.refine_verified_surface` 只净化强实测核心附近的反复否定边缘。移除导入与注册即可拆卸，原始对照与普通默认注册不启用待两场景验收的新组件。数学、接口及最新结果见综合报告2.5、6.6及21章。
+
+SAM3接入前第一场景已验收：历史GPT v11/v12均10个预测、10个GT，AP25/AP50为100%，AP75为80%，相较既有Qwen版62.5%提高17.5个百分点。第二场景GPT v12已完成，为98/109、AP25/AP50/AP75为22.33%/11.83%/2.94%；整体准入未通过，不能宣称两场景都提高。独立 `compare_evaluations.py` 检查相同GT口径和真实成品哈希，要求AP、数量误差、TP/FP/FN均不退步且至少一项改善，GT不会参与构建。
+
+## 2026-10-09：Florence有界评分修复
+
+第二场景一帧有164个描述候选，旧128个硬上限触发中止。默认Florence改为最多8个裁剪一批，对全部候选评分，继续原NMS和SAM；输入类别、检测特征与评分目标不截断。共享模型在同一帧各类别间驻留显存，阶段结束后再换出，不同模型仍顺序调度。真实4个裁剪与串行评分的平均对数似然最大差为0.003016，耗时2.229秒降至0.820秒；浮点结果不宣称逐位相同，最终仍须AP核验。
+
+当前158项完整离线测试通过，两个场景的SAM3真实单帧模型推理、DINO256维、SBERT384维、标签像素一致性核验通过。新增识图请求为0。SAM3完整场景结果另存新的v12_sam3r1目录，未完成验收前不覆盖此前的已验证成品。

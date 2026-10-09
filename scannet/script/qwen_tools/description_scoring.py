@@ -82,7 +82,7 @@ def summarize(region_scores, reference_ids, target_id):
 
 
 class FlorenceDescriptionScorer:
-    """Reusable scoring backend; one region and one target sequence per forward."""
+    """Reusable scoring backend with bounded independent crop batches."""
     def __init__(self, model_dir, device="cuda", max_tokens=96):
         import torch
         from transformers import AutoConfig, AutoModelForCausalLM, AutoProcessor
@@ -114,22 +114,30 @@ class FlorenceDescriptionScorer:
                 torch_dtype=self.dtype, attn_implementation="eager").to(device).eval()
 
     def score(self, image, descriptions):
+        return self.score_many([image], descriptions)[0]
+
+    def score_many(self, images, descriptions):
+        """Score every crop independently; batching never truncates candidates."""
+        if not images:
+            return []
+        if len(images) > 8:
+            raise ValueError('Use at most eight Florence crops per model batch')
         torch = self.torch
         # The encoder sees only the crop and a fixed caption task.
-        inputs = self.processor(text=TASK, images=image, return_tensors="pt")
+        inputs = self.processor(text=[TASK]*len(images), images=images, return_tensors="pt")
         inputs = {k: v.to(device=self.device,
                           dtype=self.dtype if v.is_floating_point() else v.dtype)
                   for k, v in inputs.items()}
-        result = {}
+        result = [{} for _ in images]
         for description_id, text in descriptions.items():
             encoded = self.processor.tokenizer(
                 text, return_tensors="pt", add_special_tokens=True,
                 return_special_tokens_mask=True, truncation=False)
-            labels = encoded["input_ids"].to(self.device)
+            labels = encoded["input_ids"].to(self.device).repeat(len(images), 1)
             if labels.shape[1] > self.max_tokens:
                 raise ValueError(f"Description too long: {description_id}; no silent truncation")
             keep = (encoded["attention_mask"].bool()
-                    & ~encoded["special_tokens_mask"].bool()).to(self.device)
+                    & ~encoded["special_tokens_mask"].bool()).to(self.device).expand(len(images), -1)
             if not keep.any():
                 raise ValueError(f"No ordinary tokens: {description_id}")
             # Florence shifts decoder labels internally. Do not shift twice.
@@ -140,20 +148,21 @@ class FlorenceDescriptionScorer:
                     raise RuntimeError("Decoder logits and target sequence are misaligned")
                 log_probs = torch.log_softmax(logits, dim=-1)
                 target_log_probs = log_probs.gather(-1, labels.unsqueeze(-1)).squeeze(-1)
-                values = target_log_probs[keep]
+                values = target_log_probs[keep].reshape(len(images), -1)
                 if not torch.isfinite(values).all():
                     raise RuntimeError(f"Non-finite token scores: {description_id}")
-                mean = float(values.mean().item())
-                token_ids = labels[keep].cpu().tolist()
+                means = values.mean(dim=1).cpu().tolist()
+                token_ids = labels[0][keep[0]].cpu().tolist()
                 logs = values.cpu().tolist()
-            result[description_id] = {
-                "text": text,
-                "mean_log_likelihood": mean,
-                "token_count": len(token_ids),
-                "token_ids": token_ids,
-                "tokens": self.processor.tokenizer.convert_ids_to_tokens(token_ids),
-                "token_log_probabilities": logs,
-            }
+            for index in range(len(images)):
+                result[index][description_id] = {
+                    "text": text,
+                    "mean_log_likelihood": float(means[index]),
+                    "token_count": len(token_ids),
+                    "token_ids": token_ids,
+                    "tokens": self.processor.tokenizer.convert_ids_to_tokens(token_ids),
+                    "token_log_probabilities": logs[index],
+                }
             del output, logits, log_probs, target_log_probs, values
         return result
 

@@ -19,6 +19,7 @@ class FlorenceGrounding(JointGrounding):
                        'model_dir': str(self.model_dir), 'dino_weight': 0.8,
                        'candidate_threshold': 0.25, 'nms_threshold': 0.5,
                        'pre_nms_threshold': 0.95, 'max_description_candidates': 128,
+                       'description_candidate_policy': 'bounded_all', 'description_score_batch': 8,
                        'mask_duplicate_iou': 0.85, 'min_saved_pixels': 16,
                        'reference_normalization': False,
                        'template': 'A photo of a {category}.',

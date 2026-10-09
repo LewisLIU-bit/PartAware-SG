@@ -114,6 +114,8 @@ def main():
             shutil.copytree(source/'refined_instance', destination)
             if (source/'frontend_cache').exists():
                 shutil.copytree(source/'frontend_cache', context.scene/'frontend_cache')
+            if (source/'fine_frontend_cache').exists():
+                shutil.copytree(source/'fine_frontend_cache', context.scene/'fine_frontend_cache')
             if (source/'frontend_provenance.json').is_file():
                 shutil.copyfile(source/'frontend_provenance.json', context.scene/'frontend_provenance.json')
             if (source/'recognition_provenance.json').is_file():
@@ -156,14 +158,15 @@ def main():
             _, jobs, _, _, _ = load_capture(context.manifest, context.image_dir, context.scene/'refined_instance')
             complete = all((context.scene/'refined_instance'/f"{j['frame_id']}_instance.json").exists()
                            and (context.scene/'refined_instance'/f"{j['frame_id']}.png").exists() for j in jobs)
-            if not complete:
+            frontend = getattr(components, 'FRONTEND', None)
+            owns_coarse = bool(getattr(frontend, 'OWNS_COARSE_SEGMENTATION', False))
+            if not complete and not owns_coarse:
                 grounding_backend = getattr(components, 'GROUNDING_BACKEND', 'florence')
                 context.execute([sys.executable, str(REPO / 'scannet/script/grounded_sam/scannet_process/get_seg_openset.py'),
                     '--manifest', str(context.manifest), '--json_folder', str(context.scene/'refined_instance'),
                     '--grounding_backend', grounding_backend, '--florence_model_dir',
                     str(Path.home()/'models/vision/Florence-2-large-ft'), '--visualize'],
                     '原始 DINO 定位与 SAM 分割' if grounding_backend == 'dino' else 'Florence 物体定位与 SAM 分割')
-            frontend = getattr(components, 'FRONTEND', None)
             if frontend is not None:
                 frontend.segment(context)
         if first <= 2:

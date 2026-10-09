@@ -182,9 +182,11 @@ class JointGrounding:
         gsam.grounding_dino_model.model.to("cpu")
         gsam.sam_predictor.reset_image()
         gsam.sam_predictor.model.to("cpu")
+        released = set()
         for p in self.profiles.values():
-            if p["scorer"] is not None:
+            if p["scorer"] is not None and id(p['scorer']) not in released:
                 p["scorer"].model.to("cpu")
+                released.add(id(p['scorer']))
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
@@ -272,24 +274,38 @@ class JointGrounding:
         # Only near-identical same-class boxes are removed before description scoring.
         records = [records[i] for i in class_nms(records, self.pre_nms_threshold, "dino_score")]
         count = sum(r["canonical"] in self.profiles for r in records)
-        if count > self.max_candidates:
+        if count > self.max_candidates and self.config.get('description_candidate_policy') != 'bounded_all':
             raise RuntimeError(f"{count} description candidates exceed configured limit; none silently truncated")
         self._release(gsam, torch)
         rgb = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        active_scorer = None
         for canonical, profile in self.profiles.items():
             relevant = [r for r in records if r["canonical"] == canonical]
             if not relevant:
                 continue
             cfg = profile["config"]
             scorer = self._scorer_for_profile(profile)
-            scorer.model.to(scorer.device)
+            if active_scorer is not scorer:
+                if active_scorer is not None:
+                    active_scorer.model.to('cpu')
+                    if torch.cuda.is_available(): torch.cuda.empty_cache()
+                scorer.model.to(scorer.device)
+                active_scorer = scorer
             descriptions, target = cfg["descriptions"], cfg["target_description_id"]
             if profile["baseline"] is None:
                 reference_scores = [scorer.score(im, descriptions) for im in profile["references"]]
                 profile["baseline"] = {d: float(np.mean([x[d]["mean_log_likelihood"] for x in reference_scores]))
                                        for d in descriptions}
-            for i, r in enumerate(relevant):
-                values = scorer.score(rgb.crop(crop_box(r["box"], width, height)), descriptions)
+            batch_size = min(8, max(1, int(self.config.get('description_score_batch', 1))))
+            scored = []
+            for start in range(0, len(relevant), batch_size):
+                crops = [rgb.crop(crop_box(r['box'], width, height)) for r in relevant[start:start+batch_size]]
+                batch = (scorer.score_many(crops, descriptions) if batch_size > 1
+                         else [scorer.score(crops[0], descriptions)])
+                if len(batch) != len(crops):
+                    raise RuntimeError('Description crop batch lost its candidate alignment')
+                scored.extend(batch)
+            for i, (r, values) in enumerate(zip(relevant, scored)):
                 ll = {d: v["mean_log_likelihood"] for d,v in values.items()}
                 gains = {d: ll[d] - profile["baseline"][d] for d in descriptions}
                 other = max((d for d in descriptions if d != target), key=lambda d:gains[d])
@@ -310,7 +326,8 @@ class JointGrounding:
                                     "description_support": fused_score(0.5, margin, 0.0),
                                     "description_raw_competition": raw_margins,
                                     "description_pass": r["description_pass"]}
-            scorer.model.to("cpu")
+        if active_scorer is not None:
+            active_scorer.model.to("cpu")
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
         accepted = [r for r in records if r["joint_score"] >= threshold and r.get("description_pass", True)]

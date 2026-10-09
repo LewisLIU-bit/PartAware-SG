@@ -45,7 +45,7 @@ def resolve(gid, remap):
     return gid
 
 
-def raw_pair_evidence(a, b, views, frames):
+def raw_pair_evidence(a, b, views, frames, minimum=.8):
     support, conflict, visible = 0, 0, 0
     for fid in sample_frames(frames):
         _, wa, la = views.project(a, fid)
@@ -56,11 +56,11 @@ def raw_pair_evidence(a, b, views, frames):
         labels = (set(la) | set(lb))-{0}
         pa = {int(k): float(wa[la == k].sum()/wa.sum()) for k in labels}
         pb = {int(k): float(wb[lb == k].sum()/wb.sum()) for k in labels}
-        if max((min(pa[k], pb[k]) for k in labels), default=0) >= .8:
+        if max((min(pa[k], pb[k]) for k in labels), default=0) >= minimum:
             support += 1
         elif labels:
             ka, kb = max(pa, key=pa.get), max(pb, key=pb.get)
-            if ka != kb and pa[ka] >= .8 and pb[kb] >= .8:
+            if ka != kb and pa[ka] >= minimum and pb[kb] >= minimum:
                 conflict += 1
     return {'whole_mask_support_views': support, 'independent_separation_views': conflict,
             'joint_visible_views': visible, 'whole_mask_consensus': support/max(visible, 1)}
@@ -274,6 +274,10 @@ def main():
         consensus = observed_validator.measure(geometry[gid], gid, views, records, resolve, remap) if observed_validator else None
         if consensus is not None:
             m['joint_observed_consensus'] = consensus
+            if consensus['joint_depth_mask_supported_fraction'] >= .8 and getattr(components, 'OWNERSHIP_VALIDATION', None):
+                geometry[gid], fringe = observed_validator.refine_verified_surface(
+                    geometry[gid], gid, views, records, resolve, remap)
+                m['verified_fringe_refinement'] = fringe
         reliable_geometry = (tracks[gid].get('reprojection_support', 0) >= .6 or
             (consensus is not None and observed_validator.confirms_existence(consensus, m['undersegmented_view_fraction'])))
         m['strong_observed_geometry'] = reliable_geometry
@@ -310,6 +314,9 @@ def main():
             survivors.append(gid)
             tracks[gid]['proposal_validation'] = m
             tracks[gid]['point_count'] = len(geometry[gid])
+    ownership_validator = getattr(components, 'OWNERSHIP_VALIDATION', None)
+    if ownership_validator is not None:
+        survivors = ownership_validator.prune(survivors, geometry, tracks, metrics, views, records, remap, audit, nodes)
     if not survivors:
         raise RuntimeError('No object passed observed proposal validation; inspect evidence')
     for fid, values in records.items():
@@ -331,11 +338,12 @@ def main():
         value['canonical_id'] = resolve(value['canonical_id'], remap)
     graph_path.write_text(json.dumps(graph, indent=2)+'\n')
     (scene/'validated_object_tracks.json').write_text(json.dumps({gid: tracks[gid] for gid in survivors}, indent=2)+'\n')
-    report = {'algorithm': 'joint_observed_consensus_semantic_validation_v9' if observed_validator else 'masked_clip_identity_background_v7' if identity_validator else 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
+    report = {'algorithm': 'visible_ownership_competition_v12' if ownership_validator else 'joint_observed_consensus_semantic_validation_v9' if observed_validator else 'masked_clip_identity_background_v7' if identity_validator else 'masked_clip_sms_inclusion_background_v6' if background_validator else 'masked_clip_sms_inclusion_v5', 'candidate_objects': len(keys),
         'merged_fragments': len(remap), 'accepted_objects': len(survivors),
         'rejected_objects': len(active)-len(survivors), 'remap': remap, 'qwen_api_calls': 0,
         'thresholds': {'bbox_inclusion': .95, 'surface_inclusion': .99, 'background_margin': .02, 'whole_mask_consensus': .8, 'sms': 0, 'mixed_view_fraction': .2, 'view_detection_rate': .2, 'strong_reprojection_support': .6},
         'semantic_model': 'OpenAI RN50 masked square crops; not Alpha-CLIP', 'vocabulary': names,
+        'ownership_component_sha256': hashlib.sha256(Path(ownership_validator.__file__).read_bytes()).hexdigest() if ownership_validator else None,
         'observed_consensus_component_sha256': hashlib.sha256(Path(observed_validator.__file__).read_bytes()).hexdigest() if observed_validator else None,
         'surface_component_sha256': hashlib.sha256(Path(surface_validator.__file__).read_bytes()).hexdigest() if surface_validator else None,
         'identity_component_sha256': hashlib.sha256(Path(identity_validator.__file__).read_bytes()).hexdigest() if identity_validator else None,

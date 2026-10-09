@@ -62,3 +62,28 @@ def confirms_core(evidence, core, mixed_fraction):
             and core['verified_core_points']/max(core['source_points'], 1) >= .3
             and sorted(core['axis_extent_retention'])[-1] >= .8
             and sorted(core['axis_extent_retention'])[-2] >= .6)
+
+
+def refine_verified_surface(points, gid, views, records, resolve, remap):
+    """Trim repeatedly contradicted fringes only around a strongly verified core."""
+    seen = np.zeros(len(points), int)
+    positive = seen.copy()
+    for fid in sorted(views.jobs):
+        local_ids = [int(r['frame_instance_id']) for r in records[fid]
+                     if resolve(str(r.get('instance_id', -1)), remap) == gid]
+        pose, depth, mask = views.get(fid)
+        visible, own = depth_mask_votes(points, pose, depth/views.scale,
+                                       np.isin(mask, local_ids), views.kd, views.kc)
+        seen += visible
+        positive += own
+    ratio = positive/np.maximum(seen, 1)
+    stable = (positive >= 3) & (ratio >= .65)
+    rejected = (seen >= 5) & (seen-positive >= 3) & (ratio < .65)
+    proposed = points[~rejected]
+    retention = np.ptp(proposed, axis=0)/np.maximum(np.ptp(points, axis=0), .01) if len(proposed) else np.zeros(3)
+    accepted = (stable.mean() >= .8 and len(proposed) >= 128
+                and len(proposed)/len(points) >= .8 and np.min(retention) >= .6)
+    return (proposed if accepted else points), {'accepted': bool(accepted),
+        'stable_core_fraction': float(stable.mean()), 'source_points': len(points),
+        'proposed_removed_points': int(rejected.sum()), 'removed_points': int(rejected.sum()) if accepted else 0,
+        'axis_extent_retention': retention.tolist(), 'unobserved_points_preserved': True}
