@@ -1,0 +1,102 @@
+{
+  "version": "v13",
+  "vision_api_calls": 0,
+  "qwen_api_calls": 0,
+  "tests_passed": 193,
+  "gt_used_for_construction": false,
+  "universal_hidden_shape_completion_solved": false,
+  "scenes": [
+    {
+      "scene_id": "ai_001_002",
+      "output": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_002",
+      "frames": 99,
+      "gt": 10,
+      "predicted": 10,
+      "AP25": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "MVO25": 1.0,
+      "MVO50": 1.0,
+      "absolute_log_count_error": 0.0,
+      "one_to_one": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "confirmed_parts": 19,
+      "confirmed_attached_parts": 15,
+      "part_of_edges": 15,
+      "split_aggregates": 0,
+      "atomic_instances": 0,
+      "dense_measured_objects": 0,
+      "new_measured_samples": 0,
+      "repeated_generated_samples": 0,
+      "visual_anchored_parts": 0,
+      "graph_sha256": "ab5a56c696a02872ae89145609011aca048a3cee74c8a0b344b81473f78d07b8",
+      "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d",
+      "original_v12_unchanged": true,
+      "native_cache_verified": 99,
+      "original_graph_API_verified": true,
+      "AP_gate_passed": true,
+      "all_metric_gate_passed": true
+    },
+    {
+      "scene_id": "ai_001_010",
+      "output": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_010",
+      "frames": 100,
+      "gt": 109,
+      "predicted": 134,
+      "AP25": 0.42016452669608906,
+      "AP50": 0.25968445912059457,
+      "AP75": 0.09907499890304024,
+      "MVO25": 0.42016452669608906,
+      "MVO50": 0.31240252019138737,
+      "absolute_log_count_error": 0.20649191772176764,
+      "one_to_one": {
+        "0.25": {
+          "TP": 76,
+          "FP": 58,
+          "FN": 33
+        },
+        "0.5": {
+          "TP": 57,
+          "FP": 77,
+          "FN": 52
+        },
+        "0.75": {
+          "TP": 28,
+          "FP": 106,
+          "FN": 81
+        }
+      },
+      "confirmed_parts": 361,
+      "confirmed_attached_parts": 137,
+      "part_of_edges": 137,
+      "split_aggregates": 2,
+      "atomic_instances": 12,
+      "dense_measured_objects": 18,
+      "new_measured_samples": 49899,
+      "repeated_generated_samples": 103290,
+      "visual_anchored_parts": 2,
+      "graph_sha256": "87018f6b85da2114185ee0411380a70ce4668f12fddc7b47235d74df715fcf8a",
+      "prediction_ply_sha256": "a63f37cc7c1f63bf5d625727efbf3276803f27ff291ffe5129c4161880d3086a",
+      "original_v12_unchanged": true,
+      "native_cache_verified": 100,
+      "original_graph_API_verified": true,
+      "AP_gate_passed": true,
+      "all_metric_gate_passed": false
+    }
+  ]
+}

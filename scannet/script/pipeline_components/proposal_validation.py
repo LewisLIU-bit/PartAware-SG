@@ -191,6 +191,8 @@ def main():
                           'surface_inclusion_3cm': coverage, 'reverse_surface_coverage_3cm': reverse_coverage,
                           'strong_surface_duplicate': strong_surface, 'bbox_inclusion': bbox_inclusion, 'semantic': similarity, **evidence})
     active = [gid for gid in keys if gid not in remap]
+    hierarchy_validator = getattr(components, 'HIERARCHY_VALIDATION', None)
+    hierarchy = hierarchy_validator.Evidence(views, tracks, nodes) if hierarchy_validator else None
     metrics, crops = {}, []
     for gid in active:
         track, local = tracks[gid], geometry[gid]
@@ -216,12 +218,23 @@ def main():
                 crop_views.append((fraction, fid))
         metrics[gid] = {'visible_views': visible, 'support_views': support,
             'mixed_views': mixed, 'undersegmented_view_fraction': mixed/max(visible, 1), 'view_detection_rate': support/max(visible, 1)}
+        whole = None
+        if hierarchy is not None and mixed >= 3:
+            whole = hierarchy.measure(local, gid)
+            metrics[gid]['native_hierarchy'] = whole
+        if whole and whole.get('confirmed'):
+            crop_views = [(row['whole_identity_fraction'], row['frame_id'])
+                          for row in whole['frames'] if row['accepted']]
         semantic_centers = []
         for fraction, fid in sorted(crop_views, reverse=True)[:5]:
             image = cv2.imread(str(views.jobs[fid]['rgb']))
             mask = views.get(fid)[2]
             member_ids = [r['frame_instance_id'] for r in records[fid] if resolve(str(r['instance_id']), remap) == gid]
-            crop = masked_crop(image, np.isin(mask, member_ids))
+            region = np.isin(mask, member_ids)
+            if whole and whole.get('confirmed'):
+                row = next(row for row in whole['frames'] if row['frame_id'] == fid)
+                region = hierarchy.mask(fid, row['native_mask_index'])
+            crop = masked_crop(image, region)
             if crop is not None:
                 crops.append((gid, fraction, crop))
                 semantic_centers.append(views.get(fid)[0][:3, 3])
@@ -264,6 +277,10 @@ def main():
             metrics[gid].update(sms=float(sms[i]), semantic_best_class=names[int(scores[i, :len(names)].argmax())],
                 semantic_object_score=float(scores[i, :len(names)].max()),
                 semantic_background_score=float(scores[i, len(names):].max()), semantic_views=counts[gid])
+            identity_name = nodes[gid]['name'].replace('_', ' ').strip().lower()
+            if identity_name in names:
+                metrics[gid]['semantic_identity_margin'] = float(scores[i, names.index(identity_name)]
+                                                                 - scores[i, len(names):].max())
     import pipeline_components as components
     background_validator = getattr(components, 'BACKGROUND_VALIDATION', None)
     surface_validator = getattr(components, 'SURFACE_VALIDATION', None)
@@ -271,7 +288,10 @@ def main():
     for gid in active:
         m = metrics[gid]
         reasons = []
-        if m['mixed_views'] >= 3 and m['undersegmented_view_fraction'] > .2:
+        native_body = (m.get('native_hierarchy', {}).get('confirmed', False)
+                       and m.get('semantic_identity_margin', -1) >= .01)
+        m['native_hierarchy_confirmed'] = bool(native_body)
+        if m['mixed_views'] >= 3 and m['undersegmented_view_fraction'] > .2 and not native_body:
             reasons.append('多个独立实例混合于一个候选')
         if m['visible_views'] >= 5 and m['view_detection_rate'] < .2:
             reasons.append('可见视角缺少足够检测支持')
@@ -279,13 +299,20 @@ def main():
         consensus = observed_validator.measure(geometry[gid], gid, views, records, resolve, remap) if observed_validator else None
         if consensus is not None:
             m['joint_observed_consensus'] = consensus
-            if consensus['joint_depth_mask_supported_fraction'] >= .8 and getattr(components, 'OWNERSHIP_VALIDATION', None):
+            if (consensus['joint_depth_mask_supported_fraction'] >= .8
+                    and getattr(components, 'OWNERSHIP_VALIDATION', None) and not native_body):
                 geometry[gid], fringe = observed_validator.refine_verified_surface(
                     geometry[gid], gid, views, records, resolve, remap)
                 m['verified_fringe_refinement'] = fringe
-        reliable_geometry = (tracks[gid].get('reprojection_support', 0) >= .6 or
+        reliable_geometry = (native_body or tracks[gid].get('reprojection_support', 0) >= .6 or
             (consensus is not None and observed_validator.confirms_existence(consensus, m['undersegmented_view_fraction'])))
         m['strong_observed_geometry'] = reliable_geometry
+        if native_body:
+            geometry[gid], native_refinement = hierarchy.refine(geometry[gid], gid)
+            m['native_identity_surface_refinement'] = native_refinement
+            audit.append({'message': '原生整体身份在部件竞争前通过验收', 'instance_id': gid,
+                          'semantic_identity_margin': m['semantic_identity_margin'],
+                          'native_hierarchy': m['native_hierarchy'], **native_refinement})
         if m.get('sms', 0) < 0 and not reliable_geometry:
             reasons.append('物体语义分数低于该类别场景平均水平')
         if ('semantic_object_score' in m and m['semantic_object_score']-m['semantic_background_score'] < .02
@@ -363,6 +390,7 @@ def main():
         'identity_component_sha256': hashlib.sha256(Path(identity_validator.__file__).read_bytes()).hexdigest() if identity_validator else None,
         'whole_object_component_sha256': whole_validator.component_sha256() if whole_validator else None,
         'surface_assembly_component_sha256': assembly_validator.component_sha256() if assembly_validator else None,
+        'hierarchy_component_sha256': hierarchy_validator.component_sha256() if hierarchy_validator else None,
         'identity_aliases': graph['object_identity_aliases'],
         'background_component_sha256': hashlib.sha256(Path(background_validator.__file__).read_bytes()).hexdigest() if background_validator else None,
         'model_sha256': hashlib.sha256((repo/'checkpoints/clip/RN50.pt').read_bytes()).hexdigest(), 'evidence': audit}

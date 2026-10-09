@@ -1,4 +1,4 @@
-"""Construct v12 using one existing GPT cache per scene; keep historical profiles."""
+"""Construct v13 using one existing GPT cache per scene; keep historical profiles."""
 import argparse
 import hashlib
 import json
@@ -12,8 +12,8 @@ from vision_api import attach_cache, atomic_json
 
 REPO = Path(__file__).resolve().parents[2]
 DEFAULT_DATA = Path.home() / 'datasets'
-VERSIONS = ('original', 'v11', 'v12')
-ACTIVE_VERSIONS = ('v12',)
+VERSIONS = ('original', 'v11', 'v12', 'v13')
+ACTIVE_VERSIONS = ('v13',)
 
 
 def configure_profile(version, registry):
@@ -23,8 +23,10 @@ def configure_profile(version, registry):
     registry.VERSION = version + '_gpt'
     registry.WHOLE_OBJECT_VALIDATION = None
     registry.SURFACE_ASSEMBLY = None
+    registry.HIERARCHY_VALIDATION = None
+    registry.BOX_FITTING = None
     registry.MEASURED_REFINEMENT = [entry for entry in getattr(registry, 'MEASURED_REFINEMENT', [])
-        if entry.__name__.rsplit('.', 1)[-1] != 'part_body_assembly']
+        if entry.__name__.rsplit('.', 1)[-1] not in ('part_body_assembly', 'repeated_instances', 'visual_part_anchoring')]
     if version != 'original':
         from pipeline_components import visibility_ownership
         registry.OWNERSHIP_VALIDATION = visibility_ownership
@@ -38,12 +40,18 @@ def configure_profile(version, registry):
         for key in ('GRAPH_COMPONENTS', 'GEOMETRY_COMPONENTS',
                     'MEASURED_REFINEMENT', 'FINAL_GEOMETRY'):
             setattr(registry, key, [])
-    elif version == 'v12':
+    elif version in ('v12', 'v13'):
         from pipeline_components import sam3_frontend, whole_object_consensus, native_assembly, part_body_assembly
         registry.FRONTEND = sam3_frontend
         registry.WHOLE_OBJECT_VALIDATION = whole_object_consensus
         registry.SURFACE_ASSEMBLY = native_assembly
         registry.MEASURED_REFINEMENT.insert(1, part_body_assembly)
+        if version == 'v13':
+            from pipeline_components import hierarchical_masks, plane_boxes, repeated_instances, visual_part_anchoring
+            registry.HIERARCHY_VALIDATION = hierarchical_masks
+            registry.BOX_FITTING = plane_boxes
+            registry.MEASURED_REFINEMENT.insert(1, repeated_instances)
+            registry.MEASURED_REFINEMENT.insert(3, visual_part_anchoring)
 
 
 def run_worker(args):
@@ -78,7 +86,7 @@ def execute(command, logfile):
 
 def scene_directory(root, version, dataset, scene_id):
     experiment = ('gpt_original_v1' if version == 'original'
-                  else 'partaware_v12' if version == 'v12' else 'partaware_gpt_v11')
+                  else f'partaware_{version}' if version in ('v12', 'v13') else 'partaware_gpt_v11')
     return root/experiment/dataset/scene_id
 
 
@@ -127,7 +135,7 @@ def compare(args):
                     'recognition_fingerprint': json.loads((cache/'recognition_provenance.json').read_text())['request_fingerprint'],
                     'driver_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     'construction_sha256': construction_fingerprint()}
-        print('v12复用同场景既有 GPT 识图缓存', {'scene': scene_id, 'frames': len(frames)}, flush=True)
+        print('复用同场景既有 GPT 识图缓存', {'scene': scene_id, 'frames': len(frames)}, flush=True)
         for version in ACTIVE_VERSIONS:
             target = scene_directory(root, version, dataset, scene_id)
             target.mkdir(parents=True, exist_ok=True)
@@ -170,7 +178,7 @@ def compare(args):
             combined = {(r['scene_id'], r['version']): r for r in previous}
             combined.update({(r['scene_id'], r['version']): r for r in records})
             atomic_json(summary_path, {
-                'recognition_scope': 'v12 uses existing shared GPT cache; historical comparisons remain unchanged',
+                'recognition_scope': 'v13 and v12 use one existing shared GPT cache per scene; historical comparisons remain unchanged',
                 'qwen_api_calls': 0, 'results': list(combined.values()),
                 'evaluation_protocol': 'observed_hypersim_adaptation_not_official_benchmark',
                 'learned_universal_completion_solved': False})

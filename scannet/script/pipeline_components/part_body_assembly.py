@@ -20,7 +20,7 @@ def cosine(a, b):
     return float(a @ b / max(np.linalg.norm(a)*np.linalg.norm(b), 1e-12))
 
 
-def boundary_relation(source, body, rotation, origin, semantic, shared_frames):
+def boundary_relation(source, body, rotation, origin, semantic, shared_frames, measured_face=False):
     """A planar subinstance must lie on one measured volumetric body boundary."""
     if len(source) < 32 or len(body) < 32 or semantic < .8 or len(shared_frames) < 3:
         return None
@@ -42,6 +42,22 @@ def boundary_relation(source, body, rotation, origin, semantic, shared_frames):
     alignment = float(abs(normal @ rotation[:, axis]))
     coordinate = float(np.median(local_source[:, axis]))
     boundary_gap = min(abs(coordinate-lower[axis]), abs(coordinate-upper[axis]))
+    face_evidence = None
+    if measured_face and boundary_gap > .035:
+        from scipy.spatial import cKDTree
+        distances = cKDTree(body).query(source)[0]
+        bins, counts = np.unique(np.floor(local_body[:, axis]/.006).astype(int), return_counts=True)
+        for index in np.argsort(counts)[::-1]:
+            values = local_body[np.abs(local_body[:, axis]-(bins[index]+.5)*.006) <= .006, axis]
+            if len(values) < .15*len(body):
+                continue
+            face_gap = abs(coordinate-float(np.median(values)))
+            if face_gap <= .01 and np.mean(distances <= .015) >= .8:
+                face_evidence = dict(plane_support_fraction=len(values)/len(body),
+                                     source_shared_surface_fraction=float(np.mean(distances <= .015)),
+                                     measured_plane_gap_m=face_gap, extreme_box_gap_m=boundary_gap)
+                boundary_gap = face_gap
+                break
     # A broad face is retained as a part; a volumetric neighboring object is not.
     if (flatness < .9 or alignment < .95 or boundary_gap > .035
             or source_extent[axis] > .2*extent[axis]
@@ -49,7 +65,8 @@ def boundary_relation(source, body, rotation, origin, semantic, shared_frames):
         return None
     return dict(semantic_cosine=semantic, inclusion=float(inclusion), volume_ratio=float(volume_ratio),
                 plane_flatness=float(flatness), boundary_normal_alignment=alignment,
-                boundary_gap_m=float(boundary_gap), shared_observed_frames=sorted(shared_frames))
+                boundary_gap_m=float(boundary_gap), shared_observed_frames=sorted(shared_frames),
+                measured_body_face=face_evidence)
 
 
 def unique_parents(candidates):
@@ -77,6 +94,24 @@ def construct(context):
         ids = colors[:, 0]+255*colors[:, 1]+255**2*colors[:, 2]
         geometry = {gid: points[ids == int(gid)] for gid in nodes}
         tracks = json.loads((context.scene/'validated_object_tracks.json').read_text())
+        import pipeline_components as components
+        hierarchy_module = getattr(components, 'HIERARCHY_VALIDATION', None)
+        hierarchy = None
+        if hierarchy_module is not None:
+            from .instance_consensus import Views
+            from partaware.geometry import load_capture
+            _, jobs, kd, kc, scale = load_capture(context.manifest)
+            mapping, records = {}, {}
+            for gid, track in tracks.items():
+                for observation in track['observations']:
+                    mapping.setdefault(observation['frame_id'], {})[observation['local_id']] = int(gid)
+            for job in jobs:
+                fid = job['frame_id']
+                values = json.loads((context.scene/'refined_instance'/f'{fid}_instance.json').read_text())
+                for record in values:
+                    record['instance_id'] = mapping.get(fid, {}).get(record['frame_instance_id'], -1)
+                records[fid] = values
+            hierarchy = hierarchy_module.Evidence(Views(context, jobs, kd, kc, scale, records), tracks, nodes)
         candidates = {}
         for source, p in geometry.items():
             for body, q in geometry.items():
@@ -84,9 +119,21 @@ def construct(context):
                     continue
                 orientation = nodes[body]['shape']['orientation']
                 rotation = Rotation.from_quat([orientation[k] for k in ['x', 'y', 'z', 'w']]).as_matrix()
+                similarity = cosine(nodes[source]['text_embedding'], nodes[body]['text_embedding'])
+                native_parent = (hierarchy is not None and similarity < .8
+                    and tracks[body].get('proposal_validation', {}).get('native_hierarchy_confirmed', False))
+                shared = set(tracks[source]['observed_frames']) & set(tracks[body]['observed_frames'])
                 evidence = boundary_relation(p, q, rotation, np.asarray(nodes[body]['position']),
-                    cosine(nodes[source]['text_embedding'], nodes[body]['text_embedding']),
-                    set(tracks[source]['observed_frames']) & set(tracks[body]['observed_frames']))
+                                             1. if native_parent else similarity, shared,
+                                             measured_face=native_parent)
+                if evidence is not None and native_parent:
+                    native_evidence = hierarchy.measure(p, source, identity_gid=body)
+                    if not native_evidence.get('confirmed', False):
+                        evidence = None
+                    else:
+                        evidence.update(semantic_cosine=similarity,
+                                        semantic_override='native_parent_identity_and_measured_boundary',
+                                        native_parent_evidence=native_evidence)
                 if evidence is not None:
                     candidates.setdefault(source, []).append((body, evidence))
         selected = unique_parents(candidates)

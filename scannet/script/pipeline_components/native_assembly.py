@@ -29,6 +29,7 @@ class NativeMasks:
         self.expected = {r['frame_id']: r for r in receipt['frames']}
         self.available = bool(receipt.get('complete'))
         self.cache = OrderedDict()
+        self.record_cache = {}
 
     def get(self, fid):
         if fid in self.cache:
@@ -44,9 +45,16 @@ class NativeMasks:
         if hashlib.sha256(rgb.read_bytes()).hexdigest() != self.expected[fid]['rgb_sha256']:
             raise ValueError('Complete-mask RGB provenance changed')
         self.cache[fid] = value
+        self.record_cache[fid] = [records[i] for i in full]
         while len(self.cache) > 4:
-            self.cache.popitem(last=False)
+            expired, _ = self.cache.popitem(last=False)
+            self.record_cache.pop(expired, None)
         return value
+
+    def records(self, fid):
+        """Return metadata in exactly the packed-mask order, after provenance checks."""
+        self.get(fid)
+        return self.record_cache[fid]
 
     def mass(self, points, fid):
         indices, weights, _ = self.views.project(points, fid)

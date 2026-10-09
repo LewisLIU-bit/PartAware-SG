@@ -81,6 +81,15 @@ def publish(context):
     metadata = json.loads(context.manifest.read_text()) if context.manifest else {}
     upright = metadata.get('world_frame') == 'hypersim_world_z_up'
     nodes = graph['object_nodes']['nodes'] or {}
+    import pipeline_components as components
+    box_fitting = getattr(components, 'BOX_FITTING', None)
+    box_audit = {}
+    def fit_current(local, gid):
+        if box_fitting is None:
+            return fit_box(local, upright)
+        center, shape, evidence = box_fitting.fit(local, upright, fit_box)
+        box_audit[gid] = evidence
+        return center, shape
     for gid in list(nodes):
         local = points[ids == int(gid)]
         if len(local) < 16:
@@ -89,7 +98,7 @@ def publish(context):
         if str(nodes[gid].get('id', gid)) != str(gid):
             raise ValueError(f'Object node identifier disagrees with graph key: {gid}')
         nodes[gid]['id'] = str(gid)
-        nodes[gid]['position'], nodes[gid]['shape'] = fit_box(local, upright)
+        nodes[gid]['position'], nodes[gid]['shape'] = fit_current(local, gid)
     synchronize_recovered_tracks(context.scene, nodes)
     # Store an observation-only geometric hypothesis for the completion ablation.
     measured_cloud = o3d.io.read_point_cloud(str(context.scene/'instance_cloud_cleaned.ply'))
@@ -100,7 +109,7 @@ def publish(context):
     observed_graph = copy.deepcopy(graph)
     for gid, node in observed_graph['object_nodes']['nodes'].items():
         local = measured_points[measured_ids == int(gid)]
-        node['position'], node['shape'] = fit_box(local, upright)
+        node['position'], node['shape'] = fit_current(local, gid)
     edges = {}
     keys = list(nodes)
     for i, a in enumerate(keys):
@@ -111,9 +120,21 @@ def publish(context):
                 edges[f'{a}_{b}'] = {'source_id': a, 'target_id': b, 'distance': distance,
                     'direction': (delta/distance).tolist(), 'description': 'next to'}
     graph['edge_hypotheses'] = {'default_hypothesis': {'id': 'default_hypothesis', 'confidence': 1., 'edges': edges}}
+    for index, relation in enumerate(graph.get('object_relations', [])):
+        if relation['source_id'] in nodes and relation['target_id'] in nodes:
+            delta = np.asarray(nodes[relation['target_id']]['position'])-nodes[relation['source_id']]['position']
+            distance = float(np.linalg.norm(delta))
+            edges[f'object_relation_{index}'] = {**relation, 'distance': distance,
+                'direction': (delta/max(distance, 1e-8)).tolist()}
     graph['geometry_provenance'] = {'source': context.graph_geometry.name,
         'bbox_algorithm': 'minimum_area_upright_box' if upright else 'oriented_surface_box',
         'observed_ply': 'instance_cloud_cleaned.ply', 'generated_points_used_for_association': False}
+    if box_fitting is not None:
+        graph['geometry_provenance']['bbox_algorithm'] = 'orthogonal_measured_faces_then_minimum_area_upright_box'
+        (context.scene/'box_fitting_audit.json').write_text(json.dumps(dict(
+            algorithm='measured_orthogonal_face_box_v13', ground_truth_used=False,
+            generated_points=0, component_sha256=box_fitting.component_sha256(),
+            objects=box_audit), indent=2)+'\n')
     observed_edges = {}
     observed_nodes = observed_graph['object_nodes']['nodes']
     observed_keys = list(observed_nodes)
@@ -125,12 +146,27 @@ def publish(context):
                 observed_edges[f'{a}_{b}'] = {'source_id': a, 'target_id': b, 'distance': distance,
                     'direction': (delta/distance).tolist(), 'description': 'next to'}
     observed_graph['edge_hypotheses'] = {'default_hypothesis': {'id': 'default_hypothesis', 'confidence': 1., 'edges': observed_edges}}
+    for index, relation in enumerate(observed_graph.get('object_relations', [])):
+        if relation['source_id'] in observed_nodes and relation['target_id'] in observed_nodes:
+            delta = np.asarray(observed_nodes[relation['target_id']]['position'])-observed_nodes[relation['source_id']]['position']
+            distance = float(np.linalg.norm(delta))
+            observed_edges[f'object_relation_{index}'] = {**relation, 'distance': distance,
+                'direction': (delta/max(distance, 1e-8)).tolist()}
     observed_graph['geometry_provenance'] = {**graph['geometry_provenance'], 'source': 'instance_cloud_cleaned.ply'}
     for current in [graph, observed_graph]:
         if 'scene_graph' in current:
             scene_nodes = current['scene_graph'].setdefault('nodes', {})
+            for gid in list(scene_nodes):
+                if scene_nodes[gid].get('node_type') == 'object' and gid not in current['object_nodes']['nodes']:
+                    del scene_nodes[gid]
+                elif (scene_nodes[gid].get('node_type') == 'part'
+                      and current.get('part_nodes', {}).get(gid, {}).get('status') != 'confirmed'):
+                    del scene_nodes[gid]
             for gid, node in current['object_nodes']['nodes'].items():
                 scene_nodes[gid] = {**scene_nodes.get(gid, {}), **node, 'node_type': 'object'}
+            for pid, part in current.get('part_nodes', {}).items():
+                if part.get('status') == 'confirmed':
+                    scene_nodes[pid] = {**scene_nodes.get(pid, {}), **part, 'node_type': 'part'}
             current['scene_graph']['edges'] = [e for h in current['edge_hypotheses'].values()
                 for e in h['edges'].values()] + current.get('part_relations', [])
     (context.scene/'topology_map_observed.json').write_text(json.dumps(observed_graph, indent=2)+'\n')

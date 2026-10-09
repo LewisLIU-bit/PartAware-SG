@@ -256,7 +256,7 @@ def prune(survivors, geometry, tracks, metrics, views, records, remap, audit, no
                    if children else 0.)
         metrics[gid]['resolved_subobjects'] = {'children': children, 'independent_pairs': independent,
                                              'covered_measured_surface_fraction': covered}
-        if independent and covered >= .6:
+        if independent and covered >= .6 and not metrics[gid].get('native_hierarchy_confirmed', False):
             rejected[gid] = '候选重复包裹多个已独立识别的实测物体'
     # A contradicted patch can be a duplicate measurement of a fuller object.
     # This rule cannot absorb a bottle resting on a table: near-total measured
