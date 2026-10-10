@@ -56,7 +56,7 @@ function buildLaTeX(tokens, reportDate) {
       if (token.type === 'space') return '';
       if (token.type === 'heading') {
         if (token.depth === 1) return '';
-        const command = token.depth === 2 ? 'section' : 'subsection';
+        const command = token.depth === 2 ? 'section' : token.depth === 3 ? 'subsection' : 'subsubsection';
         const text = inline(token.tokens);
         return `\\${command}*{${text}}\n\\addcontentsline{toc}{${command}}{${text}}\n`;
       }
@@ -264,12 +264,14 @@ nav { position:sticky; top:24px; align-self:start; max-height:calc(100vh - 48px)
 nav strong { display:block; color:var(--muted); font-size:12px; letter-spacing:.12em; margin-bottom:14px; }
 nav a { display:block; padding:5px 0; color:var(--muted); }
 nav .toc-depth-3 { padding-left:14px; font-size:12px; }
+nav .toc-depth-4 { padding-left:28px; font-size:12px; }
 main { min-width:0; overflow-wrap:anywhere; background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:42px 48px; box-shadow:0 8px 32px #152d4c06; }
 .edition { color:var(--accent); font-size:13px; font-weight:600; letter-spacing:.08em; margin-bottom:16px; }
 h1 { font-size:30px; line-height:1.4; margin:0 0 24px; }
 h2 { font-size:23px; line-height:1.5; margin:44px 0 18px; padding-top:20px; border-top:1px solid var(--line); }
 h3 { font-size:19px; line-height:1.55; margin:32px 0 14px; }
-h1,h2,h3 { scroll-margin-top:24px; }
+h4 { font-size:17px; line-height:1.55; margin:26px 0 12px; }
+h1,h2,h3,h4 { scroll-margin-top:24px; }
 p { margin:14px 0; }
 li { margin:8px 0; }
 strong { font-weight:650; }

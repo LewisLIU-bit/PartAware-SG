@@ -1037,6 +1037,175 @@ part_body_assembly.construct位于MEASURED_REFINEMENT，thin_geometry之后、ax
 
 叠盘的官方完整框沿高度方向相互重叠，因为盘子嵌套放置；把盘堆简单切成互不重叠的高度薄片，不能等同于逐盘完整形状。精细分割需要独立可见边界，非遮挡形状还需要可验证的形状先验，两者不能混称。完全没有可见证据的盘片数量仍有歧义。
 
+#### 6.9.1 GT标识和配图怎么读
+
+新增以下两场景全部119个评价GT的编号图册和对应表。**GT-xxx是官方实例编号，P-xxx是v14图中的预测节点编号，两者不能直接按号码对应；同一个GT编号在不同场景里也代表不同物体。** 图册每个小图给出GT号、官方类别、定位帧和最佳几何预测；完整表另外列出25%、50%、75%阈值下的严格一对一匹配节点。可用浏览器查找，例如在第二场景表中查找GT-067定位冰箱、GT-068定位整套下柜、GT-001定位灯具。
+
+金色轮廓直接来自对应原始帧的官方semantic_instance.hdf5；浅金色填充表示该实例的可见像素。每个实例选取本轮输入帧中可见像素最多的一帧，局部裁图仅用于放大定位，不代表完整三维形状。细小物体的像素轮廓可能呈阶梯状，遮挡部分不会被补画。
+
+标题绿色的matched@50表示在50%阈值下一对一几何匹配成功；棕色的matched@25 only表示仅在25%阈值成功；红色FN@25表示在25%阈值仍未匹配。**绿色只说明框的几何匹配，不证明预测类别正确。** 图上的IoU和最佳预测来自独立的最佳重叠诊断，可能不是一对一匹配选中的预测；一个预测可能是多个GT的最佳重叠候选，但严格匹配最多分配一次。official otherprop保留官方宽泛类别，不把GPT预测名称写成GT名称。
+
+图册和索引只读取已保存的最终评价、官方标签及RGB，不进入建图，也不改变GT、点云、节点或AP分数。
+
+#### 6.9.2 第一场景ai_001_002：全部10个GT
+
+第一场景GT-001至GT-010全部在25%、50%、75%阈值匹配成功。GT-008的小图还显示音箱和支架属于同一官方实例，方便核对整体与部件的粒度。
+
+![ai_001_002 官方GT编号图册 1：GT-001 至 GT-010；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_002_01.png)
+
+| GT标识 | 官方类别 | 最佳重叠预测（v14节点） | 最佳框IoU | 严格匹配25 / 50 / 75 | 定位帧 |
+| --- | --- | --- | --- | --- | --- |
+| GT-001 | otherprop | P-4 laptop | 98.73% | P-4 / P-4 / P-4 | cam_00_0016 |
+| GT-002 | otherprop | P-8 audio equipment | 86.34% | P-8 / P-8 / P-8 | cam_03_0013 |
+| GT-003 | otherprop | P-59 audio equipment | 96.77% | P-59 / P-59 / P-59 | cam_03_0057 |
+| GT-004 | desk | P-17 table | 95.56% | P-17 / P-17 / P-17 | cam_03_0017 |
+| GT-005 | otherprop | P-6 speaker | 96.17% | P-6 / P-6 / P-6 | cam_02_0000 |
+| GT-006 | otherprop | P-3 speaker | 96.56% | P-3 / P-3 / P-3 | cam_03_0004 |
+| GT-007 | otherprop | P-1 speaker | 95.40% | P-1 / P-1 / P-1 | cam_03_0000 |
+| GT-008 | otherprop | P-7 speaker | 94.95% | P-7 / P-7 / P-7 | cam_02_0020 |
+| GT-009 | otherprop | P-2 speaker | 96.33% | P-2 / P-2 / P-2 | cam_01_0000 |
+| GT-010 | otherprop | P-5 speaker | 96.57% | P-5 / P-5 / P-5 | cam_01_0095 |
+
+#### 6.9.3 第二场景ai_001_010：全部109个GT匹配索引
+
+表按官方实例号排序，编号不连续是因为墙、地面、天花板及可见证据不足的实例不在本次评价集合。严格匹配数为77/58/29，对应阈值为25%/50%/75%；未匹配GT分别有32/51/80个。表中“未匹配”是该阈值下的FN，不等于该物体完全没有预测点；最佳框重叠很低、一个父体被拆成多个节点或多个GT被混成一个预测都可能导致未匹配。
+
+| GT标识 | 官方类别 | 最佳重叠预测（v14节点） | 最佳框IoU | 严格匹配25 / 50 / 75 | 定位帧 |
+| --- | --- | --- | --- | --- | --- |
+| GT-001 | lamp | P-298 ceiling light | 6.72% | 未匹配 / 未匹配 / 未匹配 | cam_00_0054 |
+| GT-002 | otherprop | P-29 kitchen utensil | 65.63% | P-29 / P-29 / 未匹配 | cam_02_0049 |
+| GT-003 | otherprop | P-3 countertop | 0.09% | 未匹配 / 未匹配 / 未匹配 | cam_01_0011 |
+| GT-004 | otherprop | P-22 plate | 4.22% | 未匹配 / 未匹配 / 未匹配 | cam_01_0011 |
+| GT-005 | otherprop | P-84 plate | 88.98% | P-84 / P-84 / P-84 | cam_01_0062 |
+| GT-006 | otherprop | P-444 plate | 88.31% | P-444 / P-444 / P-444 | cam_01_0083 |
+| GT-007 | otherprop | P-445 plate | 88.27% | P-445 / P-445 / P-445 | cam_01_0083 |
+| GT-008 | otherprop | P-446 plate | 80.54% | P-446 / P-446 / P-446 | cam_01_0083 |
+| GT-009 | otherprop | P-447 plate | 84.32% | P-447 / P-447 / P-447 | cam_01_0083 |
+| GT-010 | otherprop | P-448 plate | 88.35% | P-448 / P-448 / P-448 | cam_01_0083 |
+| GT-011 | otherprop | P-39 plate | 72.80% | P-39 / P-39 / 未匹配 | cam_01_0035 |
+| GT-012 | otherprop | P-449 plate | 63.88% | P-449 / P-449 / 未匹配 | cam_01_0035 |
+| GT-013 | otherprop | P-450 plate | 66.31% | P-450 / P-450 / 未匹配 | cam_01_0035 |
+| GT-014 | otherprop | P-451 plate | 72.37% | P-451 / P-451 / 未匹配 | cam_01_0035 |
+| GT-015 | otherprop | P-452 plate | 60.89% | P-452 / P-452 / 未匹配 | cam_01_0035 |
+| GT-016 | otherprop | P-453 plate | 87.70% | P-453 / P-453 / P-453 | cam_01_0035 |
+| GT-017 | otherprop | P-10 cup | 95.35% | P-10 / P-10 / P-10 | cam_02_0061 |
+| GT-018 | otherprop | P-22 plate | 21.65% | 未匹配 / 未匹配 / 未匹配 | cam_01_0053 |
+| GT-019 | otherprop | P-5 cup | 97.43% | P-5 / P-5 / P-5 | cam_02_0061 |
+| GT-020 | otherprop | P-7 plate | 63.54% | P-7 / P-7 / 未匹配 | cam_02_0061 |
+| GT-021 | otherprop | P-4 cup | 97.20% | P-4 / P-4 / P-4 | cam_02_0022 |
+| GT-022 | otherprop | P-19 plate | 40.83% | P-19 / 未匹配 / 未匹配 | cam_02_0040 |
+| GT-023 | counter | P-3 countertop | 94.02% | P-3 / P-3 / P-3 | cam_02_0049 |
+| GT-024 | chair | P-2 bar stool | 93.88% | P-2 / P-2 / P-2 | cam_00_0093 |
+| GT-025 | chair | P-1 bar stool | 86.35% | P-1 / P-1 / P-1 | cam_00_0093 |
+| GT-026 | window | P-156 window | 39.05% | 未匹配 / 未匹配 / 未匹配 | cam_00_0066 |
+| GT-027 | window | P-156 window | 39.31% | P-156 / 未匹配 / 未匹配 | cam_02_0028 |
+| GT-028 | blinds | P-204 curtain | 34.61% | P-204 / 未匹配 / 未匹配 | cam_00_0084 |
+| GT-029 | blinds | P-191 curtain | 25.93% | P-191 / 未匹配 / 未匹配 | cam_02_0028 |
+| GT-030 | cabinet | P-162 cabinet | 86.43% | P-162 / P-162 / P-162 | cam_02_0022 |
+| GT-031 | otherprop | P-172 microwave | 90.93% | P-172 / P-172 / P-172 | cam_02_0028 |
+| GT-032 | otherprop | P-178 knife | 73.52% | P-178 / P-178 / 未匹配 | cam_00_0015 |
+| GT-033 | otherprop | P-157 cutting board | 58.04% | P-157 / P-157 / 未匹配 | cam_00_0015 |
+| GT-036 | otherprop | P-131 sink | 1.01% | 未匹配 / 未匹配 / 未匹配 | cam_00_0066 |
+| GT-037 | otherprop | P-443 glass | 5.34% | 未匹配 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-038 | otherprop | P-443 glass | 6.11% | 未匹配 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-040 | otherprop | P-240 glass | 31.73% | P-240 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-041 | otherprop | P-240 glass | 20.64% | 未匹配 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-043 | otherprop | P-240 glass | 1.04% | 未匹配 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-044 | otherprop | P-78 cabinet | 0.23% | 未匹配 / 未匹配 / 未匹配 | cam_00_0006 |
+| GT-045 | shelves | P-78 cabinet | 43.03% | P-78 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-047 | otherprop | P-95 glass | 42.59% | P-95 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-049 | otherprop | P-213 glass | 6.79% | 未匹配 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-050 | otherprop | P-213 glass | 12.19% | 未匹配 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-051 | otherprop | P-88 drinking glass | 12.82% | 未匹配 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-052 | otherprop | P-88 drinking glass | 26.54% | P-88 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-053 | otherprop | P-88 drinking glass | 9.29% | 未匹配 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-054 | otherprop | P-82 glass | 4.96% | 未匹配 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-055 | otherprop | P-181 drinking glass | 31.51% | P-181 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-056 | otherprop | P-108 drinking glass | 45.25% | P-108 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-057 | cabinet | P-15 cabinet | 79.10% | P-15 / P-15 / P-15 | cam_02_0001 |
+| GT-058 | otherstructure | P-54 range hood | 52.72% | P-54 / P-54 / 未匹配 | cam_01_0002 |
+| GT-060 | otherprop | P-62 kitchen utensil | 37.39% | P-62 / 未匹配 / 未匹配 | cam_01_0047 |
+| GT-061 | otherprop | P-31 bottle | 55.92% | P-31 / P-31 / 未匹配 | cam_02_0058 |
+| GT-062 | otherprop | P-35 bottle | 63.45% | P-35 / P-35 / 未匹配 | cam_02_0058 |
+| GT-063 | otherprop | P-57 kitchen utensil | 62.16% | P-57 / P-57 / 未匹配 | cam_02_0058 |
+| GT-067 | refrigerator | P-138 refrigerator | 97.64% | P-138 / P-138 / P-138 | cam_00_0048 |
+| GT-068 | cabinet | P-3 countertop | 18.60% | 未匹配 / 未匹配 / 未匹配 | cam_01_0062 |
+| GT-069 | otherstructure | P-93 oven | 12.05% | 未匹配 / 未匹配 / 未匹配 | cam_00_0078 |
+| GT-070 | otherprop | P-23 bottle | 92.63% | P-23 / P-23 / P-23 | cam_02_0052 |
+| GT-071 | otherprop | P-282 utensil holder | 60.50% | P-282 / P-282 / 未匹配 | cam_02_0058 |
+| GT-075 | otherprop | P-347 fruit | 51.74% | P-347 / P-347 / 未匹配 | cam_01_0002 |
+| GT-080 | otherprop | P-347 fruit | 2.38% | 未匹配 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-086 | otherprop | P-13 bowl | 89.55% | P-13 / P-13 / P-13 | cam_01_0002 |
+| GT-089 | otherprop | P-59 plate | 53.48% | P-59 / P-59 / 未匹配 | cam_01_0002 |
+| GT-090 | otherprop | P-61 plate | 60.06% | P-61 / P-61 / 未匹配 | cam_01_0002 |
+| GT-091 | otherprop | P-58 plate | 62.29% | P-58 / P-58 / 未匹配 | cam_01_0002 |
+| GT-094 | otherstructure | P-21 utensil rack | 87.76% | P-21 / P-21 / P-21 | cam_01_0002 |
+| GT-095 | otherstructure | P-348 stovetop | 47.91% | P-348 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-096 | otherstructure | P-269 cooktop | 38.74% | P-269 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-097 | otherprop | P-46 kettle | 74.38% | P-46 / P-46 / 未匹配 | cam_01_0002 |
+| GT-098 | otherprop | P-45 pot | 77.66% | P-45 / P-45 / P-45 | cam_01_0002 |
+| GT-099 | otherprop | P-3 countertop | 0.00% | 未匹配 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-100 | otherprop | P-60 spoon | 50.45% | P-60 / P-60 / 未匹配 | cam_01_0002 |
+| GT-101 | otherprop | P-27 spoon | 19.87% | 未匹配 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-102 | otherprop | P-70 cooking utensil | 4.57% | 未匹配 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-103 | otherprop | P-32 spoon | 23.48% | 未匹配 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-104 | otherprop | P-60 spoon | 2.27% | 未匹配 / 未匹配 / 未匹配 | cam_01_0002 |
+| GT-105 | otherprop | P-34 pot | 57.37% | P-34 / P-34 / 未匹配 | cam_01_0002 |
+| GT-106 | otherprop | P-257 paper towel holder | 92.10% | P-257 / P-257 / P-257 | cam_02_0064 |
+| GT-112 | otherprop | P-264 kitchen utensil | 13.40% | 未匹配 / 未匹配 / 未匹配 | cam_02_0070 |
+| GT-113 | otherprop | P-292 box | 81.09% | P-292 / P-292 / P-292 | cam_02_0004 |
+| GT-114 | otherprop | P-292 box | 0.91% | 未匹配 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-116 | otherprop | P-292 box | 3.67% | 未匹配 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-117 | otherprop | P-274 bread | 41.84% | P-274 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-118 | otherprop | P-283 cutting board | 52.66% | P-283 / P-283 / 未匹配 | cam_02_0001 |
+| GT-119 | otherprop | P-101 dish rack | 84.42% | P-101 / P-101 / P-101 | cam_02_0001 |
+| GT-120 | otherprop | P-102 jar | 15.78% | 未匹配 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-121 | otherprop | P-103 jar | 41.35% | P-103 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-122 | otherprop | P-211 jar | 31.63% | P-211 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-123 | otherprop | P-100 jar | 30.07% | P-100 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-124 | otherprop | P-210 jar | 11.21% | 未匹配 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-125 | otherprop | P-212 jar | 13.65% | 未匹配 / 未匹配 / 未匹配 | cam_02_0001 |
+| GT-126 | otherprop | P-247 utensil rack | 65.65% | P-247 / P-247 / 未匹配 | cam_00_0096 |
+| GT-127 | otherprop | P-37 toaster | 96.50% | P-37 / P-37 / P-37 | cam_01_0050 |
+| GT-128 | otherprop | P-65 knife block | 54.73% | P-65 / P-65 / 未匹配 | cam_00_0042 |
+| GT-133 | otherprop | P-89 utensil holder | 62.84% | P-89 / P-89 / 未匹配 | cam_00_0042 |
+| GT-134 | otherprop | P-109 utensil holder | 78.84% | P-109 / P-109 / P-109 | cam_00_0042 |
+| GT-135 | otherprop | P-273 utensil holder | 45.36% | P-273 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-137 | otherprop | P-90 utensil holder | 66.84% | P-90 / P-90 / 未匹配 | cam_00_0042 |
+| GT-138 | otherprop | P-111 utensil holder | 78.76% | P-111 / P-111 / P-111 | cam_00_0042 |
+| GT-139 | otherprop | P-273 utensil holder | 0.22% | 未匹配 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-146 | otherprop | P-96 utensil rack | 5.36% | 未匹配 / 未匹配 / 未匹配 | cam_00_0084 |
+| GT-147 | otherstructure | P-96 utensil rack | 48.56% | P-96 / 未匹配 / 未匹配 | cam_00_0042 |
+| GT-148 | counter | P-141 countertop | 57.09% | P-141 / P-141 / 未匹配 | cam_00_0084 |
+| GT-149 | sink | P-131 sink | 83.21% | P-131 / P-131 / P-131 | cam_00_0084 |
+| GT-151 | otherprop | P-217 kitchen utensil | 57.61% | P-217 / P-217 / 未匹配 | cam_02_0001 |
+| GT-152 | otherprop | P-337 butter | 81.10% | P-337 / P-337 / P-337 | cam_02_0001 |
+| GT-153 | otherprop | P-94 cutting board | 71.75% | P-94 / P-94 / 未匹配 | cam_02_0001 |
+
+#### 6.9.4 第二场景ai_001_010：全部109个GT定位图册
+
+以下10张图册依次覆盖上表全部实例，不仅列低AP物体。GT-001是灯具整体，GT-005至GT-016是两摞逐片盘子；GT-030、GT-057、GT-068是柜体，GT-045是开放格架，GT-067是冰箱，GT-148是环绕台面，GT-149是双盆水槽整体。柜门和支架是否属于一个完整物体，以对应金色官方轮廓和第6.9节的粒度说明核对。
+
+![ai_001_010 官方GT编号图册 1：GT-001 至 GT-012；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_01.png)
+
+![ai_001_010 官方GT编号图册 2：GT-013 至 GT-024；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_02.png)
+
+![ai_001_010 官方GT编号图册 3：GT-025 至 GT-038；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_03.png)
+
+![ai_001_010 官方GT编号图册 4：GT-040 至 GT-054；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_04.png)
+
+![ai_001_010 官方GT编号图册 5：GT-055 至 GT-070；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_05.png)
+
+![ai_001_010 官方GT编号图册 6：GT-071 至 GT-098；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_06.png)
+
+![ai_001_010 官方GT编号图册 7：GT-099 至 GT-116；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_07.png)
+
+![ai_001_010 官方GT编号图册 8：GT-117 至 GT-128；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_08.png)
+
+![ai_001_010 官方GT编号图册 9：GT-133 至 GT-152；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_09.png)
+
+![ai_001_010 官方GT编号图册 10：GT-153 至 GT-153；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态](figures/v14_gt_010_10.png)
+
 ### 6.10 v14接缝与形状接口
 
 `seeded_surfaces.construct`复用原结构表面接口；`AXIAL_VALIDATION.check`验证轴向附属身份。最终几何依次调用`verified_suspension.construct`、`enclosure_continuity.construct`、`verified_cuboids.construct`；ECA以关系适配器回调原`part_body_assembly.construct`，沿用原点云、轨迹、别名及部件写入路径。ECA独立审计不覆盖BHA审计，删除`BODY_CONTINUITY`和`FINAL_GEOMETRY`中的相应注册即可撤除；其他新组件同样按单项代码注册撤除。历史v13配置明确清除v14组件，没有新增逐算法命令行开关。
@@ -1355,6 +1524,8 @@ AP是整体置信度排序指标，不适合给单个物体冠以“AP”。以�
 ECA将节点6归入15，保留`assembly_6_section`部件；实测接缝高1.088米、竖直连续覆盖99.16%，27帧共同观测。没有修改实测坐标或读取GT；归并后预测数为129。
 
 ### 21.2 逐物体定位核查
+
+两场景全部GT的金色官方轮廓、编号图册及v14严格匹配索引已放在6.9.1–6.9.4。下表保留重点对象的版本对照；查看柜体、冰箱、灯具或餐具时，可先在完整索引中查找对应GT号，再对照图册中的实物位置。
 
 | GT实例 | v13最佳框IoU | v14最佳框IoU |
 | --- | --- | --- |
