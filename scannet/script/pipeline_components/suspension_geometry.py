@@ -116,7 +116,7 @@ def measured_roi(lower,upper,jobs,kd,kc,scale,max_depth):
     return voxel_downsample(np.concatenate(pool),.003) if pool else np.empty((0,3))
 
 
-def construct(context):
+def construct(context, require_suspension=False):
     data,jobs,kd,kc,scale=load_capture(context.manifest,context.image_dir,context.scene/'refined_instance')
     report={'algorithm':'unique_ceiling_attachment_measured_members_v10','ground_truth_used':False,
         'qwen_api_calls':0,'language_prompts':0,'generated_points':0,'objects':[],
@@ -147,6 +147,11 @@ def construct(context):
                 lower,upper=face[:,:2].min(0)-.02,face[:,:2].max(0)+.02
                 q=measured_roi(np.r_[lower,z+.015],np.r_[upper,ceiling-.018],jobs,kd,kc,scale,context.max_depth)
                 if len(q)<12:continue
+                members = ceiling_member_candidates(q, ceiling)
+                if require_suspension and not members:
+                    report.setdefault('rejected_objects', []).append(dict(instance_id=gid,
+                        reason='没有实测悬挂杆，水平面不自动获得灯体扩展资格'))
+                    continue
                 accepted=[];audit=[]
                 other=np.concatenate([v for k,v in regions.items() if k!=gid]) if len(regions)>1 else np.empty((0,3))
                 # Recover the actual cuboid body first. Its top and side faces may
@@ -172,7 +177,7 @@ def construct(context):
                         'evidence_type':'seed_connected_multiview_measured_upper_body'}
                     graph.setdefault('part_relations',[]).append({'source_id':pid,'target_id':gid,'description':'part_of',
                         'evidence_frames':len(body_evidence['depth_support_frames'])})
-                for member_points in ceiling_member_candidates(q,ceiling):
+                for member_points in members:
                     member=line_member(member_points)
                     if member is None:continue
                     bottom=member_points[np.argsort(member_points[:,2])[:max(3,len(member_points)//10)]]

@@ -120,7 +120,7 @@ def storage_identity(front,fit,support,rawtracks,verified,fallback):
     return ('cabinet' if accepted else fallback),evidence
 
 
-def construct(context):
+def construct(context, proposal_builder=plane_regions, sample_builder=voxel_downsample, recovery_gate=None):
     data,jobs,kd,kc,scale=load_capture(context.manifest,context.image_dir,context.scene/'refined_instance')
     report={'algorithm':'bounded_cached_identity_planar_structural_recovery_v10','ground_truth_used':False,
         'qwen_api_calls':0,'language_prompts':0,'generated_points':0,'objects':[],
@@ -141,7 +141,7 @@ def construct(context):
         visuals={str(r['instance_id']):r['feature'] for r in json.loads((context.scene/'averaged_instance_features.json').read_text())}
         raw_regions={gid:raw[rawids==int(gid)] for gid in rawtracks};cameras=np.array([np.loadtxt(j['pose'])[:3,3] for j in jobs])
         protected=cKDTree(p);used=np.empty((0,3));replacements={};next_id=max(map(int,rawtracks))+1;reassigned={}
-        for front,normal,kind in plane_regions(raw):
+        for front,normal,kind in proposal_builder(raw):
             entry={'kind':kind,'front_points':len(front),'status':'rejected','front_bounds':[front.min(0).tolist(),front.max(0).tolist()]}
             report['objects'].append(entry)
             tree=cKDTree(front);support=[]
@@ -166,10 +166,12 @@ def construct(context):
             candidate=raw[bounded]
             if len(used):candidate=candidate[cKDTree(used).query(candidate)[0]>.015]
             candidate=candidate[protected.query(candidate)[0]>.015]
-            candidate=voxel_downsample(candidate,.01)
+            candidate=sample_builder(candidate,.01)
             if len(candidate)<512:entry['reason']='没有足够未分配的实测表面';continue
             verified,depth_evidence=measure(candidate,jobs,kd,kc,scale);entry.update(depth_evidence)
-            if len(verified)<512 or len(verified)<.65*len(candidate) or depth_evidence['camera_baseline_m']<.08:
+            adequate = (len(verified)>=512 and len(verified)>=.65*len(candidate)
+                and depth_evidence['camera_baseline_m']>=.08) if recovery_gate is None else recovery_gate(verified, candidate, depth_evidence, kind)
+            if not adequate:
                 entry['reason']='三视角实测表面、相机基线不足或自由空间冲突';continue
             source_id=max(support,key=lambda a:a[1])[0];source_track=copy.deepcopy(rawtracks[source_id])
             parents=[]

@@ -218,6 +218,8 @@ def main():
                                       'observed_validation': getattr(getattr(components, 'OBSERVED_VALIDATION', None), '__name__', None),
                                       'hierarchy_validation': getattr(getattr(components, 'HIERARCHY_VALIDATION', None), '__name__', None),
                                       'box_fitting': getattr(getattr(components, 'BOX_FITTING', None), '__name__', None),
+                                      'attachment_validation': getattr(getattr(components, 'AXIAL_VALIDATION', None), '__name__', None),
+                                      'enclosure_continuity': getattr(getattr(components, 'BODY_CONTINUITY', None), '__name__', None),
                                       'measured_refinement': [x.__name__ for x in getattr(components, 'MEASURED_REFINEMENT', [])],
                                       'final_geometry': [x.__name__ for x in getattr(components, 'FINAL_GEOMETRY', [])],
                                       'part_geometry': getattr(getattr(components, 'PART_GEOMETRY', None), '__name__', None),

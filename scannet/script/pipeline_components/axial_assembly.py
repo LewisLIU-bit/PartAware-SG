@@ -124,6 +124,10 @@ def construct(context):
     if unique:
         records={j['frame_id']:json.loads((context.scene/'refined_instance'/f"{j['frame_id']}_updated_instance.json").read_text()) for j in jobs}
         views=Views(context,jobs,kd,kc,scale,records)
+        import pipeline_components as components
+        validator = getattr(components, 'AXIAL_VALIDATION', None)
+        identity = validator.Evidence(views) if validator is not None else None
+        report['rejected_attachments'] = []
         original_tracks=json.loads(json.dumps(tracks))
         recovery_records=json.loads(json.dumps(records))
         audit_path=context.scene/'thin_geometry_audit.json'
@@ -146,6 +150,14 @@ def construct(context):
                 frames=coobserved(geometry[body],geometry[support],views,body,support,
                     original_tracks[body]['observed_frames']+original_tracks[support]['observed_frames'])
             if len(frames)<3:continue
+            if identity is not None:
+                accepted, identity_evidence = identity.check(geometry[body], geometry[support],
+                    nodes[body], nodes[support], frames)
+                measurement['attachment_identity'] = identity_evidence
+                if not accepted:
+                    report['rejected_attachments'].append(dict(body_id=body, support_id=support,
+                        reason='接触和共同可见不能证明部件身份', **identity_evidence))
+                    continue
             original=geometry[body];base=geometry[support]
             # Concatenation preserves each original measurement, including contacts.
             replacements[body]=np.concatenate([replacements.get(body,original),base]);remap[support]=body

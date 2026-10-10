@@ -1,4 +1,4 @@
-# GPT 视觉接口、v12/v13共用缓存与SAM3接入
+# GPT 视觉接口、v12/v13/v14共用缓存与SAM3接入
 
 ## 接入状态
 
@@ -39,7 +39,7 @@ cd /home/lewisliu/PartAware-SG
   --limit 1
 ```
 
-最新入口构建v13，直接使用两场景已完成的GPT类别缓存；v12保留历史参照。默认原始版仍用RAM，
+最新入口构建v14，直接使用两场景已完成的GPT类别缓存；v12保留历史参照。默认原始版仍用RAM，
 默认v11仍为原有Qwen缓存；已完成GPT原始流程作为独立基线参与原始流程和v12/v13对比。
 以下入口不会新增GPT或Qwen识图，缓存不完整就停止。输出根目录选一个新的
 实验目录，以免覆盖此前的完整结果：
@@ -47,7 +47,7 @@ cd /home/lewisliu/PartAware-SG
 ```bash
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
   --cache-root /home/lewisliu/datasets/scannet-sg-processed/gpt_vision_cache \
-  --output-root /home/lewisliu/datasets/scannet-sg-processed/gpt_sam3_v13
+  --output-root /home/lewisliu/datasets/scannet-sg-processed/gpt_sam3_v14
 ```
 
 也可重复指定 `--manifest` 选择场景，不改变输入采样。运行失败后，已完成
@@ -101,7 +101,7 @@ $$
 线程只加速未缓存的不同帧。Responses 原始流事件也保留，避免第三方
 扩展事件导致 SDK 高层解析失败后丢失可用结果。
 
-GPT原始与v12从同一识图缓存获取语义；既有两套成品参与对比，新增构建使用v13，其构建端新增API调用为零。默认原始版/v11仍分别为RAM/既有Qwen。
+GPT原始与v12从同一识图缓存获取语义；既有两套成品参与对比，新增构建使用v14，其构建端新增API调用为零。默认原始版/v11仍分别为RAM/既有Qwen。
 完成缓存的预期规模是 ai_001_002 的99帧与 ai_001_010 的100帧，共199份
 有效响应；失败请求的可能计费由中转站决定，不能用有效响应数推断账单。
 构建与类别请求均不读取 GT；GT 只用于完成后的独立评价。
@@ -136,15 +136,12 @@ BHA挂接MEASURED_REFINEMENT，将唯一完整实测体边界上的源分实例�
 删除对应导入/注册即可拆卸；它不能推断完整单柜或隐藏柜深。
 数学原理见综合报告2.6–2.8，接口见6.7，最终结果见18章，比较见19章，命令见21章。
 
-## 最新最终v13与直接复用
+## 最新最终v14与直接复用
 
-v13最终只有`partaware_v13/hypersim/ai_001_002`和`ai_001_010`两场景。
-AP25/AP50/AP75分别100%/100%/100%与42.02%/25.97%/9.91%。
-第二场景在三个阈值的TP/FP/FN均改善，但数量误差从0.1449变为0.2065，
-不宣称全面门控通过或通用三维补全成功。原始GPT对照仍保留，并参加第19章比较。
+默认构建v14，继续复用同一完整GPT缓存与本地SAM3源观测，无新增GPT/Qwen识图。
+原始RAM、Qwen→DINO及GPT原始对照均保留。第一场景AP25/AP50/AP75全部100%；
+第二场景44.42%/27.68%/10.86%，目标80%/70%尚未达到。
+最终目录为partaware_v14/hypersim/ai_001_002与ai_001_010；
+重建命令、独立拆卸注册点和真实形状限制见README及综合报告第21章。
 
-现有正式结果及其签名已登记；`run_gpt_comparison.py`默认只选择v13，
-已有正式文件会经图/点云哈希核验直接复用，不重新识图。
-从v12原始融合重建的可修改单条命令见README。
-新组件均在v13代码注册分支独立挂接；数学、接口、GT说明分别见综合报告
-2.9、3.15–3.16、5.3、6.8–6.9，最终逐物体诊断见20章。
+ECA在全部实测部件恢复后核验连续闭合接缝，归并整柜并保留分段part；审核为enclosure_continuity_audit.json。删除该最终几何注册即可单独撤除，不改基础接口。

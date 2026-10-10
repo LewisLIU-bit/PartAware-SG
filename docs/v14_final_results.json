@@ -1,0 +1,102 @@
+{
+  "version": "v14",
+  "tests": 219,
+  "consumer_vision_api_calls": 0,
+  "construction_uses_ground_truth": false,
+  "evaluation_uses_original_gt": true,
+  "targets": {
+    "AP25": 0.8,
+    "AP50": 0.7
+  },
+  "scenes": [
+    {
+      "scene_id": "ai_001_002",
+      "frames": 99,
+      "predicted": 10,
+      "gt": 10,
+      "AP25": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "MVO25": 1.0,
+      "MVO50": 1.0,
+      "absolute_log_count_error": 0.0,
+      "graph_sha256": "3c058858d71a46d04046520802da7ef59edd840de629e9e52ed049e9b9144fd4",
+      "prediction_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d",
+      "observed_ply_sha256": "1a73926a827869f09ba67dca72c64bf246f3f4b4e7e6f127cb98dae4521b418d",
+      "completed_ply_sha256": null,
+      "gt_labels_sha256": "72fec7af62bde7a8283de28cd6348a48754247b03dadbbcc37abea0ad29932a9",
+      "legacy_topology_reader_passed": true,
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "part_nodes": 28,
+      "part_of_edges": 15
+    },
+    {
+      "scene_id": "ai_001_010",
+      "frames": 100,
+      "predicted": 129,
+      "gt": 109,
+      "AP25": 0.44419097011373515,
+      "AP50": 0.2767864837111439,
+      "AP75": 0.1086155640162104,
+      "MVO25": 0.44419097011373515,
+      "MVO50": 0.3318031389411552,
+      "absolute_log_count_error": 0.1684645221325284,
+      "graph_sha256": "312209738d089be9ac5b7c6b30a5eeaa9cedc07b630b384bf04c97773273d951",
+      "prediction_ply_sha256": "a7de2fc0ebe37e4b65ab2253fe11b96dc06df4b63d9dc6d161e8d56a481446c7",
+      "observed_ply_sha256": "a7de2fc0ebe37e4b65ab2253fe11b96dc06df4b63d9dc6d161e8d56a481446c7",
+      "completed_ply_sha256": "9a4b117cf0df01e5c085eda54b9185d4d46eb6a295067b417bd655139342e84c",
+      "gt_labels_sha256": "547c62e10f02e9601f45bdfb5553e0d5f2228b4b697709c37f3eb4038908a702",
+      "legacy_topology_reader_passed": true,
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "part_nodes": 630,
+      "part_of_edges": 141
+    }
+  ],
+  "native_cache_bundles_verified": 199,
+  "learned_universal_completion_solved": false,
+  "fine_instance_generalization_proven": false,
+  "target_reached": false,
+  "shape_rebuild_idempotence": {
+    "before": {
+      "points": 946830,
+      "pointset_sha256": "84201c88eaa0c0b6527e0dff772ef0fec0141ba65d7975d08faafce9310fa864",
+      "measured_sha256": "a7de2fc0ebe37e4b65ab2253fe11b96dc06df4b63d9dc6d161e8d56a481446c7"
+    },
+    "after": {
+      "points": 946830,
+      "pointset_sha256": "84201c88eaa0c0b6527e0dff772ef0fec0141ba65d7975d08faafce9310fa864",
+      "measured_sha256": "a7de2fc0ebe37e4b65ab2253fe11b96dc06df4b63d9dc6d161e8d56a481446c7"
+    },
+    "identical_pointset": true,
+    "scope": "final geometry replay; measured coordinates and generated XYZ plus instance identity"
+  },
+  "learned_completion": {
+    "algorithm": "MGPC_partial_RGB_cached_text_visibility_v12",
+    "variation": "fused_measured_cloud_paired_with_union_of_owned_image_masks",
+    "status": "completed",
+    "accepted": 0,
+    "weights_sha256": "41d41f0c449bbfc85ab3aa20ed303fc1b030e0649f49ed3f0d092633c7aba00e",
+    "vision_api_calls": 0,
+    "default_promoted": false,
+    "138": {
+      "measured_anchor_fraction": 0.9997652582159624,
+      "anchor_distance_p90_m": 0.02120517744604636,
+      "free_space_fraction": 0.03927655554055878,
+      "foreign_fraction": 0.0,
+      "checked_frames": 4,
+      "early_rejected": true,
+      "reason": "已观测的模型冲突超过验收上限，追加视角不能撤销已有反证"
+    },
+    "141": {
+      "measured_anchor_fraction": 1.0,
+      "anchor_distance_p90_m": 0.024492169872992856,
+      "free_space_fraction": 0.045178691840863115,
+      "foreign_fraction": 0.0012137559002022927,
+      "checked_frames": 5,
+      "early_rejected": true,
+      "reason": "已观测的模型冲突超过验收上限，追加视角不能撤销已有反证"
+    }
+  }
+}

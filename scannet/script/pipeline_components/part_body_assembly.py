@@ -76,7 +76,7 @@ def unique_parents(candidates):
     return {source: value for source, value in selected.items() if value[0] not in selected}
 
 
-def construct(context):
+def construct(context, relation_adapter=None, audit_filename='part_body_assembly_audit.json'):
     graph_path = context.scene/'topology_map.json'
     graph = json.loads(graph_path.read_text())
     report = dict(algorithm='unique_measured_body_boundary_hierarchy_v12', ground_truth_used=False,
@@ -95,7 +95,7 @@ def construct(context):
         geometry = {gid: points[ids == int(gid)] for gid in nodes}
         tracks = json.loads((context.scene/'validated_object_tracks.json').read_text())
         import pipeline_components as components
-        hierarchy_module = getattr(components, 'HIERARCHY_VALIDATION', None)
+        hierarchy_module = None if relation_adapter is not None else getattr(components, 'HIERARCHY_VALIDATION', None)
         hierarchy = None
         if hierarchy_module is not None:
             from .instance_consensus import Views
@@ -117,38 +117,43 @@ def construct(context):
             for body, q in geometry.items():
                 if source == body:
                     continue
-                orientation = nodes[body]['shape']['orientation']
-                rotation = Rotation.from_quat([orientation[k] for k in ['x', 'y', 'z', 'w']]).as_matrix()
                 similarity = cosine(nodes[source]['text_embedding'], nodes[body]['text_embedding'])
-                native_parent = (hierarchy is not None and similarity < .8
-                    and tracks[body].get('proposal_validation', {}).get('native_hierarchy_confirmed', False))
                 shared = set(tracks[source]['observed_frames']) & set(tracks[body]['observed_frames'])
-                evidence = boundary_relation(p, q, rotation, np.asarray(nodes[body]['position']),
-                                             1. if native_parent else similarity, shared,
-                                             measured_face=native_parent)
-                if evidence is not None and native_parent:
-                    native_evidence = hierarchy.measure(p, source, identity_gid=body)
-                    if not native_evidence.get('confirmed', False):
-                        evidence = None
-                    else:
-                        evidence.update(semantic_cosine=similarity,
-                                        semantic_override='native_parent_identity_and_measured_boundary',
-                                        native_parent_evidence=native_evidence)
+                if relation_adapter is not None:
+                    evidence = relation_adapter.relation(p, q, nodes[source], nodes[body], similarity, shared)
+                else:
+                    orientation = nodes[body]['shape']['orientation']
+                    rotation = Rotation.from_quat([orientation[k] for k in ['x', 'y', 'z', 'w']]).as_matrix()
+                    native_parent = (hierarchy is not None and similarity < .8
+                        and tracks[body].get('proposal_validation', {}).get('native_hierarchy_confirmed', False))
+                    evidence = boundary_relation(p, q, rotation, np.asarray(nodes[body]['position']),
+                                                 1. if native_parent else similarity, shared,
+                                                 measured_face=native_parent)
+                    if evidence is not None and native_parent:
+                        native_evidence = hierarchy.measure(p, source, identity_gid=body)
+                        if not native_evidence.get('confirmed', False):
+                            evidence = None
+                        else:
+                            evidence.update(semantic_cosine=similarity,
+                                            semantic_override='native_parent_identity_and_measured_boundary',
+                                            native_parent_evidence=native_evidence)
                 if evidence is not None:
                     candidates.setdefault(source, []).append((body, evidence))
         selected = unique_parents(candidates)
         replacements, remap = {}, {}
         (context.scene/'parts').mkdir(exist_ok=True)
         for source, (body, evidence) in selected.items():
-            part_id = f'assembly_{source}_panel'
+            corner = evidence.get('evidence_type') == 'measured_closed_enclosure_corner'
+            role = 'section' if corner else 'panel'
+            part_id = f'assembly_{source}_{role}'
             p = geometry[source]
             frames = evidence['shared_observed_frames']
-            part = dict(id=part_id, name=f'{nodes[body]["name"]}: observed panel', node_type='part', parent_id=body,
+            part = dict(id=part_id, name=f'{nodes[body]["name"]}: observed {role}', node_type='part', parent_id=body,
                 position=p.mean(0).tolist(), extent=np.ptp(p, axis=0).tolist(), confidence=tracks[source]['confidence'],
                 status='confirmed', observed_frames=frames, point_count=len(p),
                 observations=tracks[source]['observations'], semantic_embedding=None,
                 semantic_feature_space='geometry_only_no_visual_embedding', source_object_id=source,
-                source_name=nodes[source]['name'], evidence_type='unique_measured_boundary_multiview',
+                source_name=nodes[source]['name'], evidence_type=evidence.get('evidence_type', 'unique_measured_boundary_multiview'),
                 semantic_part_label_inferred=False)
             graph.setdefault('part_nodes', {})[part_id] = part
             graph.setdefault('part_relations', []).append(dict(source_id=part_id, target_id=body,
@@ -169,9 +174,9 @@ def construct(context):
             tracks[body].setdefault('assembly_source_ids', [body]).append(source)
             remap[source] = body
             graph.setdefault('object_identity_aliases', {})[source] = dict(canonical_id=body,
-                source_name=nodes[source]['name'], role='observed_panel_component', part_id=part_id, evidence=evidence)
+                source_name=nodes[source]['name'], role=f'observed_{role}_component', part_id=part_id, evidence=evidence)
             report['objects'].append(dict(source_id=source, body_id=body, part_id=part_id,
-                measured_points=len(p), reason='唯一完整实测边界锚点；保留原分实例为可查询面板部件', **evidence))
+                measured_points=len(p), reason='连续实测柜体接缝；分段保留为可查询部件' if corner else '唯一完整实测边界锚点；保留原分实例为可查询面板部件', **evidence))
         if remap:
             for gid in remap:
                 del nodes[gid]
@@ -193,7 +198,7 @@ def construct(context):
                 replace_regions(geometry_path, replacements, nodes)
             (context.scene/'validated_object_tracks.json').write_text(json.dumps(tracks, indent=2)+'\n')
             graph['object_granularity_policy'] = dict(policy='whole_body_with_queryable_observed_subinstances',
-                predicted_from='unique_measured_boundary_and_multiview_identity', ground_truth_used=False)
+                predicted_from='continuous_measured_corner_and_multiview_identity' if relation_adapter is not None else 'unique_measured_boundary_and_multiview_identity', ground_truth_used=False)
             graph_path.write_text(json.dumps(graph, indent=2)+'\n')
             context.graph_geometry, context.canonical_geometry_input = geometry_path, graph_path
             from . import canonical_geometry
@@ -205,5 +210,9 @@ def construct(context):
                 edges=[edge for h in graph['edge_hypotheses'].values() for edge in h['edges'].values()]+graph['part_relations'])
             graph_path.write_text(json.dumps(graph, indent=2)+'\n')
             (context.scene/'parts/partaware_graph.json').write_text(json.dumps(graph, indent=2)+'\n')
-    (context.scene/'part_body_assembly_audit.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+    if relation_adapter is not None:
+        relation_adapter.retain_evidence(graph, report)
+        report['algorithm'] = 'unique_measured_closed_enclosure_corner_v14'
+        report['relation_component_sha256'] = hashlib.sha256(Path(relation_adapter.__file__).read_bytes()).hexdigest()
+    (context.scene/audit_filename).write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
     context.event('实测整物体与面板层级完成', parts=len(report['objects']), generated_points=0)

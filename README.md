@@ -14,53 +14,47 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
-for v12 and v13; construction makes no new GPT or Qwen image requests. Report defaults
-remain original RAM, existing Qwen for v11, and existing GPT for v12/v13. The GPT original pipeline is retained as a separate baseline and compared
-with RAM, Qwen-to-DINO, v12 and v13 using the same scene cache as v12. See
+for v12, v13 and v14; construction makes no new GPT or Qwen image requests. Report defaults
+remain original RAM, existing Qwen for v11, and existing GPT for v12 and later. The GPT original pipeline is retained as a separate baseline and compared
+with RAM, Qwen-to-DINO, v12, v13 and v14 using the same scene cache as v12. See
 [GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
 The existing ScanNet and Hypersim interfaces remain unchanged.
 
-The latest v13 research profile reuses the complete local SAM3 and GPT
-observations. Its functional tree is FOVEA (visual evidence), MICA (multiview
-association), SHAPE (measured recovery and validated hypotheses), and GRAPH
-(canonical objects, parts and relations). HMG protects whole-object evidence
-before exclusive-mask vetoes, FDR recovers dense small-object measurements,
-RSI splits supported repeated surfaces, PCB orients boxes from measured faces,
-and VPA anchors confirmed visual parts to a unique physical parent.
+The latest v14 research profile reuses the existing GPT and SAM3 observations.
+Its FOVEA -> MICA -> SHAPE -> GRAPH functional tree now includes identity-seeded
+measured surface proposals, closed-front versus open-rack boundaries, physical
+assembly ownership checks, and all-view verified shape hypotheses after assembly.
+Names select a bounded geometric prior; measured faces determine its dimensions.
+Generated surfaces remain hypotheses and never replace measured coordinates.
 
-Both full scenes are complete. ai_001_002 retains 100%/100%/100%
-AP25/AP50/AP75. ai_001_010 improves from v12's 32.21%/18.86%/6.17% to
-42.02%/25.97%/9.91%, with fewer threshold-level false positives. Two plate
-stacks now contain six independent objects each; refrigerator box IoU is
-98.58%. Count error worsens, and whole cabinet rows, the complete light
-assembly and separate adjacent windows remain unresolved. These are adapted,
-class-agnostic observed Hypersim box metrics, not official benchmark scores.
-Translated lower plate surfaces are recorded as generated hypotheses; unseen
-undersides and universal hidden geometry remain unsolved. Ordinary ScanNet
-entry points retain their validated components and original interfaces.
-Only one final package per version is retained; v12 remains the control.
+Both scenes are rebuilt and independently evaluated. ai_001_002 retains
+100%/100%/100% AP25/AP50/AP75; ai_001_010 reaches 44.42%/27.68%/10.86%
+from v13's 42.02%/25.97%/9.91%. The 80% AP25 / 70% AP50 target remains unmet.
+These are class-agnostic adapted Hypersim box metrics. Universal text-conditioned
+completion and broad fine-instance generalization remain unresolved; official MGPC
+inference was tested but did not pass the observation constraints and is not active.
+See [the consolidated report](docs/RESEARCH_REPORT.md) for final per-object results,
+GT explanations, equations, source papers and direct visualization commands.
 
-To reconstruct v13 from cached raw fusion, choose a fresh result path:
+To rebuild v14 from cached raw fusion, choose a fresh result path:
 
 ```bash
 cd /home/lewisliu/PartAware-SG
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
-  --worker v13 \
+  --worker v14 \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v12/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v13/hypersim/ai_001_010 \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v14/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
-The finalized scenes are under `datasets/scannet-sg-processed/partaware_v13`.
-Use the published PLY named by `geometry_provenance.source` together with
-`topology_map.json`, or `instance_cloud_cleaned.ply` with
-`topology_map_observed.json` for measured-only inspection. The v13 modules
-attach in `run_gpt_comparison.configure_profile`; remove their import and
-registry entries to detach them independently, then rebuild from observations.
-No per-algorithm flags or backup restoration are required. Current equations,
-GT explanations, final comparisons and direct visualization commands are in
-[the research report](docs/RESEARCH_REPORT.md).
+Final artifacts are under `datasets/scannet-sg-processed/partaware_v14`.
+Pair `instance_cloud_completed.ply` with `topology_map.json`, or use
+`instance_cloud_cleaned.ply` and `topology_map_observed.json` for measurements.
+The first scene has no added completion and uses the cleaned PLY.
+Detach adapters at the code registrations in `configure_profile`, then rebuild;
+no algorithm flags or backup restoration are needed. Historical versions and
+ordinary ScanNet/Hypersim interfaces remain available.
 
 PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v11 default
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
@@ -183,8 +177,9 @@ Only selected RGB-D frames appear in the manifest. No complete ZIP archive or
 download helper repository is retained. `--existing-manifest` reuses downloaded
 RGB-D without changing it and records dimension-invalid frames explicitly.
 
-Component attachment is centralized in
-`scannet/script/pipeline_components/__init__.py`. To detach an algorithm, remove
+Base component attachment is centralized in
+`scannet/script/pipeline_components/__init__.py`; research-version adapters are
+registered in `run_gpt_comparison.configure_profile`. To detach an algorithm, remove
 its import and registry entry: `ASSOCIATION` returns object association and part
 ownership to their conservative base rules; `FUSION` returns object fusion to the
 original C++ implementation; entries in `GRAPH_COMPONENTS` determine graph
@@ -194,7 +189,7 @@ Rebuild into a fresh result folder after editing the registry. Existing result
 files do not change automatically. `--start-stage` resumes a completed frontend;
 it is not a component-removal switch.
 
-V6 adds one removable pointwise held-out-view background check to the existing validator. Large mixed identities must agree with independent depth-consistent views; source masks cannot validate themselves. The stable v5 segmentation, association, inclusion and confidence rules remain in use. Results are regenerated from cached raw fusion outputs, not edited by hand; no new Qwen calls or input-depth changes occur. Earlier combined SAVPE/partition experiments were withdrawn and stored separately as `_v6_trial`.
+V6 adds one removable pointwise held-out-view background check to the existing validator. Large mixed identities must agree with independent depth-consistent views; source masks cannot validate themselves. The stable v5 segmentation, association, inclusion and confidence rules remain in use. Results are regenerated from cached raw fusion outputs, not edited by hand; no new Qwen calls or input-depth changes occur. Earlier combined SAVPE/partition experiments were withdrawn; only final version outputs are retained.
 
 The standalone `scannet/script/run_partaware.py` entry remains available for
 inspecting an existing graph; its ScanNet and Hypersim contracts are documented

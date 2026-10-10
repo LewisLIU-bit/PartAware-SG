@@ -1,4 +1,4 @@
-"""Construct v13 using one existing GPT cache per scene; keep historical profiles."""
+"""Construct v14 using one existing GPT cache per scene; keep historical profiles."""
 import argparse
 import hashlib
 import json
@@ -12,8 +12,8 @@ from vision_api import attach_cache, atomic_json
 
 REPO = Path(__file__).resolve().parents[2]
 DEFAULT_DATA = Path.home() / 'datasets'
-VERSIONS = ('original', 'v11', 'v12', 'v13')
-ACTIVE_VERSIONS = ('v13',)
+VERSIONS = ('original', 'v11', 'v12', 'v13', 'v14')
+ACTIVE_VERSIONS = ('v14',)
 
 
 def configure_profile(version, registry):
@@ -25,6 +25,17 @@ def configure_profile(version, registry):
     registry.SURFACE_ASSEMBLY = None
     registry.HIERARCHY_VALIDATION = None
     registry.BOX_FITTING = None
+    registry.AXIAL_VALIDATION = None
+    registry.BODY_CONTINUITY = None
+    from pipeline_components import suspension_geometry
+    registry.FINAL_GEOMETRY = [suspension_geometry if entry.__name__.endswith('.verified_suspension') else entry
+        for entry in getattr(registry, 'FINAL_GEOMETRY', []) if entry.__name__.rsplit('.', 1)[-1] not in ('verified_cuboids', 'enclosure_continuity')]
+    if any(entry.__name__.endswith('.seeded_surfaces') for entry in getattr(registry, 'GEOMETRY_COMPONENTS', [])):
+        from pipeline_components import structural_surfaces, backed_cuboid
+        registry.GEOMETRY_COMPONENTS = [structural_surfaces if entry.__name__.endswith('.seeded_surfaces') else entry
+            for entry in registry.GEOMETRY_COMPONENTS]
+        if backed_cuboid not in registry.GEOMETRY_COMPONENTS:
+            registry.GEOMETRY_COMPONENTS.append(backed_cuboid)
     registry.MEASURED_REFINEMENT = [entry for entry in getattr(registry, 'MEASURED_REFINEMENT', [])
         if entry.__name__.rsplit('.', 1)[-1] not in ('part_body_assembly', 'repeated_instances', 'visual_part_anchoring')]
     if version != 'original':
@@ -40,18 +51,26 @@ def configure_profile(version, registry):
         for key in ('GRAPH_COMPONENTS', 'GEOMETRY_COMPONENTS',
                     'MEASURED_REFINEMENT', 'FINAL_GEOMETRY'):
             setattr(registry, key, [])
-    elif version in ('v12', 'v13'):
+    elif version in ('v12', 'v13', 'v14'):
         from pipeline_components import sam3_frontend, whole_object_consensus, native_assembly, part_body_assembly
         registry.FRONTEND = sam3_frontend
         registry.WHOLE_OBJECT_VALIDATION = whole_object_consensus
         registry.SURFACE_ASSEMBLY = native_assembly
         registry.MEASURED_REFINEMENT.insert(1, part_body_assembly)
-        if version == 'v13':
+        if version in ('v13', 'v14'):
             from pipeline_components import hierarchical_masks, plane_boxes, repeated_instances, visual_part_anchoring
             registry.HIERARCHY_VALIDATION = hierarchical_masks
             registry.BOX_FITTING = plane_boxes
             registry.MEASURED_REFINEMENT.insert(1, repeated_instances)
             registry.MEASURED_REFINEMENT.insert(3, visual_part_anchoring)
+        if version == 'v14':
+            from pipeline_components import seeded_surfaces, verified_cuboids, verified_suspension, attachment_identity, enclosure_continuity
+            registry.GEOMETRY_COMPONENTS = [seeded_surfaces if entry.__name__.endswith('.structural_surfaces') else entry
+                for entry in registry.GEOMETRY_COMPONENTS if not entry.__name__.endswith('.backed_cuboid')]
+            registry.AXIAL_VALIDATION = attachment_identity
+            registry.BODY_CONTINUITY = enclosure_continuity
+            registry.FINAL_GEOMETRY = [verified_suspension if entry.__name__.endswith('.suspension_geometry') else entry
+                for entry in registry.FINAL_GEOMETRY]+[enclosure_continuity, verified_cuboids]
 
 
 def run_worker(args):
@@ -86,7 +105,7 @@ def execute(command, logfile):
 
 def scene_directory(root, version, dataset, scene_id):
     experiment = ('gpt_original_v1' if version == 'original'
-                  else f'partaware_{version}' if version in ('v12', 'v13') else 'partaware_gpt_v11')
+                  else f'partaware_{version}' if version in ('v12', 'v13', 'v14') else 'partaware_gpt_v11')
     return root/experiment/dataset/scene_id
 
 

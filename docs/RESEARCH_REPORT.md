@@ -1,8 +1,8 @@
 # PartAware-SG 综合研发与实验报告
 
-更新：2026-10-09。仅保留各版本最终结果。默认原始版RAM、v11既有Qwen、v12与v13既有GPT；另保留GPT原始流程和Qwen→DINO对照。最终目录已归并，3RScan/KITTI和中途试验已清理，scene0802保留。
+更新：2026-10-10。仅保留各版本最终结果。默认原始版RAM、v11既有Qwen、v12及以后既有GPT；另保留GPT原始流程和Qwen→DINO对照。最终目录已归并，3RScan/KITTI和中途试验已清理，scene0802保留。
 
-当前主流程为v13，复用v12完整GPT和SAM3观测缓存，新增整体掩码保护、实测面定向、重复边界实例恢复与视觉部件锚定。数学、接口和主脉络均描述最新代码；历史章节只保留各版最终结果。两场景完整重建与评价已完成：第二场景AP25/AP50/AP75为42.02%/25.97%/9.91%，优于v12；第一场景仍全部100%。第二场景数量误差变大，通用隐藏形状补全仍未解决。
+当前主流程为v14，继续复用既有GPT和SAM3观测。新增身份种子表面提案、封闭立面与开放格架分离、连续柜体接缝层级归并、物理连接归属检查和最终整体形状验收。第二场景最终AP25/AP50/AP75为44.42%/27.68%/10.86%；第一场景仍全部100%。目标AP25≥80%、AP50≥70%尚未达到。通过验收的长方体表面是有条件预测，通用文本条件补全及精细识别的跨场景泛化仍未解决。
 
 ## 1. 当前主脉络
 
@@ -11,13 +11,13 @@
 - **FOVEA — Fine Object and Visual Evidence Acquisition｜视觉证据获取**
   - **语义与缓存**
     - 复用原类别、描述及已完成观测；两个既有场景新增 Qwen 识图请求为零。
-    - 原始版使用RAM，v11保留既有Qwen缓存；v12/v13使用同场景已完成的GPT缓存，构建入口不再调用任何VLM识图。
+    - 原始版使用RAM，v11保留既有Qwen缓存；v12及以后使用同场景已完成的GPT缓存，构建入口不再调用任何VLM识图。
     - RGB、模型、协议和提示版本做哈希核验，保留原始响应与来源，不重新调用Qwen。
   - **基础定位与分割**
-    - 当前v13复用SAM3直接产生整图概念实例与局部放大掩码；GroundingDINO保留256维视觉特征接口。
+    - 当前v14复用SAM3直接产生整图概念实例与局部放大掩码；GroundingDINO保留256维视觉特征接口。
     - 原始版及v11保留既有定位/分割路径；Florence、SAM和YOLOE的旧组合不作为SAM3前端的重复步骤。
   - **精细证据与统一接口**
-    - v12/v13研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两场景使用既有GPT缓存完成构建，保留最终成品和独立评价。
+    - v12/v13/v14研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两场景使用既有GPT缓存完成构建，保留最终成品和独立评价。
     - 物体特征统一为 DINO 256维和 SBERT 384维，部件 RN50 1024维独立保留。
 - **MICA — Multiview Instance Consensus and Association｜多视角实例共识**
   - **实测投影与背景**
@@ -40,17 +40,20 @@
 - **SHAPE — Scene-constrained Hypotheses Anchored to Physical Evidence｜场景约束几何**
   - **实测表面维护**
     - 留出视角的深度/掩码共识清理错误所有权；遮挡和未知区域不充当反证。
-    - 缓存身份、前后平面及多视角测量恢复有界柜体、台面和其他结构表面。
+    - 缓存身份种子提出局部平面，封闭立面与稀疏开放格架分开；前后边界及逐点多视角验收恢复漏掉的真实表面。
   - **细结构与整体归属**
     - 已验收的部件、稀疏几何种子及密集原始深度补充真实测量。
-    - 唯一同轴支撑、横梁与悬挂结构验收后纳入整体，同时保留部件身份。
+    - 唯一同轴连接还需身份相容或组合部件身份；只有实测悬挂杆证据才能启动上部扩张。
+    - **ECA — Enclosure Corner Assembly｜柜体接缝归并**
+      - 在实测部件恢复后，检查柜体片段的闭合立面身份、正交法向、上下边界及沿高度连续的真实接缝。
+      - 仅唯一父体成立时归并根节点，保留分段为part；实测坐标不改变，不按同名或框重叠强并。
     - **FDR — Fine Depth Recovery｜精细实测恢复**
       - 小物体在原生身份掩码内使用逐像素深度、2毫米体素和至少3个独立视角；保留真实坐标。
     - **RSI — Repeated Surface Instances｜重复表面实例**
       - RGB-D外缘沿高度出现多视角稳定周期时才拆分；实例数来自实测边缘，不来自类别或GT。
       - 顶部实测曲面作为共享先验，下层平移曲面标为生成；自由空间与原点残差否决不成立的假设。
   - **形状先验及验收**
-    - 现有 AdaPoinTr 与后方结构约束提案均须接受实测验收；运行模型不等于补全成功。
+    - AdaPoinTr保持独立验收；在实测整体/部件归并后，由缓存名称选择形状族，实测正面、侧面、后界决定尺寸，全部帧检验形状假设。
     - 只发布通过当前准入的形状假设；生成点不充当实测或跟踪证据。
 - **GRAPH — Geometry Relations And Part Hierarchy｜关系与层级发布**
   - **物体与空间图**
@@ -62,7 +65,7 @@
     - 独立物体、部件节点和 `part_of` 关系共存；部件不重复计入物体数。
     - **BHA — Body Hierarchy Association｜整物体与面板层级**
       - 唯一完整实测体、边界平面与至少3帧共同观测确定父归属。
-      - 原分实例保留为可查询部件，不生成柜深；含糊归属保留独立。
+      - 原分实例保留为可查询部件；唯一完整实测边界确定父归属；尚不能可靠合并所有转角柜体，含糊归属保留独立。
     - **VPA — Visual Part Anchoring｜视觉部件锚定**
       - 已确认VLPart部件、多视角父体支持、真实接触和唯一父归属消解重复根节点。
       - 原根实例保留为可查询部件，实测及已验收生成点同步到父体；不凭名称或框包含判定。
@@ -81,8 +84,9 @@
 | v11 | 既有Qwen缓存 | 否，停止GPT v11调优 |
 | v12 | 既有GPT缓存 | 否，复用同场景完整响应 |
 | v13 | 与v12同一GPT缓存 | 否，复用源观测并重建后续流程 |
+| v14 | 与v12/v13同一GPT缓存 | 否，复用源观测并重建后续流程 |
 
-从v12起默认类别来源改为GPT，v13继续复用同一缓存。另保留GPT原始流程作为独立基线，参与原始流程和v12对比，并与v12/v13复用同场景GPT识图缓存。旧GPT v11和旧Qwen v12中途产物已清理。SAM3是v12本地分割后端，不新增GPT或Qwen识图。
+从v12起默认类别来源改为GPT，v13和v14继续复用同一缓存。另保留GPT原始流程作为独立基线，参与原始流程和v12对比，并与v12/v13/v14复用同场景GPT识图缓存。旧GPT v11和旧Qwen v12中途产物已清理。SAM3是v12本地分割后端，不新增GPT或Qwen识图。
 
 ## 2. 前端与实例关联的数学原理
 
@@ -161,7 +165,7 @@ $$
 
 双方均为细实例时采用尺度半径；整图实例仍用10厘米半径及1厘米体素。细实例体素为 $h(d)=\operatorname{clip}(d/80,0.002,0.005)$ 米，跨度不小于25厘米时仍用1厘米体素。只保留实测RGB-D投影，不用生成点建立独立物体。分通道可避免一种吞并，也可能暂留跨尺度重复；最终仍需MICA多视角共识与候选验收，不能把某帧95个掩码写成95个正确物体。
 
-### 2.5 可见归属竞争与有界实测残片归并（当前GPT v13）
+### 2.5 可见归属竞争与有界实测残片归并（当前GPT v14）
 
 GPT仍只提供类别与描述。新算法使用既有RGB-D、原掩码及缓存SBERT特征；不调用GPT或Qwen，不读取GT。遮挡、缺失深度和未命名区域均不能直接视为物体不存在。令可见深度一致指示为 $v_t(p)$、投影权重为 $w_t(p)$、当前物体归属为 $a_{it}(p)$，则：
 
@@ -470,7 +474,7 @@ $$
 
 大柜门和台面可能与墙/地面相似，前端局部掩码或语义验收会删掉本来存在的表面。当前先保留原判定，再从含背景原始实测云提出几何区域；不能把“平面”直接当作“物体”。借鉴SAI3D的几何区域与多视角证据结合思想，但没有移植其完整超点图与网络。[SAI3D](https://arxiv.org/html/2312.11557v2)
 
-在1.2厘米体素云上以9毫米RANSAC拟合平面，用4.5厘米邻接分量形成有界区域。至少700点，两条面内跨度分别至少0.5/1米。已声明Z轴时，储物立面要求 $|n_z|<0.01$，台面要求 $|n_z|>0.995$：
+当前由至少3帧、置信度≥0.4的缓存身份轨迹先拟合局部平面种子，再从1.2厘米体素原始云回收距种子平面9毫米以内的点。局部种子避免大地面/墙面耗尽全局RANSAC提案配额；每条种子最多考察4个平面。后续，用4.5厘米邻接分量形成有界区域。至少700点，两条面内跨度分别至少0.5/1米。已声明Z轴时，储物立面要求 $|n_z|<0.01$，台面要求 $|n_z|>0.995$：
 
 $$
 \mathcal F=\{p:|n^Tp-h_f|\le0.009\},\qquad \|n\|_2=1.
@@ -493,9 +497,20 @@ s(p)=\sum_t\mathbf1[|z_t(p)-D_t(\pi_t(p))|\le0.004+0.001z_t(p)],\qquad
 P_{new}=\{p\in\mathcal B:s(p)\ge3,\ b(p)<2\}.
 $$
 
-最终至少512点、保留候选至少65%、有效相机基线至少8厘米。新增的每一个点都是深度测量，不是长方体生成点。只把此前已拒绝的对应局部记录从负编号映射到已验收整体，其他字段、原PNG和特征缓存不改。实际帧观察历史与编号同步，不能把几何验证帧冒充新的识图观测。
+最终至少512点、有效相机基线至少8厘米。储物体仍要求保留候选至少65%；台面要求至少512点形成4.5厘米邻接的连通实测片，水平跨度至少0.5米。每点仍须3视角深度支持，不能用其他失败候选像素的比例否定已被逐点验证的真实点。体素采样保留原始坐标，避免平均点偏离薄表面。新增的每一个点都是深度测量，不是长方体生成点。只把此前已拒绝的对应局部记录从负编号映射到已验收整体，其他字段、原PNG和特征缓存不改。实际帧观察历史与编号同步，不能把几何验证帧冒充新的识图观测。
+
+### 3.10.1 封闭立面与开放格架
+
+储物正面投影到水平切向和竖直轴，在6厘米网格记录真实表面占据。每个切向列的竖直占据率至少60%，只闭合窄门缝，并保留长度至少0.5米的连续密集前面；格架细柱与横条不会因为共面就自动扩成柜门。该判断适用于有稳定平面的封闭储物前面，不适用于所有家具。
+
+$$
+O_{ij}=\mathbf1[\exists p\in P:\operatorname{bin}(p)=(i,j)],\qquad
+r_i=\frac{1}{N_z}\sum_jO_{ij},\qquad \mathcal F_{closed}=\{p:r_{\operatorname{bin}_x(p)}\ge0.6\}.
+$$
 
 ### 3.11 原始像素中的上部本体恢复与杆身连续性
+
+当前先要求真实悬挂杆候选存在，再恢复上部主体。真实深度只证明点的位置，不证明它属于灯具；缺少杆身证据时，不能把柜体后的墙面并入灯具。
 
 现有物体掩码可能只留下柔性灯头或长条本体的局部面。当前在含背景实测云中估计上方水平面，从已有本体的水平几何面自动提出ROI，再投影全部原始RGB-D像素，步长1、体素3毫米。先恢复本体真实深度表面，随后才检查独立杆件。这里的上方平面是搜索边界，不能把外部屋顶安装点直接当作室内杆身。
 
@@ -546,7 +561,7 @@ $$
 
 这条门控还必须通过第3.10节的缓存身份、实测后界、三视角深度和相机基线检查，不能单独把平面变成柜子。开放格架的正面填充不足、没有侧面的薄片、没有cabinet类别缓存或同一帧的重复投票均保持原身份。名称和纵深不从GT取值；本轮没有新增文字提示或千问调用。256维视觉特征与384维语义特征仍继承原兼容轨迹，几何推断类别另外记录来源和门控证据。
 
-整体/部件粒度尚需另一层证据。参考[Part2Object](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02657.pdf)的多层聚类与物体性选择、[Clutt3R-Seg](https://arxiv.org/html/2602.11660v1)的条件父掩码替代，下一项应建立多个尺度的父掩码树，并以多视角完整掩码和共有柜架边界选择整柜层；柜门、抽屉保留part_of。单凭共面、邻近或同名不能证明一个整体。此次共面柜门试验缺少可靠后界，未采用强并。
+整体/部件粒度尚需另一层证据。参考[Part2Object](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/02657.pdf)的多层聚类与物体性选择、[Clutt3R-Seg](https://arxiv.org/html/2602.11660v1)的条件父掩码替代，整体父掩码树仍有研究空间；当前ECA已用闭合立面和连续实测接缝识别一个正交柜体整体，详见3.17；柜门、抽屉保留part_of。单凭共面、邻近或同名不能证明一个整体。共面柜门缺少可靠整体边界时仍不强并；ECA只接受连续的正交闭合边界。
 
 [MoMa-SG](https://momasg.cs.uni-freiburg.de/)进一步提供柜门运动与容器层级的路线，但其关键输入包括物体开合观测；当前静态Hypersim帧不能提供该运动证据，未宣称已经接入关节推断。这些论文支持分层方案的研究方向，不能保证本项目门槛的泛化，也不是其完整模型的复现。
 
@@ -611,6 +626,28 @@ $$
 
 没有第二个可信实测面就沿用原最小面积/OBB接口。尺寸只来自已有点的极值，不填盒、不加厚，不把正确框冒充新增背面点。正式及实测图使用同一求解器，空间边同步更新。
 
+### 3.17 ECA：实测连续接缝建立整柜与部件
+
+参考部件重建的“先识别局部、再建立整体关系”方向，本项目新增几何ECA适配器，并未运行关节重建论文的训练网络。它位于全部实测部件恢复之后、最终形状预测之前；早期单面不足时不推断整柜。
+
+双方都须有缓存cabinet身份至少3帧、封闭立面占据率至少0.6及已验收实测表面来源；至少512个源点，语义余弦≥0.85，至少3帧共同观测。上下边界由实测高度1%及99%分位确定，差异≤4厘米，高度≥0.5米。8毫米RANSAC主立面各支持至少40%实测点，近竖直且法向近正交：
+
+$$
+|n_a^Tn_b|\le0.15,\qquad\max(|n_{a,z}|,|n_{b,z}|)\le0.08.
+$$
+
+定义双向实测接触点与1厘米接触体素集：
+
+$$
+C_a=\{p\in P_a:d(p,P_b)\le0.025\},\qquad
+C_b=\{p\in P_b:d(p,P_a)\le0.025\},\qquad
+C=C_a\cup C_b.
+$$
+
+双方各至少64个接触点、合计至少128个不同接触体素，接缝高度覆盖≥80%；3厘米竖直桶占据率≥80%。双向计数降低两面采样密度不同造成的偏差，断开、共面、短触点或身份冲突不成立。正交接缝规则不处理一整排共面独立柜门，也不证明所有接触柜体都属于同一功能物体。
+
+每个源只有唯一候选父体才归并，以较多实测点的一方作锚；避免循环与依赖合并。原分段写为`observed section`部件并保留点文件，更新轨迹、逐帧所有权、已有部件父体和身份别名。坐标全部来自实际测量，无GT、合成点或新视觉请求。随后同一发布器重算框和空间关系。审核存于`enclosure_continuity_audit.json`；重跑从有效别名保留接缝证据。
+
 ## 4. 选择性形状补全
 
 ### 4.1 实际模型与准入
@@ -660,37 +697,38 @@ $$
 
 当前没有多样本不确定性估计，也没有完整网格误差证明；不能声称生成背面一定正确。`completion_audit.json` 对每个物体记录未准入、拒绝或接受及具体数值。
 
-### 4.3 实测后方结构约束的完整体积假设
+### 4.3 最终整体的身份先验与全视角形状验收
 
-当前在AdaPoinTr之后增加可独立移除的 `backed_cuboid`。这不是新训练的身份条件网络，也没有移植ROCA的CAD检索器；借鉴[CubeSLAM](https://arxiv.org/html/1806.00557v2)的受几何约束长方体提案与[Total3DUnderstanding](https://arxiv.org/html/2002.12212v1)的物体和布局联合约束，利用已有RGB-D、背景实测云和位姿。
+当前`verified_cuboids`在实测整体/部件归并后运行。名称只选择cabinet/cupboard/refrigerator/wardrobe等封闭长方体族，绝不提供固定宽深高。这是项目几何算法，不是训练好的文本条件网络；开放格架、灯具和任意形状不由这个分支补全。
 
-用1.2厘米RANSAC拟合近竖直正面，至少512点、竖直跨度至少0.5米，正面点占比至少0.6，法向竖直分量不超过0.08。投影到20×20正面网格，覆盖至少65%；宽度至少0.3米、高度至少0.5米。正面法向朝支持相机的中位位置，组成局部坐标：
-
-$$
-R=[n,\ e_z\times n,\ e_z],\qquad p_{\mathrm{local}}=R^Tp.
-$$
-
-模型在正面后方查找原含背景实测云的独立平面，搜索深度在0.1米到正面宽度与1.2米的较小值之间，侧向各扩25%正面宽度，竖直上下扩0.1/0.25米。至少256个背景点，后方平面点占比至少45%，与正面法向相容度至少0.99，横向覆盖至少80%正面宽度。
-
-不能仅凭一张薄片和远处一堵墙就推断体积。至少128个物体实测点已向后方延伸到预计纵深的15%以上，最深实测点至少达到预计纵深的40%，才提出“物体靠近后方结构”的假设。若实测物体已有超过宽/高较小值60%的纵深，或者后方边界不能提供至少3厘米新增纵深，则跳过。
+缓存身份置信度≥0.4且至少3帧实测观测；最多考察4个8毫米RANSAC平面；近竖直正面至少占实测样本20%，宽≥0.3米、高≥0.5米，20×20正面网格占据率≥65%。原点数至少512。正面法向朝相机，切向及竖直轴构成局部坐标：
 
 $$
-d=h_{\mathrm{front}}-h_{\mathrm{rear}},\qquad
-|n_{\mathrm{rear}}^T n_{\mathrm{front}}|\ge0.99.
+R=[n,e_z\times n,e_z],\qquad x=R^Tp,\qquad d=h_f-h_b.
 $$
 
-把手或孤立凸起不被扩展为整个实体截面：生成正面终点采用正面中位平面，侧向及高度采用正面0.5%至99.5%分位范围；背面终点在实测后方平面前方1厘米。每2厘米采样背面、侧面和上下表面，保留全部实测点，生成点与实测点分文件存储。物体贴近后方结构仍是有条件假设，不是后方确切形状真值。
+在正面后方0.1至min(1.2米,正面宽)搜索实测背景。逐次剥离最多8个平面，选择与正面法向相容度≥0.99、至少256点且覆盖80%正面宽的后界。较大的地面不能挡住有效后界。至少128个侧面点延伸到推断深度15%以上，最深实测点达到40%以上；纯薄片加远墙不授权补全。
 
-候选接受全部输入帧的自由空间与其他物体检查；遮挡后的未知区域不算空。深度容差为0.012米加0.003倍光轴深度：
+已有包围框的纵深足够，不等于背面和侧面已经存在。因此取消旧算法“框已有深度就跳过”的条件；正面0.5%–99.5%分位确定横截面，每1.5厘米提出背面、侧面和上下表面。后界仍是靠后结构假设，不能当作已看见的物体背面。
+
+对所有输入帧，包括没有检测该实例的帧，区分深度支持、自由空间反证和遮挡/未知：
 
 $$
-b_t(q)=\mathbf1[z_t(q)<D_t(\pi_t(q))-(0.012+0.003D_t(\pi_t(q)))].
+b_t(q)=\mathbf1[z_t(q)<D_t(\pi_t(q))-(0.012+0.003D_t)],\qquad
+s(q)=\sum_t\mathbf1[|z_t(q)-D_t(\pi_t(q))|\le\delta_t].
 $$
 
-至少两帧反证的点占比超过3%、其他可见物体归属/2厘米邻近冲突超过5%，或者全部被否定候选点超过10%，则整项假设拒绝，不能靠删掉大量冲突点隐藏不合法体积。通过后仅保留零反证的新点，至少128点且距实测表面超过1.5厘米才发布。
+整项候选的重复自由空间冲突不得超过3%，其他物体冲突≤5%，总反证≤10%。通过后仍删去任何有反证的点；至少128个候选表面点须被3帧深度支持，并有至少3个支持帧。深度支持容差为0.025+0.01D米。形状假设单独记录其拥有的生成点，重跑时只替换本组件旧假设，保护全部实测点。上述门控是证据规则，不是已经校准的贝叶斯置信度；相邻帧不能被解释为完全独立样本。
 
-正式图保存 `geometry_hypothesis.measured=false` 和靠后结构假设标记，`cuboid_completion_audit.json`记录每项准入/拒绝依据。点数增加、符合自由空间和高AP都不能证明隐藏细节完全正确。复杂非长方体、缺少后方边界、没有侧面支持或活动物体不适用；未知竖直轴的ScanNet输入继续保留原流程。
+生成点只进入`instance_cloud_completed.ply`，实测云不被预测坐标替换。正式图保存`geometry_hypothesis.measured=false`，`verified_shape_audit.json`记录全部100帧检查、支持点数和反证。生成点影响最终框及空间边，但不反向增加身份轨迹或识图确认帧。
 
+### 4.4 联合文本、图像与点云模型的真实状态
+
+[MGPC](https://arxiv.org/html/2601.03660v2)的网络确实联合接收残缺点云、RGB及文本，通过注意力融合和渐进解码预测完整点集。项目已严格加载官方8192点权重，文本来自既有实例名称；模型按所选视图相机坐标与实测尺度归一化，不使用GT尺寸。该模型有通用补全研究价值，但论文中的泛化结果不能代替本场景验证。
+
+最终独立验证用多帧融合实测点配对当前整物体所有权掩码，检查有界对齐、实测锚点、自由空间/外物冲突及两视角一致性。没有完整候选通过，MGPC未并入默认v14。冰箱候选的实测锚点覆盖为99.98%，90%锚点距离分位约2.12厘米；但仅前4帧已有3.93%模型点侵入已观测自由空间，超过完整模型3%的验收限制，因此提前拒绝。这里的4帧是失败时已检查数量，任何接受模型仍须检查全部帧。高锚点覆盖不等于隐藏背面正确，也不能证明模型已经适用于本场景。
+
+[SDS-Complete](https://sds-complete.github.io/)提供文本先验与实测点/空空间共同优化隐式表面的方向；[Point-based Instance Completion with Scene Constraints](https://arxiv.org/html/2504.05698v1)显式考虑物体补全与周边场景约束。当前借鉴证据约束，未移植它们的训练网络或SDS优化。要实现用户提出的通用“身份+残片→形状→原图验证”闭环，仍需解决先验与实测的尺度、姿态及局部形状适配，不能宣称本轮已经完全实现。
 
 ## 5. 部件融合与父归属的数学原理
 
@@ -809,7 +847,7 @@ BHA继续使用几何面板规则；对于HMG已经确认的本体，可用稳�
 | `assembly_audit.json`、`parts/assembly_*.points.npy` | 整体组成、接触证据、多帧复核和原始来源部件点 |
 | `pipeline_zh.jsonl`、`object_association_zh.jsonl` | 中文阶段及算法决策日志 |
 
-组件唯一挂接点是 `pipeline_components/__init__.py`：`FRONTEND`、`ASSOCIATION`、`FUSION`、`INSTANCE_REFINEMENT`、`GEOMETRY_COMPONENTS`、`GEOMETRY_OUTPUT`、`OBJECT_VALIDATION`、`GRAPH_COMPONENTS`及`BACKGROUND_VALIDATION`。移除采用删除导入与注册项的代码编辑，之后在新结果目录重建。不是靠备份或开关参数模拟移除。`--start-stage` 只用于恢复阶段，`--reuse-scene` 只指定同场景缓存。
+基础组件挂接点是 `pipeline_components/__init__.py`，版本适配集中在 `run_gpt_comparison.configure_profile`：`FRONTEND`、`ASSOCIATION`、`FUSION`、`INSTANCE_REFINEMENT`、`GEOMETRY_COMPONENTS`、`GEOMETRY_OUTPUT`、`OBJECT_VALIDATION`、`GRAPH_COMPONENTS`及`BACKGROUND_VALIDATION`。移除采用删除导入与注册项的代码编辑，之后在新结果目录重建。不是靠备份或开关参数模拟移除。`--start-stage` 只用于恢复阶段，`--reuse-scene` 只指定同场景缓存。
 
 独立注册项 `IDENTITY_VALIDATION`、`SURFACE_VALIDATION`、`PART_GEOMETRY` 和 `EVALUATION_DIAGNOSTICS`。前两项插入原候选验收；部件几何在 `GRAPH_COMPONENTS` 后发布；评价诊断只挂入评价程序。各自删除导入与注册即可撤除。新增 `object_identity_aliases` 保留重复观测来源，`part_geometry_audit.json` 保存实测回填证据，`granularity_surface_diagnostic` 保存新增统计。
 
@@ -934,7 +972,7 @@ $$
 
 ### 6.7 完整物体与层级关联接口
 
-whole_object_consensus.reconcile与native_assembly.reconcile位于proposal_validation内部，分别使用已有图像身份/共享面和原生整图掩码，返回普通候选ID并同步原实测点、轨迹和别名。WHOLE_OBJECT_VALIDATION、SURFACE_ASSEMBLY在v12/v13的configure_profile中挂接。
+whole_object_consensus.reconcile与native_assembly.reconcile位于proposal_validation内部，分别使用已有图像身份/共享面和原生整图掩码，返回普通候选ID并同步原实测点、轨迹和别名。WHOLE_OBJECT_VALIDATION、SURFACE_ASSEMBLY在v12/v13/v14的configure_profile中挂接。
 
 part_body_assembly.construct位于MEASURED_REFINEMENT，thin_geometry之后、axial_assembly之前；已有VLPart部件阶段已经完成。它只接收当前实测PLY、节点及观测轨迹，将满足唯一边界关系的原实例保存为几何部件，再同步正式PLY、对象轨迹、每帧instance_id、part_nodes、part_relations、scene_graph和身份别名，调用原canonical_geometry发布框及空间关系。
 
@@ -980,6 +1018,10 @@ part_body_assembly.construct位于MEASURED_REFINEMENT，thin_geometry之后、ax
 严格AP的低分可能来自漏检、多个碎片竞争一个GT、多个物体混成一个预测、整体框偏斜或缺少厚度，以及高置信度错误排序。预测数小于GT不能证明没有假阳性；例如漏掉10个盘子同时多出若干柜门，仍可能出现“数量偏少但FP不少”。数量误差、表面覆盖与AP必须同时报告。
 
 叠盘的官方完整框沿高度方向相互重叠，因为盘子嵌套放置；把盘堆简单切成互不重叠的高度薄片，不能等同于逐盘完整形状。精细分割需要独立可见边界，非遮挡形状还需要可验证的形状先验，两者不能混称。完全没有可见证据的盘片数量仍有歧义。
+
+### 6.10 v14接缝与形状接口
+
+`seeded_surfaces.construct`复用原结构表面接口；`AXIAL_VALIDATION.check`验证轴向附属身份。最终几何依次调用`verified_suspension.construct`、`enclosure_continuity.construct`、`verified_cuboids.construct`；ECA以关系适配器回调原`part_body_assembly.construct`，沿用原点云、轨迹、别名及部件写入路径。ECA独立审计不覆盖BHA审计，删除`BODY_CONTINUITY`和`FINAL_GEOMETRY`中的相应注册即可撤除；其他新组件同样按单项代码注册撤除。历史v13配置明确清除v14组件，没有新增逐算法命令行开关。
 
 ## 7. 版本 v1：最终结果
 
@@ -1125,7 +1167,7 @@ part_body_assembly.construct位于MEASURED_REFINEMENT，thin_geometry之后、ax
 
 ## 19. 原始流程与最终版本对照
 
-GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12/v13复用同场景GPT响应。以下分别列RAM原始、GPT原始、Qwen→DINO原始对照和最终v12/v13，不把GPT原始流程省略。第一场景早期RAM成品没有同一99帧口径的完整评价，因此不虚构其可比分数。
+GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12/v13/v14复用同场景GPT响应。以下分别列RAM原始、GPT原始、Qwen→DINO原始对照和最终v12/v13/v14，不把GPT原始流程省略。第一场景早期RAM成品没有同一99帧口径的完整评价，因此不虚构其可比分数。
 
 | 场景/流程 | 预测/GT | AP25 | AP50 | AP75 | MVO25 | MVO50 | 数量绝对对数误差 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -1137,6 +1179,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 | 010 GPT v12 | 126/109 | 32.21% | 18.86% | 6.17% | 32.21% | 22.81% | 0.1449 |
 | 002 GPT v13 | 10/10 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | 0.0000 |
 | 010 GPT v13 | 134/109 | 42.02% | 25.97% | 9.91% | 42.02% | 31.24% | 0.2065 |
+| 002 GPT v14 | 10/10 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | 0.0000 |
+| 010 GPT v14 | 129/109 | 44.42% | 27.68% | 10.86% | 44.42% | 33.18% | 0.1685 |
 
 | 场景/流程 | TP/FP/FN@25 | TP/FP/FN@50 | TP/FP/FN@75 |
 | --- | --- | --- | --- |
@@ -1148,6 +1192,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 | 010 GPT v12 | 64/62/45 | 45/81/64 | 19/107/90 |
 | 002 GPT v13 | 10/0/0 | 10/0/0 | 10/0/0 |
 | 010 GPT v13 | 76/58/33 | 57/77/52 | 28/106/81 |
+| 002 GPT v14 | 10/0/0 | 10/0/0 | 10/0/0 |
+| 010 GPT v14 | 77/52/32 | 58/71/51 | 29/100/80 |
 
 严格框AP与MVO采用原始GT，类无关项目适配评价，不是官方点云掩码benchmark或关系准确率。数量比可能因漏检与重复相抵而接近1，必须一起看TP/FP/FN。当前第一场景100%只覆盖这份可观测GT和框口径。
 
@@ -1265,9 +1311,70 @@ AP是整体置信度排序指标，不适合给单个物体冠以“AP”。以�
 
 ![第一场景最终v13，实测坐标与v12一致](figures/v13_scene002.png)
 
-## 21. 保留数据、日志与直接可视化命令
+## 21. 版本 v14：最终结果与形状恢复边界
 
-数据只保留ScanNet/Hypersim及scene0802。每个PartAware版本归并到一个partaware_vN目录，v12保留既有参照，v13只保留一套包含两个场景的最终成品；原始RAM、GPT原始和Qwen→DINO对照分别保留。scene0802的矫正输入、基础/改进流程结果及fuse点云保留，443份矫正位姿与输入逐文件一致。3RScan/KITTI、中途试验和无用调试日志按用户要求删除，没有备份。
+本版继续使用同一GPT类别响应、SAM3观测和原始融合云，没有新增GPT/Qwen识图或修改GT。仅保留完整运行、独立评价通过的最终成品；中途参数和失败成品不加入版本对照。
+
+| 场景 | 预测/GT | AP25/AP50/AP75 | 数量绝对对数误差 |
+| --- | --- | --- | --- |
+| ai_001_002 | 10/10 | 100.00%/100.00%/100.00% | 0.0000 |
+| ai_001_010 | 129/109 | 44.42%/27.68%/10.86% | 0.1685 |
+
+第二场景由v13的42.02%/25.97%/9.91%变为44.42%/27.68%/10.86%。目标AP25≥80%、AP50≥70%尚未达到，不称为目标完成。
+
+### 21.1 实际改变与恢复证据
+
+身份种子解决全局大平面挤占候选的问题。台面只收录被逐点三视角证实的真实坐标；封闭柜体前面按局部密集面与开放格架分开。接触归并还要检查整物体/部件身份，避免把餐具附到柜子。组合名称只提供已有缓存身份相容证据，唯一轴向连接及至少3帧共同可见仍是必要条件；音箱与支架保留整体及可查询部件。
+
+形状验收移到实测整体归并之后，并逐次搜索平行后界。它恢复有证据支持的背/侧/上下表面；没有通用模型补全成功的声明。
+
+| 通过验收的对象 | 深度假设 | 新增生成点 | 三视角深度支持点 | 检查帧数 |
+| --- | --- | --- | --- | --- |
+| 138 refrigerator | 0.681米 | 20482 | 1302 | 100 |
+| 15 cabinet | 0.351米 | 17329 | 2857 | 100 |
+| 162 cabinet | 0.350米 | 29478 | 2416 | 100 |
+
+ECA将节点6归入15，保留`assembly_6_section`部件；实测接缝高1.088米、竖直连续覆盖99.16%，27帧共同观测。没有修改实测坐标或读取GT；归并后预测数为129。
+
+### 21.2 逐物体定位核查
+
+| GT实例 | v13最佳框IoU | v14最佳框IoU |
+| --- | --- | --- |
+| 1 lamp | 6.72% | 6.72% |
+| 26 window | 39.05% | 39.05% |
+| 27 window | 39.31% | 39.31% |
+| 30 cabinet | 86.70% | 86.43% |
+| 45 shelves | 43.03% | 43.03% |
+| 57 cabinet | 7.25% | 79.10% |
+| 67 refrigerator | 98.59% | 97.64% |
+| 68 cabinet | 18.60% | 18.60% |
+| 148 counter | 56.27% | 57.09% |
+| 149 sink | 83.21% | 83.21% |
+
+上表是每个GT的最佳几何候选，不等于严格一对一TP。正式AP仍按原GT、原物体口径及一对一匹配计算。6.9的GT实例说明和原始流程对照保留。
+
+![v14第二场景最终成品，原ScanNet-SG可视化](figures/v14_scene010.png)
+
+![v14反向观察生成背侧面；补全面仍是预测假设](figures/v14_scene010_reverse.png)
+
+
+同一最终实例层级下，实测几何AP25/AP50/AP75为41.46%/24.68%/9.95%，完成几何为44.42%/27.68%/10.86%。该对照区分层级/实测恢复与生成表面带来的框变化；框AP提高不证明背面形状与真实网格完全一致。
+
+### 21.3 尚未解决及泛化限制
+
+隐藏几何仍是有条件假设；长方体族不能代表任意物体。冰箱上方横梁的独立身份、完整灯具整体、所有下柜的统一父体、相邻窗体独立粒度及部分微小物体仍需改进。RSI目前只证实多视角稳定重复外缘及两摞盘子的实例分离，不能据此声称对所有瓶子、遮挡物或任意结构泛化良好。
+
+本场景既参与调试也参与评价，没有另设未见测试场景。因此分数进步是这两个场景上的观测证据，不是广泛泛化结论。下一步应保留实测锚点并优化模型先验的尺度/姿态及局部对应，再以未见场景验证；不能用GT补形、膨胀预测框或数量目标代替建图。
+
+### 21.4 接口、拆卸与验证
+
+`run_gpt_comparison.configure_profile`挂接`seeded_surfaces`、`AXIAL_VALIDATION=attachment_identity`、`BODY_CONTINUITY=enclosure_continuity`及最终`verified_suspension → enclosure_continuity → verified_cuboids`。删除相应代码注册即可拆卸，历史profile恢复原组件；不依赖备份或算法开关。ScanNet/Hypersim输入和原topology对象字段保留，新增证据与部件作为扩展。
+
+219项离线回归通过；最终几何重跑的实测哈希和含实例编码的生成点集一致。两场景完整重建、原可视化接口和缓存哈希核验见`docs/v14_final_results.json`；数学规则见3.10–3.11、3.17、4.3–4.4及5章。报告主脉络描述当前代码，历史版本保留各自最终结果。
+
+## 22. 保留数据、日志与直接可视化命令
+
+数据只保留ScanNet/Hypersim及scene0802。每个PartAware版本归并到一个partaware_vN目录，v12保留既有参照，v13和v14各只保留一套包含两个场景的最终成品；原始RAM、GPT原始和Qwen→DINO对照分别保留。scene0802的矫正输入、基础/改进流程结果及fuse点云保留，443份矫正位姿与输入逐文件一致。3RScan/KITTI、中途试验和无用调试日志按用户要求删除，没有备份。
 
 最新命令显示正式完成点云；RSI下层曲面是已标记的形状假设。改成instance_cloud_cleaned.ply可只查看真实观测，配合topology_map_observed.json查看实测框。
 
@@ -1280,8 +1387,8 @@ env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
 /home/lewisliu/PartAware-SG/script/visualize_map.py \
---map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_002/instance_cloud_cleaned.ply \
---topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_002/topology_map.json \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_002/topology_map.json \
 --show_bboxes --node_radius 0.02
 ```
 
@@ -1292,15 +1399,17 @@ env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
 /home/lewisliu/PartAware-SG/script/visualize_map.py \
---map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_010/instance_cloud_completed.ply \
---topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_010/topology_map.json \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_010/instance_cloud_completed.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_010/topology_map.json \
 --show_bboxes --node_radius 0.02
 ```
 
 需要看部件时，自行加 --show_parts --show_part_points；默认不显示边、不启用pick。scene0802的基础与PartAware结果仍在scene0802_scannetsg_v1、scene0802_partaware_v1中；独立fuse点云归并到scene0802_fuse_v1/scannet/scene0802_00/scene0802_00_fused.ply。
 
-## 22. 当前采用方法的来源
+## 23. 当前采用方法的来源
 
-[ScanNet-SG](https://github.com/tud-amr/ScanNet-SG)保留原建图接口；[OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)提供融合参考；[VLPart](https://github.com/facebookresearch/VLPart)运行视觉部件预测；[SAM3官方代码](https://github.com/facebookresearch/sam3)承担当前v12/v13二维实例；[MaskClustering](https://github.com/PKU-EPIC/MaskClustering)提供多视角完整掩码共识依据；[AdaPoinTr](https://arxiv.org/abs/2301.04545)为选择性形状提案网络；[PartNet](https://arxiv.org/abs/1812.02713)、[Part2Object](https://github.com/SooLab/Part2Object)支持物体—部件分层观点，BHA是本项目几何适配，没有宣称移植它们的训练网络。来源不替代本项目实测评价。
+[ScanNet-SG](https://github.com/tud-amr/ScanNet-SG)保留原建图接口；[OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)提供融合参考；[VLPart](https://github.com/facebookresearch/VLPart)运行视觉部件预测；[SAM3官方代码](https://github.com/facebookresearch/sam3)承担当前v12/v13/v14二维实例；[MaskClustering](https://github.com/PKU-EPIC/MaskClustering)提供多视角完整掩码共识依据；[AdaPoinTr](https://arxiv.org/abs/2301.04545)为选择性形状提案网络；[PartNet](https://arxiv.org/abs/1812.02713)、[Part2Object](https://github.com/SooLab/Part2Object)支持物体—部件分层观点，BHA是本项目几何适配，没有宣称移植它们的训练网络。来源不替代本项目实测评价。
 
 本轮文献方向：[RICE](https://arxiv.org/abs/2106.15711)支持拥挤实例的拆分与合并研究思路，[ZISVFM](https://arxiv.org/abs/2502.03266)支持深度与视觉边界联合，[Open3DIS](https://arxiv.org/abs/2312.10671)支持二维引导三维实例。RSI/HMG是项目自有适配，没有移植这些论文的训练网络或宣称复现其指标。
+
+本版新增阅读：[MGPC](https://arxiv.org/html/2601.03660v2)、[SDS-Complete](https://sds-complete.github.io/)、[Point-based Instance Completion with Scene Constraints](https://arxiv.org/html/2504.05698v1)、[Detection Based Part-level Articulated Object Reconstruction](https://arxiv.org/html/2504.03177v1)、[SymmCompletion](https://arxiv.org/html/2503.18007v1)。前两类提供多模态形状与观测约束方向；部件重建提供检测后归并的结构依据；局部对称补全提示保留实测细节的重要性。本项目没有宣称实现论文的完整训练系统，当前几何适配和未接受模型的状态分别列明。

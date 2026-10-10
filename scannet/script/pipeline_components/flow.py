@@ -30,6 +30,8 @@ def process_tree(registry, recognition=None):
         'SHAPE': {'name': 'Scene-constrained Hypotheses Anchored to Physical Evidence', 'children': {
             'geometry': {'modules': modules('GEOMETRY_COMPONENTS')},
             'measured_recovery': {'modules': modules('PART_GEOMETRY', 'MEASURED_REFINEMENT', 'FINAL_GEOMETRY')},
+            'assembly_ownership': {'modules': modules('AXIAL_VALIDATION')},
+            'enclosure_continuity': {'modules': modules('BODY_CONTINUITY')},
             'evidence_boundary': {'generated_surfaces_are_measurements': False, 'ground_truth_in_construction': False}}},
         'GRAPH': {'name': 'Geometry Relations And Part Hierarchy', 'children': {
             'objects': {'backend': 'original ScanNet-SG graph binary'},
