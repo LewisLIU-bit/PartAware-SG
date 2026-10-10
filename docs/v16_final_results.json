@@ -1,12 +1,14 @@
 {
   "version": "v16",
-  "tests": 242,
+  "final_revision": "MIRA AP refinement",
+  "tests": 250,
   "consumer_vision_api_calls": 0,
   "construction_uses_ground_truth": false,
   "evaluation_uses_original_gt": true,
+  "retention_basis": "all three AP non-regressing and AP25/AP50 improve; FP and count-error tradeoffs explicitly reported",
   "targets": {
-    "AP25": 0.8,
-    "AP50": 0.7
+    "AP25": 0.7,
+    "AP50": 0.55
   },
   "scenes": [
     {
@@ -37,7 +39,7 @@
           "FN": 0
         }
       },
-      "graph_sha256": "60bc98cf0967d50c3c9a17e4f327f0bbc9defdf2803a3914f859f37ea73d4337",
+      "graph_sha256": "747dc4c9653960ffbc575c041bccb8e2632365f9242b741c9a87b07fda32650b",
       "prediction_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
       "observed_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
       "completed_ply_sha256": null,
@@ -162,6 +164,72 @@
       "part_of_edges": 15,
       "measured_contact_nodes": {},
       "measured_dense_surfaces": {},
+      "retention_AP_gate": {
+        "non_regressing": true,
+        "AP25_improved": false,
+        "AP50_improved": false,
+        "scope": "user AP objective; full strict-count and count-error checks remain reported separately"
+      },
+      "previous_v16_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "previous_v16_strict_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "mask_graph_audit": {
+        "algorithm": "MIRA",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "b15927528fd0f69220762bece6a59d60a6d4084a5b0cfc6b4917f6dd455fe0fa",
+        "objects": [
+          {
+            "instance_id": "4",
+            "name": "keyboard",
+            "action": "defer_confirmed_part_duplicate",
+            "part_ids": [
+              "part_11"
+            ],
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0004",
+              "cam_00_0016",
+              "cam_00_0033",
+              "cam_00_0061",
+              "cam_00_0065",
+              "cam_00_0083",
+              "cam_01_0004",
+              "cam_01_0050",
+              "cam_01_0054",
+              "cam_01_0070",
+              "cam_01_0091",
+              "cam_02_0099"
+            ],
+            "native_mean_confidence": 0.8491586538461539,
+            "camera_baseline_m": 4.178995805687105,
+            "measured_points": 6464,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "whole_image_frames": 12
+          }
+        ]
+      },
       "visible_instance_audit": {
         "algorithm": "VISTA_v16",
         "ground_truth_used": false,
@@ -186,47 +254,47 @@
     {
       "scene_id": "ai_001_010",
       "frames": 100,
-      "predicted": 127,
+      "predicted": 131,
       "gt": 109,
-      "AP25": 0.5883816566298687,
-      "AP50": 0.41245840334386896,
-      "AP75": 0.18415254146040616,
-      "MVO25": 0.5883816566298687,
-      "MVO50": 0.457607576211022,
-      "absolute_log_count_error": 0.1528392042294475,
+      "AP25": 0.6094247380273331,
+      "AP50": 0.4214499420884318,
+      "AP75": 0.1883115166885917,
+      "MVO25": 0.6094247380273331,
+      "MVO50": 0.46620097507393493,
+      "absolute_log_count_error": 0.18384944097200775,
       "strict_counts": {
         "0.25": {
-          "TP": 88,
-          "FP": 39,
-          "FN": 21
+          "TP": 91,
+          "FP": 40,
+          "FN": 18
         },
         "0.5": {
-          "TP": 72,
-          "FP": 55,
-          "FN": 37
+          "TP": 74,
+          "FP": 57,
+          "FN": 35
         },
         "0.75": {
-          "TP": 39,
-          "FP": 88,
-          "FN": 70
+          "TP": 40,
+          "FP": 91,
+          "FN": 69
         }
       },
-      "graph_sha256": "34f4290f431b5dcc2ce3bcc59fbc0e800128e95ac9887a6f7f1cfff874f09b94",
-      "prediction_ply_sha256": "100e167793fb5c0572d55c0617a630f57dbcf43eea4dc64962b7f6fe66a99dc1",
-      "observed_ply_sha256": "100e167793fb5c0572d55c0617a630f57dbcf43eea4dc64962b7f6fe66a99dc1",
-      "completed_ply_sha256": "c3c428bcaa7823f6ad1d6b2bf921480f55ca0e957891f57fd04d9b8bacff01ba",
+      "graph_sha256": "419d58a40966a5b273fe6cb74becb02eab4e10b65701225c7fe83aa6dd4acf56",
+      "prediction_ply_sha256": "89855e540e304905cfa37230f279d67c24163096369e8e189105ac701b55847d",
+      "observed_ply_sha256": "89855e540e304905cfa37230f279d67c24163096369e8e189105ac701b55847d",
+      "completed_ply_sha256": "090af044834e11fcc5a60befae4a19ac3bf8746f73f8eae28f524cc8de61b067",
       "gt_labels_sha256": "547c62e10f02e9601f45bdfb5553e0d5f2228b4b697709c37f3eb4038908a702",
       "legacy_topology_reader_passed": true,
       "same_raw_fusion": true,
       "same_native_masks": true,
       "non_regression_gate": {
-        "accepted": true,
-        "non_regressing": true,
+        "accepted": false,
+        "non_regressing": false,
         "strictly_improved": true,
         "checks": [
           {
             "metric": "geometry_only_box_AP25",
-            "candidate": 0.5883816566298687,
+            "candidate": 0.6094247380273331,
             "baseline": 0.5189953738019547,
             "direction": "higher",
             "non_regressing": true,
@@ -234,7 +302,7 @@
           },
           {
             "metric": "geometry_only_box_AP50",
-            "candidate": 0.41245840334386896,
+            "candidate": 0.4214499420884318,
             "baseline": 0.336310873521977,
             "direction": "higher",
             "non_regressing": true,
@@ -242,7 +310,7 @@
           },
           {
             "metric": "geometry_only_box_AP75",
-            "candidate": 0.18415254146040616,
+            "candidate": 0.1883115166885917,
             "baseline": 0.1486108450882826,
             "direction": "higher",
             "non_regressing": true,
@@ -250,15 +318,15 @@
           },
           {
             "metric": "absolute_log_count_error",
-            "candidate": 0.1528392042294475,
+            "candidate": 0.18384944097200775,
             "baseline": 0.1528392042294475,
             "direction": "lower",
-            "non_regressing": true,
+            "non_regressing": false,
             "strictly_improved": false
           },
           {
             "metric": "TP@0.25",
-            "candidate": 88,
+            "candidate": 91,
             "baseline": 82,
             "direction": "higher",
             "non_regressing": true,
@@ -266,7 +334,7 @@
           },
           {
             "metric": "FP@0.25",
-            "candidate": 39,
+            "candidate": 40,
             "baseline": 45,
             "direction": "lower",
             "non_regressing": true,
@@ -274,7 +342,7 @@
           },
           {
             "metric": "FN@0.25",
-            "candidate": 21,
+            "candidate": 18,
             "baseline": 27,
             "direction": "lower",
             "non_regressing": true,
@@ -282,7 +350,7 @@
           },
           {
             "metric": "TP@0.5",
-            "candidate": 72,
+            "candidate": 74,
             "baseline": 63,
             "direction": "higher",
             "non_regressing": true,
@@ -290,7 +358,7 @@
           },
           {
             "metric": "FP@0.5",
-            "candidate": 55,
+            "candidate": 57,
             "baseline": 64,
             "direction": "lower",
             "non_regressing": true,
@@ -298,7 +366,7 @@
           },
           {
             "metric": "FN@0.5",
-            "candidate": 37,
+            "candidate": 35,
             "baseline": 46,
             "direction": "lower",
             "non_regressing": true,
@@ -306,7 +374,7 @@
           },
           {
             "metric": "TP@0.75",
-            "candidate": 39,
+            "candidate": 40,
             "baseline": 34,
             "direction": "higher",
             "non_regressing": true,
@@ -314,7 +382,7 @@
           },
           {
             "metric": "FP@0.75",
-            "candidate": 88,
+            "candidate": 91,
             "baseline": 93,
             "direction": "lower",
             "non_regressing": true,
@@ -322,7 +390,7 @@
           },
           {
             "metric": "FN@0.75",
-            "candidate": 70,
+            "candidate": 69,
             "baseline": 75,
             "direction": "lower",
             "non_regressing": true,
@@ -731,13 +799,168 @@
         "25": {
           "measured": true,
           "original_points": 11811,
-          "retained_points": 30188,
-          "additional_observed_samples": 18574,
+          "retained_points": 30161,
+          "additional_observed_samples": 18550,
           "minimum_point_views": 3,
           "generated_points": 0,
           "v15_observed_points": 30483,
-          "v16_observed_points": 30188
+          "v16_observed_points": 30161
         }
+      },
+      "retention_AP_gate": {
+        "non_regressing": true,
+        "AP25_improved": true,
+        "AP50_improved": true,
+        "scope": "user AP objective; full strict-count and count-error checks remain reported separately"
+      },
+      "previous_v16_AP": {
+        "AP25": 0.5883816566298687,
+        "AP50": 0.41245840334386896,
+        "AP75": 0.18415254146040616
+      },
+      "previous_v16_strict_counts": {
+        "0.25": {
+          "TP": 88,
+          "FP": 39,
+          "FN": 21
+        },
+        "0.5": {
+          "TP": 72,
+          "FP": 55,
+          "FN": 37
+        },
+        "0.75": {
+          "TP": 39,
+          "FP": 88,
+          "FN": 70
+        }
+      },
+      "mask_graph_audit": {
+        "algorithm": "MIRA",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "b15927528fd0f69220762bece6a59d60a6d4084a5b0cfc6b4917f6dd455fe0fa",
+        "objects": [
+          {
+            "instance_id": "131",
+            "name": "faucet",
+            "action": "defer_confirmed_part_duplicate",
+            "part_ids": [
+              "part_103",
+              "owned_149_part"
+            ],
+            "frames": [
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0018",
+              "cam_00_0021",
+              "cam_00_0027",
+              "cam_00_0030",
+              "cam_00_0033",
+              "cam_00_0039",
+              "cam_00_0045",
+              "cam_00_0063",
+              "cam_00_0066",
+              "cam_00_0069",
+              "cam_00_0084",
+              "cam_00_0096",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0017",
+              "cam_01_0026",
+              "cam_01_0029",
+              "cam_01_0059",
+              "cam_01_0062",
+              "cam_02_0025",
+              "cam_02_0028",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0037",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0049"
+            ],
+            "native_mean_confidence": 0.9345052083333333,
+            "camera_baseline_m": 6.185113508307881,
+            "measured_points": 6892,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "whole_image_frames": 30
+          },
+          {
+            "instance_id": "460",
+            "name": "cup",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0039",
+              "cam_00_0042",
+              "cam_01_0035",
+              "cam_02_0001",
+              "cam_02_0025",
+              "cam_02_0061"
+            ],
+            "native_mean_confidence": 0.8365885416666666,
+            "camera_baseline_m": 4.207816724529648,
+            "measured_points": 446,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "whole_image_frames": 4
+          },
+          {
+            "instance_id": "461",
+            "name": "glass",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_02_0001",
+              "cam_02_0034"
+            ],
+            "native_mean_confidence": 0.82109375,
+            "camera_baseline_m": 4.109229121975831,
+            "measured_points": 362,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "whole_image_frames": 5
+          },
+          {
+            "instance_id": "462",
+            "name": "cup",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0039",
+              "cam_00_0042",
+              "cam_02_0001",
+              "cam_02_0025"
+            ],
+            "native_mean_confidence": 0.84375,
+            "camera_baseline_m": 1.7971464049658072,
+            "measured_points": 334,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "whole_image_frames": 4
+          },
+          {
+            "instance_id": "463",
+            "name": "cooking utensil",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_01_0002",
+              "cam_01_0056"
+            ],
+            "native_mean_confidence": 0.873046875,
+            "camera_baseline_m": 5.221989386462899,
+            "measured_points": 1093,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "whole_image_frames": 4
+          }
+        ]
       },
       "visible_instance_audit": {
         "algorithm": "VISTA_v16",
@@ -4196,17 +4419,18 @@
   "native_cache_bundles_verified": 199,
   "learned_universal_completion_solved": false,
   "fine_instance_generalization_proven": false,
-  "added_geometry": "VISTA/CMR/DSM recover measured raw depth; PSG-inspired empirical geometry belief is not full NIW; existing cuboids and RSI remain labeled hypotheses",
+  "added_geometry": "MIRA/VISTA/CMR/DSM recover measured raw depth; PSG-inspired empirical geometry belief is not full NIW; existing cuboids and RSI remain labeled hypotheses",
   "target_reached": false,
-  "rse_runtime": {
-    "scikit_learn": "1.7.2"
+  "report_source_sha256": "3f520692d3aeed35d3d8787135a8d6a405c69612ffbdf367f16eb321d3836e1e",
+  "previous_targets": {
+    "AP25": 0.8,
+    "AP50": 0.7
   },
-  "report_source_sha256": "5cadcd841f527f7345962d0923932a2ec915c9c42752c09ac9ceb7f61bc91305",
-  "latex_compilation": {
-    "status": "compiler_unavailable",
-    "source": "docs/RESEARCH_LOG.tex",
-    "diagnostic": "exec failed: windows sandbox: helper_unknown_error: setup refresh had errors",
-    "source_preserved": true,
-    "separate_pdf_created": false
-  }
+  "target_revision": {
+    "date": "2026-10-10",
+    "requested_by": "user",
+    "evaluation_unchanged": true
+  },
+  "latex_compile_confirmed": false,
+  "latex_limitation": "built-in compiler environment setup failed; no external PDF created"
 }

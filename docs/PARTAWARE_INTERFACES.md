@@ -404,3 +404,18 @@ GT evaluation; diagnostics are not fed into construction. Existing Graph, 256/38
 object features and independent 1024-dimensional part features remain compatible.
 Equations, remaining errors and sources are in report chapters 2.11, 6.12 and 23–25.
 Final validated hashes and gates are in `docs/v16_final_results.json`.
+
+## V16 final MIRA reconciliation
+
+`configure_profile('v16', registry)` adds `instance_reconciliation` after
+`visible_instances` and `residual_ownership`; all historical profiles detach it.
+MIRA belongs to MICA and executes after part fusion. It uses signed native masks,
+raw depth and genuine cached 384/256-dimensional features; no fresh vision request.
+The module preserves existing root geometry and adds only measured new instances.
+Partial surface association, same-frame separation, three visible native-mask
+votes per point, camera baseline, quality/frame gates and known-parent suppression
+are described in report section 2.12. `mask_graph_audit.json` records code hash,
+measured points, supporting frames, decisions and zero generated coordinates.
+Independent GT review follows original-viewer rendering and cannot feed construction.
+AP retention and the stricter all-metric gate are reported separately: count error
+regresses, and AP50/AP75 unmatched counts include geometrically incomplete new roots.

@@ -32,7 +32,7 @@ def configure_profile(version, registry):
     registry.FINAL_GEOMETRY = [suspension_geometry if entry.__name__.endswith('.verified_suspension') else entry
         for entry in getattr(registry, 'FINAL_GEOMETRY', []) if entry.__name__.rsplit('.', 1)[-1] not in
         ('verified_cuboids', 'enclosure_continuity', 'surface_densification', 'contact_instances',
-         'support_layers', 'boundary_ownership', 'front_continuity', 'face_boxes', 'visible_instances', 'residual_ownership')]
+         'support_layers', 'boundary_ownership', 'front_continuity', 'face_boxes', 'visible_instances', 'residual_ownership', 'instance_reconciliation')]
     if any(entry.__name__.endswith('.seeded_surfaces') for entry in getattr(registry, 'GEOMETRY_COMPONENTS', [])):
         from pipeline_components import structural_surfaces, backed_cuboid
         registry.GEOMETRY_COMPONENTS = [structural_surfaces if entry.__name__.endswith('.seeded_surfaces') else entry
@@ -80,8 +80,8 @@ def configure_profile(version, registry):
                                        boundary_ownership, front_continuity, face_boxes]
             registry.POST_PUBLICATION = [scene_review]
         if version == 'v16':
-            from pipeline_components import visible_instances, residual_ownership
-            registry.FINAL_GEOMETRY += [visible_instances, residual_ownership]
+            from pipeline_components import visible_instances, residual_ownership, instance_reconciliation
+            registry.FINAL_GEOMETRY += [visible_instances, residual_ownership, instance_reconciliation]
 
 
 def run_worker(args):

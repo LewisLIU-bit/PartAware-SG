@@ -20,31 +20,36 @@ with RAM, Qwen-to-DINO, v12, v13, v14, v15 and v16 using the same scene cache as
 [GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
 The existing ScanNet and Hypersim interfaces remain unchanged.
 
-The latest v16 research profile reuses the existing GPT and signed SAM3 observations.
-Its FOVEA -> MICA -> SHAPE -> GRAPH tree adds Visible Instance Surface Tracking
-and Assignment (VISTA) and Robust Surface Envelopes (RSE). VISTA reconciles partial
-measured observations, recovers sparse thin structures using independent visible
-votes, and assigns surfaces with physical uniqueness. RSE protects multiple
-supported unknown components before FAST-MCD tail checks. No fixed two-row count,
-scene coordinates, GT IDs, node lists, category whitelist, or special prompt is used.
+The latest v16 final reuses one existing GPT cache per scene and signed SAM3 observations.
+FOVEA -> MICA -> SHAPE -> GRAPH includes VISTA (Visible Instance Surface Tracking
+and Assignment), RSE (Robust Surface Envelopes), and MIRA (Measured Instance
+Reconciliation and Association). MIRA associates partial observed surfaces across
+views, vetoes independently segmented same-frame objects, and admits new measured
+instances with quality, camera baseline and independent visible-mask support.
+Known parts and already owned related surfaces suppress duplicate roots. Existing
+root geometry stays intact. No fixed object count, scene coordinates, GT IDs,
+node list, category whitelist or special prompt is used.
 
-The PSG paper motivates separating physical extent from uncertainty in its estimate.
-V16 uses empirical covariances, not PSG's NIW/EM optimizer or sampled Gaussian map.
-SupeRGB-D, SAMPart3D and ClearGrasp were reviewed but their trained networks were not
-deployed. All added VISTA points are measured. Existing cuboid and repeated-surface
-hypotheses remain labeled generated priors, not universal learned hidden completion.
+The first scene retains 10/10 and 100%/100%/100% AP25/AP50/AP75. The second reaches
+60.94%/42.14%/18.83% (131 predictions / 109 GT).
+All three AP thresholds and strict TP/FP/FN improve over v15, but the log-count
+error increases; the all-metric nonregression gate therefore does not fully pass.
+Relative to the pre-refinement v16, AP25/AP50 improve while unmatched predictions
+increase slightly. These tradeoffs are reported rather than hidden.
+The five hanging implements now match at 50% box IoU. Windows, thin oven geometry,
+small boxes and several transparent objects still fail. AP25 70% / AP50 55% remains
+the current unmet target. Class-agnostic box scores do not establish fine semantic
+accuracy or generalization, and MIRA is not universal hidden-shape completion.
+Existing cuboid and repeated-surface priors remain labeled as generated hypotheses.
 
-Both scenes are rebuilt from the same retained raw fusion and cached observations.
-ai_001_002 retains 100%/100%/100% AP25/AP50/AP75. ai_001_010 reaches 58.84%/41.25%/18.42%
-(127 predictions / 109 GT), compared with v15's 51.90%/33.63%/14.86%.
-All three AP thresholds, optimal TP/FP/FN counts and log-count error pass nonregression
-against v15. These adapted class-agnostic box metrics do not prove correct fine labels.
-Some transparent rear objects, a spatula, the hanging rail and other small objects
-remain unresolved, as do the 80% AP25 / 70% AP50 target and general completion.
-Local regressions are reported alongside gains. See [the consolidated report](docs/RESEARCH_REPORT.md)
-and [the final validation receipt](docs/v16_final_results.json).
+Both scenes are rebuilt from retained raw fusion and tracks without new GPT/Qwen
+or SAM3 image inference. All 250 offline regression tests and the original
+TopologyMap reader pass; all 199 signed bundles match the source. The consolidated
+report retains all 119 official GT identifiers, 11 atlases, equations, references,
+viewer commands and one final result per version. See [the report](docs/RESEARCH_REPORT.md)
+and [the independent validation receipt](docs/v16_final_results.json).
 
-Rebuild v16 in a fresh result directory:
+Rebuild into a fresh directory with existing observations:
 
 ```bash
 cd /home/lewisliu/PartAware-SG
@@ -56,15 +61,11 @@ cd /home/lewisliu/PartAware-SG
   --start-stage graph
 ```
 
-Final artifacts are under `datasets/scannet-sg-processed/partaware_v16`.
-Pair `instance_cloud_completed.ply` with `topology_map.json`, or use
-`instance_cloud_cleaned.ply` and `topology_map_observed.json` for measurements.
-The first scene uses the cleaned PLY. Detach modules at code registrations and
-rebuild; historical profiles actively clear v16 adapters. No per-feature flags
-or backup restoration are required. All 242 offline tests and the original
-TopologyMap reader pass; all 199 signed observation bundles match the source.
-The report preserves all 119 GT labels, 11 atlases, mathematical sources, direct
-viewer commands and each version's final comparison. No new GPT/Qwen request occurs.
+Final results remain under `datasets/scannet-sg-processed/partaware_v16`.
+Use `instance_cloud_completed.ply` with `topology_map.json` for final geometry;
+use `instance_cloud_cleaned.ply` with `topology_map_observed.json` for measurements.
+Historical profiles actively detach V16 adapters. Remove MIRA's code registration
+and rebuild to omit it; existing 256/384-dimensional object features are unchanged.
 
 PartAware-SG preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,

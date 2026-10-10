@@ -6,7 +6,7 @@
       "scene_id": "ai_001_002",
       "gt_count": 10,
       "frames": 99,
-      "evaluation_sha256": "febeca50570c6fbe1761830fff48a1e3e896032e966f016c5ee0b801848ba7a0",
+      "evaluation_sha256": "f39e78d4caded2aa9acc586f5453dbae3cb3a0a45f2c3516e6d77d30695800f4",
       "figures": [
         "figures/v16_gt_002_01.png"
       ],
@@ -322,7 +322,7 @@
       "scene_id": "ai_001_010",
       "gt_count": 109,
       "frames": 100,
-      "evaluation_sha256": "c6493baef57b3da36c7f90b2f67c6becd95ea2a0bfafd82dceab00198def1f1e",
+      "evaluation_sha256": "e9579ea307bf4919acb30083a489405e4835d6e1c4ae74c6a8eb67275ce4b412",
       "figures": [
         "figures/v16_gt_010_01.png",
         "figures/v16_gt_010_02.png",
@@ -1458,13 +1458,17 @@
           "gt_id": 50,
           "official_label": "otherprop",
           "best_prediction": {
-            "prediction_id": "78",
-            "label": "cabinet",
-            "IoU": 0.0035488746448592632,
-            "confidence": 0.44260630399427187
+            "prediction_id": "461",
+            "label": "glass",
+            "IoU": 0.3556474657035866,
+            "confidence": 0.574765625
           },
           "strict_matches": {
-            "0.25": null,
+            "0.25": {
+              "prediction_id": "461",
+              "gt_id": 50,
+              "iou": 0.3556474657035866
+            },
             "0.5": null,
             "0.75": null
           },
@@ -2180,15 +2184,27 @@
           "gt_id": 99,
           "official_label": "otherprop",
           "best_prediction": {
-            "prediction_id": "3",
-            "label": "countertop",
-            "IoU": 0.0,
-            "confidence": 0.7153965703329238
+            "prediction_id": "463",
+            "label": "cooking utensil",
+            "IoU": 0.8264526705728679,
+            "confidence": 0.6111328125
           },
           "strict_matches": {
-            "0.25": null,
-            "0.5": null,
-            "0.75": null
+            "0.25": {
+              "prediction_id": "463",
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            },
+            "0.5": {
+              "prediction_id": "463",
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            },
+            "0.75": {
+              "prediction_id": "463",
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            }
           },
           "frame_id": "cam_01_0002",
           "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
@@ -2920,14 +2936,22 @@
           "gt_id": 146,
           "official_label": "otherprop",
           "best_prediction": {
-            "prediction_id": "96",
-            "label": "utensil rack",
-            "IoU": 0.04153398976495348,
-            "confidence": 0.5226114321565083
+            "prediction_id": "462",
+            "label": "cup",
+            "IoU": 0.6296046514716646,
+            "confidence": 0.590625
           },
           "strict_matches": {
-            "0.25": null,
-            "0.5": null,
+            "0.25": {
+              "prediction_id": "462",
+              "gt_id": 146,
+              "iou": 0.6296046514716646
+            },
+            "0.5": {
+              "prediction_id": "462",
+              "gt_id": 146,
+              "iou": 0.6296046514716646
+            },
             "0.75": null
           },
           "frame_id": "cam_00_0084",
@@ -3096,9 +3120,9 @@
         }
       ],
       "strict_counts": {
-        "0.25": 88,
-        "0.5": 72,
-        "0.75": 39
+        "0.25": 91,
+        "0.5": 74,
+        "0.75": 40
       }
     }
   ]

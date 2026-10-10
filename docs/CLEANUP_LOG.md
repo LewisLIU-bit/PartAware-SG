@@ -121,3 +121,6 @@ Retained one v15 final tree with both scenes and identical signed source caches.
 ## 2026-10-10 v16 final retention
 
 Retained one v16 final tree with both scenes and 199 identical signed observations. Removed only the seven own v16 diagnostic/trial cache directories. Original RAM/GPT/Qwen baselines, previous final versions, ScanNet/Hypersim/scene0802 and pre-existing source modifications remain. No backup was made. Consolidated report shows final results only.
+
+
+2026-10-10：更新v16唯一最终版后，清除本轮自己创建的MIRA/正交面/完整复跑候选缓存；未删除历史版本最终成品、ScanNet、Hypersim或scene0802。最终综合报告只保留各版本终极结果和真实未解决问题。
