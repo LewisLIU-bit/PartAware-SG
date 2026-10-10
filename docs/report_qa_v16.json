@@ -1,0 +1,29 @@
+{
+  "desktop": {
+    "version": "v16",
+    "updated": "2026-10-10",
+    "sourceHash": "5cadcd841f527f7345962d0923932a2ec915c9c42752c09ac9ceb7f61bc91305",
+    "edition": "研究报告 · v16 · 2026-10-10 · LaTeX 公式渲染版",
+    "latestSummary": true,
+    "latestChapter": "23. 版本 v16：细结构与前后排归属的最终结果",
+    "latestNavigation": true,
+    "latestMetrics": true,
+    "preservedGroundTruth": true,
+    "gtAtlasImages": 11,
+    "trees": 1,
+    "branches": 30,
+    "formulas": 143,
+    "formulaErrors": 0,
+    "overflow": false,
+    "images": true,
+    "gtIndexRows": [
+      10,
+      109
+    ],
+    "collapseWorks": true
+  },
+  "mobile": {
+    "overflow": false
+  },
+  "errors": []
+}

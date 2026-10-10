@@ -1,0 +1,4212 @@
+{
+  "version": "v16",
+  "tests": 242,
+  "consumer_vision_api_calls": 0,
+  "construction_uses_ground_truth": false,
+  "evaluation_uses_original_gt": true,
+  "targets": {
+    "AP25": 0.8,
+    "AP50": 0.7
+  },
+  "scenes": [
+    {
+      "scene_id": "ai_001_002",
+      "frames": 99,
+      "predicted": 10,
+      "gt": 10,
+      "AP25": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "MVO25": 1.0,
+      "MVO50": 1.0,
+      "absolute_log_count_error": 0.0,
+      "strict_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "graph_sha256": "60bc98cf0967d50c3c9a17e4f327f0bbc9defdf2803a3914f859f37ea73d4337",
+      "prediction_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "observed_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "completed_ply_sha256": null,
+      "gt_labels_sha256": "72fec7af62bde7a8283de28cd6348a48754247b03dadbbcc37abea0ad29932a9",
+      "legacy_topology_reader_passed": true,
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "non_regression_gate": {
+        "accepted": false,
+        "non_regressing": true,
+        "strictly_improved": false,
+        "checks": [
+          {
+            "metric": "geometry_only_box_AP25",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "geometry_only_box_AP50",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "geometry_only_box_AP75",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "absolute_log_count_error",
+            "candidate": 0.0,
+            "baseline": 0.0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.25",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.25",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.25",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.5",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.5",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.5",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.75",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.75",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.75",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          }
+        ],
+        "scope": "these observed scenes only; no guarantee on unseen captures",
+        "construction_uses_ground_truth": false
+      },
+      "part_nodes": 28,
+      "part_of_edges": 15,
+      "measured_contact_nodes": {},
+      "measured_dense_surfaces": {},
+      "visible_instance_audit": {
+        "algorithm": "VISTA_v16",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "fa86eb9259151d70f403aeaa609097c9b5ad14b02084cb7808b69bc4e6a84a87",
+        "objects": [],
+        "source_groups": 194,
+        "reconciled_groups": 184,
+        "accepted_proposals": 30,
+        "ambiguous_or_unowned_proposals": 19
+      },
+      "residual_ownership_audit": {
+        "algorithm": "RSE_v16_FAST_MCD",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "c601015c18122abd68e94da4a9c5c1f37c3b66d0dab33eca4809f04eb65b5440",
+        "objects": []
+      }
+    },
+    {
+      "scene_id": "ai_001_010",
+      "frames": 100,
+      "predicted": 127,
+      "gt": 109,
+      "AP25": 0.5883816566298687,
+      "AP50": 0.41245840334386896,
+      "AP75": 0.18415254146040616,
+      "MVO25": 0.5883816566298687,
+      "MVO50": 0.457607576211022,
+      "absolute_log_count_error": 0.1528392042294475,
+      "strict_counts": {
+        "0.25": {
+          "TP": 88,
+          "FP": 39,
+          "FN": 21
+        },
+        "0.5": {
+          "TP": 72,
+          "FP": 55,
+          "FN": 37
+        },
+        "0.75": {
+          "TP": 39,
+          "FP": 88,
+          "FN": 70
+        }
+      },
+      "graph_sha256": "34f4290f431b5dcc2ce3bcc59fbc0e800128e95ac9887a6f7f1cfff874f09b94",
+      "prediction_ply_sha256": "100e167793fb5c0572d55c0617a630f57dbcf43eea4dc64962b7f6fe66a99dc1",
+      "observed_ply_sha256": "100e167793fb5c0572d55c0617a630f57dbcf43eea4dc64962b7f6fe66a99dc1",
+      "completed_ply_sha256": "c3c428bcaa7823f6ad1d6b2bf921480f55ca0e957891f57fd04d9b8bacff01ba",
+      "gt_labels_sha256": "547c62e10f02e9601f45bdfb5553e0d5f2228b4b697709c37f3eb4038908a702",
+      "legacy_topology_reader_passed": true,
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "non_regression_gate": {
+        "accepted": true,
+        "non_regressing": true,
+        "strictly_improved": true,
+        "checks": [
+          {
+            "metric": "geometry_only_box_AP25",
+            "candidate": 0.5883816566298687,
+            "baseline": 0.5189953738019547,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "geometry_only_box_AP50",
+            "candidate": 0.41245840334386896,
+            "baseline": 0.336310873521977,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "geometry_only_box_AP75",
+            "candidate": 0.18415254146040616,
+            "baseline": 0.1486108450882826,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "absolute_log_count_error",
+            "candidate": 0.1528392042294475,
+            "baseline": 0.1528392042294475,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.25",
+            "candidate": 88,
+            "baseline": 82,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FP@0.25",
+            "candidate": 39,
+            "baseline": 45,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FN@0.25",
+            "candidate": 21,
+            "baseline": 27,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "TP@0.5",
+            "candidate": 72,
+            "baseline": 63,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FP@0.5",
+            "candidate": 55,
+            "baseline": 64,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FN@0.5",
+            "candidate": 37,
+            "baseline": 46,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "TP@0.75",
+            "candidate": 39,
+            "baseline": 34,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FP@0.75",
+            "candidate": 88,
+            "baseline": 93,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FN@0.75",
+            "candidate": 70,
+            "baseline": 75,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          }
+        ],
+        "scope": "these observed scenes only; no guarantee on unseen captures",
+        "construction_uses_ground_truth": false
+      },
+      "part_nodes": 636,
+      "part_of_edges": 147,
+      "measured_contact_nodes": {
+        "191": {
+          "measured": true,
+          "source_root": "191",
+          "multiview_entity_split": true,
+          "supporting_frames": [
+            "cam_00_0021",
+            "cam_00_0027",
+            "cam_00_0039",
+            "cam_00_0066",
+            "cam_00_0096",
+            "cam_01_0008",
+            "cam_01_0011",
+            "cam_01_0014",
+            "cam_01_0062",
+            "cam_02_0025",
+            "cam_02_0028",
+            "cam_02_0040",
+            "cam_02_0046",
+            "cam_02_0049"
+          ]
+        },
+        "113": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0027",
+            "cam_00_0039",
+            "cam_01_0041",
+            "cam_02_0025"
+          ]
+        },
+        "192": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0027",
+            "cam_00_0039",
+            "cam_00_0042",
+            "cam_00_0069",
+            "cam_00_0084",
+            "cam_00_0096",
+            "cam_01_0008",
+            "cam_01_0011",
+            "cam_01_0026",
+            "cam_01_0035",
+            "cam_01_0062",
+            "cam_02_0025",
+            "cam_02_0028",
+            "cam_02_0040",
+            "cam_02_0043",
+            "cam_02_0046",
+            "cam_02_0073",
+            "cam_02_0079"
+          ]
+        },
+        "204": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0042",
+            "cam_00_0069",
+            "cam_00_0084",
+            "cam_00_0096",
+            "cam_01_0008",
+            "cam_01_0011",
+            "cam_01_0026",
+            "cam_01_0035",
+            "cam_01_0062",
+            "cam_02_0025",
+            "cam_02_0028",
+            "cam_02_0040",
+            "cam_02_0046",
+            "cam_02_0073"
+          ]
+        },
+        "37": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0000",
+            "cam_00_0003",
+            "cam_00_0030",
+            "cam_00_0051",
+            "cam_00_0054",
+            "cam_01_0023"
+          ]
+        },
+        "157": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0018",
+            "cam_00_0036",
+            "cam_01_0020",
+            "cam_01_0026",
+            "cam_02_0031"
+          ]
+        },
+        "257": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0051",
+            "cam_00_0054",
+            "cam_00_0081",
+            "cam_02_0052",
+            "cam_02_0058"
+          ]
+        },
+        "7": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0024",
+            "cam_00_0060",
+            "cam_00_0090",
+            "cam_00_0099",
+            "cam_01_0005",
+            "cam_02_0007",
+            "cam_02_0016",
+            "cam_02_0031",
+            "cam_02_0040",
+            "cam_02_0049"
+          ]
+        },
+        "19": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0021",
+            "cam_00_0045",
+            "cam_00_0063",
+            "cam_01_0008",
+            "cam_01_0017",
+            "cam_01_0020",
+            "cam_02_0007",
+            "cam_02_0010",
+            "cam_02_0019",
+            "cam_02_0055"
+          ]
+        },
+        "22": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0003",
+            "cam_00_0015",
+            "cam_00_0033",
+            "cam_00_0036",
+            "cam_01_0026",
+            "cam_01_0065",
+            "cam_01_0098",
+            "cam_02_0022",
+            "cam_02_0040",
+            "cam_02_0049"
+          ]
+        },
+        "89": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0003",
+            "cam_00_0015",
+            "cam_00_0030",
+            "cam_00_0042",
+            "cam_00_0045",
+            "cam_00_0054",
+            "cam_00_0081",
+            "cam_01_0035",
+            "cam_02_0001",
+            "cam_02_0034",
+            "cam_02_0046",
+            "cam_02_0061",
+            "cam_02_0067"
+          ]
+        },
+        "94": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0057",
+            "cam_00_0096",
+            "cam_01_0050",
+            "cam_02_0001",
+            "cam_02_0070"
+          ]
+        },
+        "34": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0051",
+            "cam_01_0044",
+            "cam_02_0052",
+            "cam_02_0058",
+            "cam_02_0061",
+            "cam_02_0070"
+          ]
+        },
+        "23": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0072",
+            "cam_01_0047",
+            "cam_01_0056",
+            "cam_01_0083",
+            "cam_01_0089",
+            "cam_01_0098",
+            "cam_02_0052",
+            "cam_02_0061",
+            "cam_02_0064"
+          ]
+        },
+        "240": {
+          "measured": true,
+          "source_root": "240",
+          "multiview_entity_split": true,
+          "supporting_frames": [
+            "cam_00_0045",
+            "cam_00_0081",
+            "cam_01_0017",
+            "cam_02_0001",
+            "cam_02_0034"
+          ]
+        },
+        "58": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_01_0053",
+            "cam_01_0086",
+            "cam_01_0092",
+            "cam_01_0095",
+            "cam_01_0098",
+            "cam_02_0052",
+            "cam_02_0058",
+            "cam_02_0061",
+            "cam_02_0064"
+          ]
+        },
+        "95": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0030",
+            "cam_00_0045",
+            "cam_00_0081",
+            "cam_01_0017",
+            "cam_01_0035",
+            "cam_01_0056",
+            "cam_02_0001",
+            "cam_02_0034"
+          ]
+        },
+        "213": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0030",
+            "cam_00_0045",
+            "cam_00_0081",
+            "cam_01_0017",
+            "cam_01_0035",
+            "cam_02_0001",
+            "cam_02_0034"
+          ]
+        },
+        "210": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0030",
+            "cam_00_0045",
+            "cam_01_0017",
+            "cam_02_0067"
+          ]
+        },
+        "103": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0030",
+            "cam_00_0045",
+            "cam_01_0017",
+            "cam_02_0067"
+          ]
+        },
+        "211": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0030",
+            "cam_00_0045",
+            "cam_01_0017",
+            "cam_02_0067"
+          ]
+        },
+        "347": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0057",
+            "cam_01_0002",
+            "cam_01_0032",
+            "cam_01_0044",
+            "cam_01_0083",
+            "cam_02_0064"
+          ]
+        },
+        "454": {
+          "measured": true,
+          "source_root": "191",
+          "multiview_entity_split": true,
+          "supporting_frames": [
+            "cam_00_0096",
+            "cam_01_0014",
+            "cam_01_0062",
+            "cam_02_0025",
+            "cam_02_0028",
+            "cam_02_0040",
+            "cam_02_0043",
+            "cam_02_0046",
+            "cam_02_0073",
+            "cam_02_0079"
+          ]
+        },
+        "455": {
+          "measured": true,
+          "source_root": "240",
+          "multiview_entity_split": true,
+          "supporting_frames": [
+            "cam_00_0045",
+            "cam_00_0081",
+            "cam_01_0017",
+            "cam_02_0001"
+          ]
+        },
+        "456": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0024",
+            "cam_00_0039",
+            "cam_00_0087",
+            "cam_01_0065",
+            "cam_01_0071",
+            "cam_01_0077",
+            "cam_01_0083",
+            "cam_01_0092"
+          ]
+        },
+        "457": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0003",
+            "cam_00_0030",
+            "cam_00_0033",
+            "cam_00_0087",
+            "cam_01_0026",
+            "cam_01_0053",
+            "cam_02_0061"
+          ]
+        },
+        "458": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0045",
+            "cam_01_0017",
+            "cam_02_0001",
+            "cam_02_0034"
+          ]
+        },
+        "459": {
+          "measured": true,
+          "supporting_frames": [
+            "cam_00_0045",
+            "cam_01_0017",
+            "cam_02_0001",
+            "cam_02_0034"
+          ]
+        }
+      },
+      "measured_dense_surfaces": {
+        "141": {
+          "measured": true,
+          "original_points": 53949,
+          "retained_points": 210163,
+          "additional_observed_samples": 159236,
+          "minimum_point_views": 3,
+          "generated_points": 0,
+          "v15_observed_points": 214799,
+          "v16_observed_points": 210163
+        },
+        "55": {
+          "measured": true,
+          "original_points": 12904,
+          "retained_points": 17513,
+          "additional_observed_samples": 4657,
+          "minimum_point_views": 3,
+          "generated_points": 0,
+          "v15_observed_points": 17456,
+          "v16_observed_points": 17513
+        },
+        "236": {
+          "measured": true,
+          "original_points": 11817,
+          "retained_points": 26788,
+          "additional_observed_samples": 15073,
+          "minimum_point_views": 3,
+          "generated_points": 0,
+          "v15_observed_points": 27728,
+          "v16_observed_points": 26788
+        },
+        "25": {
+          "measured": true,
+          "original_points": 11811,
+          "retained_points": 30188,
+          "additional_observed_samples": 18574,
+          "minimum_point_views": 3,
+          "generated_points": 0,
+          "v15_observed_points": 30483,
+          "v16_observed_points": 30188
+        }
+      },
+      "visible_instance_audit": {
+        "algorithm": "VISTA_v16",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "fa86eb9259151d70f403aeaa609097c9b5ad14b02084cb7808b69bc4e6a84a87",
+        "objects": [
+          {
+            "instance_id": "172",
+            "name": "microwave",
+            "native_name": "microwave",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9999999999999999,
+            "proposal_owned_fraction": 0.9984425542110938,
+            "original_explained_fraction": 0.9518518518518518,
+            "removed_points": 62,
+            "prior_points": 1620,
+            "final_points": 25779,
+            "frames": [
+              "cam_00_0018",
+              "cam_00_0021",
+              "cam_00_0024",
+              "cam_00_0027",
+              "cam_00_0030",
+              "cam_00_0033",
+              "cam_00_0036",
+              "cam_00_0039",
+              "cam_00_0045",
+              "cam_00_0060",
+              "cam_00_0063",
+              "cam_00_0066",
+              "cam_00_0069",
+              "cam_00_0096",
+              "cam_00_0099",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0026",
+              "cam_01_0062",
+              "cam_02_0007",
+              "cam_02_0010",
+              "cam_02_0022",
+              "cam_02_0025",
+              "cam_02_0028",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0037",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0046",
+              "cam_02_0049"
+            ],
+            "measured_points": 25039,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.9485538563829787,
+            "camera_baseline_m": 5.9368192162341185,
+            "position_mean": [
+              2.3681071150097823,
+              1.865117654354849,
+              1.4042138521268006
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00030126318082493946,
+                -0.0007572306410679941,
+                -1.7267590812951624e-05
+              ],
+              [
+                -0.0007572306410679941,
+                0.016092831933952636,
+                3.55709511387165e-05
+              ],
+              [
+                -1.7267590812951624e-05,
+                3.55709511387165e-05,
+                0.005154017794822191
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                2.5626043658971205e-07,
+                -1.1887115347468402e-06,
+                -6.556791293685286e-08
+              ],
+              [
+                -1.1887115347468402e-06,
+                4.001384203071604e-05,
+                -9.305109350239235e-08
+              ],
+              [
+                -6.556791293685286e-08,
+                -9.305109350239235e-08,
+                4.6957932827132305e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "61",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9953516818015573,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9759288330716902,
+            "removed_points": 20,
+            "prior_points": 1911,
+            "final_points": 2541,
+            "frames": [
+              "cam_00_0006",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0078",
+              "cam_00_0081",
+              "cam_01_0002",
+              "cam_01_0029",
+              "cam_01_0032",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0086",
+              "cam_01_0092",
+              "cam_01_0095",
+              "cam_01_0098",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064"
+            ],
+            "measured_points": 1992,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8347739361702128,
+            "camera_baseline_m": 6.211766035987003,
+            "position_mean": [
+              -2.953672257522227,
+              -0.3041595832199698,
+              1.285831705746956
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00017167876606281806,
+                -0.00017271232472650133,
+                -0.0003150803823512103
+              ],
+              [
+                -0.00017271232472650133,
+                0.0005406585506820827,
+                0.0001864984029956241
+              ],
+              [
+                -0.0003150803823512103,
+                0.0001864984029956241,
+                0.0007301368027836129
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.6432556496305313e-07,
+                -5.012939138881061e-07,
+                -1.0129641173199714e-07
+              ],
+              [
+                -5.012939138881061e-07,
+                1.8836537466448544e-06,
+                1.9984440329893347e-07
+              ],
+              [
+                -1.0129641173199714e-07,
+                1.9984440329893347e-07,
+                1.426111607288693e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "59",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9982814044642259,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9596273291925466,
+            "removed_points": 58,
+            "prior_points": 1932,
+            "final_points": 2506,
+            "frames": [
+              "cam_00_0006",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0078",
+              "cam_01_0002",
+              "cam_01_0029",
+              "cam_01_0032",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0071",
+              "cam_01_0083",
+              "cam_01_0086",
+              "cam_01_0092",
+              "cam_01_0098",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064"
+            ],
+            "measured_points": 1945,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8480179398148148,
+            "camera_baseline_m": 5.702777189867239,
+            "position_mean": [
+              -2.9538752320741186,
+              -0.37498830352017654,
+              1.2868868581069908
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00017442541270545425,
+                -0.0001752110349700263,
+                -0.00031874776191155964
+              ],
+              [
+                -0.0001752110349700263,
+                0.0004953024021863876,
+                0.0001796789955838621
+              ],
+              [
+                -0.00031874776191155964,
+                0.0001796789955838621,
+                0.0007254179038371961
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                2.905834405681873e-08,
+                -3.539472230227767e-08,
+                -3.337744877850655e-08
+              ],
+              [
+                -3.539472230227767e-08,
+                1.7606346457638921e-07,
+                -1.8663134297457026e-08
+              ],
+              [
+                -3.337744877850655e-08,
+                -1.8663134297457026e-08,
+                8.289343362059788e-08
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "58",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.995615723456724,
+            "proposal_owned_fraction": 0.9981944026482095,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 4061,
+            "final_points": 4154,
+            "frames": [
+              "cam_00_0006",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0078",
+              "cam_00_0081",
+              "cam_01_0002",
+              "cam_01_0029",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0086",
+              "cam_01_0092",
+              "cam_01_0095",
+              "cam_01_0098",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064"
+            ],
+            "measured_points": 3297,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8573467548076923,
+            "camera_baseline_m": 6.211766035987003,
+            "position_mean": [
+              -2.9573380345395557,
+              -0.2080218307604884,
+              1.2819887864435209
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00014692529009667808,
+                -0.00024261729718448645,
+                -0.0002415618120393169
+              ],
+              [
+                -0.00024261729718448645,
+                0.0013471436043683987,
+                -4.561761228814921e-05
+              ],
+              [
+                -0.0002415618120393169,
+                -4.561761228814921e-05,
+                0.0006561976510650098
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.3578940665474533e-08,
+                -8.565028026105102e-09,
+                -2.4057997059528955e-08
+              ],
+              [
+                -8.565028026105102e-09,
+                6.753279747604372e-08,
+                -1.3351031921243565e-08
+              ],
+              [
+                -2.4057997059528955e-08,
+                -1.3351031921243565e-08,
+                6.168324739511778e-08
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "192",
+            "name": "curtain",
+            "native_name": "curtain",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9999636223210825,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9996339677891655,
+            "removed_points": 3,
+            "prior_points": 8196,
+            "final_points": 27913,
+            "frames": [
+              "cam_00_0027",
+              "cam_00_0039",
+              "cam_00_0042",
+              "cam_00_0069",
+              "cam_00_0084",
+              "cam_00_0096",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0026",
+              "cam_01_0035",
+              "cam_01_0062",
+              "cam_02_0025",
+              "cam_02_0028",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0046",
+              "cam_02_0073",
+              "cam_02_0079"
+            ],
+            "measured_points": 27252,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7705592105263158,
+            "camera_baseline_m": 7.454450527373327,
+            "position_mean": [
+              0.7710385175148696,
+              2.4147414415129136,
+              1.4916177634838206
+            ],
+            "physical_extent_covariance": [
+              [
+                0.007849242608855288,
+                0.0002005601272683821,
+                0.0001432866958898124
+              ],
+              [
+                0.0002005601272683821,
+                2.942196331929059e-05,
+                0.00011089082440120924
+              ],
+              [
+                0.0001432866958898124,
+                0.00011089082440120924,
+                0.011575183895604286
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.3907122958701275e-05,
+                5.3055420053260336e-08,
+                -1.517249800300033e-06
+              ],
+              [
+                5.3055420053260336e-08,
+                5.729727001510441e-10,
+                2.313032526842584e-08
+              ],
+              [
+                -1.517249800300033e-06,
+                2.313032526842584e-08,
+                4.57825231151702e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "5",
+            "name": "cup",
+            "native_name": "cup",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9995024792148686,
+            "proposal_owned_fraction": 0.9997301672962763,
+            "original_explained_fraction": 0.9697816593886462,
+            "removed_points": 0,
+            "prior_points": 5725,
+            "final_points": 6655,
+            "frames": [
+              "cam_00_0018",
+              "cam_00_0021",
+              "cam_00_0033",
+              "cam_00_0036",
+              "cam_00_0039",
+              "cam_00_0045",
+              "cam_00_0048",
+              "cam_00_0060",
+              "cam_00_0063",
+              "cam_00_0099",
+              "cam_01_0005",
+              "cam_01_0020",
+              "cam_01_0026",
+              "cam_01_0059",
+              "cam_02_0010",
+              "cam_02_0016",
+              "cam_02_0019",
+              "cam_02_0022",
+              "cam_02_0031",
+              "cam_02_0040",
+              "cam_02_0049"
+            ],
+            "measured_points": 3706,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.887520032051282,
+            "camera_baseline_m": 5.384379811568847,
+            "position_mean": [
+              0.6007878548415408,
+              -0.43811378217646885,
+              1.0264067939166868
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0009063036537146622,
+                -0.00019351026197686523,
+                8.996347497396086e-05
+              ],
+              [
+                -0.00019351026197686523,
+                0.0006669889480795284,
+                0.00010975337210060233
+              ],
+              [
+                8.996347497396086e-05,
+                0.00010975337210060233,
+                0.0005016884803423417
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                6.6974309690609335e-06,
+                -1.698925335333865e-06,
+                8.803564933371576e-07
+              ],
+              [
+                -1.698925335333865e-06,
+                2.22599056514055e-06,
+                1.603136943105972e-07
+              ],
+              [
+                8.803564933371576e-07,
+                1.603136943105972e-07,
+                3.0619690220489517e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "46",
+            "name": "kettle",
+            "native_name": "kettle",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9469492252504077,
+            "proposal_owned_fraction": 0.9974243399871217,
+            "original_explained_fraction": 0.9912043301759134,
+            "removed_points": 0,
+            "prior_points": 4434,
+            "final_points": 8118,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0006",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0078",
+              "cam_01_0002",
+              "cam_01_0029",
+              "cam_01_0038",
+              "cam_01_0044",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0059",
+              "cam_01_0092",
+              "cam_01_0098",
+              "cam_02_0052"
+            ],
+            "measured_points": 6187,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8696546052631579,
+            "camera_baseline_m": 5.590504783938197,
+            "position_mean": [
+              -2.710762682171456,
+              0.35648109617117296,
+              1.0381534538440444
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0012829065288660945,
+                -0.00023837596763610298,
+                -0.0008424194328141729
+              ],
+              [
+                -0.00023837596763610298,
+                0.0028675256608215816,
+                0.00027570257026097224
+              ],
+              [
+                -0.0008424194328141729,
+                0.00027570257026097224,
+                0.0015618969117324798
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                4.780969023543814e-06,
+                5.705189903499311e-06,
+                -2.022758408481712e-06
+              ],
+              [
+                5.705189903499311e-06,
+                3.038804015543053e-05,
+                1.868995436763244e-06
+              ],
+              [
+                -2.022758408481712e-06,
+                1.868995436763244e-06,
+                2.5440930697641297e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "4",
+            "name": "cup",
+            "native_name": "cup",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9967899579393144,
+            "proposal_owned_fraction": 0.9997443762781186,
+            "original_explained_fraction": 0.9929618768328445,
+            "removed_points": 0,
+            "prior_points": 5115,
+            "final_points": 5826,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0018",
+              "cam_00_0030",
+              "cam_00_0036",
+              "cam_01_0026",
+              "cam_01_0029",
+              "cam_01_0041",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_01_0068",
+              "cam_02_0010",
+              "cam_02_0055",
+              "cam_02_0061"
+            ],
+            "measured_points": 3912,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.866015625,
+            "camera_baseline_m": 5.038272064668685,
+            "position_mean": [
+              0.25505114329781486,
+              -0.2607818913153457,
+              1.0258927397136108
+            ],
+            "physical_extent_covariance": [
+              [
+                0.000874180142128403,
+                0.00022025540232307377,
+                -8.537441320216844e-05
+              ],
+              [
+                0.00022025540232307377,
+                0.0007141173928154224,
+                0.00010701777722631908
+              ],
+              [
+                -8.537441320216844e-05,
+                0.00010701777722631908,
+                0.0005077390131718616
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                6.933750302566285e-06,
+                4.850656046352575e-06,
+                1.1662140051957158e-07
+              ],
+              [
+                4.850656046352575e-06,
+                6.779899945843248e-06,
+                5.716670419785083e-07
+              ],
+              [
+                1.1662140051957158e-07,
+                5.716670419785083e-07,
+                4.772249083563931e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "45",
+            "name": "pot",
+            "native_name": "pot",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9831336598259769,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9054798492316614,
+            "removed_points": 2,
+            "prior_points": 3449,
+            "final_points": 5124,
+            "frames": [
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_00_0081",
+              "cam_01_0023",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0070",
+              "cam_02_0082"
+            ],
+            "measured_points": 3254,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.810546875,
+            "camera_baseline_m": 5.432964259258744,
+            "position_mean": [
+              -2.7397106580780393,
+              0.6531943985724195,
+              1.024665762623266
+            ],
+            "physical_extent_covariance": [
+              [
+                0.001040893145525125,
+                0.0008091751149297751,
+                -2.4037686953445253e-05
+              ],
+              [
+                0.0008091751149297751,
+                0.0012007105745343687,
+                3.087544042775648e-05
+              ],
+              [
+                -2.4037686953445253e-05,
+                3.087544042775648e-05,
+                0.0009441527940512265
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                5.353049393865913e-06,
+                6.377599121717918e-06,
+                2.989810170019915e-07
+              ],
+              [
+                6.377599121717918e-06,
+                9.628275138104327e-06,
+                5.546962560508992e-07
+              ],
+              [
+                2.989810170019915e-07,
+                5.546962560508992e-07,
+                2.347323993912245e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "13",
+            "name": "bowl",
+            "native_name": "bowl",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.6325169013695439,
+            "proposal_owned_fraction": 0.9944086750254151,
+            "original_explained_fraction": 0.9004576659038902,
+            "removed_points": 0,
+            "prior_points": 874,
+            "final_points": 6489,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0006",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_00_0075",
+              "cam_00_0081",
+              "cam_01_0029",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0086",
+              "cam_01_0092",
+              "cam_01_0095",
+              "cam_01_0098",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064"
+            ],
+            "measured_points": 5902,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.88037109375,
+            "camera_baseline_m": 6.6130649587753885,
+            "position_mean": [
+              -2.552915242268198,
+              -0.3997864408699067,
+              1.0484105700720538
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0010263265563734698,
+                0.0005991014293496345,
+                0.0002942000565278336
+              ],
+              [
+                0.0005991014293496345,
+                0.003874383142574413,
+                -3.864434949579917e-05
+              ],
+              [
+                0.0002942000565278336,
+                -3.864434949579917e-05,
+                0.0011597984821550623
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                4.919556531569276e-06,
+                6.608367992922525e-06,
+                -1.890524555334181e-07
+              ],
+              [
+                6.608367992922525e-06,
+                5.7613077009965345e-05,
+                -1.938731014353905e-06
+              ],
+              [
+                -1.890524555334181e-07,
+                -1.938731014353905e-06,
+                8.1654456734169e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "204",
+            "name": "curtain",
+            "native_name": "curtain",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9994602927330277,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 7805,
+            "final_points": 27427,
+            "frames": [
+              "cam_00_0027",
+              "cam_00_0042",
+              "cam_00_0069",
+              "cam_00_0084",
+              "cam_00_0096",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0026",
+              "cam_01_0035",
+              "cam_01_0062",
+              "cam_02_0025",
+              "cam_02_0028",
+              "cam_02_0040",
+              "cam_02_0046",
+              "cam_02_0073"
+            ],
+            "measured_points": 26751,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7669270833333334,
+            "camera_baseline_m": 6.412794088641312,
+            "position_mean": [
+              0.4539295936815243,
+              2.413278266314276,
+              1.4921342662923942
+            ],
+            "physical_extent_covariance": [
+              [
+                0.007559574922393851,
+                0.00024363259000181824,
+                -5.947249069382065e-07
+              ],
+              [
+                0.00024363259000181824,
+                4.114009034362313e-05,
+                0.0001608242162488282
+              ],
+              [
+                -5.947249069382065e-07,
+                0.0001608242162488282,
+                0.011501513849882494
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                7.259855758145159e-05,
+                1.985497945965216e-06,
+                -3.3809539207754355e-05
+              ],
+              [
+                1.985497945965216e-06,
+                6.516014591429396e-08,
+                -1.0454501792681365e-06
+              ],
+              [
+                -3.3809539207754355e-05,
+                -1.0454501792681365e-06,
+                2.5075316702908307e-05
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "191",
+            "name": "curtain",
+            "native_name": "curtain",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 0.9991560672734945,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 1691,
+            "final_points": 16590,
+            "frames": [
+              "cam_00_0021",
+              "cam_00_0027",
+              "cam_00_0039",
+              "cam_00_0066",
+              "cam_00_0096",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0062",
+              "cam_02_0025",
+              "cam_02_0028",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0046",
+              "cam_02_0049"
+            ],
+            "measured_points": 16589,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7944878472222222,
+            "camera_baseline_m": 4.305830144090341,
+            "position_mean": [
+              1.6355682964537812,
+              2.413161736686499,
+              1.4932208142303733
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0078074476420425315,
+                0.00025419843065411417,
+                -0.00023937894865646878
+              ],
+              [
+                0.00025419843065411417,
+                4.1539616111211674e-05,
+                0.0001594046509728541
+              ],
+              [
+                -0.00023937894865646878,
+                0.0001594046509728541,
+                0.011313518223067538
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                2.096368444901069e-05,
+                9.724506830450786e-07,
+                1.1728521633763882e-06
+              ],
+              [
+                9.724506830450786e-07,
+                4.7881525178885374e-08,
+                1.3971150074169962e-07
+              ],
+              [
+                1.1728521633763882e-06,
+                1.3971150074169962e-07,
+                1.2095423229031542e-05
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "10",
+            "name": "cup",
+            "native_name": "cup",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9999906507629946,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.980504135486412,
+            "removed_points": 0,
+            "prior_points": 5078,
+            "final_points": 5850,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0009",
+              "cam_00_0015",
+              "cam_00_0018",
+              "cam_00_0036",
+              "cam_01_0026",
+              "cam_01_0029",
+              "cam_01_0041",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_01_0068",
+              "cam_02_0061"
+            ],
+            "measured_points": 3708,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8716517857142857,
+            "camera_baseline_m": 4.613310013349517,
+            "position_mean": [
+              0.5002446793524356,
+              -0.26005588463713203,
+              1.0269864340809152
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0008619915857641771,
+                0.00021131605362890017,
+                -5.785997075624603e-05
+              ],
+              [
+                0.00021131605362890017,
+                0.0007492095130885135,
+                0.00014216844462621166
+              ],
+              [
+                -5.785997075624603e-05,
+                0.00014216844462621166,
+                0.000492909710284582
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.2266068483611366e-05,
+                6.472412534028824e-06,
+                2.114869477568127e-06
+              ],
+              [
+                6.472412534028824e-06,
+                6.632582484735269e-06,
+                2.176691863874421e-06
+              ],
+              [
+                2.114869477568127e-06,
+                2.176691863874421e-06,
+                2.067619951282423e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "23",
+            "name": "bottle",
+            "native_name": "bottle",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9979608478940865,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9997367035281727,
+            "removed_points": 4,
+            "prior_points": 3798,
+            "final_points": 4446,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0006",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0075",
+              "cam_00_0078",
+              "cam_01_0032",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0083",
+              "cam_01_0086",
+              "cam_01_0089",
+              "cam_01_0092",
+              "cam_01_0098",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064"
+            ],
+            "measured_points": 3513,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8905341569767442,
+            "camera_baseline_m": 5.153389685485012,
+            "position_mean": [
+              -2.7957067240096873,
+              -0.6603091070000947,
+              1.0804232638275837
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00245219574346504,
+                0.002351983607106223,
+                0.0013393276342634605
+              ],
+              [
+                0.002351983607106223,
+                0.0025350261201245268,
+                0.001249361225335864
+              ],
+              [
+                0.0013393276342634605,
+                0.001249361225335864,
+                0.0011166173047982332
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                5.120404979626607e-06,
+                5.40244164678299e-06,
+                2.4920938497170035e-06
+              ],
+              [
+                5.40244164678299e-06,
+                6.283227122070235e-06,
+                2.132056867523797e-06
+              ],
+              [
+                2.4920938497170035e-06,
+                2.132056867523797e-06,
+                1.739751237814798e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "89",
+            "name": "utensil holder",
+            "native_name": "utensil holder",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.8992123730555357,
+            "proposal_owned_fraction": 0.9895219384413884,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 819,
+            "final_points": 1760,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0015",
+              "cam_00_0030",
+              "cam_00_0042",
+              "cam_00_0045",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_01_0035",
+              "cam_02_0001",
+              "cam_02_0034",
+              "cam_02_0046",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "measured_points": 1527,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7873046875,
+            "camera_baseline_m": 4.634399104686828,
+            "position_mean": [
+              -0.8673427603097662,
+              2.077273074120688,
+              1.051536834602869
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0004179550852558737,
+                1.0121019772745094e-05,
+                4.2207764492302434e-05
+              ],
+              [
+                1.0121019772745094e-05,
+                0.0001692030718416485,
+                -1.9627547986421367e-05
+              ],
+              [
+                4.2207764492302434e-05,
+                -1.9627547986421367e-05,
+                0.0007151000404257139
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                5.7160856979187465e-06,
+                1.3870420268155386e-06,
+                1.2744958968622727e-06
+              ],
+              [
+                1.3870420268155386e-06,
+                1.701086633468352e-06,
+                -5.150542198961004e-07
+              ],
+              [
+                1.2744958968622727e-06,
+                -5.150542198961004e-07,
+                1.0798871374686289e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "65",
+            "name": "knife block",
+            "native_name": "knife block",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.8823173714156306,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.8707482993197279,
+            "removed_points": 25,
+            "prior_points": 588,
+            "final_points": 3909,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0015",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0023",
+              "cam_02_0004",
+              "cam_02_0046",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067",
+              "cam_02_0070"
+            ],
+            "measured_points": 3522,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8423978365384616,
+            "camera_baseline_m": 5.174683801407122,
+            "position_mean": [
+              -1.1988420181013948,
+              2.0664272074244123,
+              1.0610410284740108
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0009783200649277025,
+                -0.00012132622685380092,
+                3.8856996960639635e-05
+              ],
+              [
+                -0.00012132622685380092,
+                0.00012381074473526737,
+                -0.00022355918463461615
+              ],
+              [
+                3.8856996960639635e-05,
+                -0.00022355918463461615,
+                0.00293740300214149
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                6.4907992786157674e-06,
+                7.937659924644239e-07,
+                6.765864703326368e-07
+              ],
+              [
+                7.937659924644239e-07,
+                1.534785949901534e-07,
+                1.2074624280220219e-07
+              ],
+              [
+                6.765864703326368e-07,
+                1.2074624280220219e-07,
+                2.311445508376584e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "454",
+            "name": "curtain",
+            "native_name": "curtain",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 0.9725818383576845,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 755,
+            "final_points": 21628,
+            "frames": [
+              "cam_00_0021",
+              "cam_00_0027",
+              "cam_00_0039",
+              "cam_00_0042",
+              "cam_00_0069",
+              "cam_00_0084",
+              "cam_00_0096",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0062",
+              "cam_02_0025",
+              "cam_02_0028",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0046",
+              "cam_02_0073",
+              "cam_02_0079"
+            ],
+            "measured_points": 21628,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7886904761904762,
+            "camera_baseline_m": 7.268594022719407,
+            "position_mean": [
+              1.2634828915903715,
+              2.4146863187853906,
+              1.4919554737492446
+            ],
+            "physical_extent_covariance": [
+              [
+                0.007665667075910926,
+                0.0001917520178968279,
+                -4.110871001888965e-05
+              ],
+              [
+                0.0001917520178968279,
+                2.8969103710451153e-05,
+                0.0001109253380780329
+              ],
+              [
+                -4.110871001888965e-05,
+                0.0001109253380780329,
+                0.011703638121316058
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                4.635003218164113e-05,
+                7.706894212648876e-07,
+                -1.867280856701919e-07
+              ],
+              [
+                7.706894212648876e-07,
+                2.1463354484711582e-08,
+                2.034323093879751e-08
+              ],
+              [
+                -1.867280856701919e-07,
+                2.034323093879751e-08,
+                2.6045991641094614e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "22",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9933204877254775,
+            "proposal_owned_fraction": 0.9232718894009216,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 486,
+            "final_points": 4336,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0015",
+              "cam_00_0033",
+              "cam_00_0036",
+              "cam_00_0090",
+              "cam_00_0099",
+              "cam_01_0026",
+              "cam_01_0065",
+              "cam_01_0098",
+              "cam_02_0016",
+              "cam_02_0022",
+              "cam_02_0040",
+              "cam_02_0049"
+            ],
+            "measured_points": 4335,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8324908088235294,
+            "camera_baseline_m": 5.848606152018922,
+            "position_mean": [
+              0.47472161211559094,
+              -0.27693379555540687,
+              0.9854514955907333
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0033453223032237633,
+                0.00019935994803036477,
+                -6.059616018032609e-05
+              ],
+              [
+                0.00019935994803036477,
+                0.0035669145643352123,
+                -4.6506618114804835e-05
+              ],
+              [
+                -6.059616018032609e-05,
+                -4.6506618114804835e-05,
+                4.7806088469536414e-05
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                3.2471435685594496e-05,
+                1.723823979515171e-05,
+                -1.1476507629749605e-06
+              ],
+              [
+                1.723823979515171e-05,
+                8.457987658070057e-05,
+                -2.9962251670841033e-06
+              ],
+              [
+                -1.1476507629749605e-06,
+                -2.9962251670841033e-06,
+                1.8982413196236706e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "7",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9987514962164983,
+            "proposal_owned_fraction": 0.8452535760728218,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 163,
+            "final_points": 2293,
+            "frames": [
+              "cam_00_0024",
+              "cam_00_0060",
+              "cam_00_0090",
+              "cam_00_0099",
+              "cam_01_0005",
+              "cam_02_0007",
+              "cam_02_0016",
+              "cam_02_0031",
+              "cam_02_0040",
+              "cam_02_0049"
+            ],
+            "measured_points": 2293,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8214285714285714,
+            "camera_baseline_m": 5.032158608007167,
+            "position_mean": [
+              0.5931932531701187,
+              -0.44344447926660285,
+              0.9850832314031784
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00305016962235152,
+                0.0003906961814184138,
+                -3.165012926782288e-05
+              ],
+              [
+                0.0003906961814184138,
+                0.003964644292969198,
+                2.5247823643951847e-05
+              ],
+              [
+                -3.165012926782288e-05,
+                2.5247823643951847e-05,
+                4.665310334923925e-05
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                3.060223526817454e-05,
+                2.7809012919181564e-05,
+                -5.832993915113066e-07
+              ],
+              [
+                2.7809012919181564e-05,
+                7.744797106288819e-05,
+                -1.3712682921590946e-07
+              ],
+              [
+                -5.832993915113066e-07,
+                -1.3712682921590946e-07,
+                1.3754754815254964e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "19",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.999595221308737,
+            "proposal_owned_fraction": 0.8388448998602701,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 139,
+            "final_points": 2121,
+            "frames": [
+              "cam_00_0021",
+              "cam_00_0045",
+              "cam_00_0063",
+              "cam_01_0008",
+              "cam_01_0017",
+              "cam_01_0020",
+              "cam_02_0007",
+              "cam_02_0010",
+              "cam_02_0019",
+              "cam_02_0055"
+            ],
+            "measured_points": 2120,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8125,
+            "camera_baseline_m": 3.460722815264842,
+            "position_mean": [
+              0.23824914807428688,
+              -0.2595798811794435,
+              0.9841476228473583
+            ],
+            "physical_extent_covariance": [
+              [
+                0.003422003541561899,
+                -0.0010382750863826239,
+                3.097139286051016e-05
+              ],
+              [
+                -0.0010382750863826239,
+                0.0037268204127931487,
+                3.1904418661900996e-05
+              ],
+              [
+                3.097139286051016e-05,
+                3.1904418661900996e-05,
+                5.169054772438453e-05
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                4.3095285590727384e-05,
+                -1.0741113367756195e-05,
+                8.993532936752836e-07
+              ],
+              [
+                -1.0741113367756195e-05,
+                6.9845961498745305e-06,
+                4.00864995573158e-07
+              ],
+              [
+                8.993532936752836e-07,
+                4.00864995573158e-07,
+                1.9230844710033657e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "34",
+            "name": "pot",
+            "native_name": "pot",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9110548094368738,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.954614681693573,
+            "removed_points": 26,
+            "prior_points": 3283,
+            "final_points": 3874,
+            "frames": [
+              "cam_00_0006",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_01_0002",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0059"
+            ],
+            "measured_points": 2055,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8146701388888888,
+            "camera_baseline_m": 5.367547334729206,
+            "position_mean": [
+              -2.7266767608545472,
+              1.0201839714258498,
+              1.038543197017433
+            ],
+            "physical_extent_covariance": [
+              [
+                0.000907237521105891,
+                0.00013702551684338334,
+                -0.00024178088835313759
+              ],
+              [
+                0.00013702551684338334,
+                0.0014559038706713472,
+                8.696798068292957e-05
+              ],
+              [
+                -0.00024178088835313759,
+                8.696798068292957e-05,
+                0.000688268149181676
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.4569960551651428e-05,
+                3.1036159540702363e-06,
+                -3.029047248025697e-06
+              ],
+              [
+                3.1036159540702363e-06,
+                2.1715858573673252e-05,
+                2.403482080846744e-07
+              ],
+              [
+                -3.029047248025697e-06,
+                2.403482080846744e-07,
+                8.14006712500166e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "456",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 0.891237901171676,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 807,
+            "final_points": 7851,
+            "frames": [
+              "cam_00_0024",
+              "cam_00_0039",
+              "cam_00_0087",
+              "cam_01_0065",
+              "cam_01_0071",
+              "cam_01_0077",
+              "cam_01_0083",
+              "cam_01_0092"
+            ],
+            "measured_points": 7847,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.78203125,
+            "camera_baseline_m": 4.491545248250135,
+            "position_mean": [
+              0.36975996687432966,
+              0.07532677026823376,
+              0.9874584159063029
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0265101522308597,
+                -0.0006171949343848126,
+                -1.9248142348783896e-05
+              ],
+              [
+                -0.0006171949343848126,
+                0.0063740772283283125,
+                7.210166030018908e-05
+              ],
+              [
+                -1.9248142348783896e-05,
+                7.210166030018908e-05,
+                7.610388085339175e-05
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                0.0001648125931018154,
+                -5.893410205304086e-05,
+                -2.998336960282436e-06
+              ],
+              [
+                -5.893410205304086e-05,
+                6.421591408585915e-05,
+                -3.848811379880277e-07
+              ],
+              [
+                -2.998336960282436e-06,
+                -3.848811379880277e-07,
+                1.1539868784757145e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "32",
+            "name": "spoon",
+            "native_name": "cooking spoon",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9145371081777689,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.610738255033557,
+            "removed_points": 174,
+            "prior_points": 447,
+            "final_points": 1384,
+            "frames": [
+              "cam_00_0057",
+              "cam_01_0029",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_02_0058",
+              "cam_02_0061"
+            ],
+            "measured_points": 1169,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7688210227272727,
+            "camera_baseline_m": 4.663844587650623,
+            "position_mean": [
+              -2.935037557859512,
+              0.7145524102160236,
+              1.254436226886734
+            ],
+            "physical_extent_covariance": [
+              [
+                5.772573168108827e-05,
+                5.0737969105493225e-06,
+                -0.0005789337542289325
+              ],
+              [
+                5.0737969105493225e-06,
+                0.00016127879766257756,
+                -8.65652314626548e-05
+              ],
+              [
+                -0.0005789337542289325,
+                -8.65652314626548e-05,
+                0.012215300547191742
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                3.1038679906286906e-07,
+                3.3020090770846605e-08,
+                -5.9594430888266666e-06
+              ],
+              [
+                3.3020090770846605e-08,
+                3.147757786685779e-08,
+                -6.689771464420125e-07
+              ],
+              [
+                -5.9594430888266666e-06,
+                -6.689771464420125e-07,
+                0.00011567881000966439
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "95",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9655924210024002,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9667590027700831,
+            "removed_points": 21,
+            "prior_points": 722,
+            "final_points": 699,
+            "frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_01_0056",
+              "cam_02_0001",
+              "cam_02_0034"
+            ],
+            "measured_points": 581,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.81875,
+            "camera_baseline_m": 4.319951600274025,
+            "position_mean": [
+              -0.6543858823255797,
+              1.9326052237585385,
+              1.915173779349946
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0005177450558736432,
+                -4.7217317504838866e-05,
+                -1.6730092888280164e-05
+              ],
+              [
+                -4.7217317504838866e-05,
+                0.0001315810210644276,
+                6.9168523765904e-05
+              ],
+              [
+                -1.6730092888280164e-05,
+                6.9168523765904e-05,
+                0.000314148037940263
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.3957324698617022e-05,
+                -1.7406863183914284e-06,
+                -1.0972059230639781e-06
+              ],
+              [
+                -1.7406863183914284e-06,
+                5.8144005231365e-07,
+                7.721353661057767e-07
+              ],
+              [
+                -1.0972059230639781e-06,
+                7.721353661057767e-07,
+                2.6264069332407247e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "457",
+            "name": "plate",
+            "native_name": "plate",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.99930268014245,
+            "proposal_owned_fraction": 0.9960410738587159,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 1145,
+            "final_points": 8083,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0033",
+              "cam_00_0087",
+              "cam_01_0011",
+              "cam_01_0026",
+              "cam_01_0053",
+              "cam_01_0077",
+              "cam_02_0022",
+              "cam_02_0061"
+            ],
+            "measured_points": 8083,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.759765625,
+            "camera_baseline_m": 4.79270804464378,
+            "position_mean": [
+              0.38850735299653133,
+              0.04147331016298336,
+              0.9970733769234461
+            ],
+            "physical_extent_covariance": [
+              [
+                0.006808725247905467,
+                6.235764222490439e-05,
+                7.2118403755797845e-06
+              ],
+              [
+                6.235764222490439e-05,
+                0.0020985260423267813,
+                -2.4921165445813232e-05
+              ],
+              [
+                7.2118403755797845e-06,
+                -2.4921165445813232e-05,
+                0.00013939144464958996
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                0.0001096577446829906,
+                3.4729765704385306e-05,
+                2.635827995153237e-06
+              ],
+              [
+                3.4729765704385306e-05,
+                3.528805758869354e-05,
+                4.332792234118236e-07
+              ],
+              [
+                2.635827995153237e-06,
+                4.332792234118236e-07,
+                4.855595535305882e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "458",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 1,
+            "prior_points": 1127,
+            "final_points": 1086,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_01_0056"
+            ],
+            "measured_points": 711,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8233506944444444,
+            "camera_baseline_m": 4.140326940378416,
+            "position_mean": [
+              -0.6368806584020578,
+              1.9057843678584547,
+              1.6815882665387505
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0002023535195887733,
+                8.619223428081275e-06,
+                9.231024020122244e-06
+              ],
+              [
+                8.619223428081275e-06,
+                4.216328730645476e-05,
+                0.00017488781827077428
+              ],
+              [
+                9.231024020122244e-06,
+                0.00017488781827077428,
+                0.0027044125512077598
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.1387775877672443e-05,
+                1.4758690729458565e-06,
+                1.8740124857108324e-06
+              ],
+              [
+                1.4758690729458565e-06,
+                1.0343489792039792e-06,
+                3.6857558983420905e-07
+              ],
+              [
+                1.8740124857108324e-06,
+                3.6857558983420905e-07,
+                7.255106522847938e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "213",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9665581795859204,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9609826589595376,
+            "removed_points": 24,
+            "prior_points": 692,
+            "final_points": 661,
+            "frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_02_0001",
+              "cam_02_0034"
+            ],
+            "measured_points": 546,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8042534722222222,
+            "camera_baseline_m": 4.319951600274025,
+            "position_mean": [
+              -0.5675466120636302,
+              1.926547543834296,
+              1.915415628456859
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0005040453766246787,
+                -5.551069249563904e-05,
+                1.6818079466755856e-05
+              ],
+              [
+                -5.551069249563904e-05,
+                0.0001285677126097677,
+                5.7439080780240065e-05
+              ],
+              [
+                1.6818079466755856e-05,
+                5.7439080780240065e-05,
+                0.00030518538168477013
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.5833519480319586e-05,
+                -7.204539059574127e-07,
+                4.648682054168341e-07
+              ],
+              [
+                -7.204539059574127e-07,
+                2.381780507706237e-07,
+                3.779575329116381e-07
+              ],
+              [
+                4.648682054168341e-07,
+                3.779575329116381e-07,
+                2.83097152509036e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "37",
+            "name": "toaster",
+            "native_name": "toaster",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9526746468178524,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9797279958942776,
+            "removed_points": 0,
+            "prior_points": 3897,
+            "final_points": 3847,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_01_0023"
+            ],
+            "measured_points": 2808,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.794921875,
+            "camera_baseline_m": 3.901771164115539,
+            "position_mean": [
+              -1.4843113435422912,
+              2.007188634484672,
+              1.041799928276936
+            ],
+            "physical_extent_covariance": [
+              [
+                0.008353150991876748,
+                0.0006682091900994712,
+                -0.0005639213799228044
+              ],
+              [
+                0.0006682091900994712,
+                0.0014092189101668224,
+                0.0008238207057568377
+              ],
+              [
+                -0.0005639213799228044,
+                0.0008238207057568377,
+                0.0013662533836230428
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                2.7914595291650284e-05,
+                1.1249605011412055e-05,
+                -8.218520813803117e-06
+              ],
+              [
+                1.1249605011412055e-05,
+                1.0851910821430601e-05,
+                -1.6469427913951887e-06
+              ],
+              [
+                -8.218520813803117e-06,
+                -1.6469427913951887e-06,
+                2.889676892048471e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "347",
+            "name": "fruit",
+            "native_name": "fruit",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9917795739940715,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9731543624161074,
+            "removed_points": 24,
+            "prior_points": 894,
+            "final_points": 792,
+            "frames": [
+              "cam_00_0057",
+              "cam_01_0002",
+              "cam_01_0032",
+              "cam_01_0044",
+              "cam_01_0083",
+              "cam_02_0064"
+            ],
+            "measured_points": 566,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.816015625,
+            "camera_baseline_m": 3.3081109699854503,
+            "position_mean": [
+              -2.602455544027946,
+              -0.3665936503592599,
+              1.1459683461418597
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00013219843991713458,
+                -3.848527774889063e-05,
+                -8.49020165030811e-05
+              ],
+              [
+                -3.848527774889063e-05,
+                0.0003261443013036289,
+                1.0095483537195265e-05
+              ],
+              [
+                -8.49020165030811e-05,
+                1.0095483537195265e-05,
+                0.00019754187119940583
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                5.743958560835725e-07,
+                -1.2821008099114596e-06,
+                -4.11040975925856e-07
+              ],
+              [
+                -1.2821008099114596e-06,
+                3.9664361717037995e-06,
+                9.966609576551263e-07
+              ],
+              [
+                -4.11040975925856e-07,
+                9.966609576551263e-07,
+                3.1971995215255835e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "96",
+            "name": "utensil rack",
+            "native_name": "utensil rack",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9375481293641165,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.7134894091415831,
+            "removed_points": 35,
+            "prior_points": 897,
+            "final_points": 2044,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0045",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_01_0041",
+              "cam_02_0061"
+            ],
+            "measured_points": 1258,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.83203125,
+            "camera_baseline_m": 4.347961293131409,
+            "position_mean": [
+              -0.7041480971641078,
+              2.1712888675830047,
+              1.3206954048312147
+            ],
+            "physical_extent_covariance": [
+              [
+                0.010577317319852864,
+                -6.62682395190922e-05,
+                5.143895465871218e-05
+              ],
+              [
+                -6.62682395190922e-05,
+                5.282792921429839e-05,
+                -9.60077397632395e-06
+              ],
+              [
+                5.143895465871218e-05,
+                -9.60077397632395e-06,
+                0.0008201265630941556
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.3990158605871626e-05,
+                -9.969445754347989e-08,
+                -3.6606283520342486e-07
+              ],
+              [
+                -9.969445754347989e-08,
+                6.041972531054993e-07,
+                3.121433295669124e-07
+              ],
+              [
+                -3.6606283520342486e-07,
+                3.121433295669124e-07,
+                5.46583795083462e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "459",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9972850678733032,
+            "removed_points": 1,
+            "prior_points": 1105,
+            "final_points": 1071,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_01_0035"
+            ],
+            "measured_points": 686,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8207465277777778,
+            "camera_baseline_m": 4.140326940378416,
+            "position_mean": [
+              -0.5552111153420244,
+              1.911807909324875,
+              1.6798813466277671
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00021195326584839418,
+                2.0471192687938435e-05,
+                -2.262830444646653e-05
+              ],
+              [
+                2.0471192687938435e-05,
+                4.733451656830462e-05,
+                0.0001614097481453606
+              ],
+              [
+                -2.262830444646653e-05,
+                0.0001614097481453606,
+                0.0027391694132291506
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.388936847600839e-05,
+                -7.301873911109458e-08,
+                1.6742763180484501e-06
+              ],
+              [
+                -7.301873911109458e-08,
+                9.29454736311503e-07,
+                5.264880817062085e-07
+              ],
+              [
+                1.6742763180484501e-06,
+                5.264880817062085e-07,
+                6.63840482877741e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "27",
+            "name": "spoon",
+            "native_name": "cooking utensil",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.8703542180830385,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.4423631123919308,
+            "removed_points": 387,
+            "prior_points": 694,
+            "final_points": 1505,
+            "frames": [
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_01_0002",
+              "cam_01_0023",
+              "cam_01_0056"
+            ],
+            "measured_points": 1270,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.833984375,
+            "camera_baseline_m": 5.2230332199829945,
+            "position_mean": [
+              -2.9369907285814025,
+              0.5258388499402774,
+              1.255842041052627
+            ],
+            "physical_extent_covariance": [
+              [
+                2.1052152571357415e-05,
+                -1.3068519163993028e-06,
+                -0.0003550400922249348
+              ],
+              [
+                -1.3068519163993028e-06,
+                0.0004500659420877251,
+                1.5232808216494614e-05
+              ],
+              [
+                -0.0003550400922249348,
+                1.5232808216494614e-05,
+                0.012108363262147948
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                3.071400547126466e-07,
+                -5.612694455277205e-07,
+                -9.426540528154583e-06
+              ],
+              [
+                -5.612694455277205e-07,
+                1.438727546794788e-06,
+                1.6443599754640508e-05
+              ],
+              [
+                -9.426540528154583e-06,
+                1.6443599754640508e-05,
+                0.0003300905979007999
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "70",
+            "name": "cooking utensil",
+            "native_name": "kitchen utensils",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.892994122995171,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.5048309178743962,
+            "removed_points": 205,
+            "prior_points": 414,
+            "final_points": 1353,
+            "frames": [
+              "cam_01_0002",
+              "cam_01_0023",
+              "cam_01_0047",
+              "cam_01_0056",
+              "cam_02_0064"
+            ],
+            "measured_points": 1227,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.841796875,
+            "camera_baseline_m": 3.7462135564691694,
+            "position_mean": [
+              -2.939523914733462,
+              0.6442416139719258,
+              1.3146401532688228
+            ],
+            "physical_extent_covariance": [
+              [
+                1.7867534355855318e-06,
+                2.7593220890542997e-07,
+                -8.066182899815795e-05
+              ],
+              [
+                2.7593220890542997e-07,
+                6.500215131394987e-05,
+                -7.584885547685588e-06
+              ],
+              [
+                -8.066182899815795e-05,
+                -7.584885547685588e-06,
+                0.01015382035426244
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                6.322377022257703e-09,
+                6.2927755872802e-08,
+                -5.636780470955284e-08
+              ],
+              [
+                6.2927755872802e-08,
+                9.513765384776322e-07,
+                9.529801509255789e-07
+              ],
+              [
+                -5.636780470955284e-08,
+                9.529801509255789e-07,
+                7.917717589685014e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "257",
+            "name": "paper towel holder",
+            "native_name": "paper towel holder",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.9641570986178133,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9931170108161259,
+            "removed_points": 0,
+            "prior_points": 3051,
+            "final_points": 3025,
+            "frames": [
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_02_0052",
+              "cam_02_0058"
+            ],
+            "measured_points": 2132,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8234375,
+            "camera_baseline_m": 3.004000879332619,
+            "position_mean": [
+              -2.928727018948616,
+              1.356593419848107,
+              1.3354866792964
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0023179095876944924,
+                0.0005017703747036464,
+                -0.0015694613401619135
+              ],
+              [
+                0.0005017703747036464,
+                0.005231724242672427,
+                0.0005159251049644595
+              ],
+              [
+                -0.0015694613401619135,
+                0.0005159251049644595,
+                0.0027498720453503185
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.513847186504786e-05,
+                4.54623086386793e-05,
+                -5.293359417691264e-06
+              ],
+              [
+                4.54623086386793e-05,
+                0.0001479773790734026,
+                -1.1939696578917213e-05
+              ],
+              [
+                -5.293359417691264e-06,
+                -1.1939696578917213e-05,
+                3.664495217779004e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "157",
+            "name": "cutting board",
+            "native_name": "cutting board",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9999999999999993,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 1643,
+            "final_points": 1643,
+            "frames": [
+              "cam_00_0018",
+              "cam_00_0036",
+              "cam_01_0020",
+              "cam_01_0026",
+              "cam_02_0031"
+            ],
+            "measured_points": 1643,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7765625,
+            "camera_baseline_m": 2.3160898382881903,
+            "position_mean": [
+              2.2171059939436795,
+              -0.0033712396004756252,
+              0.9899675863044296
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0037321875937469644,
+                -0.0035336041884667857,
+                0.00012101869223935538
+              ],
+              [
+                -0.0035336041884667857,
+                0.01726882504295721,
+                0.00011812383607261425
+              ],
+              [
+                0.00012101869223935538,
+                0.00011812383607261425,
+                8.13242720229144e-05
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                7.283514551768758e-05,
+                -7.249834019495547e-05,
+                5.057360663745729e-06
+              ],
+              [
+                -7.249834019495547e-05,
+                7.720536905305354e-05,
+                -4.5030175501224905e-06
+              ],
+              [
+                5.057360663745729e-06,
+                -4.5030175501224905e-06,
+                4.4673045826891575e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "94",
+            "name": "cutting board",
+            "native_name": "cutting board",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9867785448701712,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 1089,
+            "final_points": 1089,
+            "frames": [
+              "cam_00_0057",
+              "cam_00_0096",
+              "cam_01_0050",
+              "cam_02_0001",
+              "cam_02_0070"
+            ],
+            "measured_points": 1089,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.9045758928571429,
+            "camera_baseline_m": 3.6144314700968097,
+            "position_mean": [
+              -1.9142366373925648,
+              1.6953618266776178,
+              0.9741136500724022
+            ],
+            "physical_extent_covariance": [
+              [
+                0.011967869459048429,
+                -0.00035184432445752495,
+                -6.0349705675506945e-06
+              ],
+              [
+                -0.00035184432445752495,
+                0.002465149832560423,
+                2.425753691017242e-05
+              ],
+              [
+                -6.0349705675506945e-06,
+                2.425753691017242e-05,
+                4.354397381835092e-06
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                0.000247726707297884,
+                -2.4317119951375622e-05,
+                -5.83047276405231e-07
+              ],
+              [
+                -2.4317119951375622e-05,
+                3.6595061211022144e-06,
+                8.852429742255674e-08
+              ],
+              [
+                -5.83047276405231e-07,
+                8.852429742255674e-08,
+                7.28316267733701e-09
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "240",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 492,
+            "final_points": 492,
+            "frames": [
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_02_0001",
+              "cam_02_0034"
+            ],
+            "measured_points": 492,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.7890625,
+            "camera_baseline_m": 2.8612110719005512,
+            "position_mean": [
+              -0.5819049340028589,
+              1.947851708867567,
+              2.2493521049475413
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00012675303924034994,
+                -5.669537964535541e-05,
+                3.614879649273086e-05
+              ],
+              [
+                -5.669537964535541e-05,
+                4.365714212153682e-05,
+                3.7365066101009024e-05
+              ],
+              [
+                3.614879649273086e-05,
+                3.7365066101009024e-05,
+                0.0014103090446660742
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                6.761560640772724e-06,
+                -4.7150482440274853e-07,
+                -3.3064639310006418e-06
+              ],
+              [
+                -4.7150482440274853e-07,
+                2.964264409507135e-07,
+                1.3938008122949617e-06
+              ],
+              [
+                -3.3064639310006418e-06,
+                1.3938008122949617e-06,
+                1.2670741026764025e-05
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "108",
+            "name": "drinking glass",
+            "native_name": "glass",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.8928166320363531,
+            "proposal_owned_fraction": 0.9828926905132193,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 516,
+            "final_points": 991,
+            "frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_01_0035"
+            ],
+            "measured_points": 548,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.83349609375,
+            "camera_baseline_m": 4.130544560113639,
+            "position_mean": [
+              -0.47369199814926455,
+              1.9063656348258384,
+              1.6792975054571149
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00023084225284591888,
+                9.78470668176333e-06,
+                2.6830384865151723e-05
+              ],
+              [
+                9.78470668176333e-06,
+                5.1644886783172124e-05,
+                0.00015708370162043436
+              ],
+              [
+                2.6830384865151723e-05,
+                0.00015708370162043436,
+                0.00259912262145101
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.1007167012595912e-05,
+                1.3316889614108154e-06,
+                3.5620314163185818e-06
+              ],
+              [
+                1.3316889614108154e-06,
+                7.493375640182653e-07,
+                9.376460239334277e-07
+              ],
+              [
+                3.5620314163185818e-06,
+                9.376460239334277e-07,
+                2.51166249351597e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "113",
+            "name": "shelf",
+            "native_name": "shelf",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9791594163973123,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 3555,
+            "final_points": 3555,
+            "frames": [
+              "cam_00_0027",
+              "cam_00_0039",
+              "cam_01_0041",
+              "cam_02_0025"
+            ],
+            "measured_points": 3555,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8955078125,
+            "camera_baseline_m": 4.729771275180438,
+            "position_mean": [
+              -0.4965328786760869,
+              1.9208328061633193,
+              2.1317636259208443
+            ],
+            "physical_extent_covariance": [
+              [
+                0.013109609488404918,
+                0.004228303674221887,
+                -0.00011275978507048984
+              ],
+              [
+                0.004228303674221887,
+                0.006210653799520626,
+                -0.00014367376048382365
+              ],
+              [
+                -0.00011275978507048984,
+                -0.00014367376048382365,
+                1.7685871074458862e-05
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                4.616674517881814e-05,
+                3.948580852922736e-05,
+                -2.3415776462527595e-06
+              ],
+              [
+                3.948580852922736e-05,
+                6.512336678399377e-05,
+                -2.663193090117084e-06
+              ],
+              [
+                -2.3415776462527595e-06,
+                -2.663193090117084e-06,
+                1.3431768538597565e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "60",
+            "name": "spoon",
+            "native_name": "cooking utensil",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.8979588019468335,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.6865671641791045,
+            "removed_points": 145,
+            "prior_points": 469,
+            "final_points": 1299,
+            "frames": [
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_01_0002",
+              "cam_01_0056"
+            ],
+            "measured_points": 1035,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8546875,
+            "camera_baseline_m": 5.221989386462899,
+            "position_mean": [
+              -2.9457819450741263,
+              0.41012140296804483,
+              1.266214215657014
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00011690359066288225,
+                -2.1328731859992364e-05,
+                0.0006348745248785955
+              ],
+              [
+                -2.1328731859992364e-05,
+                0.0002355932490958317,
+                -0.0005953047169780944
+              ],
+              [
+                0.0006348745248785955,
+                -0.0005953047169780944,
+                0.012759812426615353
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                8.309561390491694e-07,
+                1.4366185296870806e-06,
+                1.8183992961622418e-06
+              ],
+              [
+                1.4366185296870806e-06,
+                3.7854454197584828e-06,
+                2.9789354615072145e-06
+              ],
+              [
+                1.8183992961622418e-06,
+                2.9789354615072145e-06,
+                4.328425154167011e-06
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "455",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 1.0,
+            "removed_points": 0,
+            "prior_points": 499,
+            "final_points": 499,
+            "frames": [
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_02_0001"
+            ],
+            "measured_points": 499,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8125,
+            "camera_baseline_m": 2.8498461376974404,
+            "position_mean": [
+              -0.518782732439691,
+              1.9483659460809442,
+              2.2505494789411147
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0001871348556587138,
+                -5.180333485330149e-05,
+                -7.024096461120496e-06
+              ],
+              [
+                -5.180333485330149e-05,
+                5.7318379086568515e-05,
+                4.8378929199119575e-05
+              ],
+              [
+                -7.024096461120496e-06,
+                4.8378929199119575e-05,
+                0.001456018301832976
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                1.125811464680528e-05,
+                -3.6363559556612024e-06,
+                -1.2549805577559281e-05
+              ],
+              [
+                -3.6363559556612024e-06,
+                1.1992059199355926e-06,
+                3.828481378351845e-06
+              ],
+              [
+                -1.2549805577559281e-05,
+                3.828481378351845e-06,
+                1.8852534185338767e-05
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "443",
+            "name": "glass",
+            "native_name": "glass",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9663967597378558,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.5098039215686274,
+            "removed_points": 122,
+            "prior_points": 255,
+            "final_points": 458,
+            "frames": [
+              "cam_00_0045",
+              "cam_00_0081",
+              "cam_01_0017",
+              "cam_02_0034"
+            ],
+            "measured_points": 337,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8033854166666666,
+            "camera_baseline_m": 2.1320326119548145,
+            "position_mean": [
+              -0.6412866258438249,
+              1.9460880547906714,
+              2.236406947350166
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00017866544905609816,
+                -2.8307332884178357e-05,
+                2.5074362313460677e-06
+              ],
+              [
+                -2.8307332884178357e-05,
+                2.4453426017471467e-05,
+                2.1900416191670395e-05
+              ],
+              [
+                2.5074362313460677e-06,
+                2.1900416191670395e-05,
+                0.0013798772893328514
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                4.000996359144309e-06,
+                1.1185902267685513e-07,
+                4.710093345671222e-06
+              ],
+              [
+                1.1185902267685513e-07,
+                4.0267719935334855e-08,
+                -5.073595177931948e-07
+              ],
+              [
+                4.710093345671222e-06,
+                -5.073595177931948e-07,
+                1.6616300944268354e-05
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "103",
+            "name": "jar",
+            "native_name": "jar",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.8500586551523063,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9642857142857143,
+            "removed_points": 6,
+            "prior_points": 364,
+            "final_points": 361,
+            "frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_01_0017",
+              "cam_02_0067"
+            ],
+            "measured_points": 246,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.821875,
+            "camera_baseline_m": 1.893736268849364,
+            "position_mean": [
+              -1.8821516170537504,
+              2.064491319025466,
+              1.1317774398697227
+            ],
+            "physical_extent_covariance": [
+              [
+                0.0002913675735840473,
+                4.259533625654891e-05,
+                -3.852273336958706e-06
+              ],
+              [
+                4.259533625654891e-05,
+                5.785550404396215e-05,
+                4.848198316550017e-05
+              ],
+              [
+                -3.852273336958706e-06,
+                4.848198316550017e-05,
+                0.000458512735382547
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                5.017714402866662e-06,
+                -1.338332400533383e-07,
+                2.2934050480206343e-07
+              ],
+              [
+                -1.338332400533383e-07,
+                7.945886575773676e-08,
+                6.10023181491319e-08
+              ],
+              [
+                2.2934050480206343e-07,
+                6.10023181491319e-08,
+                1.1662745887863406e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "210",
+            "name": "jar",
+            "native_name": "jar",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.906958671365732,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9357326478149101,
+            "removed_points": 23,
+            "prior_points": 389,
+            "final_points": 367,
+            "frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_01_0017",
+              "cam_02_0067"
+            ],
+            "measured_points": 255,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.84765625,
+            "camera_baseline_m": 1.893736268849364,
+            "position_mean": [
+              -1.8830956633324016,
+              2.0646868870691013,
+              1.0307186423566292
+            ],
+            "physical_extent_covariance": [
+              [
+                0.00031323800478319166,
+                2.6926210872419484e-05,
+                -1.313890268792505e-05
+              ],
+              [
+                2.6926210872419484e-05,
+                6.044820666982514e-05,
+                4.170335936166703e-05
+              ],
+              [
+                -1.313890268792505e-05,
+                4.170335936166703e-05,
+                0.0004717890200461114
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                2.843337010714368e-06,
+                4.2902171975101674e-07,
+                4.510058126291089e-07
+              ],
+              [
+                4.2902171975101674e-07,
+                1.5156750835446602e-07,
+                2.656128841495225e-07
+              ],
+              [
+                4.510058126291089e-07,
+                2.656128841495225e-07,
+                6.982787890541999e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "211",
+            "name": "jar",
+            "native_name": "jar",
+            "action": "detached_low_support_patch_rejection",
+            "semantic_agreement": 0.8945397936677796,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9575070821529745,
+            "removed_points": 13,
+            "prior_points": 353,
+            "final_points": 336,
+            "frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_01_0017",
+              "cam_02_0067"
+            ],
+            "measured_points": 233,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.849609375,
+            "camera_baseline_m": 1.893736268849364,
+            "position_mean": [
+              -1.805067259813011,
+              2.0638761252626816,
+              1.13188813142326
+            ],
+            "physical_extent_covariance": [
+              [
+                0.000291050155213656,
+                5.35375042079363e-06,
+                1.2671362700234868e-05
+              ],
+              [
+                5.35375042079363e-06,
+                5.151656646137668e-05,
+                5.670738204235679e-05
+              ],
+              [
+                1.2671362700234868e-05,
+                5.670738204235679e-05,
+                0.00046708442489370907
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                2.424326305420808e-06,
+                2.2277838281586528e-07,
+                5.163463641420992e-07
+              ],
+              [
+                2.2277838281586528e-07,
+                7.124452527513209e-08,
+                3.1486894513206075e-08
+              ],
+              [
+                5.163463641420992e-07,
+                3.1486894513206075e-08,
+                1.1510737338699411e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "239",
+            "name": "knife",
+            "native_name": "knife",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 0.9966870723538759,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9960629921259843,
+            "removed_points": 0,
+            "prior_points": 254,
+            "final_points": 431,
+            "frames": [
+              "cam_00_0042",
+              "cam_02_0001",
+              "cam_02_0046",
+              "cam_02_0070"
+            ],
+            "measured_points": 296,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.8376116071428571,
+            "camera_baseline_m": 1.690520703737841,
+            "position_mean": [
+              -1.195386057031197,
+              2.0676119149460748,
+              1.2023312364841983
+            ],
+            "physical_extent_covariance": [
+              [
+                2.431335781471351e-05,
+                6.210735634728754e-06,
+                -2.5199397118910988e-05
+              ],
+              [
+                6.210735634728754e-06,
+                2.91663843559247e-05,
+                -0.000127759017155174
+              ],
+              [
+                -2.5199397118910988e-05,
+                -0.000127759017155174,
+                0.0009540358790247654
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                5.823884916720671e-07,
+                -1.42321849360734e-07,
+                2.494869476497909e-07
+              ],
+              [
+                -1.42321849360734e-07,
+                7.335432858166042e-08,
+                -1.5484462804344263e-07
+              ],
+              [
+                2.494869476497909e-07,
+                -1.5484462804344263e-07,
+                3.6429726729045394e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "214",
+            "name": "knife",
+            "native_name": "knife",
+            "action": "anisotropic_measured_extent_envelope",
+            "semantic_agreement": 1.0000000000000002,
+            "proposal_owned_fraction": 1.0,
+            "original_explained_fraction": 0.9913793103448276,
+            "removed_points": 1,
+            "prior_points": 232,
+            "final_points": 423,
+            "frames": [
+              "cam_00_0042",
+              "cam_02_0001",
+              "cam_02_0046",
+              "cam_02_0070"
+            ],
+            "measured_points": 300,
+            "generated_points": 0,
+            "independent_point_views": 3,
+            "native_mean_confidence": 0.84375,
+            "camera_baseline_m": 1.690520703737841,
+            "position_mean": [
+              -1.1719999264564152,
+              2.061178175207447,
+              1.2034194973521084
+            ],
+            "physical_extent_covariance": [
+              [
+                2.4597216779454175e-05,
+                9.483498880407007e-06,
+                -3.769047910620267e-05
+              ],
+              [
+                9.483498880407007e-06,
+                3.3094843374011035e-05,
+                -0.00013876112629720424
+              ],
+              [
+                -3.769047910620267e-05,
+                -0.00013876112629720424,
+                0.0009774733976081623
+              ]
+            ],
+            "mean_estimation_covariance": [
+              [
+                6.27217113222186e-07,
+                -1.7966073638167787e-07,
+                2.0868451515668533e-07
+              ],
+              [
+                -1.7966073638167787e-07,
+                1.1164492618931049e-07,
+                -2.4239580540964713e-07
+              ],
+              [
+                2.0868451515668533e-07,
+                -2.4239580540964713e-07,
+                7.38539826858122e-07
+              ]
+            ],
+            "uncertainty_model": "empirical_independent_view_centroids_not_NIW_reproduction"
+          },
+          {
+            "instance_id": "82",
+            "action": "唯一原生表面归属，保留后排未知表面",
+            "unique_owner": "108",
+            "removed_duplicate_points": 147,
+            "generated_points": 0
+          }
+        ],
+        "source_groups": 741,
+        "reconciled_groups": 646,
+        "accepted_proposals": 138,
+        "ambiguous_or_unowned_proposals": 52
+      },
+      "residual_ownership_audit": {
+        "algorithm": "RSE_v16_FAST_MCD",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "c601015c18122abd68e94da4a9c5c1f37c3b66d0dab33eca4809f04eb65b5440",
+        "objects": [
+          {
+            "instance_id": "82",
+            "unique_owner": "108",
+            "action": "量化尺度表面归属与未知余量稳健审核",
+            "removed_duplicate_points": 73,
+            "accepted": true,
+            "raw_mcd_location": [
+              -0.4737470803866877,
+              1.9985346771404335,
+              1.7118898569892997
+            ],
+            "raw_mcd_covariance": [
+              [
+                0.00025290968819647355,
+                0.00015120623288352844,
+                0.00021959655171351322
+              ],
+              [
+                0.00015120623288352844,
+                0.0003217098856977098,
+                0.00010773349501833865
+              ],
+              [
+                0.00021959655171351322,
+                0.00010773349501833865,
+                0.001864779187096157
+              ]
+            ],
+            "removed_points": 40,
+            "generated_points": 0,
+            "posterior_probability_calibrated": false
+          },
+          {
+            "instance_id": "113",
+            "action": "水平主表面稳健包络排除少量混入点",
+            "accepted": true,
+            "raw_mcd_location": [
+              -0.48579794612284377,
+              1.9368972693660274,
+              2.129997022493986
+            ],
+            "raw_mcd_covariance": [
+              [
+                0.010497866790696293,
+                0.0030547481474578015,
+                -1.1131919851292687e-06
+              ],
+              [
+                0.0030547481474578015,
+                0.004787033117756449,
+                -1.5917431069574993e-07
+              ],
+              [
+                -1.1131919851292687e-06,
+                -1.5917431069574993e-07,
+                2.8741271647168207e-08
+              ]
+            ],
+            "removed_points": 13,
+            "generated_points": 0,
+            "posterior_probability_calibrated": false,
+            "measured_plane": [
+              -0.00039486869274194263,
+              0.0024055207387468627,
+              0.9999970287699314,
+              -2.134963110767719
+            ],
+            "plane_support_fraction": 0.8469760900140647
+          },
+          {
+            "instance_id": "456",
+            "action": "水平主表面稳健包络排除少量混入点",
+            "accepted": true,
+            "raw_mcd_location": [
+              0.3547480099305282,
+              0.11159704463180894,
+              0.9863743550308304
+            ],
+            "raw_mcd_covariance": [
+              [
+                0.02181298757196707,
+                0.0012979879171584237,
+                1.8784056518720573e-05
+              ],
+              [
+                0.0012979879171584237,
+                0.002647744709702643,
+                0.00024181640905684602
+              ],
+              [
+                1.8784056518720573e-05,
+                0.00024181640905684602,
+                8.030250417582722e-05
+              ]
+            ],
+            "removed_points": 988,
+            "generated_points": 0,
+            "posterior_probability_calibrated": false,
+            "measured_plane": [
+              -6.346372269987802e-05,
+              -0.00015679920022767374,
+              0.9999999856931833,
+              -0.9942940298102256
+            ],
+            "plane_support_fraction": 0.5862947395236275
+          },
+          {
+            "instance_id": "88",
+            "unique_owner": "459",
+            "action": "量化尺度表面归属与未知余量稳健审核",
+            "removed_duplicate_points": 9,
+            "accepted": true,
+            "raw_mcd_location": [
+              -0.6370961566975052,
+              1.9784449425822148,
+              1.7013255695359708
+            ],
+            "raw_mcd_covariance": [
+              [
+                0.00010007116937751046,
+                -3.264700632795009e-06,
+                0.00011451467526428779
+              ],
+              [
+                -3.264700632795009e-06,
+                1.0810873157737614e-05,
+                9.532407275393672e-05
+              ],
+              [
+                0.00011451467526428779,
+                9.532407275393672e-05,
+                0.0019464679317191768
+              ]
+            ],
+            "removed_points": 10,
+            "generated_points": 0,
+            "posterior_probability_calibrated": false
+          }
+        ]
+      }
+    }
+  ],
+  "native_cache_bundles_verified": 199,
+  "learned_universal_completion_solved": false,
+  "fine_instance_generalization_proven": false,
+  "added_geometry": "VISTA/CMR/DSM recover measured raw depth; PSG-inspired empirical geometry belief is not full NIW; existing cuboids and RSI remain labeled hypotheses",
+  "target_reached": false,
+  "rse_runtime": {
+    "scikit_learn": "1.7.2"
+  },
+  "report_source_sha256": "5cadcd841f527f7345962d0923932a2ec915c9c42752c09ac9ceb7f61bc91305",
+  "latex_compilation": {
+    "status": "compiler_unavailable",
+    "source": "docs/RESEARCH_LOG.tex",
+    "diagnostic": "exec failed: windows sandbox: helper_unknown_error: setup refresh had errors",
+    "source_preserved": true,
+    "separate_pdf_created": false
+  }
+}

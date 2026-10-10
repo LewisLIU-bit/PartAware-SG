@@ -381,3 +381,26 @@ Historical profile selection clears v15 registrations, including post-publicatio
 review. No per-component CLI flags or backup-dependent removal were added.
 Detailed equations, limits and final results are in report chapters 2–6 and 22–24.
 `docs/v15_final_results.json` records hashes and independent nonregression gates.
+
+## V16 visible instance surfaces and protected residual geometry
+
+`configure_profile('v16', registry)` registers `visible_instances` and
+`residual_ownership` at the end of `FINAL_GEOMETRY`. Both are grouped under MICA
+in descriptive provenance but execute after part fusion. CMR forwards its native
+observations to VISTA. All historical profiles clear both adapters first.
+
+VISTA uses all measured-point visible votes, shared partial surfaces, simultaneous
+separation, semantic variants and unique physical matching. It preserves broad
+partial bodies and uses empirical extent plus mean uncertainty only as a geometric
+acceptance envelope. RSE checks independent unknown connected components before
+FAST-MCD; a smaller supported component cannot be discarded just for having fewer
+points. Degenerate fits defer. No coordinate, category or node-specific override exists.
+
+`visible_instance_audit.json` and `residual_ownership_audit.json` include measured
+origins, accepted/rejected evidence, covariance, zero generated points and code hash.
+Remove either code registration and rebuild from retained raw observations to detach.
+`POST_PUBLICATION=[scene_review]` still renders the original viewer before independent
+GT evaluation; diagnostics are not fed into construction. Existing Graph, 256/384
+object features and independent 1024-dimensional part features remain compatible.
+Equations, remaining errors and sources are in report chapters 2.11, 6.12 and 23–25.
+Final validated hashes and gates are in `docs/v16_final_results.json`.

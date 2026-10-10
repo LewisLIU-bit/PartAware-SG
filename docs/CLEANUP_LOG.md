@@ -117,3 +117,7 @@ SAM3访问被作者拒绝，用户决定放弃，删除 .env-sam3（7.6 GB）、
 ## 2026-10-10 v15 final retention
 
 Retained one v15 final tree with both scenes and identical signed source caches. Removed seven own v15 trial cache directories and the unused, unregistered mask_separation experiment. All earlier official finals, original RAM/GPT/Qwen baselines, ScanNet/Hypersim/scene0802 and pre-existing source modifications remain. No backup was made. Comprehensive report includes final version results only.
+
+## 2026-10-10 v16 final retention
+
+Retained one v16 final tree with both scenes and 199 identical signed observations. Removed only the seven own v16 diagnostic/trial cache directories. Original RAM/GPT/Qwen baselines, previous final versions, ScanNet/Hypersim/scene0802 and pre-existing source modifications remain. No backup was made. Consolidated report shows final results only.

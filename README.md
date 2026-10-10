@@ -14,54 +14,57 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
-for v12, v13, v14 and v15; construction makes no new GPT or Qwen image requests. Report defaults
+for v12, v13, v14, v15 and v16; construction makes no new GPT or Qwen image requests. Report defaults
 remain original RAM, existing Qwen for v11, and existing GPT for v12 and later. The GPT original pipeline is retained as a separate baseline and compared
-with RAM, Qwen-to-DINO, v12, v13, v14 and v15 using the same scene cache as v12. See
+with RAM, Qwen-to-DINO, v12, v13, v14, v15 and v16 using the same scene cache as v12. See
 [GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
 The existing ScanNet and Hypersim interfaces remain unchanged.
 
-The latest v15 research profile reuses the existing GPT and signed SAM3 observations.
-Its FOVEA -> MICA -> SHAPE -> GRAPH tree adds nonexclusive contact-mask recovery
-(CMR), measured surface densification (DSM), open support layers (OSL), outer
-room-surface ownership (ROS), carrier-supported facade hierarchy (FCA), and
-single-face physical box cues. Original-viewer screenshots precede independent
-per-GT review; annotations never feed back into construction.
+The latest v16 research profile reuses the existing GPT and signed SAM3 observations.
+Its FOVEA -> MICA -> SHAPE -> GRAPH tree adds Visible Instance Surface Tracking
+and Assignment (VISTA) and Robust Surface Envelopes (RSE). VISTA reconciles partial
+measured observations, recovers sparse thin structures using independent visible
+votes, and assigns surfaces with physical uniqueness. RSE protects multiple
+supported unknown components before FAST-MCD tail checks. No fixed two-row count,
+scene coordinates, GT IDs, node lists, category whitelist, or special prompt is used.
 
-These adapters use generic multiview and geometric evidence, not scene coordinates,
-GT IDs, node lists or object-specific prompts. CMR/DSM add actual depth samples.
-Existing category-conditioned cuboids and repeated-surface hypotheses remain
-explicitly generated priors; this is not universal learned hidden-shape completion.
+The PSG paper motivates separating physical extent from uncertainty in its estimate.
+V16 uses empirical covariances, not PSG's NIW/EM optimizer or sampled Gaussian map.
+SupeRGB-D, SAMPart3D and ClearGrasp were reviewed but their trained networks were not
+deployed. All added VISTA points are measured. Existing cuboid and repeated-surface
+hypotheses remain labeled generated priors, not universal learned hidden completion.
 
-Both scenes are rebuilt. ai_001_002 retains 100%/100%/100% AP25/AP50/AP75.
-ai_001_010 reaches 51.90%/33.63%/14.86% (127 predictions / 109 GT), compared
-with v14's 44.42%/27.68%/10.86%. All three AP thresholds, optimal TP/FP/FN
-counts and absolute log-count error pass nonregression against v14. These are
-adapted class-agnostic box metrics on two development scenes, not mask or relation AP.
-The 80% AP25 / 70% AP50 target, complete lamps, some fine glassware, and general
-text-conditioned completion remain unresolved. MGPC was tested and rejected by
-observed constraints. See [the consolidated report](docs/RESEARCH_REPORT.md) and
-[the final validation receipt](docs/v15_final_results.json).
+Both scenes are rebuilt from the same retained raw fusion and cached observations.
+ai_001_002 retains 100%/100%/100% AP25/AP50/AP75. ai_001_010 reaches 58.84%/41.25%/18.42%
+(127 predictions / 109 GT), compared with v15's 51.90%/33.63%/14.86%.
+All three AP thresholds, optimal TP/FP/FN counts and log-count error pass nonregression
+against v15. These adapted class-agnostic box metrics do not prove correct fine labels.
+Some transparent rear objects, a spatula, the hanging rail and other small objects
+remain unresolved, as do the 80% AP25 / 70% AP50 target and general completion.
+Local regressions are reported alongside gains. See [the consolidated report](docs/RESEARCH_REPORT.md)
+and [the final validation receipt](docs/v16_final_results.json).
 
-Rebuild v15 from the retained raw fusion in a fresh result directory:
+Rebuild v16 in a fresh result directory:
 
 ```bash
 cd /home/lewisliu/PartAware-SG
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
-  --worker v15 \
+  --worker v16 \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v15/hypersim/ai_001_010 \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v15/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v16/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
-Final artifacts are under `datasets/scannet-sg-processed/partaware_v15`.
+Final artifacts are under `datasets/scannet-sg-processed/partaware_v16`.
 Pair `instance_cloud_completed.ply` with `topology_map.json`, or use
 `instance_cloud_cleaned.ply` and `topology_map_observed.json` for measurements.
-The first scene has no added completion and uses the cleaned PLY.
-Remove adapters at code registrations in `configure_profile` and rebuild;
-no per-feature flags or backup restoration are needed. Historical profiles remain.
-The full 230-test offline regression passes and all 199 signed observation
-bundles match the retained source. No new GPT/Qwen recognition is requested.
+The first scene uses the cleaned PLY. Detach modules at code registrations and
+rebuild; historical profiles actively clear v16 adapters. No per-feature flags
+or backup restoration are required. All 242 offline tests and the original
+TopologyMap reader pass; all 199 signed observation bundles match the source.
+The report preserves all 119 GT labels, 11 atlases, mathematical sources, direct
+viewer commands and each version's final comparison. No new GPT/Qwen request occurs.
 
 PartAware-SG preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,

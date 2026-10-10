@@ -240,6 +240,7 @@ def construct(context):
     tracks_path = context.scene / 'validated_object_tracks.json'
     tracks = json.loads(tracks_path.read_text())
     groups = observations(context, jobs, kd, kc, scale, native)
+    context.native_contact_observations = (groups, views, native)
     proposals = []
     for group in groups:
         recovered, evidence = consensus(group, views, native)

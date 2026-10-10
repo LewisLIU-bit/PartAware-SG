@@ -28,12 +28,12 @@ def process_tree(registry, recognition=None):
             'association': {'modules': modules('ASSOCIATION', 'FUSION', 'INSTANCE_REFINEMENT')},
             'whole_object': {'modules': modules('HIERARCHY_VALIDATION', 'WHOLE_OBJECT_VALIDATION', 'SURFACE_ASSEMBLY')},
             'contact_recovery': {'modules': [entry.__name__ for entry in getattr(registry, 'FINAL_GEOMETRY', [])
-                                             if entry.__name__.endswith('.contact_instances')],
+                                             if entry.__name__.rsplit('.',1)[-1] in ('contact_instances','visible_instances','residual_ownership')],
                                  'execution_after_part_fusion': True},
             'validation': {'modules': modules('OBJECT_VALIDATION', 'OBSERVED_VALIDATION', 'BACKGROUND_VALIDATION', 'IDENTITY_VALIDATION', 'SURFACE_VALIDATION', 'OWNERSHIP_VALIDATION')}}},
         'SHAPE': {'name': 'Scene-constrained Hypotheses Anchored to Physical Evidence', 'children': {
             'geometry': {'modules': modules('GEOMETRY_COMPONENTS')},
-            'measured_recovery': {'modules': modules('PART_GEOMETRY', 'MEASURED_REFINEMENT', 'FINAL_GEOMETRY', omit=('contact_instances',))},
+            'measured_recovery': {'modules': modules('PART_GEOMETRY', 'MEASURED_REFINEMENT', 'FINAL_GEOMETRY', omit=('contact_instances','visible_instances','residual_ownership'))},
             'assembly_ownership': {'modules': modules('AXIAL_VALIDATION')},
             'enclosure_continuity': {'modules': modules('BODY_CONTINUITY')},
             'evidence_boundary': {'generated_surfaces_are_measurements': False, 'ground_truth_in_construction': False}}},

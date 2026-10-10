@@ -198,3 +198,16 @@ verified; do not confuse checkpoint hashing with publisher verification.
 V15 reuses existing signed masks and makes no new model or image API requests.
 Historical YOLOE profiles remain historical, not a repeated current front end.
 See `v15_final_results.json` and the consolidated report for final validation.
+
+## V16 robust construction dependency
+
+RSE uses scikit-learn 1.7.2 in the existing `scannet-sg` construction environment,
+distinct from SAM3 and VLPart. The runtime was already installed for the final run.
+If recreating that environment, install this dependency there:
+
+```bash
+/home/lewisliu/miniconda3/envs/scannet-sg/bin/python -m pip install scikit-learn==1.7.2
+```
+
+V16 reuses existing GPT categories and signed native masks; no account request,
+checkpoint download or fresh image call is required for this comparison.
