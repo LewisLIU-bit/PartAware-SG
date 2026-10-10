@@ -230,6 +230,8 @@ def main():
         graph_path.write_text(json.dumps(graph, indent=2) + '\n')
         if (context.scene/'parts/partaware_graph.json').exists():
             (context.scene/'parts/partaware_graph.json').write_text(json.dumps(graph, indent=2)+'\n')
+        for component in getattr(components,'POST_PUBLICATION',[]):
+            component.construct(context)
         context.event('完整主流程完成', output=str(graph_path))
     except Exception as error:
         context.event('主流程失败', error=str(error))

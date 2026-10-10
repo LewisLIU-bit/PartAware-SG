@@ -344,7 +344,7 @@ Closed storage identity is inferred before part construction from cached cabinet
 
 ## V12 native masks and measured body hierarchy
 
-`SURFACE_ASSEMBLY` registers `native_assembly.reconcile` only in v12. It resolves
+`SURFACE_ASSEMBLY` registers `native_assembly.reconcile` in v12 and subsequent GPT research profiles. It resolves
 signed complete-mask cache provenance from `cache_reuse.json`, queries packed
 original masks, and returns canonical measured candidates before publication.
 
@@ -357,3 +357,27 @@ Detach either component by deleting its import and registry entry, then rebuild
 from raw observations. Current receipts and unchanged-GT metrics are in
 `docs/sam3_woc_results.json` and report chapters 18–21. Object AP excludes parts;
 part AP remains unavailable without part annotations.
+
+## V15 generic measured recovery and independent final review
+
+`run_gpt_comparison.configure_profile('v15', registry)` adds `surface_densification`,
+`contact_instances`, `support_layers`, `boundary_ownership`, `front_continuity`
+and `face_boxes` to `FINAL_GEOMETRY` after the retained v14 construction.
+CMR is grouped under MICA in descriptive provenance but runs after part fusion.
+Its proposals use signed native masks, actual raw-depth points, independent
+visible views and simultaneous full-image separation. Confirmed VLPart parts
+can absorb matching measured candidates through the same VPA acceptance
+function; no node- or category-specific candidate override is registered.
+
+DSM retains all trusted original coordinates and adds nearby real samples.
+OSL/ROS correct measured support/background ownership; FCA uses a unique
+continuous measured carrier and retains source panels as parts. Final PCB
+single-face cues change directions, not coordinates or measured extents.
+`POST_PUBLICATION=[scene_review]` renders with the original viewer, then evaluates
+saved geometry against official GT. It returns no geometry to construction.
+
+Detach each module at its code registration and rebuild from retained observations.
+Historical profile selection clears v15 registrations, including post-publication
+review. No per-component CLI flags or backup-dependent removal were added.
+Detailed equations, limits and final results are in report chapters 2–6 and 22–24.
+`docs/v15_final_results.json` records hashes and independent nonregression gates.

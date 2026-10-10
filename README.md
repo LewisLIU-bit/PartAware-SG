@@ -14,49 +14,56 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
-for v12, v13 and v14; construction makes no new GPT or Qwen image requests. Report defaults
+for v12, v13, v14 and v15; construction makes no new GPT or Qwen image requests. Report defaults
 remain original RAM, existing Qwen for v11, and existing GPT for v12 and later. The GPT original pipeline is retained as a separate baseline and compared
-with RAM, Qwen-to-DINO, v12, v13 and v14 using the same scene cache as v12. See
+with RAM, Qwen-to-DINO, v12, v13, v14 and v15 using the same scene cache as v12. See
 [GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
 The existing ScanNet and Hypersim interfaces remain unchanged.
 
-The latest v14 research profile reuses the existing GPT and SAM3 observations.
-Its FOVEA -> MICA -> SHAPE -> GRAPH functional tree now includes identity-seeded
-measured surface proposals, closed-front versus open-rack boundaries, physical
-assembly ownership checks, and all-view verified shape hypotheses after assembly.
-Names select a bounded geometric prior; measured faces determine its dimensions.
-Generated surfaces remain hypotheses and never replace measured coordinates.
+The latest v15 research profile reuses the existing GPT and signed SAM3 observations.
+Its FOVEA -> MICA -> SHAPE -> GRAPH tree adds nonexclusive contact-mask recovery
+(CMR), measured surface densification (DSM), open support layers (OSL), outer
+room-surface ownership (ROS), carrier-supported facade hierarchy (FCA), and
+single-face physical box cues. Original-viewer screenshots precede independent
+per-GT review; annotations never feed back into construction.
 
-Both scenes are rebuilt and independently evaluated. ai_001_002 retains
-100%/100%/100% AP25/AP50/AP75; ai_001_010 reaches 44.42%/27.68%/10.86%
-from v13's 42.02%/25.97%/9.91%. The 80% AP25 / 70% AP50 target remains unmet.
-These are class-agnostic adapted Hypersim box metrics. Universal text-conditioned
-completion and broad fine-instance generalization remain unresolved; official MGPC
-inference was tested but did not pass the observation constraints and is not active.
-See [the consolidated report](docs/RESEARCH_REPORT.md) for final per-object results,
-GT explanations, equations, source papers and direct visualization commands.
+These adapters use generic multiview and geometric evidence, not scene coordinates,
+GT IDs, node lists or object-specific prompts. CMR/DSM add actual depth samples.
+Existing category-conditioned cuboids and repeated-surface hypotheses remain
+explicitly generated priors; this is not universal learned hidden-shape completion.
 
-To rebuild v14 from cached raw fusion, choose a fresh result path:
+Both scenes are rebuilt. ai_001_002 retains 100%/100%/100% AP25/AP50/AP75.
+ai_001_010 reaches 51.90%/33.63%/14.86% (127 predictions / 109 GT), compared
+with v14's 44.42%/27.68%/10.86%. All three AP thresholds, optimal TP/FP/FN
+counts and absolute log-count error pass nonregression against v14. These are
+adapted class-agnostic box metrics on two development scenes, not mask or relation AP.
+The 80% AP25 / 70% AP50 target, complete lamps, some fine glassware, and general
+text-conditioned completion remain unresolved. MGPC was tested and rejected by
+observed constraints. See [the consolidated report](docs/RESEARCH_REPORT.md) and
+[the final validation receipt](docs/v15_final_results.json).
+
+Rebuild v15 from the retained raw fusion in a fresh result directory:
 
 ```bash
 cd /home/lewisliu/PartAware-SG
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
-  --worker v14 \
+  --worker v15 \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v13/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v14/hypersim/ai_001_010 \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v15/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
-Final artifacts are under `datasets/scannet-sg-processed/partaware_v14`.
+Final artifacts are under `datasets/scannet-sg-processed/partaware_v15`.
 Pair `instance_cloud_completed.ply` with `topology_map.json`, or use
 `instance_cloud_cleaned.ply` and `topology_map_observed.json` for measurements.
 The first scene has no added completion and uses the cleaned PLY.
-Detach adapters at the code registrations in `configure_profile`, then rebuild;
-no algorithm flags or backup restoration are needed. Historical versions and
-ordinary ScanNet/Hypersim interfaces remain available.
+Remove adapters at code registrations in `configure_profile` and rebuild;
+no per-feature flags or backup restoration are needed. Historical profiles remain.
+The full 230-test offline regression passes and all 199 signed observation
+bundles match the retained source. No new GPT/Qwen recognition is requested.
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. Its v11 default
+PartAware-SG preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
@@ -384,7 +391,7 @@ reduces standalone objects from 139 to 126, and preserves every other object's
 point coordinates. Object AP uses the unchanged GT; part quality has no AP
 without part-level annotations. See report sections 2.7/2.8, 6.7 and chapter 18.
 
-Current results share `scannet-sg-processed/partaware_v12/hypersim/`, with
+The retained v12 results share `scannet-sg-processed/partaware_v12/hypersim/`, with
 `ai_001_002` and `ai_001_010` as sibling scenes. Direct viewer commands are in
 report section 21;
 `--show_parts --show_part_points` optionally displays the retained panel parts.

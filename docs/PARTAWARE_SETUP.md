@@ -185,8 +185,16 @@ node docs/render_research_report.cjs --source docs/RESEARCH_REPORT.md \
 
 The published HTML requires no CDN, JavaScript, remote font or network connection.
 
-## GPT relay and v12 fine inference
+## GPT relay and current cached SAM3 inference
 
 GPT image categories use the existing scannet-sg OpenAI SDK. See [VISION_API.md](VISION_API.md) for local credential setup, shared caches and direct comparison commands.
 
-V12 fine inference uses the existing .venv-yoloe environment and public YOLOE-v8-L weights. SAM3 access was rejected and its abandoned runtime was removed. See CLEANUP_LOG.md and the research report for the retirement record.
+The retained current SAM3 runtime is the isolated Conda environment
+`/home/lewisliu/miniconda3/envs/sg-sam3`, distinct from `scannet-sg` construction
+and `.venv-vlpart` part inference. The initial Hugging Face access was rejected;
+the subsequently obtained ModelScope checkpoint and official-source revision are
+recorded in `environment_sam3.json`. Its publisher identity was not independently
+verified; do not confuse checkpoint hashing with publisher verification.
+V15 reuses existing signed masks and makes no new model or image API requests.
+Historical YOLOE profiles remain historical, not a repeated current front end.
+See `v15_final_results.json` and the consolidated report for final validation.

@@ -113,3 +113,7 @@ SAM3访问被作者拒绝，用户决定放弃，删除 .env-sam3（7.6 GB）、
 完整清理与保留记录见datasets_cleanup.json；最终结果和文件哈希见sam3_woc_results.json。报告最新章节为18（v12）、19（原始流程对比）、20（低AP诊断）、21（数据和直接可视化命令）。
 
 保留完整性补充核对：清理时误删v1依赖的hypersim_joint_v4共享点云。图、部件及已记录历史评分保留；尚未找到同SHA256副本，原点云可视化暂不可复现。没有使用其他版本点云或生成点替代。 原评价记录的点云SHA256为7b8044a7bacdf25d517eca61c8999ff72afff0611fb97da639a59efb463cdd5a；保留数据及项目点云中无一致副本。此限制已写入v1版本章节、evaluation.json和最终结果索引。历史评价若图哈希不同也按原记录保留，不伪造为重算结果；当前GPT原始及v12的图/点云哈希核验一致。
+
+## 2026-10-10 v15 final retention
+
+Retained one v15 final tree with both scenes and identical signed source caches. Removed seven own v15 trial cache directories and the unused, unregistered mask_separation experiment. All earlier official finals, original RAM/GPT/Qwen baselines, ScanNet/Hypersim/scene0802 and pre-existing source modifications remain. No backup was made. Comprehensive report includes final version results only.

@@ -18,42 +18,42 @@
 
 
 
-当前主流程为v14，继续复用既有GPT和SAM3观测。新增身份种子表面提案、封闭立面与开放格架分离、连续柜体接缝层级归并、物理连接归属检查和最终整体形状验收。第二场景最终AP25/AP50/AP75为44.42\%/27.68\%/10.86\%；第一场景仍全部100\%。目标AP25≥80\%、AP50≥70\%尚未达到。通过验收的长方体表面是有条件预测，通用文本条件补全及精细识别的跨场景泛化仍未解决。
+当前主流程为v15，继续复用既有GPT和SAM3观测。新增CMR非互斥接触实例恢复、DSM真实深度密集恢复、OSL开放层架、ROS最外层背景归属、FCA整柜与面板层级以及单面物理定向框；发布后自动用原版可视化并独立核对全部GT。第二场景最终AP25/AP50/AP75为51.90\%/33.63\%/14.86\%；第一场景仍全部100\%。目标AP25≥80\%、AP50≥70\%尚未达到。新增点来自实际深度；既有长方体和RSI预测仍标记为假设，通用隐藏几何补全及精细识别泛化仍未解决。
 
 
 
-\section*{v14 更新摘要（当前最终版）}
-\addcontentsline{toc}{section}{v14 更新摘要（当前最终版）}
+\section*{v15 更新摘要（当前最终版）}
+\addcontentsline{toc}{section}{v15 更新摘要（当前最终版）}
 
-以下只比较各版本最终成品，沿用同一GT、评价程序及既有GPT/SAM3观测；没有新增识图调用。完整版本对照见第19章，v14逐物体证据及适用边界见第21章。
+仅比较各版本最终成品，沿用同一GT、评价程序及既有GPT/SAM3观测，没有新识图调用。完整对照见第19章；v15逐物体证据和限制见第22章。
 
 
 
 {\small
 \begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
 \hline
-第二场景 ai\_001\_010 & v13最终版 & v14最终版 & 变化 \\ \hline
+第二场景 ai\_001\_010 & v14最终版 & v15最终版 & 变化 \\ \hline
 \endfirsthead
 \hline
-第二场景 ai\_001\_010 & v13最终版 & v14最终版 & 变化 \\ \hline
+第二场景 ai\_001\_010 & v14最终版 & v15最终版 & 变化 \\ \hline
 \endhead
-AP25 & 42.02\% & 44.42\% & +2.40个百分点 \\ \hline
-AP50 & 25.97\% & 27.68\% & +1.71个百分点 \\ \hline
-AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
-预测物体数 / GT物体数 & 134/109 & 129/109 & 预测数减少5个 \\ \hline
-数量绝对对数误差 & 0.2065 & 0.1685 & 降低0.0380 \\ \hline
+AP25 & 44.42\% & 51.90\% & +7.48个百分点 \\ \hline
+AP50 & 27.68\% & 33.63\% & +5.95个百分点 \\ \hline
+AP75 & 10.86\% & 14.86\% & +4.00个百分点 \\ \hline
+预测物体数 / GT物体数 & 129/109 & 127/109 & 预测数减少2个 \\ \hline
+数量绝对对数误差 & 0.1685 & 0.1528 & 降低0.0156 \\ \hline
 \end{longtable}
 }
 
-第一场景ai\_001\_002仍为10/10，AP25/AP50/AP75均为100\%。第二场景在25\%/50\%/75\%阈值下的TP/FP/FN分别为77/52/32、58/71/51、29/100/80；数量减少不等于假阳性已解决。
+第一场景ai\_001\_002仍为10/10，AP25/AP50/AP75均为100\%。第二场景TP/FP/FN@25、@50、@75分别为82/45/27、63/64/46、34/93/75。三档AP、严格TP/FP/FN和数量误差均通过对v14的非回退检查；这只说明当前两个场景的独立评价进步。
 
 
 
-本轮保留三组改动：身份种子与封闭/开放结构分离改善表面提案；ECA用连续实测接缝建立整柜—部件层级；实测归并后的整体形状验收在全部100帧中检查预测表面。一个柜体GT实例的最佳框IoU由7.25\%升至79.10\%，冰箱及两个柜体通过有条件长方体补全验收。主脉络和通用数学说明按当前v14维护，具体规则见3.17、4.3及6.10。
+\textbf{算法与特化处理的边界：} 本轮新增构建模块没有场景名、GT编号、预测节点白名单或固定位置分支，没有手工改成品或为某个物体改提示词。CMR和DSM从原始RGB-D重新取真实坐标，以独立视角、原生掩码、深度残差、已有部件和唯一所有权验收；OSL/ROS/FCA及PCB处理所有满足几何条件的实例。阈值是人工设计且在两个开发场景验证，尚无独立测试集泛化证据。既有长方体补全由名称选择适用形状族并经实测约束验收，这是明确的类别条件解析先验，不能宣传为类别无关或学习式通用补全。
 
 
 
-\textbf{尚未完成：} 第二场景AP25≥80\%、AP50≥70\%的目标；任意物体的文本条件点云补全；完整灯具、冰箱上方横梁和部分微小物体恢复。MGPC候选未通过自由空间验收，未加入默认主流程；不能将本轮局部改进描述为通用补全或精细识别已经解决。
+\textbf{尚未完成：} 80\%/70\%目标、任意物体的文本条件隐藏形状预测、完整灯具及冰箱上方横梁、全部细玻璃器皿和柜体粒度。不能把真实点恢复描述成未观测背面已经恢复，也不能把几个餐具改善描述成精细识别已彻底解决。
 
 
 
@@ -87,7 +87,7 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 
 
 \begin{itemize}
-\item 当前v14复用SAM3直接产生整图概念实例与局部放大掩码；GroundingDINO保留256维视觉特征接口。
+\item 当前v15复用SAM3直接产生整图概念实例与局部放大掩码；GroundingDINO保留256维视觉特征接口。
 
 
 \item 原始版及v11保留既有定位/分割路径；Florence、SAM和YOLOE的旧组合不作为SAM3前端的重复步骤。
@@ -98,7 +98,7 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 
 
 \begin{itemize}
-\item v12/v13/v14研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两场景使用既有GPT缓存完成构建，保留最终成品和独立评价。
+\item v12及以后研究注册点使用SAM3概念实例掩码及最多4处通用局部放大；两场景使用既有GPT缓存完成构建，保留最终成品和独立评价。
 
 
 \item 物体特征统一为 DINO 256维和 SBERT 384维，部件 RN50 1024维独立保留。
@@ -153,6 +153,20 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 
 \end{itemize}
 
+\item \textbf{CMR — Contact Mask Recovery｜接触实例恢复}
+
+
+\begin{itemize}
+\item 签名非互斥整图/放大掩码、实际深度和多视角共识恢复被公共标签遗漏的表面。
+
+
+\item 稀疏曲面用深度可见重投影票数，不要求另一帧恰好采到同一体素；整图同时分离证据才允许拆分混合实例。
+
+
+\item 确认部件补入唯一父体，已拥有表面不能再建重复根；实际执行位于部件融合之后。
+
+\end{itemize}
+
 \item \textbf{HMG — Hierarchical Mask Guard｜整体掩码保护}
 
 
@@ -183,6 +197,25 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 \item 留出视角的深度/掩码共识清理错误所有权；遮挡和未知区域不充当反证。
 
 
+\item \textbf{DSM — Depth Surface Maintenance｜密集实测维护}
+
+
+\begin{itemize}
+\item 逐像素真实深度、原生身份、平面和已有边界联合约束；三独立帧确认，不填造平面网格。
+
+\end{itemize}
+
+\item \textbf{OSL / ROS｜层架与房间外壳归属}
+
+
+\begin{itemize}
+\item OSL以多层支撑及面向相机的开放前侧分开架体与旁侧闭合面；仅有几何时保留原名称。
+
+
+\item ROS识别最外层房间面，把重复贴合该面的根实例退回背景；其他物体点不移动。
+
+\end{itemize}
+
 \item 缓存身份种子提出局部平面，封闭立面与稀疏开放格架分开；前后边界及逐点多视角验收恢复漏掉的真实表面。
 
 \end{itemize}
@@ -205,6 +238,17 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 
 
 \item 仅唯一父体成立时归并根节点，保留分段为part；实测坐标不改变，不按同名或框重叠强并。
+
+\end{itemize}
+
+\item \textbf{FCA — Front Carrier Assembly｜连续载体整柜层级}
+
+
+\begin{itemize}
+\item 唯一上表面沿连接持续有实测支持、立面高度及语义一致、多视角共同出现，才归并整柜。
+
+
+\item 门板保留为part，原实测坐标取并集；反复审核至无新关系。
 
 \end{itemize}
 
@@ -254,7 +298,7 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 \item 最终用同一正式点云重算物体框、中心及空间边，不直接修改成品来提高分数。
 
 
-\item \textbf{PCB — Physical Cue Boxes｜物理表面定向框}：两个广阔正交实测面提供方向，原点极值提供尺寸；没有第二个面就回退原框求解器。
+\item \textbf{PCB — Physical Cue Boxes｜物理表面定向框}：优先两个广阔正交实测面；末段可用可靠竖直单面提供方向，原点极值提供尺寸，证据不足回退原求解器。
 
 \end{itemize}
 
@@ -300,12 +344,23 @@ AP75 & 9.91\% & 10.86\% & +0.95个百分点 \\ \hline
 
 \item 输出实测/生成来源、轨迹、接受与拒绝原因及中文日志；真值只进入独立评价。
 
+
+\item \textbf{独立核对}
+
+
+\begin{itemize}
+\item 正式发布后自动生成原版可视化双视角，再评价全部GT；最佳重叠与严格一对一匹配分开。
+
+
+\item 记录低覆盖、遗漏及未分配预测；诊断不回写构建，不从GT扩框或补点。
+
+\end{itemize}
 \end{itemize}
 \end{itemize}
 \end{itemize}
 
 
-\textbf{输出与核验：} 严格 AP25/AP50/AP75、MVO、数量误差和逐物体诊断 → 原版可视化。可视化命令默认不展示边、不启用 pick。各阶段的数学原理见第2至6章；各版本的实际改变与成功/失败证据单列于版本章节。
+\textbf{输出与核验：} 原版可视化 → 独立严格AP25/AP50/AP75、MVO、数量误差和逐物体诊断。可视化命令默认不展示边、不启用 pick。各阶段的数学原理见第2至6章；各版本的实际改变与成功/失败证据单列于版本章节。
 
 
 
@@ -325,10 +380,11 @@ v11 & 既有Qwen缓存 & 否，停止GPT v11调优 \\ \hline
 v12 & 既有GPT缓存 & 否，复用同场景完整响应 \\ \hline
 v13 & 与v12同一GPT缓存 & 否，复用源观测并重建后续流程 \\ \hline
 v14 & 与v12/v13同一GPT缓存 & 否，复用源观测并重建后续流程 \\ \hline
+v15 & 与v12/v13/v14同一GPT缓存 & 否，复用源观测并重建后续流程 \\ \hline
 \end{longtable}
 }
 
-从v12起默认类别来源改为GPT，v13和v14继续复用同一缓存。另保留GPT原始流程作为独立基线，参与原始流程和v12对比，并与v12/v13/v14复用同场景GPT识图缓存。旧GPT v11和旧Qwen v12中途产物已清理。SAM3是v12本地分割后端，不新增GPT或Qwen识图。
+从v12起默认类别来源改为GPT，v13、v14和v15继续复用同一缓存。另保留GPT原始流程作为独立基线，参与原始流程和v12对比，并与v12及以后复用同场景GPT识图缓存。旧GPT v11和旧Qwen v12中途产物已清理。SAM3是v12本地分割后端，不新增GPT或Qwen识图。
 
 
 
@@ -337,6 +393,10 @@ v14 & 与v12/v13同一GPT缓存 & 否，复用源观测并重建后续流程 \\ 
 
 \subsection*{2.1 SAM3实例分割与公共特征接口}
 \addcontentsline{toc}{subsection}{2.1 SAM3实例分割与公共特征接口}
+
+实例分割模型见SAM3 [5]；原始定位/掩码及公共特征来源见 [6,7,8]。
+
+
 
 v12读取同场景已完成的GPT类别缓存，并合并项目既有室内词表；没有新GPT或Qwen识图。模型从ModelScope公开下载，使用固定提交的Meta官方图像推理代码，显式指定本地权重且关闭Hugging Face自动下载。每帧图像骨干只编码一次，随后逐个名词查询得到多个独立实例。原始版及v11继续保留各自既有算法。
 
@@ -377,6 +437,10 @@ f_i=\frac{1}{|\Omega_i|}\sum_{u\in\Omega_i}F_{\mathrm{DINO}}(u),\qquad f_i\in\ma
 
 \subsection*{2.2 投影、方向覆盖与在线关联}
 \addcontentsline{toc}{subsection}{2.2 投影、方向覆盖与在线关联}
+
+一对一分配采用Hungarian算法 [20]；RGB-D投影是相机几何，方向覆盖及联合门控为本项目适配。
+
+
 
 深度反投影与世界变换为：
 
@@ -458,8 +522,8 @@ r(d)=\begin{cases}\operatorname{clip}(0.08d,0.006,0.02),&d<0.25\text{ m}\\0.1,&\
 
 
 
-\subsection*{2.5 可见归属竞争与有界实测残片归并（当前GPT v14）}
-\addcontentsline{toc}{subsection}{2.5 可见归属竞争与有界实测残片归并（当前GPT v14）}
+\subsection*{2.5 可见归属竞争与有界实测残片归并（当前GPT流程）}
+\addcontentsline{toc}{subsection}{2.5 可见归属竞争与有界实测残片归并（当前GPT流程）}
 
 GPT仍只提供类别与描述。新算法使用既有RGB-D、原掩码及缓存SBERT特征；不调用GPT或Qwen，不读取GT。遮挡、缺失深度和未命名区域均不能直接视为物体不存在。令可见深度一致指示为 $v_t(p)$、投影权重为 $w_t(p)$、当前物体归属为 $a_{it}(p)$，则：
 
@@ -644,6 +708,49 @@ H_i=\frac{\sum_{t\in V_i}\mathbf1[r_{it}\geq0.8\ \land\ s_{it}\geq0.5]}{|V_i|}.
 
 
 逐点精修只删除至少3次反证、至多1次正证且加权正证比例低于0.35的点。遮挡、出画、无效深度及没有原生身份掩码的视角不是删除依据。这修复了整体已经多次看见却在层级判断之前被删掉的执行顺序，不能创造未观察到的柜深。
+
+
+
+\subsection*{2.10 CMR：接触物体的非互斥掩码恢复}
+\addcontentsline{toc}{subsection}{2.10 CMR：接触物体的非互斥掩码恢复}
+
+\textbf{CMR — Contact Mask Recovery。} 先前盘堆拆分依赖重复盘沿；杯盘遮挡、透明器皿与相邻小物体需要不同的实例证据。CMR借鉴二维引导三维实例和视角共识 [10,11]，从已经签名的整图、放大掩码中恢复真实深度，不再次调用GPT/Qwen，也不读取GT。它不是Open3DIS的学习式超点网络，亦未实现RICE或UCN的训练模型 [13,14]。
+
+
+
+对两个实测点集定义定向覆盖：
+
+
+
+\$
+C\_\textbackslash{}epsilon(A,B)=\textbackslash{}frac\{1\}\{|A|\}\textbackslash{}sum\_\{x\textbackslash{}in A\}\textbackslash{}mathbf1!\textbackslash{}left[\textbackslash{}min\_\{y\textbackslash{}in B\}|x-y|\_2\textbackslash{}le\textbackslash{}epsilon\textbackslash{}right].
+\$
+
+
+
+跨视角候选在6毫米内同时满足较小覆盖至少0.35、较大覆盖至少0.60才关联；同帧同义候选的双向覆盖都要达到0.88，以去除别名重复。文本相容使用真实缓存的SBERT特征余弦，不添加物体专用提示词。单帧掩码先保留12毫米连通格中的主要分量，拒绝脱离主体的漏入区域。
+
+
+
+候选至少有4个独立帧、0.1米相机基线、0.75平均原生质量和3份真实公共特征。普通表面需要3个独立帧支持同一3毫米体素。若稀疏曲面不足64点，使用重投影票数补充核验，而不是要求另一帧恰好采到同一体素：
+
+
+
+\$
+n(x)=\textbackslash{}sum\_\{t\textbackslash{}in\textbackslash{}mathcal T\}\textbackslash{}mathbf1!\textbackslash{}left[\textbackslash{}left|z\_t(x)-D\_t(\textbackslash{}pi\_t(x))\textbackslash{}right|\textbackslash{}le0.3\textbackslash{}left(0.025+0.01D\_t(\textbackslash{}pi\_t(x))\textbackslash{}right)\textbackslash{}right]\textbackslash{}mathbf1!\textbackslash{}left[\textbackslash{}pi\_t(x)\textbackslash{}in M\_t\textbackslash{}right].
+\$
+
+
+
+只保留原始深度中已有且满足 $n(x)\ge3$ 的坐标。遮挡、图外和缺失深度不投负票；多个放大掩码在同一帧只计一票。这个补充条件解决的是重复采样不足，并不恢复透明表面不可观测的隐藏几何。
+
+
+
+拆分混合根实例还需要三个共同整图视角中出现不同原生实例，二维框IoU小于0.25，恢复点集双向覆盖均不超过0.10，并且这些独立点集在15毫米内解释至少80\%的原根点。根到候选的归属容差为20毫米，兼容历史较粗的点云；不能只靠同名、接触或一次分割来拆分。已经成立的RSI原子实例与已验收补全体受保护。曲面只补入真实测量；不因一个局部掩码裁掉原杯身。
+
+
+
+新根节点另需至少6帧。候选若与已经确认的VLPart部件有至少80\%的实测覆盖，还须通过VPA的唯一父归属、至少5个父掩码帧、至少3个共同帧、98\%父框包含及15毫米真实接触核验，才能把这些真实点补入部件与父体，不创建重复根节点。与既有根语义相容且实测表面已被拥有的候选同样不能再计为独立物体。规则遍历所有候选和部件，没有按名称、场景坐标或GT编号列白名单。真实特征维度保持DINO 256/SBERT 384，部件的RN50 1024维不参与这个余弦。质量分不是经过标定的真实概率，不能据其数值断言识别正确。
 
 
 
@@ -1205,11 +1312,101 @@ C=C_a\cup C_b.
 
 
 
+\subsection*{3.18 DSM：补回台面的真实密集采样}
+\addcontentsline{toc}{subsection}{3.18 DSM：补回台面的真实密集采样}
+
+\textbf{DSM — Depth Surface Maintenance。} 对至少1024点、具有广阔水平面的实例，用RANSAC [19] 寻找实测平面 $n^\top x+d=0$。法向竖直分量至少0.995、面支持率至少0.55。逐像素原始深度的候选须同时满足平面残差不超过3毫米、到可信原点集距离不超过35毫米、原生同身份掩码质量至少0.5。3毫米体素须有3个独立帧，2毫米采样保留真实坐标：
+
+
+
+\$
+P'\emph{i=P\_i\textbackslash{}cup\{x\textbackslash{}in P}\{\textbackslash{}rm raw\}:|n\textasciicircum{}\textbackslash{}top x+d|\textbackslash{}le0.003,\textbackslash{} d(x,P\_i)\textbackslash{}le0.035,\textbackslash{} n\_\{\textbackslash{}rm views\}(x)\textbackslash{}ge3\}.
+\$
+
+
+
+原点逐个保留，不填造平面网格。此项改善采样密度；没有真实深度支持的空白仍为空白。它不能代替形状预测，也不能仅凭更密集的显示证明框AP提升。
+
+
+
+\subsection*{3.19 OSL与ROS：开放格架和房间外壳}
+\addcontentsline{toc}{subsection}{3.19 OSL与ROS：开放格架和房间外壳}
+
+\textbf{OSL — Open Support Layers。} 至少三个不同高度的水平实测面、共同水平投影覆盖大于0.55、层间距超过5厘米，形成开放层架候选。以实际拍摄相机方向确定前侧，把前侧占据率定义为：
+
+
+
+\$
+o\_\{\textbackslash{}rm front\}=\textbackslash{}frac\{N\_\{\textbackslash{}rm occupied\textbackslash{} 3cm\textbackslash{} cells\}\}\{A\_\{\textbackslash{}rm front\}/0.03\textasciicircum{}2\}.
+\$
+
+
+
+前侧占据率超过0.60则不能视为开放架。保留共同投影范围中的板面及边界立柱，剔除夹带的旁侧闭合大面。后背板不能被当作前门。几何证据可修正开放支撑结构；只有既有架子语义和真实缓存特征成立时才改名，没有语义证据则仍保留原名称并记录 \texttt{measured\_\allowbreak{}open\_\allowbreak{}support\_\allowbreak{}layers}。本项目规则不是VLPart或PartNet完整网络的替代 [4,17]。
+
+
+
+\textbf{ROS — Room Outer Surface Ownership。} 从包含背景的实测点云拟合房间平面 [19]，相机在同侧支持比例至少0.90，仅保留同向平行面的最外层。一个根实例须有至少95\%的点落入该面补丁且残差不超过10毫米、总厚度小于20毫米、两个面内方向都超过0.3米，才退回背景：
+
+
+
+\$
+\textbackslash{}frac\{|\{x\textbackslash{}in P\_i:|n\textasciicircum{}\textbackslash{}top x+d|\textbackslash{}le0.01,\textbackslash{} \textbackslash{}pi\_\{\textbackslash{}rm plane\}(x)\textbackslash{}in\textbackslash{}Omega\}|\}\{|P\_i|\}\textbackslash{}ge0.95.
+\$
+
+
+
+其他实例坐标不改变，墙点仍在背景输出中。纯几何对贴墙且没有厚度证据的大幅装饰物仍可能含糊；需要更多身份或几何信息，不能宣称所有阴影、反光和外部取景已经解决。
+
+
+
+\subsection*{3.20 FCA：连续台面支持整柜，门板保留为part}
+\addcontentsline{toc}{subsection}{3.20 FCA：连续台面支持整柜，门板保留为part}
+
+\textbf{FCA — Front Carrier Assembly。} 与ECA的真实转角接缝互补：两个闭合立面须有至少3个共同帧、文本余弦至少0.90、上下边界误差不超过6厘米、法向平行或正交，并且只有一个真实上表面支持整个连接。沿最近连接每1.5厘米采样，定义：
+
+
+
+\$
+B(A,B,S)=\textbackslash{}frac\{1\}\{K\}\textbackslash{}sum\_\{k=1\}\textasciicircum{}\{K\}\textbackslash{}mathbf1[d\_\{XY\}(\textbackslash{}gamma\_\{AB\}(k),S)\textbackslash{}le0.045].
+\$
+
+
+
+要求 $B\ge0.90$，载体至少6帧；纯框重叠和同名不成立。连接分量须共享同一载体；每次归并后重审当前几何，直到没有新关系。原门板坐标保留为可查询部件，根点云是原实测坐标的并集。烤箱与柜体不会仅因接触被并成同一名称。这是本项目BHA适配，与层级建模观点 [3,17] 对应，不是论文整体系统的复现。
+
+
+
+\subsection*{3.21 PCB的单面补充与独立核对}
+\addcontentsline{toc}{subsection}{3.21 PCB的单面补充与独立核对}
+
+两面物理框求解仍优先。只有在两个正交面不成立、竖直单面支持率至少0.45、面内宽高各至少0.2米时，用稳定实测面提供方向；所有原点的极值提供尺寸：
+
+
+
+\$
+\textbackslash{}ell=\textbackslash{}min\_\{x\textbackslash{}in P\}R\textasciicircum{}\textbackslash{}top x,\textbackslash{}quad h=\textbackslash{}max\_\{x\textbackslash{}in P\}R\textasciicircum{}\textbackslash{}top x,\textbackslash{}quad c=R(\textbackslash{}ell+h)/2,\textbackslash{}quad s=\textbackslash{}max(h-\textbackslash{}ell,10\textasciicircum{}\{-4\}).
+\$
+
+
+
+方向修正不产生新的点，也不从GT扩大框。单面补充只在历史构建与部件融合结束后启用，避免改变此前部件父归属。
+
+
+
+最终发布正式点云、框和边之后，\texttt{scene\_\allowbreak{}review}自动用原版可视化器生成两个视角，再独立计算AP25/50/75及每个GT的一对一结果，记录遗漏、错位、粒度差异和低覆盖对象。它读取GT只用于评价 [18]，不回写物体、框、部件或置信度。最佳重叠候选与严格一对一匹配分别报告，未分配的预测不能直接解释成不存在的物体。
+
+
+
 \section*{4. 选择性形状补全}
 \addcontentsline{toc}{section}{4. 选择性形状补全}
 
 \subsection*{4.1 实际模型与准入}
 \addcontentsline{toc}{subsection}{4.1 实际模型与准入}
+
+AdaPoinTr网络来源为 [16]。名称条件长方体为项目解析先验；MGPC [25] 候选未通过准入，未接入默认主流程。
+
+
 
 默认组件实际加载官方 AdaPoinTr-PCN 预训练权重，完整结构和参数严格匹配。该模型以几何为输入，没有文字或身份编码输入；类别信息用于限制适用范围，不能把它描述成已经实现文字条件补全。
 
@@ -1328,7 +1525,7 @@ s(q)=\sum_t\mathbf1[|z_t(q)-D_t(\pi_t(q))|\le\delta_t].
 
 
 
-最终独立验证用多帧融合实测点配对当前整物体所有权掩码，检查有界对齐、实测锚点、自由空间/外物冲突及两视角一致性。没有完整候选通过，MGPC未并入默认v14。冰箱候选的实测锚点覆盖为99.98\%，90\%锚点距离分位约2.12厘米；但仅前4帧已有3.93\%模型点侵入已观测自由空间，超过完整模型3\%的验收限制，因此提前拒绝。这里的4帧是失败时已检查数量，任何接受模型仍须检查全部帧。高锚点覆盖不等于隐藏背面正确，也不能证明模型已经适用于本场景。
+最终独立验证用多帧融合实测点配对当前整物体所有权掩码，检查有界对齐、实测锚点、自由空间/外物冲突及两视角一致性。没有完整候选通过，MGPC未并入当前默认流程。冰箱候选的实测锚点覆盖为99.98\%，90\%锚点距离分位约2.12厘米；但仅前4帧已有3.93\%模型点侵入已观测自由空间，超过完整模型3\%的验收限制，因此提前拒绝。这里的4帧是失败时已检查数量，任何接受模型仍须检查全部帧。高锚点覆盖不等于隐藏背面正确，也不能证明模型已经适用于本场景。
 
 
 
@@ -1338,6 +1535,10 @@ s(q)=\sum_t\mathbf1[|z_t(q)-D_t(\pi_t(q))|\le\delta_t].
 
 \section*{5. 部件融合与父归属的数学原理}
 \addcontentsline{toc}{section}{5. 部件融合与父归属的数学原理}
+
+VLPart [4] 提供实际部件检测；独立CLIP区域特征 [9] 与OP3DSG [3] 的融合和父归属适配负责跨视角关联；四通道Wasserstein颜色距离的数学基础见 [22]。以下为现行项目公式及实际门控，几何部件不伪造视觉特征。
+
+
 
 VLPart 使用官方物体—部件词表和原生预测，SAM 对部件掩码进行现有精修。部件按1厘米体素下采样，使用独立 RN50 掩码裁剪1024维特征：
 
@@ -1533,6 +1734,10 @@ BHA继续使用几何面板规则；对于HMG已经确认的本体，可用稳�
 \subsection*{6.2 指标与边界}
 \addcontentsline{toc}{subsection}{6.2 指标与边界}
 
+官方物体和部件定义来自Hypersim [18]；下列框AP、MVO及数量指标为本项目明确固定的适配口径。
+
+
+
 当前采用类别无关的三维框 AP，预测框来自正式图的姿态和尺寸，真值来自官方完整物体框转为 AABB：
 
 
@@ -1691,7 +1896,7 @@ Q=\operatorname{SHA256}(\text{model, URL, protocol, prompt, request settings}).
 \subsection*{6.7 完整物体与层级关联接口}
 \addcontentsline{toc}{subsection}{6.7 完整物体与层级关联接口}
 
-whole\_object\_consensus.reconcile与native\_assembly.reconcile位于proposal\_validation内部，分别使用已有图像身份/共享面和原生整图掩码，返回普通候选ID并同步原实测点、轨迹和别名。WHOLE\_OBJECT\_VALIDATION、SURFACE\_ASSEMBLY在v12/v13/v14的configure\_profile中挂接。
+whole\_object\_consensus.reconcile与native\_assembly.reconcile位于proposal\_validation内部，分别使用已有图像身份/共享面和原生整图掩码，返回普通候选ID并同步原实测点、轨迹和别名。WHOLE\_OBJECT\_VALIDATION、SURFACE\_ASSEMBLY在v12及以后（含当前v15）的configure\_profile中挂接。
 
 
 
@@ -1781,40 +1986,32 @@ VPA & \texttt{MEASURED\_\allowbreak{}REFINEMENT}中的\texttt{visual\_\allowbrea
 \subsubsection*{6.9.1 GT标识和配图怎么读}
 \addcontentsline{toc}{subsubsection}{6.9.1 GT标识和配图怎么读}
 
-新增以下两场景全部119个评价GT的编号图册和对应表。\textbf{GT-xxx是官方实例编号，P-xxx是v14图中的预测节点编号，两者不能直接按号码对应；同一个GT编号在不同场景里也代表不同物体。} 图册每个小图给出GT号、官方类别、定位帧和最佳几何预测；完整表另外列出25\%、50\%、75\%阈值下的严格一对一匹配节点。可用浏览器查找，例如在第二场景表中查找GT-067定位冰箱、GT-068定位整套下柜、GT-001定位灯具。
+两场景全部119个评价GT的编号图册和表如下。\textbf{GT-xxx是官方实例编号，P-xxx是当前v15预测节点编号，不能直接按号码对应；同一个GT号在不同场景代表不同物体。} 可浏览器查找GT-067冰箱、GT-068整套下柜、GT-001灯具。官方otherprop保留宽泛类别，不将GPT名称冒充GT名称。
 
 
 
-金色轮廓直接来自对应原始帧的官方semantic\_instance.hdf5；浅金色填充表示该实例的可见像素。每个实例选取本轮输入帧中可见像素最多的一帧，局部裁图仅用于放大定位，不代表完整三维形状。细小物体的像素轮廓可能呈阶梯状，遮挡部分不会被补画。
-
-
-
-标题绿色的matched@50表示在50\%阈值下一对一几何匹配成功；棕色的matched@25 only表示仅在25\%阈值成功；红色FN@25表示在25\%阈值仍未匹配。\textbf{绿色只说明框的几何匹配，不证明预测类别正确。} 图上的IoU和最佳预测来自独立的最佳重叠诊断，可能不是一对一匹配选中的预测；一个预测可能是多个GT的最佳重叠候选，但严格匹配最多分配一次。official otherprop保留官方宽泛类别，不把GPT预测名称写成GT名称。
-
-
-
-图册和索引只读取已保存的最终评价、官方标签及RGB，不进入建图，也不改变GT、点云、节点或AP分数。
+金色轮廓与浅金色填充来自原始semantic\_instance.hdf5。每个实例选输入中可见像素最多的一帧；局部裁图只用于定位，不补画遮挡几何。绿色matched@50、棕色matched@25 only、红色FN@25表示严格一对一几何状态，\textbf{绿色不证明预测类别正确}。最佳重叠可能不是严格匹配选中的预测，同一预测严格匹配最多一次。图册只读取已保存评价、官方标签及RGB，不回写构建。
 
 
 
 \subsubsection*{6.9.2 第一场景ai\_001\_002：全部10个GT}
 \addcontentsline{toc}{subsubsection}{6.9.2 第一场景ai\_001\_002：全部10个GT}
 
-第一场景GT-001至GT-010全部在25\%、50\%、75\%阈值匹配成功。GT-008的小图还显示音箱和支架属于同一官方实例，方便核对整体与部件的粒度。
+全部10个GT在三阈值匹配成功；GT-008展示音箱和支架属于同一官方实例。
 
 
 
-\textit{ai\_001\_002 官方GT编号图册 1：GT-001 至 GT-010；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_002 官方GT编号图册 1：GT-001 至 GT-010；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
 {\small
 \begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
 \hline
-GT标识 & 官方类别 & 最佳重叠预测（v14节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
+GT标识 & 官方类别 & 最佳重叠预测（v15节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
 \endfirsthead
 \hline
-GT标识 & 官方类别 & 最佳重叠预测（v14节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
+GT标识 & 官方类别 & 最佳重叠预测（v15节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
 \endhead
 GT-001 & otherprop & P-4 laptop & 98.73\% & P-4 / P-4 / P-4 & cam\_00\_0016 \\ \hline
 GT-002 & otherprop & P-8 audio equipment & 86.34\% & P-8 / P-8 / P-8 & cam\_03\_0013 \\ \hline
@@ -1832,22 +2029,22 @@ GT-010 & otherprop & P-5 speaker & 96.57\% & P-5 / P-5 / P-5 & cam\_01\_0095 \\ 
 \subsubsection*{6.9.3 第二场景ai\_001\_010：全部109个GT匹配索引}
 \addcontentsline{toc}{subsubsection}{6.9.3 第二场景ai\_001\_010：全部109个GT匹配索引}
 
-表按官方实例号排序，编号不连续是因为墙、地面、天花板及可见证据不足的实例不在本次评价集合。严格匹配数为77/58/29，对应阈值为25\%/50\%/75\%；未匹配GT分别有32/51/80个。表中“未匹配”是该阈值下的FN，不等于该物体完全没有预测点；最佳框重叠很低、一个父体被拆成多个节点或多个GT被混成一个预测都可能导致未匹配。
+编号不连续是因为墙、地面、天花板及可见证据不足实例不在评价集合。严格匹配数为82/63/34，未匹配GT为27/46/75。未匹配不等于完全没有点；混合实例、拆分粒度和框尺度也会造成FN。
 
 
 
 {\small
 \begin{longtable}{|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/6-2\tabcolsep-2\arrayrulewidth\relax}|}
 \hline
-GT标识 & 官方类别 & 最佳重叠预测（v14节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
+GT标识 & 官方类别 & 最佳重叠预测（v15节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
 \endfirsthead
 \hline
-GT标识 & 官方类别 & 最佳重叠预测（v14节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
+GT标识 & 官方类别 & 最佳重叠预测（v15节点） & 最佳框IoU & 严格匹配25 / 50 / 75 & 定位帧 \\ \hline
 \endhead
 GT-001 & lamp & P-298 ceiling light & 6.72\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0054 \\ \hline
 GT-002 & otherprop & P-29 kitchen utensil & 65.63\% & P-29 / P-29 / 未匹配 & cam\_02\_0049 \\ \hline
-GT-003 & otherprop & P-3 countertop & 0.09\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0011 \\ \hline
-GT-004 & otherprop & P-22 plate & 4.22\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0011 \\ \hline
+GT-003 & otherprop & P-457 plate & 87.79\% & P-457 / P-457 / P-457 & cam\_01\_0011 \\ \hline
+GT-004 & otherprop & P-456 plate & 85.71\% & P-456 / P-456 / P-456 & cam\_01\_0011 \\ \hline
 GT-005 & otherprop & P-84 plate & 88.98\% & P-84 / P-84 / P-84 & cam\_01\_0062 \\ \hline
 GT-006 & otherprop & P-444 plate & 88.31\% & P-444 / P-444 / P-444 & cam\_01\_0083 \\ \hline
 GT-007 & otherprop & P-445 plate & 88.27\% & P-445 / P-445 / P-445 & cam\_01\_0083 \\ \hline
@@ -1861,57 +2058,57 @@ GT-014 & otherprop & P-451 plate & 72.37\% & P-451 / P-451 / 未匹配 & cam\_01
 GT-015 & otherprop & P-452 plate & 60.89\% & P-452 / P-452 / 未匹配 & cam\_01\_0035 \\ \hline
 GT-016 & otherprop & P-453 plate & 87.70\% & P-453 / P-453 / P-453 & cam\_01\_0035 \\ \hline
 GT-017 & otherprop & P-10 cup & 95.35\% & P-10 / P-10 / P-10 & cam\_02\_0061 \\ \hline
-GT-018 & otherprop & P-22 plate & 21.65\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0053 \\ \hline
+GT-018 & otherprop & P-22 plate & 40.98\% & P-22 / 未匹配 / 未匹配 & cam\_01\_0053 \\ \hline
 GT-019 & otherprop & P-5 cup & 97.43\% & P-5 / P-5 / P-5 & cam\_02\_0061 \\ \hline
-GT-020 & otherprop & P-7 plate & 63.54\% & P-7 / P-7 / 未匹配 & cam\_02\_0061 \\ \hline
+GT-020 & otherprop & P-7 plate & 87.72\% & P-7 / P-7 / P-7 & cam\_02\_0061 \\ \hline
 GT-021 & otherprop & P-4 cup & 97.20\% & P-4 / P-4 / P-4 & cam\_02\_0022 \\ \hline
-GT-022 & otherprop & P-19 plate & 40.83\% & P-19 / 未匹配 / 未匹配 & cam\_02\_0040 \\ \hline
+GT-022 & otherprop & P-19 plate & 91.34\% & P-19 / P-19 / P-19 & cam\_02\_0040 \\ \hline
 GT-023 & counter & P-3 countertop & 94.02\% & P-3 / P-3 / P-3 & cam\_02\_0049 \\ \hline
 GT-024 & chair & P-2 bar stool & 93.88\% & P-2 / P-2 / P-2 & cam\_00\_0093 \\ \hline
 GT-025 & chair & P-1 bar stool & 86.35\% & P-1 / P-1 / P-1 & cam\_00\_0093 \\ \hline
-GT-026 & window & P-156 window & 39.05\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0066 \\ \hline
-GT-027 & window & P-156 window & 39.31\% & P-156 / 未匹配 / 未匹配 & cam\_02\_0028 \\ \hline
-GT-028 & blinds & P-204 curtain & 34.61\% & P-204 / 未匹配 / 未匹配 & cam\_00\_0084 \\ \hline
-GT-029 & blinds & P-191 curtain & 25.93\% & P-191 / 未匹配 / 未匹配 & cam\_02\_0028 \\ \hline
-GT-030 & cabinet & P-162 cabinet & 86.43\% & P-162 / P-162 / P-162 & cam\_02\_0022 \\ \hline
+GT-026 & window & P-156 window & 39.04\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0066 \\ \hline
+GT-027 & window & P-156 window & 39.30\% & P-156 / 未匹配 / 未匹配 & cam\_02\_0028 \\ \hline
+GT-028 & blinds & P-204 curtain & 30.35\% & P-204 / 未匹配 / 未匹配 & cam\_00\_0084 \\ \hline
+GT-029 & blinds & P-191 curtain & 33.23\% & P-191 / 未匹配 / 未匹配 & cam\_02\_0028 \\ \hline
+GT-030 & cabinet & P-162 cabinet & 85.79\% & P-162 / P-162 / P-162 & cam\_02\_0022 \\ \hline
 GT-031 & otherprop & P-172 microwave & 90.93\% & P-172 / P-172 / P-172 & cam\_02\_0028 \\ \hline
 GT-032 & otherprop & P-178 knife & 73.52\% & P-178 / P-178 / 未匹配 & cam\_00\_0015 \\ \hline
-GT-033 & otherprop & P-157 cutting board & 58.04\% & P-157 / P-157 / 未匹配 & cam\_00\_0015 \\ \hline
+GT-033 & otherprop & P-157 cutting board & 86.87\% & P-157 / P-157 / P-157 & cam\_00\_0015 \\ \hline
 GT-036 & otherprop & P-131 sink & 1.01\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0066 \\ \hline
 GT-037 & otherprop & P-443 glass & 5.34\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
 GT-038 & otherprop & P-443 glass & 6.11\% & 未匹配 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
-GT-040 & otherprop & P-240 glass & 31.73\% & P-240 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
-GT-041 & otherprop & P-240 glass & 20.64\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
-GT-043 & otherprop & P-240 glass & 1.04\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
-GT-044 & otherprop & P-78 cabinet & 0.23\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0006 \\ \hline
-GT-045 & shelves & P-78 cabinet & 43.03\% & P-78 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
-GT-047 & otherprop & P-95 glass & 42.59\% & P-95 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
-GT-049 & otherprop & P-213 glass & 6.79\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
-GT-050 & otherprop & P-213 glass & 12.19\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
+GT-040 & otherprop & P-240 glass & 38.82\% & P-240 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
+GT-041 & otherprop & P-455 glass & 43.02\% & P-455 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
+GT-043 & otherprop & P-78 cabinet & 0.37\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
+GT-044 & otherprop & P-78 cabinet & 0.41\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0006 \\ \hline
+GT-045 & shelves & P-78 cabinet & 64.01\% & P-78 / P-78 / 未匹配 & cam\_01\_0095 \\ \hline
+GT-047 & otherprop & P-95 glass & 43.00\% & P-95 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
+GT-049 & otherprop & P-213 glass & 6.81\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
+GT-050 & otherprop & P-213 glass & 12.22\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
 GT-051 & otherprop & P-88 drinking glass & 12.82\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
-GT-052 & otherprop & P-88 drinking glass & 26.54\% & P-88 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
-GT-053 & otherprop & P-88 drinking glass & 9.29\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0042 \\ \hline
+GT-052 & otherprop & P-458 glass & 57.44\% & P-458 / P-458 / 未匹配 & cam\_00\_0042 \\ \hline
+GT-053 & otherprop & P-459 glass & 60.45\% & P-459 / P-459 / 未匹配 & cam\_00\_0042 \\ \hline
 GT-054 & otherprop & P-82 glass & 4.96\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
 GT-055 & otherprop & P-181 drinking glass & 31.51\% & P-181 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
 GT-056 & otherprop & P-108 drinking glass & 45.25\% & P-108 / 未匹配 / 未匹配 & cam\_01\_0095 \\ \hline
-GT-057 & cabinet & P-15 cabinet & 79.10\% & P-15 / P-15 / P-15 & cam\_02\_0001 \\ \hline
+GT-057 & cabinet & P-15 cabinet & 79.13\% & P-15 / P-15 / P-15 & cam\_02\_0001 \\ \hline
 GT-058 & otherstructure & P-54 range hood & 52.72\% & P-54 / P-54 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-060 & otherprop & P-62 kitchen utensil & 37.39\% & P-62 / 未匹配 / 未匹配 & cam\_01\_0047 \\ \hline
 GT-061 & otherprop & P-31 bottle & 55.92\% & P-31 / P-31 / 未匹配 & cam\_02\_0058 \\ \hline
 GT-062 & otherprop & P-35 bottle & 63.45\% & P-35 / P-35 / 未匹配 & cam\_02\_0058 \\ \hline
 GT-063 & otherprop & P-57 kitchen utensil & 62.16\% & P-57 / P-57 / 未匹配 & cam\_02\_0058 \\ \hline
-GT-067 & refrigerator & P-138 refrigerator & 97.64\% & P-138 / P-138 / P-138 & cam\_00\_0048 \\ \hline
+GT-067 & refrigerator & P-138 refrigerator & 97.63\% & P-138 / P-138 / P-138 & cam\_00\_0048 \\ \hline
 GT-068 & cabinet & P-3 countertop & 18.60\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0062 \\ \hline
-GT-069 & otherstructure & P-93 oven & 12.05\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0078 \\ \hline
+GT-069 & otherstructure & P-93 oven & 11.99\% & 未匹配 / 未匹配 / 未匹配 & cam\_00\_0078 \\ \hline
 GT-070 & otherprop & P-23 bottle & 92.63\% & P-23 / P-23 / P-23 & cam\_02\_0052 \\ \hline
 GT-071 & otherprop & P-282 utensil holder & 60.50\% & P-282 / P-282 / 未匹配 & cam\_02\_0058 \\ \hline
-GT-075 & otherprop & P-347 fruit & 51.74\% & P-347 / P-347 / 未匹配 & cam\_01\_0002 \\ \hline
-GT-080 & otherprop & P-347 fruit & 2.38\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
+GT-075 & otherprop & P-347 fruit & 52.17\% & P-347 / P-347 / 未匹配 & cam\_01\_0002 \\ \hline
+GT-080 & otherprop & P-347 fruit & 2.37\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-086 & otherprop & P-13 bowl & 89.55\% & P-13 / P-13 / P-13 & cam\_01\_0002 \\ \hline
 GT-089 & otherprop & P-59 plate & 53.48\% & P-59 / P-59 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-090 & otherprop & P-61 plate & 60.06\% & P-61 / P-61 / 未匹配 & cam\_01\_0002 \\ \hline
-GT-091 & otherprop & P-58 plate & 62.29\% & P-58 / P-58 / 未匹配 & cam\_01\_0002 \\ \hline
-GT-094 & otherstructure & P-21 utensil rack & 87.76\% & P-21 / P-21 / P-21 & cam\_01\_0002 \\ \hline
+GT-091 & otherprop & P-58 plate & 58.51\% & P-58 / P-58 / 未匹配 & cam\_01\_0002 \\ \hline
+GT-094 & otherstructure & P-21 utensil rack & 88.25\% & P-21 / P-21 / P-21 & cam\_01\_0002 \\ \hline
 GT-095 & otherstructure & P-348 stovetop & 47.91\% & P-348 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-096 & otherstructure & P-269 cooktop & 38.74\% & P-269 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-097 & otherprop & P-46 kettle & 74.38\% & P-46 / P-46 / 未匹配 & cam\_01\_0002 \\ \hline
@@ -1922,8 +2119,8 @@ GT-101 & otherprop & P-27 spoon & 19.87\% & 未匹配 / 未匹配 / 未匹配 & 
 GT-102 & otherprop & P-70 cooking utensil & 4.57\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-103 & otherprop & P-32 spoon & 23.48\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
 GT-104 & otherprop & P-60 spoon & 2.27\% & 未匹配 / 未匹配 / 未匹配 & cam\_01\_0002 \\ \hline
-GT-105 & otherprop & P-34 pot & 57.37\% & P-34 / P-34 / 未匹配 & cam\_01\_0002 \\ \hline
-GT-106 & otherprop & P-257 paper towel holder & 92.10\% & P-257 / P-257 / P-257 & cam\_02\_0064 \\ \hline
+GT-105 & otherprop & P-34 pot & 57.40\% & P-34 / P-34 / 未匹配 & cam\_01\_0002 \\ \hline
+GT-106 & otherprop & P-257 paper towel holder & 91.70\% & P-257 / P-257 / P-257 & cam\_02\_0064 \\ \hline
 GT-112 & otherprop & P-264 kitchen utensil & 13.40\% & 未匹配 / 未匹配 / 未匹配 & cam\_02\_0070 \\ \hline
 GT-113 & otherprop & P-292 box & 81.09\% & P-292 / P-292 / P-292 & cam\_02\_0004 \\ \hline
 GT-114 & otherprop & P-292 box & 0.91\% & 未匹配 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
@@ -1932,13 +2129,13 @@ GT-117 & otherprop & P-274 bread & 41.84\% & P-274 / 未匹配 / 未匹配 & cam
 GT-118 & otherprop & P-283 cutting board & 52.66\% & P-283 / P-283 / 未匹配 & cam\_02\_0001 \\ \hline
 GT-119 & otherprop & P-101 dish rack & 84.42\% & P-101 / P-101 / P-101 & cam\_02\_0001 \\ \hline
 GT-120 & otherprop & P-102 jar & 15.78\% & 未匹配 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
-GT-121 & otherprop & P-103 jar & 41.35\% & P-103 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
-GT-122 & otherprop & P-211 jar & 31.63\% & P-211 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
+GT-121 & otherprop & P-103 jar & 41.67\% & P-103 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
+GT-122 & otherprop & P-211 jar & 31.58\% & P-211 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
 GT-123 & otherprop & P-100 jar & 30.07\% & P-100 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
 GT-124 & otherprop & P-210 jar & 11.21\% & 未匹配 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
 GT-125 & otherprop & P-212 jar & 13.65\% & 未匹配 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
 GT-126 & otherprop & P-247 utensil rack & 65.65\% & P-247 / P-247 / 未匹配 & cam\_00\_0096 \\ \hline
-GT-127 & otherprop & P-37 toaster & 96.50\% & P-37 / P-37 / P-37 & cam\_01\_0050 \\ \hline
+GT-127 & otherprop & P-37 toaster & 96.38\% & P-37 / P-37 / P-37 & cam\_01\_0050 \\ \hline
 GT-128 & otherprop & P-65 knife block & 54.73\% & P-65 / P-65 / 未匹配 & cam\_00\_0042 \\ \hline
 GT-133 & otherprop & P-89 utensil holder & 62.84\% & P-89 / P-89 / 未匹配 & cam\_00\_0042 \\ \hline
 GT-134 & otherprop & P-109 utensil holder & 78.84\% & P-109 / P-109 / P-109 & cam\_00\_0042 \\ \hline
@@ -1952,61 +2149,72 @@ GT-148 & counter & P-141 countertop & 57.09\% & P-141 / P-141 / 未匹配 & cam\
 GT-149 & sink & P-131 sink & 83.21\% & P-131 / P-131 / P-131 & cam\_00\_0084 \\ \hline
 GT-151 & otherprop & P-217 kitchen utensil & 57.61\% & P-217 / P-217 / 未匹配 & cam\_02\_0001 \\ \hline
 GT-152 & otherprop & P-337 butter & 81.10\% & P-337 / P-337 / P-337 & cam\_02\_0001 \\ \hline
-GT-153 & otherprop & P-94 cutting board & 71.75\% & P-94 / P-94 / 未匹配 & cam\_02\_0001 \\ \hline
+GT-153 & otherprop & P-94 cutting board & 44.97\% & P-94 / 未匹配 / 未匹配 & cam\_02\_0001 \\ \hline
 \end{longtable}
 }
 
 \subsubsection*{6.9.4 第二场景ai\_001\_010：全部109个GT定位图册}
 \addcontentsline{toc}{subsubsection}{6.9.4 第二场景ai\_001\_010：全部109个GT定位图册}
 
-以下10张图册依次覆盖上表全部实例，不仅列低AP物体。GT-001是灯具整体，GT-005至GT-016是两摞逐片盘子；GT-030、GT-057、GT-068是柜体，GT-045是开放格架，GT-067是冰箱，GT-148是环绕台面，GT-149是双盆水槽整体。柜门和支架是否属于一个完整物体，以对应金色官方轮廓和第6.9节的粒度说明核对。
+GT-001为完整灯具，GT-005至016为两摞逐片盘子；GT-030/057/068为柜体，GT-045为开放格架，GT-067为冰箱，GT-148为环绕台面，GT-149为双盆水槽整体。柜门、支架是否属于整物体，按官方轮廓和6.9粒度说明核对。
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 1：GT-001 至 GT-012；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 1：GT-001 至 GT-012；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 2：GT-013 至 GT-024；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 2：GT-013 至 GT-024；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 3：GT-025 至 GT-038；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 3：GT-025 至 GT-038；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 4：GT-040 至 GT-054；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 4：GT-040 至 GT-054；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 5：GT-055 至 GT-070；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 5：GT-055 至 GT-070；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 6：GT-071 至 GT-098；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 6：GT-071 至 GT-098；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 7：GT-099 至 GT-116；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 7：GT-099 至 GT-116；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 8：GT-117 至 GT-128；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 8：GT-117 至 GT-128；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 9：GT-133 至 GT-152；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 9：GT-133 至 GT-152；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\textit{ai\_001\_010 官方GT编号图册 10：GT-153 至 GT-153；金线为官方可见轮廓，标题颜色为v14严格几何匹配状态（见HTML版附图）}
+\textit{ai\_001\_010 官方GT编号图册 10：GT-153 至 GT-153；金线为官方可见轮廓，标题颜色为v15严格几何匹配状态（见HTML版附图）}
 
 
 
-\subsection*{6.10 v14接缝与形状接口}
-\addcontentsline{toc}{subsection}{6.10 v14接缝与形状接口}
+\subsection*{6.10 现行接缝与形状接口（v14引入）}
+\addcontentsline{toc}{subsection}{6.10 现行接缝与形状接口（v14引入）}
 
 \texttt{seeded\_\allowbreak{}surfaces.\allowbreak{}construct}复用原结构表面接口；\texttt{AXIAL\_\allowbreak{}VALIDATION.\allowbreak{}check}验证轴向附属身份。最终几何依次调用\texttt{verified\_\allowbreak{}suspension.\allowbreak{}construct}、\texttt{enclosure\_\allowbreak{}continuity.\allowbreak{}construct}、\texttt{verified\_\allowbreak{}cuboids.\allowbreak{}construct}；ECA以关系适配器回调原\texttt{part\_\allowbreak{}body\_\allowbreak{}assembly.\allowbreak{}construct}，沿用原点云、轨迹、别名及部件写入路径。ECA独立审计不覆盖BHA审计，删除\texttt{BODY\_\allowbreak{}CONTINUITY}和\texttt{FINAL\_\allowbreak{}GEOMETRY}中的相应注册即可撤除；其他新组件同样按单项代码注册撤除。历史v13配置明确清除v14组件，没有新增逐算法命令行开关。
+
+
+
+\subsection*{6.11 v15通用算法挂接与撤除}
+\addcontentsline{toc}{subsection}{6.11 v15通用算法挂接与撤除}
+
+v15在\texttt{run\_\allowbreak{}gpt\_\allowbreak{}comparison.\allowbreak{}configure\_\allowbreak{}profile}的\texttt{FINAL\_\allowbreak{}GEOMETRY}末段依次注册DSM、CMR、OSL、ROS、FCA及PCB单面补充。CMR虽按功能归入MICA，真实执行仍在原图、部件融合和既有形状验收之后；不重复运行前端。\texttt{POST\_\allowbreak{}PUBLICATION=[scene\_\allowbreak{}review]}只负责成品可视化和独立评价。按模块删除对应代码注册即可移除，不依赖备份或逐功能参数；历史v14配置主动清除这些注册，原始接口保持可用。
+
+
+
+新增审计为\texttt{contact\_\allowbreak{}instance\_\allowbreak{}audit.\allowbreak{}json}、\texttt{surface\_\allowbreak{}densification\_\allowbreak{}audit.\allowbreak{}json}、\texttt{support\_\allowbreak{}layers\_\allowbreak{}audit.\allowbreak{}json}、\texttt{boundary\_\allowbreak{}ownership\_\allowbreak{}audit.\allowbreak{}json}、\texttt{front\_\allowbreak{}continuity\_\allowbreak{}audit.\allowbreak{}json}及\texttt{scene\_\allowbreak{}review\_\allowbreak{}zh.\allowbreak{}json}。点来源、实际帧、接受原因与代码哈希可核对。补入部件须复用现行VPA准入，未确认归属不为降低预测数强并。数学见2.10、3.18–3.21及5.3。
 
 
 
@@ -2321,7 +2529,7 @@ ai\_001\_010 & 126/109 & 32.21\% & 18.86\% & 6.17\% & 0.1449 \\ \hline
 \section*{19. 原始流程与最终版本对照}
 \addcontentsline{toc}{section}{19. 原始流程与最终版本对照}
 
-GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12/v13/v14复用同场景GPT响应。以下分别列RAM原始、GPT原始、Qwen→DINO原始对照和最终v12/v13/v14，不把GPT原始流程省略。第一场景早期RAM成品没有同一99帧口径的完整评价，因此不虚构其可比分数。
+GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12及以后复用同场景GPT响应。以下分别列RAM原始、GPT原始、Qwen→DINO原始对照和最终v12/v13/v14/v15，不把GPT原始流程省略。第一场景早期RAM成品没有同一99帧口径的完整评价，因此不虚构其可比分数。
 
 
 
@@ -2343,6 +2551,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 010 GPT v13 & 134/109 & 42.02\% & 25.97\% & 9.91\% & 42.02\% & 31.24\% & 0.2065 \\ \hline
 002 GPT v14 & 10/10 & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 0.0000 \\ \hline
 010 GPT v14 & 129/109 & 44.42\% & 27.68\% & 10.86\% & 44.42\% & 33.18\% & 0.1685 \\ \hline
+002 GPT v15 & 10/10 & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 100.00\% & 0.0000 \\ \hline
+010 GPT v15 & 127/109 & 51.90\% & 33.63\% & 14.86\% & 51.90\% & 39.05\% & 0.1528 \\ \hline
 \end{longtable}
 }
 
@@ -2364,6 +2574,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 010 GPT v13 & 76/58/33 & 57/77/52 & 28/106/81 \\ \hline
 002 GPT v14 & 10/0/0 & 10/0/0 & 10/0/0 \\ \hline
 010 GPT v14 & 77/52/32 & 58/71/51 & 29/100/80 \\ \hline
+002 GPT v15 & 10/0/0 & 10/0/0 & 10/0/0 \\ \hline
+010 GPT v15 & 82/45/27 & 63/64/46 & 34/93/75 \\ \hline
 \end{longtable}
 }
 
@@ -2625,7 +2837,7 @@ ECA将节点6归入15，保留\texttt{assembly\_\allowbreak{}6\_\allowbreak{}sec
 \subsection*{21.2 逐物体定位核查}
 \addcontentsline{toc}{subsection}{21.2 逐物体定位核查}
 
-两场景全部GT的金色官方轮廓、编号图册及v14严格匹配索引已放在6.9.1–6.9.4。下表保留重点对象的版本对照；查看柜体、冰箱、灯具或餐具时，可先在完整索引中查找对应GT号，再对照图册中的实物位置。
+当前v15的全部GT金色官方轮廓及匹配索引见6.9.1–6.9.4；本节下表保留v14最终版证据。下表保留重点对象的版本对照；查看柜体、冰箱、灯具或餐具时，可先在完整索引中查找对应GT号，再对照图册中的实物位置。
 
 
 
@@ -2688,10 +2900,197 @@ GT实例 & v13最佳框IoU & v14最佳框IoU \\ \hline
 
 
 
-\section*{22. 保留数据、日志与直接可视化命令}
-\addcontentsline{toc}{section}{22. 保留数据、日志与直接可视化命令}
+\section*{22. 版本 v15：接触实例与实测恢复的最终结果}
+\addcontentsline{toc}{section}{22. 版本 v15：接触实例与实测恢复的最终结果}
 
-数据只保留ScanNet/Hypersim及scene0802。每个PartAware版本归并到一个partaware\_vN目录，v12保留既有参照，v13和v14各只保留一套包含两个场景的最终成品；原始RAM、GPT原始和Qwen→DINO对照分别保留。scene0802的矫正输入、基础/改进流程结果及fuse点云保留，443份矫正位姿与输入逐文件一致。3RScan/KITTI、中途试验和无用调试日志按用户要求删除，没有备份。
+从同一原始融合点云、轨迹及既有GPT/SAM3观测重新执行建图、部件融合和全部后续算法；没有以GT修点或手工改成品。全119个GT在成品可视化后独立评价，GT标识图册见6.9.1–6.9.4。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+场景 & 预测/GT & AP25/AP50/AP75 & MVO25/MVO50 & 数量绝对对数误差 \\ \hline
+\endfirsthead
+\hline
+场景 & 预测/GT & AP25/AP50/AP75 & MVO25/MVO50 & 数量绝对对数误差 \\ \hline
+\endhead
+ai\_001\_002 & 10/10 & 100.00\%/100.00\%/100.00\% & 100.00\%/100.00\% & 0.0000 \\ \hline
+ai\_001\_010 & 127/109 & 51.90\%/33.63\%/14.86\% & 51.90\%/39.05\% & 0.1528 \\ \hline
+\end{longtable}
+}
+
+\subsection*{22.1 真正改变的是算法，补入的是什么}
+\addcontentsline{toc}{subsection}{22.1 真正改变的是算法，补入的是什么}
+
+CMR解决非互斥掩码被公共像素归属遮掉、曲面采样不同体素和小物体混合的问题，使用跨视角实际测量与同时分离证据；确认部件补回父体，重复归属不再增加根计数。DSM恢复真实深度密度；OSL、ROS、FCA分别处理开放结构边界、最外层背景面及整柜—门板层级。PCB由实际单面提供可靠方向。新规则逐候选执行，未使用具体场景位置、GT ID或名称特化提示词。
+
+
+
+\textbf{真实深度恢复不等于未拍到的背面补全。} 既有长方体解析先验按名称选择形状族，仍检查实测边界、自由空间和全视角；不能说该逻辑已经被通用文本—点云网络代替。MGPC没有通过准入，未启动其成品补全。RSI下层曲面仍标为生成先验。v15的新增CMR/DSM点是RGB-D中实际存在的点，生成数为零。
+
+
+
+第一场景新增候选通过已有VLPart部件和唯一父体核验后加入父体，没有重复生成第11个根；规则不写该部件专用名称条件。第一场景的全部10个GT保持三阈值匹配成功。
+
+
+
+\subsection*{22.2 精细对象、层架和保留对象核查}
+\addcontentsline{toc}{subsection}{22.2 精细对象、层架和保留对象核查}
+
+下面是独立GT最佳几何重叠，另外列严格50\%匹配；两者不可互相冒充。类无关框AP进步不自动证明语义正确。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+官方GT & 类别 & v14最佳IoU & v15最佳IoU / 预测 & 严格匹配50 \\ \hline
+\endfirsthead
+\hline
+官方GT & 类别 & v14最佳IoU & v15最佳IoU / 预测 & 严格匹配50 \\ \hline
+\endhead
+GT-001 & lamp & 6.72\% & 6.72\% / P-298 ceiling light & 未匹配 \\ \hline
+GT-003 & otherprop & 0.09\% & 87.79\% / P-457 plate & P-457 \\ \hline
+GT-004 & otherprop & 4.22\% & 85.71\% / P-456 plate & P-456 \\ \hline
+GT-017 & otherprop & 95.35\% & 95.35\% / P-10 cup & P-10 \\ \hline
+GT-018 & otherprop & 21.65\% & 40.98\% / P-22 plate & 未匹配 \\ \hline
+GT-019 & otherprop & 97.43\% & 97.43\% / P-5 cup & P-5 \\ \hline
+GT-020 & otherprop & 63.54\% & 87.72\% / P-7 plate & P-7 \\ \hline
+GT-021 & otherprop & 97.20\% & 97.20\% / P-4 cup & P-4 \\ \hline
+GT-022 & otherprop & 40.83\% & 91.34\% / P-19 plate & P-19 \\ \hline
+GT-037 & otherprop & 5.34\% & 5.34\% / P-443 glass & 未匹配 \\ \hline
+GT-038 & otherprop & 6.11\% & 6.11\% / P-443 glass & 未匹配 \\ \hline
+GT-040 & otherprop & 31.73\% & 38.82\% / P-240 glass & 未匹配 \\ \hline
+GT-041 & otherprop & 20.64\% & 43.02\% / P-455 glass & 未匹配 \\ \hline
+GT-043 & otherprop & 1.04\% & 0.37\% / P-78 cabinet & 未匹配 \\ \hline
+GT-045 & shelves & 43.03\% & 64.01\% / P-78 cabinet & P-78 \\ \hline
+GT-047 & otherprop & 42.59\% & 43.00\% / P-95 glass & 未匹配 \\ \hline
+GT-049 & otherprop & 6.79\% & 6.81\% / P-213 glass & 未匹配 \\ \hline
+GT-050 & otherprop & 12.19\% & 12.22\% / P-213 glass & 未匹配 \\ \hline
+GT-051 & otherprop & 12.82\% & 12.82\% / P-88 drinking glass & 未匹配 \\ \hline
+GT-052 & otherprop & 26.54\% & 57.44\% / P-458 glass & P-458 \\ \hline
+GT-053 & otherprop & 9.29\% & 60.45\% / P-459 glass & P-459 \\ \hline
+GT-054 & otherprop & 4.96\% & 4.96\% / P-82 glass & 未匹配 \\ \hline
+GT-055 & otherprop & 31.51\% & 31.51\% / P-181 drinking glass & 未匹配 \\ \hline
+GT-056 & otherprop & 45.25\% & 45.25\% / P-108 drinking glass & 未匹配 \\ \hline
+GT-057 & cabinet & 79.10\% & 79.13\% / P-15 cabinet & P-15 \\ \hline
+GT-067 & refrigerator & 97.64\% & 97.63\% / P-138 refrigerator & P-138 \\ \hline
+GT-068 & cabinet & 18.60\% & 18.60\% / P-3 countertop & 未匹配 \\ \hline
+GT-069 & otherstructure & 12.05\% & 11.99\% / P-93 oven & 未匹配 \\ \hline
+GT-094 & otherstructure & 87.76\% & 88.25\% / P-21 utensil rack & P-21 \\ \hline
+GT-147 & otherstructure & 48.56\% & 48.56\% / P-96 utensil rack & 未匹配 \\ \hline
+GT-148 & counter & 57.09\% & 57.09\% / P-141 countertop & P-141 \\ \hline
+GT-149 & sink & 83.21\% & 83.21\% / P-131 sink & P-131 \\ \hline
+\end{longtable}
+}
+
+两处桌面浅盘从几乎缺失改善；已有杯身受曲面保护，小盘得到独立恢复。部分玻璃器皿达到50\%，但多个器皿仍共享或只形成残片。开放格架的框改善，若无缓存架子语义仍保留cabinet名称；不能声称语义层架识别已彻底完成。冰箱、双盆水槽及已识别杯子需与上表同时核对，不用总体AP遮掩局部退步。
+
+
+
+\subsection*{22.3 点密度与可视化核查}
+\addcontentsline{toc}{subsection}{22.3 点密度与可视化核查}
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+实例 & v14实测点 & v15实测点 & 本轮新增生成点 \\ \hline
+\endfirsthead
+\hline
+实例 & v14实测点 & v15实测点 & 本轮新增生成点 \\ \hline
+\endhead
+P-25 & 11811 & 30483 & 0 \\ \hline
+P-55 & 12904 & 17456 & 0 \\ \hline
+P-141 & 53965 & 214799 & 0 \\ \hline
+P-236 & 11817 & 27728 & 0 \\ \hline
+\end{longtable}
+}
+
+表中均为新增实际深度样本；只说明采样密度，不证明隐藏背面正确。原版可视化双视角与桌面、层架近景如下，没有展示边或启用pick。近景仍可看到局部框重叠与不完整器皿，不能凭远景宣称全部修复。
+
+
+
+\textit{v15第二场景正式物体点云及框（见HTML版附图）}
+
+
+
+\textit{v15第二场景反向观察；预测面仍标记为假设（见HTML版附图）}
+
+
+
+\textit{v15桌面杯盘近景，原版可视化（见HTML版附图）}
+
+
+
+\textit{v15悬挂层架及器皿近景，原版可视化（见HTML版附图）}
+
+
+
+\subsection*{22.4 尚低于匹配阈值的GT及下一步边界}
+\addcontentsline{toc}{subsection}{22.4 尚低于匹配阈值的GT及下一步边界}
+
+全部严格25\%未匹配GT如下。即使最佳候选达标，若已被其他GT占用也会未匹配；因此不把所有FN都说成完全漏检。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+未匹配GT@25 & 官方类别 & 最佳预测 & 最佳IoU \\ \hline
+\endfirsthead
+\hline
+未匹配GT@25 & 官方类别 & 最佳预测 & 最佳IoU \\ \hline
+\endhead
+GT-001 & lamp & P-298 ceiling light & 6.72\% \\ \hline
+GT-026 & window & P-156 window & 39.04\% \\ \hline
+GT-036 & otherprop & P-131 sink & 1.01\% \\ \hline
+GT-037 & otherprop & P-443 glass & 5.34\% \\ \hline
+GT-038 & otherprop & P-443 glass & 6.11\% \\ \hline
+GT-043 & otherprop & P-78 cabinet & 0.37\% \\ \hline
+GT-044 & otherprop & P-78 cabinet & 0.41\% \\ \hline
+GT-049 & otherprop & P-213 glass & 6.81\% \\ \hline
+GT-050 & otherprop & P-213 glass & 12.22\% \\ \hline
+GT-051 & otherprop & P-88 drinking glass & 12.82\% \\ \hline
+GT-054 & otherprop & P-82 glass & 4.96\% \\ \hline
+GT-068 & cabinet & P-3 countertop & 18.60\% \\ \hline
+GT-069 & otherstructure & P-93 oven & 11.99\% \\ \hline
+GT-080 & otherprop & P-347 fruit & 2.37\% \\ \hline
+GT-099 & otherprop & P-3 countertop & 0.00\% \\ \hline
+GT-101 & otherprop & P-27 spoon & 19.87\% \\ \hline
+GT-102 & otherprop & P-70 cooking utensil & 4.57\% \\ \hline
+GT-103 & otherprop & P-32 spoon & 23.48\% \\ \hline
+GT-104 & otherprop & P-60 spoon & 2.27\% \\ \hline
+GT-112 & otherprop & P-264 kitchen utensil & 13.40\% \\ \hline
+GT-114 & otherprop & P-292 box & 0.91\% \\ \hline
+GT-116 & otherprop & P-292 box & 3.67\% \\ \hline
+GT-120 & otherprop & P-102 jar & 15.78\% \\ \hline
+GT-124 & otherprop & P-210 jar & 11.21\% \\ \hline
+GT-125 & otherprop & P-212 jar & 13.65\% \\ \hline
+GT-139 & otherprop & P-273 utensil holder & 0.22\% \\ \hline
+GT-146 & otherprop & P-96 utensil rack & 5.36\% \\ \hline
+\end{longtable}
+}
+
+未分配预测@25共有45个，仍须区分错位、重复、粒度、可观测范围及GT标签差异，不能称为已解决假阳性。整套下柜、完整灯具、冰箱上方横梁和部分透明细物体仍是主要限制。目标80\%/70\%未达到；两场景是开发集，尚不能保证对其他拥挤结构的泛化。
+
+
+
+\subsection*{22.5 数学来源、验证与撤除}
+\addcontentsline{toc}{subsection}{22.5 数学来源、验证与撤除}
+
+数学见2.10、3.18–3.21和5.3；论文逐项对应见24章。CMR借鉴MaskClustering/Open3DIS的视角共识与二维引导思想 [10,11]，没有声称移植其学习式网络。UOIS、UCN、RICE与ZISVFM [12–15] 为继续研究的拥挤实例方向，完整模型尚未接入。
+
+
+
+230项离线回归通过，包括接触不可作为同一实例证据、放大重复不构成多物体、遮挡票、原坐标保留、外壳/偏移家具反例、载体断开否决及开放/封闭结构反例。两场景原生199份缓存签名及原始融合哈希保持一致，原TopologyMap读取器成功；三档AP、TP/FP/FN及数量误差对v14均未回退，第二场景有严格进步。验证材料见\texttt{docs/\allowbreak{}v15\_\allowbreak{}final\_\allowbreak{}results.\allowbreak{}json}。组件撤除只删6.11所列注册，原成品与历史配置保留。
+
+
+
+\section*{23. 保留数据、日志与直接可视化命令}
+\addcontentsline{toc}{section}{23. 保留数据、日志与直接可视化命令}
+
+数据只保留ScanNet/Hypersim及scene0802。每个PartAware版本归并到一个partaware\_vN目录，v12保留既有参照，v13、v14和v15各只保留一套包含两个场景的最终成品；原始RAM、GPT原始和Qwen→DINO对照分别保留。scene0802的矫正输入、基础/改进流程结果及fuse点云保留，443份矫正位姿与输入逐文件一致。3RScan/KITTI、中途试验和无用调试日志按用户要求删除，没有备份。
 
 
 
@@ -2712,8 +3111,8 @@ env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
 /home/lewisliu/PartAware-SG/script/visualize_map.py \
---map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_002/instance_cloud_cleaned.ply \
---topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_002/topology_map.json \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v15/hypersim/ai_001_002/instance_cloud_cleaned.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v15/hypersim/ai_001_002/topology_map.json \
 --show_bboxes --node_radius 0.02
 \end{verbatim}
 
@@ -2727,8 +3126,8 @@ env -u WAYLAND_DISPLAY -u WAYLAND_SOCKET \
 XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python \
 /home/lewisliu/PartAware-SG/script/visualize_map.py \
---map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_010/instance_cloud_completed.ply \
---topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v14/hypersim/ai_001_010/topology_map.json \
+--map_ply_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v15/hypersim/ai_001_010/instance_cloud_completed.ply \
+--topology_map_path /home/lewisliu/datasets/scannet-sg-processed/partaware_v15/hypersim/ai_001_010/topology_map.json \
 --show_bboxes --node_radius 0.02
 \end{verbatim}
 
@@ -2737,18 +3136,141 @@ XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 
 
 
-\section*{23. 当前采用方法的来源}
-\addcontentsline{toc}{section}{23. 当前采用方法的来源}
+\section*{24. 数学、组件与论文对应}
+\addcontentsline{toc}{section}{24. 数学、组件与论文对应}
 
-\href{https://github.com/tud-amr/ScanNet-SG}{ScanNet-SG}保留原建图接口；\href{https://github.com/AutoCompSysLab/OP3DSG}{OP3DSG}提供融合参考；\href{https://github.com/facebookresearch/VLPart}{VLPart}运行视觉部件预测；\href{https://github.com/facebookresearch/sam3}{SAM3官方代码}承担当前v12/v13/v14二维实例；\href{https://github.com/PKU-EPIC/MaskClustering}{MaskClustering}提供多视角完整掩码共识依据；\href{https://arxiv.org/abs/2301.04545}{AdaPoinTr}为选择性形状提案网络；\href{https://arxiv.org/abs/1812.02713}{PartNet}、\href{https://github.com/SooLab/Part2Object}{Part2Object}支持物体—部件分层观点，BHA是本项目几何适配，没有宣称移植它们的训练网络。来源不替代本项目实测评价。
-
-
-
-本轮文献方向：\href{https://arxiv.org/abs/2106.15711}{RICE}支持拥挤实例的拆分与合并研究思路，\href{https://arxiv.org/abs/2502.03266}{ZISVFM}支持深度与视觉边界联合，\href{https://arxiv.org/abs/2312.10671}{Open3DIS}支持二维引导三维实例。RSI/HMG是项目自有适配，没有移植这些论文的训练网络或宣称复现其指标。
+以下编号用于正文引用。区分实际运行的模型、本项目几何适配以及尚未接入的研究方向；阅读论文不等于复现论文的训练网络或达到其指标。
 
 
 
-本版新增阅读：\href{https://arxiv.org/html/2601.03660v2}{MGPC}、\href{https://sds-complete.github.io/}{SDS-Complete}、\href{https://arxiv.org/html/2504.05698v1}{Point-based Instance Completion with Scene Constraints}、\href{https://arxiv.org/html/2504.03177v1}{Detection Based Part-level Articulated Object Reconstruction}、\href{https://arxiv.org/html/2503.18007v1}{SymmCompletion}。前两类提供多模态形状与观测约束方向；部件重建提供检测后归并的结构依据；局部对称补全提示保留实测细节的重要性。本项目没有宣称实现论文的完整训练系统，当前几何适配和未接受模型的状态分别列明。
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/3-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+主分支 / 组件 & 数学与实现对应 & 论文依据及实际状态 \\ \hline
+\endfirsthead
+\hline
+主分支 / 组件 & 数学与实现对应 & 论文依据及实际状态 \\ \hline
+\endhead
+FOVEA / GPT、Qwen类别缓存 & RGB与协议哈希、已有类别及描述复用 & 本地中转接口及缓存来源审计；本轮没有新识图调用，无法仅凭中转模型名验证后台模型身份 \\ \hline
+FOVEA / RAM、GroundingDINO、SAM & 历史原始流程的类别、二维定位、掩码；256维公共特征 & [6,7,23] 为真实已用模型；原始对照保留 \\ \hline
+FOVEA / SAM3 & 原生非互斥实例、公共互斥标签、通用放大候选 & [5] 的既有签名观测；本轮不重新识图，旧Florence前端 [24] 保留历史位置 \\ \hline
+MICA / 在线融合、实例共识、WOC/HMG & 反投影、方向覆盖、Hungarian分配、独立可见帧与完整掩码；正文2.2–2.9 & [10,11,20] 支持方法方向；项目适配，未移植Open3DIS的训练式超点网络 \\ \hline
+MICA / CMR & 6毫米定向覆盖、非互斥掩码、深度可见重投影票数、同帧分离否决；正文2.10 & [10,11] 的共识与二维引导思想；[12–15] 提供拥挤实例研究背景，UCN/RICE/ZISVFM完整网络没有加入 \\ \hline
+SHAPE / 地面、反光/开口/表面所有权 & 观察与自由空间冲突、留出视角、唯一身份竞争；正文3.1–3.14 & 本项目RGB-D证据规则，平面估计使用 [19]；没有镜面反射重建模型 \\ \hline
+SHAPE / FDR、DSM & 实测像素、体素、独立视角；正文3.15、3.18 & 采用二维引导真实三维表面的思想 [11]；项目适配，不将生成点作为观测 \\ \hline
+SHAPE / RSI、OSL、ROS & 重复边缘周期、开放层架、外壳平面；正文3.15、3.19 & 本项目几何规则；[17,19] 是层级观点和估计基础，没有通用物体隐形部分恢复保证 \\ \hline
+SHAPE / ECA、FCA、BHA、VPA & 接缝、连续载体、唯一父体、实测部件并集；正文2.8、3.17、3.20、5.1–5.3 & 部件与物体层级参考 [3,4,17]；FCA/ECA是项目适配，不能仅靠同名或框接触合并 \\ \hline
+SHAPE / AdaPoinTr、最终长方体验收 & 网络提案、刚性对齐、尺度、观测残差、自由空间与全部视角验收；正文4 & AdaPoinTr [16] 真实运行；有条件长方体为项目解析先验。MGPC [25] 实测候选未通过准入，未加入默认主流程 \\ \hline
+GRAPH / ScanNet-SG、PCB & 原建图接口、正式点云重算中心与框；正文3.3、3.16、3.21 & 原程序/数据 [1,2]；PCB为实测方向和极值的项目求解器 \\ \hline
+GRAPH / VLPart、OP3DSG部件融合 & 独立RN50特征余弦、几何门控、4通道直方图、Wasserstein距离、父归属；正文5 & VLPart [4] 真实运行；OP3DSG [3] 融合/父归属适配，CLIP和最优输运基础 [9,22] \\ \hline
+GRAPH / 独立GT核对 & 可观测GT筛选、严格一对一框AP、MVO、数量对数误差；正文6 & 官方Hypersim [18] 标注；框协议为项目适配，不是官方点云掩码或关系AP \\ \hline
+\end{longtable}
+}
+
+\subsection*{24.1 参考文献}
+\addcontentsline{toc}{subsection}{24.1 参考文献}
+
+[1] Chen G, Barbas Laina S, Alonso-Mora J. \textbf{ScanNet-SG: A Large-Scale Dataset for 3D Scene Graph Alignment} [DS]. 4TU.ResearchData, 2026. DOI: \href{https://data.4tu.nl/datasets/bebe8bd4-cf91-4f86-a28a-87cb870f6cea}{10.4121/bebe8bd4-cf91-4f86-a28a-87cb870f6cea}. \href{https://github.com/tud-amr/ScanNet-SG}{原程序}.
+
+
+
+[2] Chen G, Barbas Laina S, Leutenegger S, Alonso-Mora J. \textbf{OpenSGA: Efficient 3D Scene Graph Alignment in the Open World} [EB/OL]. arXiv:2605.10484, 2026. \href{https://arxiv.org/abs/2605.10484}{论文}.
+
+
+
+[3] Kim Y, Kim U H. \textbf{Open-Vocabulary Part-Aware 3D Scene Graph Generation for Real-World Environments} [C]. ECCV, 2026. arXiv:2606.29786. \href{https://arxiv.org/abs/2606.29786}{论文}, \href{https://github.com/AutoCompSysLab/OP3DSG}{OP3DSG代码}.
+
+
+
+[4] Sun P, Chen S, Zhu C, Xiao F, Luo P, Xie S, Yan Z. \textbf{Going Denser with Open-Vocabulary Part Segmentation} [C]. ICCV, 2023. \href{https://openaccess.thecvf.com/content/ICCV2023/papers/Sun\_Going\_Denser\_with\_Open-Vocabulary\_Part\_Segmentation\_ICCV\_2023\_paper.pdf}{论文}, \href{https://github.com/facebookresearch/VLPart}{VLPart代码}.
+
+
+
+[5] Carion N, Gustafson L, Hu Y T, et al. \textbf{SAM 3: Segment Anything with Concepts} [EB/OL]. arXiv:2511.16719, 2025. \href{https://arxiv.org/abs/2511.16719}{论文}, \href{https://github.com/facebookresearch/sam3}{官方代码}.
+
+
+
+[6] Liu S, Zeng Z, Ren T, et al. \textbf{Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection} [C]. ECCV, 2024. arXiv:2303.05499. \href{https://arxiv.org/abs/2303.05499}{论文}.
+
+
+
+[7] Kirillov A, Mintun E, Ravi N, et al. \textbf{Segment Anything} [C]. ICCV, 2023. \href{https://arxiv.org/abs/2304.02643}{论文}.
+
+
+
+[8] Reimers N, Gurevych I. \textbf{Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks} [C]. EMNLP-IJCNLP, 2019: 3982–3992. \href{https://aclanthology.org/D19-1410/}{论文}.
+
+
+
+[9] Radford A, Kim J W, Hallacy C, et al. \textbf{Learning Transferable Visual Models From Natural Language Supervision} [C]. ICML, PMLR 139, 2021: 8748–8763. \href{https://proceedings.mlr.press/v139/radford21a.html}{论文}.
+
+
+
+[10] Yan M, Zhang J, Zhu Y, Wang H. \textbf{MaskClustering: View Consensus based Mask Graph Clustering for Open-Vocabulary 3D Instance Segmentation} [C]. CVPR, 2024. arXiv:2401.07745. \href{https://arxiv.org/abs/2401.07745}{论文}, \href{https://github.com/PKU-EPIC/MaskClustering}{代码}.
+
+
+
+[11] Nguyen P, Ngo T D, Kalogerakis E, Gan C, Tran A, Pham C, Nguyen K. \textbf{Open3DIS: Open-Vocabulary 3D Instance Segmentation with 2D Mask Guidance} [C]. CVPR, 2024. \href{https://openaccess.thecvf.com/content/CVPR2024/papers/Nguyen\_Open3DIS\_Open-Vocabulary\_3D\_Instance\_Segmentation\_with\_2D\_Mask\_Guidance\_CVPR\_2024\_paper.pdf}{论文}.
+
+
+
+[12] Xie C, Xiang Y, Mousavian A, Fox D. \textbf{The Best of Both Modes: Separately Leveraging RGB and Depth for Unseen Object Instance Segmentation} [C]. CoRL, PMLR 100, 2020: 1369–1378. \href{https://proceedings.mlr.press/v100/xie20b.html}{论文}.
+
+
+
+[13] Xiang Y, Xie C, Mousavian A, Fox D. \textbf{Learning RGB-D Feature Embeddings for Unseen Object Instance Segmentation} [C]. CoRL, PMLR 155, 2021: 461–470. \href{https://proceedings.mlr.press/v155/xiang21a.html}{论文}, \href{https://github.com/NVlabs/UnseenObjectClustering}{UCN代码}.
+
+
+
+[14] Xie C, Mousavian A, Xiang Y, Fox D. \textbf{RICE: Refining Instance Masks in Cluttered Environments with Graph Neural Networks} [EB/OL]. arXiv:2106.15711, 2021. \href{https://arxiv.org/abs/2106.15711}{论文}.
+
+
+
+[15] Zhang Y, Yin M, Bi W, Yan H, Bian S, Zhang C H, Hua C. \textbf{ZISVFM: Zero-Shot Object Instance Segmentation in Indoor Robotic Environments with Vision Foundation Models} [EB/OL]. arXiv:2502.03266, 2025. \href{https://arxiv.org/abs/2502.03266}{论文}.
+
+
+
+[16] Yu X, Rao Y, Wang Z, Lu J, Zhou J. \textbf{AdaPoinTr: Diverse Point Cloud Completion with Adaptive Geometry-Aware Transformers} [EB/OL]. arXiv:2301.04545, 2023. \href{https://arxiv.org/abs/2301.04545}{论文}.
+
+
+
+[17] Mo K, Zhu S, Chang A X, Yi L, Tripathi S, Guibas L J, Su H. \textbf{PartNet: A Large-scale Benchmark for Fine-grained and Hierarchical Part-level 3D Object Understanding} [C]. CVPR, 2019. arXiv:1812.02713. \href{https://arxiv.org/abs/1812.02713}{论文}.
+
+
+
+[18] Roberts M, Ramapuram J, Ranjan A, et al. \textbf{Hypersim: A Photorealistic Synthetic Dataset for Holistic Indoor Scene Understanding} [C]. ICCV, 2021. arXiv:2011.02523. \href{https://arxiv.org/abs/2011.02523}{论文}, \href{https://github.com/apple/ml-hypersim}{官方数据与标注说明}.
+
+
+
+[19] Fischler M A, Bolles R C. \textbf{Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography} [J]. Communications of the ACM, 1981, 24(6): 381–395. DOI: \href{https://doi.org/10.1145/358669.358692}{10.1145/358669.358692}.
+
+
+
+[20] Kuhn H W. \textbf{The Hungarian Method for the Assignment Problem} [J]. Naval Research Logistics Quarterly, 1955, 2(1–2): 83–97. DOI: \href{https://doi.org/10.1002/nav.3800020109}{10.1002/nav.3800020109}.
+
+
+
+[21] Ester M, Kriegel H P, Sander J, Xu X. \textbf{A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise} [C]. KDD, 1996: 226–231. \href{https://www2.cs.sfu.ca/\textasciitilde{}ester/papers/kdd-96.pdf}{论文}.
+
+
+
+[22] Peyré G, Cuturi M. \textbf{Computational Optimal Transport} [J]. Foundations and Trends in Machine Learning, 2019, 11(5–6): 355–607. arXiv:1803.00567. \href{https://arxiv.org/abs/1803.00567}{论文}.
+
+
+
+[23] Zhang Y, Huang X, Ma J, et al. \textbf{Recognize Anything: A Strong Image Tagging Model} [EB/OL]. arXiv:2306.03514, 2023. \href{https://arxiv.org/abs/2306.03514}{论文}.
+
+
+
+[24] Xiao B, Wu H, Xu W, et al. \textbf{Florence-2: Advancing a Unified Representation for a Variety of Vision Tasks} [EB/OL]. arXiv:2311.06242, 2023. \href{https://arxiv.org/abs/2311.06242}{论文}.
+
+
+
+[25] Liu J, Zhao Y, Ma H, Liu Z, Wang J, Zou W. \textbf{MGPC: Multimodal Network for Generalizable Point Cloud Completion With Modality Dropout and Progressive Decoding} [EB/OL]. arXiv:2601.03660, 2026. \href{https://arxiv.org/abs/2601.03660}{论文}.
+
+
+
+本项目自有的MVO、数量绝对对数误差、外壳归属及各准入阈值不是上述论文的官方指标或原始超参数；公式、适用范围和当前实测结果在正文分别列出。源代码中存在的注册点可以独立撤除，不需要保留备份成品或增加运行参数来控制研究组件。
 
 
 \end{document}

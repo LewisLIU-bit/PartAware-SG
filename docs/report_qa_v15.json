@@ -1,0 +1,29 @@
+{
+  "desktop": {
+    "version": "v15",
+    "updated": "2026-10-10",
+    "sourceHash": "f383c5a37be4cb10744314a3933224237a51ad895bf955651500187066deb497",
+    "edition": "研究报告 · v15 · 2026-10-10 · LaTeX 公式渲染版",
+    "latestSummary": true,
+    "latestChapter": "22. 版本 v15：接触实例与实测恢复的最终结果",
+    "latestNavigation": true,
+    "latestMetrics": true,
+    "preservedGroundTruth": true,
+    "gtAtlasImages": 11,
+    "trees": 1,
+    "branches": 28,
+    "formulas": 143,
+    "formulaErrors": 0,
+    "overflow": false,
+    "images": true,
+    "gtIndexRows": [
+      10,
+      109
+    ],
+    "collapseWorks": true
+  },
+  "mobile": {
+    "overflow": false
+  },
+  "errors": []
+}
