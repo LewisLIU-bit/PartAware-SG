@@ -38,7 +38,7 @@ function escapeTeX(value) {
   })[character]);
 }
 
-function buildLaTeX(tokens) {
+function buildLaTeX(tokens, reportDate) {
   function inline(items) {
     return (items || []).map(token => {
       if (token.type === 'mathInline') return `$${token.text}$`;
@@ -88,7 +88,7 @@ function buildLaTeX(tokens) {
 \renewcommand{\arraystretch}{1.25}
 \title{PartAware-SG 综合研发与实验报告}
 \author{}
-\date{2026-10-05}
+\date{${escapeTeX(reportDate)}}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -120,6 +120,9 @@ async function buildReport(options) {
   const counts = { display: 0, inline: 0 };
   const headings = [];
   const markdown = fs.readFileSync(source, 'utf8').replace(/\r\n/g, '\n');
+  const reportDate = /^更新[：:]\s*(\d{4}-\d{2}-\d{2})/m.exec(markdown)?.[1] || '';
+  const reportVersion = /^当前主流程为(v\d+)/m.exec(markdown)?.[1] || '';
+  const edition = ['研究报告', reportVersion, reportDate, 'LaTeX 公式渲染版'].filter(Boolean).join(' · ');
 
   function renderMath(expression, display) {
     let node;
@@ -180,7 +183,40 @@ async function buildReport(options) {
       }
     }
   });
-  const body = marked.parse(markdown);
+  let body = marked.parse(markdown);
+  // Turn the first chapter's nested Markdown list into an accessible tree.
+  // The same source still renders as ordinary nested lists in LaTeX.
+  const flowStart = body.indexOf('<h2 id="section-1"');
+  const flowEnd = body.indexOf('<h2 id="section-2"', flowStart);
+  if (flowStart >= 0 && flowEnd > flowStart) {
+    const chapter = body.slice(flowStart, flowEnd);
+    const parsed = adaptor.parse(chapter, 'text/html');
+    const container = adaptor.body(parsed);
+    const lists = adaptor.tags(container, 'ul');
+    if (lists.length && adaptor.textContent(lists[0]).includes('FOVEA')) {
+      adaptor.setAttribute(lists[0], 'class', 'pipeline-tree');
+      for (const list of lists.slice(1).reverse()) {
+        const parent = adaptor.parent(list);
+        if (adaptor.kind(parent) !== 'li') continue;
+        const children = adaptor.childNodes(parent);
+        const details = adaptor.node('details', { open: '' });
+        const summary = adaptor.node('summary');
+        for (const child of children) {
+          if (child === list) break;
+          adaptor.remove(child);
+          if (adaptor.kind(child) === 'p') {
+            for (const inline of [...adaptor.childNodes(child)]) {
+              adaptor.remove(inline); adaptor.append(summary, inline);
+            }
+          } else adaptor.append(summary, child);
+        }
+        adaptor.remove(list);
+        adaptor.append(details, summary); adaptor.append(details, list);
+        adaptor.append(parent, details);
+      }
+      body = body.slice(0, flowStart) + adaptor.innerHTML(container) + body.slice(flowEnd);
+    }
+  }
   if (!counts.display || !counts.inline) throw new Error('No complete report math was rendered');
   const mathSource = markdown
     .replace(/^```[^\n]*\n[\s\S]*?^```[ \t]*$/gm, '')
@@ -201,6 +237,8 @@ async function buildReport(options) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="source-sha256" content="${sourceHash}">
+<meta name="report-version" content="${escapeHTML(reportVersion)}">
+<meta name="report-updated" content="${escapeHTML(reportDate)}">
 <meta name="math-display-count" content="${counts.display}">
 <meta name="math-inline-count" content="${counts.inline}">
 <title>PartAware-SG 综合研发与实验报告 · LaTeX 渲染版</title>
@@ -210,6 +248,15 @@ ${mathStyles}
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; color:var(--ink); background:var(--bg); font:16px/1.85 "Segoe UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif; }
+.pipeline-tree { list-style:none; padding:0; margin:24px 0; }
+.pipeline-tree > li { margin:18px 0; padding:14px 18px; border:1px solid var(--line); border-radius:12px; background:var(--formula); }
+.pipeline-tree ul { list-style:none; margin:10px 0 4px 8px; padding-left:18px; border-left:2px solid var(--line); }
+.pipeline-tree ul > li { position:relative; margin:9px 0; padding-left:9px; }
+.pipeline-tree ul > li::before { content:""; position:absolute; top:16px; left:-18px; width:19px; border-top:2px solid var(--line); }
+.pipeline-tree summary { cursor:pointer; font-weight:600; line-height:1.6; overflow-wrap:anywhere; }
+.pipeline-tree summary:hover { color:var(--accent); }
+.pipeline-tree li p { margin:5px 0; }
+@media(max-width:600px) { .pipeline-tree > li { padding:12px 9px; } .pipeline-tree ul { margin-left:2px; padding-left:13px; } .pipeline-tree ul > li::before { left:-13px; width:14px; } }
 a { color:var(--accent); text-decoration:none; }
 a:hover { text-decoration:underline; }
 .layout { display:grid; grid-template-columns:240px minmax(0,1fr); gap:30px; max-width:1400px; padding:36px 30px 64px; margin:auto; }
@@ -247,7 +294,7 @@ footer { border-top:1px solid var(--line); margin-top:40px; padding-top:18px; co
 <div class="layout">
 <nav aria-label="报告目录"><strong>报告目录</strong>${navigation}</nav>
 <main>
-<div class="edition">研究报告 · LaTeX 公式渲染版</div>
+<div class="edition">${escapeHTML(edition)}</div>
 ${body}
 <footer>公式由 LaTeX 经 MathJax 排版，已内嵌为矢量图形。阅读无需联网。源码：docs/RESEARCH_REPORT.md。</footer>
 </main>
@@ -259,7 +306,7 @@ ${body}
   if (options['latex-output']) {
     const latexOutput = path.resolve(options['latex-output']);
     if (latexOutput === source || latexOutput === output) throw new Error('LaTeX output must have a separate path');
-    fs.writeFileSync(latexOutput, buildLaTeX(marked.lexer(markdown)), 'utf8');
+    fs.writeFileSync(latexOutput, buildLaTeX(marked.lexer(markdown), reportDate), 'utf8');
   }
   process.stdout.write(`${JSON.stringify({ output, formulas: counts, source_sha256: sourceHash, bytes: Buffer.byteLength(html) })}\n`);
 }
