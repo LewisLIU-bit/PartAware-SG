@@ -128,3 +128,41 @@ def box_diagnostics(predictions, truth, spatial, surfaces):
     return {'protocol': 'per_object_diagnostic_not_individual_AP', 'ground_truth_used_for_construction': False,
             'per_gt': per_gt, 'per_prediction': per_prediction, 'AP_ranking': ranking,
             'limitation': 'Best IoU can refer to a neighboring object. Surface dominant identity and one-to-one matching must also be checked. Diagnostic grouping never changes GT or predictions.'}
+
+
+def fragment_union_box_diagnostics(predictions, truth, surfaces):
+    """Annotation-assisted diagnostic, never an AP or a predicted hierarchy.
+
+    Assign only surface-pure fragments to their dominant observed GT object.
+    Bound the union of their measured coordinates, retaining holes implicitly.
+    Mixed predictions (e.g. two GT instances in one mask) receive no union credit.
+    """
+    rows={str(p['prediction_id']):p for p in surfaces.get('per_prediction',[])}
+    output=[]
+    def overlap(a,b):
+        a,b=np.asarray(a),np.asarray(b)
+        inter=float(np.prod(np.maximum(np.minimum(a[1],b[1])-np.maximum(a[0],b[0]),0)))
+        volumes=float(np.prod(np.maximum(a[1]-a[0],0))+np.prod(np.maximum(b[1]-b[0],0)))
+        return inter/max(volumes-inter,1e-12)
+    for gt in truth:
+        members=[p for p in predictions if rows.get(str(p['id']),{}).get('pure_fragment')
+                 and rows[str(p['id'])]['dominant_gt_id']==gt['id']]
+        if members:
+            bounds=[]
+            for p in members:
+                if 'observed_bounds' in p:bounds.append(np.asarray(p['observed_bounds']))
+                else:
+                    points=voxel_centers(p['keys']);bounds.append(np.array([points.min(0),points.max(0)]))
+            measured=np.array([np.min([b[0] for b in bounds],axis=0),np.max([b[1] for b in bounds],axis=0)])
+            canonical=np.array([np.min([p['bounds'][0] for p in members],axis=0),np.max([p['bounds'][1] for p in members],axis=0)])
+            measured_iou=overlap(measured,gt['bounds']);canonical_iou=overlap(canonical,gt['bounds'])
+        else:measured=canonical=None;measured_iou=canonical_iou=0.
+        output.append(dict(gt_id=gt['id'],label=gt['label'],member_prediction_ids=[p['id'] for p in members],
+            fragment_count=len(members),measured_union_bounds=measured.tolist() if measured is not None else None,
+            measured_union_box_IoU=measured_iou,canonical_child_envelope_IoU=canonical_iou,
+            single_prediction_best_box_IoU=max((overlap(p['bounds'],gt['bounds']) for p in predictions),default=0.)))
+    return dict(protocol='annotation_assisted_pure_fragment_union_box_diagnostic',
+        construction_uses_ground_truth=False,group_assignment_uses_ground_truth=True,
+        average_precision=False,predicted_hierarchy=False,official_benchmark_metric=False,
+        membership_purity_threshold=surfaces.get('dominant_assignment_purity'),per_gt=output,
+        limitation='GT selects pure-fragment membership only for diagnosis. AABB envelopes can span empty space and do not certify dense shape or correct part hierarchy. Strict AP, FP, FN and count error are unchanged. This is not PartPQ/PWQ.')

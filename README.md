@@ -14,58 +14,66 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
-for v12, v13, v14, v15 and v16; construction makes no new GPT or Qwen image requests. Report defaults
-remain original RAM, existing Qwen for v11, and existing GPT for v12 and later. The GPT original pipeline is retained as a separate baseline and compared
-with RAM, Qwen-to-DINO, v12, v13, v14, v15 and v16 using the same scene cache as v12. See
-[GPT setup, direct commands and comparison protocol](docs/VISION_API.md).
-The existing ScanNet and Hypersim interfaces remain unchanged.
+for v12 through v17; construction makes no new GPT or Qwen image requests.
+Report defaults remain original RAM, existing Qwen for v11, and existing GPT
+for v12 and later. The GPT original pipeline is retained as a separate baseline
+and compared with RAM, Qwen-to-DINO and all retained final versions.
+See [GPT setup and comparison protocol](docs/VISION_API.md).
+The ScanNet and Hypersim interfaces remain unchanged.
 
-The latest v16 final reuses one existing GPT cache per scene and signed SAM3 observations.
-FOVEA -> MICA -> SHAPE -> GRAPH includes VISTA (Visible Instance Surface Tracking
-and Assignment), RSE (Robust Surface Envelopes), and MIRA (Measured Instance
-Reconciliation and Association). MIRA associates partial observed surfaces across
-views, vetoes independently segmented same-frame objects, and admits new measured
-instances with quality, camera baseline and independent visible-mask support.
-Known parts and already owned related surfaces suppress duplicate roots. Existing
-root geometry stays intact. No fixed object count, scene coordinates, GT IDs,
-node list, category whitelist or special prompt is used.
+The latest v17 final reuses existing GPT categories and signed SAM3 observations.
+FOVEA -> MICA -> SHAPE -> GRAPH retains VISTA/RSE/MIRA and adds CORE (Component
+Ownership and Residual Evidence) and WISP (Weak Instance Surface Proposals).
+CORE checks jointly depth-visible component evidence before quarantining remote
+minority fragments and recomputing the real object's center, box and spatial edges.
+WISP associates low-confidence native identities using shared measured surfaces,
+genuine cached features and same-frame separation; original-pixel resolution,
+camera baseline and three-view point verification gate new roots. No scene
+coordinates, GT/node list, category whitelist, fixed count or special prompt is used.
 
 The first scene retains 10/10 and 100%/100%/100% AP25/AP50/AP75. The second reaches
-60.94%/42.14%/18.83% (131 predictions / 109 GT).
-All three AP thresholds and strict TP/FP/FN improve over v15, but the log-count
-error increases; the all-metric nonregression gate therefore does not fully pass.
-Relative to the pre-refinement v16, AP25/AP50 improve while unmatched predictions
-increase slightly. These tradeoffs are reported rather than hidden.
-The five hanging implements now match at 50% box IoU. Windows, thin oven geometry,
-small boxes and several transparent objects still fail. AP25 70% / AP50 55% remains
-the current unmet target. Class-agnostic box scores do not establish fine semantic
-accuracy or generalization, and MIRA is not universal hidden-shape completion.
-Existing cuboid and repeated-surface priors remain labeled as generated hypotheses.
+63.09%/42.53%/19.12% (134 predictions / 109 GT), improving all three AP thresholds
+over the immutable v16 final. The P298 empty-center artifact is corrected while
+the real lamp head remains. GT114 is recovered and matches at 75%; GT116 is an
+independent recovered box with 49.1% IoU, matching at 25% but still below 50%.
+At 25%, TP/FP/FN is 94/40/15; at 50% and 75%, unmatched predictions and log-count
+error increase. The all-metric nonregression gate does not fully pass.
+Transparent rear objects, mixed windows, the thin oven and whole lamp assembly
+still fail; AP25 70% / AP50 55% remains unmet. This is measured recovery, not
+universal hidden-shape completion or proof of broad semantic generalization.
 
-Both scenes are rebuilt from retained raw fusion and tracks without new GPT/Qwen
-or SAM3 image inference. All 250 offline regression tests and the original
-TopologyMap reader pass; all 199 signed bundles match the source. The consolidated
-report retains all 119 official GT identifiers, 11 atlases, equations, references,
-viewer commands and one final result per version. See [the report](docs/RESEARCH_REPORT.md)
-and [the independent validation receipt](docs/v16_final_results.json).
+GUD (Granularity Union Diagnostics) separately reports pure measured-fragment
+unions, including the cloth example. Membership is GT-assisted only in evaluation;
+it is not AP, an inferred parent hierarchy, PartPQ/PWQ or an official benchmark.
+Original GT and strict one-to-one AP remain unchanged. Mixed windows do not gain
+two identities from diagnostic grouping. All available retained finals use the
+same supplementary conditions; missing old surface diagnostics are marked unavailable.
+
+Both scenes were fully rebuilt from raw fusion and tracks without new vision
+inference. All 263 offline regression tests and the original TopologyMap reader
+pass. All 199 signed bundles match, and every v16 file remains byte-identical.
+The [consolidated report](docs/RESEARCH_REPORT.md) retains all 119 official GT IDs,
+11 atlases, equations, references and one final result per version. See the
+[independent validation receipt](docs/v17_final_results.json).
 
 Rebuild into a fresh directory with existing observations:
 
 ```bash
 cd /home/lewisliu/PartAware-SG
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
-  --worker v16 \
+  --worker v17 \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v15/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v16/hypersim/ai_001_010 \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v16/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v17/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
-Final results remain under `datasets/scannet-sg-processed/partaware_v16`.
+Final results remain under `datasets/scannet-sg-processed/partaware_v17`.
 Use `instance_cloud_completed.ply` with `topology_map.json` for final geometry;
 use `instance_cloud_cleaned.ply` with `topology_map_observed.json` for measurements.
-Historical profiles actively detach V16 adapters. Remove MIRA's code registration
-and rebuild to omit it; existing 256/384-dimensional object features are unchanged.
+Unresolved fragments preserve original coordinates outside object-root statistics.
+Historical profiles actively detach v17 adapters. Remove each code registration
+and rebuild to omit it; 256/384-dimensional object features remain compatible.
 
 PartAware-SG preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,

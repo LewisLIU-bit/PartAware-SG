@@ -1,0 +1,3085 @@
+{
+  "version": "v17",
+  "updated": "2026-10-11",
+  "tests": 263,
+  "consumer_vision_api_calls": 0,
+  "construction_uses_ground_truth": false,
+  "evaluation_uses_original_gt": true,
+  "targets": {
+    "AP25": 0.7,
+    "AP50": 0.55
+  },
+  "scenes": [
+    {
+      "scene_id": "ai_001_002",
+      "frames": 99,
+      "predicted": 10,
+      "gt": 10,
+      "AP25": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "MVO25": 1.0,
+      "MVO50": 1.0,
+      "absolute_log_count_error": 0.0,
+      "strict_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "previous_v16_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "all_metric_non_regression_gate": {
+        "accepted": false,
+        "non_regressing": true,
+        "strictly_improved": false,
+        "checks": [
+          {
+            "metric": "geometry_only_box_AP25",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "geometry_only_box_AP50",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "geometry_only_box_AP75",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "absolute_log_count_error",
+            "candidate": 0.0,
+            "baseline": 0.0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.25",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.25",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.25",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.5",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.5",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.5",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.75",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.75",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.75",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          }
+        ],
+        "scope": "these observed scenes only; no guarantee on unseen captures",
+        "construction_uses_ground_truth": false
+      },
+      "graph_sha256": "ac2ea2f2eb4638469b1b60180a41e155cfe758c12df0bf2da75410007dd3f202",
+      "prediction_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "observed_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "completed_ply_sha256": null,
+      "gt_labels_sha256": "72fec7af62bde7a8283de28cd6348a48754247b03dadbbcc37abea0ad29932a9",
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "legacy_topology_reader_passed": true,
+      "part_nodes": 28,
+      "CORE": {
+        "algorithm": "CORE",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "4a597fe5c1a2a60d7d453e689a8f8b7442ddf11241e4dede4779a89ab399590a",
+        "objects": []
+      },
+      "WISP": {
+        "algorithm": "WISP",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "a4ea71999a11ce84b69b2b1fda2170a971af7012c6467ceee80472b0ce21535c",
+        "verification": {
+          "undersegmented_identity_groups": 11,
+          "associated_groups": 25,
+          "candidates": []
+        },
+        "objects": []
+      },
+      "granularity_union_diagnostic": {
+        "protocol": "annotation_assisted_pure_fragment_union_box_diagnostic",
+        "construction_uses_ground_truth": false,
+        "group_assignment_uses_ground_truth": true,
+        "average_precision": false,
+        "predicted_hierarchy": false,
+        "official_benchmark_metric": false,
+        "membership_purity_threshold": 0.8,
+        "per_gt": [
+          {
+            "gt_id": 1,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "4"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                2.0960453419740346,
+                -3.4345378628956746,
+                0.43976909558040267
+              ],
+              [
+                2.5510565216589685,
+                -2.9790064275941632,
+                0.723792810117157
+              ]
+            ],
+            "measured_union_box_IoU": 0.9498838577554588,
+            "canonical_child_envelope_IoU": 0.9873438140419162,
+            "single_prediction_best_box_IoU": 0.9873438140419162
+          },
+          {
+            "gt_id": 2,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "8"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                1.868017732639627,
+                -3.4979182051659943,
+                0.22984639194895118
+              ],
+              [
+                2.3316034031549453,
+                -3.1136560646388527,
+                0.32438010140771084
+              ]
+            ],
+            "measured_union_box_IoU": 0.8691500793085625,
+            "canonical_child_envelope_IoU": 0.8633562899351143,
+            "single_prediction_best_box_IoU": 0.8633562899351143
+          },
+          {
+            "gt_id": 3,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "59"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                1.406215083661306,
+                -3.500765660456114,
+                0.22990637171919245
+              ],
+              [
+                1.8364595992488182,
+                -3.1192602215970417,
+                0.38759173533035474
+              ]
+            ],
+            "measured_union_box_IoU": 0.9678773169492221,
+            "canonical_child_envelope_IoU": 0.9676334849825101,
+            "single_prediction_best_box_IoU": 0.9676334849825101
+          },
+          {
+            "gt_id": 4,
+            "label": "desk",
+            "member_prediction_ids": [
+              "17"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                1.0381386739472782,
+                -3.5455503181980372,
+                -0.2399136551210898
+              ],
+              [
+                2.6510940728189634,
+                -2.9557937116883766,
+                0.4551995026451867
+              ]
+            ],
+            "measured_union_box_IoU": 0.9554530791336954,
+            "canonical_child_envelope_IoU": 0.9556205947921056,
+            "single_prediction_best_box_IoU": 0.9556205947921056
+          },
+          {
+            "gt_id": 5,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "6"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                1.8655501829479582,
+                -0.6330667953595253,
+                0.009997191175149522
+              ],
+              [
+                2.2264974374223203,
+                -0.2708196294051568,
+                0.3603881727801118
+              ]
+            ],
+            "measured_union_box_IoU": 0.9631516468572521,
+            "canonical_child_envelope_IoU": 0.961673310863647,
+            "single_prediction_best_box_IoU": 0.961673310863647
+          },
+          {
+            "gt_id": 6,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "3"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                1.799277797622615,
+                -0.2510004224123863,
+                0.8308191590969449
+              ],
+              [
+                2.293812628315889,
+                -0.008670476759808032,
+                1.1009584700417103
+              ]
+            ],
+            "measured_union_box_IoU": 0.966010326989307,
+            "canonical_child_envelope_IoU": 0.9655813268708822,
+            "single_prediction_best_box_IoU": 0.9655813268708822
+          },
+          {
+            "gt_id": 7,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "1"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                2.633227996754617,
+                -0.5610378956727344,
+                0.009997967081255221
+              ],
+              [
+                2.872278933676653,
+                -0.29449261059859433,
+                1.0441824279923724
+              ]
+            ],
+            "measured_union_box_IoU": 0.9622927168506306,
+            "canonical_child_envelope_IoU": 0.9539541274125323,
+            "single_prediction_best_box_IoU": 0.9539541274125323
+          },
+          {
+            "gt_id": 8,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "7"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                3.156518139283918,
+                -0.6052230221930646,
+                0.010303357156814852
+              ],
+              [
+                3.4349361377301033,
+                -0.29971036028274245,
+                1.0553969131517604
+              ]
+            ],
+            "measured_union_box_IoU": 0.8318706862516663,
+            "canonical_child_envelope_IoU": 0.949523060223664,
+            "single_prediction_best_box_IoU": 0.949523060223664
+          },
+          {
+            "gt_id": 9,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "2"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                1.1670281396297872,
+                -0.5824657560670932,
+                0.009997181701853597
+              ],
+              [
+                1.4056408670077292,
+                -0.31532402519131875,
+                1.0485735210696885
+              ]
+            ],
+            "measured_union_box_IoU": 0.965519578275579,
+            "canonical_child_envelope_IoU": 0.9633495906057027,
+            "single_prediction_best_box_IoU": 0.9633495906057027
+          },
+          {
+            "gt_id": 10,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "5"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.6274949347781935,
+                -0.6052056279513862,
+                0.013437539779845895
+              ],
+              [
+                0.9149078215232718,
+                -0.29881255654671834,
+                1.055180918683734
+              ]
+            ],
+            "measured_union_box_IoU": 0.8584604939443856,
+            "canonical_child_envelope_IoU": 0.9657097712622829,
+            "single_prediction_best_box_IoU": 0.9657097712622829
+          }
+        ],
+        "limitation": "GT selects pure-fragment membership only for diagnosis. AABB envelopes can span empty space and do not certify dense shape or correct part hierarchy. Strict AP, FP, FN and count error are unchanged. This is not PartPQ/PWQ."
+      }
+    },
+    {
+      "scene_id": "ai_001_010",
+      "frames": 100,
+      "predicted": 134,
+      "gt": 109,
+      "AP25": 0.6308642175677919,
+      "AP50": 0.4252531475054254,
+      "AP75": 0.1911980555480905,
+      "MVO25": 0.6308642175677919,
+      "MVO50": 0.4776973485187077,
+      "absolute_log_count_error": 0.20649191772176764,
+      "strict_counts": {
+        "0.25": {
+          "TP": 94,
+          "FP": 40,
+          "FN": 15
+        },
+        "0.5": {
+          "TP": 75,
+          "FP": 59,
+          "FN": 34
+        },
+        "0.75": {
+          "TP": 41,
+          "FP": 93,
+          "FN": 68
+        }
+      },
+      "previous_v16_AP": {
+        "AP25": 0.6094247380273331,
+        "AP50": 0.4214499420884318,
+        "AP75": 0.1883115166885917
+      },
+      "all_metric_non_regression_gate": {
+        "accepted": false,
+        "non_regressing": false,
+        "strictly_improved": true,
+        "checks": [
+          {
+            "metric": "geometry_only_box_AP25",
+            "candidate": 0.6308642175677919,
+            "baseline": 0.6094247380273331,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "geometry_only_box_AP50",
+            "candidate": 0.4252531475054254,
+            "baseline": 0.4214499420884318,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "geometry_only_box_AP75",
+            "candidate": 0.1911980555480905,
+            "baseline": 0.1883115166885917,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "absolute_log_count_error",
+            "candidate": 0.20649191772176764,
+            "baseline": 0.18384944097200775,
+            "direction": "lower",
+            "non_regressing": false,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.25",
+            "candidate": 94,
+            "baseline": 91,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FP@0.25",
+            "candidate": 40,
+            "baseline": 40,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.25",
+            "candidate": 15,
+            "baseline": 18,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "TP@0.5",
+            "candidate": 75,
+            "baseline": 74,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FP@0.5",
+            "candidate": 59,
+            "baseline": 57,
+            "direction": "lower",
+            "non_regressing": false,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.5",
+            "candidate": 34,
+            "baseline": 35,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "TP@0.75",
+            "candidate": 41,
+            "baseline": 40,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FP@0.75",
+            "candidate": 93,
+            "baseline": 91,
+            "direction": "lower",
+            "non_regressing": false,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.75",
+            "candidate": 68,
+            "baseline": 69,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          }
+        ],
+        "scope": "these observed scenes only; no guarantee on unseen captures",
+        "construction_uses_ground_truth": false
+      },
+      "graph_sha256": "0f60836a8e1258892ff96ec8adbf86fbea491592e314be5ba6d3708a6e0051b2",
+      "prediction_ply_sha256": "8bf40d15b0abd836892ba5a25fd4d3d2e624798f3ed81f03f67222bb061f7c34",
+      "observed_ply_sha256": "8bf40d15b0abd836892ba5a25fd4d3d2e624798f3ed81f03f67222bb061f7c34",
+      "completed_ply_sha256": "e4e71e94ecde91be62b64eab0231e6060e6db9e97928902794d3c9449c2a059a",
+      "gt_labels_sha256": "547c62e10f02e9601f45bdfb5553e0d5f2228b4b697709c37f3eb4038908a702",
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "legacy_topology_reader_passed": true,
+      "part_nodes": 636,
+      "CORE": {
+        "algorithm": "CORE",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "4a597fe5c1a2a60d7d453e689a8f8b7442ddf11241e4dede4779a89ab399590a",
+        "objects": [
+          {
+            "instance_id": "298",
+            "name": "ceiling light",
+            "accepted": true,
+            "isolated_jointly_visible_frames": [
+              "cam_01_0041",
+              "cam_02_0031"
+            ],
+            "whole_component_frames": [
+              "cam_02_0061"
+            ],
+            "camera_baseline_m": 1.761838820918739,
+            "core_points": 326,
+            "residual_points": 25,
+            "connectivity_radius_m": 0.014762409000266756,
+            "core_fraction": 0.9287749287749287,
+            "fragment_gap_m": 2.272539239707873,
+            "core_diameter_m": 0.3344300144816331
+          }
+        ]
+      },
+      "WISP": {
+        "algorithm": "WISP",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "a4ea71999a11ce84b69b2b1fda2170a971af7012c6467ceee80472b0ce21535c",
+        "verification": {
+          "undersegmented_identity_groups": 21,
+          "associated_groups": 283,
+          "candidates": [
+            {
+              "name": "glass",
+              "frames": [
+                "cam_00_0003",
+                "cam_00_0015",
+                "cam_01_0056"
+              ],
+              "independent_separation_frames": [
+                "cam_00_0003",
+                "cam_00_0015",
+                "cam_01_0056"
+              ],
+              "camera_baseline_m": 0.782431944635871,
+              "native_mean_confidence": 0.6380208333333334,
+              "maximum_identity_mask_confidence": 0.6796875,
+              "original_mask_pixels": {
+                "cam_00_0003": 372,
+                "cam_01_0056": 290,
+                "cam_00_0015": 235
+              },
+              "minimum_original_mask_pixels": 128,
+              "corroboration_frames": [
+                "cam_00_0000",
+                "cam_00_0003",
+                "cam_00_0015",
+                "cam_00_0036",
+                "cam_00_0054",
+                "cam_00_0081",
+                "cam_00_0096",
+                "cam_01_0035",
+                "cam_01_0056",
+                "cam_02_0001",
+                "cam_02_0025",
+                "cam_02_0031",
+                "cam_02_0055"
+              ],
+              "measured_points": 432,
+              "minimum_point_views": 3,
+              "generated_points": 0
+            },
+            {
+              "name": "box",
+              "frames": [
+                "cam_00_0072",
+                "cam_01_0050"
+              ],
+              "independent_separation_frames": [
+                "cam_00_0072",
+                "cam_01_0050"
+              ],
+              "camera_baseline_m": 0.9920570330380125,
+              "native_mean_confidence": 0.564453125,
+              "maximum_identity_mask_confidence": 0.59765625,
+              "original_mask_pixels": {
+                "cam_00_0072": 354,
+                "cam_01_0050": 607
+              },
+              "minimum_original_mask_pixels": 128,
+              "corroboration_frames": [
+                "cam_00_0051",
+                "cam_00_0072",
+                "cam_01_0050",
+                "cam_02_0061"
+              ],
+              "measured_points": 792,
+              "minimum_point_views": 3,
+              "generated_points": 0
+            },
+            {
+              "name": "food container",
+              "frames": [
+                "cam_00_0072",
+                "cam_01_0050"
+              ],
+              "independent_separation_frames": [
+                "cam_00_0072",
+                "cam_01_0050"
+              ],
+              "camera_baseline_m": 0.9920570330380125,
+              "native_mean_confidence": 0.533203125,
+              "maximum_identity_mask_confidence": 0.54296875,
+              "original_mask_pixels": {
+                "cam_01_0050": 484,
+                "cam_00_0072": 401
+              },
+              "minimum_original_mask_pixels": 128,
+              "corroboration_frames": [
+                "cam_00_0051",
+                "cam_00_0072",
+                "cam_01_0050",
+                "cam_02_0061"
+              ],
+              "measured_points": 711,
+              "minimum_point_views": 3,
+              "generated_points": 0
+            }
+          ]
+        },
+        "objects": [
+          {
+            "name": "glass",
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0015",
+              "cam_01_0056"
+            ],
+            "independent_separation_frames": [
+              "cam_00_0003",
+              "cam_00_0015",
+              "cam_01_0056"
+            ],
+            "camera_baseline_m": 0.782431944635871,
+            "native_mean_confidence": 0.6380208333333334,
+            "maximum_identity_mask_confidence": 0.6796875,
+            "original_mask_pixels": {
+              "cam_00_0003": 372,
+              "cam_01_0056": 290,
+              "cam_00_0015": 235
+            },
+            "minimum_original_mask_pixels": 128,
+            "corroboration_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0015",
+              "cam_00_0036",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0035",
+              "cam_01_0056",
+              "cam_02_0001",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0055"
+            ],
+            "measured_points": 432,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "maximum_existing_coverage": [
+              "3",
+              0.0
+            ],
+            "union_existing_coverage": 0.0,
+            "action": "new_measured_instance",
+            "instance_id": "464"
+          },
+          {
+            "name": "box",
+            "frames": [
+              "cam_00_0072",
+              "cam_01_0050"
+            ],
+            "independent_separation_frames": [
+              "cam_00_0072",
+              "cam_01_0050"
+            ],
+            "camera_baseline_m": 0.9920570330380125,
+            "native_mean_confidence": 0.564453125,
+            "maximum_identity_mask_confidence": 0.59765625,
+            "original_mask_pixels": {
+              "cam_00_0072": 354,
+              "cam_01_0050": 607
+            },
+            "minimum_original_mask_pixels": 128,
+            "corroboration_frames": [
+              "cam_00_0051",
+              "cam_00_0072",
+              "cam_01_0050",
+              "cam_02_0061"
+            ],
+            "measured_points": 792,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "maximum_existing_coverage": [
+              "141",
+              0.19696969696969696
+            ],
+            "union_existing_coverage": 0.1275252525252525,
+            "action": "new_measured_instance",
+            "instance_id": "465"
+          },
+          {
+            "name": "food container",
+            "frames": [
+              "cam_00_0072",
+              "cam_01_0050"
+            ],
+            "independent_separation_frames": [
+              "cam_00_0072",
+              "cam_01_0050"
+            ],
+            "camera_baseline_m": 0.9920570330380125,
+            "native_mean_confidence": 0.533203125,
+            "maximum_identity_mask_confidence": 0.54296875,
+            "original_mask_pixels": {
+              "cam_01_0050": 484,
+              "cam_00_0072": 401
+            },
+            "minimum_original_mask_pixels": 128,
+            "corroboration_frames": [
+              "cam_00_0051",
+              "cam_00_0072",
+              "cam_01_0050",
+              "cam_02_0061"
+            ],
+            "measured_points": 711,
+            "minimum_point_views": 3,
+            "generated_points": 0,
+            "maximum_existing_coverage": [
+              "465",
+              0.08157524613220815
+            ],
+            "union_existing_coverage": 0.035161744022503515,
+            "action": "new_measured_instance",
+            "instance_id": "466"
+          }
+        ]
+      },
+      "granularity_union_diagnostic": {
+        "protocol": "annotation_assisted_pure_fragment_union_box_diagnostic",
+        "construction_uses_ground_truth": false,
+        "group_assignment_uses_ground_truth": true,
+        "average_precision": false,
+        "predicted_hierarchy": false,
+        "official_benchmark_metric": false,
+        "membership_purity_threshold": 0.8,
+        "per_gt": [
+          {
+            "gt_id": 1,
+            "label": "lamp",
+            "member_prediction_ids": [
+              "25",
+              "40",
+              "42",
+              "150",
+              "298",
+              "41"
+            ],
+            "fragment_count": 6,
+            "measured_union_bounds": [
+              [
+                -1.000084868940183,
+                -0.4188420015176526,
+                1.7015359626255506
+              ],
+              [
+                0.9005022885675187,
+                0.21455172722475124,
+                2.0204164461972223
+              ]
+            ],
+            "measured_union_box_IoU": 0.24169872561443662,
+            "canonical_child_envelope_IoU": 0.24958865751108508,
+            "single_prediction_best_box_IoU": 0.03038039170547391
+          },
+          {
+            "gt_id": 2,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "29"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5700892859217335,
+                -0.4222181576620345,
+                0.9696109611236456
+              ],
+              [
+                -0.4159249789535798,
+                -0.2781094538054131,
+                1.065406620928794
+              ]
+            ],
+            "measured_union_box_IoU": 0.5469574099475899,
+            "canonical_child_envelope_IoU": 0.6562805894102749,
+            "single_prediction_best_box_IoU": 0.6562805894102749
+          },
+          {
+            "gt_id": 3,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "457"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.2199556075147795,
+                -0.04975669497899715,
+                0.9745549959476317
+              ],
+              [
+                0.5412768201449276,
+                0.11090459823381171,
+                1.015523605581171
+              ]
+            ],
+            "measured_union_box_IoU": 0.8772778174959774,
+            "canonical_child_envelope_IoU": 0.9762140823550043,
+            "single_prediction_best_box_IoU": 0.9762140823550043
+          },
+          {
+            "gt_id": 4,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "456"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.1343209574058306,
+                -0.058751469021362634,
+                0.9702286282246845
+              ],
+              [
+                0.6182315483902727,
+                0.18306354136952852,
+                1.0034787317160472
+              ]
+            ],
+            "measured_union_box_IoU": 0.5927493987003843,
+            "canonical_child_envelope_IoU": 0.606339702148698,
+            "single_prediction_best_box_IoU": 0.606339702148698
+          },
+          {
+            "gt_id": 5,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "84"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.650308008781735,
+                -0.005282306890842525,
+                1.0128984477805516
+              ],
+              [
+                1.0043079148626368,
+                0.354288622519073,
+                1.0449382888412695
+              ]
+            ],
+            "measured_union_box_IoU": 0.7733749056412228,
+            "canonical_child_envelope_IoU": 0.8898040283713003,
+            "single_prediction_best_box_IoU": 0.8898040283713003
+          },
+          {
+            "gt_id": 6,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "444"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.6505886475398671,
+                -0.006179449166275552,
+                1.0130050088734048
+              ],
+              [
+                1.0042452078867643,
+                0.3541366449915211,
+                1.037202767776767
+              ]
+            ],
+            "measured_union_box_IoU": 0.5820318551536259,
+            "canonical_child_envelope_IoU": 0.8831336695900827,
+            "single_prediction_best_box_IoU": 0.8831336695900827
+          },
+          {
+            "gt_id": 7,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.8826717813035798
+          },
+          {
+            "gt_id": 8,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.8054385819927489
+          },
+          {
+            "gt_id": 9,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.8431729901465576
+          },
+          {
+            "gt_id": 10,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "448"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.649965323725314,
+                -0.006032353589276673,
+                0.9767016642252024
+              ],
+              [
+                1.0010150554070765,
+                0.3543119654623016,
+                1.0062590732966623
+              ]
+            ],
+            "measured_union_box_IoU": 0.7069636098656863,
+            "canonical_child_envelope_IoU": 0.8835099346015547,
+            "single_prediction_best_box_IoU": 0.8835099346015547
+          },
+          {
+            "gt_id": 11,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "39"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.605075926321017,
+                -0.33504951224760404,
+                1.0071816693407274
+              ],
+              [
+                0.917150979117252,
+                -0.028311994185469515,
+                1.019380430886793
+              ]
+            ],
+            "measured_union_box_IoU": 0.6351824919067175,
+            "canonical_child_envelope_IoU": 0.7279560408766269,
+            "single_prediction_best_box_IoU": 0.7279560408766269
+          },
+          {
+            "gt_id": 12,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.6388104710036018
+          },
+          {
+            "gt_id": 13,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.6631386499293865
+          },
+          {
+            "gt_id": 14,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.7236812672559342
+          },
+          {
+            "gt_id": 15,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.6088604554597827
+          },
+          {
+            "gt_id": 16,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.8769604350862066
+          },
+          {
+            "gt_id": 17,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "10"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.43985524770086104,
+                -0.3030760936522925,
+                0.9731775843828927
+              ],
+              [
+                0.5497272897306817,
+                -0.20915813240524805,
+                1.054814674746241
+              ]
+            ],
+            "measured_union_box_IoU": 0.902236736497578,
+            "canonical_child_envelope_IoU": 0.969917895616257,
+            "single_prediction_best_box_IoU": 0.969917895616257
+          },
+          {
+            "gt_id": 18,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "22"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.3934401293290548,
+                -0.37681069682731905,
+                0.9697454161209017
+              ],
+              [
+                0.6145492402005885,
+                -0.15505649553077394,
+                0.9906123735695478
+              ]
+            ],
+            "measured_union_box_IoU": 0.8523377622513713,
+            "canonical_child_envelope_IoU": 0.9286522630506937,
+            "single_prediction_best_box_IoU": 0.9286522630506937
+          },
+          {
+            "gt_id": 19,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "5"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.5493585564080112,
+                -0.4813546228522625,
+                0.9728729144042308
+              ],
+              [
+                0.6649097432377906,
+                -0.38915839074679015,
+                1.0548858347073762
+              ]
+            ],
+            "measured_union_box_IoU": 0.5607520270100109,
+            "canonical_child_envelope_IoU": 0.9743028402240755,
+            "single_prediction_best_box_IoU": 0.9743028402240755
+          },
+          {
+            "gt_id": 20,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "7"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.5094425268927592,
+                -0.5493212694554424,
+                0.9697131737557304
+              ],
+              [
+                0.7281841208769184,
+                -0.29836769760215953,
+                0.9905460874357604
+              ]
+            ],
+            "measured_union_box_IoU": 0.6735402017221744,
+            "canonical_child_envelope_IoU": 0.8724711374492818,
+            "single_prediction_best_box_IoU": 0.8724711374492818
+          },
+          {
+            "gt_id": 21,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "4"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.19634169504719134,
+                -0.2989331611456576,
+                0.9727413004125466
+              ],
+              [
+                0.30190799276641633,
+                -0.19961078265452814,
+                1.054795979544655
+              ]
+            ],
+            "measured_union_box_IoU": 0.7949263905638183,
+            "canonical_child_envelope_IoU": 0.9673615228163507,
+            "single_prediction_best_box_IoU": 0.9673615228163507
+          },
+          {
+            "gt_id": 22,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "19"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.13286310246786526,
+                -0.37378526858086847,
+                0.9697436324261349
+              ],
+              [
+                0.3521320789676239,
+                -0.15607350245611212,
+                0.9905163454495217
+              ]
+            ],
+            "measured_union_box_IoU": 0.9050445897441877,
+            "canonical_child_envelope_IoU": 0.9254840877556236,
+            "single_prediction_best_box_IoU": 0.9254840877556236
+          },
+          {
+            "gt_id": 23,
+            "label": "counter",
+            "member_prediction_ids": [
+              "3",
+              "199"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                -1.2007336859048925,
+                -0.7009256717887964,
+                0.010589372536189634
+              ],
+              [
+                1.1006195540078751,
+                0.5010089608652708,
+                1.0184299754354313
+              ]
+            ],
+            "measured_union_box_IoU": 0.9400008587909319,
+            "canonical_child_envelope_IoU": 0.9394988829302519,
+            "single_prediction_best_box_IoU": 0.9402362865961675
+          },
+          {
+            "gt_id": 24,
+            "label": "chair",
+            "member_prediction_ids": [
+              "2"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.8365839882039083,
+                -1.4101699694747154,
+                0.011503848964444785
+              ],
+              [
+                -0.38112581176693006,
+                -0.9479377030312992,
+                0.9002392408460268
+              ]
+            ],
+            "measured_union_box_IoU": 0.5500087196812129,
+            "canonical_child_envelope_IoU": 0.9388364923013379,
+            "single_prediction_best_box_IoU": 0.9388364923013379
+          },
+          {
+            "gt_id": 25,
+            "label": "chair",
+            "member_prediction_ids": [
+              "1"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.10182165744944813,
+                -1.4530769170841777,
+                0.010185903255076623
+              ],
+              [
+                0.5561344602556455,
+                -0.990667129850357,
+                0.9001113417669048
+              ]
+            ],
+            "measured_union_box_IoU": 0.8479297584273109,
+            "canonical_child_envelope_IoU": 0.8634533693877967,
+            "single_prediction_best_box_IoU": 0.8634533693877967
+          },
+          {
+            "gt_id": 26,
+            "label": "window",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.3904317451374724
+          },
+          {
+            "gt_id": 27,
+            "label": "window",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.39302623536225384
+          },
+          {
+            "gt_id": 28,
+            "label": "blinds",
+            "member_prediction_ids": [
+              "192",
+              "204"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                0.2931010294948069,
+                2.386035775298366,
+                1.303898680389868
+              ],
+              [
+                0.9343069795282308,
+                2.427224650188191,
+                1.6945281730117723
+              ]
+            ],
+            "measured_union_box_IoU": 0.570030032494516,
+            "canonical_child_envelope_IoU": 0.6528666793710984,
+            "single_prediction_best_box_IoU": 0.3004937362295033
+          },
+          {
+            "gt_id": 29,
+            "label": "blinds",
+            "member_prediction_ids": [
+              "191",
+              "454"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                1.1199511537726545,
+                2.3875580124494715,
+                1.303916676508418
+              ],
+              [
+                1.8001001740410385,
+                2.4311329174970715,
+                1.6982389156901048
+              ]
+            ],
+            "measured_union_box_IoU": 0.7549086141360517,
+            "canonical_child_envelope_IoU": 0.7206296107759605,
+            "single_prediction_best_box_IoU": 0.356436880899807
+          },
+          {
+            "gt_id": 30,
+            "label": "cabinet",
+            "member_prediction_ids": [
+              "162",
+              "175",
+              "176",
+              "186",
+              "206"
+            ],
+            "fragment_count": 5,
+            "measured_union_bounds": [
+              [
+                2.3250584680339217,
+                -1.131866542965684,
+                0.973263777665762
+              ],
+              [
+                2.7022454347619598,
+                2.1998194529444826,
+                2.720497506328563
+              ]
+            ],
+            "measured_union_box_IoU": 0.9285143682932502,
+            "canonical_child_envelope_IoU": 0.9292664577147415,
+            "single_prediction_best_box_IoU": 0.8578638239533495
+          },
+          {
+            "gt_id": 31,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "172"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                2.3526789000581747,
+                1.669416156967988,
+                1.2750278491982796
+              ],
+              [
+                2.571118877365575,
+                2.0909001144639543,
+                1.5300990694974028
+              ]
+            ],
+            "measured_union_box_IoU": 0.9139725195102298,
+            "canonical_child_envelope_IoU": 0.9112282906657573,
+            "single_prediction_best_box_IoU": 0.9112282906657573
+          },
+          {
+            "gt_id": 32,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.7352359464343841
+          },
+          {
+            "gt_id": 33,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "157"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                2.1662463110497923,
+                -0.1485376594022476,
+                0.9696944152613389
+              ],
+              [
+                2.392145357700934,
+                0.2697472695759011,
+                1.000447725079188
+              ]
+            ],
+            "measured_union_box_IoU": 0.8687325689621881,
+            "canonical_child_envelope_IoU": 0.8687151190206764,
+            "single_prediction_best_box_IoU": 0.8687151190206764
+          },
+          {
+            "gt_id": 36,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.010073936248732073
+          },
+          {
+            "gt_id": 37,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "443"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.6627960516747318,
+                1.9403773512566667,
+                2.1713744071441354
+              ],
+              [
+                -0.6135106657321774,
+                1.974497951247456,
+                2.323736132782625
+              ]
+            ],
+            "measured_union_box_IoU": 0.5445656357879918,
+            "canonical_child_envelope_IoU": 0.5002997026467377,
+            "single_prediction_best_box_IoU": 0.5002997026467377
+          },
+          {
+            "gt_id": 38,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.003233382112632643
+          },
+          {
+            "gt_id": 40,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "240"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5992093858375052,
+                1.9385087148612148,
+                2.1747423344560985
+              ],
+              [
+                -0.5520570556713008,
+                1.9756186989155717,
+                2.3191680726588597
+              ]
+            ],
+            "measured_union_box_IoU": 0.3039890520725063,
+            "canonical_child_envelope_IoU": 0.38821253073946005,
+            "single_prediction_best_box_IoU": 0.38821253073946005
+          },
+          {
+            "gt_id": 41,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "455"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5376884459526949,
+                1.940075331178496,
+                2.17419529286478
+              ],
+              [
+                -0.4895602770926155,
+                1.9788508473429622,
+                2.3207629856918417
+              ]
+            ],
+            "measured_union_box_IoU": 0.5780772573615423,
+            "canonical_child_envelope_IoU": 0.4301832044268034,
+            "single_prediction_best_box_IoU": 0.4301832044268034
+          },
+          {
+            "gt_id": 43,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.0036570461046195545
+          },
+          {
+            "gt_id": 44,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.00407421231759004
+          },
+          {
+            "gt_id": 45,
+            "label": "shelves",
+            "member_prediction_ids": [
+              "113",
+              "114",
+              "411"
+            ],
+            "fragment_count": 3,
+            "measured_union_bounds": [
+              [
+                -0.7659276316769003,
+                1.8376803534727433,
+                1.5661376475673516
+              ],
+              [
+                -0.29962912065503283,
+                2.200443117568214,
+                2.4300493990782037
+              ]
+            ],
+            "measured_union_box_IoU": 0.7156209506917593,
+            "canonical_child_envelope_IoU": 0.7067242510298073,
+            "single_prediction_best_box_IoU": 0.6400966331377237
+          },
+          {
+            "gt_id": 47,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "95",
+              "213"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                -0.6924665437136941,
+                1.908738133301086,
+                1.8751299468511387
+              ],
+              [
+                -0.5228855054988757,
+                1.9790126082609047,
+                1.9468719671563877
+              ]
+            ],
+            "measured_union_box_IoU": 0.6813475025439765,
+            "canonical_child_envelope_IoU": 0.6849460357502251,
+            "single_prediction_best_box_IoU": 0.3594864728854488
+          },
+          {
+            "gt_id": 49,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.003067206499015812
+          },
+          {
+            "gt_id": 50,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "461"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5141812571618045,
+                1.9134673504822346,
+                1.8883198768350078
+              ],
+              [
+                -0.44234197571051004,
+                1.9576662713337896,
+                1.9469528054498226
+              ]
+            ],
+            "measured_union_box_IoU": 0.3193151849709557,
+            "canonical_child_envelope_IoU": 0.3556474657035866,
+            "single_prediction_best_box_IoU": 0.3556474657035866
+          },
+          {
+            "gt_id": 51,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "88"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.6535281860874587,
+                1.970999935285736,
+                1.596148005780916
+              ],
+              [
+                -0.6131399911896647,
+                1.9965077622900376,
+                1.7705743054258534
+              ]
+            ],
+            "measured_union_box_IoU": 0.2566128942790355,
+            "canonical_child_envelope_IoU": 0.29125242331205903,
+            "single_prediction_best_box_IoU": 0.29125242331205903
+          },
+          {
+            "gt_id": 52,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "458"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.6685136455208747,
+                1.8948818958517648,
+                1.5924708605064284
+              ],
+              [
+                -0.6101909302073096,
+                1.9277561573293815,
+                1.772086358678743
+              ]
+            ],
+            "measured_union_box_IoU": 0.45808254209460764,
+            "canonical_child_envelope_IoU": 0.4592216691747642,
+            "single_prediction_best_box_IoU": 0.4592216691747642
+          },
+          {
+            "gt_id": 53,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "459"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5885721149036012,
+                1.9009613433184134,
+                1.591708917676726
+              ],
+              [
+                -0.5271079261007645,
+                1.9410948656052178,
+                1.7740191496349442
+              ]
+            ],
+            "measured_union_box_IoU": 0.6040993096592578,
+            "canonical_child_envelope_IoU": 0.5716226517197721,
+            "single_prediction_best_box_IoU": 0.5716226517197721
+          },
+          {
+            "gt_id": 54,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "464"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5578158235732482,
+                1.9784375264863687,
+                1.593175687512774
+              ],
+              [
+                -0.5291614725831796,
+                2.007572253928452,
+                1.77161646501963
+              ]
+            ],
+            "measured_union_box_IoU": 0.21273269597251498,
+            "canonical_child_envelope_IoU": 0.2713037927516594,
+            "single_prediction_best_box_IoU": 0.2713037927516594
+          },
+          {
+            "gt_id": 55,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "82",
+              "181"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                -0.5038099865089043,
+                1.9307636687270284,
+                1.5929844290334836
+              ],
+              [
+                -0.44506789056923113,
+                2.0328002583532983,
+                1.773508509311364
+              ]
+            ],
+            "measured_union_box_IoU": 0.5615795172293708,
+            "canonical_child_envelope_IoU": 0.4373019310947217,
+            "single_prediction_best_box_IoU": 0.7149444050882074
+          },
+          {
+            "gt_id": 56,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "108"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5052703554967326,
+                1.8954249560672014,
+                1.5924961122609014
+              ],
+              [
+                -0.444451491044346,
+                1.9309596034687782,
+                1.773525231381896
+              ]
+            ],
+            "measured_union_box_IoU": 0.5345210560228211,
+            "canonical_child_envelope_IoU": 0.5350971680349572,
+            "single_prediction_best_box_IoU": 0.5350971680349572
+          },
+          {
+            "gt_id": 57,
+            "label": "cabinet",
+            "member_prediction_ids": [
+              "15"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9848277199302684,
+                1.056378992697735,
+                1.4819073014390534
+              ],
+              [
+                -0.6985108208918813,
+                2.175848824076512,
+                2.720206194464705
+              ]
+            ],
+            "measured_union_box_IoU": 0.7877616597337831,
+            "canonical_child_envelope_IoU": 0.7912970098236316,
+            "single_prediction_best_box_IoU": 0.7912970098236316
+          },
+          {
+            "gt_id": 58,
+            "label": "otherstructure",
+            "member_prediction_ids": [
+              "55",
+              "54"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                -2.9904862840400694,
+                -0.050992434695951605,
+                1.699723973585557
+              ],
+              [
+                -2.3779442330626934,
+                0.8306228473942217,
+                2.3103395746220787
+              ]
+            ],
+            "measured_union_box_IoU": 0.9647941481602296,
+            "canonical_child_envelope_IoU": 0.9645139009330695,
+            "single_prediction_best_box_IoU": 0.5269362268085311
+          },
+          {
+            "gt_id": 60,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.37387920593008217
+          },
+          {
+            "gt_id": 61,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "31"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.518627565977846,
+                0.2581139606093782,
+                1.8039283522066616
+              ],
+              [
+                -2.432944271130587,
+                0.36291201016965813,
+                2.0346906626950325
+              ]
+            ],
+            "measured_union_box_IoU": 0.4832304335848774,
+            "canonical_child_envelope_IoU": 0.559231368457755,
+            "single_prediction_best_box_IoU": 0.559231368457755
+          },
+          {
+            "gt_id": 62,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "35"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.5328286425192665,
+                0.38914960581837343,
+                1.8053866809812982
+              ],
+              [
+                -2.45839210018747,
+                0.49043807732570555,
+                2.090024993485995
+              ]
+            ],
+            "measured_union_box_IoU": 0.5739341644734942,
+            "canonical_child_envelope_IoU": 0.6345384882943393,
+            "single_prediction_best_box_IoU": 0.6345384882943393
+          },
+          {
+            "gt_id": 63,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "57"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.5456044631680874,
+                0.5412136445583676,
+                1.8067876075591198
+              ],
+              [
+                -2.4368582230843563,
+                0.7046760667504626,
+                1.9768154264084776
+              ]
+            ],
+            "measured_union_box_IoU": 0.6085885685754925,
+            "canonical_child_envelope_IoU": 0.6216372310029172,
+            "single_prediction_best_box_IoU": 0.6216372310029172
+          },
+          {
+            "gt_id": 67,
+            "label": "refrigerator",
+            "member_prediction_ids": [
+              "138"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9766023463028706,
+                -2.031856340380985,
+                0.011892652702170992
+              ],
+              [
+                -2.2630861354318332,
+                -1.117243408224938,
+                1.8272132819824116
+              ]
+            ],
+            "measured_union_box_IoU": 0.986122290474525,
+            "canonical_child_envelope_IoU": 0.9764099105150673,
+            "single_prediction_best_box_IoU": 0.9764099105150673
+          },
+          {
+            "gt_id": 68,
+            "label": "cabinet",
+            "member_prediction_ids": [
+              "177",
+              "174",
+              "47",
+              "8"
+            ],
+            "fragment_count": 4,
+            "measured_union_bounds": [
+              [
+                -2.438882720456403,
+                -1.0112389686679315,
+                0.04340900691260274
+              ],
+              [
+                2.09310666265521,
+                1.6069487039733859,
+                0.8615061593894556
+              ]
+            ],
+            "measured_union_box_IoU": 0.7849804795132889,
+            "canonical_child_envelope_IoU": 0.7854519305993476,
+            "single_prediction_best_box_IoU": 0.18601078721456699
+          },
+          {
+            "gt_id": 69,
+            "label": "otherstructure",
+            "member_prediction_ids": [
+              "93"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.3951548397170956,
+                0.20345556138313858,
+                0.04924135995500745
+              ],
+              [
+                -2.356812007839922,
+                0.8576781314843278,
+                0.8627315116197816
+              ]
+            ],
+            "measured_union_box_IoU": 0.11980677445050877,
+            "canonical_child_envelope_IoU": 0.11987031479460415,
+            "single_prediction_best_box_IoU": 0.11987031479460415
+          },
+          {
+            "gt_id": 70,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "23"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9069856133448475,
+                -0.7574729461386511,
+                1.0045126326260458
+              ],
+              [
+                -2.703579072671361,
+                -0.5546239075287925,
+                1.1465617854404353
+              ]
+            ],
+            "measured_union_box_IoU": 0.6669917051159024,
+            "canonical_child_envelope_IoU": 0.8811939886863424,
+            "single_prediction_best_box_IoU": 0.8811939886863424
+          },
+          {
+            "gt_id": 71,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.6050467822394117
+          },
+          {
+            "gt_id": 75,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "347"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.6358725163262435,
+                -0.4087646775702731,
+                1.1079225798987105
+              ],
+              [
+                -2.5777279965423383,
+                -0.3383561202241706,
+                1.1720783193143862
+              ]
+            ],
+            "measured_union_box_IoU": 0.4185594466049586,
+            "canonical_child_envelope_IoU": 0.5163405861385307,
+            "single_prediction_best_box_IoU": 0.5163405861385307
+          },
+          {
+            "gt_id": 80,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.016076188906141032
+          },
+          {
+            "gt_id": 86,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "13"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.7446358606515444,
+                -0.507600868253379,
+                0.9697664261961843
+              ],
+              [
+                -2.501161758290654,
+                -0.2574585335703017,
+                1.1246269003614326
+              ]
+            ],
+            "measured_union_box_IoU": 0.5169157009294275,
+            "canonical_child_envelope_IoU": 0.7794298103912383,
+            "single_prediction_best_box_IoU": 0.7794298103912383
+          },
+          {
+            "gt_id": 89,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "59"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9922502398731847,
+                -0.41911740602953484,
+                1.2051925802551766
+              ],
+              [
+                -2.920683790913804,
+                -0.3221968092629465,
+                1.3361366713387086
+              ]
+            ],
+            "measured_union_box_IoU": 0.5544748621315935,
+            "canonical_child_envelope_IoU": 0.5662508482957199,
+            "single_prediction_best_box_IoU": 0.5662508482957199
+          },
+          {
+            "gt_id": 90,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "61"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9922366735567736,
+                -0.3516463280328392,
+                1.2043755574112929
+              ],
+              [
+                -2.9211528071542845,
+                -0.24951472771310534,
+                1.3354559724695212
+              ]
+            ],
+            "measured_union_box_IoU": 0.58454565754367,
+            "canonical_child_envelope_IoU": 0.5964271739988726,
+            "single_prediction_best_box_IoU": 0.5964271739988726
+          },
+          {
+            "gt_id": 91,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "58"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9914311981510253,
+                -0.2775535458385572,
+                1.232819555683737
+              ],
+              [
+                -2.9264364603463986,
+                -0.13805683756038267,
+                1.3352664296384877
+              ]
+            ],
+            "measured_union_box_IoU": 0.5791354599855127,
+            "canonical_child_envelope_IoU": 0.5357343834522033,
+            "single_prediction_best_box_IoU": 0.5357343834522033
+          },
+          {
+            "gt_id": 94,
+            "label": "otherstructure",
+            "member_prediction_ids": [
+              "21"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9933100436117823,
+                -0.4975388864006456,
+                1.0379545311016654
+              ],
+              [
+                -2.902718623108613,
+                -0.11633961002295878,
+                1.5373297214799821
+              ]
+            ],
+            "measured_union_box_IoU": 0.8894795702226721,
+            "canonical_child_envelope_IoU": 0.8775984899007094,
+            "single_prediction_best_box_IoU": 0.8775984899007094
+          },
+          {
+            "gt_id": 95,
+            "label": "otherstructure",
+            "member_prediction_ids": [
+              "348"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.904090861061481,
+                -0.021337543105149792,
+                0.9657359888144882
+              ],
+              [
+                -2.344868577620205,
+                0.2310138865382087,
+                0.9903772508467236
+              ]
+            ],
+            "measured_union_box_IoU": 0.4814776536468041,
+            "canonical_child_envelope_IoU": 0.47906676330615494,
+            "single_prediction_best_box_IoU": 0.47906676330615494
+          },
+          {
+            "gt_id": 96,
+            "label": "otherstructure",
+            "member_prediction_ids": [
+              "269"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.901156684132922,
+                0.2347233127916559,
+                0.9695993491197594
+              ],
+              [
+                -2.364236051564024,
+                0.8243836592368636,
+                0.9871593110970635
+              ]
+            ],
+            "measured_union_box_IoU": 0.38701828160221086,
+            "canonical_child_envelope_IoU": 0.3873669158327076,
+            "single_prediction_best_box_IoU": 0.3873669158327076
+          },
+          {
+            "gt_id": 97,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "46"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.8443780458234094,
+                0.26049946417493675,
+                0.9712560037175754
+              ],
+              [
+                -2.6402454703245777,
+                0.47131539318783516,
+                1.1482405611114137
+              ]
+            ],
+            "measured_union_box_IoU": 0.7195762624370169,
+            "canonical_child_envelope_IoU": 0.8217382070413297,
+            "single_prediction_best_box_IoU": 0.8217382070413297
+          },
+          {
+            "gt_id": 98,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "45"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.8611899936339933,
+                0.5994380621076537,
+                0.9713677496739568
+              ],
+              [
+                -2.6952318923774645,
+                0.7881819604252909,
+                1.0770827010573014
+              ]
+            ],
+            "measured_union_box_IoU": 0.7503676210288349,
+            "canonical_child_envelope_IoU": 0.9054699177990005,
+            "single_prediction_best_box_IoU": 0.9054699177990005
+          },
+          {
+            "gt_id": 99,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "463"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9460546888494985,
+                0.25071319438929496,
+                1.1034194697213877
+              ],
+              [
+                -2.9187733525165616,
+                0.3216349582490549,
+                1.4830265481075933
+              ]
+            ],
+            "measured_union_box_IoU": 0.855270358288629,
+            "canonical_child_envelope_IoU": 0.8264526705728679,
+            "single_prediction_best_box_IoU": 0.8264526705728679
+          },
+          {
+            "gt_id": 100,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "60"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9883039789207464,
+                0.3658569423102882,
+                1.1209096011809483
+              ],
+              [
+                -2.931296566812473,
+                0.4562306089505759,
+                1.48564472701799
+              ]
+            ],
+            "measured_union_box_IoU": 0.7620275194568721,
+            "canonical_child_envelope_IoU": 0.7598135712828793,
+            "single_prediction_best_box_IoU": 0.7598135712828793
+          },
+          {
+            "gt_id": 101,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "27"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9442878359026023,
+                0.47061449037985614,
+                1.10720725013742
+              ],
+              [
+                -2.9227942893407457,
+                0.5772157849749722,
+                1.4857518665477887
+              ]
+            ],
+            "measured_union_box_IoU": 0.9309436204747771,
+            "canonical_child_envelope_IoU": 0.8019020090349869,
+            "single_prediction_best_box_IoU": 0.8019020090349869
+          },
+          {
+            "gt_id": 102,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "70"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9470785491705316,
+                0.6279524172076694,
+                1.122594200328181
+              ],
+              [
+                -2.9350976778826623,
+                0.661372001309273,
+                1.486445390500546
+              ]
+            ],
+            "measured_union_box_IoU": 0.6070434197945792,
+            "canonical_child_envelope_IoU": 0.601207749756932,
+            "single_prediction_best_box_IoU": 0.601207749756932
+          },
+          {
+            "gt_id": 103,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "32"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.9488596998664467,
+                0.682187678088521,
+                1.102541196851817
+              ],
+              [
+                -2.9097600851850167,
+                0.7466018124260171,
+                1.4845528400395882
+              ]
+            ],
+            "measured_union_box_IoU": 0.8428264141007251,
+            "canonical_child_envelope_IoU": 0.5928323075136192,
+            "single_prediction_best_box_IoU": 0.5928323075136192
+          },
+          {
+            "gt_id": 104,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.020086582786538347
+          },
+          {
+            "gt_id": 105,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "34"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.8340233917478623,
+                0.9482963463821412,
+                0.9890865877474212
+              ],
+              [
+                -2.7014352053690263,
+                1.113542878846146,
+                1.078725537572757
+              ]
+            ],
+            "measured_union_box_IoU": 0.5760893898619164,
+            "canonical_child_envelope_IoU": 0.946089437390693,
+            "single_prediction_best_box_IoU": 0.946089437390693
+          },
+          {
+            "gt_id": 106,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "257"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.991092104951535,
+                1.272455458661768,
+                1.2431700374404726
+              ],
+              [
+                -2.8571277351481967,
+                1.5443558745272674,
+                1.4336672160400687
+              ]
+            ],
+            "measured_union_box_IoU": 0.9178964401541738,
+            "canonical_child_envelope_IoU": 0.9170315427199861,
+            "single_prediction_best_box_IoU": 0.9170315427199861
+          },
+          {
+            "gt_id": 112,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.1339767654814289
+          },
+          {
+            "gt_id": 113,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "292"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.8781302149557213,
+                1.8245364778887725,
+                0.9721680110655238
+              ],
+              [
+                -2.70377408882611,
+                1.9437813149190706,
+                1.0435215900119934
+              ]
+            ],
+            "measured_union_box_IoU": 0.7013923245442364,
+            "canonical_child_envelope_IoU": 0.810873088152817,
+            "single_prediction_best_box_IoU": 0.810873088152817
+          },
+          {
+            "gt_id": 114,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "466"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.7545328974732843,
+                1.9406509567022887,
+                1.027101469545682
+              ],
+              [
+                -2.578013496860172,
+                2.0595944453596915,
+                1.0761165076410784
+              ]
+            ],
+            "measured_union_box_IoU": 0.7448947133468348,
+            "canonical_child_envelope_IoU": 0.8099281912978827,
+            "single_prediction_best_box_IoU": 0.8099281912978827
+          },
+          {
+            "gt_id": 116,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "465"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.709780467446281,
+                1.9375943085329832,
+                0.9711893701772338
+              ],
+              [
+                -2.5491716329108316,
+                2.044768057846324,
+                1.0296539353888463
+              ]
+            ],
+            "measured_union_box_IoU": 0.42143715215809713,
+            "canonical_child_envelope_IoU": 0.49065012713285633,
+            "single_prediction_best_box_IoU": 0.49065012713285633
+          },
+          {
+            "gt_id": 117,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "274"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.366610502670675,
+                1.9345518496702985,
+                0.9869146949261208
+              ],
+              [
+                -2.2393744628669157,
+                2.063357732068366,
+                1.0594828251348252
+              ]
+            ],
+            "measured_union_box_IoU": 0.5637456273282696,
+            "canonical_child_envelope_IoU": 0.4183510844312067,
+            "single_prediction_best_box_IoU": 0.4183510844312067
+          },
+          {
+            "gt_id": 118,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "283"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.2492893751357954,
+                1.9292970459688195,
+                0.9820229544961878
+              ],
+              [
+                -2.1532437837631653,
+                2.0263981221883807,
+                0.9938300062768892
+              ]
+            ],
+            "measured_union_box_IoU": 0.3744655066509793,
+            "canonical_child_envelope_IoU": 0.526581515636288,
+            "single_prediction_best_box_IoU": 0.526581515636288
+          },
+          {
+            "gt_id": 119,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "101"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.483235535661827,
+                1.8849480518886657,
+                0.9698784079901461
+              ],
+              [
+                -2.1038961390082904,
+                2.1547604972840704,
+                1.0920189382492769
+              ]
+            ],
+            "measured_union_box_IoU": 0.8408096847498466,
+            "canonical_child_envelope_IoU": 0.8442148062958832,
+            "single_prediction_best_box_IoU": 0.8442148062958832
+          },
+          {
+            "gt_id": 120,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "102"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.02072486932157,
+                2.0554366900004037,
+                1.095957965795645
+              ],
+              [
+                -1.8984699746604727,
+                2.192156051134997,
+                1.1700747861855227
+              ]
+            ],
+            "measured_union_box_IoU": 0.2641553043069438,
+            "canonical_child_envelope_IoU": 0.15779708042034923,
+            "single_prediction_best_box_IoU": 0.15779708042034923
+          },
+          {
+            "gt_id": 121,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "103"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.9196400101413849,
+                2.0542931632686945,
+                1.0961472120084634
+              ],
+              [
+                -1.8526577702131282,
+                2.1027567110678023,
+                1.1697018843009679
+              ]
+            ],
+            "measured_union_box_IoU": 0.5811958814575159,
+            "canonical_child_envelope_IoU": 0.5045536121394013,
+            "single_prediction_best_box_IoU": 0.5045536121394013
+          },
+          {
+            "gt_id": 122,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "211"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.838650621141306,
+                2.054462236149985,
+                1.0938897724246979
+              ],
+              [
+                -1.7748174055027386,
+                2.1008997196716317,
+                1.1696509216914348
+              ]
+            ],
+            "measured_union_box_IoU": 0.5495978063504984,
+            "canonical_child_envelope_IoU": 0.5249482287023424,
+            "single_prediction_best_box_IoU": 0.5249482287023424
+          },
+          {
+            "gt_id": 123,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "100"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.0175500171939054,
+                2.0356277363842024,
+                0.9937229745610405
+              ],
+              [
+                -1.9330146687715577,
+                2.143289041365637,
+                1.0685499103565481
+              ]
+            ],
+            "measured_union_box_IoU": 0.4645011962355728,
+            "canonical_child_envelope_IoU": 0.3007046793320587,
+            "single_prediction_best_box_IoU": 0.3007046793320587
+          },
+          {
+            "gt_id": 124,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "210"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.918658196931363,
+                2.035947477966825,
+                0.9930416666601471
+              ],
+              [
+                -1.8531885101411094,
+                2.093852540254174,
+                1.0686269834907502
+              ]
+            ],
+            "measured_union_box_IoU": 0.3889398664509893,
+            "canonical_child_envelope_IoU": 0.37227131726990037,
+            "single_prediction_best_box_IoU": 0.37227131726990037
+          },
+          {
+            "gt_id": 125,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.13654214977308707
+          },
+          {
+            "gt_id": 126,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.6564537972115563
+          },
+          {
+            "gt_id": 127,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "37"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.6654051045867833,
+                1.9646951807602702,
+                0.969806576296874
+              ],
+              [
+                -1.3559130285710248,
+                2.160391749941417,
+                1.1000456256207762
+              ]
+            ],
+            "measured_union_box_IoU": 0.974800728656399,
+            "canonical_child_envelope_IoU": 0.9637539742419475,
+            "single_prediction_best_box_IoU": 0.9637539742419475
+          },
+          {
+            "gt_id": 128,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "65"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.2679363459185398,
+                2.0080251629965113,
+                0.9696915422413345
+              ],
+              [
+                -1.1441021271972849,
+                2.112791926942427,
+                1.2509142348187812
+              ]
+            ],
+            "measured_union_box_IoU": 0.5987435764352734,
+            "canonical_child_envelope_IoU": 0.5848840358177896,
+            "single_prediction_best_box_IoU": 0.5848840358177896
+          },
+          {
+            "gt_id": 133,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "89"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.8983146976676648,
+                2.069548151735984,
+                0.9980845115843532
+              ],
+              [
+                -0.836404208130896,
+                2.129616481421966,
+                1.0977786618580303
+              ]
+            ],
+            "measured_union_box_IoU": 0.7529274951263835,
+            "canonical_child_envelope_IoU": 0.75154303685579,
+            "single_prediction_best_box_IoU": 0.75154303685579
+          },
+          {
+            "gt_id": 134,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "109"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.8885730713972495,
+                1.9616273502895076,
+                0.9699370153736139
+              ],
+              [
+                -0.8074927658458408,
+                2.036120131536241,
+                1.0165170432426964
+              ]
+            ],
+            "measured_union_box_IoU": 0.8307506171437806,
+            "canonical_child_envelope_IoU": 0.788407550128035,
+            "single_prediction_best_box_IoU": 0.788407550128035
+          },
+          {
+            "gt_id": 135,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "273"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.8161470165799465,
+                2.0588848365132657,
+                0.9976201583357811
+              ],
+              [
+                -0.7526085923594276,
+                2.127080333453417,
+                1.0241675140118747
+              ]
+            ],
+            "measured_union_box_IoU": 0.455916152258259,
+            "canonical_child_envelope_IoU": 0.4536129637165722,
+            "single_prediction_best_box_IoU": 0.4536129637165722
+          },
+          {
+            "gt_id": 137,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "90"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.6493860687479927,
+                2.062021603307681,
+                0.9979555266230511
+              ],
+              [
+                -0.5857884814827872,
+                2.131742052898616,
+                1.0979852779982708
+              ]
+            ],
+            "measured_union_box_IoU": 0.6838541706623898,
+            "canonical_child_envelope_IoU": 0.6683938420802673,
+            "single_prediction_best_box_IoU": 0.6683938420802673
+          },
+          {
+            "gt_id": 138,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "111"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.6911641061653172,
+                1.9595834359342241,
+                0.9697395756027679
+              ],
+              [
+                -0.6128233688118331,
+                2.0352472031241913,
+                1.0164678543180101
+              ]
+            ],
+            "measured_union_box_IoU": 0.9364092166504133,
+            "canonical_child_envelope_IoU": 0.7875922987045119,
+            "single_prediction_best_box_IoU": 0.7875922987045119
+          },
+          {
+            "gt_id": 139,
+            "label": "otherprop",
+            "member_prediction_ids": [],
+            "fragment_count": 0,
+            "measured_union_bounds": null,
+            "measured_union_box_IoU": 0.0,
+            "canonical_child_envelope_IoU": 0.0,
+            "single_prediction_best_box_IoU": 0.0022038473083275363
+          },
+          {
+            "gt_id": 146,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "462"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.5881670190233461,
+                2.1113466922285093,
+                1.241220859153001
+              ],
+              [
+                -0.5502258206400413,
+                2.152971285653418,
+                1.296549810610614
+              ]
+            ],
+            "measured_union_box_IoU": 0.4176081526255974,
+            "canonical_child_envelope_IoU": 0.6296046514716646,
+            "single_prediction_best_box_IoU": 0.6296046514716646
+          },
+          {
+            "gt_id": 147,
+            "label": "otherstructure",
+            "member_prediction_ids": [
+              "96"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -0.8781674307312248,
+                2.141041778529969,
+                1.2442835972353419
+              ],
+              [
+                -0.5266990709391254,
+                2.192577868445662,
+                1.3645751060642544
+              ]
+            ],
+            "measured_union_box_IoU": 0.7265756105864838,
+            "canonical_child_envelope_IoU": 0.7128781854569578,
+            "single_prediction_best_box_IoU": 0.7128781854569578
+          },
+          {
+            "gt_id": 148,
+            "label": "counter",
+            "member_prediction_ids": [
+              "141",
+              "236"
+            ],
+            "fragment_count": 2,
+            "measured_union_bounds": [
+              [
+                -3.0008434344902337,
+                -2.7013110472326662,
+                0.8699938732628062
+              ],
+              [
+                2.7012291263858734,
+                2.190187833537838,
+                0.9867593113310857
+              ]
+            ],
+            "measured_union_box_IoU": 0.5766070015225879,
+            "canonical_child_envelope_IoU": 0.5761302950892274,
+            "single_prediction_best_box_IoU": 0.5709474879105592
+          },
+          {
+            "gt_id": 149,
+            "label": "sink",
+            "member_prediction_ids": [
+              "131"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                0.6022788354204192,
+                1.5385962985346784,
+                0.8199020231085682
+              ],
+              [
+                1.4108507921400095,
+                2.062418003081534,
+                1.196407467075323
+              ]
+            ],
+            "measured_union_box_IoU": 0.8320493709897506,
+            "canonical_child_envelope_IoU": 0.8320764817496737,
+            "single_prediction_best_box_IoU": 0.8320764817496737
+          },
+          {
+            "gt_id": 151,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "217"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.6894484762362778,
+                1.7248482965836818,
+                0.9698008224538055
+              ],
+              [
+                -1.5192092111919457,
+                1.995802794971095,
+                1.0627637966368917
+              ]
+            ],
+            "measured_union_box_IoU": 0.6340691860392323,
+            "canonical_child_envelope_IoU": 0.5761457243141496,
+            "single_prediction_best_box_IoU": 0.5761457243141496
+          },
+          {
+            "gt_id": 152,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "337"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -2.0135023822302025,
+                1.687064739460824,
+                0.9764508364817335
+              ],
+              [
+                -1.9249047548907807,
+                1.781931695128292,
+                1.0089705062445669
+              ]
+            ],
+            "measured_union_box_IoU": 0.5883561070955855,
+            "canonical_child_envelope_IoU": 0.8110378263856275,
+            "single_prediction_best_box_IoU": 0.8110378263856275
+          },
+          {
+            "gt_id": 153,
+            "label": "otherprop",
+            "member_prediction_ids": [
+              "279"
+            ],
+            "fragment_count": 1,
+            "measured_union_bounds": [
+              [
+                -1.9615333577788021,
+                1.804094214936391,
+                0.9753813770797699
+              ],
+              [
+                -1.750707959955679,
+                1.8724297214070444,
+                0.9869393796563417
+              ]
+            ],
+            "measured_union_box_IoU": 0.11848808515769634,
+            "canonical_child_envelope_IoU": 0.12996987133813043,
+            "single_prediction_best_box_IoU": 0.44972145939278746
+          }
+        ],
+        "limitation": "GT selects pure-fragment membership only for diagnosis. AABB envelopes can span empty space and do not certify dense shape or correct part hierarchy. Strict AP, FP, FN and count error are unchanged. This is not PartPQ/PWQ."
+      }
+    }
+  ],
+  "native_cache_bundles_verified": 199,
+  "learned_universal_completion_solved": false,
+  "fine_instance_generalization_proven": false,
+  "retention_basis": "three strict AP thresholds non-regressing; AP25/AP50 improve; reported ghost-center artifact and both missing box instances recovered; count and FP tradeoffs retained",
+  "construction_sha256": "613465bff2c7df80ef6d272d138f59261c18bd820bbe3fcd555b0533024ec666",
+  "v16_byte_identical": true,
+  "target_reached": false,
+  "report_source_sha256": "64d459c8f4881687584a03aa32a978ff20e9cd4c5d39e6c12d436d3fe98e169b",
+  "report_qa_passed": true,
+  "report_version": "v17",
+  "latex_compile_confirmed": false,
+  "latex_compile_limitation": "Built-in compiler could not prepare the LaTeX preview; no TeX diagnostics returned: exec failed: windows sandbox: helper_unknown_error: setup refresh had errors."
+}

@@ -1,0 +1,29 @@
+{
+  "desktop": {
+    "version": "v17",
+    "updated": "2026-10-11",
+    "sourceHash": "64d459c8f4881687584a03aa32a978ff20e9cd4c5d39e6c12d436d3fe98e169b",
+    "edition": "研究报告 · v17 · 2026-10-11 · LaTeX 公式渲染版",
+    "latestSummary": true,
+    "latestChapter": "24. 版本 v17：远端碎片、弱小实例与统计粒度",
+    "latestNavigation": true,
+    "latestMetrics": true,
+    "preservedGroundTruth": true,
+    "gtAtlasImages": 11,
+    "trees": 1,
+    "branches": 33,
+    "formulas": 162,
+    "formulaErrors": 0,
+    "overflow": false,
+    "images": true,
+    "gtIndexRows": [
+      10,
+      109
+    ],
+    "collapseWorks": true
+  },
+  "mobile": {
+    "overflow": false
+  },
+  "errors": []
+}

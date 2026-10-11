@@ -171,7 +171,8 @@ def evaluate(args):
                     observations += [float(x['confidence']) for x in json.loads(path.read_text()) if str(x.get('instance_id')) == key]
         confidence = float(tracks[key]['confidence']) if key in tracks else float(np.mean(observations)) if observations else 0.
         predictions.append({'id': key, 'label': node['name'], 'keys': voxel_keys(region),
-                            'bounds': node_bounds(node), 'confidence': confidence})
+                            'bounds': node_bounds(node), 'confidence': confidence,
+                            'observed_bounds': [region.min(0).tolist(), region.max(0).tolist()]})
     gt_points, class_votes = defaultdict(list), defaultdict(Counter)
     label_digest = hashlib.sha256()
     manifest_frames = {f['frame_id']: f for f in payload['frames']}
@@ -302,6 +303,7 @@ def evaluate(args):
     if diagnostics is not None:
         report['granularity_surface_diagnostic'] = diagnostics.surface_diagnostics(predictions, truth)
         report['object_error_diagnostic'] = diagnostics.box_diagnostics(predictions, truth, bbox_spatial, report['granularity_surface_diagnostic'])
+        report['fragment_union_box_diagnostic'] = diagnostics.fragment_union_box_diagnostics(predictions, truth, report['granularity_surface_diagnostic'])
         report['granularity_component_sha256'] = hashlib.sha256(Path(diagnostics.__file__).read_bytes()).hexdigest()
     output = Path(args.output).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)

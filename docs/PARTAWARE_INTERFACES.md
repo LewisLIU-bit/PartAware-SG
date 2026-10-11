@@ -419,3 +419,41 @@ measured points, supporting frames, decisions and zero generated coordinates.
 Independent GT review follows original-viewer rendering and cannot feed construction.
 AP retention and the stricter all-metric gate are reported separately: count error
 regresses, and AP50/AP75 unmatched counts include geometrically incomplete new roots.
+
+## V17 component evidence, weak identities and granularity diagnostics
+
+`configure_profile('v17', registry)` retains v16 and appends `component_evidence`
+(CORE) and `weak_verification` (WISP) to `FINAL_GEOMETRY`. Both belong to MICA's
+evidence branch but execute after part fusion. Historical profile selection clears
+both registrations, so v16 does not silently inherit them.
+
+CORE uses adaptive measured connectivity and jointly visible native-mask evidence.
+Accepted minority residuals keep exact coordinates in `unresolved_fragments` and
+do not become new roots. It updates observed/completed point ownership, tracks,
+the formal and observed boxes, centers and spatial edges through canonical publication.
+`component_evidence_audit.json` records source hash and all accepted/deferred evidence.
+
+WISP only rescues identities whose source confidences all lie below the old 0.7
+admission floor. Same-frame separation vetoes alias merging, including native zoom
+proposals; broader undersegmented groups can vote on surfaces but not identity.
+Cached 384/256-dimensional features are genuine, not substituted constants.
+Source-pixel resolution, independent neighbor separation, camera baseline,
+three visible native-mask votes per point and already-owned surface tests gate
+new ordinary roots. Existing root geometry is retained except CORE's proven ownership
+correction. `weak_instance_audit.json` and node evidence retain actual observations,
+code hashes, admission decisions and zero generated points. No fresh vision API is used.
+
+Remove either registration and rebuild from retained raw observations to detach.
+The original viewer and TopologyMap JSON reader remain compatible. Independent GT
+review occurs after original-viewer rendering and never returns geometry to construction.
+
+`fragment_union_box_diagnostic` is supplementary evaluator output. GUD groups only
+pure measured fragments by nearest original GT surfaces, records raw-coordinate union
+bounds, canonical child-box envelopes and individual best IoU. It declares
+`group_assignment_uses_ground_truth=true`, `average_precision=false` and
+`predicted_hierarchy=false`. Strict AP, FP/FN and original labels remain unchanged.
+It cannot auto-split a mixed prediction or replace a learned/predicted parent hierarchy.
+Identical conditions apply to all available retained final versions; unavailable old
+surface assignments are explicit. Equations and sources are in report sections
+2.13–2.14, 6.13, 19.1, 24 and 26. The final hashes, targets and count tradeoffs are
+in `docs/v17_final_results.json`.
