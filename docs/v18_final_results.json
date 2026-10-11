@@ -1,0 +1,779 @@
+{
+  "version": "v18",
+  "updated": "2026-10-11",
+  "tests": 278,
+  "consumer_vision_api_calls": 0,
+  "construction_uses_ground_truth": false,
+  "statistics_grouping_uses_ground_truth": true,
+  "statistical_protocol": "GAU_v1_annotation_assisted_pure_fragment_union",
+  "training_started": false,
+  "training_paused_by_user": true,
+  "learned_joint_model_implemented": false,
+  "targets": {
+    "strict_AP25": 0.7,
+    "strict_AP50": 0.55
+  },
+  "scenes": [
+    {
+      "scene_id": "ai_001_002",
+      "frames": 99,
+      "predicted": 10,
+      "gt": 10,
+      "AP25": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "GAU_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "GAU_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "statistical_entities": 10,
+      "MVO25": 1.0,
+      "MVO50": 1.0,
+      "absolute_log_count_error": 0.0,
+      "strict_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "previous_v17_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "previous_v17_GAU_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "all_metric_non_regression_gate": {
+        "accepted": false,
+        "non_regressing": true,
+        "strictly_improved": false,
+        "checks": [
+          {
+            "metric": "geometry_only_box_AP25",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "geometry_only_box_AP50",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "geometry_only_box_AP75",
+            "candidate": 1.0,
+            "baseline": 1.0,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "absolute_log_count_error",
+            "candidate": 0.0,
+            "baseline": 0.0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.25",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.25",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.25",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.5",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.5",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.5",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.75",
+            "candidate": 10,
+            "baseline": 10,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.75",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FN@0.75",
+            "candidate": 0,
+            "baseline": 0,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          }
+        ],
+        "scope": "these observed scenes only; no guarantee on unseen captures",
+        "construction_uses_ground_truth": false
+      },
+      "graph_sha256": "9b35fe0a1fb09f0dc704f0ebacd33898e4f69cf5b5ae529f0e32a716577ff7c4",
+      "prediction_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "observed_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "geometry_source": "instance_cloud_cleaned.ply",
+      "gt_labels_sha256": "72fec7af62bde7a8283de28cd6348a48754247b03dadbbcc37abea0ad29932a9",
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "legacy_topology_reader_passed": true,
+      "part_nodes": 28,
+      "ECHO": {
+        "algorithm": "ECHO_evidence_consensus_for_hypothesis_ownership_v18",
+        "construction_uses_ground_truth": false,
+        "node_or_category_whitelist": false,
+        "thinness_is_rejection": false,
+        "vision_api_calls": 0,
+        "objects": [],
+        "component_sha256": "e53039daf01c546e676a69eadf205f8a8b7c75019510982fa753f6a5c49c0f34",
+        "withdrawn_objects": 0
+      },
+      "MEND": {
+        "algorithm": "MEND_measured_envelope_normal_denoising_v18",
+        "construction_uses_ground_truth": false,
+        "node_or_category_whitelist": false,
+        "component_sha256": "93e56aac8d6f7bbdeaf57588919c1a22cc2a6c481dc45f16c8de9b1e1afa9eb5",
+        "objects": []
+      }
+    },
+    {
+      "scene_id": "ai_001_010",
+      "frames": 100,
+      "predicted": 133,
+      "gt": 109,
+      "AP25": 0.6368771257713797,
+      "AP50": 0.4284958864570163,
+      "AP75": 0.19239071720132508,
+      "GAU_AP": {
+        "AP25": 0.7617337086302854,
+        "AP50": 0.5569186035368884,
+        "AP75": 0.23716938290571482
+      },
+      "GAU_counts": {
+        "0.25": {
+          "TP": 95,
+          "FP": 17,
+          "FN": 14
+        },
+        "0.5": {
+          "TP": 78,
+          "FP": 34,
+          "FN": 31
+        },
+        "0.75": {
+          "TP": 43,
+          "FP": 69,
+          "FN": 66
+        }
+      },
+      "statistical_entities": 112,
+      "MVO25": 0.6368771257713797,
+      "MVO50": 0.4814316839606555,
+      "absolute_log_count_error": 0.19900124599261007,
+      "strict_counts": {
+        "0.25": {
+          "TP": 94,
+          "FP": 39,
+          "FN": 15
+        },
+        "0.5": {
+          "TP": 75,
+          "FP": 58,
+          "FN": 34
+        },
+        "0.75": {
+          "TP": 41,
+          "FP": 92,
+          "FN": 68
+        }
+      },
+      "previous_v17_AP": {
+        "AP25": 0.6308642175677919,
+        "AP50": 0.4252531475054254,
+        "AP75": 0.1911980555480905
+      },
+      "previous_v17_GAU_AP": {
+        "AP25": 0.7528800874132254,
+        "AP50": 0.550060557867535,
+        "AP75": 0.23523367730979966
+      },
+      "all_metric_non_regression_gate": {
+        "accepted": true,
+        "non_regressing": true,
+        "strictly_improved": true,
+        "checks": [
+          {
+            "metric": "geometry_only_box_AP25",
+            "candidate": 0.6368771257713797,
+            "baseline": 0.6308642175677919,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "geometry_only_box_AP50",
+            "candidate": 0.4284958864570163,
+            "baseline": 0.4252531475054254,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "geometry_only_box_AP75",
+            "candidate": 0.19239071720132508,
+            "baseline": 0.1911980555480905,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "absolute_log_count_error",
+            "candidate": 0.19900124599261007,
+            "baseline": 0.20649191772176764,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "TP@0.25",
+            "candidate": 94,
+            "baseline": 94,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.25",
+            "candidate": 39,
+            "baseline": 40,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FN@0.25",
+            "candidate": 15,
+            "baseline": 15,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.5",
+            "candidate": 75,
+            "baseline": 75,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.5",
+            "candidate": 58,
+            "baseline": 59,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FN@0.5",
+            "candidate": 34,
+            "baseline": 34,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "TP@0.75",
+            "candidate": 41,
+            "baseline": 41,
+            "direction": "higher",
+            "non_regressing": true,
+            "strictly_improved": false
+          },
+          {
+            "metric": "FP@0.75",
+            "candidate": 92,
+            "baseline": 93,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": true
+          },
+          {
+            "metric": "FN@0.75",
+            "candidate": 68,
+            "baseline": 68,
+            "direction": "lower",
+            "non_regressing": true,
+            "strictly_improved": false
+          }
+        ],
+        "scope": "these observed scenes only; no guarantee on unseen captures",
+        "construction_uses_ground_truth": false
+      },
+      "graph_sha256": "b01ec526026822ff6e2b37d8c262725a9891a37b0b2123652a0b15451499c36a",
+      "prediction_ply_sha256": "6cb08dc44fc87d4f3d84a9455d471a5835293b7ea8c714b3322198c5554c5429",
+      "observed_ply_sha256": "6cb08dc44fc87d4f3d84a9455d471a5835293b7ea8c714b3322198c5554c5429",
+      "geometry_source": "instance_cloud_regularized.ply",
+      "gt_labels_sha256": "547c62e10f02e9601f45bdfb5553e0d5f2228b4b697709c37f3eb4038908a702",
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "legacy_topology_reader_passed": true,
+      "part_nodes": 636,
+      "ECHO": {
+        "algorithm": "ECHO_evidence_consensus_for_hypothesis_ownership_v18",
+        "construction_uses_ground_truth": false,
+        "node_or_category_whitelist": false,
+        "thinness_is_rejection": false,
+        "vision_api_calls": 0,
+        "objects": [
+          {
+            "instance_id": "310",
+            "name": "window",
+            "withdrawn": true,
+            "sample_points": 1329,
+            "visible_point_fraction": 1.0,
+            "stable_own_point_fraction": 0.0,
+            "contradicted_point_fraction": 0.26636568848758463,
+            "majority_background_point_fraction": 0.9962377727614747,
+            "weighted_own_fraction": 0.245277289513294,
+            "weighted_background_fraction": 0.7547227104867061,
+            "compatible_class_point_fraction": 0.0,
+            "compatible_class_weighted_fraction": 0.245277289513294,
+            "other_owners": {},
+            "frame_evidence": [
+              {
+                "frame_id": "cam_00_0087",
+                "visible_points": 984,
+                "own_fraction": 1.0,
+                "background_fraction": 0.0
+              },
+              {
+                "frame_id": "cam_01_0065",
+                "visible_points": 1074,
+                "own_fraction": 0.518114943379617,
+                "background_fraction": 0.481885056620383
+              },
+              {
+                "frame_id": "cam_01_0068",
+                "visible_points": 1321,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_01_0071",
+                "visible_points": 1211,
+                "own_fraction": 0.47946543928351204,
+                "background_fraction": 0.520534560716488
+              },
+              {
+                "frame_id": "cam_01_0074",
+                "visible_points": 1239,
+                "own_fraction": 0.8797778745288757,
+                "background_fraction": 0.12022212547112422
+              },
+              {
+                "frame_id": "cam_01_0077",
+                "visible_points": 1016,
+                "own_fraction": 0.9160945639150735,
+                "background_fraction": 0.08390543608492634
+              },
+              {
+                "frame_id": "cam_01_0083",
+                "visible_points": 605,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0073",
+                "visible_points": 911,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0076",
+                "visible_points": 1114,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0079",
+                "visible_points": 1209,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0082",
+                "visible_points": 849,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0085",
+                "visible_points": 452,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0088",
+                "visible_points": 1329,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0091",
+                "visible_points": 1329,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0094",
+                "visible_points": 1329,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0097",
+                "visible_points": 300,
+                "own_fraction": 0.0,
+                "background_fraction": 1.0
+              }
+            ],
+            "linear_fragment_ratio": 0.009638186599968615,
+            "semantic_identity_margin": -0.028663322355280102,
+            "semantic_object_background_margin": 0.0004009464682694086,
+            "native_stable_point_fraction": 0.0,
+            "holdout_background_views": 10,
+            "negative_camera_baseline_m": 7.759377633012881,
+            "native_frame_evidence": [
+              {
+                "frame_id": "cam_00_0087",
+                "visible_points": 984,
+                "native_mass": 1.0,
+                "background_mass": 0.0,
+                "holdout_negative": false
+              },
+              {
+                "frame_id": "cam_01_0065",
+                "visible_points": 1074,
+                "native_mass": 0.518114943379617,
+                "background_mass": 0.481885056620383,
+                "holdout_negative": false
+              },
+              {
+                "frame_id": "cam_01_0068",
+                "visible_points": 1321,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_01_0071",
+                "visible_points": 1211,
+                "native_mass": 0.47946543928351204,
+                "background_mass": 0.520534560716488,
+                "holdout_negative": false
+              },
+              {
+                "frame_id": "cam_01_0074",
+                "visible_points": 1239,
+                "native_mass": 0.8797778745288758,
+                "background_mass": 0.12022212547112422,
+                "holdout_negative": false
+              },
+              {
+                "frame_id": "cam_01_0077",
+                "visible_points": 1016,
+                "native_mass": 0.9160945639150735,
+                "background_mass": 0.08390543608492634,
+                "holdout_negative": false
+              },
+              {
+                "frame_id": "cam_01_0083",
+                "visible_points": 605,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0073",
+                "visible_points": 911,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0076",
+                "visible_points": 1114,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0079",
+                "visible_points": 1209,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0082",
+                "visible_points": 849,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0085",
+                "visible_points": 452,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0088",
+                "visible_points": 1329,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0091",
+                "visible_points": 1329,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0094",
+                "visible_points": 1329,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": true
+              },
+              {
+                "frame_id": "cam_02_0097",
+                "visible_points": 300,
+                "native_mass": 0.0,
+                "background_mass": 1.0,
+                "holdout_negative": false
+              }
+            ]
+          }
+        ],
+        "component_sha256": "e53039daf01c546e676a69eadf205f8a8b7c75019510982fa753f6a5c49c0f34",
+        "withdrawn_objects": 1
+      },
+      "MEND": {
+        "algorithm": "MEND_measured_envelope_normal_denoising_v18",
+        "construction_uses_ground_truth": false,
+        "node_or_category_whitelist": false,
+        "component_sha256": "93e56aac8d6f7bbdeaf57588919c1a22cc2a6c481dc45f16c8de9b1e1afa9eb5",
+        "objects": [
+          {
+            "instance_id": "141",
+            "name": "countertop",
+            "original_points": 210163,
+            "regularized_points": 201214,
+            "maximum_displacement_m": 0.0039998116477497625,
+            "rms_residual_before_m": 0.00036693537138083606,
+            "plane_normal": [
+              1.4357081481397363e-06,
+              -1.9065888694424106e-05,
+              0.9999999998172153
+            ],
+            "plane_offset": -0.969940414261565,
+            "measured_plane_support": 0.95979940143978,
+            "observed_geometry_unchanged": true,
+            "reconstructed_coordinates_are_new_measurements": false,
+            "hidden_points_generated": 0
+          },
+          {
+            "instance_id": "236",
+            "name": "countertop",
+            "original_points": 26788,
+            "regularized_points": 23258,
+            "maximum_displacement_m": 0.003986345267806057,
+            "rms_residual_before_m": 0.0005546711294637761,
+            "plane_normal": [
+              -0.0013673791667651073,
+              -6.41709425035684e-05,
+              0.9999990630777134
+            ],
+            "plane_offset": -0.9669122416977152,
+            "measured_plane_support": 0.8793489622218904,
+            "observed_geometry_unchanged": true,
+            "reconstructed_coordinates_are_new_measurements": false,
+            "hidden_points_generated": 0
+          },
+          {
+            "instance_id": "93",
+            "name": "oven",
+            "original_points": 10591,
+            "regularized_points": 10257,
+            "maximum_displacement_m": 0.003976441656176721,
+            "rms_residual_before_m": 0.0006168579292725443,
+            "plane_normal": [
+              0.99999999397364,
+              5.1807443247139574e-05,
+              9.67920908957611e-05
+            ],
+            "plane_offset": 2.3799432087274206,
+            "measured_plane_support": 0.9683693702199981,
+            "observed_geometry_unchanged": true,
+            "reconstructed_coordinates_are_new_measurements": false,
+            "hidden_points_generated": 0
+          },
+          {
+            "instance_id": "174",
+            "name": "cabinet",
+            "original_points": 9267,
+            "regularized_points": 8514,
+            "maximum_displacement_m": 0.003997580913029708,
+            "rms_residual_before_m": 0.0006510255671213946,
+            "plane_normal": [
+              0.9999999798514662,
+              9.894089477229925e-05,
+              -0.0001746647265379504
+            ],
+            "plane_offset": -2.089951488820557,
+            "measured_plane_support": 0.9202546670983058,
+            "observed_geometry_unchanged": true,
+            "reconstructed_coordinates_are_new_measurements": false,
+            "hidden_points_generated": 0
+          },
+          {
+            "instance_id": "8",
+            "name": "cabinet",
+            "original_points": 16033,
+            "regularized_points": 13108,
+            "maximum_displacement_m": 0.0039957702959605435,
+            "rms_residual_before_m": 0.0006889681176074688,
+            "plane_normal": [
+              0.9999999745772717,
+              -2.249895229318618e-05,
+              0.00022436410859073431
+            ],
+            "plane_offset": 2.389838010357977,
+            "measured_plane_support": 0.8201210004365995,
+            "observed_geometry_unchanged": true,
+            "reconstructed_coordinates_are_new_measurements": false,
+            "hidden_points_generated": 0
+          },
+          {
+            "instance_id": "162",
+            "name": "cabinet",
+            "original_points": 66391,
+            "regularized_points": 64050,
+            "maximum_displacement_m": 0.003991528432628844,
+            "rms_residual_before_m": 0.000815330522841023,
+            "plane_normal": [
+              0.9999999978635244,
+              6.727858354100768e-06,
+              6.502066535738991e-05
+            ],
+            "plane_offset": -2.340156366834329,
+            "measured_plane_support": 0.9658859853904661,
+            "observed_geometry_unchanged": true,
+            "reconstructed_coordinates_are_new_measurements": false,
+            "hidden_points_generated": 0
+          }
+        ]
+      }
+    }
+  ],
+  "native_cache_bundles_verified": 199,
+  "construction_sha256": "3e15482e427d6ab97e914042e28d4fedf0196e1fca8c53b8310a3c27337d304a",
+  "learned_universal_completion_solved": false,
+  "empirical_cross_dataset_generalization_proven": false,
+  "v17_byte_identical": true,
+  "strict_target_reached": false,
+  "report_source_sha256": "f894b75eacfa56f47ddd772f9603042f2f4972221ca55a10883575823f915d20",
+  "report_qa_passed": true,
+  "report_version": "v18",
+  "latex_compile_confirmed": false,
+  "latex_compile_limitation": "Built-in compile_latex_document failed before source compilation: windows sandbox helper_unknown_error: setup refresh had errors. No TeX compiler diagnostic was returned. Existing source preserved; no separate PDF compiled.",
+  "published_html": "RESEARCH_LOG.html",
+  "published_latex": "RESEARCH_LOG.tex",
+  "html_sha256": "ebce981e2bb269039bf4ab45291b7ed18f586cd4291018d58a531e0c0a3bb224",
+  "latex_sha256": "fca23cd449ab39819d9c99f102c412dadcc96e9d0933673df9f0f971029f0cf3",
+  "duplicate_rendered_docs_removed": true
+}

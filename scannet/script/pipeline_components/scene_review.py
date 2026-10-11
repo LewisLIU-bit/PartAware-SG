@@ -22,11 +22,18 @@ def summarize(evaluation):
     unmatched=[dict(prediction_id=r['id'],label=r['label'],confidence=r['confidence'],
         reason='25%严格一对一未分配；可能是错位、重复、分割粒度或GT范围差异，不能仅凭此断言物体不存在')
         for r in evaluation['prediction_objects'] if str(r['id']) not in matched['0.25']]
+    aligned=evaluation.get('granularity_aligned_AP')
+    if aligned:
+        aligned_rows={r['gt_id']:r for r in aligned['per_gt']}
+        for row in rows:
+            row['granularity_aligned_best_predictions']=aligned_rows[row['gt_id']]['best_predictions']
+            row['granularity_aligned_matches']={t:next((m for m in value['matches'] if m['gt_id']==row['gt_id']),None) for t,value in aligned['one_to_one'].items()}
     return dict(protocol='independent_observed_hypersim_geometry_review',construction_consumes_review=False,
         ground_truth_in_construction=False,graph_sha256=evaluation['graph_sha256'],
         AP25=evaluation['geometry_only_box_AP25'],AP50=evaluation['geometry_only_box_AP50'],AP75=evaluation['geometry_only_box_AP75'],
         strict_counts={key:{field:value[field] for field in ('TP','FP','FN')} for key,value in strict.items()},
-        per_gt=rows,unmatched_predictions=unmatched)
+        per_gt=rows,unmatched_predictions=unmatched,
+        granularity_aligned_AP={k:aligned[k] for k in ('protocol','grouping_uses_ground_truth','AP25','AP50','AP75','statistical_entity_count')} if aligned else None)
 
 
 def construct(context):
@@ -37,7 +44,8 @@ def construct(context):
     context.environment.update(XDG_SESSION_TYPE='x11',LIBGL_ALWAYS_SOFTWARE='true',OMP_NUM_THREADS='1')
     context.environment.pop('WAYLAND_DISPLAY',None);context.environment.pop('WAYLAND_SOCKET',None)
     try:
-        geometry=context.scene/'instance_cloud_completed.ply'
+        graph=json.loads((context.scene/'topology_map.json').read_text())
+        geometry=context.scene/graph.get('geometry_provenance',{}).get('source','instance_cloud_completed.ply')
         if not geometry.is_file():geometry=context.scene/'instance_cloud_cleaned.ply'
         for name,front in [('final_scene.png',[.15,-.85,.5]),('final_scene_reverse.png',[-.15,.85,.5])]:
             context.execute([sys.executable,str(context.repo/'script/visualize_map.py'),

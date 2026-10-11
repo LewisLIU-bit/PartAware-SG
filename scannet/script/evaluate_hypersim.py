@@ -304,6 +304,8 @@ def evaluate(args):
         report['granularity_surface_diagnostic'] = diagnostics.surface_diagnostics(predictions, truth)
         report['object_error_diagnostic'] = diagnostics.box_diagnostics(predictions, truth, bbox_spatial, report['granularity_surface_diagnostic'])
         report['fragment_union_box_diagnostic'] = diagnostics.fragment_union_box_diagnostics(predictions, truth, report['granularity_surface_diagnostic'])
+        from pipeline_components.granularity_aligned import evaluate as aligned_evaluate
+        report['granularity_aligned_AP'] = aligned_evaluate(predictions, truth, report['granularity_surface_diagnostic'])
         report['granularity_component_sha256'] = hashlib.sha256(Path(diagnostics.__file__).read_bytes()).hexdigest()
     output = Path(args.output).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,5902 @@
+{
+  "version": "v18",
+  "purpose": "report_only_official_gt_index_with_GAU_and_strict_matches",
+  "guides": [
+    {
+      "scene_id": "ai_001_002",
+      "gt_count": 10,
+      "frames": 99,
+      "evaluation_sha256": "49d7a9fa65b78b1265f01c24d3f65c8f93278fe99cd43691566e4ad756c4ec3b",
+      "figures": [
+        "figures/v18_gt_002_01.png"
+      ],
+      "instances": [
+        {
+          "gt_id": 1,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "4",
+            "member_prediction_ids": [
+              "4"
+            ],
+            "label": "laptop",
+            "confidence": 0.7734505558830719,
+            "IoU": 0.9873438140419162
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "4",
+              "member_prediction_ids": [
+                "4"
+              ],
+              "gt_id": 1,
+              "iou": 0.9873438140419162
+            },
+            "0.5": {
+              "prediction_id": "4",
+              "member_prediction_ids": [
+                "4"
+              ],
+              "gt_id": 1,
+              "iou": 0.9873438140419162
+            },
+            "0.75": {
+              "prediction_id": "4",
+              "member_prediction_ids": [
+                "4"
+              ],
+              "gt_id": 1,
+              "iou": 0.9873438140419162
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "4",
+              "gt_id": 1,
+              "iou": 0.9873438140419162
+            },
+            "0.5": {
+              "prediction_id": "4",
+              "gt_id": 1,
+              "iou": 0.9873438140419162
+            },
+            "0.75": {
+              "prediction_id": "4",
+              "gt_id": 1,
+              "iou": 0.9873438140419162
+            }
+          },
+          "frame_id": "cam_00_0016",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0016.semantic_instance.hdf5",
+          "visible_pixels": 139515
+        },
+        {
+          "gt_id": 2,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "8",
+            "member_prediction_ids": [
+              "8"
+            ],
+            "label": "audio equipment",
+            "confidence": 0.6312088526554669,
+            "IoU": 0.8633562899351143
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "8",
+              "member_prediction_ids": [
+                "8"
+              ],
+              "gt_id": 2,
+              "iou": 0.8633562899351143
+            },
+            "0.5": {
+              "prediction_id": "8",
+              "member_prediction_ids": [
+                "8"
+              ],
+              "gt_id": 2,
+              "iou": 0.8633562899351143
+            },
+            "0.75": {
+              "prediction_id": "8",
+              "member_prediction_ids": [
+                "8"
+              ],
+              "gt_id": 2,
+              "iou": 0.8633562899351143
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "8",
+              "gt_id": 2,
+              "iou": 0.8633562899351143
+            },
+            "0.5": {
+              "prediction_id": "8",
+              "gt_id": 2,
+              "iou": 0.8633562899351143
+            },
+            "0.75": {
+              "prediction_id": "8",
+              "gt_id": 2,
+              "iou": 0.8633562899351143
+            }
+          },
+          "frame_id": "cam_03_0013",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_03_geometry_hdf5/frame.0013.semantic_instance.hdf5",
+          "visible_pixels": 33136
+        },
+        {
+          "gt_id": 3,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "59",
+            "member_prediction_ids": [
+              "59"
+            ],
+            "label": "audio equipment",
+            "confidence": 0.6447514383980769,
+            "IoU": 0.9676334849825101
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "59",
+              "member_prediction_ids": [
+                "59"
+              ],
+              "gt_id": 3,
+              "iou": 0.9676334849825101
+            },
+            "0.5": {
+              "prediction_id": "59",
+              "member_prediction_ids": [
+                "59"
+              ],
+              "gt_id": 3,
+              "iou": 0.9676334849825101
+            },
+            "0.75": {
+              "prediction_id": "59",
+              "member_prediction_ids": [
+                "59"
+              ],
+              "gt_id": 3,
+              "iou": 0.9676334849825101
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "59",
+              "gt_id": 3,
+              "iou": 0.9676334849825101
+            },
+            "0.5": {
+              "prediction_id": "59",
+              "gt_id": 3,
+              "iou": 0.9676334849825101
+            },
+            "0.75": {
+              "prediction_id": "59",
+              "gt_id": 3,
+              "iou": 0.9676334849825101
+            }
+          },
+          "frame_id": "cam_03_0057",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_03_geometry_hdf5/frame.0057.semantic_instance.hdf5",
+          "visible_pixels": 178573
+        },
+        {
+          "gt_id": 4,
+          "official_label": "desk",
+          "best_prediction": {
+            "prediction_id": "17",
+            "member_prediction_ids": [
+              "17"
+            ],
+            "label": "table",
+            "confidence": 0.5875674515837601,
+            "IoU": 0.9556205947921056
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "17",
+              "member_prediction_ids": [
+                "17"
+              ],
+              "gt_id": 4,
+              "iou": 0.9556205947921056
+            },
+            "0.5": {
+              "prediction_id": "17",
+              "member_prediction_ids": [
+                "17"
+              ],
+              "gt_id": 4,
+              "iou": 0.9556205947921056
+            },
+            "0.75": {
+              "prediction_id": "17",
+              "member_prediction_ids": [
+                "17"
+              ],
+              "gt_id": 4,
+              "iou": 0.9556205947921056
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "17",
+              "gt_id": 4,
+              "iou": 0.9556205947921056
+            },
+            "0.5": {
+              "prediction_id": "17",
+              "gt_id": 4,
+              "iou": 0.9556205947921056
+            },
+            "0.75": {
+              "prediction_id": "17",
+              "gt_id": 4,
+              "iou": 0.9556205947921056
+            }
+          },
+          "frame_id": "cam_03_0017",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_03_geometry_hdf5/frame.0017.semantic_instance.hdf5",
+          "visible_pixels": 331314
+        },
+        {
+          "gt_id": 5,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "6",
+            "member_prediction_ids": [
+              "6"
+            ],
+            "label": "speaker",
+            "confidence": 0.9134490001885726,
+            "IoU": 0.961673310863647
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "6",
+              "member_prediction_ids": [
+                "6"
+              ],
+              "gt_id": 5,
+              "iou": 0.961673310863647
+            },
+            "0.5": {
+              "prediction_id": "6",
+              "member_prediction_ids": [
+                "6"
+              ],
+              "gt_id": 5,
+              "iou": 0.961673310863647
+            },
+            "0.75": {
+              "prediction_id": "6",
+              "member_prediction_ids": [
+                "6"
+              ],
+              "gt_id": 5,
+              "iou": 0.961673310863647
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "6",
+              "gt_id": 5,
+              "iou": 0.961673310863647
+            },
+            "0.5": {
+              "prediction_id": "6",
+              "gt_id": 5,
+              "iou": 0.961673310863647
+            },
+            "0.75": {
+              "prediction_id": "6",
+              "gt_id": 5,
+              "iou": 0.961673310863647
+            }
+          },
+          "frame_id": "cam_02_0000",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0000.semantic_instance.hdf5",
+          "visible_pixels": 518514
+        },
+        {
+          "gt_id": 6,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "3",
+            "member_prediction_ids": [
+              "3"
+            ],
+            "label": "speaker",
+            "confidence": 0.8979020826666513,
+            "IoU": 0.9655813268708822
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "3",
+              "member_prediction_ids": [
+                "3"
+              ],
+              "gt_id": 6,
+              "iou": 0.9655813268708822
+            },
+            "0.5": {
+              "prediction_id": "3",
+              "member_prediction_ids": [
+                "3"
+              ],
+              "gt_id": 6,
+              "iou": 0.9655813268708822
+            },
+            "0.75": {
+              "prediction_id": "3",
+              "member_prediction_ids": [
+                "3"
+              ],
+              "gt_id": 6,
+              "iou": 0.9655813268708822
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "3",
+              "gt_id": 6,
+              "iou": 0.9655813268708822
+            },
+            "0.5": {
+              "prediction_id": "3",
+              "gt_id": 6,
+              "iou": 0.9655813268708822
+            },
+            "0.75": {
+              "prediction_id": "3",
+              "gt_id": 6,
+              "iou": 0.9655813268708822
+            }
+          },
+          "frame_id": "cam_03_0004",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_03_geometry_hdf5/frame.0004.semantic_instance.hdf5",
+          "visible_pixels": 41627
+        },
+        {
+          "gt_id": 7,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "1",
+            "member_prediction_ids": [
+              "1"
+            ],
+            "label": "speaker",
+            "confidence": 0.90449035309781,
+            "IoU": 0.9539541274125323
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "1",
+              "member_prediction_ids": [
+                "1"
+              ],
+              "gt_id": 7,
+              "iou": 0.9539541274125323
+            },
+            "0.5": {
+              "prediction_id": "1",
+              "member_prediction_ids": [
+                "1"
+              ],
+              "gt_id": 7,
+              "iou": 0.9539541274125323
+            },
+            "0.75": {
+              "prediction_id": "1",
+              "member_prediction_ids": [
+                "1"
+              ],
+              "gt_id": 7,
+              "iou": 0.9539541274125323
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "1",
+              "gt_id": 7,
+              "iou": 0.9539541274125323
+            },
+            "0.5": {
+              "prediction_id": "1",
+              "gt_id": 7,
+              "iou": 0.9539541274125323
+            },
+            "0.75": {
+              "prediction_id": "1",
+              "gt_id": 7,
+              "iou": 0.9539541274125323
+            }
+          },
+          "frame_id": "cam_03_0000",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_03_geometry_hdf5/frame.0000.semantic_instance.hdf5",
+          "visible_pixels": 125930
+        },
+        {
+          "gt_id": 8,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "7",
+            "member_prediction_ids": [
+              "7"
+            ],
+            "label": "speaker",
+            "confidence": 0.888432898955186,
+            "IoU": 0.949523060223664
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "7",
+              "member_prediction_ids": [
+                "7"
+              ],
+              "gt_id": 8,
+              "iou": 0.949523060223664
+            },
+            "0.5": {
+              "prediction_id": "7",
+              "member_prediction_ids": [
+                "7"
+              ],
+              "gt_id": 8,
+              "iou": 0.949523060223664
+            },
+            "0.75": {
+              "prediction_id": "7",
+              "member_prediction_ids": [
+                "7"
+              ],
+              "gt_id": 8,
+              "iou": 0.949523060223664
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "7",
+              "gt_id": 8,
+              "iou": 0.949523060223664
+            },
+            "0.5": {
+              "prediction_id": "7",
+              "gt_id": 8,
+              "iou": 0.949523060223664
+            },
+            "0.75": {
+              "prediction_id": "7",
+              "gt_id": 8,
+              "iou": 0.949523060223664
+            }
+          },
+          "frame_id": "cam_02_0020",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0020.semantic_instance.hdf5",
+          "visible_pixels": 78102
+        },
+        {
+          "gt_id": 9,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "2",
+            "member_prediction_ids": [
+              "2"
+            ],
+            "label": "speaker",
+            "confidence": 0.908427007271192,
+            "IoU": 0.9633495906057027
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "2",
+              "member_prediction_ids": [
+                "2"
+              ],
+              "gt_id": 9,
+              "iou": 0.9633495906057027
+            },
+            "0.5": {
+              "prediction_id": "2",
+              "member_prediction_ids": [
+                "2"
+              ],
+              "gt_id": 9,
+              "iou": 0.9633495906057027
+            },
+            "0.75": {
+              "prediction_id": "2",
+              "member_prediction_ids": [
+                "2"
+              ],
+              "gt_id": 9,
+              "iou": 0.9633495906057027
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "2",
+              "gt_id": 9,
+              "iou": 0.9633495906057027
+            },
+            "0.5": {
+              "prediction_id": "2",
+              "gt_id": 9,
+              "iou": 0.9633495906057027
+            },
+            "0.75": {
+              "prediction_id": "2",
+              "gt_id": 9,
+              "iou": 0.9633495906057027
+            }
+          },
+          "frame_id": "cam_01_0000",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0000.semantic_instance.hdf5",
+          "visible_pixels": 360123
+        },
+        {
+          "gt_id": 10,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "5",
+            "member_prediction_ids": [
+              "5"
+            ],
+            "label": "speaker",
+            "confidence": 0.8928160330930452,
+            "IoU": 0.9657097712622829
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "5",
+              "member_prediction_ids": [
+                "5"
+              ],
+              "gt_id": 10,
+              "iou": 0.9657097712622829
+            },
+            "0.5": {
+              "prediction_id": "5",
+              "member_prediction_ids": [
+                "5"
+              ],
+              "gt_id": 10,
+              "iou": 0.9657097712622829
+            },
+            "0.75": {
+              "prediction_id": "5",
+              "member_prediction_ids": [
+                "5"
+              ],
+              "gt_id": 10,
+              "iou": 0.9657097712622829
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "5",
+              "gt_id": 10,
+              "iou": 0.9657097712622829
+            },
+            "0.5": {
+              "prediction_id": "5",
+              "gt_id": 10,
+              "iou": 0.9657097712622829
+            },
+            "0.75": {
+              "prediction_id": "5",
+              "gt_id": 10,
+              "iou": 0.9657097712622829
+            }
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_002_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 160777
+        }
+      ],
+      "aligned_counts": {
+        "0.25": 10,
+        "0.5": 10,
+        "0.75": 10
+      },
+      "strict_counts": {
+        "0.25": 10,
+        "0.5": 10,
+        "0.75": 10
+      }
+    },
+    {
+      "scene_id": "ai_001_010",
+      "gt_count": 109,
+      "frames": 100,
+      "evaluation_sha256": "c3b35293bf3ceae8b4420a76de5ce58c67b88feb48da7557d22f271a283e0294",
+      "figures": [
+        "figures/v18_gt_010_01.png",
+        "figures/v18_gt_010_02.png",
+        "figures/v18_gt_010_03.png",
+        "figures/v18_gt_010_04.png",
+        "figures/v18_gt_010_05.png",
+        "figures/v18_gt_010_06.png",
+        "figures/v18_gt_010_07.png",
+        "figures/v18_gt_010_08.png",
+        "figures/v18_gt_010_09.png",
+        "figures/v18_gt_010_10.png"
+      ],
+      "instances": [
+        {
+          "gt_id": 1,
+          "official_label": "lamp",
+          "best_prediction": {
+            "prediction_id": "25+40+42+150+298+41",
+            "member_prediction_ids": [
+              "25",
+              "40",
+              "42",
+              "150",
+              "298",
+              "41"
+            ],
+            "label": "range hood + light fixture + ceiling light",
+            "confidence": 0.4891421526187471,
+            "IoU": 0.24958893686855407
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0054",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0054.semantic_instance.hdf5",
+          "visible_pixels": 82615
+        },
+        {
+          "gt_id": 2,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "29",
+            "member_prediction_ids": [
+              "29"
+            ],
+            "label": "kitchen utensil",
+            "confidence": 0.437791750758173,
+            "IoU": 0.6562805894102749
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "29",
+              "member_prediction_ids": [
+                "29"
+              ],
+              "gt_id": 2,
+              "iou": 0.6562805894102749
+            },
+            "0.5": {
+              "prediction_id": "29",
+              "member_prediction_ids": [
+                "29"
+              ],
+              "gt_id": 2,
+              "iou": 0.6562805894102749
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "29",
+              "gt_id": 2,
+              "iou": 0.6562805894102749
+            },
+            "0.5": {
+              "prediction_id": "29",
+              "gt_id": 2,
+              "iou": 0.6562805894102749
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0049",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0049.semantic_instance.hdf5",
+          "visible_pixels": 11736
+        },
+        {
+          "gt_id": 3,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "457",
+            "member_prediction_ids": [
+              "457"
+            ],
+            "label": "plate",
+            "confidence": 0.5369628906249999,
+            "IoU": 0.9762140823550043
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "457",
+              "member_prediction_ids": [
+                "457"
+              ],
+              "gt_id": 3,
+              "iou": 0.9762140823550043
+            },
+            "0.5": {
+              "prediction_id": "457",
+              "member_prediction_ids": [
+                "457"
+              ],
+              "gt_id": 3,
+              "iou": 0.9762140823550043
+            },
+            "0.75": {
+              "prediction_id": "457",
+              "member_prediction_ids": [
+                "457"
+              ],
+              "gt_id": 3,
+              "iou": 0.9762140823550043
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "457",
+              "gt_id": 3,
+              "iou": 0.9762140823550043
+            },
+            "0.5": {
+              "prediction_id": "457",
+              "gt_id": 3,
+              "iou": 0.9762140823550043
+            },
+            "0.75": {
+              "prediction_id": "457",
+              "gt_id": 3,
+              "iou": 0.9762140823550043
+            }
+          },
+          "frame_id": "cam_01_0011",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0011.semantic_instance.hdf5",
+          "visible_pixels": 22536
+        },
+        {
+          "gt_id": 4,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "456",
+            "member_prediction_ids": [
+              "456"
+            ],
+            "label": "plate",
+            "confidence": 0.547421875,
+            "IoU": 0.606339702148698
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "456",
+              "member_prediction_ids": [
+                "456"
+              ],
+              "gt_id": 4,
+              "iou": 0.606339702148698
+            },
+            "0.5": {
+              "prediction_id": "456",
+              "member_prediction_ids": [
+                "456"
+              ],
+              "gt_id": 4,
+              "iou": 0.606339702148698
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "456",
+              "gt_id": 4,
+              "iou": 0.606339702148698
+            },
+            "0.5": {
+              "prediction_id": "456",
+              "gt_id": 4,
+              "iou": 0.606339702148698
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0011",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0011.semantic_instance.hdf5",
+          "visible_pixels": 29006
+        },
+        {
+          "gt_id": 5,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "84",
+            "member_prediction_ids": [
+              "84"
+            ],
+            "label": "plate",
+            "confidence": 0.41881609667763836,
+            "IoU": 0.8898040283713003
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "84",
+              "member_prediction_ids": [
+                "84"
+              ],
+              "gt_id": 5,
+              "iou": 0.8898040283713003
+            },
+            "0.5": {
+              "prediction_id": "84",
+              "member_prediction_ids": [
+                "84"
+              ],
+              "gt_id": 5,
+              "iou": 0.8898040283713003
+            },
+            "0.75": {
+              "prediction_id": "84",
+              "member_prediction_ids": [
+                "84"
+              ],
+              "gt_id": 5,
+              "iou": 0.8898040283713003
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "84",
+              "gt_id": 5,
+              "iou": 0.8898040283713003
+            },
+            "0.5": {
+              "prediction_id": "84",
+              "gt_id": 5,
+              "iou": 0.8898040283713003
+            },
+            "0.75": {
+              "prediction_id": "84",
+              "gt_id": 5,
+              "iou": 0.8898040283713003
+            }
+          },
+          "frame_id": "cam_01_0062",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0062.semantic_instance.hdf5",
+          "visible_pixels": 35605
+        },
+        {
+          "gt_id": 6,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "444",
+            "member_prediction_ids": [
+              "444"
+            ],
+            "label": "plate",
+            "confidence": 0.349013413898032,
+            "IoU": 0.8831336695900827
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "444",
+              "member_prediction_ids": [
+                "444"
+              ],
+              "gt_id": 6,
+              "iou": 0.8831336695900827
+            },
+            "0.5": {
+              "prediction_id": "444",
+              "member_prediction_ids": [
+                "444"
+              ],
+              "gt_id": 6,
+              "iou": 0.8831336695900827
+            },
+            "0.75": {
+              "prediction_id": "444",
+              "member_prediction_ids": [
+                "444"
+              ],
+              "gt_id": 6,
+              "iou": 0.8831336695900827
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "444",
+              "gt_id": 6,
+              "iou": 0.8831336695900827
+            },
+            "0.5": {
+              "prediction_id": "444",
+              "gt_id": 6,
+              "iou": 0.8831336695900827
+            },
+            "0.75": {
+              "prediction_id": "444",
+              "gt_id": 6,
+              "iou": 0.8831336695900827
+            }
+          },
+          "frame_id": "cam_01_0083",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0083.semantic_instance.hdf5",
+          "visible_pixels": 3051
+        },
+        {
+          "gt_id": 7,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "445",
+            "member_prediction_ids": [
+              "445"
+            ],
+            "label": "plate",
+            "confidence": 0.36646408459293356,
+            "IoU": 0.8826717813035798
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "445",
+              "member_prediction_ids": [
+                "445"
+              ],
+              "gt_id": 7,
+              "iou": 0.8826717813035798
+            },
+            "0.5": {
+              "prediction_id": "445",
+              "member_prediction_ids": [
+                "445"
+              ],
+              "gt_id": 7,
+              "iou": 0.8826717813035798
+            },
+            "0.75": {
+              "prediction_id": "445",
+              "member_prediction_ids": [
+                "445"
+              ],
+              "gt_id": 7,
+              "iou": 0.8826717813035798
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "445",
+              "gt_id": 7,
+              "iou": 0.8826717813035798
+            },
+            "0.5": {
+              "prediction_id": "445",
+              "gt_id": 7,
+              "iou": 0.8826717813035798
+            },
+            "0.75": {
+              "prediction_id": "445",
+              "gt_id": 7,
+              "iou": 0.8826717813035798
+            }
+          },
+          "frame_id": "cam_01_0083",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0083.semantic_instance.hdf5",
+          "visible_pixels": 3023
+        },
+        {
+          "gt_id": 8,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "446",
+            "member_prediction_ids": [
+              "446"
+            ],
+            "label": "plate",
+            "confidence": 0.349013413898032,
+            "IoU": 0.8054385819927489
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "446",
+              "member_prediction_ids": [
+                "446"
+              ],
+              "gt_id": 8,
+              "iou": 0.8054385819927489
+            },
+            "0.5": {
+              "prediction_id": "446",
+              "member_prediction_ids": [
+                "446"
+              ],
+              "gt_id": 8,
+              "iou": 0.8054385819927489
+            },
+            "0.75": {
+              "prediction_id": "446",
+              "member_prediction_ids": [
+                "446"
+              ],
+              "gt_id": 8,
+              "iou": 0.8054385819927489
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "446",
+              "gt_id": 8,
+              "iou": 0.8054385819927489
+            },
+            "0.5": {
+              "prediction_id": "446",
+              "gt_id": 8,
+              "iou": 0.8054385819927489
+            },
+            "0.75": {
+              "prediction_id": "446",
+              "gt_id": 8,
+              "iou": 0.8054385819927489
+            }
+          },
+          "frame_id": "cam_01_0083",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0083.semantic_instance.hdf5",
+          "visible_pixels": 3014
+        },
+        {
+          "gt_id": 9,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "447",
+            "member_prediction_ids": [
+              "447"
+            ],
+            "label": "plate",
+            "confidence": 0.36646408459293356,
+            "IoU": 0.8431729901465576
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "447",
+              "member_prediction_ids": [
+                "447"
+              ],
+              "gt_id": 9,
+              "iou": 0.8431729901465576
+            },
+            "0.5": {
+              "prediction_id": "447",
+              "member_prediction_ids": [
+                "447"
+              ],
+              "gt_id": 9,
+              "iou": 0.8431729901465576
+            },
+            "0.75": {
+              "prediction_id": "447",
+              "member_prediction_ids": [
+                "447"
+              ],
+              "gt_id": 9,
+              "iou": 0.8431729901465576
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "447",
+              "gt_id": 9,
+              "iou": 0.8431729901465576
+            },
+            "0.5": {
+              "prediction_id": "447",
+              "gt_id": 9,
+              "iou": 0.8431729901465576
+            },
+            "0.75": {
+              "prediction_id": "447",
+              "gt_id": 9,
+              "iou": 0.8431729901465576
+            }
+          },
+          "frame_id": "cam_01_0083",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0083.semantic_instance.hdf5",
+          "visible_pixels": 3012
+        },
+        {
+          "gt_id": 10,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "448",
+            "member_prediction_ids": [
+              "448"
+            ],
+            "label": "plate",
+            "confidence": 0.38391475528783514,
+            "IoU": 0.8835099346015547
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "448",
+              "member_prediction_ids": [
+                "448"
+              ],
+              "gt_id": 10,
+              "iou": 0.8835099346015547
+            },
+            "0.5": {
+              "prediction_id": "448",
+              "member_prediction_ids": [
+                "448"
+              ],
+              "gt_id": 10,
+              "iou": 0.8835099346015547
+            },
+            "0.75": {
+              "prediction_id": "448",
+              "member_prediction_ids": [
+                "448"
+              ],
+              "gt_id": 10,
+              "iou": 0.8835099346015547
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "448",
+              "gt_id": 10,
+              "iou": 0.8835099346015547
+            },
+            "0.5": {
+              "prediction_id": "448",
+              "gt_id": 10,
+              "iou": 0.8835099346015547
+            },
+            "0.75": {
+              "prediction_id": "448",
+              "gt_id": 10,
+              "iou": 0.8835099346015547
+            }
+          },
+          "frame_id": "cam_01_0083",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0083.semantic_instance.hdf5",
+          "visible_pixels": 3605
+        },
+        {
+          "gt_id": 11,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "39",
+            "member_prediction_ids": [
+              "39"
+            ],
+            "label": "plate",
+            "confidence": 0.5064479292593335,
+            "IoU": 0.7279560408766269
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "39",
+              "member_prediction_ids": [
+                "39"
+              ],
+              "gt_id": 11,
+              "iou": 0.7279560408766269
+            },
+            "0.5": {
+              "prediction_id": "39",
+              "member_prediction_ids": [
+                "39"
+              ],
+              "gt_id": 11,
+              "iou": 0.7279560408766269
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "39",
+              "gt_id": 11,
+              "iou": 0.7279560408766269
+            },
+            "0.5": {
+              "prediction_id": "39",
+              "gt_id": 11,
+              "iou": 0.7279560408766269
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0035",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0035.semantic_instance.hdf5",
+          "visible_pixels": 24155
+        },
+        {
+          "gt_id": 12,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "449",
+            "member_prediction_ids": [
+              "449"
+            ],
+            "label": "plate",
+            "confidence": 0.37983594694450007,
+            "IoU": 0.6388104710036018
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "449",
+              "member_prediction_ids": [
+                "449"
+              ],
+              "gt_id": 12,
+              "iou": 0.6388104710036018
+            },
+            "0.5": {
+              "prediction_id": "449",
+              "member_prediction_ids": [
+                "449"
+              ],
+              "gt_id": 12,
+              "iou": 0.6388104710036018
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "449",
+              "gt_id": 12,
+              "iou": 0.6388104710036018
+            },
+            "0.5": {
+              "prediction_id": "449",
+              "gt_id": 12,
+              "iou": 0.6388104710036018
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0035",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0035.semantic_instance.hdf5",
+          "visible_pixels": 3383
+        },
+        {
+          "gt_id": 13,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "450",
+            "member_prediction_ids": [
+              "450"
+            ],
+            "label": "plate",
+            "confidence": 0.3587339498920279,
+            "IoU": 0.6631386499293865
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "450",
+              "member_prediction_ids": [
+                "450"
+              ],
+              "gt_id": 13,
+              "iou": 0.6631386499293865
+            },
+            "0.5": {
+              "prediction_id": "450",
+              "member_prediction_ids": [
+                "450"
+              ],
+              "gt_id": 13,
+              "iou": 0.6631386499293865
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "450",
+              "gt_id": 13,
+              "iou": 0.6631386499293865
+            },
+            "0.5": {
+              "prediction_id": "450",
+              "gt_id": 13,
+              "iou": 0.6631386499293865
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0035",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0035.semantic_instance.hdf5",
+          "visible_pixels": 3365
+        },
+        {
+          "gt_id": 14,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "451",
+            "member_prediction_ids": [
+              "451"
+            ],
+            "label": "plate",
+            "confidence": 0.37983594694450007,
+            "IoU": 0.7236812672559342
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "451",
+              "member_prediction_ids": [
+                "451"
+              ],
+              "gt_id": 14,
+              "iou": 0.7236812672559342
+            },
+            "0.5": {
+              "prediction_id": "451",
+              "member_prediction_ids": [
+                "451"
+              ],
+              "gt_id": 14,
+              "iou": 0.7236812672559342
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "451",
+              "gt_id": 14,
+              "iou": 0.7236812672559342
+            },
+            "0.5": {
+              "prediction_id": "451",
+              "gt_id": 14,
+              "iou": 0.7236812672559342
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0035",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0035.semantic_instance.hdf5",
+          "visible_pixels": 3381
+        },
+        {
+          "gt_id": 15,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "452",
+            "member_prediction_ids": [
+              "452"
+            ],
+            "label": "plate",
+            "confidence": 0.37983594694450007,
+            "IoU": 0.6088604554597827
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "452",
+              "member_prediction_ids": [
+                "452"
+              ],
+              "gt_id": 15,
+              "iou": 0.6088604554597827
+            },
+            "0.5": {
+              "prediction_id": "452",
+              "member_prediction_ids": [
+                "452"
+              ],
+              "gt_id": 15,
+              "iou": 0.6088604554597827
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "452",
+              "gt_id": 15,
+              "iou": 0.6088604554597827
+            },
+            "0.5": {
+              "prediction_id": "452",
+              "gt_id": 15,
+              "iou": 0.6088604554597827
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0035",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0035.semantic_instance.hdf5",
+          "visible_pixels": 3345
+        },
+        {
+          "gt_id": 16,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "453",
+            "member_prediction_ids": [
+              "453"
+            ],
+            "label": "plate",
+            "confidence": 0.5064479292593335,
+            "IoU": 0.8769604350862066
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "453",
+              "member_prediction_ids": [
+                "453"
+              ],
+              "gt_id": 16,
+              "iou": 0.8769604350862066
+            },
+            "0.5": {
+              "prediction_id": "453",
+              "member_prediction_ids": [
+                "453"
+              ],
+              "gt_id": 16,
+              "iou": 0.8769604350862066
+            },
+            "0.75": {
+              "prediction_id": "453",
+              "member_prediction_ids": [
+                "453"
+              ],
+              "gt_id": 16,
+              "iou": 0.8769604350862066
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "453",
+              "gt_id": 16,
+              "iou": 0.8769604350862066
+            },
+            "0.5": {
+              "prediction_id": "453",
+              "gt_id": 16,
+              "iou": 0.8769604350862066
+            },
+            "0.75": {
+              "prediction_id": "453",
+              "gt_id": 16,
+              "iou": 0.8769604350862066
+            }
+          },
+          "frame_id": "cam_01_0035",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0035.semantic_instance.hdf5",
+          "visible_pixels": 3369
+        },
+        {
+          "gt_id": 17,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "10",
+            "member_prediction_ids": [
+              "10"
+            ],
+            "label": "cup",
+            "confidence": 0.7783452082822422,
+            "IoU": 0.969917895616257
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "10",
+              "member_prediction_ids": [
+                "10"
+              ],
+              "gt_id": 17,
+              "iou": 0.969917895616257
+            },
+            "0.5": {
+              "prediction_id": "10",
+              "member_prediction_ids": [
+                "10"
+              ],
+              "gt_id": 17,
+              "iou": 0.969917895616257
+            },
+            "0.75": {
+              "prediction_id": "10",
+              "member_prediction_ids": [
+                "10"
+              ],
+              "gt_id": 17,
+              "iou": 0.969917895616257
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "10",
+              "gt_id": 17,
+              "iou": 0.969917895616257
+            },
+            "0.5": {
+              "prediction_id": "10",
+              "gt_id": 17,
+              "iou": 0.969917895616257
+            },
+            "0.75": {
+              "prediction_id": "10",
+              "gt_id": 17,
+              "iou": 0.969917895616257
+            }
+          },
+          "frame_id": "cam_02_0061",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0061.semantic_instance.hdf5",
+          "visible_pixels": 5904
+        },
+        {
+          "gt_id": 18,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "22",
+            "member_prediction_ids": [
+              "22"
+            ],
+            "label": "plate",
+            "confidence": 0.5823742487929284,
+            "IoU": 0.9286522630506937
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "22",
+              "member_prediction_ids": [
+                "22"
+              ],
+              "gt_id": 18,
+              "iou": 0.9286522630506937
+            },
+            "0.5": {
+              "prediction_id": "22",
+              "member_prediction_ids": [
+                "22"
+              ],
+              "gt_id": 18,
+              "iou": 0.9286522630506937
+            },
+            "0.75": {
+              "prediction_id": "22",
+              "member_prediction_ids": [
+                "22"
+              ],
+              "gt_id": 18,
+              "iou": 0.9286522630506937
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "22",
+              "gt_id": 18,
+              "iou": 0.9286522630506937
+            },
+            "0.5": {
+              "prediction_id": "22",
+              "gt_id": 18,
+              "iou": 0.9286522630506937
+            },
+            "0.75": {
+              "prediction_id": "22",
+              "gt_id": 18,
+              "iou": 0.9286522630506937
+            }
+          },
+          "frame_id": "cam_01_0053",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0053.semantic_instance.hdf5",
+          "visible_pixels": 6388
+        },
+        {
+          "gt_id": 19,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "5",
+            "member_prediction_ids": [
+              "5"
+            ],
+            "label": "cup",
+            "confidence": 0.7128152142795732,
+            "IoU": 0.9743028402240755
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "5",
+              "member_prediction_ids": [
+                "5"
+              ],
+              "gt_id": 19,
+              "iou": 0.9743028402240755
+            },
+            "0.5": {
+              "prediction_id": "5",
+              "member_prediction_ids": [
+                "5"
+              ],
+              "gt_id": 19,
+              "iou": 0.9743028402240755
+            },
+            "0.75": {
+              "prediction_id": "5",
+              "member_prediction_ids": [
+                "5"
+              ],
+              "gt_id": 19,
+              "iou": 0.9743028402240755
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "5",
+              "gt_id": 19,
+              "iou": 0.9743028402240755
+            },
+            "0.5": {
+              "prediction_id": "5",
+              "gt_id": 19,
+              "iou": 0.9743028402240755
+            },
+            "0.75": {
+              "prediction_id": "5",
+              "gt_id": 19,
+              "iou": 0.9743028402240755
+            }
+          },
+          "frame_id": "cam_02_0061",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0061.semantic_instance.hdf5",
+          "visible_pixels": 7558
+        },
+        {
+          "gt_id": 20,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "7",
+            "member_prediction_ids": [
+              "7"
+            ],
+            "label": "plate",
+            "confidence": 0.6896633900734186,
+            "IoU": 0.8724711374492818
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "7",
+              "member_prediction_ids": [
+                "7"
+              ],
+              "gt_id": 20,
+              "iou": 0.8724711374492818
+            },
+            "0.5": {
+              "prediction_id": "7",
+              "member_prediction_ids": [
+                "7"
+              ],
+              "gt_id": 20,
+              "iou": 0.8724711374492818
+            },
+            "0.75": {
+              "prediction_id": "7",
+              "member_prediction_ids": [
+                "7"
+              ],
+              "gt_id": 20,
+              "iou": 0.8724711374492818
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "7",
+              "gt_id": 20,
+              "iou": 0.8724711374492818
+            },
+            "0.5": {
+              "prediction_id": "7",
+              "gt_id": 20,
+              "iou": 0.8724711374492818
+            },
+            "0.75": {
+              "prediction_id": "7",
+              "gt_id": 20,
+              "iou": 0.8724711374492818
+            }
+          },
+          "frame_id": "cam_02_0061",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0061.semantic_instance.hdf5",
+          "visible_pixels": 10212
+        },
+        {
+          "gt_id": 21,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "4",
+            "member_prediction_ids": [
+              "4"
+            ],
+            "label": "cup",
+            "confidence": 0.7777223323958418,
+            "IoU": 0.9673615228163507
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "4",
+              "member_prediction_ids": [
+                "4"
+              ],
+              "gt_id": 21,
+              "iou": 0.9673615228163507
+            },
+            "0.5": {
+              "prediction_id": "4",
+              "member_prediction_ids": [
+                "4"
+              ],
+              "gt_id": 21,
+              "iou": 0.9673615228163507
+            },
+            "0.75": {
+              "prediction_id": "4",
+              "member_prediction_ids": [
+                "4"
+              ],
+              "gt_id": 21,
+              "iou": 0.9673615228163507
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "4",
+              "gt_id": 21,
+              "iou": 0.9673615228163507
+            },
+            "0.5": {
+              "prediction_id": "4",
+              "gt_id": 21,
+              "iou": 0.9673615228163507
+            },
+            "0.75": {
+              "prediction_id": "4",
+              "gt_id": 21,
+              "iou": 0.9673615228163507
+            }
+          },
+          "frame_id": "cam_02_0022",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0022.semantic_instance.hdf5",
+          "visible_pixels": 4331
+        },
+        {
+          "gt_id": 22,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "19",
+            "member_prediction_ids": [
+              "19"
+            ],
+            "label": "plate",
+            "confidence": 0.6757726929733023,
+            "IoU": 0.9254840877556236
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "19",
+              "member_prediction_ids": [
+                "19"
+              ],
+              "gt_id": 22,
+              "iou": 0.9254840877556236
+            },
+            "0.5": {
+              "prediction_id": "19",
+              "member_prediction_ids": [
+                "19"
+              ],
+              "gt_id": 22,
+              "iou": 0.9254840877556236
+            },
+            "0.75": {
+              "prediction_id": "19",
+              "member_prediction_ids": [
+                "19"
+              ],
+              "gt_id": 22,
+              "iou": 0.9254840877556236
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "19",
+              "gt_id": 22,
+              "iou": 0.9254840877556236
+            },
+            "0.5": {
+              "prediction_id": "19",
+              "gt_id": 22,
+              "iou": 0.9254840877556236
+            },
+            "0.75": {
+              "prediction_id": "19",
+              "gt_id": 22,
+              "iou": 0.9254840877556236
+            }
+          },
+          "frame_id": "cam_02_0040",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0040.semantic_instance.hdf5",
+          "visible_pixels": 4284
+        },
+        {
+          "gt_id": 23,
+          "official_label": "counter",
+          "best_prediction": {
+            "prediction_id": "3+199",
+            "member_prediction_ids": [
+              "3",
+              "199"
+            ],
+            "label": "countertop + kitchen island",
+            "confidence": 0.7153965703329238,
+            "IoU": 0.9394988829302519
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "3+199",
+              "member_prediction_ids": [
+                "3",
+                "199"
+              ],
+              "gt_id": 23,
+              "iou": 0.9394988829302519
+            },
+            "0.5": {
+              "prediction_id": "3+199",
+              "member_prediction_ids": [
+                "3",
+                "199"
+              ],
+              "gt_id": 23,
+              "iou": 0.9394988829302519
+            },
+            "0.75": {
+              "prediction_id": "3+199",
+              "member_prediction_ids": [
+                "3",
+                "199"
+              ],
+              "gt_id": 23,
+              "iou": 0.9394988829302519
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "3",
+              "gt_id": 23,
+              "iou": 0.9402362865961675
+            },
+            "0.5": {
+              "prediction_id": "3",
+              "gt_id": 23,
+              "iou": 0.9402362865961675
+            },
+            "0.75": {
+              "prediction_id": "3",
+              "gt_id": 23,
+              "iou": 0.9402362865961675
+            }
+          },
+          "frame_id": "cam_02_0049",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0049.semantic_instance.hdf5",
+          "visible_pixels": 475456
+        },
+        {
+          "gt_id": 24,
+          "official_label": "chair",
+          "best_prediction": {
+            "prediction_id": "2",
+            "member_prediction_ids": [
+              "2"
+            ],
+            "label": "bar stool",
+            "confidence": 0.7932169786218206,
+            "IoU": 0.9388364923013379
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "2",
+              "member_prediction_ids": [
+                "2"
+              ],
+              "gt_id": 24,
+              "iou": 0.9388364923013379
+            },
+            "0.5": {
+              "prediction_id": "2",
+              "member_prediction_ids": [
+                "2"
+              ],
+              "gt_id": 24,
+              "iou": 0.9388364923013379
+            },
+            "0.75": {
+              "prediction_id": "2",
+              "member_prediction_ids": [
+                "2"
+              ],
+              "gt_id": 24,
+              "iou": 0.9388364923013379
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "2",
+              "gt_id": 24,
+              "iou": 0.9388364923013379
+            },
+            "0.5": {
+              "prediction_id": "2",
+              "gt_id": 24,
+              "iou": 0.9388364923013379
+            },
+            "0.75": {
+              "prediction_id": "2",
+              "gt_id": 24,
+              "iou": 0.9388364923013379
+            }
+          },
+          "frame_id": "cam_00_0093",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0093.semantic_instance.hdf5",
+          "visible_pixels": 44902
+        },
+        {
+          "gt_id": 25,
+          "official_label": "chair",
+          "best_prediction": {
+            "prediction_id": "1",
+            "member_prediction_ids": [
+              "1"
+            ],
+            "label": "bar stool",
+            "confidence": 0.8287968292773811,
+            "IoU": 0.8634533693877967
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "1",
+              "member_prediction_ids": [
+                "1"
+              ],
+              "gt_id": 25,
+              "iou": 0.8634533693877967
+            },
+            "0.5": {
+              "prediction_id": "1",
+              "member_prediction_ids": [
+                "1"
+              ],
+              "gt_id": 25,
+              "iou": 0.8634533693877967
+            },
+            "0.75": {
+              "prediction_id": "1",
+              "member_prediction_ids": [
+                "1"
+              ],
+              "gt_id": 25,
+              "iou": 0.8634533693877967
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "1",
+              "gt_id": 25,
+              "iou": 0.8634533693877967
+            },
+            "0.5": {
+              "prediction_id": "1",
+              "gt_id": 25,
+              "iou": 0.8634533693877967
+            },
+            "0.75": {
+              "prediction_id": "1",
+              "gt_id": 25,
+              "iou": 0.8634533693877967
+            }
+          },
+          "frame_id": "cam_00_0093",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0093.semantic_instance.hdf5",
+          "visible_pixels": 36065
+        },
+        {
+          "gt_id": 26,
+          "official_label": "window",
+          "best_prediction": {
+            "prediction_id": "156",
+            "member_prediction_ids": [
+              "156"
+            ],
+            "label": "window",
+            "confidence": 0.4617653700712854,
+            "IoU": 0.3904317451374724
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0066",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0066.semantic_instance.hdf5",
+          "visible_pixels": 104367
+        },
+        {
+          "gt_id": 27,
+          "official_label": "window",
+          "best_prediction": {
+            "prediction_id": "156",
+            "member_prediction_ids": [
+              "156"
+            ],
+            "label": "window",
+            "confidence": 0.4617653700712854,
+            "IoU": 0.39302623536225384
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "156",
+              "member_prediction_ids": [
+                "156"
+              ],
+              "gt_id": 27,
+              "iou": 0.39302623536225384
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "156",
+              "gt_id": 27,
+              "iou": 0.39302623536225384
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0028",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0028.semantic_instance.hdf5",
+          "visible_pixels": 87464
+        },
+        {
+          "gt_id": 28,
+          "official_label": "blinds",
+          "best_prediction": {
+            "prediction_id": "192+204",
+            "member_prediction_ids": [
+              "192",
+              "204"
+            ],
+            "label": "curtain",
+            "confidence": 0.606445598535285,
+            "IoU": 0.6528666793710984
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "192+204",
+              "member_prediction_ids": [
+                "192",
+                "204"
+              ],
+              "gt_id": 28,
+              "iou": 0.6528666793710984
+            },
+            "0.5": {
+              "prediction_id": "192+204",
+              "member_prediction_ids": [
+                "192",
+                "204"
+              ],
+              "gt_id": 28,
+              "iou": 0.6528666793710984
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "204",
+              "gt_id": 28,
+              "iou": 0.3004937362295033
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0084",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0084.semantic_instance.hdf5",
+          "visible_pixels": 66201
+        },
+        {
+          "gt_id": 29,
+          "official_label": "blinds",
+          "best_prediction": {
+            "prediction_id": "191+454",
+            "member_prediction_ids": [
+              "191",
+              "454"
+            ],
+            "label": "curtain",
+            "confidence": 0.6042096493868794,
+            "IoU": 0.7206296107759605
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "191+454",
+              "member_prediction_ids": [
+                "191",
+                "454"
+              ],
+              "gt_id": 29,
+              "iou": 0.7206296107759605
+            },
+            "0.5": {
+              "prediction_id": "191+454",
+              "member_prediction_ids": [
+                "191",
+                "454"
+              ],
+              "gt_id": 29,
+              "iou": 0.7206296107759605
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "191",
+              "gt_id": 29,
+              "iou": 0.356436880899807
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0028",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0028.semantic_instance.hdf5",
+          "visible_pixels": 42838
+        },
+        {
+          "gt_id": 30,
+          "official_label": "cabinet",
+          "best_prediction": {
+            "prediction_id": "162+175+176+186+206",
+            "member_prediction_ids": [
+              "162",
+              "175",
+              "176",
+              "186",
+              "206"
+            ],
+            "label": "cabinet + shelf",
+            "confidence": 0.40189608458902343,
+            "IoU": 0.9292663098941659
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "162+175+176+186+206",
+              "member_prediction_ids": [
+                "162",
+                "175",
+                "176",
+                "186",
+                "206"
+              ],
+              "gt_id": 30,
+              "iou": 0.9292663098941659
+            },
+            "0.5": {
+              "prediction_id": "162+175+176+186+206",
+              "member_prediction_ids": [
+                "162",
+                "175",
+                "176",
+                "186",
+                "206"
+              ],
+              "gt_id": 30,
+              "iou": 0.9292663098941659
+            },
+            "0.75": {
+              "prediction_id": "162+175+176+186+206",
+              "member_prediction_ids": [
+                "162",
+                "175",
+                "176",
+                "186",
+                "206"
+              ],
+              "gt_id": 30,
+              "iou": 0.9292663098941659
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "162",
+              "gt_id": 30,
+              "iou": 0.8578632923108926
+            },
+            "0.5": {
+              "prediction_id": "162",
+              "gt_id": 30,
+              "iou": 0.8578632923108926
+            },
+            "0.75": {
+              "prediction_id": "162",
+              "gt_id": 30,
+              "iou": 0.8578632923108926
+            }
+          },
+          "frame_id": "cam_02_0022",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0022.semantic_instance.hdf5",
+          "visible_pixels": 240951
+        },
+        {
+          "gt_id": 31,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "172",
+            "member_prediction_ids": [
+              "172"
+            ],
+            "label": "microwave",
+            "confidence": 0.9052471585352212,
+            "IoU": 0.9112282906657573
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "172",
+              "member_prediction_ids": [
+                "172"
+              ],
+              "gt_id": 31,
+              "iou": 0.9112282906657573
+            },
+            "0.5": {
+              "prediction_id": "172",
+              "member_prediction_ids": [
+                "172"
+              ],
+              "gt_id": 31,
+              "iou": 0.9112282906657573
+            },
+            "0.75": {
+              "prediction_id": "172",
+              "member_prediction_ids": [
+                "172"
+              ],
+              "gt_id": 31,
+              "iou": 0.9112282906657573
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "172",
+              "gt_id": 31,
+              "iou": 0.9112282906657573
+            },
+            "0.5": {
+              "prediction_id": "172",
+              "gt_id": 31,
+              "iou": 0.9112282906657573
+            },
+            "0.75": {
+              "prediction_id": "172",
+              "gt_id": 31,
+              "iou": 0.9112282906657573
+            }
+          },
+          "frame_id": "cam_02_0028",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0028.semantic_instance.hdf5",
+          "visible_pixels": 9611
+        },
+        {
+          "gt_id": 32,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "178",
+            "member_prediction_ids": [
+              "178"
+            ],
+            "label": "knife",
+            "confidence": 0.5511098817202025,
+            "IoU": 0.7352359464343841
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "178",
+              "member_prediction_ids": [
+                "178"
+              ],
+              "gt_id": 32,
+              "iou": 0.7352359464343841
+            },
+            "0.5": {
+              "prediction_id": "178",
+              "member_prediction_ids": [
+                "178"
+              ],
+              "gt_id": 32,
+              "iou": 0.7352359464343841
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "178",
+              "gt_id": 32,
+              "iou": 0.7352359464343841
+            },
+            "0.5": {
+              "prediction_id": "178",
+              "gt_id": 32,
+              "iou": 0.7352359464343841
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0015",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0015.semantic_instance.hdf5",
+          "visible_pixels": 502
+        },
+        {
+          "gt_id": 33,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "157",
+            "member_prediction_ids": [
+              "157"
+            ],
+            "label": "cutting board",
+            "confidence": 0.6068044700211835,
+            "IoU": 0.8687151190206764
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "157",
+              "member_prediction_ids": [
+                "157"
+              ],
+              "gt_id": 33,
+              "iou": 0.8687151190206764
+            },
+            "0.5": {
+              "prediction_id": "157",
+              "member_prediction_ids": [
+                "157"
+              ],
+              "gt_id": 33,
+              "iou": 0.8687151190206764
+            },
+            "0.75": {
+              "prediction_id": "157",
+              "member_prediction_ids": [
+                "157"
+              ],
+              "gt_id": 33,
+              "iou": 0.8687151190206764
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "157",
+              "gt_id": 33,
+              "iou": 0.8687151190206764
+            },
+            "0.5": {
+              "prediction_id": "157",
+              "gt_id": 33,
+              "iou": 0.8687151190206764
+            },
+            "0.75": {
+              "prediction_id": "157",
+              "gt_id": 33,
+              "iou": 0.8687151190206764
+            }
+          },
+          "frame_id": "cam_00_0015",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0015.semantic_instance.hdf5",
+          "visible_pixels": 5180
+        },
+        {
+          "gt_id": 36,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "131",
+            "member_prediction_ids": [
+              "131"
+            ],
+            "label": "sink",
+            "confidence": 0.6033528088413735,
+            "IoU": 0.010073936248732073
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0066",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0066.semantic_instance.hdf5",
+          "visible_pixels": 1483
+        },
+        {
+          "gt_id": 37,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "443",
+            "member_prediction_ids": [
+              "443"
+            ],
+            "label": "glass",
+            "confidence": 0.5900031036494082,
+            "IoU": 0.5002997026467377
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "443",
+              "member_prediction_ids": [
+                "443"
+              ],
+              "gt_id": 37,
+              "iou": 0.5002997026467377
+            },
+            "0.5": {
+              "prediction_id": "443",
+              "member_prediction_ids": [
+                "443"
+              ],
+              "gt_id": 37,
+              "iou": 0.5002997026467377
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "443",
+              "gt_id": 37,
+              "iou": 0.5002997026467377
+            },
+            "0.5": {
+              "prediction_id": "443",
+              "gt_id": 37,
+              "iou": 0.5002997026467377
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1278
+        },
+        {
+          "gt_id": 38,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "113+114+411",
+            "member_prediction_ids": [
+              "113",
+              "114",
+              "411"
+            ],
+            "label": "shelf",
+            "confidence": 0.6549342131398943,
+            "IoU": 0.0035617679155136254
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 283
+        },
+        {
+          "gt_id": 40,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "240",
+            "member_prediction_ids": [
+              "240"
+            ],
+            "label": "glass",
+            "confidence": 0.5435588353886659,
+            "IoU": 0.38821253073946005
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "240",
+              "member_prediction_ids": [
+                "240"
+              ],
+              "gt_id": 40,
+              "iou": 0.38821253073946005
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "240",
+              "gt_id": 40,
+              "iou": 0.38821253073946005
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1274
+        },
+        {
+          "gt_id": 41,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "455",
+            "member_prediction_ids": [
+              "455"
+            ],
+            "label": "glass",
+            "confidence": 0.5435588353886659,
+            "IoU": 0.4301832044268034
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "455",
+              "member_prediction_ids": [
+                "455"
+              ],
+              "gt_id": 41,
+              "iou": 0.4301832044268034
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "455",
+              "gt_id": 41,
+              "iou": 0.4301832044268034
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1310
+        },
+        {
+          "gt_id": 43,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "113+114+411",
+            "member_prediction_ids": [
+              "113",
+              "114",
+              "411"
+            ],
+            "label": "shelf",
+            "confidence": 0.6549342131398943,
+            "IoU": 0.004028459683158981
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1203
+        },
+        {
+          "gt_id": 44,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "113+114+411",
+            "member_prediction_ids": [
+              "113",
+              "114",
+              "411"
+            ],
+            "label": "shelf",
+            "confidence": 0.6549342131398943,
+            "IoU": 0.004487993750286238
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0006",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0006.semantic_instance.hdf5",
+          "visible_pixels": 355
+        },
+        {
+          "gt_id": 45,
+          "official_label": "shelves",
+          "best_prediction": {
+            "prediction_id": "113+114+411",
+            "member_prediction_ids": [
+              "113",
+              "114",
+              "411"
+            ],
+            "label": "shelf",
+            "confidence": 0.6549342131398943,
+            "IoU": 0.7067242510298073
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "113+114+411",
+              "member_prediction_ids": [
+                "113",
+                "114",
+                "411"
+              ],
+              "gt_id": 45,
+              "iou": 0.7067242510298073
+            },
+            "0.5": {
+              "prediction_id": "113+114+411",
+              "member_prediction_ids": [
+                "113",
+                "114",
+                "411"
+              ],
+              "gt_id": 45,
+              "iou": 0.7067242510298073
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "78",
+              "gt_id": 45,
+              "iou": 0.6400966331377237
+            },
+            "0.5": {
+              "prediction_id": "78",
+              "gt_id": 45,
+              "iou": 0.6400966331377237
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 69319
+        },
+        {
+          "gt_id": 47,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "95+213",
+            "member_prediction_ids": [
+              "95",
+              "213"
+            ],
+            "label": "glass",
+            "confidence": 0.5935229713300877,
+            "IoU": 0.6849460357502251
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "95+213",
+              "member_prediction_ids": [
+                "95",
+                "213"
+              ],
+              "gt_id": 47,
+              "iou": 0.6849460357502251
+            },
+            "0.5": {
+              "prediction_id": "95+213",
+              "member_prediction_ids": [
+                "95",
+                "213"
+              ],
+              "gt_id": 47,
+              "iou": 0.6849460357502251
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "213",
+              "gt_id": 47,
+              "iou": 0.3594864728854488
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1729
+        },
+        {
+          "gt_id": 49,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "113+114+411",
+            "member_prediction_ids": [
+              "113",
+              "114",
+              "411"
+            ],
+            "label": "shelf",
+            "confidence": 0.6549342131398943,
+            "IoU": 0.0033787153259020293
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 3162
+        },
+        {
+          "gt_id": 50,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "461",
+            "member_prediction_ids": [
+              "461"
+            ],
+            "label": "glass",
+            "confidence": 0.574765625,
+            "IoU": 0.3556474657035866
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "461",
+              "member_prediction_ids": [
+                "461"
+              ],
+              "gt_id": 50,
+              "iou": 0.3556474657035866
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "461",
+              "gt_id": 50,
+              "iou": 0.3556474657035866
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 1093
+        },
+        {
+          "gt_id": 51,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "88",
+            "member_prediction_ids": [
+              "88"
+            ],
+            "label": "drinking glass",
+            "confidence": 0.44049391011389755,
+            "IoU": 0.29125242331205903
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "88",
+              "member_prediction_ids": [
+                "88"
+              ],
+              "gt_id": 51,
+              "iou": 0.29125242331205903
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "88",
+              "gt_id": 51,
+              "iou": 0.29125242331205903
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 2683
+        },
+        {
+          "gt_id": 52,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "458",
+            "member_prediction_ids": [
+              "458"
+            ],
+            "label": "glass",
+            "confidence": 0.576345486111111,
+            "IoU": 0.4592216691747642
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "458",
+              "member_prediction_ids": [
+                "458"
+              ],
+              "gt_id": 52,
+              "iou": 0.4592216691747642
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "458",
+              "gt_id": 52,
+              "iou": 0.4592216691747642
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 2732
+        },
+        {
+          "gt_id": 53,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "459",
+            "member_prediction_ids": [
+              "459"
+            ],
+            "label": "glass",
+            "confidence": 0.5745225694444445,
+            "IoU": 0.5716226517197721
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "459",
+              "member_prediction_ids": [
+                "459"
+              ],
+              "gt_id": 53,
+              "iou": 0.5716226517197721
+            },
+            "0.5": {
+              "prediction_id": "459",
+              "member_prediction_ids": [
+                "459"
+              ],
+              "gt_id": 53,
+              "iou": 0.5716226517197721
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "459",
+              "gt_id": 53,
+              "iou": 0.5716226517197721
+            },
+            "0.5": {
+              "prediction_id": "459",
+              "gt_id": 53,
+              "iou": 0.5716226517197721
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 2609
+        },
+        {
+          "gt_id": 54,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "464",
+            "member_prediction_ids": [
+              "464"
+            ],
+            "label": "glass",
+            "confidence": 0.4466145833333333,
+            "IoU": 0.2713037927516594
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "464",
+              "member_prediction_ids": [
+                "464"
+              ],
+              "gt_id": 54,
+              "iou": 0.2713037927516594
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "464",
+              "gt_id": 54,
+              "iou": 0.2713037927516594
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 5101
+        },
+        {
+          "gt_id": 55,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "82+181",
+            "member_prediction_ids": [
+              "82",
+              "181"
+            ],
+            "label": "glass + drinking glass",
+            "confidence": 0.47384987556616764,
+            "IoU": 0.4373019310947217
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "82+181",
+              "member_prediction_ids": [
+                "82",
+                "181"
+              ],
+              "gt_id": 55,
+              "iou": 0.4373019310947217
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "82",
+              "gt_id": 55,
+              "iou": 0.7149444050882074
+            },
+            "0.5": {
+              "prediction_id": "82",
+              "gt_id": 55,
+              "iou": 0.7149444050882074
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 12311
+        },
+        {
+          "gt_id": 56,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "108",
+            "member_prediction_ids": [
+              "108"
+            ],
+            "label": "drinking glass",
+            "confidence": 0.3831642535479661,
+            "IoU": 0.5350971680349572
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "108",
+              "member_prediction_ids": [
+                "108"
+              ],
+              "gt_id": 56,
+              "iou": 0.5350971680349572
+            },
+            "0.5": {
+              "prediction_id": "108",
+              "member_prediction_ids": [
+                "108"
+              ],
+              "gt_id": 56,
+              "iou": 0.5350971680349572
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "108",
+              "gt_id": 56,
+              "iou": 0.5350971680349572
+            },
+            "0.5": {
+              "prediction_id": "108",
+              "gt_id": 56,
+              "iou": 0.5350971680349572
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0095",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0095.semantic_instance.hdf5",
+          "visible_pixels": 6482
+        },
+        {
+          "gt_id": 57,
+          "official_label": "cabinet",
+          "best_prediction": {
+            "prediction_id": "15",
+            "member_prediction_ids": [
+              "15"
+            ],
+            "label": "cabinet",
+            "confidence": 0.6646761250478815,
+            "IoU": 0.7912970098236316
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "15",
+              "member_prediction_ids": [
+                "15"
+              ],
+              "gt_id": 57,
+              "iou": 0.7912970098236316
+            },
+            "0.5": {
+              "prediction_id": "15",
+              "member_prediction_ids": [
+                "15"
+              ],
+              "gt_id": 57,
+              "iou": 0.7912970098236316
+            },
+            "0.75": {
+              "prediction_id": "15",
+              "member_prediction_ids": [
+                "15"
+              ],
+              "gt_id": 57,
+              "iou": 0.7912970098236316
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "15",
+              "gt_id": 57,
+              "iou": 0.7912970098236316
+            },
+            "0.5": {
+              "prediction_id": "15",
+              "gt_id": 57,
+              "iou": 0.7912970098236316
+            },
+            "0.75": {
+              "prediction_id": "15",
+              "gt_id": 57,
+              "iou": 0.7912970098236316
+            }
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 265054
+        },
+        {
+          "gt_id": 58,
+          "official_label": "otherstructure",
+          "best_prediction": {
+            "prediction_id": "55+54",
+            "member_prediction_ids": [
+              "55",
+              "54"
+            ],
+            "label": "range hood",
+            "confidence": 0.5278854402742317,
+            "IoU": 0.9645139009330695
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "55+54",
+              "member_prediction_ids": [
+                "55",
+                "54"
+              ],
+              "gt_id": 58,
+              "iou": 0.9645139009330695
+            },
+            "0.5": {
+              "prediction_id": "55+54",
+              "member_prediction_ids": [
+                "55",
+                "54"
+              ],
+              "gt_id": 58,
+              "iou": 0.9645139009330695
+            },
+            "0.75": {
+              "prediction_id": "55+54",
+              "member_prediction_ids": [
+                "55",
+                "54"
+              ],
+              "gt_id": 58,
+              "iou": 0.9645139009330695
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "54",
+              "gt_id": 58,
+              "iou": 0.5269362268085311
+            },
+            "0.5": {
+              "prediction_id": "54",
+              "gt_id": 58,
+              "iou": 0.5269362268085311
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 86289
+        },
+        {
+          "gt_id": 60,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "62",
+            "member_prediction_ids": [
+              "62"
+            ],
+            "label": "kitchen utensil",
+            "confidence": 0.45028089076404965,
+            "IoU": 0.37387920593008217
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "62",
+              "member_prediction_ids": [
+                "62"
+              ],
+              "gt_id": 60,
+              "iou": 0.37387920593008217
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "62",
+              "gt_id": 60,
+              "iou": 0.37387920593008217
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0047",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0047.semantic_instance.hdf5",
+          "visible_pixels": 1582
+        },
+        {
+          "gt_id": 61,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "31",
+            "member_prediction_ids": [
+              "31"
+            ],
+            "label": "bottle",
+            "confidence": 0.5059909558165435,
+            "IoU": 0.559231368457755
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "31",
+              "member_prediction_ids": [
+                "31"
+              ],
+              "gt_id": 61,
+              "iou": 0.559231368457755
+            },
+            "0.5": {
+              "prediction_id": "31",
+              "member_prediction_ids": [
+                "31"
+              ],
+              "gt_id": 61,
+              "iou": 0.559231368457755
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "31",
+              "gt_id": 61,
+              "iou": 0.559231368457755
+            },
+            "0.5": {
+              "prediction_id": "31",
+              "gt_id": 61,
+              "iou": 0.559231368457755
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0058",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0058.semantic_instance.hdf5",
+          "visible_pixels": 3255
+        },
+        {
+          "gt_id": 62,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "35",
+            "member_prediction_ids": [
+              "35"
+            ],
+            "label": "bottle",
+            "confidence": 0.4954843106203181,
+            "IoU": 0.6345384882943393
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "35",
+              "member_prediction_ids": [
+                "35"
+              ],
+              "gt_id": 62,
+              "iou": 0.6345384882943393
+            },
+            "0.5": {
+              "prediction_id": "35",
+              "member_prediction_ids": [
+                "35"
+              ],
+              "gt_id": 62,
+              "iou": 0.6345384882943393
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "35",
+              "gt_id": 62,
+              "iou": 0.6345384882943393
+            },
+            "0.5": {
+              "prediction_id": "35",
+              "gt_id": 62,
+              "iou": 0.6345384882943393
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0058",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0058.semantic_instance.hdf5",
+          "visible_pixels": 3777
+        },
+        {
+          "gt_id": 63,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "57",
+            "member_prediction_ids": [
+              "57"
+            ],
+            "label": "kitchen utensil",
+            "confidence": 0.47681206072179316,
+            "IoU": 0.6216372310029172
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "57",
+              "member_prediction_ids": [
+                "57"
+              ],
+              "gt_id": 63,
+              "iou": 0.6216372310029172
+            },
+            "0.5": {
+              "prediction_id": "57",
+              "member_prediction_ids": [
+                "57"
+              ],
+              "gt_id": 63,
+              "iou": 0.6216372310029172
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "57",
+              "gt_id": 63,
+              "iou": 0.6216372310029172
+            },
+            "0.5": {
+              "prediction_id": "57",
+              "gt_id": 63,
+              "iou": 0.6216372310029172
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0058",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0058.semantic_instance.hdf5",
+          "visible_pixels": 4271
+        },
+        {
+          "gt_id": 67,
+          "official_label": "refrigerator",
+          "best_prediction": {
+            "prediction_id": "138",
+            "member_prediction_ids": [
+              "138"
+            ],
+            "label": "refrigerator",
+            "confidence": 0.6464393798331988,
+            "IoU": 0.9764099105150673
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "138",
+              "member_prediction_ids": [
+                "138"
+              ],
+              "gt_id": 67,
+              "iou": 0.9764099105150673
+            },
+            "0.5": {
+              "prediction_id": "138",
+              "member_prediction_ids": [
+                "138"
+              ],
+              "gt_id": 67,
+              "iou": 0.9764099105150673
+            },
+            "0.75": {
+              "prediction_id": "138",
+              "member_prediction_ids": [
+                "138"
+              ],
+              "gt_id": 67,
+              "iou": 0.9764099105150673
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "138",
+              "gt_id": 67,
+              "iou": 0.9764099105150673
+            },
+            "0.5": {
+              "prediction_id": "138",
+              "gt_id": 67,
+              "iou": 0.9764099105150673
+            },
+            "0.75": {
+              "prediction_id": "138",
+              "gt_id": 67,
+              "iou": 0.9764099105150673
+            }
+          },
+          "frame_id": "cam_00_0048",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0048.semantic_instance.hdf5",
+          "visible_pixels": 308043
+        },
+        {
+          "gt_id": 68,
+          "official_label": "cabinet",
+          "best_prediction": {
+            "prediction_id": "177+174+47+8",
+            "member_prediction_ids": [
+              "177",
+              "174",
+              "47",
+              "8"
+            ],
+            "label": "cabinet",
+            "confidence": 0.4522299163757564,
+            "IoU": 0.7854520525594743
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "177+174+47+8",
+              "member_prediction_ids": [
+                "177",
+                "174",
+                "47",
+                "8"
+              ],
+              "gt_id": 68,
+              "iou": 0.7854520525594743
+            },
+            "0.5": {
+              "prediction_id": "177+174+47+8",
+              "member_prediction_ids": [
+                "177",
+                "174",
+                "47",
+                "8"
+              ],
+              "gt_id": 68,
+              "iou": 0.7854520525594743
+            },
+            "0.75": {
+              "prediction_id": "177+174+47+8",
+              "member_prediction_ids": [
+                "177",
+                "174",
+                "47",
+                "8"
+              ],
+              "gt_id": 68,
+              "iou": 0.7854520525594743
+            }
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0062",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0062.semantic_instance.hdf5",
+          "visible_pixels": 210060
+        },
+        {
+          "gt_id": 69,
+          "official_label": "otherstructure",
+          "best_prediction": {
+            "prediction_id": "93",
+            "member_prediction_ids": [
+              "93"
+            ],
+            "label": "oven",
+            "confidence": 0.6891953402724083,
+            "IoU": 0.11989496357389537
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0078",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0078.semantic_instance.hdf5",
+          "visible_pixels": 84200
+        },
+        {
+          "gt_id": 70,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "23",
+            "member_prediction_ids": [
+              "23"
+            ],
+            "label": "bottle",
+            "confidence": 0.6940964071222697,
+            "IoU": 0.8811939886863424
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "23",
+              "member_prediction_ids": [
+                "23"
+              ],
+              "gt_id": 70,
+              "iou": 0.8811939886863424
+            },
+            "0.5": {
+              "prediction_id": "23",
+              "member_prediction_ids": [
+                "23"
+              ],
+              "gt_id": 70,
+              "iou": 0.8811939886863424
+            },
+            "0.75": {
+              "prediction_id": "23",
+              "member_prediction_ids": [
+                "23"
+              ],
+              "gt_id": 70,
+              "iou": 0.8811939886863424
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "23",
+              "gt_id": 70,
+              "iou": 0.8811939886863424
+            },
+            "0.5": {
+              "prediction_id": "23",
+              "gt_id": 70,
+              "iou": 0.8811939886863424
+            },
+            "0.75": {
+              "prediction_id": "23",
+              "gt_id": 70,
+              "iou": 0.8811939886863424
+            }
+          },
+          "frame_id": "cam_02_0052",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0052.semantic_instance.hdf5",
+          "visible_pixels": 2048
+        },
+        {
+          "gt_id": 71,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "282",
+            "member_prediction_ids": [
+              "282"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.5348176249250267,
+            "IoU": 0.6050467822394117
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "282",
+              "member_prediction_ids": [
+                "282"
+              ],
+              "gt_id": 71,
+              "iou": 0.6050467822394117
+            },
+            "0.5": {
+              "prediction_id": "282",
+              "member_prediction_ids": [
+                "282"
+              ],
+              "gt_id": 71,
+              "iou": 0.6050467822394117
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "282",
+              "gt_id": 71,
+              "iou": 0.6050467822394117
+            },
+            "0.5": {
+              "prediction_id": "282",
+              "gt_id": 71,
+              "iou": 0.6050467822394117
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0058",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0058.semantic_instance.hdf5",
+          "visible_pixels": 322
+        },
+        {
+          "gt_id": 75,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "347",
+            "member_prediction_ids": [
+              "347"
+            ],
+            "label": "fruit",
+            "confidence": 0.6415387803793985,
+            "IoU": 0.5163405861385307
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "347",
+              "member_prediction_ids": [
+                "347"
+              ],
+              "gt_id": 75,
+              "iou": 0.5163405861385307
+            },
+            "0.5": {
+              "prediction_id": "347",
+              "member_prediction_ids": [
+                "347"
+              ],
+              "gt_id": 75,
+              "iou": 0.5163405861385307
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "347",
+              "gt_id": 75,
+              "iou": 0.5163405861385307
+            },
+            "0.5": {
+              "prediction_id": "347",
+              "gt_id": 75,
+              "iou": 0.5163405861385307
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 1509
+        },
+        {
+          "gt_id": 80,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "347",
+            "member_prediction_ids": [
+              "347"
+            ],
+            "label": "fruit",
+            "confidence": 0.6415387803793985,
+            "IoU": 0.016076188906141032
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 744
+        },
+        {
+          "gt_id": 86,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "13",
+            "member_prediction_ids": [
+              "13"
+            ],
+            "label": "bowl",
+            "confidence": 0.4376693278735982,
+            "IoU": 0.7794298103912383
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "13",
+              "member_prediction_ids": [
+                "13"
+              ],
+              "gt_id": 86,
+              "iou": 0.7794298103912383
+            },
+            "0.5": {
+              "prediction_id": "13",
+              "member_prediction_ids": [
+                "13"
+              ],
+              "gt_id": 86,
+              "iou": 0.7794298103912383
+            },
+            "0.75": {
+              "prediction_id": "13",
+              "member_prediction_ids": [
+                "13"
+              ],
+              "gt_id": 86,
+              "iou": 0.7794298103912383
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "13",
+              "gt_id": 86,
+              "iou": 0.7794298103912383
+            },
+            "0.5": {
+              "prediction_id": "13",
+              "gt_id": 86,
+              "iou": 0.7794298103912383
+            },
+            "0.75": {
+              "prediction_id": "13",
+              "gt_id": 86,
+              "iou": 0.7794298103912383
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 8566
+        },
+        {
+          "gt_id": 89,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "59",
+            "member_prediction_ids": [
+              "59"
+            ],
+            "label": "plate",
+            "confidence": 0.6005884584428732,
+            "IoU": 0.5662508482957199
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "59",
+              "member_prediction_ids": [
+                "59"
+              ],
+              "gt_id": 89,
+              "iou": 0.5662508482957199
+            },
+            "0.5": {
+              "prediction_id": "59",
+              "member_prediction_ids": [
+                "59"
+              ],
+              "gt_id": 89,
+              "iou": 0.5662508482957199
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "59",
+              "gt_id": 89,
+              "iou": 0.5662508482957199
+            },
+            "0.5": {
+              "prediction_id": "59",
+              "gt_id": 89,
+              "iou": 0.5662508482957199
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 2040
+        },
+        {
+          "gt_id": 90,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "61",
+            "member_prediction_ids": [
+              "61"
+            ],
+            "label": "plate",
+            "confidence": 0.5882331998740784,
+            "IoU": 0.5964271739988726
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "61",
+              "member_prediction_ids": [
+                "61"
+              ],
+              "gt_id": 90,
+              "iou": 0.5964271739988726
+            },
+            "0.5": {
+              "prediction_id": "61",
+              "member_prediction_ids": [
+                "61"
+              ],
+              "gt_id": 90,
+              "iou": 0.5964271739988726
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "61",
+              "gt_id": 90,
+              "iou": 0.5964271739988726
+            },
+            "0.5": {
+              "prediction_id": "61",
+              "gt_id": 90,
+              "iou": 0.5964271739988726
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 2070
+        },
+        {
+          "gt_id": 91,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "58",
+            "member_prediction_ids": [
+              "58"
+            ],
+            "label": "plate",
+            "confidence": 0.6599208542255997,
+            "IoU": 0.5357343834522033
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "58",
+              "member_prediction_ids": [
+                "58"
+              ],
+              "gt_id": 91,
+              "iou": 0.5357343834522033
+            },
+            "0.5": {
+              "prediction_id": "58",
+              "member_prediction_ids": [
+                "58"
+              ],
+              "gt_id": 91,
+              "iou": 0.5357343834522033
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "58",
+              "gt_id": 91,
+              "iou": 0.5357343834522033
+            },
+            "0.5": {
+              "prediction_id": "58",
+              "gt_id": 91,
+              "iou": 0.5357343834522033
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 3838
+        },
+        {
+          "gt_id": 94,
+          "official_label": "otherstructure",
+          "best_prediction": {
+            "prediction_id": "21",
+            "member_prediction_ids": [
+              "21"
+            ],
+            "label": "utensil rack",
+            "confidence": 0.5633841297473402,
+            "IoU": 0.8775984899007094
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "21",
+              "member_prediction_ids": [
+                "21"
+              ],
+              "gt_id": 94,
+              "iou": 0.8775984899007094
+            },
+            "0.5": {
+              "prediction_id": "21",
+              "member_prediction_ids": [
+                "21"
+              ],
+              "gt_id": 94,
+              "iou": 0.8775984899007094
+            },
+            "0.75": {
+              "prediction_id": "21",
+              "member_prediction_ids": [
+                "21"
+              ],
+              "gt_id": 94,
+              "iou": 0.8775984899007094
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "21",
+              "gt_id": 94,
+              "iou": 0.8775984899007094
+            },
+            "0.5": {
+              "prediction_id": "21",
+              "gt_id": 94,
+              "iou": 0.8775984899007094
+            },
+            "0.75": {
+              "prediction_id": "21",
+              "gt_id": 94,
+              "iou": 0.8775984899007094
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 15640
+        },
+        {
+          "gt_id": 95,
+          "official_label": "otherstructure",
+          "best_prediction": {
+            "prediction_id": "348",
+            "member_prediction_ids": [
+              "348"
+            ],
+            "label": "stovetop",
+            "confidence": 0.45787099123190833,
+            "IoU": 0.47906676330615494
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "348",
+              "member_prediction_ids": [
+                "348"
+              ],
+              "gt_id": 95,
+              "iou": 0.47906676330615494
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "348",
+              "gt_id": 95,
+              "iou": 0.47906676330615494
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 24552
+        },
+        {
+          "gt_id": 96,
+          "official_label": "otherstructure",
+          "best_prediction": {
+            "prediction_id": "269",
+            "member_prediction_ids": [
+              "269"
+            ],
+            "label": "cooktop",
+            "confidence": 0.5774160593888996,
+            "IoU": 0.3873669158327076
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "269",
+              "member_prediction_ids": [
+                "269"
+              ],
+              "gt_id": 96,
+              "iou": 0.3873669158327076
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "269",
+              "gt_id": 96,
+              "iou": 0.3873669158327076
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 62812
+        },
+        {
+          "gt_id": 97,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "46",
+            "member_prediction_ids": [
+              "46"
+            ],
+            "label": "kettle",
+            "confidence": 0.7148005664382457,
+            "IoU": 0.8217382070413297
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "46",
+              "member_prediction_ids": [
+                "46"
+              ],
+              "gt_id": 97,
+              "iou": 0.8217382070413297
+            },
+            "0.5": {
+              "prediction_id": "46",
+              "member_prediction_ids": [
+                "46"
+              ],
+              "gt_id": 97,
+              "iou": 0.8217382070413297
+            },
+            "0.75": {
+              "prediction_id": "46",
+              "member_prediction_ids": [
+                "46"
+              ],
+              "gt_id": 97,
+              "iou": 0.8217382070413297
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "46",
+              "gt_id": 97,
+              "iou": 0.8217382070413297
+            },
+            "0.5": {
+              "prediction_id": "46",
+              "gt_id": 97,
+              "iou": 0.8217382070413297
+            },
+            "0.75": {
+              "prediction_id": "46",
+              "gt_id": 97,
+              "iou": 0.8217382070413297
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 10929
+        },
+        {
+          "gt_id": 98,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "45",
+            "member_prediction_ids": [
+              "45"
+            ],
+            "label": "pot",
+            "confidence": 0.6660560676003457,
+            "IoU": 0.9054699177990005
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "45",
+              "member_prediction_ids": [
+                "45"
+              ],
+              "gt_id": 98,
+              "iou": 0.9054699177990005
+            },
+            "0.5": {
+              "prediction_id": "45",
+              "member_prediction_ids": [
+                "45"
+              ],
+              "gt_id": 98,
+              "iou": 0.9054699177990005
+            },
+            "0.75": {
+              "prediction_id": "45",
+              "member_prediction_ids": [
+                "45"
+              ],
+              "gt_id": 98,
+              "iou": 0.9054699177990005
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "45",
+              "gt_id": 98,
+              "iou": 0.9054699177990005
+            },
+            "0.5": {
+              "prediction_id": "45",
+              "gt_id": 98,
+              "iou": 0.9054699177990005
+            },
+            "0.75": {
+              "prediction_id": "45",
+              "gt_id": 98,
+              "iou": 0.9054699177990005
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 9002
+        },
+        {
+          "gt_id": 99,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "463",
+            "member_prediction_ids": [
+              "463"
+            ],
+            "label": "cooking utensil",
+            "confidence": 0.6111328125,
+            "IoU": 0.8264526705728679
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "463",
+              "member_prediction_ids": [
+                "463"
+              ],
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            },
+            "0.5": {
+              "prediction_id": "463",
+              "member_prediction_ids": [
+                "463"
+              ],
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            },
+            "0.75": {
+              "prediction_id": "463",
+              "member_prediction_ids": [
+                "463"
+              ],
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "463",
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            },
+            "0.5": {
+              "prediction_id": "463",
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            },
+            "0.75": {
+              "prediction_id": "463",
+              "gt_id": 99,
+              "iou": 0.8264526705728679
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 3846
+        },
+        {
+          "gt_id": 100,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "60",
+            "member_prediction_ids": [
+              "60"
+            ],
+            "label": "spoon",
+            "confidence": 0.47829110011557274,
+            "IoU": 0.7598135712828793
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "60",
+              "member_prediction_ids": [
+                "60"
+              ],
+              "gt_id": 100,
+              "iou": 0.7598135712828793
+            },
+            "0.5": {
+              "prediction_id": "60",
+              "member_prediction_ids": [
+                "60"
+              ],
+              "gt_id": 100,
+              "iou": 0.7598135712828793
+            },
+            "0.75": {
+              "prediction_id": "60",
+              "member_prediction_ids": [
+                "60"
+              ],
+              "gt_id": 100,
+              "iou": 0.7598135712828793
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "60",
+              "gt_id": 100,
+              "iou": 0.7598135712828793
+            },
+            "0.5": {
+              "prediction_id": "60",
+              "gt_id": 100,
+              "iou": 0.7598135712828793
+            },
+            "0.75": {
+              "prediction_id": "60",
+              "gt_id": 100,
+              "iou": 0.7598135712828793
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 3868
+        },
+        {
+          "gt_id": 101,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "27",
+            "member_prediction_ids": [
+              "27"
+            ],
+            "label": "spoon",
+            "confidence": 0.5316368801691482,
+            "IoU": 0.8019020090349869
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "27",
+              "member_prediction_ids": [
+                "27"
+              ],
+              "gt_id": 101,
+              "iou": 0.8019020090349869
+            },
+            "0.5": {
+              "prediction_id": "27",
+              "member_prediction_ids": [
+                "27"
+              ],
+              "gt_id": 101,
+              "iou": 0.8019020090349869
+            },
+            "0.75": {
+              "prediction_id": "27",
+              "member_prediction_ids": [
+                "27"
+              ],
+              "gt_id": 101,
+              "iou": 0.8019020090349869
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "27",
+              "gt_id": 101,
+              "iou": 0.8019020090349869
+            },
+            "0.5": {
+              "prediction_id": "27",
+              "gt_id": 101,
+              "iou": 0.8019020090349869
+            },
+            "0.75": {
+              "prediction_id": "27",
+              "gt_id": 101,
+              "iou": 0.8019020090349869
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 4095
+        },
+        {
+          "gt_id": 102,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "70",
+            "member_prediction_ids": [
+              "70"
+            ],
+            "label": "cooking utensil",
+            "confidence": 0.4546020272186484,
+            "IoU": 0.601207749756932
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "70",
+              "member_prediction_ids": [
+                "70"
+              ],
+              "gt_id": 102,
+              "iou": 0.601207749756932
+            },
+            "0.5": {
+              "prediction_id": "70",
+              "member_prediction_ids": [
+                "70"
+              ],
+              "gt_id": 102,
+              "iou": 0.601207749756932
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "70",
+              "gt_id": 102,
+              "iou": 0.601207749756932
+            },
+            "0.5": {
+              "prediction_id": "70",
+              "gt_id": 102,
+              "iou": 0.601207749756932
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 2821
+        },
+        {
+          "gt_id": 103,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "32",
+            "member_prediction_ids": [
+              "32"
+            ],
+            "label": "spoon",
+            "confidence": 0.5323093571212837,
+            "IoU": 0.5928323075136192
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "32",
+              "member_prediction_ids": [
+                "32"
+              ],
+              "gt_id": 103,
+              "iou": 0.5928323075136192
+            },
+            "0.5": {
+              "prediction_id": "32",
+              "member_prediction_ids": [
+                "32"
+              ],
+              "gt_id": 103,
+              "iou": 0.5928323075136192
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "32",
+              "gt_id": 103,
+              "iou": 0.5928323075136192
+            },
+            "0.5": {
+              "prediction_id": "32",
+              "gt_id": 103,
+              "iou": 0.5928323075136192
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 4257
+        },
+        {
+          "gt_id": 104,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "60",
+            "member_prediction_ids": [
+              "60"
+            ],
+            "label": "spoon",
+            "confidence": 0.47829110011557274,
+            "IoU": 0.020086582786538347
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 6081
+        },
+        {
+          "gt_id": 105,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "34",
+            "member_prediction_ids": [
+              "34"
+            ],
+            "label": "pot",
+            "confidence": 0.6382937007336417,
+            "IoU": 0.946089437390693
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "34",
+              "member_prediction_ids": [
+                "34"
+              ],
+              "gt_id": 105,
+              "iou": 0.946089437390693
+            },
+            "0.5": {
+              "prediction_id": "34",
+              "member_prediction_ids": [
+                "34"
+              ],
+              "gt_id": 105,
+              "iou": 0.946089437390693
+            },
+            "0.75": {
+              "prediction_id": "34",
+              "member_prediction_ids": [
+                "34"
+              ],
+              "gt_id": 105,
+              "iou": 0.946089437390693
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "34",
+              "gt_id": 105,
+              "iou": 0.946089437390693
+            },
+            "0.5": {
+              "prediction_id": "34",
+              "gt_id": 105,
+              "iou": 0.946089437390693
+            },
+            "0.75": {
+              "prediction_id": "34",
+              "gt_id": 105,
+              "iou": 0.946089437390693
+            }
+          },
+          "frame_id": "cam_01_0002",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0002.semantic_instance.hdf5",
+          "visible_pixels": 7416
+        },
+        {
+          "gt_id": 106,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "257",
+            "member_prediction_ids": [
+              "257"
+            ],
+            "label": "paper towel holder",
+            "confidence": 0.5480997190247132,
+            "IoU": 0.9170315427199861
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "257",
+              "member_prediction_ids": [
+                "257"
+              ],
+              "gt_id": 106,
+              "iou": 0.9170315427199861
+            },
+            "0.5": {
+              "prediction_id": "257",
+              "member_prediction_ids": [
+                "257"
+              ],
+              "gt_id": 106,
+              "iou": 0.9170315427199861
+            },
+            "0.75": {
+              "prediction_id": "257",
+              "member_prediction_ids": [
+                "257"
+              ],
+              "gt_id": 106,
+              "iou": 0.9170315427199861
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "257",
+              "gt_id": 106,
+              "iou": 0.9170315427199861
+            },
+            "0.5": {
+              "prediction_id": "257",
+              "gt_id": 106,
+              "iou": 0.9170315427199861
+            },
+            "0.75": {
+              "prediction_id": "257",
+              "gt_id": 106,
+              "iou": 0.9170315427199861
+            }
+          },
+          "frame_id": "cam_02_0064",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0064.semantic_instance.hdf5",
+          "visible_pixels": 4394
+        },
+        {
+          "gt_id": 112,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "264",
+            "member_prediction_ids": [
+              "264"
+            ],
+            "label": "kitchen utensil",
+            "confidence": 0.4388906518114094,
+            "IoU": 0.1339767654814289
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0070",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0070.semantic_instance.hdf5",
+          "visible_pixels": 787
+        },
+        {
+          "gt_id": 113,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "292",
+            "member_prediction_ids": [
+              "292"
+            ],
+            "label": "box",
+            "confidence": 0.4418395346186941,
+            "IoU": 0.810873088152817
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "292",
+              "member_prediction_ids": [
+                "292"
+              ],
+              "gt_id": 113,
+              "iou": 0.810873088152817
+            },
+            "0.5": {
+              "prediction_id": "292",
+              "member_prediction_ids": [
+                "292"
+              ],
+              "gt_id": 113,
+              "iou": 0.810873088152817
+            },
+            "0.75": {
+              "prediction_id": "292",
+              "member_prediction_ids": [
+                "292"
+              ],
+              "gt_id": 113,
+              "iou": 0.810873088152817
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "292",
+              "gt_id": 113,
+              "iou": 0.810873088152817
+            },
+            "0.5": {
+              "prediction_id": "292",
+              "gt_id": 113,
+              "iou": 0.810873088152817
+            },
+            "0.75": {
+              "prediction_id": "292",
+              "gt_id": 113,
+              "iou": 0.810873088152817
+            }
+          },
+          "frame_id": "cam_02_0004",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0004.semantic_instance.hdf5",
+          "visible_pixels": 1325
+        },
+        {
+          "gt_id": 114,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "466",
+            "member_prediction_ids": [
+              "466"
+            ],
+            "label": "food container",
+            "confidence": 0.3732421875,
+            "IoU": 0.8099281912978827
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "466",
+              "member_prediction_ids": [
+                "466"
+              ],
+              "gt_id": 114,
+              "iou": 0.8099281912978827
+            },
+            "0.5": {
+              "prediction_id": "466",
+              "member_prediction_ids": [
+                "466"
+              ],
+              "gt_id": 114,
+              "iou": 0.8099281912978827
+            },
+            "0.75": {
+              "prediction_id": "466",
+              "member_prediction_ids": [
+                "466"
+              ],
+              "gt_id": 114,
+              "iou": 0.8099281912978827
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "466",
+              "gt_id": 114,
+              "iou": 0.8099281912978827
+            },
+            "0.5": {
+              "prediction_id": "466",
+              "gt_id": 114,
+              "iou": 0.8099281912978827
+            },
+            "0.75": {
+              "prediction_id": "466",
+              "gt_id": 114,
+              "iou": 0.8099281912978827
+            }
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 1831
+        },
+        {
+          "gt_id": 116,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "465",
+            "member_prediction_ids": [
+              "465"
+            ],
+            "label": "box",
+            "confidence": 0.39511718749999997,
+            "IoU": 0.49065012713285633
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "465",
+              "member_prediction_ids": [
+                "465"
+              ],
+              "gt_id": 116,
+              "iou": 0.49065012713285633
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "465",
+              "gt_id": 116,
+              "iou": 0.49065012713285633
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 1894
+        },
+        {
+          "gt_id": 117,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "274",
+            "member_prediction_ids": [
+              "274"
+            ],
+            "label": "bread",
+            "confidence": 0.47276220185207163,
+            "IoU": 0.4183510844312067
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "274",
+              "member_prediction_ids": [
+                "274"
+              ],
+              "gt_id": 117,
+              "iou": 0.4183510844312067
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "274",
+              "gt_id": 117,
+              "iou": 0.4183510844312067
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 1906
+        },
+        {
+          "gt_id": 118,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "283",
+            "member_prediction_ids": [
+              "283"
+            ],
+            "label": "cutting board",
+            "confidence": 0.34589180495505195,
+            "IoU": 0.526581515636288
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "283",
+              "member_prediction_ids": [
+                "283"
+              ],
+              "gt_id": 118,
+              "iou": 0.526581515636288
+            },
+            "0.5": {
+              "prediction_id": "283",
+              "member_prediction_ids": [
+                "283"
+              ],
+              "gt_id": 118,
+              "iou": 0.526581515636288
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "283",
+              "gt_id": 118,
+              "iou": 0.526581515636288
+            },
+            "0.5": {
+              "prediction_id": "283",
+              "gt_id": 118,
+              "iou": 0.526581515636288
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 370
+        },
+        {
+          "gt_id": 119,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "101",
+            "member_prediction_ids": [
+              "101"
+            ],
+            "label": "dish rack",
+            "confidence": 0.46168495334494586,
+            "IoU": 0.8442148062958832
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "101",
+              "member_prediction_ids": [
+                "101"
+              ],
+              "gt_id": 119,
+              "iou": 0.8442148062958832
+            },
+            "0.5": {
+              "prediction_id": "101",
+              "member_prediction_ids": [
+                "101"
+              ],
+              "gt_id": 119,
+              "iou": 0.8442148062958832
+            },
+            "0.75": {
+              "prediction_id": "101",
+              "member_prediction_ids": [
+                "101"
+              ],
+              "gt_id": 119,
+              "iou": 0.8442148062958832
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "101",
+              "gt_id": 119,
+              "iou": 0.8442148062958832
+            },
+            "0.5": {
+              "prediction_id": "101",
+              "gt_id": 119,
+              "iou": 0.8442148062958832
+            },
+            "0.75": {
+              "prediction_id": "101",
+              "gt_id": 119,
+              "iou": 0.8442148062958832
+            }
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 8084
+        },
+        {
+          "gt_id": 120,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "102",
+            "member_prediction_ids": [
+              "102"
+            ],
+            "label": "jar",
+            "confidence": 0.5523577038128679,
+            "IoU": 0.15779708042034923
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 821
+        },
+        {
+          "gt_id": 121,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "103",
+            "member_prediction_ids": [
+              "103"
+            ],
+            "label": "jar",
+            "confidence": 0.5620024303979567,
+            "IoU": 0.5045536121394013
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "103",
+              "member_prediction_ids": [
+                "103"
+              ],
+              "gt_id": 121,
+              "iou": 0.5045536121394013
+            },
+            "0.5": {
+              "prediction_id": "103",
+              "member_prediction_ids": [
+                "103"
+              ],
+              "gt_id": 121,
+              "iou": 0.5045536121394013
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "103",
+              "gt_id": 121,
+              "iou": 0.5045536121394013
+            },
+            "0.5": {
+              "prediction_id": "103",
+              "gt_id": 121,
+              "iou": 0.5045536121394013
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 808
+        },
+        {
+          "gt_id": 122,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "211",
+            "member_prediction_ids": [
+              "211"
+            ],
+            "label": "jar",
+            "confidence": 0.586760096530566,
+            "IoU": 0.5249482287023424
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "211",
+              "member_prediction_ids": [
+                "211"
+              ],
+              "gt_id": 122,
+              "iou": 0.5249482287023424
+            },
+            "0.5": {
+              "prediction_id": "211",
+              "member_prediction_ids": [
+                "211"
+              ],
+              "gt_id": 122,
+              "iou": 0.5249482287023424
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "211",
+              "gt_id": 122,
+              "iou": 0.5249482287023424
+            },
+            "0.5": {
+              "prediction_id": "211",
+              "gt_id": 122,
+              "iou": 0.5249482287023424
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 801
+        },
+        {
+          "gt_id": 123,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "100",
+            "member_prediction_ids": [
+              "100"
+            ],
+            "label": "jar",
+            "confidence": 0.5811220163655142,
+            "IoU": 0.3007046793320587
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "100",
+              "member_prediction_ids": [
+                "100"
+              ],
+              "gt_id": 123,
+              "iou": 0.3007046793320587
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "100",
+              "gt_id": 123,
+              "iou": 0.3007046793320587
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 857
+        },
+        {
+          "gt_id": 124,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "210",
+            "member_prediction_ids": [
+              "210"
+            ],
+            "label": "jar",
+            "confidence": 0.5816030654981159,
+            "IoU": 0.37227131726990037
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "210",
+              "member_prediction_ids": [
+                "210"
+              ],
+              "gt_id": 124,
+              "iou": 0.37227131726990037
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "210",
+              "gt_id": 124,
+              "iou": 0.37227131726990037
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 844
+        },
+        {
+          "gt_id": 125,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "212",
+            "member_prediction_ids": [
+              "212"
+            ],
+            "label": "jar",
+            "confidence": 0.6117056622933517,
+            "IoU": 0.13654214977308707
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 831
+        },
+        {
+          "gt_id": 126,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "247",
+            "member_prediction_ids": [
+              "247"
+            ],
+            "label": "utensil rack",
+            "confidence": 0.5528348966786334,
+            "IoU": 0.6564537972115563
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "247",
+              "member_prediction_ids": [
+                "247"
+              ],
+              "gt_id": 126,
+              "iou": 0.6564537972115563
+            },
+            "0.5": {
+              "prediction_id": "247",
+              "member_prediction_ids": [
+                "247"
+              ],
+              "gt_id": 126,
+              "iou": 0.6564537972115563
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "247",
+              "gt_id": 126,
+              "iou": 0.6564537972115563
+            },
+            "0.5": {
+              "prediction_id": "247",
+              "gt_id": 126,
+              "iou": 0.6564537972115563
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0096",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0096.semantic_instance.hdf5",
+          "visible_pixels": 3178
+        },
+        {
+          "gt_id": 127,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "37",
+            "member_prediction_ids": [
+              "37"
+            ],
+            "label": "toaster",
+            "confidence": 0.5701779008723519,
+            "IoU": 0.9637539742419475
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "37",
+              "member_prediction_ids": [
+                "37"
+              ],
+              "gt_id": 127,
+              "iou": 0.9637539742419475
+            },
+            "0.5": {
+              "prediction_id": "37",
+              "member_prediction_ids": [
+                "37"
+              ],
+              "gt_id": 127,
+              "iou": 0.9637539742419475
+            },
+            "0.75": {
+              "prediction_id": "37",
+              "member_prediction_ids": [
+                "37"
+              ],
+              "gt_id": 127,
+              "iou": 0.9637539742419475
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "37",
+              "gt_id": 127,
+              "iou": 0.9637539742419475
+            },
+            "0.5": {
+              "prediction_id": "37",
+              "gt_id": 127,
+              "iou": 0.9637539742419475
+            },
+            "0.75": {
+              "prediction_id": "37",
+              "gt_id": 127,
+              "iou": 0.9637539742419475
+            }
+          },
+          "frame_id": "cam_01_0050",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_01_geometry_hdf5/frame.0050.semantic_instance.hdf5",
+          "visible_pixels": 7184
+        },
+        {
+          "gt_id": 128,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "65",
+            "member_prediction_ids": [
+              "65"
+            ],
+            "label": "knife block",
+            "confidence": 0.5258542624755956,
+            "IoU": 0.5848840358177896
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "65",
+              "member_prediction_ids": [
+                "65"
+              ],
+              "gt_id": 128,
+              "iou": 0.5848840358177896
+            },
+            "0.5": {
+              "prediction_id": "65",
+              "member_prediction_ids": [
+                "65"
+              ],
+              "gt_id": 128,
+              "iou": 0.5848840358177896
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "65",
+              "gt_id": 128,
+              "iou": 0.5848840358177896
+            },
+            "0.5": {
+              "prediction_id": "65",
+              "gt_id": 128,
+              "iou": 0.5848840358177896
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 7515
+        },
+        {
+          "gt_id": 133,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "89",
+            "member_prediction_ids": [
+              "89"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.5972936349734347,
+            "IoU": 0.75154303685579
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "89",
+              "member_prediction_ids": [
+                "89"
+              ],
+              "gt_id": 133,
+              "iou": 0.75154303685579
+            },
+            "0.5": {
+              "prediction_id": "89",
+              "member_prediction_ids": [
+                "89"
+              ],
+              "gt_id": 133,
+              "iou": 0.75154303685579
+            },
+            "0.75": {
+              "prediction_id": "89",
+              "member_prediction_ids": [
+                "89"
+              ],
+              "gt_id": 133,
+              "iou": 0.75154303685579
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "89",
+              "gt_id": 133,
+              "iou": 0.75154303685579
+            },
+            "0.5": {
+              "prediction_id": "89",
+              "gt_id": 133,
+              "iou": 0.75154303685579
+            },
+            "0.75": {
+              "prediction_id": "89",
+              "gt_id": 133,
+              "iou": 0.75154303685579
+            }
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 2025
+        },
+        {
+          "gt_id": 134,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "109",
+            "member_prediction_ids": [
+              "109"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.5516710144058834,
+            "IoU": 0.788407550128035
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "109",
+              "member_prediction_ids": [
+                "109"
+              ],
+              "gt_id": 134,
+              "iou": 0.788407550128035
+            },
+            "0.5": {
+              "prediction_id": "109",
+              "member_prediction_ids": [
+                "109"
+              ],
+              "gt_id": 134,
+              "iou": 0.788407550128035
+            },
+            "0.75": {
+              "prediction_id": "109",
+              "member_prediction_ids": [
+                "109"
+              ],
+              "gt_id": 134,
+              "iou": 0.788407550128035
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "109",
+              "gt_id": 134,
+              "iou": 0.788407550128035
+            },
+            "0.5": {
+              "prediction_id": "109",
+              "gt_id": 134,
+              "iou": 0.788407550128035
+            },
+            "0.75": {
+              "prediction_id": "109",
+              "gt_id": 134,
+              "iou": 0.788407550128035
+            }
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1704
+        },
+        {
+          "gt_id": 135,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "273",
+            "member_prediction_ids": [
+              "273"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.49654949916397756,
+            "IoU": 0.4536129637165722
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "273",
+              "member_prediction_ids": [
+                "273"
+              ],
+              "gt_id": 135,
+              "iou": 0.4536129637165722
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "273",
+              "gt_id": 135,
+              "iou": 0.4536129637165722
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 740
+        },
+        {
+          "gt_id": 137,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "90",
+            "member_prediction_ids": [
+              "90"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.5004517334743322,
+            "IoU": 0.6683938420802673
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "90",
+              "member_prediction_ids": [
+                "90"
+              ],
+              "gt_id": 137,
+              "iou": 0.6683938420802673
+            },
+            "0.5": {
+              "prediction_id": "90",
+              "member_prediction_ids": [
+                "90"
+              ],
+              "gt_id": 137,
+              "iou": 0.6683938420802673
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "90",
+              "gt_id": 137,
+              "iou": 0.6683938420802673
+            },
+            "0.5": {
+              "prediction_id": "90",
+              "gt_id": 137,
+              "iou": 0.6683938420802673
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 2056
+        },
+        {
+          "gt_id": 138,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "111",
+            "member_prediction_ids": [
+              "111"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.5278883126161901,
+            "IoU": 0.7875922987045119
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "111",
+              "member_prediction_ids": [
+                "111"
+              ],
+              "gt_id": 138,
+              "iou": 0.7875922987045119
+            },
+            "0.5": {
+              "prediction_id": "111",
+              "member_prediction_ids": [
+                "111"
+              ],
+              "gt_id": 138,
+              "iou": 0.7875922987045119
+            },
+            "0.75": {
+              "prediction_id": "111",
+              "member_prediction_ids": [
+                "111"
+              ],
+              "gt_id": 138,
+              "iou": 0.7875922987045119
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "111",
+              "gt_id": 138,
+              "iou": 0.7875922987045119
+            },
+            "0.5": {
+              "prediction_id": "111",
+              "gt_id": 138,
+              "iou": 0.7875922987045119
+            },
+            "0.75": {
+              "prediction_id": "111",
+              "gt_id": 138,
+              "iou": 0.7875922987045119
+            }
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 1569
+        },
+        {
+          "gt_id": 139,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "273",
+            "member_prediction_ids": [
+              "273"
+            ],
+            "label": "utensil holder",
+            "confidence": 0.49654949916397756,
+            "IoU": 0.0022038473083275363
+          },
+          "aligned_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": null,
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 2079
+        },
+        {
+          "gt_id": 146,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "462",
+            "member_prediction_ids": [
+              "462"
+            ],
+            "label": "cup",
+            "confidence": 0.590625,
+            "IoU": 0.6296046514716646
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "462",
+              "member_prediction_ids": [
+                "462"
+              ],
+              "gt_id": 146,
+              "iou": 0.6296046514716646
+            },
+            "0.5": {
+              "prediction_id": "462",
+              "member_prediction_ids": [
+                "462"
+              ],
+              "gt_id": 146,
+              "iou": 0.6296046514716646
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "462",
+              "gt_id": 146,
+              "iou": 0.6296046514716646
+            },
+            "0.5": {
+              "prediction_id": "462",
+              "gt_id": 146,
+              "iou": 0.6296046514716646
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0084",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0084.semantic_instance.hdf5",
+          "visible_pixels": 876
+        },
+        {
+          "gt_id": 147,
+          "official_label": "otherstructure",
+          "best_prediction": {
+            "prediction_id": "96",
+            "member_prediction_ids": [
+              "96"
+            ],
+            "label": "utensil rack",
+            "confidence": 0.5226114321565083,
+            "IoU": 0.7128781854569578
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "96",
+              "member_prediction_ids": [
+                "96"
+              ],
+              "gt_id": 147,
+              "iou": 0.7128781854569578
+            },
+            "0.5": {
+              "prediction_id": "96",
+              "member_prediction_ids": [
+                "96"
+              ],
+              "gt_id": 147,
+              "iou": 0.7128781854569578
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "96",
+              "gt_id": 147,
+              "iou": 0.7128781854569578
+            },
+            "0.5": {
+              "prediction_id": "96",
+              "gt_id": 147,
+              "iou": 0.7128781854569578
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0042",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0042.semantic_instance.hdf5",
+          "visible_pixels": 4824
+        },
+        {
+          "gt_id": 148,
+          "official_label": "counter",
+          "best_prediction": {
+            "prediction_id": "141+236",
+            "member_prediction_ids": [
+              "141",
+              "236"
+            ],
+            "label": "countertop",
+            "confidence": 0.5178053595981228,
+            "IoU": 0.5761302954510734
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "141+236",
+              "member_prediction_ids": [
+                "141",
+                "236"
+              ],
+              "gt_id": 148,
+              "iou": 0.5761302954510734
+            },
+            "0.5": {
+              "prediction_id": "141+236",
+              "member_prediction_ids": [
+                "141",
+                "236"
+              ],
+              "gt_id": 148,
+              "iou": 0.5761302954510734
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "141",
+              "gt_id": 148,
+              "iou": 0.5709474882633496
+            },
+            "0.5": {
+              "prediction_id": "141",
+              "gt_id": 148,
+              "iou": 0.5709474882633496
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_00_0084",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0084.semantic_instance.hdf5",
+          "visible_pixels": 204941
+        },
+        {
+          "gt_id": 149,
+          "official_label": "sink",
+          "best_prediction": {
+            "prediction_id": "131",
+            "member_prediction_ids": [
+              "131"
+            ],
+            "label": "sink",
+            "confidence": 0.6033528088413735,
+            "IoU": 0.8320764817496737
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "131",
+              "member_prediction_ids": [
+                "131"
+              ],
+              "gt_id": 149,
+              "iou": 0.8320764817496737
+            },
+            "0.5": {
+              "prediction_id": "131",
+              "member_prediction_ids": [
+                "131"
+              ],
+              "gt_id": 149,
+              "iou": 0.8320764817496737
+            },
+            "0.75": {
+              "prediction_id": "131",
+              "member_prediction_ids": [
+                "131"
+              ],
+              "gt_id": 149,
+              "iou": 0.8320764817496737
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "131",
+              "gt_id": 149,
+              "iou": 0.8320764817496737
+            },
+            "0.5": {
+              "prediction_id": "131",
+              "gt_id": 149,
+              "iou": 0.8320764817496737
+            },
+            "0.75": {
+              "prediction_id": "131",
+              "gt_id": 149,
+              "iou": 0.8320764817496737
+            }
+          },
+          "frame_id": "cam_00_0084",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_00_geometry_hdf5/frame.0084.semantic_instance.hdf5",
+          "visible_pixels": 68591
+        },
+        {
+          "gt_id": 151,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "217",
+            "member_prediction_ids": [
+              "217"
+            ],
+            "label": "kitchen utensil",
+            "confidence": 0.47813432434568515,
+            "IoU": 0.5761457243141496
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "217",
+              "member_prediction_ids": [
+                "217"
+              ],
+              "gt_id": 151,
+              "iou": 0.5761457243141496
+            },
+            "0.5": {
+              "prediction_id": "217",
+              "member_prediction_ids": [
+                "217"
+              ],
+              "gt_id": 151,
+              "iou": 0.5761457243141496
+            },
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "217",
+              "gt_id": 151,
+              "iou": 0.5761457243141496
+            },
+            "0.5": {
+              "prediction_id": "217",
+              "gt_id": 151,
+              "iou": 0.5761457243141496
+            },
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 1934
+        },
+        {
+          "gt_id": 152,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "337",
+            "member_prediction_ids": [
+              "337"
+            ],
+            "label": "butter",
+            "confidence": 0.38586453861710346,
+            "IoU": 0.8110378263856275
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "337",
+              "member_prediction_ids": [
+                "337"
+              ],
+              "gt_id": 152,
+              "iou": 0.8110378263856275
+            },
+            "0.5": {
+              "prediction_id": "337",
+              "member_prediction_ids": [
+                "337"
+              ],
+              "gt_id": 152,
+              "iou": 0.8110378263856275
+            },
+            "0.75": {
+              "prediction_id": "337",
+              "member_prediction_ids": [
+                "337"
+              ],
+              "gt_id": 152,
+              "iou": 0.8110378263856275
+            }
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "337",
+              "gt_id": 152,
+              "iou": 0.8110378263856275
+            },
+            "0.5": {
+              "prediction_id": "337",
+              "gt_id": 152,
+              "iou": 0.8110378263856275
+            },
+            "0.75": {
+              "prediction_id": "337",
+              "gt_id": 152,
+              "iou": 0.8110378263856275
+            }
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 886
+        },
+        {
+          "gt_id": 153,
+          "official_label": "otherprop",
+          "best_prediction": {
+            "prediction_id": "94",
+            "member_prediction_ids": [
+              "94"
+            ],
+            "label": "cutting board",
+            "confidence": 0.6039028047632519,
+            "IoU": 0.44972145939278746
+          },
+          "aligned_matches": {
+            "0.25": {
+              "prediction_id": "94",
+              "member_prediction_ids": [
+                "94"
+              ],
+              "gt_id": 153,
+              "iou": 0.44972145939278746
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "strict_matches": {
+            "0.25": {
+              "prediction_id": "94",
+              "gt_id": 153,
+              "iou": 0.44972145939278746
+            },
+            "0.5": null,
+            "0.75": null
+          },
+          "frame_id": "cam_02_0001",
+          "mask_path": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/source_hdf5/images/scene_cam_02_geometry_hdf5/frame.0001.semantic_instance.hdf5",
+          "visible_pixels": 1901
+        }
+      ],
+      "aligned_counts": {
+        "0.25": 95,
+        "0.5": 78,
+        "0.75": 43
+      },
+      "strict_counts": {
+        "0.25": 94,
+        "0.5": 75,
+        "0.75": 41
+      }
+    }
+  ]
+}

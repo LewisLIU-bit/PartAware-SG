@@ -14,66 +14,71 @@ __OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
 
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each existing scene has one complete GPT cache
-for v12 through v17; construction makes no new GPT or Qwen image requests.
-Report defaults remain original RAM, existing Qwen for v11, and existing GPT
-for v12 and later. The GPT original pipeline is retained as a separate baseline
-and compared with RAM, Qwen-to-DINO and all retained final versions.
-See [GPT setup and comparison protocol](docs/VISION_API.md).
-The ScanNet and Hypersim interfaces remain unchanged.
+for v12 through v18; construction makes no new GPT or Qwen image requests.
+Defaults remain original RAM, existing Qwen for v11, and existing GPT for v12
+and later. GPT original remains a separate baseline. See [setup](docs/VISION_API.md).
 
-The latest v17 final reuses existing GPT categories and signed SAM3 observations.
-FOVEA -> MICA -> SHAPE -> GRAPH retains VISTA/RSE/MIRA and adds CORE (Component
-Ownership and Residual Evidence) and WISP (Weak Instance Surface Proposals).
-CORE checks jointly depth-visible component evidence before quarantining remote
-minority fragments and recomputing the real object's center, box and spatial edges.
-WISP associates low-confidence native identities using shared measured surfaces,
-genuine cached features and same-frame separation; original-pixel resolution,
-camera baseline and three-view point verification gate new roots. No scene
-coordinates, GT/node list, category whitelist, fixed count or special prompt is used.
+The latest v18 final adds ECHO (Evidence Consensus for Hypothesis Ownership)
+and MEND (Measured Envelope Normal Denoising) to FOVEA -> MICA -> SHAPE -> GRAPH.
+ECHO only withdraws a whole-object identity when linear geometry and semantic
+incompatibility coincide with public ownership and independent native-mask
+refutation. Missing depth, occlusion and thinness alone cannot delete a node.
+Measurements remain in unresolved fragments. MEND projects broad measured plane
+anchors by at most 4 mm into a separate reconstructed cloud; this is denoising,
+not hidden-shape completion. Neither construction component reads GT or uses
+node/category whitelists, scene coordinates or target counts.
 
-The first scene retains 10/10 and 100%/100%/100% AP25/AP50/AP75. The second reaches
-63.09%/42.53%/19.12% (134 predictions / 109 GT), improving all three AP thresholds
-over the immutable v16 final. The P298 empty-center artifact is corrected while
-the real lamp head remains. GT114 is recovered and matches at 75%; GT116 is an
-independent recovered box with 49.1% IoU, matching at 25% but still below 50%.
-At 25%, TP/FP/FN is 94/40/15; at 50% and 75%, unmatched predictions and log-count
-error increase. The all-metric nonregression gate does not fully pass.
-Transparent rear objects, mixed windows, the thin oven and whole lamp assembly
-still fail; AP25 70% / AP50 55% remains unmet. This is measured recovery, not
-universal hidden-shape completion or proof of broad semantic generalization.
+Both first-scene protocols remain 100%/100%/100%. Second-scene strict
+AP25/AP50/AP75 is 63.69%/42.85%/19.24%, with 133 roots / 109 GT.
+All strict thresholds improve modestly over v17. ECHO withdraws the unsupported
+window hypothesis P310, retains the real lamp and recovered small boxes, and
+preserves all 1,329 original fragment coordinates. Thin cabinet depth,
+transparent rear items, mixed windows and the full oven remain unresolved.
+The strict AP25 70% / AP50 55% target remains unmet.
 
-GUD (Granularity Union Diagnostics) separately reports pure measured-fragment
-unions, including the cloth example. Membership is GT-assisted only in evaluation;
-it is not AP, an inferred parent hierarchy, PartPQ/PWQ or an official benchmark.
-Original GT and strict one-to-one AP remain unchanged. Mixed windows do not gain
-two identities from diagnostic grouping. All available retained finals use the
-same supplementary conditions; missing old surface diagnostics are marked unavailable.
+GAU (Granularity-Aligned Union AP) groups pure fragments of the same annotation
+only during evaluation. It uses a fixed 2 cm tolerance, 0.8 purity, envelopes
+of saved child prediction boxes and minimum child score. Mixed and unknown
+predictions remain independent and retain false-positive liability. The second
+scene has 76.17%/55.69%/23.72% GAU-AP. This is GT-assisted granularity accounting,
+not independent instance-recognition AP or an official benchmark. Strict AP
+remains alongside it. All available retained finals are reevaluated uniformly;
+missing or fingerprint-inconsistent old artifacts are explicitly unavailable.
+Protocol-induced gains must not be claimed as algorithm improvement.
 
-Both scenes were fully rebuilt from raw fusion and tracks without new vision
-inference. All 263 offline regression tests and the original TopologyMap reader
-pass. All 199 signed bundles match, and every v16 file remains byte-identical.
-The [consolidated report](docs/RESEARCH_REPORT.md) retains all 119 official GT IDs,
-11 atlases, equations, references and one final result per version. See the
-[independent validation receipt](docs/v17_final_results.json).
+MATCH-3D is a proposed joint text / local scene graph / shape model. It separates
+class compatibility, existence and completion quality, with condition tokens
+in a point-cloud Transformer decoder and RGB-D verification. Training is paused
+at the user's request; no trained model, checkpoint or learned result is claimed.
+See the equations and limitations in section 26 of the
+[canonical report](RESEARCH_LOG.html) and its [Markdown source](docs/RESEARCH_REPORT.md).
+
+All 278 offline tests and the original TopologyMap reader pass. Both scenes are
+fully rebuilt from raw fusion. All 199 signed native bundles match and every
+v17 file is byte-identical. See the [validation receipt](docs/v18_final_results.json)
+and [uniform statistics ledger](docs/v18_granularity_comparison.json). All 119
+official GT IDs and 11 atlases remain, with combined GAU members and strict matches.
 
 Rebuild into a fresh directory with existing observations:
 
 ```bash
 cd /home/lewisliu/PartAware-SG
 /home/lewisliu/miniconda3/envs/scannet-sg/bin/python scannet/script/run_gpt_comparison.py \
-  --worker v17 \
+  --worker v18 \
   --manifest /home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json \
-  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v16/hypersim/ai_001_010 \
-  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v17/hypersim/ai_001_010 \
+  --reuse-scene /home/lewisliu/datasets/scannet-sg-processed/partaware_v17/hypersim/ai_001_010 \
+  --processed-scene /home/lewisliu/.cache/partaware-sg/rebuild_v18/hypersim/ai_001_010 \
   --start-stage graph
 ```
 
-Final results remain under `datasets/scannet-sg-processed/partaware_v17`.
-Use `instance_cloud_completed.ply` with `topology_map.json` for final geometry;
-use `instance_cloud_cleaned.ply` with `topology_map_observed.json` for measurements.
-Unresolved fragments preserve original coordinates outside object-root statistics.
-Historical profiles actively detach v17 adapters. Remove each code registration
-and rebuild to omit it; 256/384-dimensional object features remain compatible.
+Final results remain under `datasets/scannet-sg-processed/partaware_v18`.
+Use the source recorded in `topology_map.json.geometry_provenance.source`
+(the reconstructed `instance_cloud_regularized.ply` where present) with the
+formal graph. Use `instance_cloud_cleaned.ply` and `topology_map_observed.json`
+for measurements. Historical profiles detach v18 adapters. Remove registrations
+and rebuild to omit each component; 256/384-dimensional object features remain
+compatible. Reports are published at repository-root `RESEARCH_LOG.html` and
+`RESEARCH_LOG.tex`; no duplicate rendered files are kept in `docs`.
 
 PartAware-SG preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
@@ -230,7 +235,7 @@ The [offline LaTeX-rendered HTML report](RESEARCH_LOG.html) includes all equatio
 as embedded SVG and opens without runtime downloads. Editable
 [LaTeX source](RESEARCH_LOG.tex) and editable
 [Chinese research source](docs/RESEARCH_REPORT.md) are also provided. General
-flow, mathematics and interfaces describe v10; each version change and the withdrawn v6 trial have separate chapters.
+flow, mathematics and interfaces describe v18; each retained version has its final results in the report.
 
 ```bash
 python -m unittest discover -s scannet/script/tests_partaware -v
@@ -405,6 +410,6 @@ without part-level annotations. See report sections 2.7/2.8, 6.7 and chapter 18.
 
 The retained v12 results share `scannet-sg-processed/partaware_v12/hypersim/`, with
 `ai_001_002` and `ai_001_010` as sibling scenes. Direct viewer commands are in
-report section 21;
+report section 27;
 `--show_parts --show_part_points` optionally displays the retained panel parts.
 Edges and picking remain opt-in.

@@ -457,3 +457,42 @@ Identical conditions apply to all available retained final versions; unavailable
 surface assignments are explicit. Equations and sources are in report sections
 2.13–2.14, 6.13, 19.1, 24 and 26. The final hashes, targets and count tradeoffs are
 in `docs/v17_final_results.json`.
+
+
+## V18 identity review, bounded reconstruction and uniform statistics
+
+`configure_profile('v18', registry)` appends `existence_review` (ECHO) and
+`surface_regularization` (MEND) to `FINAL_GEOMETRY` after v17 evidence recovery.
+ECHO belongs to MICA; MEND belongs to SHAPE. Historical profiles explicitly clear
+both registrations. Remove imports/registrations and rebuild from raw fusion
+to detach them; never reuse a corrected final as a substitute for raw input.
+
+ECHO combines line-like geometry, semantic incompatibility, public ownership,
+signed non-exclusive native masks and held-out depth-visible negative frames.
+It preserves unsupported fragment coordinates in `unresolved_fragments` and
+withdraws only the unsupported whole-object identity. Raw fusion is unchanged.
+The canonical publisher synchronizes surviving nodes, boxes and spatial edges.
+`existence_review_audit.json` records code hash, thresholds, actual votes and
+camera baseline. No GT, node/category whitelist or target count is used.
+
+MEND fits broad observed planes using RANSAC and projects anchors by at most
+4 mm. Only anchors identical to actual observations are moved in the separate
+`instance_cloud_regularized.ply`; cleaned measurement coordinates, boundaries,
+small curved objects and generated priors remain distinct. Publication and
+the original viewer use `geometry_provenance.source`, not a hardcoded completed
+PLY. `surface_regularization_audit.json` records displacement and residuals.
+This is not universal hidden completion or newly measured geometry.
+
+Independent evaluation adds `granularity_aligned_AP` (GAU_v1). Pure child
+predictions are grouped by nearest original GT observed surfaces (2 cm, 0.8
+purity). Their saved AABBs are enveloped and minimum child score determines
+AP ranking. Mixed predictions are never GT-split; unknowns keep FP liability;
+every child appears once. This is explicitly GT-assisted and not official AP
+or independent instance-recognition accuracy. Original strict AP is retained.
+All comparable saved finals use the same protocol, including original baselines
+and v11. Missing/fingerprint-inconsistent historical products are unavailable.
+
+Post-publication `scene_review_zh.json` includes combined statistical members,
+GAU matches and strict matches. Report sections 6.13–6.14 and 25 define the rules;
+section 26 defines the untrained MATCH-3D method and section 28 maps references.
+Training is paused by the user. No learned joint model participates in v18.
