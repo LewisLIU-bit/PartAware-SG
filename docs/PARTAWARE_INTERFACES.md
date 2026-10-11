@@ -496,3 +496,48 @@ Post-publication `scene_review_zh.json` includes combined statistical members,
 GAU matches and strict matches. Report sections 6.13–6.14 and 25 define the rules;
 section 26 defines the untrained MATCH-3D method and section 28 maps references.
 Training is paused by the user. No learned joint model participates in v18.
+
+
+## V19 visible ownership and automatically verified support residuals
+
+`configure_profile('v19', registry)` adds `consensus_ownership.construct` (COVE)
+and `support_residuals.construct` (BASE) after v18 FINAL_GEOMETRY registrations.
+Historical profiles clear them. Removing a registration requires reconstruction
+from an input without the removed component; do not reuse a corrected final as
+a removal baseline. `run_v19_refinement.py` explicitly starts from a verified v18
+final, refuses overwrite, records every base file hash and checks base immutability.
+The full raw-fusion profile remains separately available and is not the protocol
+of the published v19 experiment. Version/profile provenance distinguishes these.
+
+COVE uses genuine independent frame quality, real public features, a shared
+2/3-view measured core and visible mask votes. A stronger two-view branch keeps
+uncontradicted real side measurements once identity is shared. Unique semantic
+and bidirectional geometric ownership may recover dense depth after minority
+contradicted prior points are quarantined. Unknown and occluded points cannot
+be negative votes. Optional robust axial envelopes protect coherent attachments;
+failed fits do not generate surfaces. No GT, target count or ID whitelist is used.
+
+BASE requires declared Hypersim world-Z-up. Multiple raised bottom anchors above
+a broad measured parent plane propose residual support geometry; actual depth
+cells need 3 independent frames, connection and a parallel measured face.
+`support_publication.py` automatically creates projected boxes and requires
+3 independent SAM3 masks with >=0.7 candidate coverage and >=0.6 actual depth
+purity within 15 mm. `support_visual_worker.py` invokes the existing pinned model
+with the PCS geometric-box API, not manual text/category prompts. Additional
+local masks are signed separately; existing 199 native cache bundles stay fixed.
+Whole-mask ownership restores existing objects; ambiguous enclosed pieces are
+deferred. New `support platform` nodes carry geometric-role status, genuine 384/256
+features, real secondary observations and supports edges, not recognized tray labels.
+
+Both components write audited measured replacements and unresolved original
+coordinates, preserve completion-only samples in separate products and republish
+canonical boxes/relations. Newly measured samples are never called generated
+hidden geometry. Conservative minimum-independent-view scores remain uncalibrated.
+Primary audit paths: `consensus_ownership_audit.json`, `support_residual_audit.json`,
+`support_residual_jobs.json`, `support_residual_visual/`, `v19_build_receipt.json`.
+Post-publication original viewer and independent evaluation run automatically.
+
+Report sections 6.15 and 26 contain exact equations, thresholds and paper mappings;
+section 27 remains the paused, untrained MATCH-3D proposal. Strict AP and GAU_v1
+are reported together. No claim of universal hidden completion or strong
+cross-dataset generalization is made from these two local scenes.

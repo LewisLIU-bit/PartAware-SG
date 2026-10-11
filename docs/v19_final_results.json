@@ -1,0 +1,2584 @@
+{
+  "version": "v19",
+  "updated": "2026-10-11",
+  "tests": 294,
+  "consumer_vision_api_calls": 0,
+  "construction_uses_ground_truth": false,
+  "statistics_grouping_uses_ground_truth": true,
+  "statistical_protocol": "GAU_v1_annotation_assisted_pure_fragment_union",
+  "training_started": false,
+  "training_paused_by_user": true,
+  "learned_joint_model_implemented": false,
+  "targets": {
+    "strict_AP25": 0.7,
+    "strict_AP50": 0.55
+  },
+  "scenes": [
+    {
+      "scene_id": "ai_001_002",
+      "frames": 99,
+      "predicted": 10,
+      "gt": 10,
+      "AP25": 1.0,
+      "AP50": 1.0,
+      "AP75": 1.0,
+      "GAU_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "statistical_entities": 10,
+      "GAU_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "strict_counts": {
+        "0.25": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.5": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        },
+        "0.75": {
+          "TP": 10,
+          "FP": 0,
+          "FN": 0
+        }
+      },
+      "MVO25": 1.0,
+      "MVO50": 1.0,
+      "absolute_log_count_error": 0.0,
+      "previous_v18_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "previous_v18_GAU_AP": {
+        "AP25": 1.0,
+        "AP50": 1.0,
+        "AP75": 1.0
+      },
+      "graph_sha256": "7a8cbfc67ec039e62f8877ad8a04eac07b288c159d4bd03d964f15eb94c21ed2",
+      "prediction_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "observed_ply_sha256": "4b07739d47813584aa29180bd903c0c50af49658efa5b10e1a2b3e586c5e0fd9",
+      "geometry_source": "instance_cloud_cleaned.ply",
+      "gt_labels_sha256": "72fec7af62bde7a8283de28cd6348a48754247b03dadbbcc37abea0ad29932a9",
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "local_support_visual_box_queries": 0,
+      "legacy_topology_reader_passed": true,
+      "strict_threshold_non_regression_gate": true,
+      "base_v18_byte_identical": true,
+      "part_nodes": 28,
+      "COVE": {
+        "algorithm": "COVE",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "source_groups": 25,
+        "undersegmented_groups": 11,
+        "component_sha256": "a065d80721a5ed79251ea24b00d7813617cd490d0e49b7bddaf6490cdb0edc97",
+        "objects": []
+      },
+      "BASE": {
+        "algorithm": "BASE",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "191f4e821fe8bb2e5e69073531aefe86fa15718b6e09c25e6645610321b07089",
+        "candidates": [],
+        "objects": []
+      }
+    },
+    {
+      "scene_id": "ai_001_010",
+      "frames": 100,
+      "predicted": 141,
+      "gt": 109,
+      "AP25": 0.665310717064037,
+      "AP50": 0.4354798656162385,
+      "AP75": 0.19401176711866386,
+      "GAU_AP": {
+        "AP25": 0.8000279550454716,
+        "AP50": 0.5680920909479357,
+        "AP75": 0.23899001349553742
+      },
+      "statistical_entities": 119,
+      "GAU_counts": {
+        "0.25": {
+          "TP": 99,
+          "FP": 20,
+          "FN": 10
+        },
+        "0.5": {
+          "TP": 80,
+          "FP": 39,
+          "FN": 29
+        },
+        "0.75": {
+          "TP": 44,
+          "FP": 75,
+          "FN": 65
+        }
+      },
+      "strict_counts": {
+        "0.25": {
+          "TP": 98,
+          "FP": 43,
+          "FN": 11
+        },
+        "0.5": {
+          "TP": 77,
+          "FP": 64,
+          "FN": 32
+        },
+        "0.75": {
+          "TP": 42,
+          "FP": 99,
+          "FN": 67
+        }
+      },
+      "MVO25": 0.665310717064037,
+      "MVO50": 0.5059132056374883,
+      "absolute_log_count_error": 0.2574120081490246,
+      "previous_v18_AP": {
+        "AP25": 0.6368771257713797,
+        "AP50": 0.4284958864570163,
+        "AP75": 0.19239071720132508
+      },
+      "previous_v18_GAU_AP": {
+        "AP25": 0.7617337086302854,
+        "AP50": 0.5569186035368884,
+        "AP75": 0.23716938290571482
+      },
+      "graph_sha256": "35430fb026ab733e584bf4e19d8372db53526bea468a82e2f60118ae4150b8f1",
+      "prediction_ply_sha256": "d95efb40a3ed36763821f606c697473a2550161aad9e4e8742f1f21bef1f7480",
+      "observed_ply_sha256": "d95efb40a3ed36763821f606c697473a2550161aad9e4e8742f1f21bef1f7480",
+      "geometry_source": "instance_cloud_regularized.ply",
+      "gt_labels_sha256": "547c62e10f02e9601f45bdfb5553e0d5f2228b4b697709c37f3eb4038908a702",
+      "same_raw_fusion": true,
+      "same_native_masks": true,
+      "local_support_visual_box_queries": 15,
+      "legacy_topology_reader_passed": true,
+      "strict_threshold_non_regression_gate": true,
+      "base_v18_byte_identical": true,
+      "part_nodes": 636,
+      "COVE": {
+        "algorithm": "COVE",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "source_groups": 283,
+        "undersegmented_groups": 21,
+        "component_sha256": "a065d80721a5ed79251ea24b00d7813617cd490d0e49b7bddaf6490cdb0edc97",
+        "objects": [
+          {
+            "instance_id": "45",
+            "name": "pot",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 5124,
+            "final_points": 11341,
+            "removed_unsupported_points": 21,
+            "axial_shape_envelope": {
+              "center_xy": [
+                -2.7833679518704852,
+                0.6959622111531707
+              ],
+              "radius_m": 0.0769598388231943,
+              "inlier_fraction": 0.9323715058611362,
+              "angular_coverage_radians": 6.036361956970831,
+              "radial_rms_m": 0.0007548284257258936,
+              "margin_m": 0.005,
+              "status": "uncalibrated_measured_axial_shape_envelope"
+            },
+            "semantic_agreement": 0.9988530877089719,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0006",
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0078",
+              "cam_00_0081",
+              "cam_01_0002",
+              "cam_01_0023",
+              "cam_01_0029",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064",
+              "cam_02_0070",
+              "cam_02_0082"
+            ],
+            "feature_frames": [
+              "cam_00_0000",
+              "cam_00_0006",
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0078",
+              "cam_00_0081",
+              "cam_01_0002",
+              "cam_01_0023",
+              "cam_01_0029",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0047",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_02_0052",
+              "cam_02_0058",
+              "cam_02_0061",
+              "cam_02_0064",
+              "cam_02_0070",
+              "cam_02_0082"
+            ],
+            "camera_baseline_m": 6.648661792326322,
+            "native_mean_confidence": 0.79984375,
+            "native_max_confidence": 0.9140625,
+            "native_min_confidence": 0.5703125,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 11089,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0000",
+                "depth_visible_points": 9777,
+                "inside_mask_points": 9088,
+                "fraction": 0.9295284852204153
+              },
+              {
+                "frame_id": "cam_00_0006",
+                "depth_visible_points": 9114,
+                "inside_mask_points": 8917,
+                "fraction": 0.978384902348036
+              },
+              {
+                "frame_id": "cam_00_0012",
+                "depth_visible_points": 9913,
+                "inside_mask_points": 8991,
+                "fraction": 0.9069908201351761
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 8444,
+                "inside_mask_points": 7766,
+                "fraction": 0.9197063003315964
+              },
+              {
+                "frame_id": "cam_00_0057",
+                "depth_visible_points": 9558,
+                "inside_mask_points": 8343,
+                "fraction": 0.8728813559322034
+              },
+              {
+                "frame_id": "cam_00_0072",
+                "depth_visible_points": 9119,
+                "inside_mask_points": 8587,
+                "fraction": 0.9416602697664218
+              },
+              {
+                "frame_id": "cam_00_0078",
+                "depth_visible_points": 4443,
+                "inside_mask_points": 4332,
+                "fraction": 0.975016880486158
+              },
+              {
+                "frame_id": "cam_00_0081",
+                "depth_visible_points": 9853,
+                "inside_mask_points": 9398,
+                "fraction": 0.9538211712168883
+              },
+              {
+                "frame_id": "cam_01_0002",
+                "depth_visible_points": 10990,
+                "inside_mask_points": 10697,
+                "fraction": 0.9733393994540491
+              },
+              {
+                "frame_id": "cam_01_0023",
+                "depth_visible_points": 9623,
+                "inside_mask_points": 9164,
+                "fraction": 0.9523017769926219
+              },
+              {
+                "frame_id": "cam_01_0029",
+                "depth_visible_points": 9990,
+                "inside_mask_points": 8513,
+                "fraction": 0.8521521521521521
+              },
+              {
+                "frame_id": "cam_01_0038",
+                "depth_visible_points": 8539,
+                "inside_mask_points": 8240,
+                "fraction": 0.9649841901862045
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "depth_visible_points": 9506,
+                "inside_mask_points": 8908,
+                "fraction": 0.9370923627182832
+              },
+              {
+                "frame_id": "cam_01_0044",
+                "depth_visible_points": 10502,
+                "inside_mask_points": 10142,
+                "fraction": 0.9657208150828414
+              },
+              {
+                "frame_id": "cam_01_0047",
+                "depth_visible_points": 5698,
+                "inside_mask_points": 5479,
+                "fraction": 0.9615654615654615
+              },
+              {
+                "frame_id": "cam_01_0050",
+                "depth_visible_points": 9701,
+                "inside_mask_points": 8839,
+                "fraction": 0.911143181115349
+              },
+              {
+                "frame_id": "cam_01_0053",
+                "depth_visible_points": 10075,
+                "inside_mask_points": 9596,
+                "fraction": 0.9524565756823822
+              },
+              {
+                "frame_id": "cam_01_0056",
+                "depth_visible_points": 10025,
+                "inside_mask_points": 9553,
+                "fraction": 0.9529177057356608
+              },
+              {
+                "frame_id": "cam_01_0059",
+                "depth_visible_points": 9934,
+                "inside_mask_points": 9389,
+                "fraction": 0.9451379102073686
+              },
+              {
+                "frame_id": "cam_02_0052",
+                "depth_visible_points": 8724,
+                "inside_mask_points": 8475,
+                "fraction": 0.9714580467675378
+              },
+              {
+                "frame_id": "cam_02_0058",
+                "depth_visible_points": 9737,
+                "inside_mask_points": 9170,
+                "fraction": 0.9417685118619699
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 9571,
+                "inside_mask_points": 8846,
+                "fraction": 0.9242503395674433
+              },
+              {
+                "frame_id": "cam_02_0064",
+                "depth_visible_points": 9882,
+                "inside_mask_points": 9264,
+                "fraction": 0.9374620522161505
+              },
+              {
+                "frame_id": "cam_02_0070",
+                "depth_visible_points": 9080,
+                "inside_mask_points": 8147,
+                "fraction": 0.8972466960352423
+              },
+              {
+                "frame_id": "cam_02_0082",
+                "depth_visible_points": 8929,
+                "inside_mask_points": 8747,
+                "fraction": 0.9796169783850375
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "117",
+            "name": "ceiling light",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 111,
+            "final_points": 1268,
+            "removed_unsupported_points": 2,
+            "axial_shape_envelope": null,
+            "semantic_agreement": 0.9915467229088608,
+            "frames": [
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0050",
+              "cam_01_0056",
+              "cam_01_0071",
+              "cam_01_0083",
+              "cam_01_0086",
+              "cam_01_0092",
+              "cam_01_0095",
+              "cam_02_0061"
+            ],
+            "feature_frames": [
+              "cam_00_0012",
+              "cam_00_0051",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0050",
+              "cam_01_0056",
+              "cam_01_0071",
+              "cam_01_0083",
+              "cam_01_0086",
+              "cam_01_0092",
+              "cam_01_0095",
+              "cam_02_0061"
+            ],
+            "camera_baseline_m": 6.3550403131732915,
+            "native_mean_confidence": 0.80078125,
+            "native_max_confidence": 0.87890625,
+            "native_min_confidence": 0.7421875,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 1223,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0012",
+                "depth_visible_points": 1199,
+                "inside_mask_points": 1066,
+                "fraction": 0.8890742285237698
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 1106,
+                "inside_mask_points": 969,
+                "fraction": 0.8761301989150091
+              },
+              {
+                "frame_id": "cam_00_0057",
+                "depth_visible_points": 1258,
+                "inside_mask_points": 1110,
+                "fraction": 0.8823529411764706
+              },
+              {
+                "frame_id": "cam_00_0072",
+                "depth_visible_points": 1239,
+                "inside_mask_points": 1117,
+                "fraction": 0.9015334947538337
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "depth_visible_points": 1247,
+                "inside_mask_points": 1128,
+                "fraction": 0.9045709703287891
+              },
+              {
+                "frame_id": "cam_01_0044",
+                "depth_visible_points": 1230,
+                "inside_mask_points": 1110,
+                "fraction": 0.9024390243902439
+              },
+              {
+                "frame_id": "cam_01_0050",
+                "depth_visible_points": 1208,
+                "inside_mask_points": 1001,
+                "fraction": 0.8286423841059603
+              },
+              {
+                "frame_id": "cam_01_0056",
+                "depth_visible_points": 1222,
+                "inside_mask_points": 1139,
+                "fraction": 0.9320785597381342
+              },
+              {
+                "frame_id": "cam_01_0071",
+                "depth_visible_points": 1172,
+                "inside_mask_points": 981,
+                "fraction": 0.8370307167235495
+              },
+              {
+                "frame_id": "cam_01_0083",
+                "depth_visible_points": 762,
+                "inside_mask_points": 615,
+                "fraction": 0.8070866141732284
+              },
+              {
+                "frame_id": "cam_01_0086",
+                "depth_visible_points": 1262,
+                "inside_mask_points": 1044,
+                "fraction": 0.8272583201267829
+              },
+              {
+                "frame_id": "cam_01_0092",
+                "depth_visible_points": 1211,
+                "inside_mask_points": 966,
+                "fraction": 0.7976878612716763
+              },
+              {
+                "frame_id": "cam_01_0095",
+                "depth_visible_points": 1188,
+                "inside_mask_points": 962,
+                "fraction": 0.8097643097643098
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 1252,
+                "inside_mask_points": 1056,
+                "fraction": 0.8434504792332268
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "28",
+            "name": "ceiling light",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 115,
+            "final_points": 1286,
+            "removed_unsupported_points": 2,
+            "axial_shape_envelope": null,
+            "semantic_agreement": 0.9985641852638352,
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_01_0032",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0053",
+              "cam_01_0071",
+              "cam_01_0083",
+              "cam_01_0086",
+              "cam_01_0089",
+              "cam_01_0095",
+              "cam_02_0061",
+              "cam_02_0073"
+            ],
+            "feature_frames": [
+              "cam_00_0000",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0057",
+              "cam_01_0032",
+              "cam_01_0041",
+              "cam_01_0044",
+              "cam_01_0053",
+              "cam_01_0071",
+              "cam_01_0083",
+              "cam_01_0086",
+              "cam_01_0089",
+              "cam_01_0095",
+              "cam_02_0061",
+              "cam_02_0073"
+            ],
+            "camera_baseline_m": 6.862356806491008,
+            "native_mean_confidence": 0.7997395833333333,
+            "native_max_confidence": 0.875,
+            "native_min_confidence": 0.7421875,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 1243,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0000",
+                "depth_visible_points": 1171,
+                "inside_mask_points": 1015,
+                "fraction": 0.8667805294619982
+              },
+              {
+                "frame_id": "cam_00_0009",
+                "depth_visible_points": 1220,
+                "inside_mask_points": 1140,
+                "fraction": 0.9344262295081968
+              },
+              {
+                "frame_id": "cam_00_0012",
+                "depth_visible_points": 1211,
+                "inside_mask_points": 1084,
+                "fraction": 0.8951279933938894
+              },
+              {
+                "frame_id": "cam_00_0057",
+                "depth_visible_points": 1247,
+                "inside_mask_points": 1095,
+                "fraction": 0.8781074578989575
+              },
+              {
+                "frame_id": "cam_01_0032",
+                "depth_visible_points": 1250,
+                "inside_mask_points": 1126,
+                "fraction": 0.9008
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "depth_visible_points": 1243,
+                "inside_mask_points": 1116,
+                "fraction": 0.8978278358809332
+              },
+              {
+                "frame_id": "cam_01_0044",
+                "depth_visible_points": 1231,
+                "inside_mask_points": 1143,
+                "fraction": 0.9285134037367994
+              },
+              {
+                "frame_id": "cam_01_0053",
+                "depth_visible_points": 1214,
+                "inside_mask_points": 1120,
+                "fraction": 0.9225700164744646
+              },
+              {
+                "frame_id": "cam_01_0071",
+                "depth_visible_points": 1202,
+                "inside_mask_points": 997,
+                "fraction": 0.829450915141431
+              },
+              {
+                "frame_id": "cam_01_0083",
+                "depth_visible_points": 1255,
+                "inside_mask_points": 1033,
+                "fraction": 0.8231075697211155
+              },
+              {
+                "frame_id": "cam_01_0086",
+                "depth_visible_points": 1260,
+                "inside_mask_points": 1110,
+                "fraction": 0.8809523809523809
+              },
+              {
+                "frame_id": "cam_01_0089",
+                "depth_visible_points": 1250,
+                "inside_mask_points": 1109,
+                "fraction": 0.8872
+              },
+              {
+                "frame_id": "cam_01_0095",
+                "depth_visible_points": 1119,
+                "inside_mask_points": 880,
+                "fraction": 0.7864164432529044
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 1249,
+                "inside_mask_points": 1135,
+                "fraction": 0.9087269815852682
+              },
+              {
+                "frame_id": "cam_02_0073",
+                "depth_visible_points": 1258,
+                "inside_mask_points": 999,
+                "fraction": 0.7941176470588235
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "100",
+            "name": "jar",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 132,
+            "final_points": 2551,
+            "removed_unsupported_points": 4,
+            "axial_shape_envelope": null,
+            "semantic_agreement": 0.9981549795864851,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_01_0050",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0052",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067",
+              "cam_02_0070",
+              "cam_02_0076"
+            ],
+            "feature_frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0050",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0052",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067",
+              "cam_02_0070"
+            ],
+            "camera_baseline_m": 6.416165072867068,
+            "native_mean_confidence": 0.7962239583333334,
+            "native_max_confidence": 0.91015625,
+            "native_min_confidence": 0.51171875,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 2518,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0003",
+                "depth_visible_points": 2311,
+                "inside_mask_points": 2237,
+                "fraction": 0.9679792297706621
+              },
+              {
+                "frame_id": "cam_00_0030",
+                "depth_visible_points": 774,
+                "inside_mask_points": 722,
+                "fraction": 0.9328165374677002
+              },
+              {
+                "frame_id": "cam_00_0045",
+                "depth_visible_points": 2441,
+                "inside_mask_points": 2378,
+                "fraction": 0.974190905366653
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 2388,
+                "inside_mask_points": 2241,
+                "fraction": 0.9384422110552764
+              },
+              {
+                "frame_id": "cam_00_0054",
+                "depth_visible_points": 2347,
+                "inside_mask_points": 2292,
+                "fraction": 0.9765658287175117
+              },
+              {
+                "frame_id": "cam_00_0081",
+                "depth_visible_points": 2391,
+                "inside_mask_points": 2327,
+                "fraction": 0.97323295692179
+              },
+              {
+                "frame_id": "cam_00_0096",
+                "depth_visible_points": 2307,
+                "inside_mask_points": 2235,
+                "fraction": 0.9687906371911573
+              },
+              {
+                "frame_id": "cam_01_0017",
+                "depth_visible_points": 2400,
+                "inside_mask_points": 2370,
+                "fraction": 0.9875
+              },
+              {
+                "frame_id": "cam_01_0035",
+                "depth_visible_points": 1337,
+                "inside_mask_points": 1083,
+                "fraction": 0.8100224382946896
+              },
+              {
+                "frame_id": "cam_01_0050",
+                "depth_visible_points": 1932,
+                "inside_mask_points": 1820,
+                "fraction": 0.9420289855072463
+              },
+              {
+                "frame_id": "cam_02_0001",
+                "depth_visible_points": 2449,
+                "inside_mask_points": 2370,
+                "fraction": 0.967741935483871
+              },
+              {
+                "frame_id": "cam_02_0004",
+                "depth_visible_points": 2433,
+                "inside_mask_points": 2298,
+                "fraction": 0.9445129469790382
+              },
+              {
+                "frame_id": "cam_02_0052",
+                "depth_visible_points": 2399,
+                "inside_mask_points": 2260,
+                "fraction": 0.9420591913297207
+              },
+              {
+                "frame_id": "cam_02_0055",
+                "depth_visible_points": 2319,
+                "inside_mask_points": 2243,
+                "fraction": 0.9672272531263476
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 1754,
+                "inside_mask_points": 1684,
+                "fraction": 0.9600912200684151
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 2424,
+                "inside_mask_points": 2395,
+                "fraction": 0.988036303630363
+              },
+              {
+                "frame_id": "cam_02_0070",
+                "depth_visible_points": 2406,
+                "inside_mask_points": 2279,
+                "fraction": 0.9472152950955943
+              },
+              {
+                "frame_id": "cam_02_0076",
+                "depth_visible_points": 2424,
+                "inside_mask_points": 1583,
+                "fraction": 0.653052805280528
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "102",
+            "name": "jar",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 163,
+            "final_points": 2668,
+            "removed_unsupported_points": 14,
+            "axial_shape_envelope": null,
+            "semantic_agreement": 0.9990510431369275,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_01_0050",
+              "cam_01_0056",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0052",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067",
+              "cam_02_0070",
+              "cam_02_0076"
+            ],
+            "feature_frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0035",
+              "cam_01_0050",
+              "cam_01_0056",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0052",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067",
+              "cam_02_0070"
+            ],
+            "camera_baseline_m": 6.416165072867068,
+            "native_mean_confidence": 0.809827302631579,
+            "native_max_confidence": 0.9140625,
+            "native_min_confidence": 0.52734375,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 2628,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0003",
+                "depth_visible_points": 2471,
+                "inside_mask_points": 2439,
+                "fraction": 0.9870497774180493
+              },
+              {
+                "frame_id": "cam_00_0030",
+                "depth_visible_points": 646,
+                "inside_mask_points": 634,
+                "fraction": 0.9814241486068112
+              },
+              {
+                "frame_id": "cam_00_0045",
+                "depth_visible_points": 2443,
+                "inside_mask_points": 2415,
+                "fraction": 0.9885386819484241
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 2575,
+                "inside_mask_points": 2160,
+                "fraction": 0.8388349514563107
+              },
+              {
+                "frame_id": "cam_00_0054",
+                "depth_visible_points": 2431,
+                "inside_mask_points": 2388,
+                "fraction": 0.9823118058412176
+              },
+              {
+                "frame_id": "cam_00_0081",
+                "depth_visible_points": 2482,
+                "inside_mask_points": 2412,
+                "fraction": 0.9717969379532635
+              },
+              {
+                "frame_id": "cam_00_0096",
+                "depth_visible_points": 2423,
+                "inside_mask_points": 2395,
+                "fraction": 0.9884440775897647
+              },
+              {
+                "frame_id": "cam_01_0017",
+                "depth_visible_points": 2443,
+                "inside_mask_points": 2361,
+                "fraction": 0.9664347114203847
+              },
+              {
+                "frame_id": "cam_01_0035",
+                "depth_visible_points": 2265,
+                "inside_mask_points": 1961,
+                "fraction": 0.8657836644591611
+              },
+              {
+                "frame_id": "cam_01_0050",
+                "depth_visible_points": 2204,
+                "inside_mask_points": 2146,
+                "fraction": 0.9736842105263158
+              },
+              {
+                "frame_id": "cam_01_0056",
+                "depth_visible_points": 2252,
+                "inside_mask_points": 2217,
+                "fraction": 0.9844582593250444
+              },
+              {
+                "frame_id": "cam_02_0001",
+                "depth_visible_points": 2481,
+                "inside_mask_points": 2420,
+                "fraction": 0.9754131398629585
+              },
+              {
+                "frame_id": "cam_02_0004",
+                "depth_visible_points": 2504,
+                "inside_mask_points": 2386,
+                "fraction": 0.9528753993610224
+              },
+              {
+                "frame_id": "cam_02_0052",
+                "depth_visible_points": 2502,
+                "inside_mask_points": 2321,
+                "fraction": 0.9276578737010391
+              },
+              {
+                "frame_id": "cam_02_0055",
+                "depth_visible_points": 2454,
+                "inside_mask_points": 2371,
+                "fraction": 0.9661776691116545
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 2296,
+                "inside_mask_points": 2266,
+                "fraction": 0.9869337979094077
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 2471,
+                "inside_mask_points": 2364,
+                "fraction": 0.9566976932416026
+              },
+              {
+                "frame_id": "cam_02_0070",
+                "depth_visible_points": 2473,
+                "inside_mask_points": 2371,
+                "fraction": 0.9587545491306106
+              },
+              {
+                "frame_id": "cam_02_0076",
+                "depth_visible_points": 2186,
+                "inside_mask_points": 1821,
+                "fraction": 0.833028362305581
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "212",
+            "name": "jar",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 133,
+            "final_points": 2040,
+            "removed_unsupported_points": 7,
+            "axial_shape_envelope": null,
+            "semantic_agreement": 0.9948228614252638,
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0055",
+              "cam_02_0067",
+              "cam_02_0070"
+            ],
+            "feature_frames": [
+              "cam_00_0030",
+              "cam_00_0045",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0055",
+              "cam_02_0067",
+              "cam_02_0070"
+            ],
+            "camera_baseline_m": 4.857300707699554,
+            "native_mean_confidence": 0.7956730769230769,
+            "native_max_confidence": 0.91015625,
+            "native_min_confidence": 0.5078125,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 1997,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0003",
+                "depth_visible_points": 957,
+                "inside_mask_points": 902,
+                "fraction": 0.9425287356321839
+              },
+              {
+                "frame_id": "cam_00_0030",
+                "depth_visible_points": 1890,
+                "inside_mask_points": 1819,
+                "fraction": 0.9624338624338624
+              },
+              {
+                "frame_id": "cam_00_0045",
+                "depth_visible_points": 1966,
+                "inside_mask_points": 1954,
+                "fraction": 0.9938962360122076
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 1913,
+                "inside_mask_points": 1748,
+                "fraction": 0.9137480397281756
+              },
+              {
+                "frame_id": "cam_00_0054",
+                "depth_visible_points": 1320,
+                "inside_mask_points": 1252,
+                "fraction": 0.9484848484848485
+              },
+              {
+                "frame_id": "cam_00_0081",
+                "depth_visible_points": 1687,
+                "inside_mask_points": 1596,
+                "fraction": 0.946058091286307
+              },
+              {
+                "frame_id": "cam_00_0096",
+                "depth_visible_points": 1969,
+                "inside_mask_points": 1892,
+                "fraction": 0.9608938547486033
+              },
+              {
+                "frame_id": "cam_01_0017",
+                "depth_visible_points": 1928,
+                "inside_mask_points": 1888,
+                "fraction": 0.979253112033195
+              },
+              {
+                "frame_id": "cam_02_0001",
+                "depth_visible_points": 1994,
+                "inside_mask_points": 1950,
+                "fraction": 0.9779338014042126
+              },
+              {
+                "frame_id": "cam_02_0004",
+                "depth_visible_points": 1944,
+                "inside_mask_points": 1882,
+                "fraction": 0.9681069958847737
+              },
+              {
+                "frame_id": "cam_02_0055",
+                "depth_visible_points": 1348,
+                "inside_mask_points": 1341,
+                "fraction": 0.994807121661721
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 1724,
+                "inside_mask_points": 1691,
+                "fraction": 0.9808584686774942
+              },
+              {
+                "frame_id": "cam_02_0070",
+                "depth_visible_points": 1977,
+                "inside_mask_points": 1903,
+                "fraction": 0.962569549822964
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "54",
+            "name": "range hood",
+            "action": "verified_measured_surface_recovery",
+            "prior_points": 4080,
+            "final_points": 14229,
+            "removed_unsupported_points": 13,
+            "axial_shape_envelope": null,
+            "semantic_agreement": 1.0000000000000002,
+            "frames": [
+              "cam_00_0003",
+              "cam_02_0079",
+              "cam_02_0082"
+            ],
+            "feature_frames": [
+              "cam_00_0003",
+              "cam_02_0079"
+            ],
+            "camera_baseline_m": 3.7410127419387007,
+            "native_mean_confidence": 0.7122395833333334,
+            "native_max_confidence": 0.875,
+            "native_min_confidence": 0.5234375,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 10679,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0003",
+                "depth_visible_points": 11311,
+                "inside_mask_points": 11271,
+                "fraction": 0.9964636194854566
+              },
+              {
+                "frame_id": "cam_02_0079",
+                "depth_visible_points": 11724,
+                "inside_mask_points": 11558,
+                "fraction": 0.9858410098942341
+              },
+              {
+                "frame_id": "cam_02_0082",
+                "depth_visible_points": 11395,
+                "inside_mask_points": 11181,
+                "fraction": 0.9812198332602018
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "467",
+            "name": "fruit",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0003",
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0035",
+              "cam_01_0038",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0095",
+              "cam_02_0001",
+              "cam_02_0052",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067",
+              "cam_02_0070"
+            ],
+            "feature_frames": [
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0057",
+              "cam_00_0072",
+              "cam_00_0081",
+              "cam_00_0096",
+              "cam_01_0038",
+              "cam_01_0050",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0095",
+              "cam_02_0001",
+              "cam_02_0052",
+              "cam_02_0070"
+            ],
+            "camera_baseline_m": 7.441036680194121,
+            "native_mean_confidence": 0.725328947368421,
+            "native_max_confidence": 0.9375,
+            "native_min_confidence": 0.51953125,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 1523,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0003",
+                "depth_visible_points": 1340,
+                "inside_mask_points": 1298,
+                "fraction": 0.9686567164179104
+              },
+              {
+                "frame_id": "cam_00_0045",
+                "depth_visible_points": 1188,
+                "inside_mask_points": 1117,
+                "fraction": 0.9402356902356902
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 1239,
+                "inside_mask_points": 1170,
+                "fraction": 0.9443099273607748
+              },
+              {
+                "frame_id": "cam_00_0057",
+                "depth_visible_points": 1259,
+                "inside_mask_points": 1220,
+                "fraction": 0.9690230341540905
+              },
+              {
+                "frame_id": "cam_00_0072",
+                "depth_visible_points": 1219,
+                "inside_mask_points": 1188,
+                "fraction": 0.9745693191140279
+              },
+              {
+                "frame_id": "cam_00_0081",
+                "depth_visible_points": 1302,
+                "inside_mask_points": 1276,
+                "fraction": 0.9800307219662059
+              },
+              {
+                "frame_id": "cam_00_0096",
+                "depth_visible_points": 1190,
+                "inside_mask_points": 1131,
+                "fraction": 0.9504201680672268
+              },
+              {
+                "frame_id": "cam_01_0035",
+                "depth_visible_points": 1153,
+                "inside_mask_points": 1073,
+                "fraction": 0.9306157849089333
+              },
+              {
+                "frame_id": "cam_01_0038",
+                "depth_visible_points": 1193,
+                "inside_mask_points": 1147,
+                "fraction": 0.961441743503772
+              },
+              {
+                "frame_id": "cam_01_0050",
+                "depth_visible_points": 1313,
+                "inside_mask_points": 1241,
+                "fraction": 0.9451637471439451
+              },
+              {
+                "frame_id": "cam_01_0053",
+                "depth_visible_points": 1348,
+                "inside_mask_points": 1334,
+                "fraction": 0.9896142433234422
+              },
+              {
+                "frame_id": "cam_01_0056",
+                "depth_visible_points": 1348,
+                "inside_mask_points": 1344,
+                "fraction": 0.9970326409495549
+              },
+              {
+                "frame_id": "cam_01_0095",
+                "depth_visible_points": 1104,
+                "inside_mask_points": 1080,
+                "fraction": 0.9782608695652174
+              },
+              {
+                "frame_id": "cam_02_0001",
+                "depth_visible_points": 1235,
+                "inside_mask_points": 1184,
+                "fraction": 0.9587044534412955
+              },
+              {
+                "frame_id": "cam_02_0052",
+                "depth_visible_points": 1256,
+                "inside_mask_points": 1190,
+                "fraction": 0.947452229299363
+              },
+              {
+                "frame_id": "cam_02_0055",
+                "depth_visible_points": 1269,
+                "inside_mask_points": 1225,
+                "fraction": 0.9653270291568163
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 1279,
+                "inside_mask_points": 1115,
+                "fraction": 0.8717748240813136
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 1218,
+                "inside_mask_points": 1114,
+                "fraction": 0.9146141215106732
+              },
+              {
+                "frame_id": "cam_02_0070",
+                "depth_visible_points": 1219,
+                "inside_mask_points": 1168,
+                "fraction": 0.9581624282198523
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "468",
+            "name": "kitchen utensil",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0006",
+              "cam_00_0030",
+              "cam_00_0042",
+              "cam_00_0045",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0023",
+              "cam_02_0004",
+              "cam_02_0025",
+              "cam_02_0034",
+              "cam_02_0046",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "feature_frames": [
+              "cam_00_0006",
+              "cam_00_0030",
+              "cam_00_0042",
+              "cam_00_0045",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0023",
+              "cam_02_0004",
+              "cam_02_0025",
+              "cam_02_0034",
+              "cam_02_0046",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "camera_baseline_m": 5.737778423112407,
+            "native_mean_confidence": 0.77734375,
+            "native_max_confidence": 0.9453125,
+            "native_min_confidence": 0.64453125,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 969,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0006",
+                "depth_visible_points": 825,
+                "inside_mask_points": 801,
+                "fraction": 0.9709090909090909
+              },
+              {
+                "frame_id": "cam_00_0030",
+                "depth_visible_points": 938,
+                "inside_mask_points": 928,
+                "fraction": 0.9893390191897654
+              },
+              {
+                "frame_id": "cam_00_0042",
+                "depth_visible_points": 953,
+                "inside_mask_points": 951,
+                "fraction": 0.9979013641133263
+              },
+              {
+                "frame_id": "cam_00_0045",
+                "depth_visible_points": 895,
+                "inside_mask_points": 877,
+                "fraction": 0.9798882681564246
+              },
+              {
+                "frame_id": "cam_00_0096",
+                "depth_visible_points": 944,
+                "inside_mask_points": 940,
+                "fraction": 0.9957627118644068
+              },
+              {
+                "frame_id": "cam_01_0017",
+                "depth_visible_points": 910,
+                "inside_mask_points": 880,
+                "fraction": 0.967032967032967
+              },
+              {
+                "frame_id": "cam_01_0023",
+                "depth_visible_points": 907,
+                "inside_mask_points": 891,
+                "fraction": 0.9823594266813671
+              },
+              {
+                "frame_id": "cam_02_0004",
+                "depth_visible_points": 915,
+                "inside_mask_points": 866,
+                "fraction": 0.946448087431694
+              },
+              {
+                "frame_id": "cam_02_0025",
+                "depth_visible_points": 789,
+                "inside_mask_points": 784,
+                "fraction": 0.9936628643852978
+              },
+              {
+                "frame_id": "cam_02_0034",
+                "depth_visible_points": 904,
+                "inside_mask_points": 901,
+                "fraction": 0.9966814159292036
+              },
+              {
+                "frame_id": "cam_02_0046",
+                "depth_visible_points": 923,
+                "inside_mask_points": 916,
+                "fraction": 0.9924160346695557
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 860,
+                "inside_mask_points": 823,
+                "fraction": 0.9569767441860465
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 910,
+                "inside_mask_points": 909,
+                "fraction": 0.9989010989010989
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "469",
+            "name": "spoon",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0000",
+              "cam_00_0006",
+              "cam_00_0015",
+              "cam_00_0030",
+              "cam_00_0042",
+              "cam_01_0023",
+              "cam_01_0035",
+              "cam_01_0041",
+              "cam_01_0056",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "feature_frames": [
+              "cam_00_0000",
+              "cam_00_0006",
+              "cam_00_0015",
+              "cam_00_0030",
+              "cam_00_0042",
+              "cam_01_0023",
+              "cam_01_0035",
+              "cam_01_0041",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "camera_baseline_m": 4.6392922168827955,
+            "native_mean_confidence": 0.8057528409090909,
+            "native_max_confidence": 0.9296875,
+            "native_min_confidence": 0.6640625,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 750,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0000",
+                "depth_visible_points": 708,
+                "inside_mask_points": 686,
+                "fraction": 0.9689265536723164
+              },
+              {
+                "frame_id": "cam_00_0006",
+                "depth_visible_points": 738,
+                "inside_mask_points": 698,
+                "fraction": 0.94579945799458
+              },
+              {
+                "frame_id": "cam_00_0015",
+                "depth_visible_points": 715,
+                "inside_mask_points": 686,
+                "fraction": 0.9594405594405594
+              },
+              {
+                "frame_id": "cam_00_0030",
+                "depth_visible_points": 471,
+                "inside_mask_points": 464,
+                "fraction": 0.9851380042462845
+              },
+              {
+                "frame_id": "cam_00_0042",
+                "depth_visible_points": 535,
+                "inside_mask_points": 529,
+                "fraction": 0.9887850467289719
+              },
+              {
+                "frame_id": "cam_01_0023",
+                "depth_visible_points": 450,
+                "inside_mask_points": 447,
+                "fraction": 0.9933333333333333
+              },
+              {
+                "frame_id": "cam_01_0035",
+                "depth_visible_points": 728,
+                "inside_mask_points": 693,
+                "fraction": 0.9519230769230769
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "depth_visible_points": 732,
+                "inside_mask_points": 641,
+                "fraction": 0.8756830601092896
+              },
+              {
+                "frame_id": "cam_01_0056",
+                "depth_visible_points": 736,
+                "inside_mask_points": 633,
+                "fraction": 0.8600543478260869
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 733,
+                "inside_mask_points": 673,
+                "fraction": 0.9181446111869032
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 542,
+                "inside_mask_points": 542,
+                "fraction": 1.0
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "470",
+            "name": "drinking glass",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0042",
+              "cam_00_0051",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0041",
+              "cam_02_0004",
+              "cam_02_0025",
+              "cam_02_0037",
+              "cam_02_0046",
+              "cam_02_0055",
+              "cam_02_0067"
+            ],
+            "feature_frames": [
+              "cam_00_0042",
+              "cam_00_0051",
+              "cam_00_0096",
+              "cam_01_0041",
+              "cam_02_0004",
+              "cam_02_0025",
+              "cam_02_0037",
+              "cam_02_0046",
+              "cam_02_0055",
+              "cam_02_0067"
+            ],
+            "camera_baseline_m": 5.936662704277076,
+            "native_mean_confidence": 0.6896306818181818,
+            "native_max_confidence": 0.90625,
+            "native_min_confidence": 0.50390625,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 3127,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0042",
+                "depth_visible_points": 2412,
+                "inside_mask_points": 2236,
+                "fraction": 0.9270315091210614
+              },
+              {
+                "frame_id": "cam_00_0051",
+                "depth_visible_points": 2875,
+                "inside_mask_points": 2184,
+                "fraction": 0.7596521739130435
+              },
+              {
+                "frame_id": "cam_00_0096",
+                "depth_visible_points": 2995,
+                "inside_mask_points": 2887,
+                "fraction": 0.9639398998330551
+              },
+              {
+                "frame_id": "cam_01_0017",
+                "depth_visible_points": 3053,
+                "inside_mask_points": 2784,
+                "fraction": 0.9118899443170652
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "depth_visible_points": 3016,
+                "inside_mask_points": 2319,
+                "fraction": 0.7688992042440318
+              },
+              {
+                "frame_id": "cam_02_0004",
+                "depth_visible_points": 3057,
+                "inside_mask_points": 2739,
+                "fraction": 0.8959764474975466
+              },
+              {
+                "frame_id": "cam_02_0025",
+                "depth_visible_points": 2456,
+                "inside_mask_points": 2414,
+                "fraction": 0.9828990228013029
+              },
+              {
+                "frame_id": "cam_02_0037",
+                "depth_visible_points": 3047,
+                "inside_mask_points": 2872,
+                "fraction": 0.9425664588119462
+              },
+              {
+                "frame_id": "cam_02_0046",
+                "depth_visible_points": 3043,
+                "inside_mask_points": 2781,
+                "fraction": 0.9139007558330595
+              },
+              {
+                "frame_id": "cam_02_0055",
+                "depth_visible_points": 2964,
+                "inside_mask_points": 2362,
+                "fraction": 0.7968960863697706
+              },
+              {
+                "frame_id": "cam_02_0067",
+                "depth_visible_points": 3127,
+                "inside_mask_points": 2837,
+                "fraction": 0.9072593540134314
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "471",
+            "name": "ceiling light",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0009",
+              "cam_01_0041",
+              "cam_01_0065",
+              "cam_01_0071",
+              "cam_02_0061"
+            ],
+            "feature_frames": [
+              "cam_00_0009",
+              "cam_01_0041",
+              "cam_01_0065",
+              "cam_02_0061"
+            ],
+            "camera_baseline_m": 3.2827011850629413,
+            "native_mean_confidence": 0.7421875,
+            "native_max_confidence": 0.84375,
+            "native_min_confidence": 0.58984375,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 1683,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0009",
+                "depth_visible_points": 2119,
+                "inside_mask_points": 1112,
+                "fraction": 0.5247758376592733
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "depth_visible_points": 2126,
+                "inside_mask_points": 2045,
+                "fraction": 0.9619002822201317
+              },
+              {
+                "frame_id": "cam_01_0065",
+                "depth_visible_points": 1708,
+                "inside_mask_points": 1644,
+                "fraction": 0.9625292740046838
+              },
+              {
+                "frame_id": "cam_01_0071",
+                "depth_visible_points": 1622,
+                "inside_mask_points": 1549,
+                "fraction": 0.9549938347718866
+              },
+              {
+                "frame_id": "cam_02_0061",
+                "depth_visible_points": 2118,
+                "inside_mask_points": 1191,
+                "fraction": 0.5623229461756374
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "472",
+            "name": "glass",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0003",
+              "cam_01_0035",
+              "cam_01_0095"
+            ],
+            "feature_frames": [
+              "cam_00_0003",
+              "cam_01_0035",
+              "cam_01_0095"
+            ],
+            "camera_baseline_m": 4.236636100000944,
+            "native_mean_confidence": 0.7213541666666666,
+            "native_max_confidence": 0.81640625,
+            "native_min_confidence": 0.57421875,
+            "minimum_point_views": 3,
+            "branch": "multiview",
+            "measured_points": 167,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0003",
+                "depth_visible_points": 345,
+                "inside_mask_points": 289,
+                "fraction": 0.8376811594202899
+              },
+              {
+                "frame_id": "cam_01_0035",
+                "depth_visible_points": 351,
+                "inside_mask_points": 351,
+                "fraction": 1.0
+              },
+              {
+                "frame_id": "cam_01_0095",
+                "depth_visible_points": 424,
+                "inside_mask_points": 391,
+                "fraction": 0.9221698113207547
+              }
+            ],
+            "generated_points": 0
+          },
+          {
+            "instance_id": "473",
+            "name": "cup",
+            "action": "new_measured_instance",
+            "frames": [
+              "cam_00_0066",
+              "cam_02_0028"
+            ],
+            "feature_frames": [
+              "cam_00_0066",
+              "cam_02_0028"
+            ],
+            "camera_baseline_m": 0.7384967899969198,
+            "native_mean_confidence": 0.8046875,
+            "native_max_confidence": 0.9296875,
+            "native_min_confidence": 0.6796875,
+            "minimum_point_views": 2,
+            "branch": "strict_two_view",
+            "measured_points": 1441,
+            "projection_consensus": [
+              {
+                "frame_id": "cam_00_0066",
+                "depth_visible_points": 1423,
+                "inside_mask_points": 1423,
+                "fraction": 1.0
+              },
+              {
+                "frame_id": "cam_02_0028",
+                "depth_visible_points": 688,
+                "inside_mask_points": 685,
+                "fraction": 0.9956395348837209
+              }
+            ],
+            "generated_points": 0
+          }
+        ]
+      },
+      "BASE": {
+        "algorithm": "BASE",
+        "ground_truth_used": false,
+        "vision_api_calls": 0,
+        "generated_points": 0,
+        "component_sha256": "191f4e821fe8bb2e5e69073531aefe86fa15718b6e09c25e6645610321b07089",
+        "candidates": [
+          {
+            "parent_id": "141",
+            "bottom_anchor_ids": [
+              "84",
+              "446",
+              "447",
+              "448"
+            ],
+            "independent_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0018",
+              "cam_00_0021",
+              "cam_00_0024",
+              "cam_00_0027",
+              "cam_00_0033",
+              "cam_00_0036",
+              "cam_00_0039",
+              "cam_00_0045",
+              "cam_00_0060",
+              "cam_00_0063",
+              "cam_00_0069",
+              "cam_00_0087",
+              "cam_00_0099",
+              "cam_01_0005",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0020",
+              "cam_01_0026",
+              "cam_01_0029",
+              "cam_01_0035",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_01_0062",
+              "cam_01_0065",
+              "cam_01_0068",
+              "cam_01_0071",
+              "cam_01_0077",
+              "cam_01_0083",
+              "cam_01_0092",
+              "cam_01_0098",
+              "cam_02_0007",
+              "cam_02_0010",
+              "cam_02_0019",
+              "cam_02_0022",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0037",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0049",
+              "cam_02_0061"
+            ],
+            "camera_baseline_m": 6.908397010909245,
+            "measured_points": 827,
+            "generated_points": 0,
+            "minimum_point_views": 3,
+            "parent_plane": [
+              5.376857032201935e-06,
+              -1.5800559408009432e-05,
+              0.9999999998607159,
+              -0.9699574680520773
+            ],
+            "slab_plane": [
+              -0.021290937093063494,
+              -0.0036321847878722792,
+              0.9997667244069318,
+              -0.9584931053908252
+            ],
+            "plane_support_fraction": 0.279322853688029,
+            "semantic_status": "unidentified_measured_support_not_a_class_prediction"
+          },
+          {
+            "parent_id": "141",
+            "bottom_anchor_ids": [
+              "90",
+              "223",
+              "89",
+              "273"
+            ],
+            "independent_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0006",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0027",
+              "cam_00_0030",
+              "cam_00_0036",
+              "cam_00_0039",
+              "cam_00_0042",
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0084",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0023",
+              "cam_01_0029",
+              "cam_01_0035",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0046",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "camera_baseline_m": 6.9999363498627885,
+            "measured_points": 1049,
+            "generated_points": 0,
+            "minimum_point_views": 3,
+            "parent_plane": [
+              5.376857032201935e-06,
+              -1.5800559408009432e-05,
+              0.9999999998607159,
+              -0.9699574680520773
+            ],
+            "slab_plane": [
+              -0.00013935543114944793,
+              -0.0014233418036724678,
+              0.999998977338564,
+              -0.9952714244403388
+            ],
+            "plane_support_fraction": 0.11725452812202097,
+            "semantic_status": "unidentified_measured_support_not_a_class_prediction"
+          },
+          {
+            "parent_id": "141",
+            "bottom_anchor_ids": [
+              "451",
+              "452",
+              "453"
+            ],
+            "independent_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0021",
+              "cam_00_0024",
+              "cam_00_0027",
+              "cam_00_0033",
+              "cam_00_0060",
+              "cam_00_0063",
+              "cam_00_0099",
+              "cam_01_0005",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0020",
+              "cam_01_0029",
+              "cam_01_0041",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_01_0068",
+              "cam_01_0077",
+              "cam_01_0083",
+              "cam_01_0098",
+              "cam_02_0007",
+              "cam_02_0010",
+              "cam_02_0019",
+              "cam_02_0022",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0037",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0049",
+              "cam_02_0061",
+              "cam_02_0073",
+              "cam_02_0079"
+            ],
+            "camera_baseline_m": 8.894872973192893,
+            "measured_points": 195,
+            "generated_points": 0,
+            "minimum_point_views": 3,
+            "parent_plane": [
+              5.376857032201935e-06,
+              -1.5800559408009432e-05,
+              0.9999999998607159,
+              -0.9699574680520773
+            ],
+            "slab_plane": [
+              0.0044969764102367185,
+              0.0045451653453183315,
+              0.99997955912866,
+              -0.9915007822436667
+            ],
+            "plane_support_fraction": 0.3333333333333333,
+            "semantic_status": "unidentified_measured_support_not_a_class_prediction"
+          }
+        ],
+        "objects": [
+          {
+            "candidate": 0,
+            "action": "defer_existing_body_envelope",
+            "possible_owners": [
+              "448"
+            ],
+            "residual_sidecar": "unresolved_fragments/support_0.points.npy",
+            "parent_id": "141",
+            "bottom_anchor_ids": [
+              "84",
+              "446",
+              "447",
+              "448"
+            ],
+            "independent_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0018",
+              "cam_00_0021",
+              "cam_00_0024",
+              "cam_00_0027",
+              "cam_00_0033",
+              "cam_00_0036",
+              "cam_00_0039",
+              "cam_00_0045",
+              "cam_00_0060",
+              "cam_00_0063",
+              "cam_00_0069",
+              "cam_00_0087",
+              "cam_00_0099",
+              "cam_01_0005",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0020",
+              "cam_01_0026",
+              "cam_01_0029",
+              "cam_01_0035",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_01_0062",
+              "cam_01_0065",
+              "cam_01_0068",
+              "cam_01_0071",
+              "cam_01_0077",
+              "cam_01_0083",
+              "cam_01_0092",
+              "cam_01_0098",
+              "cam_02_0007",
+              "cam_02_0010",
+              "cam_02_0019",
+              "cam_02_0022",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0037",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0049",
+              "cam_02_0061"
+            ],
+            "camera_baseline_m": 6.908397010909245,
+            "measured_points": 827,
+            "generated_points": 0,
+            "minimum_point_views": 3,
+            "parent_plane": [
+              5.376857032201935e-06,
+              -1.5800559408009432e-05,
+              0.9999999998607159,
+              -0.9699574680520773
+            ],
+            "slab_plane": [
+              -0.021290937093063494,
+              -0.0036321847878722792,
+              0.9997667244069318,
+              -0.9584931053908252
+            ],
+            "plane_support_fraction": 0.279322853688029,
+            "semantic_status": "unidentified_measured_support_not_a_class_prediction",
+            "visual_verification": [
+              {
+                "frame_id": "cam_01_0020",
+                "accepted": true,
+                "best": {
+                  "mask_index": 6,
+                  "confidence": 0.82421875,
+                  "candidate_coverage": 0.927710843373494,
+                  "measured_purity": 0.896797153024911
+                },
+                "mask_file": "support_residual_visual/0_cam_01_0020.npz",
+                "box": [
+                  29,
+                  335,
+                  73,
+                  344
+                ]
+              },
+              {
+                "frame_id": "cam_02_0025",
+                "accepted": true,
+                "best": {
+                  "mask_index": 3,
+                  "confidence": 0.875,
+                  "candidate_coverage": 0.9898734177215189,
+                  "measured_purity": 0.79
+                },
+                "mask_file": "support_residual_visual/0_cam_02_0025.npz",
+                "box": [
+                  829,
+                  428,
+                  876,
+                  436
+                ]
+              },
+              {
+                "frame_id": "cam_02_0043",
+                "accepted": true,
+                "best": {
+                  "mask_index": 0,
+                  "confidence": 0.8046875,
+                  "candidate_coverage": 0.7229551451187335,
+                  "measured_purity": 0.8994708994708994
+                },
+                "mask_file": "support_residual_visual/0_cam_02_0043.npz",
+                "box": [
+                  634,
+                  484,
+                  671,
+                  492
+                ]
+              },
+              {
+                "frame_id": "cam_01_0005",
+                "accepted": true,
+                "best": {
+                  "mask_index": 6,
+                  "confidence": 0.85546875,
+                  "candidate_coverage": 0.9667590027700831,
+                  "measured_purity": 0.7534722222222222
+                },
+                "mask_file": "support_residual_visual/0_cam_01_0005.npz",
+                "box": [
+                  135,
+                  471,
+                  182,
+                  481
+                ]
+              },
+              {
+                "frame_id": "cam_00_0099",
+                "accepted": true,
+                "best": {
+                  "mask_index": 2,
+                  "confidence": 0.84765625,
+                  "candidate_coverage": 0.9887005649717514,
+                  "measured_purity": 0.7093425605536332
+                },
+                "mask_file": "support_residual_visual/0_cam_00_0099.npz",
+                "box": [
+                  363,
+                  530,
+                  408,
+                  539
+                ]
+              }
+            ]
+          },
+          {
+            "candidate": 2,
+            "instance_id": "7",
+            "action": "existing_whole_mask_measured_recovery",
+            "parent_id": "141",
+            "bottom_anchor_ids": [
+              "451",
+              "452",
+              "453"
+            ],
+            "independent_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0009",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0021",
+              "cam_00_0024",
+              "cam_00_0027",
+              "cam_00_0033",
+              "cam_00_0060",
+              "cam_00_0063",
+              "cam_00_0099",
+              "cam_01_0005",
+              "cam_01_0008",
+              "cam_01_0011",
+              "cam_01_0014",
+              "cam_01_0020",
+              "cam_01_0029",
+              "cam_01_0041",
+              "cam_01_0053",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_01_0068",
+              "cam_01_0077",
+              "cam_01_0083",
+              "cam_01_0098",
+              "cam_02_0007",
+              "cam_02_0010",
+              "cam_02_0019",
+              "cam_02_0022",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0037",
+              "cam_02_0040",
+              "cam_02_0043",
+              "cam_02_0049",
+              "cam_02_0061",
+              "cam_02_0073",
+              "cam_02_0079"
+            ],
+            "camera_baseline_m": 8.894872973192893,
+            "measured_points": 195,
+            "generated_points": 0,
+            "minimum_point_views": 3,
+            "parent_plane": [
+              5.376857032201935e-06,
+              -1.5800559408009432e-05,
+              0.9999999998607159,
+              -0.9699574680520773
+            ],
+            "slab_plane": [
+              0.0044969764102367185,
+              0.0045451653453183315,
+              0.99997955912866,
+              -0.9915007822436667
+            ],
+            "plane_support_fraction": 0.3333333333333333,
+            "semantic_status": "unidentified_measured_support_not_a_class_prediction",
+            "visual_verification": [
+              {
+                "frame_id": "cam_02_0061",
+                "accepted": true,
+                "best": {
+                  "mask_index": 4,
+                  "confidence": 0.87109375,
+                  "candidate_coverage": 0.8,
+                  "measured_purity": 0.9989669421487604
+                },
+                "mask_file": "support_residual_visual/2_cam_02_0061.npz",
+                "box": [
+                  647,
+                  711,
+                  743,
+                  744
+                ]
+              },
+              {
+                "frame_id": "cam_01_0029",
+                "accepted": true,
+                "best": {
+                  "mask_index": 0,
+                  "confidence": 0.83203125,
+                  "candidate_coverage": 0.9176470588235294,
+                  "measured_purity": 0.7370517928286853
+                },
+                "mask_file": "support_residual_visual/2_cam_01_0029.npz",
+                "box": [
+                  512,
+                  300,
+                  543,
+                  308
+                ]
+              },
+              {
+                "frame_id": "cam_00_0009",
+                "accepted": true,
+                "best": {
+                  "mask_index": 2,
+                  "confidence": 0.78125,
+                  "candidate_coverage": 0.73125,
+                  "measured_purity": 0.9841269841269841
+                },
+                "mask_file": "support_residual_visual/2_cam_00_0009.npz",
+                "box": [
+                  707,
+                  667,
+                  770,
+                  686
+                ]
+              },
+              {
+                "frame_id": "cam_00_0033",
+                "accepted": true,
+                "best": {
+                  "mask_index": 4,
+                  "confidence": 0.875,
+                  "candidate_coverage": 0.9748427672955975,
+                  "measured_purity": 0.812089356110381
+                },
+                "mask_file": "support_residual_visual/2_cam_00_0033.npz",
+                "box": [
+                  550,
+                  701,
+                  576,
+                  734
+                ]
+              },
+              {
+                "frame_id": "cam_01_0041",
+                "accepted": true,
+                "best": {
+                  "mask_index": 5,
+                  "confidence": 0.78125,
+                  "candidate_coverage": 0.9874213836477987,
+                  "measured_purity": 0.9255499153976311
+                },
+                "mask_file": "support_residual_visual/2_cam_01_0041.npz",
+                "box": [
+                  633,
+                  464,
+                  690,
+                  475
+                ]
+              }
+            ]
+          },
+          {
+            "instance_id": "474",
+            "name": "support platform",
+            "action": "new_verified_measured_support",
+            "parent_id": "141",
+            "bottom_anchor_ids": [
+              "90",
+              "223",
+              "89",
+              "273"
+            ],
+            "independent_frames": [
+              "cam_00_0000",
+              "cam_00_0003",
+              "cam_00_0006",
+              "cam_00_0012",
+              "cam_00_0015",
+              "cam_00_0027",
+              "cam_00_0030",
+              "cam_00_0036",
+              "cam_00_0039",
+              "cam_00_0042",
+              "cam_00_0045",
+              "cam_00_0051",
+              "cam_00_0054",
+              "cam_00_0081",
+              "cam_00_0084",
+              "cam_00_0096",
+              "cam_01_0017",
+              "cam_01_0023",
+              "cam_01_0029",
+              "cam_01_0035",
+              "cam_01_0038",
+              "cam_01_0041",
+              "cam_01_0056",
+              "cam_01_0059",
+              "cam_02_0001",
+              "cam_02_0004",
+              "cam_02_0025",
+              "cam_02_0031",
+              "cam_02_0034",
+              "cam_02_0046",
+              "cam_02_0055",
+              "cam_02_0061",
+              "cam_02_0067"
+            ],
+            "camera_baseline_m": 6.9999363498627885,
+            "measured_points": 1049,
+            "generated_points": 0,
+            "minimum_point_views": 3,
+            "parent_plane": [
+              5.376857032201935e-06,
+              -1.5800559408009432e-05,
+              0.9999999998607159,
+              -0.9699574680520773
+            ],
+            "slab_plane": [
+              -0.00013935543114944793,
+              -0.0014233418036724678,
+              0.999998977338564,
+              -0.9952714244403388
+            ],
+            "plane_support_fraction": 0.11725452812202097,
+            "semantic_status": "unidentified_measured_support_not_a_class_prediction",
+            "visual_verification": [
+              {
+                "frame_id": "cam_01_0056",
+                "accepted": true,
+                "best": {
+                  "mask_index": 0,
+                  "confidence": 0.7578125,
+                  "candidate_coverage": 0.8074162679425837,
+                  "measured_purity": 0.8735177865612648
+                },
+                "mask_file": "support_residual_visual/1_cam_01_0056.npz",
+                "box": [
+                  722,
+                  366,
+                  777,
+                  377
+                ]
+              },
+              {
+                "frame_id": "cam_00_0015",
+                "accepted": true,
+                "best": {
+                  "mask_index": 0,
+                  "confidence": 0.83984375,
+                  "candidate_coverage": 0.8381294964028777,
+                  "measured_purity": 0.8754325259515571
+                },
+                "mask_file": "support_residual_visual/1_cam_00_0015.npz",
+                "box": [
+                  126,
+                  449,
+                  183,
+                  460
+                ]
+              },
+              {
+                "frame_id": "cam_00_0003",
+                "accepted": true,
+                "best": {
+                  "mask_index": 1,
+                  "confidence": 0.765625,
+                  "candidate_coverage": 0.7260606060606061,
+                  "measured_purity": 0.7563291139240507
+                },
+                "mask_file": "support_residual_visual/1_cam_00_0003.npz",
+                "box": [
+                  696,
+                  463,
+                  755,
+                  473
+                ]
+              },
+              {
+                "frame_id": "cam_00_0012",
+                "accepted": false,
+                "best": {
+                  "mask_index": 0,
+                  "confidence": 0.75,
+                  "candidate_coverage": 0.8795620437956204,
+                  "measured_purity": 0.5239520958083832
+                },
+                "mask_file": "support_residual_visual/1_cam_00_0012.npz",
+                "box": [
+                  664,
+                  447,
+                  711,
+                  454
+                ]
+              },
+              {
+                "frame_id": "cam_01_0059",
+                "accepted": true,
+                "best": {
+                  "mask_index": 0,
+                  "confidence": 0.7265625,
+                  "candidate_coverage": 0.8093480934809348,
+                  "measured_purity": 0.9358974358974359
+                },
+                "mask_file": "support_residual_visual/1_cam_01_0059.npz",
+                "box": [
+                  492,
+                  372,
+                  538,
+                  378
+                ]
+              }
+            ]
+          }
+        ],
+        "publication_component_sha256": "9cebbf95e61d11f871e0a40fd61f90f20c825840a5f954407b56f89dd84af4c0"
+      }
+    }
+  ],
+  "native_cache_bundles_verified": 199,
+  "construction_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+  "runner_sha256": "a2fde95cf0e34e324af597e7abd04e80ce228e305795a5c66e2d58c678b8b08c",
+  "learned_universal_completion_solved": false,
+  "empirical_cross_dataset_generalization_proven": false,
+  "build_protocol": "incremental_generic_refinement_of_immutable_verified_v18_final",
+  "raw_fusion_rerun": false,
+  "v18_byte_identical": true,
+  "strict_target_reached": false,
+  "report_source_sha256": "5f8e161056f20c9208d982482216156cd7460eb23a15d1d8ff4ecd7346d2c8f2",
+  "report_qa_passed": true,
+  "report_version": "v19",
+  "latex_compile_confirmed": false,
+  "latex_compile_limitation": "Built-in compile_latex_document failed before source compilation: windows sandbox helper_unknown_error: setup refresh had errors. No TeX compiler diagnostic was returned. Existing source preserved; no separate PDF compiled.",
+  "published_html": "RESEARCH_LOG.html",
+  "published_latex": "RESEARCH_LOG.tex",
+  "html_sha256": "16fe2f9065b645694dc7fe6015d3622a819f8740d156551b96ce77df4712fe6d",
+  "latex_sha256": "3b6c42e693ce588b216381eb9b0e323bd193353757357040379a75138365221f",
+  "duplicate_rendered_docs_removed": true
+}
