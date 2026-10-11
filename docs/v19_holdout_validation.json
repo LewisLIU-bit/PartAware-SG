@@ -1,0 +1,177 @@
+{
+  "project": "EviScene",
+  "scene_id": "ai_003_007",
+  "official_split": "test",
+  "preregistration": {
+    "registered_at_utc": "2026-10-11T07:54:41.038470+00:00",
+    "scene": "ai_003_007",
+    "selection_rule": "Lexicographically first official test scene outside the previously used ai_001 asset volume; no images, GT geometry, object counts, or AP inspected before selection.",
+    "official_split": "test",
+    "split_url": "https://raw.githubusercontent.com/apple/ml-hypersim/main/evermotion_dataset/analysis/metadata_images_split_scene_v1.csv",
+    "split_sha256": "47b7cce12f4659ffa31cf05e8fbf2aee3d69e1929d07b5ea25506603b69d5ce6",
+    "input_sampling": {
+      "max_frames": 100,
+      "frame_step": 3,
+      "order": "camera_name then frame_id",
+      "same_for_all_profiles": true
+    },
+    "construction_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+    "git_commit": "dd8c09fae97539ea9f19efe4e522b8baaaa907d2",
+    "sam3_checkpoint_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+    "profiles": [
+      "original_gpt",
+      "v19_gpt"
+    ],
+    "protocol": "Full raw-observation construction for both frozen profiles; one shared GPT cache; GT reserved for evaluation; no scene-specific parameter changes.",
+    "algorithm_tuning_on_this_scene_allowed": false,
+    "training_resumed": false,
+    "primary_metrics": [
+      "geometry_only_box_AP25",
+      "geometry_only_box_AP50",
+      "geometry_only_box_AP75"
+    ],
+    "secondary_accounting": "Custom granularity-aligned accounting reported separately from strict AP."
+  },
+  "construction_unchanged": true,
+  "training_resumed": false,
+  "GT_used_for_construction": false,
+  "frames": 67,
+  "recognition_cache": "/home/lewisliu/datasets/scannet-sg-processed/gpt_vision_cache/hypersim/ai_003_007",
+  "unique_valid_GPT_responses": 67,
+  "recognition_provenance_sha256": "bf9016ea5d15462bd9fd93073a5dd940056380ffbfd957f91d09a062633a40b8",
+  "preserved_responses_before_transport_recovery": 18,
+  "failed_request_billing_unknown": true,
+  "input_validation_sha256": "fbf2ec3e421d447d23651af069f0c8a7bbac63239313080eb5b3b4f8a8ab2470",
+  "results": [
+    {
+      "version": "original",
+      "profile": "gpt_original_v1",
+      "output": "/home/lewisliu/datasets/scannet-sg-processed/gpt_original_v1/hypersim/ai_003_007",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/gpt_original_v1/hypersim/ai_003_007/evaluation.json",
+      "predicted": 18,
+      "gt": 10,
+      "strict_AP": {
+        "AP25": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0
+      },
+      "GAU_AP": {
+        "AP25": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0
+      },
+      "strict_counts": {
+        "0.25": {
+          "TP": 0,
+          "FP": 18,
+          "FN": 10
+        },
+        "0.5": {
+          "TP": 0,
+          "FP": 18,
+          "FN": 10
+        },
+        "0.75": {
+          "TP": 0,
+          "FP": 18,
+          "FN": 10
+        }
+      },
+      "GAU_counts": {
+        "0.25": {
+          "TP": 0,
+          "FP": 14,
+          "FN": 10
+        },
+        "0.5": {
+          "TP": 0,
+          "FP": 14,
+          "FN": 10
+        },
+        "0.75": {
+          "TP": 0,
+          "FP": 14,
+          "FN": 10
+        }
+      },
+      "MVO25": 0.0,
+      "MVO50": 0.0,
+      "absolute_log_count_error": 0.5877866649021191,
+      "statistical_entities": 14,
+      "graph_sha256": "f1417d4c630c86ce3af9b894c0c251e5a5ea1eb9860bcbf6accf4476b244701d",
+      "prediction_ply_sha256": "963a06ec2661775f88c8e4d95e009e859f844dd91abc2af565e1cd13eebe1a48",
+      "gt_labels_sha256": "2b0e6a368a2df3945c1bc94fe456c6e4e609e57e7ab70ba68869847b2960912f",
+      "consumer_api_calls": 0,
+      "construction_start_stage": "tags"
+    },
+    {
+      "version": "v19",
+      "profile": "partaware_v19",
+      "output": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/hypersim/ai_003_007",
+      "evaluation": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/hypersim/ai_003_007/evaluation.json",
+      "predicted": 20,
+      "gt": 10,
+      "strict_AP": {
+        "AP25": 0.3727272727272727,
+        "AP50": 0.09,
+        "AP75": 0.09
+      },
+      "GAU_AP": {
+        "AP25": 0.36,
+        "AP50": 0.17777777777777778,
+        "AP75": 0.09999999999999999
+      },
+      "strict_counts": {
+        "0.25": {
+          "TP": 6,
+          "FP": 14,
+          "FN": 4
+        },
+        "0.5": {
+          "TP": 3,
+          "FP": 17,
+          "FN": 7
+        },
+        "0.75": {
+          "TP": 3,
+          "FP": 17,
+          "FN": 7
+        }
+      },
+      "GAU_counts": {
+        "0.25": {
+          "TP": 6,
+          "FP": 13,
+          "FN": 4
+        },
+        "0.5": {
+          "TP": 4,
+          "FP": 15,
+          "FN": 6
+        },
+        "0.75": {
+          "TP": 3,
+          "FP": 16,
+          "FN": 7
+        }
+      },
+      "MVO25": 0.3727272727272727,
+      "MVO50": 0.09,
+      "absolute_log_count_error": 0.6931471805599453,
+      "statistical_entities": 19,
+      "graph_sha256": "9136f346073cdf11490e83539300b7ba432ce2c4285b7562fde631655c5b2773",
+      "prediction_ply_sha256": "7ecddf088bdacfc1e9eb5412389833843bf715fe58c4dbd9688df94a8ca6f355",
+      "gt_labels_sha256": "2b0e6a368a2df3945c1bc94fe456c6e4e609e57e7ab70ba68869847b2960912f",
+      "consumer_api_calls": 0,
+      "construction_start_stage": "tags"
+    }
+  ],
+  "evaluation_protocol": "observed_hypersim_adaptation_not_official_benchmark",
+  "strict_AP_delta_pp": {
+    "AP25": 37.272727272727266,
+    "AP50": 9.0,
+    "AP75": 9.0
+  },
+  "all_strict_thresholds_improved": true,
+  "scope_limitation": "One additional held-out scene, not broad generalization or isolated attribution to any one component."
+}

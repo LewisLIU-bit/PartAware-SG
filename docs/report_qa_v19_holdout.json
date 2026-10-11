@@ -1,0 +1,30 @@
+{
+  "desktop": {
+    "version": "v19",
+    "updated": "2026-10-11",
+    "sourceHash": "00329d7606438087428b071a48dc564cd427ee5a4b56c2c65aac4315b682dc9e",
+    "edition": "研究报告 · v19 · 2026-10-11 · LaTeX 公式渲染版",
+    "latestSummary": true,
+    "latestChapter": "26. 版本 v19：少视角身份、真实表面归属与自动支撑残余",
+    "latestNavigation": true,
+    "latestMetrics": true,
+    "preservedGroundTruth": true,
+    "gtAtlasImages": 12,
+    "trees": 1,
+    "branches": 37,
+    "formulas": 208,
+    "formulaErrors": 0,
+    "overflow": false,
+    "images": true,
+    "gtIndexRows": [
+      10,
+      109,
+      10
+    ],
+    "collapseWorks": true
+  },
+  "mobile": {
+    "overflow": false
+  },
+  "errors": []
+}

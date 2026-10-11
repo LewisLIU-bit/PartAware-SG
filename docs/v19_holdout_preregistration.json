@@ -1,0 +1,30 @@
+{
+  "registered_at_utc": "2026-10-11T07:54:41.038470+00:00",
+  "scene": "ai_003_007",
+  "selection_rule": "Lexicographically first official test scene outside the previously used ai_001 asset volume; no images, GT geometry, object counts, or AP inspected before selection.",
+  "official_split": "test",
+  "split_url": "https://raw.githubusercontent.com/apple/ml-hypersim/main/evermotion_dataset/analysis/metadata_images_split_scene_v1.csv",
+  "split_sha256": "47b7cce12f4659ffa31cf05e8fbf2aee3d69e1929d07b5ea25506603b69d5ce6",
+  "input_sampling": {
+    "max_frames": 100,
+    "frame_step": 3,
+    "order": "camera_name then frame_id",
+    "same_for_all_profiles": true
+  },
+  "construction_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+  "git_commit": "dd8c09fae97539ea9f19efe4e522b8baaaa907d2",
+  "sam3_checkpoint_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+  "profiles": [
+    "original_gpt",
+    "v19_gpt"
+  ],
+  "protocol": "Full raw-observation construction for both frozen profiles; one shared GPT cache; GT reserved for evaluation; no scene-specific parameter changes.",
+  "algorithm_tuning_on_this_scene_allowed": false,
+  "training_resumed": false,
+  "primary_metrics": [
+    "geometry_only_box_AP25",
+    "geometry_only_box_AP50",
+    "geometry_only_box_AP75"
+  ],
+  "secondary_accounting": "Custom granularity-aligned accounting reported separately from strict AP."
+}
