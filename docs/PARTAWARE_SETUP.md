@@ -211,3 +211,10 @@ If recreating that environment, install this dependency there:
 
 V16 reuses existing GPT categories and signed native masks; no account request,
 checkpoint download or fresh image call is required for this comparison.
+
+## 报告输出位置
+
+综合报告的固定入口为仓库根目录 `RESEARCH_LOG.html`；可编辑LaTeX也在根目录
+`RESEARCH_LOG.tex`。`docs/RESEARCH_REPORT.md`保留为生成源，`docs/figures`与各版本
+最终验证记录保留。更新时从该源重新生成根目录的两个文件，不另存
+`docs/RESEARCH_LOG.html`或`docs/RESEARCH_LOG.tex`副本。

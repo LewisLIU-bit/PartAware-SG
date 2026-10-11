@@ -3081,5 +3081,10 @@
   "report_qa_passed": true,
   "report_version": "v17",
   "latex_compile_confirmed": false,
-  "latex_compile_limitation": "Built-in compiler could not prepare the LaTeX preview; no TeX diagnostics returned: exec failed: windows sandbox: helper_unknown_error: setup refresh had errors."
+  "latex_compile_limitation": "Built-in compiler could not prepare the LaTeX preview; no TeX diagnostics returned: exec failed: windows sandbox: helper_unknown_error: setup refresh had errors.",
+  "published_html": "RESEARCH_LOG.html",
+  "published_latex": "RESEARCH_LOG.tex",
+  "html_sha256": "7d0aca54f753a4ce0adf123f41b7354307e649bbf001c1f375ff1c913a9893a1",
+  "latex_sha256": "8128ddd4650a36a80f603abf3ac8acb6dc2c81520fe00bcd46411b9cf9b4216a",
+  "duplicate_rendered_docs_removed": true
 }

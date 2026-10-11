@@ -124,3 +124,9 @@ Retained one v16 final tree with both scenes and 199 identical signed observatio
 
 
 2026-10-10：更新v16唯一最终版后，清除本轮自己创建的MIRA/正交面/完整复跑候选缓存；未删除历史版本最终成品、ScanNet、Hypersim或scene0802。最终综合报告只保留各版本终极结果和真实未解决问题。
+
+## 2026-10-11：统一综合报告入口
+
+补同步仓库根目录 `RESEARCH_LOG.html` 与 `RESEARCH_LOG.tex` 至v17，删除内容相同的
+`docs/RESEARCH_LOG.html` 与 `docs/RESEARCH_LOG.tex`。保留Markdown生成源、必要配置、
+配图与各版本最终结果，未删运行数据或历史最终实验记录。
