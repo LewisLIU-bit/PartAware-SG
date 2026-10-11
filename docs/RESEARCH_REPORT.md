@@ -1,14 +1,16 @@
-# PartAware-SG 综合研发与实验报告
+# EviScene 综合研发与实验报告
+
+项目名更新为 **EviScene — Evidence-Grounded 3D Scene Graph Mapping**（原PartAware-SG）。定位为基于观测证据的实例识别、表面归属与三维场景图；部件建模是其中一个组件。既有版本、文件名与目录保留兼容，联合模型训练继续暂停。
 
 更新：2026-10-11。仅保留各版本最终结果。默认原始版RAM、v11既有Qwen、v12及以后既有GPT；另保留GPT原始流程和Qwen→DINO对照。数据保留ScanNet、Hypersim和scene0802。
 
 当前目标为严格AP25≥70%、AP50≥55%。GAU统计处理标注整体与预测小实例的粒度差异；它借助GT表面归属，不能与严格AP直接混比或宣称达到原目标。
 
-当前主流程为v19，复用每场景唯一的既有GPT与199份签名SAM3概念/放大观测。第二场景严格AP25/AP50/AP75为66.53%/43.55%/19.40%，同一成品的GAU-AP为80.00%/56.81%/23.90%；第一场景两种口径均100%。COVE恢复少视角可见身份及被掩码遗漏的实测表面，BASE自动发现并验证底部支撑残余。厨房新增15次本地SAM3几何框验证，没有新增GPT/Qwen请求。薄柜隐藏形状仍未解决；MATCH-3D联合模型的方法见第27章，按用户要求暂停训练，未接入v19。
+当前主流程为v19，复用每场景唯一的既有GPT与199份签名SAM3概念/放大观测。第二场景严格AP25/AP50/AP75为66.53%/43.55%/19.40%，同一成品的GAU-AP为80.00%/56.81%/23.90%；第一场景两种口径均100%。COVE恢复少视角可见身份及被掩码遗漏的实测表面，BASE自动发现并验证底部支撑残余。厨房新增15次本地SAM3几何框验证，没有新增GPT/Qwen请求。新增未参与调试的第三场景，冻结算法对比见26.6。薄柜隐藏形状仍未解决；MATCH-3D联合模型的方法见第27章，按用户要求暂停训练，未接入v19。
 
 ## v19 更新摘要（当前最终版）
 
-第19章保留原始对照和各最终版；第26章记录本轮最终证据。6.9保留官方GT说明、119个编号与11张图册，默认展示当前v19的GAU实体并集及匹配，严格匹配并列。
+第19章保留原始对照和各最终版；第26章记录本轮最终证据。6.9保留官方GT说明、129个编号与12张图册（包含新增独立场景），默认展示当前v19的GAU实体并集及匹配，严格匹配并列。
 
 | 第二场景 ai_001_010 | v18最终版 | v19最终版 | 同口径变化 |
 | --- | --- | --- | --- |
@@ -28,6 +30,8 @@
 **泛化边界：** 同一规则用于两场景；测试包括独立帧、遮挡未知、附件保护和编号/坐标平移不变性。BASE当前只在声明Hypersim米制Z-up的输入启用，不预设两排或隐藏数量。这些功能测试与两个场景不足以证明跨数据集强泛化。GAU仍统一使用2厘米容差和0.8纯度，37份可比最终评价同规则复评。
 
 **尚未完成：** 严格70%/55%目标未达到。水槽杯子GT36、漏检高杯GT43、薄支撑平台GT139已恢复；GT43距离50%仍有差距，GT125仍未过25%。后排小杯GT49只恢复极小片段，完整烤箱、窗户身份分离和薄柜背面继续待解决。第27章模型未训练、未接入、无效果分数。
+
+**新增独立场景验证：** 官方test场景 `ai_003_007` 的67帧，以冻结代码从原始观测完整构建。GPT原始严格AP25/AP50/AP75为0.00%/0.00%/0.00%，v19为37.27%/9.00%/9.00%；详见26.6。两者共用67份GPT响应，构建端新增API调用为零。没有按新场景GT调整参数，未恢复联合模型训练。
 
 ## 1. 当前主脉络
 
@@ -1506,6 +1510,25 @@ part_body_assembly.construct位于MEASURED_REFINEMENT，thin_geometry之后、ax
 
 ![ai_001_010 官方GT编号图册 10：金线为官方轮廓，标题为v19 GAU匹配状态](figures/v19_gt_010_10.png)
 
+### 6.9.4 新增独立场景 ai_003_007：官方GT编号与两版匹配
+
+该场景的编号来自官方semantic_instance，不参与构建、过滤或参数选择。以下默认展示v19，严格匹配和GAU统计并列；原始流程的逐GT对照见26.6。
+
+![新增独立场景官方GT编号图册 1](figures/v19_gt_003_007_01.png)
+
+| GT标识 | 官方类别 | 粒度实体（v19节点并集） | 并集框IoU | GAU匹配25 / 50 / 75 | 严格匹配25 / 50 / 75 | 定位帧 |
+| --- | --- | --- | --- | --- | --- | --- |
+| GT-001 | window | P-9 window | 87.12% | P-9 / P-9 / P-9 | P-9 / P-9 / P-9 | cam_00_0072 |
+| GT-002 | otherprop | P-7 plant | 49.11% | P-7 / 未匹配 / 未匹配 | P-7 / 未匹配 / 未匹配 | cam_01_0008 |
+| GT-003 | otherprop | P-26+28 potted plant + plant | 54.35% | P-26+28 / P-26+28 / 未匹配 | P-26 / 未匹配 / 未匹配 | cam_01_0008 |
+| GT-004 | otherstructure | P-4 staircase | 0.00% | 未匹配 / 未匹配 / 未匹配 | 未匹配 / 未匹配 / 未匹配 | cam_01_0098 |
+| GT-005 | otherstructure | P-3 column | 91.57% | P-3 / P-3 / P-3 | P-3 / P-3 / P-3 | cam_00_0096 |
+| GT-006 | otherstructure | P-4 staircase | 1.96% | 未匹配 / 未匹配 / 未匹配 | 未匹配 / 未匹配 / 未匹配 | cam_00_0000 |
+| GT-007 | otherstructure | P-34 column | 41.21% | P-34 / 未匹配 / 未匹配 | P-34 / 未匹配 / 未匹配 | cam_01_0095 |
+| GT-008 | otherstructure | P-4 staircase | 0.00% | 未匹配 / 未匹配 / 未匹配 | 未匹配 / 未匹配 / 未匹配 | cam_00_0000 |
+| GT-009 | otherstructure | P-1 column | 19.23% | 未匹配 / 未匹配 / 未匹配 | 未匹配 / 未匹配 / 未匹配 | cam_00_0000 |
+| GT-010 | otherstructure | P-2 column | 78.67% | P-2 / P-2 / P-2 | P-2 / P-2 / P-2 | cam_01_0005 |
+
 ### 6.10 现行接缝与形状接口（v14引入）
 
 `seeded_surfaces.construct`复用原结构表面接口；`AXIAL_VALIDATION.check`验证轴向附属身份。最终几何依次调用`verified_suspension.construct`、`enclosure_continuity.construct`、`verified_cuboids.construct`；ECA以关系适配器回调原`part_body_assembly.construct`，沿用原点云、轨迹、别名及部件写入路径。ECA独立审计不覆盖BHA审计，删除`BODY_CONTINUITY`和`FINAL_GEOMETRY`中的相应注册即可撤除；其他新组件同样按单项代码注册撤除。历史v13配置明确清除v14组件，没有新增逐算法命令行开关。
@@ -1746,6 +1769,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 | 002 GPT v19 | 10/10 | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% | 0.0000 |
 | 010 GPT v18 | 133/109 | 63.69% | 42.85% | 19.24% | 63.69% | 48.14% | 0.1990 |
 | 010 GPT v19 | 141/109 | 66.53% | 43.55% | 19.40% | 66.53% | 50.59% | 0.2574 |
+| ai_003_007 GPT原始（独立test） | 18/10 | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.5878 |
+| ai_003_007 GPT v19（独立test） | 20/10 | 37.27% | 9.00% | 9.00% | 37.27% | 9.00% | 0.6931 |
 
 | 场景/流程 | TP/FP/FN@25 | TP/FP/FN@50 | TP/FP/FN@75 |
 | --- | --- | --- | --- |
@@ -1769,6 +1794,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 | 002 GPT v19 | 10/0/0 | 10/0/0 | 10/0/0 |
 | 010 GPT v18 | 94/39/15 | 75/58/34 | 41/92/68 |
 | 010 GPT v19 | 98/43/11 | 77/64/32 | 42/99/67 |
+| ai_003_007 GPT原始（独立test） | 0/18/10 | 0/18/10 | 0/18/10 |
+| ai_003_007 GPT v19（独立test） | 6/14/4 | 3/17/7 | 3/17/7 |
 
 严格框AP与MVO采用原始GT，类无关项目适配评价，不是官方点云掩码benchmark或关系准确率。数量比可能因漏检与重复相抵而接近1，必须一起看TP/FP/FN。当前第一场景100%只覆盖这份可观测GT和框口径。
 
@@ -1823,6 +1850,8 @@ GPT原始流程保留原DINO/SAM及C++建图，只替换类别来源；它与v12
 | partaware_v1 ai_001_002 | 点云缺失 |
 | partaware_v4 ai_001_010 | 现存图/点云哈希与历史评分不一致，不能构成同一成品对照 |
 | partaware_v2  | 没有保留独立完整评价 |
+| ai_003_007 gpt_original_v1（独立test） | 18 / 14 / 10 | 0.00%/0.00%/0.00% | 0.00%/0.00%/0.00% |
+| ai_003_007 partaware_v19（独立test） | 20 / 19 / 10 | 37.27%/9.00%/9.00% | 36.00%/17.78%/10.00% |
 
 scene0802缺少可用独立实例真值，不报告GAU-AP。统计实体包络仍可能有空洞，表面覆盖不能由框AP替代。完整成员、置信度与全部逐GT匹配见 `v19_granularity_comparison.json`。
 
@@ -2481,6 +2510,56 @@ MaskClustering [10] 的全局掩码图、独立视角共识与欠分割过滤，
 
 ![v19第二场景反向视角：保留的小实例与支撑残余](figures/v19_scene010_reverse.png)
 
+### 26.6 新场景 ai_003_007：冻结v19与原始流程的独立对比
+
+选景在读取图像、GT几何、物体数量和AP之前固定：按官方场景划分CSV，选择不属于此前ai_001资源卷的test场景中字典序第一项，得到 `ai_003_007`。官方按整个场景分配train/val/test，但跨场景仍可能复用资产，因此“未参与本项目调试”不等于所有物体模型均未在预训练中出现。数据和划分依据为[Hypersim官方说明](https://github.com/apple-aiml-research/ml-hypersim)及[官方场景划分CSV](https://raw.githubusercontent.com/apple/ml-hypersim/main/evermotion_dataset/analysis/metadata_images_split_scene_v1.csv)。
+
+场景是楼梯大厅，包含柱体、栏杆、窗户和植物。官方200帧按camera/frame排序，每三帧取一帧、最多100帧，实际67帧；两版输入及GT标签哈希一致。原始流程保留DINO/SAM、C++融合和原图后处理，只用GPT替换类别来源；v19运行完整冻结注册树，包括SAM3前端、实测归属和几何发布。本场景从原始观测完整重建，与此前两场景“不可变v18成品增量执行COVE/BASE”的运行协议不同，报告分别标注。
+
+预登记代码指纹 `250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894`，SAM3权重指纹 `9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e`。源码在实验期间未改；无场景坐标、节点ID或GT数量补丁。67份有效GPT响应由两版共用，构建不新增GPT/Qwen识图。联合模型训练继续暂停。详细审计见 `docs/v19_holdout_validation.json` 和 `docs/v19_holdout_preregistration.json`。
+
+| 新场景流程 | 预测/GT | 严格AP25 | 严格AP50 | 严格AP75 | TP/FP/FN@25 | TP/FP/FN@50 |
+| --- | --- | --- | --- | --- | --- | --- |
+| GPT原始 | 18/10 | 0.00% | 0.00% | 0.00% | 0/18/10 | 0/18/10 |
+| GPT v19 | 20/10 | 37.27% | 9.00% | 9.00% | 6/14/4 | 3/17/7 |
+| v19变化（百分点） | — | +37.27 | +9.00 | +9.00 | — | — |
+
+GAU仍是GT辅助粒度统计，分别为原始 0.00%/0.00%/0.00%、v19 36.00%/17.78%/10.00%；主要结论只根据上表严格AP，不将口径变化计作识别提升。这是整个v19系统相对原始流程的比较，前端、融合与后处理均有不同，不能将全部差值归给COVE/BASE，也没有证明训练中的联合模型有效。一个新增场景仍不足以证明广泛泛化。
+
+![独立test场景原始流程：相同视角与查看器](figures/holdout_ai_003_007_original_final_scene.png)
+
+![独立test场景冻结v19：相同视角与查看器](figures/holdout_ai_003_007_v19_final_scene.png)
+
+逐GT框诊断如下。“最佳IoU”是诊断候选，不代表置信排序AP或严格一对一已匹配；最后一列来自严格一对一统计。
+
+| GT编号 | 官方类别 | 原始最佳IoU | v19最佳候选 | v19最佳IoU | v19严格状态 |
+| --- | --- | --- | --- | --- | --- |
+| GT-001 | window | 0.70% | P-9 window | 87.12% | 达到75% |
+| GT-002 | otherprop | 5.80% | P-7 plant | 49.11% | 仅25% |
+| GT-003 | otherprop | 6.18% | P-26 potted plant | 44.55% | 仅25% |
+| GT-004 | otherstructure | 11.80% | P-4 staircase | 0.00% | 未达25% |
+| GT-005 | otherstructure | 7.72% | P-3 column | 91.57% | 达到75% |
+| GT-006 | otherstructure | 5.35% | P-4 staircase | 1.96% | 未达25% |
+| GT-007 | otherstructure | 6.17% | P-34 column | 41.21% | 仅25% |
+| GT-008 | otherstructure | 0.00% | P-4 staircase | 0.00% | 未达25% |
+| GT-009 | otherstructure | 0.00% | P-1 column | 19.23% | 未达25% |
+| GT-010 | otherstructure | 4.56% | P-2 column | 78.67% | 达到75% |
+
+### 26.7 研究先例、指标水平与实例地图的实际作用
+
+提高三维实例地图质量已有成熟研究路线：MaskClustering [10]研究跨视角实例共识，Open3DIS [11]利用二维掩码指导三维实例；EmbodiedSAM [36]学习二维到三维查询提升及跨帧融合，ESAM++ [37]进一步研究在线精度与效率。它们是研究先例，当前v19没有部署ESAM或ESAM++。
+
+| 公开方法与条件 | ScanNet200类无关掩码AP25 | 掩码AP50 | 来源 |
+| --- | --- | --- | --- |
+| ESAM-E，训练的在线模型 | 80.9% | 65.4% | EmbodiedSAM，ICLR 2025，表1 [36] |
+| ESAM++ Large，训练的在线模型 | 81.2% | 66.1% | 2026年预印本，表2 [37] |
+
+这些数字是对应论文协议下的三维实例**点云掩码**结果；我们采用Hypersim可观测物体的类无关**几何框**AP，场景、输入采样、训练条件及评价对象不同，不能横向宣布超过已有方法。点云密度提高也不等于几何准确率提高，框AP提高不等于语义名称、空间关系或机器人任务已正确。GAU口径产生的差值仍不作为算法进步。
+
+实际作用应落实到可验证任务：将杯子与盘子分开可提供独立操作目标；跨视角稳定身份可减少重复计数；准确的支撑/包含关系可支持“架子上的杯子”一类语言定位。OVSG [38]已报告真实机器人导航和操作实验，说明三维场景图具备应用先例。本项目尚未测量抓取、导航或操作成功率，以上是需要验证的用途，不能当作已取得的机器人效果。
+
+我们当前能验证的是相对原始流水线的改进和新增冻结场景上的迁移。论文贡献还需要更强基线、组件消融、多独立场景和统一指标；应分别记录点云实例掩码IoU/边界、实测几何误差、幽灵节点误删/漏删、目标定位成功率及时间/内存。对于隐藏形状补全，需独立完整形状真值；当前可观测GT和框指标不能证明未观测背面正确。联合模型训练继续暂停。
+
 ## 27. MATCH-3D：文本、局部图与形状联合模型的方法草案（训练暂停）
 
 这是对用户核心目标的正式方法定义，**尚未训练、未接入当前v19决策、没有模型效果分数**。现有SBERT、CLIP、规则验收和AdaPoinTr不是这个联合模型。名称只是选择长方体适用类别，也不等于学习了名称条件形状补全。训练按用户2026-10-11要求暂停，先明确数据与方法。
@@ -2703,3 +2782,9 @@ XDG_SESSION_TYPE=x11 LIBGL_ALWAYS_SOFTWARE=true \
 [34] Singh B, Sarkar S D, Armeni I. **SGAligner++: Cross-Modal Language-Aided 3D Scene Graph Alignment** [EB/OL]. arXiv:2509.20401, 2025. [论文](https://arxiv.org/abs/2509.20401), [方法](https://arxiv.org/html/2509.20401v1).
 
 [35] Xue L, Yu N, Zhang S, et al. **ULIP-2: Towards Scalable Multimodal Pre-training for 3D Understanding** [C]. CVPR, 2024. arXiv:2305.08275. [论文](https://arxiv.org/abs/2305.08275), [方法](https://arxiv.org/html/2305.08275v4).
+
+[36] Xu X, Chen H, Zhao L, Wang Z, Zhou J, Lu J. **EmbodiedSAM: Online Segment Any 3D Thing in Real Time** [C]. ICLR, 2025. arXiv:2408.11811. [论文](https://proceedings.iclr.cc/paper_files/paper/2025/file/5e68f9149d33a6c8ad59ed60bf90606f-Paper-Conference.pdf), [官方代码](https://github.com/xuxw98/ESAM). 仅作为相关工作与公开水平参照，未部署。
+
+[37] Liu Q, Aggarwal L, Bandyopadhyay S, Bahirwani V, Niethammer M, Adeli E, Colaco A. **ESAM++: Efficient Online 3D Perception on the Edge** [EB/OL]. arXiv:2605.29505, 2026. [论文](https://arxiv.org/html/2605.29505v1), [代码](https://github.com/google/esamplusplus). 仅作为相关工作与公开水平参照，未部署。
+
+[38] Chang H, Boyalakuntla K, Lu S, et al. **Context-Aware Entity Grounding with Open-Vocabulary 3D Scene Graphs** [C]. CoRL, PMLR 229, 2023: 1950–1974. [论文](https://proceedings.mlr.press/v229/chang23b.html). 作为语言定位和机器人应用先例，未部署。

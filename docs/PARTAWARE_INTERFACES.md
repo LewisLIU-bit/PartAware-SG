@@ -1,4 +1,4 @@
-# PartAware-SG interfaces
+# EviScene interfaces
 
 The default Hypersim path applies multi-frame background-supported floors and
 low-platform filtering to declared meter-scale Z-up inputs. `floor_filter.json`

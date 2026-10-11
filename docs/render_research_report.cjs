@@ -82,11 +82,11 @@ function buildLaTeX(tokens, reportDate) {
 \usepackage[a4paper,margin=21mm]{geometry}
 \usepackage{amsmath,amssymb,array,longtable,booktabs,xcolor,hyperref}
 \definecolor{reportblue}{HTML}{174BA8}
-\hypersetup{colorlinks=true,linkcolor=reportblue,urlcolor=reportblue,pdftitle={PartAware-SG 综合研发与实验报告}}
+\hypersetup{colorlinks=true,linkcolor=reportblue,urlcolor=reportblue,pdftitle={EviScene 综合研发与实验报告}}
 \setlength{\emergencystretch}{3em}
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.25}
-\title{PartAware-SG 综合研发与实验报告}
+\title{EviScene 综合研发与实验报告}
 \author{}
 \date{${escapeTeX(reportDate)}}
 \begin{document}
@@ -241,7 +241,7 @@ async function buildReport(options) {
 <meta name="report-updated" content="${escapeHTML(reportDate)}">
 <meta name="math-display-count" content="${counts.display}">
 <meta name="math-inline-count" content="${counts.inline}">
-<title>PartAware-SG 综合研发与实验报告 · LaTeX 渲染版</title>
+<title>EviScene 综合研发与实验报告 · LaTeX 渲染版</title>
 <style>
 ${mathStyles}
 :root { color-scheme: light dark; --bg:#f4f6fa; --paper:#fff; --ink:#202b3d; --muted:#64748b; --line:#dce4ef; --accent:#174ba8; --formula:#f8faff; }

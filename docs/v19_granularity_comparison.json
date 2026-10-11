@@ -135879,6 +135879,1562 @@
       },
       "graph_sha256": "35430fb026ab733e584bf4e19d8372db53526bea468a82e2f60118ae4150b8f1",
       "ply_sha256": "d95efb40a3ed36763821f606c697473a2550161aad9e4e8742f1f21bef1f7480"
+    },
+    {
+      "profile": "gpt_original_v1",
+      "scene_id": "ai_003_007",
+      "strict_AP": {
+        "AP25": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0
+      },
+      "aligned": {
+        "protocol": "GAU_v1_annotation_assisted_pure_fragment_union",
+        "grouping_uses_ground_truth": true,
+        "construction_uses_ground_truth": false,
+        "official_benchmark_metric": false,
+        "purity_threshold": 0.8,
+        "distance_tolerance_m": 0.02,
+        "bbox_source": "union_of_saved_child_canonical_AABBs",
+        "confidence_rule": "minimum_child_score",
+        "raw_prediction_count": 18,
+        "statistical_entity_count": 14,
+        "gt_count": 10,
+        "entities": [
+          {
+            "id": "10",
+            "member_prediction_ids": [
+              "10"
+            ],
+            "label": "architectural column",
+            "bounds": [
+              [
+                -0.08499454599401177,
+                -5.627406312089302,
+                2.7844404199556565
+              ],
+              [
+                0.20196463805219353,
+                -5.412421988386773,
+                4.733830072598054
+              ]
+            ],
+            "confidence": 0.5280072558671236,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "14",
+            "member_prediction_ids": [
+              "14"
+            ],
+            "label": "railing",
+            "bounds": [
+              [
+                -6.076117730173681,
+                -2.007161392521602,
+                2.558184250265195
+              ],
+              [
+                -3.7070148229269053,
+                -1.9844262463333786,
+                4.429246799081729
+              ]
+            ],
+            "confidence": 0.5775852011782783,
+            "group_assignment_gt_id": 6
+          },
+          {
+            "id": "15",
+            "member_prediction_ids": [
+              "15"
+            ],
+            "label": "window",
+            "bounds": [
+              [
+                0.7085998140380153,
+                -5.957348087401873,
+                1.799768433334573
+              ],
+              [
+                2.101793042559885,
+                -5.907812854675764,
+                3.5687160637357396
+              ]
+            ],
+            "confidence": 0.6231624484062195,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "16+39",
+            "member_prediction_ids": [
+              "16",
+              "39"
+            ],
+            "label": "plant + handrail",
+            "bounds": [
+              [
+                -6.153162828099438,
+                -2.7905098953950085,
+                3.8747710475866097
+              ],
+              [
+                -2.343650829849609,
+                -2.7481638028105335,
+                6.628921429485849
+              ]
+            ],
+            "confidence": 0.5019294172525406,
+            "group_assignment_gt_id": 4
+          },
+          {
+            "id": "2+42",
+            "member_prediction_ids": [
+              "2",
+              "42"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -0.2383034104985726,
+                -2.558357365234431,
+                2.044661736353236
+              ],
+              [
+                0.17335476679285905,
+                -2.1952450974152344,
+                4.5728996399464545
+              ]
+            ],
+            "confidence": 0.5240931784113249,
+            "group_assignment_gt_id": 5
+          },
+          {
+            "id": "22+5",
+            "member_prediction_ids": [
+              "22",
+              "5"
+            ],
+            "label": "potted plant + indoor plant",
+            "bounds": [
+              [
+                -8.805618481647864,
+                -1.9569716799283483,
+                3.484281966291436
+              ],
+              [
+                -8.397672457683191,
+                -1.414242871649121,
+                4.370148010072372
+              ]
+            ],
+            "confidence": 0.5343124866485596,
+            "group_assignment_gt_id": 2
+          },
+          {
+            "id": "3",
+            "member_prediction_ids": [
+              "3"
+            ],
+            "label": "staircase",
+            "bounds": [
+              [
+                -5.293427307956304,
+                -1.741572000192871,
+                1.91519693418093
+              ],
+              [
+                -3.4479324027370546,
+                0.08732161681579576,
+                2.953685245079324
+              ]
+            ],
+            "confidence": 0.5761290788650513,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "33",
+            "member_prediction_ids": [
+              "33"
+            ],
+            "label": "potted plant",
+            "bounds": [
+              [
+                -8.201576757306073,
+                -2.737999836696112,
+                3.7455903626725786
+              ],
+              [
+                -7.632901620989826,
+                -2.4434367020001773,
+                4.371121253843535
+              ]
+            ],
+            "confidence": 0.6903294995427132,
+            "group_assignment_gt_id": 3
+          },
+          {
+            "id": "34+8",
+            "member_prediction_ids": [
+              "34",
+              "8"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -6.568494984620818,
+                -2.603391223630366,
+                4.755188515719076
+              ],
+              [
+                -6.116244831295225,
+                -2.24994108718202,
+                7.4337519793277025
+              ]
+            ],
+            "confidence": 0.4195781350135803,
+            "group_assignment_gt_id": 10
+          },
+          {
+            "id": "36",
+            "member_prediction_ids": [
+              "36"
+            ],
+            "label": "staircase",
+            "bounds": [
+              [
+                -4.742463366065067,
+                -5.171140694489831,
+                4.066704927569754
+              ],
+              [
+                -1.8286397299432335,
+                -2.6796421767565066,
+                5.740747274273508
+              ]
+            ],
+            "confidence": 0.5370424446605501,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "4",
+            "member_prediction_ids": [
+              "4"
+            ],
+            "label": "arched window",
+            "bounds": [
+              [
+                -2.51843148234701,
+                -5.9731222945628755,
+                2.3663204806287483
+              ],
+              [
+                -1.4541041278519649,
+                -5.885000531059683,
+                3.722763667778234
+              ]
+            ],
+            "confidence": 0.6089439801871777,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "40",
+            "member_prediction_ids": [
+              "40"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -6.575976305764291,
+                -5.7855513733998825,
+                4.176082249239294
+              ],
+              [
+                -6.330467290121939,
+                -5.44830292042336,
+                5.4891742510048465
+              ]
+            ],
+            "confidence": 0.47745631635189056,
+            "group_assignment_gt_id": 7
+          },
+          {
+            "id": "45",
+            "member_prediction_ids": [
+              "45"
+            ],
+            "label": "railing",
+            "bounds": [
+              [
+                -2.0600412381698514,
+                -2.633097664381882,
+                0.76280015832634
+              ],
+              [
+                -0.0027334200332735925,
+                -1.7719850382548366,
+                2.4257970439746854
+              ]
+            ],
+            "confidence": 0.5153908431529999,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "7",
+            "member_prediction_ids": [
+              "7"
+            ],
+            "label": "arched window",
+            "bounds": [
+              [
+                -9.111315759273653,
+                0.9774315340747838,
+                4.832962718020687
+              ],
+              [
+                -8.993954626468534,
+                1.170261146284103,
+                5.914138112057438
+              ]
+            ],
+            "confidence": 0.5578658921377999,
+            "group_assignment_gt_id": null
+          }
+        ],
+        "one_to_one": {
+          "0.25": {
+            "TP": 0,
+            "FP": 14,
+            "FN": 10,
+            "matches": []
+          },
+          "0.5": {
+            "TP": 0,
+            "FP": 14,
+            "FN": 10,
+            "matches": []
+          },
+          "0.75": {
+            "TP": 0,
+            "FP": 14,
+            "FN": 10,
+            "matches": []
+          }
+        },
+        "per_gt": [
+          {
+            "gt_id": 1,
+            "best_predictions": [
+              {
+                "prediction_id": "7",
+                "member_prediction_ids": [
+                  "7"
+                ],
+                "label": "arched window",
+                "confidence": 0.5578658921377999,
+                "IoU": 0.006961073806105137
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 2,
+            "best_predictions": [
+              {
+                "prediction_id": "22+5",
+                "member_prediction_ids": [
+                  "22",
+                  "5"
+                ],
+                "label": "potted plant + indoor plant",
+                "confidence": 0.5343124866485596,
+                "IoU": 0.1218612242230483
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 3,
+            "best_predictions": [
+              {
+                "prediction_id": "33",
+                "member_prediction_ids": [
+                  "33"
+                ],
+                "label": "potted plant",
+                "confidence": 0.6903294995427132,
+                "IoU": 0.06176164693245419
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 4,
+            "best_predictions": [
+              {
+                "prediction_id": "16+39",
+                "member_prediction_ids": [
+                  "16",
+                  "39"
+                ],
+                "label": "plant + handrail",
+                "confidence": 0.5019294172525406,
+                "IoU": 0.23589048173878904
+              },
+              {
+                "prediction_id": "36",
+                "member_prediction_ids": [
+                  "36"
+                ],
+                "label": "staircase",
+                "confidence": 0.5370424446605501,
+                "IoU": 0.022861372614790407
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 5,
+            "best_predictions": [
+              {
+                "prediction_id": "2+42",
+                "member_prediction_ids": [
+                  "2",
+                  "42"
+                ],
+                "label": "column",
+                "confidence": 0.5240931784113249,
+                "IoU": 0.19003093489150988
+              },
+              {
+                "prediction_id": "45",
+                "member_prediction_ids": [
+                  "45"
+                ],
+                "label": "railing",
+                "confidence": 0.5153908431529999,
+                "IoU": 0.07723349671432671
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 6,
+            "best_predictions": [
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.05350679817143203
+              },
+              {
+                "prediction_id": "45",
+                "member_prediction_ids": [
+                  "45"
+                ],
+                "label": "railing",
+                "confidence": 0.5153908431529999,
+                "IoU": 0.047736706480814343
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 7,
+            "best_predictions": [
+              {
+                "prediction_id": "40",
+                "member_prediction_ids": [
+                  "40"
+                ],
+                "label": "column",
+                "confidence": 0.47745631635189056,
+                "IoU": 0.06166009349149136
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 8,
+            "best_predictions": [
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "15",
+                "member_prediction_ids": [
+                  "15"
+                ],
+                "label": "window",
+                "confidence": 0.6231624484062195,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 9,
+            "best_predictions": [
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "15",
+                "member_prediction_ids": [
+                  "15"
+                ],
+                "label": "window",
+                "confidence": 0.6231624484062195,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 10,
+            "best_predictions": [
+              {
+                "prediction_id": "34+8",
+                "member_prediction_ids": [
+                  "34",
+                  "8"
+                ],
+                "label": "column",
+                "confidence": 0.4195781350135803,
+                "IoU": 0.24282894657951262
+              },
+              {
+                "prediction_id": "10",
+                "member_prediction_ids": [
+                  "10"
+                ],
+                "label": "architectural column",
+                "confidence": 0.5280072558671236,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "railing",
+                "confidence": 0.5775852011782783,
+                "IoU": 0.0
+              }
+            ]
+          }
+        ],
+        "limitation": "Annotation-assisted grouping measures geometry at GT granularity. It is not independent instance-recognition AP or a predicted parent hierarchy. Mixed predictions are never split using GT. Unknown predictions retain FP liability; strict AP must also be reported.",
+        "AP25": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0
+      },
+      "graph_sha256": "f1417d4c630c86ce3af9b894c0c251e5a5ea1eb9860bcbf6accf4476b244701d",
+      "ply_sha256": "963a06ec2661775f88c8e4d95e009e859f844dd91abc2af565e1cd13eebe1a48"
+    },
+    {
+      "profile": "partaware_v19",
+      "scene_id": "ai_003_007",
+      "strict_AP": {
+        "AP25": 0.3727272727272727,
+        "AP50": 0.09,
+        "AP75": 0.09
+      },
+      "aligned": {
+        "protocol": "GAU_v1_annotation_assisted_pure_fragment_union",
+        "grouping_uses_ground_truth": true,
+        "construction_uses_ground_truth": false,
+        "official_benchmark_metric": false,
+        "purity_threshold": 0.8,
+        "distance_tolerance_m": 0.02,
+        "bbox_source": "union_of_saved_child_canonical_AABBs",
+        "confidence_rule": "minimum_child_score",
+        "raw_prediction_count": 20,
+        "statistical_entity_count": 19,
+        "gt_count": 10,
+        "entities": [
+          {
+            "id": "4",
+            "member_prediction_ids": [
+              "4"
+            ],
+            "label": "staircase",
+            "bounds": [
+              [
+                -6.173685128654823,
+                -2.1075949794707185,
+                1.4643961501199438
+              ],
+              [
+                -2.6910813983754682,
+                0.9255425136245338,
+                3.2017483890427876
+              ]
+            ],
+            "confidence": 0.656655319416902,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "14",
+            "member_prediction_ids": [
+              "14"
+            ],
+            "label": "window",
+            "bounds": [
+              [
+                0.5079192594001425,
+                -5.954899178397485,
+                0.9498745453920519
+              ],
+              [
+                2.7046670559301247,
+                -5.889887513543992,
+                3.7751542626543797
+              ]
+            ],
+            "confidence": 0.8311684202506907,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "2",
+            "member_prediction_ids": [
+              "2"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -6.608826976215682,
+                -2.7140744388857887,
+                3.2182776846152703
+              ],
+              [
+                -5.971834689018546,
+                -2.0313244712652527,
+                8.171062480590148
+              ]
+            ],
+            "confidence": 0.7566719047928874,
+            "group_assignment_gt_id": 10
+          },
+          {
+            "id": "6",
+            "member_prediction_ids": [
+              "6"
+            ],
+            "label": "window",
+            "bounds": [
+              [
+                -3.0049502667994488,
+                -5.955725488121796,
+                0.9305489638274818
+              ],
+              [
+                -0.7857560238128296,
+                -5.880375236898435,
+                3.772623808956242
+              ]
+            ],
+            "confidence": 0.8288208101824969,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "3",
+            "member_prediction_ids": [
+              "3"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -0.3683552400038683,
+                -2.7225402208373604,
+                0.4788808275464911
+              ],
+              [
+                0.32693865653837306,
+                -2.0297976615143094,
+                4.9876965542442155
+              ]
+            ],
+            "confidence": 0.7438911580269476,
+            "group_assignment_gt_id": 5
+          },
+          {
+            "id": "5",
+            "member_prediction_ids": [
+              "5"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -0.3465760943569588,
+                -5.678454528734772,
+                0.7984086908500307
+              ],
+              [
+                0.32651720119403427,
+                -5.329468083094355,
+                4.972872485850554
+              ]
+            ],
+            "confidence": 0.7625624510182425,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "34",
+            "member_prediction_ids": [
+              "34"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -6.690070597070173,
+                -6.014503038747942,
+                4.0027093621950804
+              ],
+              [
+                -6.050171814992217,
+                -5.315377080146495,
+                6.4395250991990505
+              ]
+            ],
+            "confidence": 0.7070600798405344,
+            "group_assignment_gt_id": 7
+          },
+          {
+            "id": "9",
+            "member_prediction_ids": [
+              "9"
+            ],
+            "label": "window",
+            "bounds": [
+              [
+                -9.077462508392285,
+                0.8526395217917466,
+                4.09430252096988
+              ],
+              [
+                -6.838404245932962,
+                1.2027954618130035,
+                6.97344452201072
+              ]
+            ],
+            "confidence": 0.7675817967803903,
+            "group_assignment_gt_id": 1
+          },
+          {
+            "id": "26+28",
+            "member_prediction_ids": [
+              "26",
+              "28"
+            ],
+            "label": "potted plant + plant",
+            "bounds": [
+              [
+                -8.425128583746275,
+                -2.952304070581631,
+                3.251724978395062
+              ],
+              [
+                -7.470045610890976,
+                -2.2950464996167597,
+                4.720608401141327
+              ]
+            ],
+            "confidence": 0.7520915430163766,
+            "group_assignment_gt_id": 3
+          },
+          {
+            "id": "49",
+            "member_prediction_ids": [
+              "49"
+            ],
+            "label": "stair surfaces",
+            "bounds": [
+              [
+                -6.8667035669213865,
+                -5.381088090481375,
+                3.1999850752672305
+              ],
+              [
+                -6.318342975943156,
+                -2.6805570906671146,
+                3.2099895160955576
+              ]
+            ],
+            "confidence": 0.46355320341162765,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "7",
+            "member_prediction_ids": [
+              "7"
+            ],
+            "label": "plant",
+            "bounds": [
+              [
+                -8.903427619734272,
+                -2.026511809167142,
+                3.213986507007683
+              ],
+              [
+                -8.223469680855898,
+                -1.2451271760417482,
+                4.701742681511745
+              ]
+            ],
+            "confidence": 0.800787779783933,
+            "group_assignment_gt_id": 2
+          },
+          {
+            "id": "20",
+            "member_prediction_ids": [
+              "20"
+            ],
+            "label": "staircase",
+            "bounds": [
+              [
+                -9.615071190233964,
+                -2.0417237067814247,
+                2.6760027578805294
+              ],
+              [
+                -3.2484607492588435,
+                0.4420446581031945,
+                5.1505212654963755
+              ]
+            ],
+            "confidence": 0.48179995940957937,
+            "group_assignment_gt_id": 6
+          },
+          {
+            "id": "1",
+            "member_prediction_ids": [
+              "1"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -9.617654115390236,
+                -2.519587446693042,
+                5.454660724555559
+              ],
+              [
+                -9.244406974637199,
+                -2.0336512874913453,
+                8.164870501037786
+              ]
+            ],
+            "confidence": 0.8325436162628295,
+            "group_assignment_gt_id": 9
+          },
+          {
+            "id": "54",
+            "member_prediction_ids": [
+              "54"
+            ],
+            "label": "beam",
+            "bounds": [
+              [
+                -2.1452560547714734,
+                -2.082459542544267,
+                6.2468261659039435
+              ],
+              [
+                -0.32102670075133555,
+                -1.872848749788314,
+                7.2957845670821335
+              ]
+            ],
+            "confidence": 0.6196133115990089,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "51",
+            "member_prediction_ids": [
+              "51"
+            ],
+            "label": "column",
+            "bounds": [
+              [
+                -0.32211632958991165,
+                -5.676619194574203,
+                -0.036040197608604885
+              ],
+              [
+                0.28003347468637474,
+                -5.374029286090675,
+                0.8491953188620416
+              ]
+            ],
+            "confidence": 0.6207993086118618,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "53",
+            "member_prediction_ids": [
+              "53"
+            ],
+            "label": "beam",
+            "bounds": [
+              [
+                -2.1680207772269915,
+                0.728452233742823,
+                6.243743714398387
+              ],
+              [
+                -0.32557525543464005,
+                0.924196360328563,
+                7.224915376711178
+              ]
+            ],
+            "confidence": 0.6637431599090498,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "60",
+            "member_prediction_ids": [
+              "60"
+            ],
+            "label": "ceiling beams",
+            "bounds": [
+              [
+                -1.8957071327785613,
+                -2.0150392922798925,
+                6.4130912932631645
+              ],
+              [
+                -0.18643896274227112,
+                0.7375552144520137,
+                7.083088823158498
+              ]
+            ],
+            "confidence": 0.4414686542953927,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "56",
+            "member_prediction_ids": [
+              "56"
+            ],
+            "label": "beam",
+            "bounds": [
+              [
+                -2.01959520645186,
+                -0.6285885793423884,
+                6.369918003759554
+              ],
+              [
+                -0.3182568087247897,
+                -0.5236563416766598,
+                7.2751858745567946
+              ]
+            ],
+            "confidence": 0.5987240902505758,
+            "group_assignment_gt_id": null
+          },
+          {
+            "id": "16",
+            "member_prediction_ids": [
+              "16"
+            ],
+            "label": "plant",
+            "bounds": [
+              [
+                -7.496193222094975,
+                -5.648713964931547,
+                11.549015525572498
+              ],
+              [
+                -6.623582181281009,
+                -4.850209836562305,
+                11.834161275189759
+              ]
+            ],
+            "confidence": 0.4951824180345552,
+            "group_assignment_gt_id": null
+          }
+        ],
+        "one_to_one": {
+          "0.25": {
+            "TP": 6,
+            "FP": 13,
+            "FN": 4,
+            "matches": [
+              {
+                "prediction_id": "2",
+                "member_prediction_ids": [
+                  "2"
+                ],
+                "gt_id": 10,
+                "iou": 0.7866788543523912
+              },
+              {
+                "prediction_id": "3",
+                "member_prediction_ids": [
+                  "3"
+                ],
+                "gt_id": 5,
+                "iou": 0.9157322908048845
+              },
+              {
+                "prediction_id": "34",
+                "member_prediction_ids": [
+                  "34"
+                ],
+                "gt_id": 7,
+                "iou": 0.41210629216304684
+              },
+              {
+                "prediction_id": "9",
+                "member_prediction_ids": [
+                  "9"
+                ],
+                "gt_id": 1,
+                "iou": 0.8712054715861082
+              },
+              {
+                "prediction_id": "26+28",
+                "member_prediction_ids": [
+                  "26",
+                  "28"
+                ],
+                "gt_id": 3,
+                "iou": 0.5434899315530615
+              },
+              {
+                "prediction_id": "7",
+                "member_prediction_ids": [
+                  "7"
+                ],
+                "gt_id": 2,
+                "iou": 0.4911233452257463
+              }
+            ]
+          },
+          "0.5": {
+            "TP": 4,
+            "FP": 15,
+            "FN": 6,
+            "matches": [
+              {
+                "prediction_id": "2",
+                "member_prediction_ids": [
+                  "2"
+                ],
+                "gt_id": 10,
+                "iou": 0.7866788543523912
+              },
+              {
+                "prediction_id": "3",
+                "member_prediction_ids": [
+                  "3"
+                ],
+                "gt_id": 5,
+                "iou": 0.9157322908048845
+              },
+              {
+                "prediction_id": "9",
+                "member_prediction_ids": [
+                  "9"
+                ],
+                "gt_id": 1,
+                "iou": 0.8712054715861082
+              },
+              {
+                "prediction_id": "26+28",
+                "member_prediction_ids": [
+                  "26",
+                  "28"
+                ],
+                "gt_id": 3,
+                "iou": 0.5434899315530615
+              }
+            ]
+          },
+          "0.75": {
+            "TP": 3,
+            "FP": 16,
+            "FN": 7,
+            "matches": [
+              {
+                "prediction_id": "2",
+                "member_prediction_ids": [
+                  "2"
+                ],
+                "gt_id": 10,
+                "iou": 0.7866788543523912
+              },
+              {
+                "prediction_id": "3",
+                "member_prediction_ids": [
+                  "3"
+                ],
+                "gt_id": 5,
+                "iou": 0.9157322908048845
+              },
+              {
+                "prediction_id": "9",
+                "member_prediction_ids": [
+                  "9"
+                ],
+                "gt_id": 1,
+                "iou": 0.8712054715861082
+              }
+            ]
+          }
+        },
+        "per_gt": [
+          {
+            "gt_id": 1,
+            "best_predictions": [
+              {
+                "prediction_id": "9",
+                "member_prediction_ids": [
+                  "9"
+                ],
+                "label": "window",
+                "confidence": 0.7675817967803903,
+                "IoU": 0.8712054715861082
+              },
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 2,
+            "best_predictions": [
+              {
+                "prediction_id": "7",
+                "member_prediction_ids": [
+                  "7"
+                ],
+                "label": "plant",
+                "confidence": 0.800787779783933,
+                "IoU": 0.4911233452257463
+              },
+              {
+                "prediction_id": "20",
+                "member_prediction_ids": [
+                  "20"
+                ],
+                "label": "staircase",
+                "confidence": 0.48179995940957937,
+                "IoU": 0.03837263154582262
+              },
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 3,
+            "best_predictions": [
+              {
+                "prediction_id": "26+28",
+                "member_prediction_ids": [
+                  "26",
+                  "28"
+                ],
+                "label": "potted plant + plant",
+                "confidence": 0.7520915430163766,
+                "IoU": 0.5434899315530615
+              },
+              {
+                "prediction_id": "7",
+                "member_prediction_ids": [
+                  "7"
+                ],
+                "label": "plant",
+                "confidence": 0.800787779783933,
+                "IoU": 0.0022680753462801006
+              },
+              {
+                "prediction_id": "20",
+                "member_prediction_ids": [
+                  "20"
+                ],
+                "label": "staircase",
+                "confidence": 0.48179995940957937,
+                "IoU": 0.0011028410880051976
+              }
+            ]
+          },
+          {
+            "gt_id": 4,
+            "best_predictions": [
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "2",
+                "member_prediction_ids": [
+                  "2"
+                ],
+                "label": "column",
+                "confidence": 0.7566719047928874,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 5,
+            "best_predictions": [
+              {
+                "prediction_id": "3",
+                "member_prediction_ids": [
+                  "3"
+                ],
+                "label": "column",
+                "confidence": 0.7438911580269476,
+                "IoU": 0.9157322908048845
+              },
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 6,
+            "best_predictions": [
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.019607939128788644
+              },
+              {
+                "prediction_id": "20",
+                "member_prediction_ids": [
+                  "20"
+                ],
+                "label": "staircase",
+                "confidence": 0.48179995940957937,
+                "IoU": 0.00957790176410185
+              },
+              {
+                "prediction_id": "3",
+                "member_prediction_ids": [
+                  "3"
+                ],
+                "label": "column",
+                "confidence": 0.7438911580269476,
+                "IoU": 0.00535056125063961
+              }
+            ]
+          },
+          {
+            "gt_id": 7,
+            "best_predictions": [
+              {
+                "prediction_id": "34",
+                "member_prediction_ids": [
+                  "34"
+                ],
+                "label": "column",
+                "confidence": 0.7070600798405344,
+                "IoU": 0.41210629216304684
+              },
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 8,
+            "best_predictions": [
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "2",
+                "member_prediction_ids": [
+                  "2"
+                ],
+                "label": "column",
+                "confidence": 0.7566719047928874,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 9,
+            "best_predictions": [
+              {
+                "prediction_id": "1",
+                "member_prediction_ids": [
+                  "1"
+                ],
+                "label": "column",
+                "confidence": 0.8325436162628295,
+                "IoU": 0.19230149803903038
+              },
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 0.0
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              }
+            ]
+          },
+          {
+            "gt_id": 10,
+            "best_predictions": [
+              {
+                "prediction_id": "2",
+                "member_prediction_ids": [
+                  "2"
+                ],
+                "label": "column",
+                "confidence": 0.7566719047928874,
+                "IoU": 0.7866788543523912
+              },
+              {
+                "prediction_id": "4",
+                "member_prediction_ids": [
+                  "4"
+                ],
+                "label": "staircase",
+                "confidence": 0.656655319416902,
+                "IoU": 4.178513720545623e-07
+              },
+              {
+                "prediction_id": "14",
+                "member_prediction_ids": [
+                  "14"
+                ],
+                "label": "window",
+                "confidence": 0.8311684202506907,
+                "IoU": 0.0
+              }
+            ]
+          }
+        ],
+        "limitation": "Annotation-assisted grouping measures geometry at GT granularity. It is not independent instance-recognition AP or a predicted parent hierarchy. Mixed predictions are never split using GT. Unknown predictions retain FP liability; strict AP must also be reported.",
+        "AP25": 0.36,
+        "AP50": 0.17777777777777778,
+        "AP75": 0.09999999999999999
+      },
+      "graph_sha256": "9136f346073cdf11490e83539300b7ba432ce2c4285b7562fde631655c5b2773",
+      "ply_sha256": "7ecddf088bdacfc1e9eb5412389833843bf715fe58c4dbd9688df94a8ca6f355"
     }
   ],
   "unavailable": [

@@ -1,16 +1,31 @@
-# PartAware-SG (based on ScanNet-SG)
+# EviScene
 
-This repository contains the code for the __ScanNet-SG__ Dataset.
+**Evidence-Grounded 3D Scene Graph Mapping**
 
-This dataset is built on top of ScanNet by adding 3D scene graphs that contain open-set visual-language (GroundingDINO) features, BERT features, bounding boxes, etc., for each object in each scene.
-The dataset is mainly designed for frame-to-scan and subscan-to-subscan scene graph alignment. But it can also be used for the validation of navigation.
+EviScene builds object instances and queryable 3D scene graphs from RGB-D
+observations and visual-language evidence. Its current work focuses on fine
+instance recognition, measured surface ownership, evidence-based shape
+verification and rejection of unsupported nodes. Joint text–graph–shape
+learning remains a proposed method; training is paused.
 
-For more details, please refer to our paper:
-__ScanNet-SG: A Large-Scale Dataset for 3D Scene Graph Alignment__ and 
-__OpenSGA: Efficient 3D Scene Graph Alignment in the Open World__ (Coming soon).
+The implementation extends [ScanNet-SG](https://github.com/tud-amr/ScanNet-SG).
+Upstream interfaces and attribution remain. EviScene was previously named
+PartAware-SG; historical paths, result directories and Python module names
+are retained for reproducibility.
 
+## Held-out original-flow comparison
 
-## Default PartAware-SG pipeline
+Official test scene `ai_003_007` was selected before inspecting images, GT geometry,
+object counts or AP. The frozen full v19 profile and original DINO/SAM + C++
+profile share 67 RGB-D frames and one GPT recognition cache.
+Strict AP25/AP50/AP75: original 0.00%/0.00%/0.00%, v19 37.27%/9.00%/9.00%.
+This is one additional untuned scene, not broad generalization or an ablation
+attributing all changes to one component. The previous two v19 scenes remain
+incremental v18 refinements. Joint training remains paused.
+See [validation](docs/v19_holdout_validation.json),
+[preregistration](docs/v19_holdout_preregistration.json) and canonical report 26.6.
+
+## Default EviScene pipeline
 
 GPT category recognition supports an OpenAI-compatible relay through
 `scannet/script/vision_api.py`. Each scene has one existing GPT cache for
@@ -86,7 +101,7 @@ Historical profiles detach the new components; rebuild from input without those
 components when removing them. Reports remain at root `RESEARCH_LOG.html` and
 `RESEARCH_LOG.tex`; no duplicate rendered files are kept in `docs`.
 
-PartAware-SG preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
+EviScene preserves ScanNet folders and Hypersim manifests. The retained historical base runner uses its v11 registry and
 constructs objects, parts and hierarchy in one canonical `topology_map.json`,
 using [OP3DSG](https://github.com/AutoCompSysLab/OP3DSG)-inspired fusion,
 visibility-aware one-to-one association and official
