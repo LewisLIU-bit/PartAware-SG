@@ -76,6 +76,14 @@ GAU统计实体数 & 112 & 119 & 机器人小实例分别可查询 \\ \hline
 
 
 
+\textbf{010强基线实测：} 相同100帧及共同观测点上，原始/v19/冻结ESAM的点云AP25/AP50分别为29.58\%/11.46\%、72.73\%/56.41\%、9.58\%/4.71\%。这是开发厨房上的本地直接迁移对比，坐标与权重已核验，不能宣称全面超过ESAM；完整协议及109个GT逐实例诊断见26.9。新增点云口径不替代原严格框目标，框AP仍为66.53\%/43.55\%。
+
+
+
+\textbf{ScanNet200强基线实测：} 三个事先选定的验证扫描、125帧、82个可计GT，合并点云AP25/AP50/平均AP（.50–.90）为：GPT原始 59.70\%/45.44\%/23.56\%；GPT v19 75.10\%/58.28\%/37.11\%；ESAM 86.74\%/61.14\%/37.16\%。同一缓存用于原始与完整冻结v19；这是三扫描试验，不能当作完整排行榜结果。逐扫描最终值及全部GT诊断见26.8。Google的ESAM++核心代码已下载并验证；对应训练权重和必要完整集成实现尚未找到，本轮实测的是ESAM，没有将两者混用。
+
+
+
 \section*{1. 当前主脉络}
 \addcontentsline{toc}{section}{1. 当前主脉络}
 
@@ -4418,7 +4426,7 @@ GT-010 & otherstructure & 4.56\% & P-2 column & 78.67\% & 达到75\% \\ \hline
 \subsection*{26.7 研究先例、指标水平与实例地图的实际作用}
 \addcontentsline{toc}{subsection}{26.7 研究先例、指标水平与实例地图的实际作用}
 
-提高三维实例地图质量已有成熟研究路线：MaskClustering [10]研究跨视角实例共识，Open3DIS [11]利用二维掩码指导三维实例；EmbodiedSAM [36]学习二维到三维查询提升及跨帧融合，ESAM++ [37]进一步研究在线精度与效率。它们是研究先例，当前v19没有部署ESAM或ESAM++。
+提高三维实例地图质量已有成熟研究路线：MaskClustering [10]研究跨视角实例共识，Open3DIS [11]利用二维掩码指导三维实例；EmbodiedSAM [36]学习二维到三维查询提升及跨帧融合，ESAM++ [37]进一步研究在线精度与效率。它们是研究先例，本轮已将ESAM作为外部强基线在本地部署并实测，见26.8/26.9；未将其并入v19，也未声称复现ESAM++。
 
 
 
@@ -4444,6 +4452,503 @@ ESAM++ Large，训练的在线模型 & 81.2\% & 66.1\% & 2026年预印本，表2
 
 
 我们当前能验证的是相对原始流水线的改进和新增冻结场景上的迁移。论文贡献还需要更强基线、组件消融、多独立场景和统一指标；应分别记录点云实例掩码IoU/边界、实测几何误差、幽灵节点误删/漏删、目标定位成功率及时间/内存。对于隐藏形状补全，需独立完整形状真值；当前可观测GT和框指标不能证明未观测背面正确。联合模型训练继续暂停。
+
+
+
+\subsection*{26.8 ScanNet200三个验证扫描：冻结原始流程、v19与本地ESAM}
+\addcontentsline{toc}{subsection}{26.8 ScanNet200三个验证扫描：冻结原始流程、v19与本地ESAM}
+
+官方验证集包含312个扫描，测试集100个扫描；ScanNet200中的“200”是类别数。此轮在读取图像、GT实例和AP之前，按官方val列表选择字典序最前的三个不同场景 \texttt{\_\allowbreak{}00} 扫描：scene0011\_00、scene0015\_00、scene0019\_00。分别每40帧取一帧，共60/50/15帧，没有额外帧数上限。125份有效GPT识图缓存由原始流程和完整冻结v19共用，两种构建端均不追加GPT或Qwen识图。GT不进入构建；scene0802是自采ZED场景，未混入官方测试。
+
+
+
+识图请求经用户授权的卡扣AI中转站，缓存记录请求路由名 \texttt{gpt-6.\allowbreak{}1-sol}；中转站真实上游模型身份未独立核实。此处“GPT”是该接口输出的实验标识，不作为模型身份认证或官方OpenAI模型性能结论。两种流程共用逐帧响应及其哈希，不因流程不同替换识图结果。
+
+
+
+我们完整冻结算法的指纹为 \texttt{250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894}，与独立Hypersim场景26.6一致。BASE需要明确的Hypersim Z-up声明，在ScanNet不启用；没有伪造数据集声明或根据GT调整参数。此为三扫描验证试验，不能与论文全312扫描结果直接宣布胜负，更不是运行100次的平均值。
+
+
+
+\textbf{外部强基线。} 本地安装作者\href{https://github.com/xuxw98/ESAM}{ESAM官方代码}，提交 \texttt{188fc6de44f7577fecec2d69b75c7adbd9992251}，使用\href{https://huggingface.co/XXXCARREY/EmbodiedSAM}{作者提供的权重镜像}。权重SHA256 \texttt{3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285}，严格匹配553个参数键；配置为 \texttt{ESAM\_\allowbreak{}online\_\allowbreak{}scannet200\_\allowbreak{}CA.\allowbreak{}py}，SAM ViT-H版本，非ESAM-E或ESAM++。体素2cm、每帧20000点、每帧top20、融合后top100、实例分数阈值0.25、最少100点和learnable\_online均保持官方值，没有训练。
+
+
+
+\textbf{ESAM++可复现性。} 谷歌、斯坦福及UC San Diego参与的是ESAM++ [37]；ESAM [36]来自清华团队。论文旧仓库链接失效，但用户提供了可访问的\href{https://github.com/google/esamplusplus}{Google官方仓库}，已下载提交 \texttt{6929fbeaad4bbe7bc33ce8cec52010301c086887}，并建立隔离环境 \texttt{/\allowbreak{}home/\allowbreak{}lewisliu/\allowbreak{}baselines/\allowbreak{}esamplusplus-env}。公开核心编码器TinyExpert的CPU前向运行通过，含20,675,428个参数，输出96维特征；该兼容检查使用随机初始化，仅检查形状与有限值，未计算AP。
+
+
+
+\href{https://github.com/google/esamplusplus\#training--evaluation}{官方README}明确只提供核心编码器与配置，需结合ESAM进行训练、评价。当前提交没有训练权重或其下载链接，配置引用的 \texttt{ScanNet200MixFormer3D\_\allowbreak{}Online\_\allowbreak{}Tiny} 也未在两个公开代码库中注册。原ESAM主干372个状态键与新主干297个状态键没有直接兼容项，不能将ESAM权重装入新主干后冒称训练完成。核验见 \texttt{docs/\allowbreak{}esamplusplus\_\allowbreak{}setup\_\allowbreak{}audit.\allowbreak{}json}。三个ScanNet扫描及010的ESAM++对比待对应完整checkpoint与必要集成实现获得后开展；这表示公开发布资源尚不足以复现完整模型，不表示论文模型训练不完全。论文跨数据集实验包含SceneNN和3RScan，没有Hypersim；本地ESAM的010低分不归于ESAM++。
+
+
+
+独立环境 \texttt{/\allowbreak{}home/\allowbreak{}lewisliu/\allowbreak{}baselines/\allowbreak{}esam-env} 使用当前RTX5070兼容的PyTorch及MinkowskiEngine CPU稀疏后端。外置适配器修正CPU TensorField拆分时的行顺序，并用批内精确欧氏KNN实现作者最终1NN转移；经过坐标/特征顺序和距离测试。官方模型源码无修改，架构、权重和推理阈值不变。SAM只把点提示批量从64减到16以适配8GB显存，未改变掩码阈值。稀疏网络在CPU执行，不能将其计时和论文GPU实时速度横比。
+
+
+
+\textbf{统一目标域和原生评价。} 三种输出都转移到同一官方重建网格顶点，并使用固定OpenMMLab v1.4.0 ScanNet评价源码，类无关、严格点掩码IoU \texttt{>} 阈值，排除wall/floor，至少100个顶点的GT实例计入。平均AP按该实现为.50到.90、间隔.05，AP25单列。没有GT实例合并、ICP或GT框替代点掩码。
+
+
+
+源表示仍有差异：ESAM从每帧20000点按作者1NN转移；我们从正式发布实例点云以固定5cm范围转移。二者均应用作者的几何网格分区多数归属规则（>0.5），分区不含GT语义/实例组；我们点归属互斥，ESAM允许掩码重叠。因此这是同目标域、同评价程序的本地实际系统对比，不声称整个前处理完全一样。
+
+
+
+ScanNet保留完整重建网格的官方GT，包括可能未在抽样帧中充分可见的物体，没有按预测可见性事后剔除。Hypersim历史框协议则只计入所选帧中可观测GT；再加上框IoU和点掩码IoU的差别，两类数据上的收益幅度不能只根据百分数直接类比。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+扫描 & 方法 & 帧数 & 预测/可计GT & 点云AP25 & 点云AP50 & 点云平均AP（.50–.90） \\ \hline
+\endfirsthead
+\hline
+扫描 & 方法 & 帧数 & 预测/可计GT & 点云AP25 & 点云AP50 & 点云平均AP（.50–.90） \\ \hline
+\endhead
+scene0011\_00 & GPT原始 & 60 & 32/28 & 52.26\% & 34.54\% & 15.80\% \\ \hline
+scene0011\_00 & GPT v19 & 60 & 63/28 & 72.90\% & 71.93\% & 41.61\% \\ \hline
+scene0015\_00 & GPT原始 & 50 & 44/39 & 74.91\% & 68.01\% & 37.59\% \\ \hline
+scene0015\_00 & GPT v19 & 50 & 77/39 & 93.48\% & 61.13\% & 40.77\% \\ \hline
+scene0019\_00 & GPT原始 & 15 & 8/15 & 46.67\% & 32.11\% & 18.30\% \\ \hline
+scene0019\_00 & GPT v19 & 15 & 50/15 & 51.96\% & 35.80\% & 27.73\% \\ \hline
+scene0011\_00 & ESAM & 60 & 67/28 & 90.17\% & 70.25\% & 30.89\% \\ \hline
+scene0015\_00 & ESAM & 50 & 64/39 & 88.02\% & 63.46\% & 46.17\% \\ \hline
+scene0019\_00 & ESAM & 15 & 32/15 & 78.62\% & 44.69\% & 28.60\% \\ \hline
+\end{longtable}
+}
+
+合并三个扫描的预测置信度后重新运行原生AP，下面是82个GT实例上的合并结果，不是逐扫描AP的算术平均。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+方法 & 合并AP25 & 合并AP50 & 合并平均AP \\ \hline
+\endfirsthead
+\hline
+方法 & 合并AP25 & 合并AP50 & 合并平均AP \\ \hline
+\endhead
+GPT原始 & 59.70\% & 45.44\% & 23.56\% \\ \hline
+GPT v19 & 75.10\% & 58.28\% & 37.11\% \\ \hline
+ESAM & 86.74\% & 61.14\% & 37.16\% \\ \hline
+\end{longtable}
+}
+
+\textit{ScanNet同一官方重建域的实例对比 scene0011\_00（见HTML版附图）}
+
+
+
+\textit{ScanNet同一官方重建域的实例对比 scene0015\_00（见HTML版附图）}
+
+
+
+\textit{ScanNet同一官方重建域的实例对比 scene0019\_00（见HTML版附图）}
+
+
+
+灰色表示未归属的官方重建顶点；颜色是独立的预测ID，未以GT修正预测。该图比较实例分割，不是原始融合外观或隐藏体积补全展示。
+
+
+
+\textbf{算法与数学对应。} ESAM [36]将二维SAM分区转为三维查询，以学习的稀疏几何特征、查询解码与多级记忆恢复实例。在线融合使用学习查询特征与几何框重叠：作者实现的关联得分为 $a_{ij}=\langle q_i,q_j\rangle\operatorname{IoU}(B_i,B_j)$，用匈牙利匹配选择正分关联。查询提升和关联是训练所得，不能视作与我们未训练的语言/图/形状验证等价。ESAM++ [37]是另一方法，其核心编码器已下载，但完整模型与权重尚未获得，不能把ESAM结果写成ESAM++复现。
+
+
+
+点掩码评价为 $\operatorname{IoU}(P,G)=|P\cap G|/|P\cup G|$，位姿投影为 $x_w=R_{wc}[zK^{-1}(u,v,1)^T]+t_{wc}$。点更密或框更大均不自动提高IoU：误纳背景增加并集，实例碎片减少交集，重复预测影响置信排序精度。AP数值按固定源码计算，不以逐GT最佳IoU均值替代。
+
+
+
+\textbf{研究判断。} 先前只与原始流程比较，不足以证明方法具备竞争力；本轮把强基线加入同场景实测。较小的提升、退步及与ESAM的差距都保留，不据单一阈值或开发场景成绩承诺普遍领先。后续若保留某组件，需验证它能否解决强基线仍遗漏的细实例或语言/关系目标，并做冻结场景消融。联合文本—图—形状训练继续暂停。
+
+
+
+scene0019\_00的诊断显示收益和失误并存：v19将GT-019门、GT-021/023椅子的点IoU提高到86.67\%/84.09\%/82.25\%；GT-012/013仍共同依赖一个椅子预测，GT-014/015也依赖同一个预测，其最佳IoU都未达到50\%，而灯GT-011从60.7\%退至49.0\%。新增细分预测不能自动成为AP50真阳性，还可能带来重复或错归属。因此“原始8个→v19 50个预测”本身不作为提升证明。
+
+
+
+逐GT诊断如下，82个官方可计编号全部展示。候选为最佳点IoU，不等于置信排序AP的独占匹配；允许多个GT诊断引用同一碎片或混合预测。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+扫描 & 官方GT编号 & 官方原标签 & 顶点数 & 原始候选 / IoU & v19候选 / IoU & ESAM候选 / IoU \\ \hline
+\endfirsthead
+\hline
+扫描 & 官方GT编号 & 官方原标签 & 顶点数 & 原始候选 / IoU & v19候选 / IoU & ESAM候选 / IoU \\ \hline
+\endhead
+scene0011\_00 & GT-001 & kitchen cabinets & 6153 & 6 / 62.23\% & 9 / 21.06\% & 14 / 53.73\% \\ \hline
+scene0011\_00 & GT-002 & table & 12971 & 32 / 7.42\% & 1 / 64.64\% & 47 / 59.04\% \\ \hline
+scene0011\_00 & GT-003 & armchair & 3243 & 1 / 0.00\% & 147 / 76.41\% & 57 / 70.35\% \\ \hline
+scene0011\_00 & GT-004 & chair & 3781 & 60 / 89.21\% & 108 / 88.43\% & 39 / 82.90\% \\ \hline
+scene0011\_00 & GT-005 & chair & 3152 & 65 / 82.66\% & 86 / 81.80\% & 28 / 72.03\% \\ \hline
+scene0011\_00 & GT-006 & chair & 3612 & 56 / 83.39\% & 5 / 90.42\% & 13 / 63.38\% \\ \hline
+scene0011\_00 & GT-007 & chair & 2694 & 8 / 35.69\% & 3 / 72.34\% & 11 / 68.39\% \\ \hline
+scene0011\_00 & GT-008 & chair & 3463 & 8 / 47.30\% & 8 / 87.84\% & 4 / 86.70\% \\ \hline
+scene0011\_00 & GT-009 & chair & 3356 & 2 / 74.58\% & 4 / 78.44\% & 1 / 78.77\% \\ \hline
+scene0011\_00 & GT-010 & chair & 3224 & 124 / 44.96\% & 2 / 79.16\% & 0 / 85.57\% \\ \hline
+scene0011\_00 & GT-011 & chair & 3800 & 92 / 56.15\% & 7 / 73.94\% & 2 / 91.32\% \\ \hline
+scene0011\_00 & GT-012 & chair & 3422 & 44 / 89.36\% & 82 / 89.36\% & 27 / 70.96\% \\ \hline
+scene0011\_00 & GT-013 & chair & 2422 & 45 / 97.94\% & 84 / 97.94\% & 40 / 83.84\% \\ \hline
+scene0011\_00 & GT-015 & trash can & 1411 & 46 / 54.30\% & 89 / 54.30\% & 31 / 75.19\% \\ \hline
+scene0011\_00 & GT-017 & table & 4278 & 64 / 52.01\% & 83 / 62.48\% & 29 / 56.34\% \\ \hline
+scene0011\_00 & GT-018 & tv & 9908 & 57 / 86.60\% & 107 / 93.70\% & 44 / 86.83\% \\ \hline
+scene0011\_00 & GT-019 & refrigerator & 4892 & 1 / 0.00\% & 95 / 73.83\% & 37 / 46.56\% \\ \hline
+scene0011\_00 & GT-020 & cabinet & 2166 & 1 / 0.00\% & 74 / 54.02\% & 25 / 41.70\% \\ \hline
+scene0011\_00 & GT-022 & ceiling & 2094 & 1 / 0.00\% & 1 / 0.00\% & 33 / 22.58\% \\ \hline
+scene0011\_00 & GT-023 & window & 5281 & 40 / 28.68\% & 59 / 77.39\% & 35 / 83.08\% \\ \hline
+scene0011\_00 & GT-024 & window & 5590 & 7 / 43.88\% & 13 / 85.49\% & 16 / 53.60\% \\ \hline
+scene0011\_00 & GT-025 & kitchen counter & 5743 & 79 / 39.97\% & 97 / 4.28\% & 8 / 35.51\% \\ \hline
+scene0011\_00 & GT-026 & sink & 1075 & 16 / 23.57\% & 26 / 23.57\% & 19 / 26.64\% \\ \hline
+scene0011\_00 & GT-027 & refrigerator & 6152 & 9 / 81.31\% & 22 / 81.08\% & 15 / 92.37\% \\ \hline
+scene0011\_00 & GT-028 & cabinet & 3535 & 9 / 6.21\% & 38 / 75.94\% & 21 / 62.84\% \\ \hline
+scene0011\_00 & GT-030 & doors & 6336 & 1 / 0.00\% & 40 / 76.33\% & 54 / 69.45\% \\ \hline
+scene0011\_00 & GT-031 & doorframe & 1028 & 1 / 0.00\% & 40 / 2.48\% & 17 / 50.00\% \\ \hline
+scene0011\_00 & GT-032 & trash can & 1148 & 93 / 75.18\% & 148 / 64.35\% & 52 / 54.51\% \\ \hline
+scene0015\_00 & GT-000 & chair & 1844 & 27 / 82.48\% & 32 / 100.00\% & 17 / 100.00\% \\ \hline
+scene0015\_00 & GT-001 & chair & 712 & 21 / 88.62\% & 31 / 88.62\% & 13 / 100.00\% \\ \hline
+scene0015\_00 & GT-002 & window & 1391 & 5 / 42.54\% & 8 / 92.38\% & 2 / 44.34\% \\ \hline
+scene0015\_00 & GT-003 & windowsill & 1041 & 5 / 39.58\% & 6 / 77.17\% & 2 / 26.38\% \\ \hline
+scene0015\_00 & GT-006 & window & 1536 & 11 / 54.33\% & 18 / 70.94\% & 6 / 30.05\% \\ \hline
+scene0015\_00 & GT-007 & windowsill & 1006 & 11 / 23.29\% & 19 / 60.46\% & 6 / 17.25\% \\ \hline
+scene0015\_00 & GT-010 & windowsill & 1483 & 1 / 0.00\% & 2 / 0.00\% & 6 / 28.11\% \\ \hline
+scene0015\_00 & GT-012 & chair & 1914 & 35 / 84.25\% & 28 / 86.33\% & 22 / 98.17\% \\ \hline
+scene0015\_00 & GT-013 & chair & 588 & 30 / 88.02\% & 29 / 88.02\% & 54 / 88.02\% \\ \hline
+scene0015\_00 & GT-016 & chair & 1969 & 8 / 91.28\% & 97 / 43.73\% & 9 / 51.80\% \\ \hline
+scene0015\_00 & GT-017 & chair & 1924 & 10 / 98.49\% & 17 / 67.00\% & 10 / 100.00\% \\ \hline
+scene0015\_00 & GT-018 & chair & 1449 & 46 / 64.63\% & 69 / 66.69\% & 39 / 48.72\% \\ \hline
+scene0015\_00 & GT-019 & chair & 1691 & 26 / 59.40\% & 42 / 45.30\% & 29 / 93.68\% \\ \hline
+scene0015\_00 & GT-020 & chair & 1492 & 33 / 66.29\% & 46 / 49.13\% & 30 / 100.00\% \\ \hline
+scene0015\_00 & GT-021 & chair & 1430 & 39 / 100.00\% & 59 / 56.43\% & 32 / 94.39\% \\ \hline
+scene0015\_00 & GT-022 & chair & 788 & 38 / 84.28\% & 58 / 62.82\% & 28 / 70.93\% \\ \hline
+scene0015\_00 & GT-023 & chair & 1911 & 44 / 54.40\% & 64 / 44.48\% & 36 / 80.85\% \\ \hline
+scene0015\_00 & GT-024 & chair & 1697 & 42 / 91.78\% & 60 / 71.01\% & 34 / 91.78\% \\ \hline
+scene0015\_00 & GT-025 & chair & 1280 & 44 / 41.59\% & 68 / 79.38\% & 37 / 97.42\% \\ \hline
+scene0015\_00 & GT-026 & chair & 1950 & 17 / 86.00\% & 30 / 43.79\% & 16 / 93.85\% \\ \hline
+scene0015\_00 & GT-027 & chair & 1453 & 3 / 77.91\% & 1 / 90.05\% & 1 / 97.59\% \\ \hline
+scene0015\_00 & GT-028 & chair & 1252 & 49 / 54.06\% & 75 / 68.13\% & 41 / 88.90\% \\ \hline
+scene0015\_00 & GT-029 & chair & 908 & 36 / 88.47\% & 44 / 88.47\% & 26 / 64.98\% \\ \hline
+scene0015\_00 & GT-030 & chair & 1105 & 18 / 100.00\% & 21 / 93.48\% & 18 / 100.00\% \\ \hline
+scene0015\_00 & GT-031 & table & 3161 & 25 / 84.28\% & 25 / 84.28\% & 20 / 97.40\% \\ \hline
+scene0015\_00 & GT-032 & table & 4679 & 12 / 81.13\% & 12 / 87.91\% & 11 / 90.13\% \\ \hline
+scene0015\_00 & GT-033 & table & 3290 & 1 / 82.04\% & 3 / 81.41\% & 0 / 72.50\% \\ \hline
+scene0015\_00 & GT-034 & table & 4653 & 9 / 82.96\% & 10 / 88.05\% & 14 / 69.65\% \\ \hline
+scene0015\_00 & GT-035 & table & 4078 & 47 / 82.25\% & 72 / 83.64\% & 43 / 84.51\% \\ \hline
+scene0015\_00 & GT-036 & table & 2525 & 81 / 60.51\% & 57 / 79.00\% & 24 / 73.00\% \\ \hline
+scene0015\_00 & GT-037 & table & 3420 & 40 / 81.23\% & 49 / 91.00\% & 27 / 93.95\% \\ \hline
+scene0015\_00 & GT-040 & whiteboard & 7566 & 1 / 0.00\% & 61 / 89.28\% & 35 / 96.78\% \\ \hline
+scene0015\_00 & GT-044 & backpack & 645 & 48 / 64.70\% & 127 / 27.75\% & 40 / 50.16\% \\ \hline
+scene0015\_00 & GT-045 & object & 1698 & 92 / 6.01\% & 84 / 29.42\% & 47 / 42.72\% \\ \hline
+scene0015\_00 & GT-047 & whiteboard & 10720 & 2 / 86.66\% & 2 / 94.04\% & 4 / 64.34\% \\ \hline
+scene0015\_00 & GT-049 & chair & 2167 & 7 / 91.63\% & 4 / 91.00\% & 7 / 100.00\% \\ \hline
+scene0015\_00 & GT-051 & water bottle & 183 & 23 / 100.00\% & 26 / 100.00\% & 0 / 0.00\% \\ \hline
+scene0015\_00 & GT-052 & chair & 1316 & 16 / 97.95\% & 137 / 47.87\% & 15 / 100.00\% \\ \hline
+scene0015\_00 & GT-053 & chair & 1979 & 13 / 61.98\% & 16 / 56.13\% & 51 / 33.96\% \\ \hline
+scene0019\_00 & GT-000 & chair & 2060 & 5 / 69.26\% & 7 / 73.01\% & 8 / 67.32\% \\ \hline
+scene0019\_00 & GT-001 & chair & 885 & 1 / 0.00\% & 20 / 0.00\% & 11 / 40.50\% \\ \hline
+scene0019\_00 & GT-003 & couch & 6331 & 1 / 65.50\% & 3 / 62.68\% & 1 / 90.16\% \\ \hline
+scene0019\_00 & GT-008 & trash can & 1455 & 14 / 97.72\% & 18 / 97.72\% & 17 / 92.26\% \\ \hline
+scene0019\_00 & GT-010 & door & 2735 & 13 / 87.82\% & 17 / 91.04\% & 19 / 98.17\% \\ \hline
+scene0019\_00 & GT-011 & lamp & 918 & 22 / 60.72\% & 51 / 48.96\% & 24 / 40.36\% \\ \hline
+scene0019\_00 & GT-012 & chair & 1881 & 6 / 45.68\% & 8 / 47.55\% & 7 / 46.72\% \\ \hline
+scene0019\_00 & GT-013 & chair & 1165 & 6 / 40.31\% & 8 / 38.54\% & 9 / 70.45\% \\ \hline
+scene0019\_00 & GT-014 & chair & 1867 & 1 / 0.00\% & 10 / 44.43\% & 10 / 45.51\% \\ \hline
+scene0019\_00 & GT-015 & chair & 1063 & 1 / 0.00\% & 10 / 42.90\% & 10 / 29.00\% \\ \hline
+scene0019\_00 & GT-016 & chair & 1996 & 1 / 0.00\% & 20 / 0.00\% & 11 / 42.50\% \\ \hline
+scene0019\_00 & GT-019 & door & 6469 & 1 / 0.00\% & 20 / 86.67\% & 20 / 75.90\% \\ \hline
+scene0019\_00 & GT-021 & chair & 5677 & 2 / 46.18\% & 4 / 84.09\% & 2 / 81.02\% \\ \hline
+scene0019\_00 & GT-022 & chair & 1161 & 2 / 5.54\% & 4 / 13.73\% & 3 / 23.74\% \\ \hline
+scene0019\_00 & GT-023 & chair & 1842 & 5 / 1.15\% & 5 / 82.25\% & 0 / 80.97\% \\ \hline
+\end{longtable}
+}
+
+完整结果与协议见 \texttt{docs/\allowbreak{}esam\_\allowbreak{}scan200\_\allowbreak{}comparison.\allowbreak{}json}、\texttt{docs/\allowbreak{}esam\_\allowbreak{}scan200\_\allowbreak{}validation.\allowbreak{}json}。正式GT标签与实例映射哈希一致，三种方法使用相同GT。固定源评价文件SHA256 \texttt{4856a54e1bb3e7af972a8db37514592b69786fe63a991c1f62718e752cea77ee}。
+
+
+
+\subsection*{26.9 Hypersim ai\_001\_010：原始流程、v19和冻结ESAM的同场景对比}
+\addcontentsline{toc}{subsection}{26.9 Hypersim ai\_001\_010：原始流程、v19和冻结ESAM的同场景对比}
+
+按用户要求将本地ESAM用于此前反复调试的010厨房。与历史GPT原始流程及v19成品共用完全相同的100帧RGB、深度和位姿，manifest指纹 \texttt{475f536ff40ac56a34e85f80d0d27269cc141905c3831609bc4a06a0250f1453}。ESAM使用\href{https://huggingface.co/XXXCARREY/EmbodiedSAM}{作者官方ScanNet200权重}、SAM ViT-H、每帧20000个点及全部固定推理参数；只按该数据集的真实相机标定适配输入。RGB线性缩放、深度最近邻缩放至640×480，焦距按分辨率比例缩放，主点按半像素公式缩放。未使用Hypersim语义、实例、GT框或GT数量进行推理。没有微调、类别/节点白名单或场景补丁。
+
+
+
+本场景属于开发数据，不能宣称独立泛化。历史原始流程和v19具有不同构建指纹；v19是v18成品的增量改进，本轮保留其已发布结果，并非将它说成从零重建。与ScanNet的完整冻结流程协议分别标注。
+
+
+
+\textbf{共同观测点上的实例掩码评价。} 先仅使用RGB-D构建固定1cm网格，每格以观测点均值表示；共有2,412,033个点，包含墙/地面等背景。GT由独立评价程序随后投影并在格内多数投票，平票置为void，不送入模型。三个方法均使用固定5cm最近邻转移范围，均不使用GT实例合并或几何网格分区平滑。ESAM保留原生重叠掩码，我们保留正式图中的互斥点归属；显示重叠时取最高置信度，不改变评价。
+
+
+
+点云评价使用固定OpenMMLab v1.4.0 ScanNet实现的类无关AP，严格点IoU大于阈值，平均AP按原生实现为.50到.90、间隔.05；计入104个至少100点的实例。另5个历史可观测GT在共享格内归属后不足100点：GT-012（14点），GT-015（65点），GT-080（92点），GT-135（99点），GT-146（97点）。该规则对三种方法一致，并列出这些编号；原有109个GT框评价全部保留。此为Hypersim观测域适配，不能称为官方Hypersim或ScanNet200排行榜结果。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+方法 & 预测数 & 点云AP25 & 点云AP50 & 点云平均AP（.50–.90） \\ \hline
+\endfirsthead
+\hline
+方法 & 预测数 & 点云AP25 & 点云AP50 & 点云平均AP（.50–.90） \\ \hline
+\endhead
+GPT original saved & 75 & 29.58\% & 11.46\% & 4.06\% \\ \hline
+GPT v19 saved & 141 & 72.73\% & 56.41\% & 35.33\% \\ \hline
+ESAM frozen ScanNet200 pretrained & 75 & 9.58\% & 4.71\% & 2.02\% \\ \hline
+\end{longtable}
+}
+
+\textit{010共同观测域上的GT、原始流程、v19和ESAM（见HTML版附图）}
+
+
+
+图中所有面板的坐标、采样和视角相同；灰色是未归属观测点。仅为展示按相机轨迹包围范围外扩3m裁剪，四面板共享裁剪，不读取GT位置；AP仍使用完整观测域。颜色只代表各方法自己的实例ID，没有利用GT改颜色、补预测或改变排序。图显示实例归属，不证明未观测背面补全质量。
+
+
+
+\textbf{保留历史严格框AP。} GT为原来的109个官方完整物体框；我们使用历史正式拓扑图形状，ESAM主表使用其原生学习框头与在线合并器输出的AABB。该框头也用于关联；这些数字是本地适配诊断，不是论文所报点云AP。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+方法 & 严格框AP25 & 严格框AP50 & 严格框AP75 \\ \hline
+\endfirsthead
+\hline
+方法 & 严格框AP25 & 严格框AP50 & 严格框AP75 \\ \hline
+\endhead
+GPT original saved & 4.97\% & 0.17\% & 0.05\% \\ \hline
+GPT v19 saved & 66.53\% & 43.55\% & 19.40\% \\ \hline
+ESAM frozen ScanNet200 pretrained & 9.09\% & 0.04\% & 0.00\% \\ \hline
+\end{longtable}
+}
+
+本轮新增点云AP不替代既定严格框目标。v19历史严格框AP25/AP50仍为66.53\%/43.55\%，70\%/55\%的原目标仍未达到；不能因为新点云口径超过该数值就宣称完成原目标。
+
+
+
+另外单独列出ESAM观测掩码的直接AABB，结果为 3.22\% / 0.35\% / 0.03\%（AP25/AP50/AP75）。不从两种框中选择成绩更高的一项来代替主表。ESAM原生不限制距离的1NN点云结果为 9.58\% / 4.71\% / 2.02\%（AP25/AP50/平均AP）；主表对三个方法统一使用5cm范围。原生表示与共同范围的结果分别报告，不将转移口径变化计为模型提升。
+
+
+
+\textbf{评价边界。} 在010超过原始流程，只能说明开发场景中的局部收益；与冻结ScanNet场景的收益幅度不同，需要同时考虑场景难度、开发投入及框/掩码指标差异。相对强基线的证据以上表实际结果为准，不能根据一次厨房对比宣称普遍超过ESAM。本文也没有测量语言目标定位、关系正确率、机器人操作或隐藏形状补全的完整GT，因此不将场景图存在本身当作独立贡献证明。
+
+
+
+针对ESAM迁移结果很低的情况，另外核验了每条相机轨迹首末帧的实测点与原分辨率深度：点距中位数0.59–1.75mm，六帧全部样本均在5cm内。整个共同域距ESAM源点的中位数 4.84mm、P95 16.47mm，5cm内覆盖 98.61\%；移除5cm范围后原生AP完全相同。GT-030柜体与GT-067冰箱的最佳点IoU分别为 74.47\% 和 57.22\%，也支持投影并非整体错位。严格加载、坐标和转移核验见 \texttt{docs/\allowbreak{}esam\_\allowbreak{}hypersim\_\allowbreak{}010\_\allowbreak{}alignment.\allowbreak{}json}。
+
+
+
+另在事先登记的首个ScanNet扫描scene0011\_00上，仅移除/恢复作者可选的几何网格分区多数归属后处理，未改变输入、原生预测、权重或阈值。AP25/AP50/平均AP从 83.63\% / 51.01\% / 17.29\% 变为 90.17\% / 70.25\% / 30.89\%；恢复后掩码逐元素与正式ESAM基线完全一致，分数也复现。这证明该后处理在一个ScanNet扫描上影响显著，不能把其增益数值外推为010的修正值。审计见 \texttt{docs/\allowbreak{}esam\_\allowbreak{}segment\_\allowbreak{}smoothing\_\allowbreak{}audit.\allowbreak{}json}。
+
+
+
+这些检查不能证明迁移配置已达到ESAM在Hypersim上的最佳性能。其合成图像域、密集细实例、缺少ScanNet式几何网格分区平滑、多相机序列与采样尺度的影响尚未在010上通过消融分离。本轮报告的是固定ScanNet200权重的直接迁移结果，不将其低AP泛化为“ESAM无法解决厨房”或我们已经全面领先。“训练完成”和“跨数据集表现”是不同问题：本地使用作者公开的预训练权重，没有证据认为作者训练不完全；暂停的是本项目拟议的文本—场景图—形状联合训练。
+
+
+
+以下109行保留官方编号。“最佳点IoU”为逐GT诊断候选，允许一个预测成为多个GT的最佳候选，不等于AP中的一对一置信排序匹配。不足100点的实例仍展示，但不计入本轮点云AP。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/7-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+GT编号 & 官方类别 & 共同域点数 & 点AP口径 & 原始候选 / IoU & v19候选 / IoU & ESAM候选 / IoU \\ \hline
+\endfirsthead
+\hline
+GT编号 & 官方类别 & 共同域点数 & 点AP口径 & 原始候选 / IoU & v19候选 / IoU & ESAM候选 / IoU \\ \hline
+\endhead
+GT-001 & lamp & 14841 & 计入 & 16 / 75.22\% & 25 / 87.22\% & 20 / 13.26\% \\ \hline
+GT-002 & otherprop & 513 & 计入 & 31 / 89.77\% & 29 / 92.54\% & 8 / 0.13\% \\ \hline
+GT-003 & otherprop & 707 & 计入 & 50 / 14.80\% & 457 / 84.48\% & 22 / 1.28\% \\ \hline
+GT-004 & otherprop & 1750 & 计入 & 15 / 25.64\% & 456 / 63.85\% & 22 / 2.24\% \\ \hline
+GT-005 & otherprop & 917 & 计入 & 93 / 32.73\% & 84 / 93.49\% & 38 / 37.64\% \\ \hline
+GT-006 & otherprop & 374 & 计入 & 93 / 13.58\% & 444 / 83.54\% & 38 / 12.77\% \\ \hline
+GT-007 & otherprop & 252 & 计入 & 93 / 9.78\% & 445 / 70.27\% & 38 / 8.47\% \\ \hline
+GT-008 & otherprop & 126 & 计入 & 93 / 4.67\% & 446 / 50.26\% & 38 / 3.05\% \\ \hline
+GT-009 & otherprop & 354 & 计入 & 93 / 13.14\% & 447 / 88.44\% & 38 / 10.46\% \\ \hline
+GT-010 & otherprop & 525 & 计入 & 93 / 17.55\% & 448 / 83.79\% & 38 / 14.61\% \\ \hline
+GT-011 & otherprop & 665 & 计入 & 48 / 36.56\% & 39 / 97.16\% & 22 / 6.65\% \\ \hline
+GT-012 & otherprop & 14 & 不足100点 & 48 / 0.68\% & 449 / 5.71\% & 22 / 0.05\% \\ \hline
+GT-013 & otherprop & 241 & 计入 & 48 / 11.45\% & 450 / 89.80\% & 22 / 1.99\% \\ \hline
+GT-014 & otherprop & 161 & 计入 & 48 / 7.20\% & 451 / 50.00\% & 22 / 1.44\% \\ \hline
+GT-015 & otherprop & 65 & 不足100点 & 48 / 2.91\% & 452 / 36.18\% & 22 / 0.42\% \\ \hline
+GT-016 & otherprop & 298 & 计入 & 48 / 9.69\% & 453 / 70.43\% & 22 / 1.99\% \\ \hline
+GT-017 & otherprop & 345 & 计入 & 18 / 8.08\% & 10 / 97.73\% & 8 / 0.07\% \\ \hline
+GT-018 & otherprop & 695 & 计入 & 15 / 10.43\% & 22 / 83.70\% & 22 / 0.47\% \\ \hline
+GT-019 & otherprop & 357 & 计入 & 18 / 53.25\% & 5 / 94.41\% & 8 / 0.05\% \\ \hline
+GT-020 & otherprop & 689 & 计入 & 15 / 8.93\% & 7 / 75.63\% & 22 / 0.36\% \\ \hline
+GT-021 & otherprop & 350 & 计入 & 19 / 12.71\% & 4 / 92.84\% & 70 / 5.37\% \\ \hline
+GT-022 & otherprop & 696 & 计入 & 15 / 10.64\% & 19 / 77.19\% & 22 / 0.87\% \\ \hline
+GT-023 & counter & 125593 & 计入 & 1 / 42.51\% & 3 / 79.52\% & 7 / 35.14\% \\ \hline
+GT-024 & chair & 9006 & 计入 & 6 / 91.30\% & 2 / 92.76\% & 1 / 83.73\% \\ \hline
+GT-025 & chair & 9623 & 计入 & 4 / 82.90\% & 1 / 87.85\% & 0 / 81.42\% \\ \hline
+GT-026 & window & 14964 & 计入 & 2 / 33.19\% & 156 / 37.05\% & 31 / 18.05\% \\ \hline
+GT-027 & window & 14335 & 计入 & 2 / 33.02\% & 156 / 35.19\% & 31 / 26.89\% \\ \hline
+GT-028 & blinds & 3671 & 计入 & 2 / 8.88\% & 192 / 41.15\% & 31 / 7.63\% \\ \hline
+GT-029 & blinds & 3587 & 计入 & 84 / 57.56\% & 454 / 43.89\% & 43 / 10.28\% \\ \hline
+GT-030 & cabinet & 97586 & 计入 & 75 / 78.09\% & 162 / 87.93\% & 29 / 74.47\% \\ \hline
+GT-031 & otherprop & 1807 & 计入 & 72 / 55.70\% & 172 / 91.47\% & 36 / 46.09\% \\ \hline
+GT-032 & otherprop & 157 & 计入 & 68 / 7.25\% & 178 / 38.02\% & 52 / 0.92\% \\ \hline
+GT-033 & otherprop & 1202 & 计入 & 68 / 52.91\% & 157 / 65.52\% & 52 / 5.66\% \\ \hline
+GT-036 & otherprop & 142 & 计入 & 147 / 92.25\% & 473 / 96.60\% & 71 / 8.98\% \\ \hline
+GT-037 & otherprop & 194 & 计入 & 261 / 18.18\% & 443 / 81.78\% & 68 / 3.77\% \\ \hline
+GT-038 & otherprop & 106 & 计入 & 261 / 3.47\% & 443 / 14.05\% & 68 / 4.26\% \\ \hline
+GT-040 & otherprop & 206 & 计入 & 261 / 20.36\% & 240 / 62.64\% & 68 / 2.25\% \\ \hline
+GT-041 & otherprop & 199 & 计入 & 261 / 17.84\% & 455 / 55.32\% & 68 / 2.64\% \\ \hline
+GT-043 & otherprop & 212 & 计入 & 261 / 15.98\% & 470 / 54.36\% & 68 / 3.65\% \\ \hline
+GT-044 & otherprop & 118 & 计入 & 261 / 0.47\% & 470 / 23.30\% & 14 / 0.39\% \\ \hline
+GT-045 & shelves & 12857 & 计入 & 32 / 16.93\% & 78 / 36.51\% & 14 / 38.12\% \\ \hline
+GT-047 & otherprop & 315 & 计入 & 32 / 0.50\% & 213 / 48.31\% & 68 / 2.34\% \\ \hline
+GT-049 & otherprop & 101 & 计入 & 32 / 0.02\% & 472 / 80.36\% & 14 / 0.32\% \\ \hline
+GT-050 & otherprop & 175 & 计入 & 32 / 0.27\% & 461 / 90.86\% & 68 / 2.19\% \\ \hline
+GT-051 & otherprop & 293 & 计入 & 83 / 8.48\% & 88 / 85.03\% & 68 / 7.12\% \\ \hline
+GT-052 & otherprop & 280 & 计入 & 83 / 13.73\% & 458 / 96.17\% & 68 / 2.31\% \\ \hline
+GT-053 & otherprop & 276 & 计入 & 83 / 15.28\% & 459 / 96.84\% & 68 / 2.48\% \\ \hline
+GT-054 & otherprop & 280 & 计入 & 83 / 14.25\% & 464 / 83.93\% & 68 / 2.47\% \\ \hline
+GT-055 & otherprop & 326 & 计入 & 83 / 18.99\% & 82 / 70.86\% & 68 / 1.72\% \\ \hline
+GT-056 & otherprop & 316 & 计入 & 83 / 19.61\% & 108 / 94.06\% & 68 / 1.16\% \\ \hline
+GT-057 & cabinet & 77512 & 计入 & 32 / 45.62\% & 15 / 87.39\% & 10 / 51.19\% \\ \hline
+GT-058 & otherstructure & 18441 & 计入 & 121 / 58.32\% & 55 / 67.95\% & 6 / 53.77\% \\ \hline
+GT-060 & otherprop & 295 & 计入 & 54 / 2.64\% & 62 / 75.45\% & 46 / 2.23\% \\ \hline
+GT-061 & otherprop & 597 & 计入 & 54 / 27.70\% & 31 / 99.67\% & 46 / 5.67\% \\ \hline
+GT-062 & otherprop & 806 & 计入 & 54 / 37.40\% & 35 / 99.63\% & 46 / 5.86\% \\ \hline
+GT-063 & otherprop & 752 & 计入 & 54 / 30.53\% & 57 / 99.73\% & 46 / 2.43\% \\ \hline
+GT-067 & refrigerator & 30481 & 计入 & 3 / 66.52\% & 138 / 89.80\% & 15 / 57.22\% \\ \hline
+GT-068 & cabinet & 172568 & 计入 & 99 / 18.31\% & 177 / 30.57\% & 18 / 19.86\% \\ \hline
+GT-069 & otherstructure & 10957 & 计入 & 13 / 87.70\% & 93 / 82.25\% & 23 / 28.55\% \\ \hline
+GT-070 & otherprop & 457 & 计入 & 17 / 33.33\% & 23 / 97.64\% & 27 / 0.69\% \\ \hline
+GT-071 & otherprop & 149 & 计入 & 17 / 5.48\% & 282 / 12.59\% & 27 / 0.32\% \\ \hline
+GT-075 & otherprop & 122 & 计入 & 12 / 5.81\% & 347 / 58.65\% & 27 / 0.62\% \\ \hline
+GT-080 & otherprop & 92 & 不足100点 & 12 / 4.38\% & 13 / 5.79\% & 27 / 0.52\% \\ \hline
+GT-086 & otherprop & 1052 & 计入 & 12 / 44.41\% & 13 / 76.53\% & 27 / 5.09\% \\ \hline
+GT-089 & otherprop & 173 & 计入 & 8 / 6.38\% & 59 / 61.18\% & 2 / 0.03\% \\ \hline
+GT-090 & otherprop & 175 & 计入 & 8 / 6.46\% & 61 / 73.24\% & 2 / 0.02\% \\ \hline
+GT-091 & otherprop & 237 & 计入 & 8 / 8.74\% & 58 / 71.53\% & 2 / 0.02\% \\ \hline
+GT-094 & otherstructure & 1049 & 计入 & 8 / 30.56\% & 21 / 24.14\% & 2 / 0.29\% \\ \hline
+GT-095 & otherstructure & 1594 & 计入 & 43 / 25.41\% & 348 / 94.15\% & 26 / 5.19\% \\ \hline
+GT-096 & otherstructure & 2587 & 计入 & 43 / 46.39\% & 269 / 92.24\% & 26 / 8.35\% \\ \hline
+GT-097 & otherprop & 894 & 计入 & 22 / 87.74\% & 46 / 99.44\% & 50 / 7.54\% \\ \hline
+GT-098 & otherprop & 614 & 计入 & 24 / 96.34\% & 45 / 98.39\% & 73 / 10.39\% \\ \hline
+GT-099 & otherprop & 290 & 计入 & 25 / 23.55\% & 463 / 54.10\% & 50 / 0.05\% \\ \hline
+GT-100 & otherprop & 331 & 计入 & 136 / 16.99\% & 60 / 35.82\% & 2 / 0.04\% \\ \hline
+GT-101 & otherprop & 309 & 计入 & 45 / 24.08\% & 27 / 50.66\% & 50 / 0.08\% \\ \hline
+GT-102 & otherprop & 216 & 计入 & 46 / 25.47\% & 70 / 43.90\% & 23 / 0.01\% \\ \hline
+GT-103 & otherprop & 275 & 计入 & 46 / 12.37\% & 32 / 48.25\% & 50 / 0.03\% \\ \hline
+GT-104 & otherprop & 369 & 计入 & 23 / 9.34\% & 463 / 7.61\% & 15 / 0.01\% \\ \hline
+GT-105 & otherprop & 447 & 计入 & 182 / 58.27\% & 34 / 99.78\% & 60 / 39.06\% \\ \hline
+GT-106 & otherprop & 1187 & 计入 & 14 / 84.99\% & 257 / 60.41\% & 72 / 6.25\% \\ \hline
+GT-112 & otherprop & 360 & 计入 & 55 / 35.76\% & 264 / 15.43\% & 60 / 3.18\% \\ \hline
+GT-113 & otherprop & 520 & 计入 & 1 / 0.00\% & 292 / 80.14\% & 26 / 0.28\% \\ \hline
+GT-114 & otherprop & 365 & 计入 & 1 / 0.00\% & 466 / 88.71\% & 47 / 0.55\% \\ \hline
+GT-116 & otherprop & 233 & 计入 & 1 / 0.00\% & 465 / 70.71\% & 47 / 0.39\% \\ \hline
+GT-117 & otherprop & 284 & 计入 & 191 / 12.06\% & 274 / 83.93\% & 47 / 1.63\% \\ \hline
+GT-118 & otherprop & 109 & 计入 & 191 / 3.48\% & 283 / 66.92\% & 47 / 0.36\% \\ \hline
+GT-119 & otherprop & 1902 & 计入 & 191 / 42.38\% & 101 / 90.85\% & 47 / 5.67\% \\ \hline
+GT-120 & otherprop & 150 & 计入 & 10 / 5.96\% & 102 / 40.68\% & 47 / 1.58\% \\ \hline
+GT-121 & otherprop & 150 & 计入 & 10 / 5.96\% & 103 / 91.45\% & 47 / 2.00\% \\ \hline
+GT-122 & otherprop & 147 & 计入 & 10 / 5.84\% & 211 / 91.84\% & 47 / 1.12\% \\ \hline
+GT-123 & otherprop & 150 & 计入 & 10 / 5.96\% & 100 / 82.46\% & 47 / 1.58\% \\ \hline
+GT-124 & otherprop & 149 & 计入 & 10 / 5.92\% & 210 / 91.95\% & 47 / 1.32\% \\ \hline
+GT-125 & otherprop & 126 & 计入 & 10 / 5.01\% & 212 / 62.77\% & 47 / 0.41\% \\ \hline
+GT-126 & otherprop & 1122 & 计入 & 10 / 38.55\% & 247 / 51.67\% & 47 / 9.05\% \\ \hline
+GT-127 & otherprop & 1460 & 计入 & 11 / 56.83\% & 37 / 81.02\% & 47 / 26.14\% \\ \hline
+GT-128 & otherprop & 530 & 计入 & 20 / 57.00\% & 65 / 68.35\% & 47 / 0.47\% \\ \hline
+GT-133 & otherprop & 221 & 计入 & 34 / 22.93\% & 89 / 86.00\% & 47 / 0.05\% \\ \hline
+GT-134 & otherprop & 144 & 计入 & 34 / 14.46\% & 109 / 81.71\% & 22 / 0.75\% \\ \hline
+GT-135 & otherprop & 99 & 不足100点 & 34 / 3.91\% & 273 / 89.09\% & 22 / 0.30\% \\ \hline
+GT-137 & otherprop & 275 & 计入 & 1 / 0.00\% & 90 / 96.10\% & 22 / 0.04\% \\ \hline
+GT-138 & otherprop & 138 & 计入 & 94 / 0.34\% & 111 / 78.79\% & 22 / 0.23\% \\ \hline
+GT-139 & otherprop & 244 & 计入 & 34 / 7.19\% & 474 / 50.00\% & 22 / 0.31\% \\ \hline
+GT-146 & otherprop & 97 & 不足100点 & 80 / 7.63\% & 462 / 73.20\% & 24 / 0.07\% \\ \hline
+GT-147 & otherstructure & 485 & 计入 & 80 / 37.16\% & 96 / 22.10\% & 24 / 0.09\% \\ \hline
+GT-148 & counter & 121251 & 计入 & 94 / 26.13\% & 141 / 66.32\% & 26 / 17.64\% \\ \hline
+GT-149 & sink & 5146 & 计入 & 37 / 61.23\% & 131 / 97.50\% & 3 / 31.09\% \\ \hline
+GT-151 & otherprop & 430 & 计入 & 134 / 25.11\% & 217 / 74.29\% & 26 / 0.29\% \\ \hline
+GT-152 & otherprop & 170 & 计入 & 114 / 10.23\% & 337 / 81.87\% & 26 / 0.21\% \\ \hline
+GT-153 & otherprop & 526 & 计入 & 114 / 28.87\% & 94 / 39.54\% & 19 / 0.69\% \\ \hline
+\end{longtable}
+}
+
+冻结协议及完整结果见 \texttt{docs/\allowbreak{}esam\_\allowbreak{}hypersim\_\allowbreak{}010\_\allowbreak{}comparison.\allowbreak{}json}，验证收据见 \texttt{docs/\allowbreak{}esam\_\allowbreak{}hypersim\_\allowbreak{}010\_\allowbreak{}validation.\allowbreak{}json}。这轮只增加外部基线、评价和报告，未修改v19算法，联合训练继续暂停。
+
+
+
+\subsection*{26.10 ESAM论文阅读：方法差别、已测差距与研究边界}
+\addcontentsline{toc}{subsection}{26.10 ESAM论文阅读：方法差别、已测差距与研究边界}
+
+本节对应\href{https://arxiv.org/html/2408.11811v3}{EmbodiedSAM正文及附录} [36]，核对本地官方提交的 \texttt{mixformer3d.\allowbreak{}py}、\texttt{geo\_\allowbreak{}aware\_\allowbreak{}pool.\allowbreak{}py}、\texttt{query\_\allowbreak{}decoder.\allowbreak{}py}、\texttt{merge\_\allowbreak{}head.\allowbreak{}py} 和 \texttt{instance\_\allowbreak{}merge.\allowbreak{}py}，以及当前冻结v19的组件注册、关联、COVE、BASE与选择性补全代码。下面区分论文描述、公开实现和本项目实际能力，不把ESAM++ [37]当作ESAM。
+
+
+
+\textbf{基本逻辑。} ESAM先将SAM二维分区反投影成三维超点，用稀疏网络与时序记忆提取特征；几何加权汇聚把超点变成实例查询。解码器在超点间交互、最后按点预测掩码，跨帧再匹配查询并累计掩码。二维结果是初始化，三维学习会修正它，而非直接拼接原始SAM掩码。论文先训练单帧模型，再训练序列与关联辅助任务；完整范围的框预测、实例对比特征和语义分布支持跨帧识别。\href{https://github.com/xuxw98/ESAM/tree/main/oneformer3d}{36，§3–4；官方代码}
+
+
+
+\begin{verbatim}
+RGB-D与位姿 → 二维分区 → 三维特征与几何汇聚
+              → 查询解码、逐点掩码 → 跨帧实例匹配
+\end{verbatim}
+
+
+\textbf{论文与运行代码的区别。} 论文§3.2的关联描述组合几何、对比特征、语义相似性。本轮公开CA权重实际走 \texttt{OnlineMerge.\allowbreak{}merge}：归一化学习特征的内积乘预测框IoU，再作同标签约束、去除非正得分与匈牙利匹配；语义余弦在函数中被计算，但未乘入此路径的最终得分。其主要得分为
+
+
+
+\[
+a_{ij}=\langle q_i,q_j\rangle\operatorname{IoU}(B_i,B_j)\,\mathbf{1}[\ell_i=\ell_j]
+\]
+
+此公式描述本轮实际公开实现，不声称就是论文全部实验的唯一关联公式。匹配对象更新查询、置信度与框，未匹配查询成为新实例。\href{https://github.com/xuxw98/ESAM/blob/main/oneformer3d/instance\_merge.py}{官方实现}
+
+
+
+\textbf{完成框范围不等于补出隐藏点云。} 本轮官方模型的掩码对应已采样深度点；框回归能估计未完整看到的范围，却未输出隐藏表面点。v19也没有实现通用文本—图—形状生成模型：薄层恢复主要来自找回既有深度观测、表面归属与几何约束，另有受观测/自由空间验收限制的AdaPoinTr候选。物体更厚、点更多不自动证明真实隐藏几何被正确恢复。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+比较维度 & 本轮ESAM & 当前冻结v19 & 对研究结论的影响 \\ \hline
+\endfirsthead
+\hline
+比较维度 & 本轮ESAM & 当前冻结v19 & 对研究结论的影响 \\ \hline
+\endhead
+三维表征 & 在标注数据上训练的稀疏网络、记忆和查询解码 & 调用预训练视觉/语言模型，主要用观测验证与规则组合 & 我们尚无对应的联合学习三维表征 \\ \hline
+关联 & 学习实例特征与预测范围，在线匹配 & 可见性投影、外观、文本及几何一致性匹配 & 匈牙利匹配、跨帧一致性本身已有前例 \\ \hline
+小实例恢复 & 查询解码输出逐点掩码 & 局部高分辨率分割、实测核心归属、独立视角共识COVE & 需单独统计细实例收益、重复与污染，不能以节点数证明准确 \\ \hline
+未归属支撑 & 本轮未包含我们的支撑残余组件 & BASE利用多个底部锚点与多视角实测残余，并做视觉验证 & BASE需要Z-up声明，目前在ScanNet禁用，不是全数据集通用结果 \\ \hline
+几何补全 & 掩码在已观测点上；另预测范围框 & 实测恢复、受约束几何候选与选择性AdaPoinTr & 双方均未验证普遍可靠的隐藏表面补全 \\ \hline
+文本与图 & 核心CA评估不考类别正确性；论文附录另有开放词汇扩展 & 输出名字、部件层级和空间关系图 & 开放词汇或scene graph输出本身不足以成为独立创新 \\ \hline
+时序及效率 & 原生逐帧在线流程；ESAM-E使用FastSAM以实现论文实时性能 & 全场景缓存、多轮局部检查与后处理 & 目前没有我们的同硬件实时性优势证据 \\ \hline
+验证规模 & 论文有整套验证集及跨数据集实验 & 本轮三个预选ScanNet扫描，另有Hypersim开发/留出实验 & 三扫描接近不能推出完整基准相当或泛化更强 \\ \hline
+\end{longtable}
+}
+
+\textbf{本地同目标域实测差距。} 三个预选ScanNet扫描合并82个GT实例，点云AP25/AP50/平均AP（.50–.90）为原始59.70/45.44/23.56、v19 75.10/58.28/37.11、ESAM 86.74/61.14/37.16，单位\%。v19对原始分别提高15.40/12.83/13.54个百分点，说明此前工作确有可测收益；对ESAM分别落后11.64/2.86/0.05个百分点，不能把平均AP接近写成全面胜出。AP25较大缺口反映低重叠阈值下的检出/排序质量仍落后，具体来自漏检、误合并、碎片还是假阳性，须逐GT和预测诊断确认，不能仅由三个汇总指标唯一推断原因。
+
+
+
+逐扫描存在相反结果：scene0011上v19的AP50/平均AP为71.93/41.61，高于ESAM的70.25/30.89；scene0015上v19的AP50为61.13，低于ESAM63.46，也低于原始68.01。故优势尚不稳定。010厨房中v19领先本地ESAM迁移的结果保留在26.9，但010是反复开发过的合成场景，ESAM也没有ScanNet网格分区平滑，不能用它替代独立泛化证据。
+
+
+
+\textbf{为何需要承认后处理的影响。} 首个预选扫描scene0011的同权重、同帧、同原始预测消融：关闭/恢复作者无监督网格分区多数归属后，ESAM AP25/AP50/平均AP从83.63/51.01/17.29变为90.17/70.25/30.89。恢复的掩码与官方发布口径完全一致。其增益是已测前处理/后处理依赖，既不能全归于神经网络，也不能把这个扫描的增益假定为010会有同幅提升。最终主表只保留正式口径结果，此处消融用于解释方法。
+
+
+
+\textbf{我们真正还缺什么。} 用户提出的“文本、局部形状与图关系匹配，支持补全并排除幽灵节点”仍是MATCH-3D方法设想，尚未训练、未形成已验证的置信度校准模型。已有COVE的独立帧投票是确定性观测证据，不等价于学到这种联合匹配能力。只将更多预训练模型与阈值串联，没有证据能替代ESAM已训练的三维实例表征。
+
+
+
+较明确的研究问题是：在强实例分割基线上，以文本和关系产生候选，再用多视角观测与自由空间证据验证；让模型分别输出“实测归属”“隐藏形状假设”和“存在置信度”，避免把推测点当作观测。是否构成有效贡献，要由冻结独立场景、细物体分组指标、假阳性/自由空间违例及组件消融共同证明。关系约束和补全也已有研究前例，不能先承诺新颖性或普遍超越。本轮仅明确方法与证据，遵照用户要求不开始联合训练。
 
 
 
@@ -4840,11 +5345,11 @@ GRAPH / 独立GT核对 & 可观测GT筛选、严格一对一框AP、MVO、数量
 
 
 
-[36] Xu X, Chen H, Zhao L, Wang Z, Zhou J, Lu J. \textbf{EmbodiedSAM: Online Segment Any 3D Thing in Real Time} [C]. ICLR, 2025. arXiv:2408.11811. \href{https://proceedings.iclr.cc/paper\_files/paper/2025/file/5e68f9149d33a6c8ad59ed60bf90606f-Paper-Conference.pdf}{论文}, \href{https://github.com/xuxw98/ESAM}{官方代码}. 仅作为相关工作与公开水平参照，未部署。
+[36] Xu X, Chen H, Zhao L, Wang Z, Zhou J, Lu J. \textbf{EmbodiedSAM: Online Segment Any 3D Thing in Real Time} [C]. ICLR, 2025. arXiv:2408.11811. \href{https://proceedings.iclr.cc/paper\_files/paper/2025/file/5e68f9149d33a6c8ad59ed60bf90606f-Paper-Conference.pdf}{论文}, \href{https://github.com/xuxw98/ESAM}{官方代码}. 本轮作为独立强基线已部署并实测，见26.8–26.10；未并入v19。
 
 
 
-[37] Liu Q, Aggarwal L, Bandyopadhyay S, Bahirwani V, Niethammer M, Adeli E, Colaco A. \textbf{ESAM++: Efficient Online 3D Perception on the Edge} [EB/OL]. arXiv:2605.29505, 2026. \href{https://arxiv.org/html/2605.29505v1}{论文}, \href{https://github.com/google/esamplusplus}{代码}. 仅作为相关工作与公开水平参照，未部署。
+[37] Liu Q, Aggarwal L, Bandyopadhyay S, Bahirwani V, Niethammer M, Adeli E, Colaco A. \textbf{ESAM++: Efficient Online 3D Perception on the Edge} [EB/OL]. arXiv:2605.29505, 2026. \href{https://arxiv.org/html/2605.29505v1}{论文}, \href{https://github.com/google/esamplusplus}{代码}. 已验证公开核心编码器；缺少对应权重与完整集成，尚未计算AP，见26.8。
 
 
 

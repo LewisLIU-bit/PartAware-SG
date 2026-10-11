@@ -1,0 +1,80 @@
+{
+  "checked_on": "2026-10-11",
+  "repository": "https://github.com/google/esamplusplus",
+  "commit": "6929fbeaad4bbe7bc33ce8cec52010301c086887",
+  "official_source_unchanged": true,
+  "source_files": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "configs/esamplusplus_online_scannet200_CA.py",
+    "docs/code-of-conduct.md",
+    "docs/contributing.md",
+    "src/backbone.py",
+    "src/mink_unet.py"
+  ],
+  "config_sha256": "0baf37e3f8134ee1fb0f603be5375fdaaa0d555c3010d509234c2dd7b91e8474",
+  "environment": "/home/lewisliu/baselines/esamplusplus-env/bin/python",
+  "Python": "3.10.21",
+  "dependencies_reused_from_isolated_ESAM": true,
+  "CPU_sparse_backend": true,
+  "encoder_parameters": 20675428,
+  "encoder_forward_shape": [
+    1944,
+    96
+  ],
+  "encoder_forward_finite": true,
+  "forward_check_only": true,
+  "forward_uses_random_weights": true,
+  "AP_computed": false,
+  "full_model_type": "ScanNet200MixFormer3D_Online_Tiny",
+  "full_model_type_registered": false,
+  "trained_checkpoint_in_repository": false,
+  "verified_ESAMplusplus_checkpoint_found": false,
+  "ESAM_checkpoint_compatible": false,
+  "ESAM_backbone_key_comparison": {
+    "old_keys": 372,
+    "new_keys": 297,
+    "missing": 297,
+    "unexpected": 372,
+    "shape_mismatch": 0,
+    "compatible": 0,
+    "missing_examples": [
+      "project.0.kernel",
+      "project.1.kernel",
+      "s0_conv.kernel",
+      "s0_norm.bn.bias",
+      "s0_norm.bn.num_batches_tracked",
+      "s0_norm.bn.running_mean",
+      "s0_norm.bn.running_var",
+      "s0_norm.bn.weight"
+    ],
+    "unexpected_examples": [
+      "block1.0.conv1.kernel",
+      "block1.0.conv2.kernel",
+      "block1.0.norm1.bn.bias",
+      "block1.0.norm1.bn.num_batches_tracked",
+      "block1.0.norm1.bn.running_mean",
+      "block1.0.norm1.bn.running_var",
+      "block1.0.norm1.bn.weight",
+      "block1.0.norm2.bn.bias"
+    ]
+  },
+  "registered_scenes": [
+    "scene0011_00",
+    "scene0015_00",
+    "scene0019_00",
+    "ai_001_010"
+  ],
+  "frames": [
+    60,
+    50,
+    15,
+    100
+  ],
+  "pretrained_checkpoint_required_before_AP": true,
+  "GT_in_setup": false,
+  "training_started": false,
+  "joint_training": "paused",
+  "limitation": "Official publication contains the core encoder and config, not a complete pretrained inference release. Encoder smoke checks are not benchmark results."
+}

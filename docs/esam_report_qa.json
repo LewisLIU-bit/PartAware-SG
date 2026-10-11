@@ -1,0 +1,39 @@
+{
+  "scanTableRows": [
+    9,
+    3,
+    82
+  ],
+  "kitchenTableRows": [
+    3,
+    3,
+    109
+  ],
+  "methodComparisonRows": [
+    8
+  ],
+  "pointComparisonImages": [
+    {
+      "alt": "ScanNet同一官方重建域的实例对比 scene0011_00",
+      "width": 2040,
+      "height": 1870
+    },
+    {
+      "alt": "ScanNet同一官方重建域的实例对比 scene0015_00",
+      "width": 2040,
+      "height": 1870
+    },
+    {
+      "alt": "ScanNet同一官方重建域的实例对比 scene0019_00",
+      "width": 2040,
+      "height": 1870
+    },
+    {
+      "alt": "010共同观测域上的GT、原始流程、v19和ESAM",
+      "width": 2400,
+      "height": 1800
+    }
+  ],
+  "metricValuesVerified": true,
+  "GT_idsPreserved": true
+}

@@ -2571,14 +2571,74 @@
   "raw_fusion_rerun": false,
   "v18_byte_identical": true,
   "strict_target_reached": false,
-  "report_source_sha256": "5f8e161056f20c9208d982482216156cd7460eb23a15d1d8ff4ecd7346d2c8f2",
+  "report_source_sha256": "1fb3d052dda5b5ae1f9b9d9d8d6b9edf4b6a909253d8a036109aa5c31d87eb6e",
   "report_qa_passed": true,
   "report_version": "v19",
   "latex_compile_confirmed": false,
   "latex_compile_limitation": "Built-in compile_latex_document failed before source compilation: windows sandbox helper_unknown_error: setup refresh had errors. No TeX compiler diagnostic was returned. Existing source preserved; no separate PDF compiled.",
   "published_html": "RESEARCH_LOG.html",
   "published_latex": "RESEARCH_LOG.tex",
-  "html_sha256": "16fe2f9065b645694dc7fe6015d3622a819f8740d156551b96ce77df4712fe6d",
-  "latex_sha256": "3b6c42e693ce588b216381eb9b0e323bd193353757357040379a75138365221f",
-  "duplicate_rendered_docs_removed": true
+  "html_sha256": "eec6111de41a394270a6bb04d45a9cd9e7afd6e4efb226309c7e7802530674cf",
+  "latex_sha256": "f16d1f662510f3a5b2773fd23221b0fc81e70a545d9d349360c37f1417768cdc",
+  "duplicate_rendered_docs_removed": true,
+  "baseline_report_qa_passed": true,
+  "independent_benchmarks": {
+    "ScanNet200": {
+      "scans": [
+        "scene0011_00",
+        "scene0015_00",
+        "scene0019_00"
+      ],
+      "full_profile_frozen": true,
+      "GT_in_construction": false,
+      "GT_grouping": false,
+      "aggregate_point_AP": {
+        "original": {
+          "all_ap": 0.23563265908115202,
+          "all_ap_50%": 0.4544170632562762,
+          "all_ap_25%": 0.5970241228884271,
+          "classes": {
+            "object": {
+              "ap": 0.23563265908115202,
+              "ap50%": 0.4544170632562762,
+              "ap25%": 0.5970241228884271
+            }
+          }
+        },
+        "v19": {
+          "all_ap": 0.37106068077975524,
+          "all_ap_50%": 0.5827663034046122,
+          "all_ap_25%": 0.7509772027592786,
+          "classes": {
+            "object": {
+              "ap": 0.37106068077975524,
+              "ap50%": 0.5827663034046122,
+              "ap25%": 0.7509772027592786
+            }
+          }
+        },
+        "ESAM": {
+          "all_ap": 0.3715517679336755,
+          "all_ap_50%": 0.6113715763135619,
+          "all_ap_25%": 0.8674003452768589,
+          "classes": {
+            "object": {
+              "ap": 0.3715517679336755,
+              "ap50%": 0.6113715763135619,
+              "ap25%": 0.8674003452768589
+            }
+          }
+        }
+      },
+      "receipt": "docs/esam_scan200_validation.json"
+    },
+    "Hypersim010": {
+      "development_scene": true,
+      "pretrained_baseline": "ESAM",
+      "ESAMplusplus_executed": false,
+      "point_GT_instances": 104,
+      "historical_box_GT_instances": 109,
+      "receipt": "docs/esam_hypersim_010_validation.json"
+    }
+  }
 }

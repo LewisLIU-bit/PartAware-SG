@@ -1,0 +1,38 @@
+{
+  "scene": "scene0011_00",
+  "frames": 60,
+  "unsmoothed_point_metrics": {
+    "all_ap": 0.17287044575059382,
+    "all_ap_50%": 0.5101202184433468,
+    "all_ap_25%": 0.8362999185603311,
+    "classes": {
+      "object": {
+        "ap": 0.17287044575059382,
+        "ap50%": 0.5101202184433468,
+        "ap25%": 0.8362999185603311
+      }
+    }
+  },
+  "smoothed_point_metrics": {
+    "all_ap": 0.3088585354411982,
+    "all_ap_50%": 0.7025028403787802,
+    "all_ap_25%": 0.9016587689442875,
+    "classes": {
+      "object": {
+        "ap": 0.3088585354411982,
+        "ap50%": 0.7025028403787802,
+        "ap25%": 0.9016587689442875
+      }
+    }
+  },
+  "same_native_prediction": true,
+  "published_baseline_masks_exactly_reproduced": true,
+  "published_scores_reproduced": true,
+  "only_difference": "author optional unsupervised mesh-segment majority >0.5",
+  "GT_in_model": false,
+  "GT_grouping": false,
+  "weights_or_thresholds_changed": false,
+  "training": false,
+  "seconds": 31.41044929099735,
+  "limitation": "Ablation on one registered ScanNet scan; does not quantify hypothetical smoothing on Hypersim."
+}

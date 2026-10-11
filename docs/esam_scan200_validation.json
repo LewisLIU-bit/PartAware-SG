@@ -1,0 +1,121 @@
+{
+  "complete": true,
+  "scenes": [
+    {
+      "scene": "scene0011_00",
+      "frames": 60,
+      "eligible_GT": 28,
+      "one_shared_GPT_cache": true,
+      "consumer_API_calls": 0,
+      "matching_GT_hashes": true,
+      "frozen_construction": true,
+      "ESAM_pretrained_no_training": true
+    },
+    {
+      "scene": "scene0015_00",
+      "frames": 50,
+      "eligible_GT": 39,
+      "one_shared_GPT_cache": true,
+      "consumer_API_calls": 0,
+      "matching_GT_hashes": true,
+      "frozen_construction": true,
+      "ESAM_pretrained_no_training": true
+    },
+    {
+      "scene": "scene0019_00",
+      "frames": 15,
+      "eligible_GT": 15,
+      "one_shared_GPT_cache": true,
+      "consumer_API_calls": 0,
+      "matching_GT_hashes": true,
+      "frozen_construction": true,
+      "ESAM_pretrained_no_training": true
+    }
+  ],
+  "construction_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+  "evaluation": "Pinned OpenMMLab v1.4.0 ScanNet evaluator; class-agnostic full-mesh point masks",
+  "evaluation_source": {
+    "revision": "v1.4.0",
+    "files": [
+      {
+        "path": "mmdet3d/evaluation/functional/scannet_utils/evaluate_semantic_instance.py",
+        "url": "https://raw.githubusercontent.com/open-mmlab/mmdetection3d/v1.4.0/mmdet3d/evaluation/functional/scannet_utils/evaluate_semantic_instance.py",
+        "sha256": "4856a54e1bb3e7af972a8db37514592b69786fe63a991c1f62718e752cea77ee"
+      },
+      {
+        "path": "mmdet3d/evaluation/functional/scannet_utils/util_3d.py",
+        "url": "https://raw.githubusercontent.com/open-mmlab/mmdetection3d/v1.4.0/mmdet3d/evaluation/functional/scannet_utils/util_3d.py",
+        "sha256": "d556e63ff7143d116a99f59b2f825c8a7a1e3821f527f314485e6d9d3e9e82f7"
+      },
+      {
+        "path": "mmdet3d/evaluation/functional/instance_seg_eval.py",
+        "url": "https://raw.githubusercontent.com/open-mmlab/mmdetection3d/v1.4.0/mmdet3d/evaluation/functional/instance_seg_eval.py",
+        "sha256": "b2424222086bece59438b559ee2f6904eed5ba7a9db88d04c75c74f3d4de413f"
+      }
+    ]
+  },
+  "GT_grouping": false,
+  "manual_scene_patches": false,
+  "ESAM_official_model_source_unchanged": true,
+  "baseline_weights": {
+    "variant": "ESAM (SAM ViT-H), ScanNet200 class-agnostic online",
+    "checkpoint": "/home/lewisliu/baselines/ESAM/work_dirs/pretrained/ESAM_CA_online_epoch_128.pth",
+    "checkpoint_sha256": "3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285",
+    "source": "https://huggingface.co/XXXCARREY/EmbodiedSAM/resolve/3c2fa9097e7bb34e23fffcc1e76133f952f29065/ESAM_CA_online_epoch_128.pth",
+    "model_repository_revision": "3c2fa9097e7bb34e23fffcc1e76133f952f29065",
+    "ESAM_git_revision": "188fc6de44f7577fecec2d69b75c7adbd9992251",
+    "pretrained": true,
+    "training": false,
+    "SAM_reused": "/home/lewisliu/PartAware-SG/scannet/script/thirdparty/Grounded-Segment-Anything/sam_vit_h_4b8939.pth",
+    "scenes": [
+      "scene0011_00",
+      "scene0015_00",
+      "scene0019_00"
+    ]
+  },
+  "CPU_compatibility": {
+    "feature_order": "6e2a0a413792b4ba6c213842eba1a6411df333e1d13aff4ff8843d923ec6b757",
+    "KNN": "70dad04b107d500428ea73237a76e5e16ab73d121f8e59090d0d73540d682792"
+  },
+  "evaluation_result_sha256": "423330eac7147d535eec9ed8f400af8b74ac1712b0437d640b1d5f72664311bf",
+  "aggregate": {
+    "original": {
+      "all_ap": 0.23563265908115202,
+      "all_ap_50%": 0.4544170632562762,
+      "all_ap_25%": 0.5970241228884271,
+      "classes": {
+        "object": {
+          "ap": 0.23563265908115202,
+          "ap50%": 0.4544170632562762,
+          "ap25%": 0.5970241228884271
+        }
+      }
+    },
+    "v19": {
+      "all_ap": 0.37106068077975524,
+      "all_ap_50%": 0.5827663034046122,
+      "all_ap_25%": 0.7509772027592786,
+      "classes": {
+        "object": {
+          "ap": 0.37106068077975524,
+          "ap50%": 0.5827663034046122,
+          "ap25%": 0.7509772027592786
+        }
+      }
+    },
+    "ESAM": {
+      "all_ap": 0.3715517679336755,
+      "all_ap_50%": 0.6113715763135619,
+      "all_ap_25%": 0.8674003452768589,
+      "classes": {
+        "object": {
+          "ap": 0.3715517679336755,
+          "ap50%": 0.6113715763135619,
+          "ap25%": 0.8674003452768589
+        }
+      }
+    }
+  },
+  "limitation": "Three fixed validation scans, not the full 312-scan benchmark; native source sampling/transfer differ by representation",
+  "joint_text_graph_shape_training": "paused"
+}

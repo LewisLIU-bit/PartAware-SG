@@ -1,0 +1,25 @@
+{
+  "complete": true,
+  "all_three_same_input": true,
+  "official_ESAM_source_unchanged": true,
+  "strict_553_key_load": true,
+  "core_algorithm_fingerprint_unchanged": true,
+  "GT_excluded_from_ESAM": true,
+  "GT_grouping": false,
+  "training_resumed": false,
+  "parameter_tuning": false,
+  "frames": 100,
+  "observed_domain_points": 2412033,
+  "box_GT": 109,
+  "point_GT": 104,
+  "point_guard_m": 0.05,
+  "inputs_sha256": "1851e907805b616edac3feefb097c199519706cad69bfa3b9babe8d85658a169",
+  "comparison_sha256": "da5d9d9fd16d16330941951ebc0abc7bd9cb3bd8d89ae59cf9933ef6f7e8854b",
+  "limitations": [
+    "development scene, no held-out claim",
+    "saved historical original/v19 construction fingerprints differ",
+    "point-domain eligibility differs from historical box eligibility",
+    "native learned boxes and observed-mask boxes reported separately",
+    "observed point labels cannot verify unseen back-surface shape completion"
+  ]
+}

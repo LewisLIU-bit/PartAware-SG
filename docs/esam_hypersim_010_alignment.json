@@ -1,0 +1,72 @@
+{
+  "GT_used": false,
+  "frame_selection": "first and last selected frame of every camera, no GT selection",
+  "frames": [
+    {
+      "frame_id": "cam_00_0000",
+      "native_depth_median_distance_m": 0.001749818851648052,
+      "native_depth_P95_distance_m": 0.0034940802961511406,
+      "within_5cm": 1.0,
+      "resized_integer_pixel_max_error": 0.0020188984980791247
+    },
+    {
+      "frame_id": "cam_00_0099",
+      "native_depth_median_distance_m": 0.001585011552502907,
+      "native_depth_P95_distance_m": 0.0031125566918174096,
+      "within_5cm": 1.0,
+      "resized_integer_pixel_max_error": 3.771517660311474e-05
+    },
+    {
+      "frame_id": "cam_01_0002",
+      "native_depth_median_distance_m": 0.0005937262896597567,
+      "native_depth_P95_distance_m": 0.0010881688575337992,
+      "within_5cm": 1.0,
+      "resized_integer_pixel_max_error": 5.751675053033978e-05
+    },
+    {
+      "frame_id": "cam_01_0098",
+      "native_depth_median_distance_m": 0.0015080253678105115,
+      "native_depth_P95_distance_m": 0.0031614266291840614,
+      "within_5cm": 1.0,
+      "resized_integer_pixel_max_error": 5.7992899485270755e-05
+    },
+    {
+      "frame_id": "cam_02_0001",
+      "native_depth_median_distance_m": 0.0008615124555047167,
+      "native_depth_P95_distance_m": 0.0015205465472058343,
+      "within_5cm": 1.0,
+      "resized_integer_pixel_max_error": 6.970221636493079e-05
+    },
+    {
+      "frame_id": "cam_02_0097",
+      "native_depth_median_distance_m": 0.0008613236070207647,
+      "native_depth_P95_distance_m": 0.0032197351813928713,
+      "within_5cm": 1.0,
+      "resized_integer_pixel_max_error": 4.418936725869571e-05
+    }
+  ],
+  "shared_domain_source_transfer_median_m": 0.004835991759297092,
+  "shared_domain_source_transfer_P95_m": 0.016471558767224247,
+  "within_5cm": 0.9861312013558686,
+  "original_intrinsic": [
+    [
+      886.809983634957,
+      0.0,
+      511.5
+    ],
+    [
+      0.0,
+      886.8099836349569,
+      383.5
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "metric_optical_axis_depth": true,
+  "T_world_from_camera": true,
+  "native_unlimited_AP_equals_common_5cm_AP": true,
+  "notes": "Confirms projection/coverage, not model generalization or hidden shape accuracy."
+}

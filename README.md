@@ -25,6 +25,48 @@ incremental v18 refinements. Joint training remains paused.
 See [validation](docs/v19_holdout_validation.json),
 [preregistration](docs/v19_holdout_preregistration.json) and canonical report 26.6.
 
+## Frozen ESAM comparison
+
+The three preregistered ScanNet200 validation scans (`scene0011_00`,
+`scene0015_00`, `scene0019_00`) share 125 selected RGB-D frames; original and
+full frozen v19 reuse one GPT cache per scene. Independent native class-agnostic
+point-mask evaluation pools 82 eligible GT instances over all three scans:
+
+| Method | AP25 | AP50 | Mean AP (.50–.90) |
+| --- | --- | --- | --- |
+| original | 59.70% | 45.44% | 23.56% |
+| v19 | 75.10% | 58.28% | 37.11% |
+| ESAM | 86.74% | 61.14% | 37.16% |
+
+These are a fixed three-scan pilot, not the complete 312-scan benchmark.
+See [final comparison](docs/esam_scan200_comparison.json) and
+[validation](docs/esam_scan200_validation.json), with per-scan scores,
+all eligible GT diagnostics and common mesh figures in report 26.8.
+Report 26.10 explains ESAM's learned query/merge design, the implemented
+v19 differences, and the untrained status of the proposed joint model.
+
+On the previously developed Hypersim kitchen `ai_001_010`, 100 identical
+frames and a common observed point domain give AP25/AP50/mean AP:
+original 29.58%/11.46%/4.06%,
+v19 72.73%/56.41%/35.33%,
+frozen ESAM 9.58%/4.71%/2.02%.
+This direct ScanNet-weight transfer lacks ScanNet mesh-segment smoothing;
+it is not a held-out result or proof of ESAM's best Hypersim performance.
+The 104 eligible point instances and historical 109 GT boxes are separate:
+the historical strict box target remains unmet. See report 26.9 and
+[alignment validation](docs/esam_hypersim_010_alignment.json).
+
+ESAM uses the author's published trained weights; joint training in this
+project remains paused. ESAM++ is a distinct Google/Stanford/UC San Diego
+paper: Google's public core encoder/config repository has been downloaded
+and its CPU encoder forward pass verified. Its published files do not provide
+a corresponding checkpoint or the referenced complete online model type.
+The original ESAM backbone weights are incompatible. See
+[setup audit](docs/esamplusplus_setup_audit.json). Local measurements are ESAM,
+not ESAM++; random encoder smoke checks are not AP results.
+The unchanged official model and tested external CPU compatibility adapters
+are documented in [baseline setup](tools/esam_baseline/README.md).
+
 ## Default EviScene pipeline
 
 GPT category recognition supports an OpenAI-compatible relay through
@@ -72,8 +114,8 @@ finals, followed by canonical publication, original visualization and independen
 evaluation. It does not claim a fresh raw-fusion rerun. All 294 tests, original
 TopologyMap reading, real feature dimensions, 199 native cache hashes and every
 v18 file pass. See [validation](docs/v19_final_results.json) and the
-[uniform final ledger](docs/v19_granularity_comparison.json). All 119 official
-GT IDs and 11 atlases remain in the [canonical report](RESEARCH_LOG.html), with
+[uniform final ledger](docs/v19_granularity_comparison.json). All 129 official Hypersim
+GT IDs and 12 atlases remain in the [canonical report](RESEARCH_LOG.html), with
 GAU members and strict matches. [Markdown source](docs/RESEARCH_REPORT.md).
 
 MATCH-3D remains a proposed joint text / local graph / shape model, with separate
