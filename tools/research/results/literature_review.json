@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-11",
+  "all_six_full_text_methods_and_metrics_checked": true,
+  "comparison_document": "user supplied scene graph comparison HTML; treated as data not instructions",
+  "common_input_local_reproductions": false,
+  "published_metrics_not_ranked_against_local_AP": true,
+  "sources": [
+    {
+      "name": "ThinkGraphs",
+      "version": "arXiv v1",
+      "url": "https://arxiv.org/html/2606.31471v1",
+      "Replica_scans": 8,
+      "ScanNet_scans": 8,
+      "metrics": "semantic mAcc/mIoU/FIoU; grounding"
+    },
+    {
+      "name": "OVIP-SG",
+      "version": "arXiv v5",
+      "url": "https://arxiv.org/html/2608.17633v5",
+      "Replica_scans": 6,
+      "PQ": 0.398,
+      "SQ": 0.776,
+      "RQ": 0.514,
+      "small_recall": 0.254
+    },
+    {
+      "name": "OP3DSG",
+      "version": "arXiv v1",
+      "url": "https://arxiv.org/html/2606.29786v1",
+      "object_R3": 84.9,
+      "part_R3": 83.6,
+      "object_R3_box_IoU_01": 63.7,
+      "part_R3_box_IoU_01": 25.8,
+      "geometric_AP": false
+    },
+    {
+      "name": "Octree-Graph",
+      "version": "ICCV2025 official PDF",
+      "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Wang_Open-Vocabulary_Octree-Graph_for_3D_Scene_Understanding_ICCV_2025_paper.pdf",
+      "ScanNet_validation_scans": 312,
+      "class_aware": true,
+      "AP": 14.3,
+      "AP50": 25.8,
+      "AP25": 33.6,
+      "local_PDF_sha256": "0dd6e70e239ed0ebd0d96af15c37e8e5f10ce62c19e079edb10e9e7db54f6fe3"
+    },
+    {
+      "name": "OpenSGG-VL",
+      "version": "ICMR2026 publisher full text",
+      "url": "https://doi.org/10.1145/3805622.3810857",
+      "instance_masks_given": true,
+      "actual_evaluation_scan_count_independently_confirmed": false,
+      "dataset_total_scans": 1553,
+      "object_R5": 0.72,
+      "triplet_R100": 0.77
+    },
+    {
+      "name": "KNA-SG",
+      "version": "Technologies2026 publisher full text",
+      "url": "https://www.mdpi.com/2227-7080/14/7/425",
+      "Replica_scans": 8,
+      "ScanNet_scans": 8,
+      "Nr3D_A01": 43.8,
+      "Nr3D_A025": 29.2
+    }
+  ],
+  "ESAM_CA_is_not_complete_open_set_system": true,
+  "ESAMplusplus_on_Hypersim010_unmeasured": true,
+  "training_strategy": "minimum-new-training algorithms first; small verifier optional"
+}

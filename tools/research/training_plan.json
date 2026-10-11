@@ -1,0 +1,148 @@
+{
+  "status": "route_and_interfaces_prepared_not_dataset_training",
+  "dataset_split_unit": "whole_scene",
+  "diagnostic_only_scenes": [
+    "scene0011_00",
+    "scene0015_00",
+    "scene0019_00",
+    "ai_003_007",
+    "ai_001_010"
+  ],
+  "training_source": "official ScanNet train plus independent official Hypersim train",
+  "current_available_independent_ScanNet_training_scenes": 1,
+  "stage_A": {
+    "name": "ESAM instance and association fine-tuning",
+    "initialization": "official strictly loaded ESAM ScanNet200 checkpoint",
+    "reference_config": "configs/ESAM_CA/ESAM_online_scannet200_CA.py",
+    "first_freeze": [
+      "all large pretrained backbones in default minimum-training route"
+    ],
+    "first_train": [
+      "query decoder",
+      "merge head",
+      "memory",
+      "geometric pooling"
+    ],
+    "second_train": "gradually unfreeze temporal adapters and selected backbone blocks",
+    "reference_training_frames": 8,
+    "reference_optimizer": {
+      "type": "AdamW",
+      "lr": 0.0001,
+      "weight_decay": 0.05
+    },
+    "AMP": "only after verified sparse forward/backward",
+    "acceptance": [
+      "native baseline reproduction",
+      "class agnostic point AP",
+      "identity continuity",
+      "small object subsets",
+      "FP and FN"
+    ],
+    "required_for_current_improvement": false
+  },
+  "stage_B": {
+    "name": "EviMatch candidate verification",
+    "implementation": "tools/research/evi_match.py",
+    "features": {
+      "esam_query": 256,
+      "text": 384,
+      "geometry": 32,
+      "graph": 64,
+      "evidence": 12
+    },
+    "targets": [
+      "same instance across independent frames",
+      "max GT mask IoU",
+      "confirmed existence with unknown labels masked"
+    ],
+    "source_compatibility": "DINO vectors cannot silently substitute for ESAM queries merely because dimensions match",
+    "losses": [
+      "instance supervised contrastive",
+      "text-structure multi-positive contrastive",
+      "masked semantic compatibility BCE",
+      "masked existence BCE",
+      "mask quality SmoothL1"
+    ],
+    "joint_completion_implemented": false
+  },
+  "stage_C": {
+    "name": "language and graph conditioned shape hypothesis",
+    "requires": "independent training objects with genuine complete geometry targets",
+    "candidate": "AdaPoinTr initialization with text/context conditioning",
+    "losses_to_validate": [
+      "complete surface distance",
+      "observed surface preservation",
+      "visible free-space violation",
+      "multiview consistency"
+    ],
+    "observed_and_inferred_points_separate": true,
+    "ScanNet_reconstruction_is_not_complete_hidden_surface_GT": true
+  },
+  "hardware_profiles": {
+    "24GB": {
+      "initial_scene_batch": 1,
+      "initial_frames": 2,
+      "effective_batch_via_accumulation": 4
+    },
+    "48GB": {
+      "initial_scene_batch": 1,
+      "initial_frames": 8,
+      "effective_batch_via_accumulation": 4
+    },
+    "80GB": {
+      "initial_scene_batch": 2,
+      "initial_frames": 8,
+      "effective_batch_via_accumulation": 4
+    }
+  },
+  "hardware_profile_status": "starting candidates requiring real peak memory probe, not verified capacity",
+  "open_set_contract": {
+    "instance_proposals": "class-agnostic instance head, not restricted by the 200-class semantic predictions",
+    "names": "existing open-vocabulary text branch; no hard-coded closed-label output gate",
+    "claim_scope": "class-agnostic AP does not demonstrate unseen-category recognition",
+    "ESAM_itself": "local CA weights are not a complete open-set model; paper appendix combines masks with external open-vocabulary classification",
+    "evaluation": [
+      "strict geometric AP",
+      "base versus novel categories",
+      "free-text grounding",
+      "unknown objects retained"
+    ],
+    "unseen_detection_guaranteed": false,
+    "ESAM_200_class_semantics_must_not_gate_candidate_admission": true
+  },
+  "multi_GPU": "DDP only after identical single GPU baseline and sparse backward verification",
+  "external_vision_API_calls_for_plan": 0,
+  "objective": "minimise new project training; autonomous diagnose-modify-replay-reflect cycles first",
+  "execution_priority": [
+    "zero-new-training general algorithms",
+    "optional small frozen-backbone verifier",
+    "optional local adaptation only with evidence",
+    "conditional completion only with complete targets"
+  ],
+  "project_new_large_model_training_required": false,
+  "small_quality_candidate": {
+    "input_dim": 12,
+    "hidden_dim": 32,
+    "output_dim": 1,
+    "parameters_including_bias": 449,
+    "implemented": false,
+    "dataset_training": false,
+    "supervision": "training-scene mask IoU, separate from existence",
+    "evidence": "multi-view support-fraction score-only adapter reduced measured AP",
+    "requirement": "independent multi-scene train/calibration/test; freeze all large backbones"
+  },
+  "retained_algorithm_candidate": {
+    "name": "MICA-VSA",
+    "module": "soft_mutual_association.py",
+    "full_three_scan_replay": true,
+    "new_training": false,
+    "new_vision_API_calls": 0,
+    "aggregate_AP25_AP50_mean_percent": [
+      75.35657081103238,
+      60.59633175553117,
+      37.77427118368352
+    ],
+    "per_scene_regression": true,
+    "formal_default": "v19"
+  }
+}

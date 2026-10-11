@@ -1,0 +1,35 @@
+{
+  "machine": "localhost",
+  "python": "3.10.21",
+  "GPU": {
+    "torch_version": "2.14.0+cu130",
+    "CUDA_available": true,
+    "devices": [
+      {
+        "name": "NVIDIA GeForce RTX 5070 Laptop GPU",
+        "memory_GiB": 7.95953369140625,
+        "compute_capability": [
+          12,
+          0
+        ]
+      }
+    ]
+  },
+  "sparse": {
+    "import_available": false,
+    "training_CUDA_backward_verified": false
+  },
+  "official_train_scenes": 1201,
+  "official_val_scenes": 312,
+  "available_train_scenes": [
+    "scene0000_00"
+  ],
+  "missing_train_scenes": 1200,
+  "scene_level_disjoint": true,
+  "diagnostic_scenes_not_in_train": true,
+  "official_ESAM_training_entry_exists": true,
+  "official_online_config_exists": true,
+  "dataset_training_started": false,
+  "production_profile_changed": false,
+  "readiness": "needs training data coverage and CUDA sparse backward validation"
+}

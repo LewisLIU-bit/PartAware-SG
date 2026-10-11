@@ -1,0 +1,48 @@
+{
+  "complete": true,
+  "frozen_core_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+  "official_evaluator_unchanged": true,
+  "training": false,
+  "new_vision_API_calls": 0,
+  "GT_in_construction": false,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "frames": 60,
+      "manifest_sha256": "5959b53975f375d8e42fbae2902e214fcc13e2fb8855f79da03f544c52dac291",
+      "original_GPT_response_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+      "consumer_API_calls": 0,
+      "frontend_frame_masks_and_features_identical": true,
+      "graph_sha256": "1d6c4246502c5edd9f9dcaabf1fd89737577e7be36563ae658a70f26040137a8",
+      "final_ply_sha256": "5740001af13120ef1a9e5ef68f102566e8fbd728e00066917baa489dc418af6f"
+    },
+    {
+      "scene": "scene0015_00",
+      "frames": 50,
+      "manifest_sha256": "abdcfd96e95f54427875fa305ab3e4681c4d14fe15ec1a9d917a3df0e40cc268",
+      "original_GPT_response_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+      "consumer_API_calls": 0,
+      "frontend_frame_masks_and_features_identical": true,
+      "graph_sha256": "ed9f0ca8fe1f0e53b133527563897f6cf98d887ff0d9825ef6c280b0ccbae2c1",
+      "final_ply_sha256": "86ffcc1e996464bec057759b08f8ae4583c61e102c1e7c5953fb976e0e540d9b"
+    },
+    {
+      "scene": "scene0019_00",
+      "frames": 15,
+      "manifest_sha256": "0be3768df15263bde3b58fa255b68147f12f923c300b647f40b5437a8c60a2d7",
+      "original_GPT_response_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+      "consumer_API_calls": 0,
+      "frontend_frame_masks_and_features_identical": true,
+      "graph_sha256": "89d0a0cc2807439ac88f93bb478ed9f9cb30953553a90dbf0e20ae7abfe41f2d",
+      "final_ply_sha256": "d2019467337586909342fe58a90f3d1d7779c0c9a49860fa66e4008cf23693ae"
+    }
+  ],
+  "formal_default": "v19",
+  "candidate": "MICA-VSA / mutual_r2",
+  "development_scenes": true,
+  "candidate_source_sha256": {
+    "mutual_association.py": "f739b14b3a395206a9c010123cdf4484e19c73c0b92905527dfdf83ab5ef4703",
+    "soft_mutual_association.py": "64e06e446709aa10ebcb3ffcd056129c00f61dee19c5a843c13ee4b54b819433"
+  },
+  "original_replay_receipt_sha256": "33db1a9eccbc394515a5a5776e72f6dd50b10c34386d54d2071dd4eb8077d73e"
+}

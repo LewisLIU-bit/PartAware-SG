@@ -1,0 +1,46 @@
+{
+  "complete": true,
+  "validation_only_not_new_replay": true,
+  "scenes": [
+    {
+      "validated": true,
+      "frames": 60,
+      "resume": true,
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/scannet/scene0011_00",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2/scannet/scene0011_00",
+      "manifest_sha256": "5959b53975f375d8e42fbae2902e214fcc13e2fb8855f79da03f544c52dac291",
+      "full_geometry_replay": false,
+      "vision_API_calls": 0
+    },
+    {
+      "validated": true,
+      "frames": 50,
+      "resume": true,
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/scannet/scene0015_00",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2/scannet/scene0015_00",
+      "manifest_sha256": "abdcfd96e95f54427875fa305ab3e4681c4d14fe15ec1a9d917a3df0e40cc268",
+      "full_geometry_replay": false,
+      "vision_API_calls": 0
+    },
+    {
+      "validated": true,
+      "frames": 15,
+      "resume": true,
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/scannet/scene0019_00",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2/scannet/scene0019_00",
+      "manifest_sha256": "0be3768df15263bde3b58fa255b68147f12f923c300b647f40b5437a8c60a2d7",
+      "full_geometry_replay": false,
+      "vision_API_calls": 0
+    },
+    {
+      "validated": true,
+      "frames": 67,
+      "resume": true,
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/hypersim/ai_003_007",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2/hypersim/ai_003_007",
+      "manifest_sha256": "a4e60352b2588c61413a21f659b02c0b46e08054cba596f2ff0406fbda0184a6",
+      "full_geometry_replay": false,
+      "vision_API_calls": 0
+    }
+  ]
+}

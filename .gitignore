@@ -56,3 +56,8 @@ scannet/script/thirdparty/MGPC/
 scannet/script/thirdparty/SAM3/
 !docs/environment_sam3.json
 !docs/sam3_requirements.txt
+
+# Curated research contracts and compact evaluation receipts.
+!tools/research/training_plan.json
+!tools/research/results/
+!tools/research/results/*.json

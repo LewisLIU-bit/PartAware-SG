@@ -2571,15 +2571,15 @@
   "raw_fusion_rerun": false,
   "v18_byte_identical": true,
   "strict_target_reached": false,
-  "report_source_sha256": "1fb3d052dda5b5ae1f9b9d9d8d6b9edf4b6a909253d8a036109aa5c31d87eb6e",
+  "report_source_sha256": "37ab1ce41cec775ad056ab970e2dec889f0f6789b55a24fcee4aeda5d901fe87",
   "report_qa_passed": true,
   "report_version": "v19",
   "latex_compile_confirmed": false,
   "latex_compile_limitation": "Built-in compile_latex_document failed before source compilation: windows sandbox helper_unknown_error: setup refresh had errors. No TeX compiler diagnostic was returned. Existing source preserved; no separate PDF compiled.",
   "published_html": "RESEARCH_LOG.html",
   "published_latex": "RESEARCH_LOG.tex",
-  "html_sha256": "eec6111de41a394270a6bb04d45a9cd9e7afd6e4efb226309c7e7802530674cf",
-  "latex_sha256": "f16d1f662510f3a5b2773fd23221b0fc81e70a545d9d349360c37f1417768cdc",
+  "html_sha256": "ac8af67b6088cca8b62b11c8c94b6639283adfec2a855d61d22d66556a2d5286",
+  "latex_sha256": "1c85b139dcf698f270104b6aef5a22b3680b06ede2a1c9802576fa4d5c48bb56",
   "duplicate_rendered_docs_removed": true,
   "baseline_report_qa_passed": true,
   "independent_benchmarks": {
@@ -2640,5 +2640,129 @@
       "historical_box_GT_instances": 109,
       "receipt": "docs/esam_hypersim_010_validation.json"
     }
+  },
+  "research_cycle": {
+    "formal_default": "v19",
+    "candidate": "MICA-VSA / mutual_r2",
+    "aggregate": {
+      "all_ap": 0.3777427118368352,
+      "all_ap_50%": 0.6059633175553117,
+      "all_ap_25%": 0.7535657081103239,
+      "classes": {
+        "object": {
+          "ap": 0.3777427118368352,
+          "ap50%": 0.6059633175553117,
+          "ap25%": 0.7535657081103239
+        }
+      }
+    },
+    "per_scan": [
+      {
+        "scene": "scene0011_00",
+        "metrics": {
+          "all_ap": 0.40720826061617843,
+          "all_ap_50%": 0.7044025831713807,
+          "all_ap_25%": 0.7140985003187205,
+          "classes": {
+            "object": {
+              "ap": 0.40720826061617843,
+              "ap50%": 0.7044025831713807,
+              "ap25%": 0.7140985003187205
+            }
+          }
+        }
+      },
+      {
+        "scene": "scene0015_00",
+        "metrics": {
+          "all_ap": 0.4174065889802281,
+          "all_ap_50%": 0.6602963902208709,
+          "all_ap_25%": 0.9424306258495507,
+          "classes": {
+            "object": {
+              "ap": 0.4174065889802281,
+              "ap50%": 0.6602963902208709,
+              "ap25%": 0.9424306258495507
+            }
+          }
+        }
+      },
+      {
+        "scene": "scene0019_00",
+        "metrics": {
+          "all_ap": 0.27729276895943555,
+          "all_ap_50%": 0.35798941798941797,
+          "all_ap_25%": 0.5195719095719096,
+          "classes": {
+            "object": {
+              "ap": 0.27729276895943555,
+              "ap50%": 0.35798941798941797,
+              "ap25%": 0.5195719095719096
+            }
+          }
+        }
+      }
+    ],
+    "cross_domain": {
+      "complete": true,
+      "scene": "ai_003_007",
+      "development_scene": true,
+      "full_geometry_replay": true,
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/hypersim/ai_003_007",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2/hypersim/ai_003_007",
+      "protocol": "observed_hypersim_adaptation_not_official_scannet_or_unigraph3d",
+      "frames": 67,
+      "GT": 10,
+      "frozen_v19": {
+        "geometry_only_box_AP25": 0.3727272727272727,
+        "geometry_only_box_AP50": 0.09
+      },
+      "candidate": {
+        "geometry_only_box_AP25": 0.40772727272727266,
+        "geometry_only_box_AP50": 0.09
+      },
+      "delta_percentage_points": {
+        "geometry_only_box_AP25": 3.4999999999999973,
+        "geometry_only_box_AP50": 0.0
+      },
+      "formal_default": "v19",
+      "new_API_calls": 0,
+      "training": false,
+      "GT_in_construction": false,
+      "GT_and_protocol_unchanged": true,
+      "frontend_masks_and_features_identical": true,
+      "manifest_sha256": "a4e60352b2588c61413a21f659b02c0b46e08054cba596f2ff0406fbda0184a6",
+      "GT_sha256": "2b0e6a368a2df3945c1bc94fe456c6e4e609e57e7ab70ba68869847b2960912f",
+      "graph_sha256": "1f40d4d1ba61124806988344dc146aa259cb697ec99e85e2488543cf146918a6",
+      "final_ply_sha256": "6795c387c3c32230cabc00163c8c237fdd345ae70ca5020971144d9a1e31515e"
+    },
+    "candidate_promoted": false,
+    "development_scenes": true,
+    "training": false,
+    "new_API_calls": 0,
+    "receipt": "tools/research/results/full_replay_validation.json",
+    "AGENTS_sha256": "08b8646a1c247975f6ce3e1b28e8565720e58db0cc1f6094aa5417be32484d21",
+    "research_report_QA": {
+      "six_papers": [
+        "ThinkGraphs [41]",
+        "OVIP-SG [42]",
+        "OP3DSG [3]",
+        "Octree-Graph [43]",
+        "OpenSGG-VL [44]",
+        "KNA-SG [45]"
+      ],
+      "published_metrics_separate": true,
+      "minimal_training_priority": true,
+      "current_v19_preserved": true,
+      "formula_errors": 0,
+      "candidate_per_scan_and_pooled_metrics_verified": true,
+      "candidate_final_rows": 9,
+      "source_RGB_audit_loaded": true,
+      "desktop_mobile_no_body_overflow": true,
+      "cross_domain_strict_box_values_verified": true,
+      "source_sha256": "37ab1ce41cec775ad056ab970e2dec889f0f6789b55a24fcee4aeda5d901fe87",
+      "AGENTS_lines": 414
+    },
+    "latex_compilation": "environment failed: windows sandbox helper_unknown_error; no TeX diagnostics"
   }
 }

@@ -56,8 +56,9 @@ The 104 eligible point instances and historical 109 GT boxes are separate:
 the historical strict box target remains unmet. See report 26.9 and
 [alignment validation](docs/esam_hypersim_010_alignment.json).
 
-ESAM uses the author's published trained weights; joint training in this
-project remains paused. ESAM++ is a distinct Google/Stanford/UC San Diego
+ESAM uses the author's published trained weights. This project prioritises
+zero-new-training algorithm cycles, with a small verifier optional; no dataset
+training has started. ESAM++ is a distinct Google/Stanford/UC San Diego
 paper: Google's public core encoder/config repository has been downloaded
 and its CPU encoder forward pass verified. Its published files do not provide
 a corresponding checkpoint or the referenced complete online model type.
@@ -66,6 +67,40 @@ The original ESAM backbone weights are incompatible. See
 not ESAM++; random encoder smoke checks are not AP results.
 The unchanged official model and tested external CPU compatibility adapters
 are documented in [baseline setup](tools/esam_baseline/README.md).
+
+## Autonomous research cycle
+
+The root [AGENTS.md](AGENTS.md) is the detailed handoff for architecture,
+environment, data contracts, known failures, experiments and next steps.
+The [research tools](tools/research/README.md) contain reproducible cached-scene
+replay and optional minimum-training interfaces. No dataset training has started.
+
+Retained research candidate MICA-VSA uses symmetric current-visible surface
+coverage and soft semantic identity for association. All three scans were
+reconstructed from fusion through final cloud/graph publication with identical
+frontend masks/features; no fresh image API calls or training.
+
+| Development scan | AP25 | AP50 | Mean AP (.50–.90) |
+| --- | --- | --- | --- |
+| scene0011_00 | 71.41% | 70.44% | 40.72% |
+| scene0015_00 | 94.24% | 66.03% | 41.74% |
+| scene0019_00 | 51.96% | 35.80% | 27.73% |
+| Pooled | 75.36% | 60.60% | 37.77% |
+
+Pooled gains over v19 are 0.26/2.32/0.67 percentage points. scene0011 regresses,
+scene0019 is unchanged; this does not replace the formal v19 default or establish
+unseen/full-benchmark performance. On ai_003_007, the same strict observed-box
+protocol gives candidate AP25/AP50 40.77%/9.00%
+versus v19 37.27%/9.00%. Cross-domain and per-scan limitations remain explicit.
+
+See [full evaluation](tools/research/results/mutual_r2_evaluation.json),
+[cache/input validation](tools/research/results/full_replay_validation.json),
+[cross-domain validation](tools/research/results/hypersim_r2_evaluation.json), and
+canonical RESEARCH_LOG.html sections 26.11 and 27.6–27.7 for six-paper protocols,
+source-mask failures, mathematics and minimum-training opinions.
+Rejected replay products were removed; compact [negative receipts](tools/research/results/negative_trials.json)
+retain metrics/hashes. A proposed 449-parameter quality head is unimplemented;
+the 725890-parameter matching prototype has only synthetic interface checks.
 
 ## Default EviScene pipeline
 

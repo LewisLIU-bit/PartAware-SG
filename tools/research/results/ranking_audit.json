@@ -1,0 +1,1942 @@
+{
+  "evaluation_only": true,
+  "GT_used_in_construction": false,
+  "not_AP_FP_counts": true,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "variant": "v19",
+      "best_recall25": 23,
+      "best_recall50": 23,
+      "eligible_GT": 28,
+      "highest_score_low_IoU": [
+        {
+          "node": "197",
+          "points": 1196,
+          "confidence": 0.9110294423960286,
+          "best_eligible_GT_IoU": 0.06619718309859154,
+          "best_GT_id": 26
+        },
+        {
+          "node": "36",
+          "points": 584,
+          "confidence": 0.9019739360441088,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "26",
+          "points": 482,
+          "confidence": 0.8727950442539407,
+          "best_eligible_GT_IoU": 0.2357142857142857,
+          "best_GT_id": 26
+        },
+        {
+          "node": "117",
+          "points": 4371,
+          "confidence": 0.8052064779388022,
+          "best_eligible_GT_IoU": 0.19041735310269084,
+          "best_GT_id": 2
+        },
+        {
+          "node": "69",
+          "points": 518,
+          "confidence": 0.7795839412088654,
+          "best_eligible_GT_IoU": 0.031426823673344546,
+          "best_GT_id": 2
+        },
+        {
+          "node": "9",
+          "points": 1503,
+          "confidence": 0.772816194400039,
+          "best_eligible_GT_IoU": 0.21062618595825428,
+          "best_GT_id": 1
+        },
+        {
+          "node": "130",
+          "points": 392,
+          "confidence": 0.7500691562937805,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "56",
+          "points": 1057,
+          "confidence": 0.7039831791077833,
+          "best_eligible_GT_IoU": 0.06263817243920412,
+          "best_GT_id": 1
+        }
+      ],
+      "predictions": [
+        {
+          "node": "1",
+          "points": 11044,
+          "confidence": 0.8547174215671656,
+          "best_eligible_GT_IoU": 0.646441793500617,
+          "best_GT_id": 2
+        },
+        {
+          "node": "22",
+          "points": 5417,
+          "confidence": 0.828631465891858,
+          "best_eligible_GT_IoU": 0.8107685083737675,
+          "best_GT_id": 27
+        },
+        {
+          "node": "83",
+          "points": 6545,
+          "confidence": 0.8232023242224006,
+          "best_eligible_GT_IoU": 0.6248311064404743,
+          "best_GT_id": 17
+        },
+        {
+          "node": "107",
+          "points": 10312,
+          "confidence": 0.9474933911959037,
+          "best_eligible_GT_IoU": 0.9369671424465945,
+          "best_GT_id": 18
+        },
+        {
+          "node": "117",
+          "points": 4371,
+          "confidence": 0.8052064779388022,
+          "best_eligible_GT_IoU": 0.19041735310269084,
+          "best_GT_id": 2
+        },
+        {
+          "node": "3",
+          "points": 3007,
+          "confidence": 0.8609778791491326,
+          "best_eligible_GT_IoU": 0.723397823458283,
+          "best_GT_id": 7
+        },
+        {
+          "node": "13",
+          "points": 5955,
+          "confidence": 0.7354890607895387,
+          "best_eligible_GT_IoU": 0.8549164524421594,
+          "best_GT_id": 24
+        },
+        {
+          "node": "108",
+          "points": 3745,
+          "confidence": 0.8731346419200668,
+          "best_eligible_GT_IoU": 0.8843264897346019,
+          "best_GT_id": 4
+        },
+        {
+          "node": "4",
+          "points": 3639,
+          "confidence": 0.8669168723553434,
+          "best_eligible_GT_IoU": 0.7844387755102041,
+          "best_GT_id": 9
+        },
+        {
+          "node": "5",
+          "points": 3481,
+          "confidence": 0.8359059908258961,
+          "best_eligible_GT_IoU": 0.9041610738255034,
+          "best_GT_id": 6
+        },
+        {
+          "node": "8",
+          "points": 3042,
+          "confidence": 0.8636953059607896,
+          "best_eligible_GT_IoU": 0.878429107710078,
+          "best_GT_id": 8
+        },
+        {
+          "node": "2",
+          "points": 3077,
+          "confidence": 0.866093004339493,
+          "best_eligible_GT_IoU": 0.7915837361387547,
+          "best_GT_id": 10
+        },
+        {
+          "node": "7",
+          "points": 3314,
+          "confidence": 0.8332586880357665,
+          "best_eligible_GT_IoU": 0.7393643031784841,
+          "best_GT_id": 11
+        },
+        {
+          "node": "9",
+          "points": 1503,
+          "confidence": 0.772816194400039,
+          "best_eligible_GT_IoU": 0.21062618595825428,
+          "best_GT_id": 1
+        },
+        {
+          "node": "25",
+          "points": 760,
+          "confidence": 0.6637292175877154,
+          "best_eligible_GT_IoU": 0.09453681710213777,
+          "best_GT_id": 27
+        },
+        {
+          "node": "40",
+          "points": 6367,
+          "confidence": 0.7414468526365741,
+          "best_eligible_GT_IoU": 0.7633259300388673,
+          "best_GT_id": 30
+        },
+        {
+          "node": "82",
+          "points": 3058,
+          "confidence": 0.8621972074834452,
+          "best_eligible_GT_IoU": 0.8936294564582116,
+          "best_GT_id": 12
+        },
+        {
+          "node": "18",
+          "points": 284,
+          "confidence": 0.5064796418673962,
+          "best_eligible_GT_IoU": 0.03411860276198213,
+          "best_GT_id": 28
+        },
+        {
+          "node": "89",
+          "points": 1513,
+          "confidence": 0.7846031633095456,
+          "best_eligible_GT_IoU": 0.5430079155672823,
+          "best_GT_id": 15
+        },
+        {
+          "node": "74",
+          "points": 2373,
+          "confidence": 0.5645127279826732,
+          "best_eligible_GT_IoU": 0.5402103834407872,
+          "best_GT_id": 20
+        },
+        {
+          "node": "86",
+          "points": 2893,
+          "confidence": 0.7969284282382105,
+          "best_eligible_GT_IoU": 0.8180451127819549,
+          "best_GT_id": 5
+        },
+        {
+          "node": "84",
+          "points": 2372,
+          "confidence": 0.8279734179005531,
+          "best_eligible_GT_IoU": 0.9793559042113955,
+          "best_GT_id": 13
+        },
+        {
+          "node": "38",
+          "points": 3054,
+          "confidence": 0.7148279305427718,
+          "best_eligible_GT_IoU": 0.7594125500667557,
+          "best_GT_id": 28
+        },
+        {
+          "node": "95",
+          "points": 4375,
+          "confidence": 0.7023358990247807,
+          "best_eligible_GT_IoU": 0.7383230163196398,
+          "best_GT_id": 19
+        },
+        {
+          "node": "59",
+          "points": 6333,
+          "confidence": 0.8155995765336991,
+          "best_eligible_GT_IoU": 0.773942263632198,
+          "best_GT_id": 23
+        },
+        {
+          "node": "148",
+          "points": 1784,
+          "confidence": 0.8631746651919199,
+          "best_eligible_GT_IoU": 0.6434977578475336,
+          "best_GT_id": 32
+        },
+        {
+          "node": "198",
+          "points": 102,
+          "confidence": 0.6532579406683655,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "10",
+          "points": 647,
+          "confidence": 0.5233921315124298,
+          "best_eligible_GT_IoU": 0.08504866762406255,
+          "best_GT_id": 1
+        },
+        {
+          "node": "58",
+          "points": 599,
+          "confidence": 0.5761748714451327,
+          "best_eligible_GT_IoU": 0.040209520875057775,
+          "best_GT_id": 1
+        },
+        {
+          "node": "60",
+          "points": 263,
+          "confidence": 0.6463546800628799,
+          "best_eligible_GT_IoU": 0.042743377214366975,
+          "best_GT_id": 1
+        },
+        {
+          "node": "20",
+          "points": 216,
+          "confidence": 0.5757969197567422,
+          "best_eligible_GT_IoU": 0.02142612272883099,
+          "best_GT_id": 25
+        },
+        {
+          "node": "141",
+          "points": 2988,
+          "confidence": 0.6893270080912139,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "36",
+          "points": 584,
+          "confidence": 0.9019739360441088,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "133",
+          "points": 716,
+          "confidence": 0.6225237866413523,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "147",
+          "points": 2478,
+          "confidence": 0.8052616426932617,
+          "best_eligible_GT_IoU": 0.7641073080481036,
+          "best_GT_id": 3
+        },
+        {
+          "node": "56",
+          "points": 1057,
+          "confidence": 0.7039831791077833,
+          "best_eligible_GT_IoU": 0.06263817243920412,
+          "best_GT_id": 1
+        },
+        {
+          "node": "26",
+          "points": 482,
+          "confidence": 0.8727950442539407,
+          "best_eligible_GT_IoU": 0.2357142857142857,
+          "best_GT_id": 26
+        },
+        {
+          "node": "28",
+          "points": 235,
+          "confidence": 0.47866144667324456,
+          "best_eligible_GT_IoU": 0.03819275150333171,
+          "best_GT_id": 1
+        },
+        {
+          "node": "69",
+          "points": 518,
+          "confidence": 0.7795839412088654,
+          "best_eligible_GT_IoU": 0.031426823673344546,
+          "best_GT_id": 2
+        },
+        {
+          "node": "130",
+          "points": 392,
+          "confidence": 0.7500691562937805,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "97",
+          "points": 842,
+          "confidence": 0.6475923531703188,
+          "best_eligible_GT_IoU": 0.04275534441805225,
+          "best_GT_id": 25
+        },
+        {
+          "node": "197",
+          "points": 1196,
+          "confidence": 0.9110294423960286,
+          "best_eligible_GT_IoU": 0.06619718309859154,
+          "best_GT_id": 26
+        },
+        {
+          "node": "81",
+          "points": 170,
+          "confidence": 0.4452554158337015,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        }
+      ]
+    },
+    {
+      "scene": "scene0011_00",
+      "variant": "mutual_r2",
+      "best_recall25": 23,
+      "best_recall50": 23,
+      "eligible_GT": 28,
+      "highest_score_low_IoU": [
+        {
+          "node": "207",
+          "points": 1196,
+          "confidence": 0.9110294423960286,
+          "best_eligible_GT_IoU": 0.06619718309859154,
+          "best_GT_id": 26
+        },
+        {
+          "node": "37",
+          "points": 584,
+          "confidence": 0.9019739360441088,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "28",
+          "points": 482,
+          "confidence": 0.885812729665214,
+          "best_eligible_GT_IoU": 0.2357142857142857,
+          "best_GT_id": 26
+        },
+        {
+          "node": "123",
+          "points": 4371,
+          "confidence": 0.8052064779388022,
+          "best_eligible_GT_IoU": 0.19041735310269084,
+          "best_GT_id": 2
+        },
+        {
+          "node": "72",
+          "points": 518,
+          "confidence": 0.7795839412088654,
+          "best_eligible_GT_IoU": 0.031426823673344546,
+          "best_GT_id": 2
+        },
+        {
+          "node": "9",
+          "points": 1503,
+          "confidence": 0.772816194400039,
+          "best_eligible_GT_IoU": 0.21062618595825428,
+          "best_GT_id": 1
+        },
+        {
+          "node": "136",
+          "points": 392,
+          "confidence": 0.7500691562937805,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "57",
+          "points": 1057,
+          "confidence": 0.7039831791077833,
+          "best_eligible_GT_IoU": 0.06263817243920412,
+          "best_GT_id": 1
+        }
+      ],
+      "predictions": [
+        {
+          "node": "1",
+          "points": 11044,
+          "confidence": 0.8547174215671656,
+          "best_eligible_GT_IoU": 0.646441793500617,
+          "best_GT_id": 2
+        },
+        {
+          "node": "22",
+          "points": 5417,
+          "confidence": 0.828631465891858,
+          "best_eligible_GT_IoU": 0.8107685083737675,
+          "best_GT_id": 27
+        },
+        {
+          "node": "87",
+          "points": 6545,
+          "confidence": 0.8232023242224006,
+          "best_eligible_GT_IoU": 0.6248311064404743,
+          "best_GT_id": 17
+        },
+        {
+          "node": "112",
+          "points": 10403,
+          "confidence": 0.9474933911959037,
+          "best_eligible_GT_IoU": 0.9288698955365622,
+          "best_GT_id": 18
+        },
+        {
+          "node": "123",
+          "points": 4371,
+          "confidence": 0.8052064779388022,
+          "best_eligible_GT_IoU": 0.19041735310269084,
+          "best_GT_id": 2
+        },
+        {
+          "node": "3",
+          "points": 3007,
+          "confidence": 0.8609778791491326,
+          "best_eligible_GT_IoU": 0.723397823458283,
+          "best_GT_id": 7
+        },
+        {
+          "node": "13",
+          "points": 5912,
+          "confidence": 0.7441317129524105,
+          "best_eligible_GT_IoU": 0.8480077120822622,
+          "best_GT_id": 24
+        },
+        {
+          "node": "113",
+          "points": 3745,
+          "confidence": 0.8731346419200668,
+          "best_eligible_GT_IoU": 0.8843264897346019,
+          "best_GT_id": 4
+        },
+        {
+          "node": "4",
+          "points": 3639,
+          "confidence": 0.8669168723553434,
+          "best_eligible_GT_IoU": 0.7844387755102041,
+          "best_GT_id": 9
+        },
+        {
+          "node": "5",
+          "points": 3481,
+          "confidence": 0.8359118951850446,
+          "best_eligible_GT_IoU": 0.9041610738255034,
+          "best_GT_id": 6
+        },
+        {
+          "node": "8",
+          "points": 3042,
+          "confidence": 0.8636953059607896,
+          "best_eligible_GT_IoU": 0.878429107710078,
+          "best_GT_id": 8
+        },
+        {
+          "node": "2",
+          "points": 3077,
+          "confidence": 0.8802294649804806,
+          "best_eligible_GT_IoU": 0.7915837361387547,
+          "best_GT_id": 10
+        },
+        {
+          "node": "7",
+          "points": 3314,
+          "confidence": 0.8332586880357665,
+          "best_eligible_GT_IoU": 0.7393643031784841,
+          "best_GT_id": 11
+        },
+        {
+          "node": "9",
+          "points": 1503,
+          "confidence": 0.772816194400039,
+          "best_eligible_GT_IoU": 0.21062618595825428,
+          "best_GT_id": 1
+        },
+        {
+          "node": "25",
+          "points": 760,
+          "confidence": 0.6637292175877154,
+          "best_eligible_GT_IoU": 0.09453681710213777,
+          "best_GT_id": 27
+        },
+        {
+          "node": "41",
+          "points": 6367,
+          "confidence": 0.7414468526365741,
+          "best_eligible_GT_IoU": 0.7633259300388673,
+          "best_GT_id": 30
+        },
+        {
+          "node": "86",
+          "points": 3058,
+          "confidence": 0.8621972074834452,
+          "best_eligible_GT_IoU": 0.8936294564582116,
+          "best_GT_id": 12
+        },
+        {
+          "node": "18",
+          "points": 284,
+          "confidence": 0.5165416718428764,
+          "best_eligible_GT_IoU": 0.03411860276198213,
+          "best_GT_id": 28
+        },
+        {
+          "node": "93",
+          "points": 1513,
+          "confidence": 0.7846031633095456,
+          "best_eligible_GT_IoU": 0.5430079155672823,
+          "best_GT_id": 15
+        },
+        {
+          "node": "77",
+          "points": 2373,
+          "confidence": 0.5645127279826732,
+          "best_eligible_GT_IoU": 0.5402103834407872,
+          "best_GT_id": 20
+        },
+        {
+          "node": "90",
+          "points": 2893,
+          "confidence": 0.7969284282382105,
+          "best_eligible_GT_IoU": 0.8180451127819549,
+          "best_GT_id": 5
+        },
+        {
+          "node": "99",
+          "points": 4861,
+          "confidence": 0.7076136090174961,
+          "best_eligible_GT_IoU": 0.8294879009566686,
+          "best_GT_id": 19
+        },
+        {
+          "node": "88",
+          "points": 2372,
+          "confidence": 0.8279734179005531,
+          "best_eligible_GT_IoU": 0.9793559042113955,
+          "best_GT_id": 13
+        },
+        {
+          "node": "39",
+          "points": 3054,
+          "confidence": 0.7148279305427718,
+          "best_eligible_GT_IoU": 0.7594125500667557,
+          "best_GT_id": 28
+        },
+        {
+          "node": "156",
+          "points": 1784,
+          "confidence": 0.8631746651919199,
+          "best_eligible_GT_IoU": 0.6434977578475336,
+          "best_GT_id": 32
+        },
+        {
+          "node": "208",
+          "points": 102,
+          "confidence": 0.6532579406683655,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "62",
+          "points": 5724,
+          "confidence": 0.8151604329896093,
+          "best_eligible_GT_IoU": 0.8329447035309794,
+          "best_GT_id": 23
+        },
+        {
+          "node": "10",
+          "points": 647,
+          "confidence": 0.5233921315124298,
+          "best_eligible_GT_IoU": 0.08504866762406255,
+          "best_GT_id": 1
+        },
+        {
+          "node": "59",
+          "points": 599,
+          "confidence": 0.5761748714451327,
+          "best_eligible_GT_IoU": 0.040209520875057775,
+          "best_GT_id": 1
+        },
+        {
+          "node": "63",
+          "points": 317,
+          "confidence": 0.6335965575961211,
+          "best_eligible_GT_IoU": 0.05151958394279214,
+          "best_GT_id": 1
+        },
+        {
+          "node": "149",
+          "points": 2988,
+          "confidence": 0.6893270080912139,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "37",
+          "points": 584,
+          "confidence": 0.9019739360441088,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "20",
+          "points": 216,
+          "confidence": 0.5815815333960817,
+          "best_eligible_GT_IoU": 0.02142612272883099,
+          "best_GT_id": 25
+        },
+        {
+          "node": "139",
+          "points": 716,
+          "confidence": 0.6225237866413523,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "155",
+          "points": 2478,
+          "confidence": 0.8052616426932617,
+          "best_eligible_GT_IoU": 0.7641073080481036,
+          "best_GT_id": 3
+        },
+        {
+          "node": "57",
+          "points": 1057,
+          "confidence": 0.7039831791077833,
+          "best_eligible_GT_IoU": 0.06263817243920412,
+          "best_GT_id": 1
+        },
+        {
+          "node": "28",
+          "points": 482,
+          "confidence": 0.885812729665214,
+          "best_eligible_GT_IoU": 0.2357142857142857,
+          "best_GT_id": 26
+        },
+        {
+          "node": "29",
+          "points": 272,
+          "confidence": 0.47866144667324456,
+          "best_eligible_GT_IoU": 0.04420607833577117,
+          "best_GT_id": 1
+        },
+        {
+          "node": "72",
+          "points": 518,
+          "confidence": 0.7795839412088654,
+          "best_eligible_GT_IoU": 0.031426823673344546,
+          "best_GT_id": 2
+        },
+        {
+          "node": "136",
+          "points": 392,
+          "confidence": 0.7500691562937805,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 1
+        },
+        {
+          "node": "101",
+          "points": 1264,
+          "confidence": 0.6475923531703188,
+          "best_eligible_GT_IoU": 0.04007718569096037,
+          "best_GT_id": 25
+        },
+        {
+          "node": "207",
+          "points": 1196,
+          "confidence": 0.9110294423960286,
+          "best_eligible_GT_IoU": 0.06619718309859154,
+          "best_GT_id": 26
+        }
+      ]
+    },
+    {
+      "scene": "scene0015_00",
+      "variant": "v19",
+      "best_recall25": 38,
+      "best_recall50": 30,
+      "eligible_GT": 39,
+      "highest_score_low_IoU": [
+        {
+          "node": "137",
+          "points": 630,
+          "confidence": 0.8932850930686624,
+          "best_eligible_GT_IoU": 0.4787234042553192,
+          "best_GT_id": 52
+        },
+        {
+          "node": "30",
+          "points": 854,
+          "confidence": 0.8518832176412025,
+          "best_eligible_GT_IoU": 0.4379487179487179,
+          "best_GT_id": 26
+        },
+        {
+          "node": "48",
+          "points": 440,
+          "confidence": 0.8331245670100722,
+          "best_eligible_GT_IoU": 0.31336898395721924,
+          "best_GT_id": 22
+        },
+        {
+          "node": "46",
+          "points": 733,
+          "confidence": 0.8028428880471553,
+          "best_eligible_GT_IoU": 0.4912868632707775,
+          "best_GT_id": 20
+        },
+        {
+          "node": "63",
+          "points": 644,
+          "confidence": 0.7579866092300057,
+          "best_eligible_GT_IoU": 0.2660897782585181,
+          "best_GT_id": 24
+        },
+        {
+          "node": "45",
+          "points": 1981,
+          "confidence": 0.7375078449362426,
+          "best_eligible_GT_IoU": 0.2893258426966292,
+          "best_GT_id": 19
+        },
+        {
+          "node": "5",
+          "points": 1452,
+          "confidence": 0.7240932782947834,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "64",
+          "points": 850,
+          "confidence": 0.7105471727910262,
+          "best_eligible_GT_IoU": 0.44479330193615907,
+          "best_GT_id": 23
+        }
+      ],
+      "predictions": [
+        {
+          "node": "2",
+          "points": 10403,
+          "confidence": 0.9160711257771244,
+          "best_eligible_GT_IoU": 0.9403821422009921,
+          "best_GT_id": 47
+        },
+        {
+          "node": "10",
+          "points": 4097,
+          "confidence": 0.8716455986813034,
+          "best_eligible_GT_IoU": 0.8805071996561358,
+          "best_GT_id": 34
+        },
+        {
+          "node": "12",
+          "points": 4410,
+          "confidence": 0.8631988625404695,
+          "best_eligible_GT_IoU": 0.8790572669009716,
+          "best_GT_id": 32
+        },
+        {
+          "node": "61",
+          "points": 6755,
+          "confidence": 0.8621474429158811,
+          "best_eligible_GT_IoU": 0.8928099392016918,
+          "best_GT_id": 40
+        },
+        {
+          "node": "3",
+          "points": 3266,
+          "confidence": 0.8841672992789531,
+          "best_eligible_GT_IoU": 0.8140564471499724,
+          "best_GT_id": 33
+        },
+        {
+          "node": "49",
+          "points": 3267,
+          "confidence": 0.8526923339893298,
+          "best_eligible_GT_IoU": 0.910025706940874,
+          "best_GT_id": 37
+        },
+        {
+          "node": "57",
+          "points": 2036,
+          "confidence": 0.7232654651036894,
+          "best_eligible_GT_IoU": 0.7900313971742543,
+          "best_GT_id": 36
+        },
+        {
+          "node": "72",
+          "points": 3736,
+          "confidence": 0.8343277740145162,
+          "best_eligible_GT_IoU": 0.836427732079906,
+          "best_GT_id": 35
+        },
+        {
+          "node": "28",
+          "points": 2217,
+          "confidence": 0.857231027931566,
+          "best_eligible_GT_IoU": 0.8633288227334236,
+          "best_GT_id": 12
+        },
+        {
+          "node": "25",
+          "points": 2664,
+          "confidence": 0.7944643677879546,
+          "best_eligible_GT_IoU": 0.8427712749130022,
+          "best_GT_id": 31
+        },
+        {
+          "node": "1",
+          "points": 1392,
+          "confidence": 0.790071679630904,
+          "best_eligible_GT_IoU": 0.9004676018704075,
+          "best_GT_id": 27
+        },
+        {
+          "node": "21",
+          "points": 1033,
+          "confidence": 0.799257068806172,
+          "best_eligible_GT_IoU": 0.934841628959276,
+          "best_GT_id": 30
+        },
+        {
+          "node": "46",
+          "points": 733,
+          "confidence": 0.8028428880471553,
+          "best_eligible_GT_IoU": 0.4912868632707775,
+          "best_GT_id": 20
+        },
+        {
+          "node": "17",
+          "points": 1289,
+          "confidence": 0.8381029134864135,
+          "best_eligible_GT_IoU": 0.66995841995842,
+          "best_GT_id": 17
+        },
+        {
+          "node": "29",
+          "points": 668,
+          "confidence": 0.790744296870934,
+          "best_eligible_GT_IoU": 0.8802395209580839,
+          "best_GT_id": 13
+        },
+        {
+          "node": "30",
+          "points": 854,
+          "confidence": 0.8518832176412025,
+          "best_eligible_GT_IoU": 0.4379487179487179,
+          "best_GT_id": 26
+        },
+        {
+          "node": "69",
+          "points": 1143,
+          "confidence": 0.7915965244096951,
+          "best_eligible_GT_IoU": 0.6668810289389068,
+          "best_GT_id": 18
+        },
+        {
+          "node": "48",
+          "points": 440,
+          "confidence": 0.8331245670100722,
+          "best_eligible_GT_IoU": 0.31336898395721924,
+          "best_GT_id": 22
+        },
+        {
+          "node": "68",
+          "points": 1538,
+          "confidence": 0.75870705917179,
+          "best_eligible_GT_IoU": 0.7937619350732018,
+          "best_GT_id": 25
+        },
+        {
+          "node": "5",
+          "points": 1452,
+          "confidence": 0.7240932782947834,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "32",
+          "points": 1844,
+          "confidence": 0.7558774932011979,
+          "best_eligible_GT_IoU": 1.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "45",
+          "points": 1981,
+          "confidence": 0.7375078449362426,
+          "best_eligible_GT_IoU": 0.2893258426966292,
+          "best_GT_id": 19
+        },
+        {
+          "node": "31",
+          "points": 631,
+          "confidence": 0.7906639369032856,
+          "best_eligible_GT_IoU": 0.8862359550561798,
+          "best_GT_id": 1
+        },
+        {
+          "node": "42",
+          "points": 766,
+          "confidence": 0.6973591188165685,
+          "best_eligible_GT_IoU": 0.4529863985807215,
+          "best_GT_id": 19
+        },
+        {
+          "node": "6",
+          "points": 1349,
+          "confidence": 0.6419411256714455,
+          "best_eligible_GT_IoU": 0.7716827279466272,
+          "best_GT_id": 3
+        },
+        {
+          "node": "52",
+          "points": 642,
+          "confidence": 0.6975319735894492,
+          "best_eligible_GT_IoU": 0.43029490616621985,
+          "best_GT_id": 20
+        },
+        {
+          "node": "59",
+          "points": 807,
+          "confidence": 0.6395889385161423,
+          "best_eligible_GT_IoU": 0.5643356643356643,
+          "best_GT_id": 21
+        },
+        {
+          "node": "4",
+          "points": 2077,
+          "confidence": 0.828583268768767,
+          "best_eligible_GT_IoU": 0.90999099909991,
+          "best_GT_id": 49
+        },
+        {
+          "node": "58",
+          "points": 495,
+          "confidence": 0.7591875567729275,
+          "best_eligible_GT_IoU": 0.6281725888324873,
+          "best_GT_id": 22
+        },
+        {
+          "node": "63",
+          "points": 644,
+          "confidence": 0.7579866092300057,
+          "best_eligible_GT_IoU": 0.2660897782585181,
+          "best_GT_id": 24
+        },
+        {
+          "node": "44",
+          "points": 873,
+          "confidence": 0.6395329451184132,
+          "best_eligible_GT_IoU": 0.8846560846560847,
+          "best_GT_id": 29
+        },
+        {
+          "node": "60",
+          "points": 1205,
+          "confidence": 0.8564928558906639,
+          "best_eligible_GT_IoU": 0.7100766057748968,
+          "best_GT_id": 24
+        },
+        {
+          "node": "8",
+          "points": 1285,
+          "confidence": 0.7621025415856153,
+          "best_eligible_GT_IoU": 0.9237958303378864,
+          "best_GT_id": 2
+        },
+        {
+          "node": "16",
+          "points": 1156,
+          "confidence": 0.7681880188314121,
+          "best_eligible_GT_IoU": 0.5612549800796812,
+          "best_GT_id": 53
+        },
+        {
+          "node": "64",
+          "points": 850,
+          "confidence": 0.7105471727910262,
+          "best_eligible_GT_IoU": 0.44479330193615907,
+          "best_GT_id": 23
+        },
+        {
+          "node": "97",
+          "points": 861,
+          "confidence": 0.6047365307474073,
+          "best_eligible_GT_IoU": 0.4372778059928898,
+          "best_GT_id": 16
+        },
+        {
+          "node": "137",
+          "points": 630,
+          "confidence": 0.8932850930686624,
+          "best_eligible_GT_IoU": 0.4787234042553192,
+          "best_GT_id": 52
+        },
+        {
+          "node": "66",
+          "points": 739,
+          "confidence": 0.6996309514506273,
+          "best_eligible_GT_IoU": 0.3867085295656724,
+          "best_GT_id": 23
+        },
+        {
+          "node": "41",
+          "points": 823,
+          "confidence": 0.6251697341072373,
+          "best_eligible_GT_IoU": 0.42205128205128206,
+          "best_GT_id": 26
+        },
+        {
+          "node": "18",
+          "points": 1146,
+          "confidence": 0.8417875280707234,
+          "best_eligible_GT_IoU": 0.7093690248565966,
+          "best_GT_id": 6
+        },
+        {
+          "node": "40",
+          "points": 635,
+          "confidence": 0.6224189590435334,
+          "best_eligible_GT_IoU": 0.33004158004158,
+          "best_GT_id": 17
+        },
+        {
+          "node": "71",
+          "points": 251,
+          "confidence": 0.6517624856871524,
+          "best_eligible_GT_IoU": 0.17322291235334714,
+          "best_GT_id": 18
+        },
+        {
+          "node": "19",
+          "points": 1664,
+          "confidence": 0.5218170175907869,
+          "best_eligible_GT_IoU": 0.6045673076923077,
+          "best_GT_id": 7
+        },
+        {
+          "node": "75",
+          "points": 853,
+          "confidence": 0.7696584794984779,
+          "best_eligible_GT_IoU": 0.6813099041533547,
+          "best_GT_id": 28
+        },
+        {
+          "node": "73",
+          "points": 149,
+          "confidence": 0.672591654807974,
+          "best_eligible_GT_IoU": 0.2310077519379845,
+          "best_GT_id": 44
+        },
+        {
+          "node": "140",
+          "points": 387,
+          "confidence": 0.6181162637953086,
+          "best_eligible_GT_IoU": 0.29407294832826747,
+          "best_GT_id": 52
+        },
+        {
+          "node": "26",
+          "points": 183,
+          "confidence": 0.7921381844398886,
+          "best_eligible_GT_IoU": 1.0,
+          "best_GT_id": 51
+        },
+        {
+          "node": "127",
+          "points": 179,
+          "confidence": 0.671395974508987,
+          "best_eligible_GT_IoU": 0.2775193798449612,
+          "best_GT_id": 44
+        },
+        {
+          "node": "84",
+          "points": 664,
+          "confidence": 0.6630909676770732,
+          "best_eligible_GT_IoU": 0.29424657534246573,
+          "best_GT_id": 45
+        },
+        {
+          "node": "15",
+          "points": 104,
+          "confidence": 0.6849989370769307,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        }
+      ]
+    },
+    {
+      "scene": "scene0015_00",
+      "variant": "mutual_r2",
+      "best_recall25": 38,
+      "best_recall50": 32,
+      "eligible_GT": 39,
+      "highest_score_low_IoU": [
+        {
+          "node": "141",
+          "points": 630,
+          "confidence": 0.8932850930686624,
+          "best_eligible_GT_IoU": 0.4787234042553192,
+          "best_GT_id": 52
+        },
+        {
+          "node": "48",
+          "points": 440,
+          "confidence": 0.8612768001236502,
+          "best_eligible_GT_IoU": 0.31336898395721924,
+          "best_GT_id": 22
+        },
+        {
+          "node": "30",
+          "points": 854,
+          "confidence": 0.8518832176412025,
+          "best_eligible_GT_IoU": 0.4379487179487179,
+          "best_GT_id": 26
+        },
+        {
+          "node": "5",
+          "points": 1452,
+          "confidence": 0.7240932782947834,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "64",
+          "points": 850,
+          "confidence": 0.7105471727910262,
+          "best_eligible_GT_IoU": 0.44479330193615907,
+          "best_GT_id": 23
+        },
+        {
+          "node": "66",
+          "points": 739,
+          "confidence": 0.6996309514506273,
+          "best_eligible_GT_IoU": 0.3867085295656724,
+          "best_GT_id": 23
+        },
+        {
+          "node": "52",
+          "points": 642,
+          "confidence": 0.6975319735894492,
+          "best_eligible_GT_IoU": 0.43029490616621985,
+          "best_GT_id": 20
+        },
+        {
+          "node": "15",
+          "points": 104,
+          "confidence": 0.6849989370769307,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        }
+      ],
+      "predictions": [
+        {
+          "node": "2",
+          "points": 10403,
+          "confidence": 0.9160701326635423,
+          "best_eligible_GT_IoU": 0.9403821422009921,
+          "best_GT_id": 47
+        },
+        {
+          "node": "10",
+          "points": 4097,
+          "confidence": 0.8716455986813034,
+          "best_eligible_GT_IoU": 0.8805071996561358,
+          "best_GT_id": 34
+        },
+        {
+          "node": "12",
+          "points": 4410,
+          "confidence": 0.8631988625404695,
+          "best_eligible_GT_IoU": 0.8790572669009716,
+          "best_GT_id": 32
+        },
+        {
+          "node": "61",
+          "points": 6755,
+          "confidence": 0.8621474429158811,
+          "best_eligible_GT_IoU": 0.8928099392016918,
+          "best_GT_id": 40
+        },
+        {
+          "node": "3",
+          "points": 3266,
+          "confidence": 0.8841672992789531,
+          "best_eligible_GT_IoU": 0.8140564471499724,
+          "best_GT_id": 33
+        },
+        {
+          "node": "49",
+          "points": 3267,
+          "confidence": 0.8574119446477219,
+          "best_eligible_GT_IoU": 0.910025706940874,
+          "best_GT_id": 37
+        },
+        {
+          "node": "57",
+          "points": 2036,
+          "confidence": 0.6974968356178942,
+          "best_eligible_GT_IoU": 0.7900313971742543,
+          "best_GT_id": 36
+        },
+        {
+          "node": "73",
+          "points": 3736,
+          "confidence": 0.8343277740145162,
+          "best_eligible_GT_IoU": 0.836427732079906,
+          "best_GT_id": 35
+        },
+        {
+          "node": "28",
+          "points": 2217,
+          "confidence": 0.857231027931566,
+          "best_eligible_GT_IoU": 0.8633288227334236,
+          "best_GT_id": 12
+        },
+        {
+          "node": "25",
+          "points": 2664,
+          "confidence": 0.7944643677879546,
+          "best_eligible_GT_IoU": 0.8427712749130022,
+          "best_GT_id": 31
+        },
+        {
+          "node": "1",
+          "points": 1392,
+          "confidence": 0.790071679630904,
+          "best_eligible_GT_IoU": 0.9004676018704075,
+          "best_GT_id": 27
+        },
+        {
+          "node": "21",
+          "points": 1033,
+          "confidence": 0.799257068806172,
+          "best_eligible_GT_IoU": 0.934841628959276,
+          "best_GT_id": 30
+        },
+        {
+          "node": "46",
+          "points": 765,
+          "confidence": 0.8028428880471553,
+          "best_eligible_GT_IoU": 0.5127345844504021,
+          "best_GT_id": 20
+        },
+        {
+          "node": "17",
+          "points": 1289,
+          "confidence": 0.8381029134864135,
+          "best_eligible_GT_IoU": 0.66995841995842,
+          "best_GT_id": 17
+        },
+        {
+          "node": "29",
+          "points": 668,
+          "confidence": 0.790744296870934,
+          "best_eligible_GT_IoU": 0.8802395209580839,
+          "best_GT_id": 13
+        },
+        {
+          "node": "30",
+          "points": 854,
+          "confidence": 0.8518832176412025,
+          "best_eligible_GT_IoU": 0.4379487179487179,
+          "best_GT_id": 26
+        },
+        {
+          "node": "69",
+          "points": 1143,
+          "confidence": 0.7915965244096951,
+          "best_eligible_GT_IoU": 0.6668810289389068,
+          "best_GT_id": 18
+        },
+        {
+          "node": "48",
+          "points": 440,
+          "confidence": 0.8612768001236502,
+          "best_eligible_GT_IoU": 0.31336898395721924,
+          "best_GT_id": 22
+        },
+        {
+          "node": "31",
+          "points": 631,
+          "confidence": 0.7741188623565506,
+          "best_eligible_GT_IoU": 0.8862359550561798,
+          "best_GT_id": 1
+        },
+        {
+          "node": "68",
+          "points": 1538,
+          "confidence": 0.75870705917179,
+          "best_eligible_GT_IoU": 0.7937619350732018,
+          "best_GT_id": 25
+        },
+        {
+          "node": "5",
+          "points": 1452,
+          "confidence": 0.7240932782947834,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "60",
+          "points": 1806,
+          "confidence": 0.8117555859214561,
+          "best_eligible_GT_IoU": 0.9396456256921373,
+          "best_GT_id": 24
+        },
+        {
+          "node": "32",
+          "points": 1844,
+          "confidence": 0.7558774932011979,
+          "best_eligible_GT_IoU": 1.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "42",
+          "points": 981,
+          "confidence": 0.6973591188165685,
+          "best_eligible_GT_IoU": 0.535632183908046,
+          "best_GT_id": 19
+        },
+        {
+          "node": "6",
+          "points": 1349,
+          "confidence": 0.6419411256714455,
+          "best_eligible_GT_IoU": 0.7716827279466272,
+          "best_GT_id": 3
+        },
+        {
+          "node": "52",
+          "points": 642,
+          "confidence": 0.6975319735894492,
+          "best_eligible_GT_IoU": 0.43029490616621985,
+          "best_GT_id": 20
+        },
+        {
+          "node": "59",
+          "points": 807,
+          "confidence": 0.6395889385161423,
+          "best_eligible_GT_IoU": 0.5643356643356643,
+          "best_GT_id": 21
+        },
+        {
+          "node": "4",
+          "points": 2077,
+          "confidence": 0.828583268768767,
+          "best_eligible_GT_IoU": 0.90999099909991,
+          "best_GT_id": 49
+        },
+        {
+          "node": "58",
+          "points": 495,
+          "confidence": 0.7591875567729275,
+          "best_eligible_GT_IoU": 0.6281725888324873,
+          "best_GT_id": 22
+        },
+        {
+          "node": "44",
+          "points": 873,
+          "confidence": 0.6395329451184132,
+          "best_eligible_GT_IoU": 0.8846560846560847,
+          "best_GT_id": 29
+        },
+        {
+          "node": "8",
+          "points": 1285,
+          "confidence": 0.7621025415856153,
+          "best_eligible_GT_IoU": 0.9237958303378864,
+          "best_GT_id": 2
+        },
+        {
+          "node": "64",
+          "points": 850,
+          "confidence": 0.7105471727910262,
+          "best_eligible_GT_IoU": 0.44479330193615907,
+          "best_GT_id": 23
+        },
+        {
+          "node": "16",
+          "points": 1127,
+          "confidence": 0.7644421230547518,
+          "best_eligible_GT_IoU": 0.5694795351187468,
+          "best_GT_id": 53
+        },
+        {
+          "node": "98",
+          "points": 861,
+          "confidence": 0.6047365307474073,
+          "best_eligible_GT_IoU": 0.4372778059928898,
+          "best_GT_id": 16
+        },
+        {
+          "node": "141",
+          "points": 630,
+          "confidence": 0.8932850930686624,
+          "best_eligible_GT_IoU": 0.4787234042553192,
+          "best_GT_id": 52
+        },
+        {
+          "node": "66",
+          "points": 739,
+          "confidence": 0.6996309514506273,
+          "best_eligible_GT_IoU": 0.3867085295656724,
+          "best_GT_id": 23
+        },
+        {
+          "node": "41",
+          "points": 823,
+          "confidence": 0.6251697341072373,
+          "best_eligible_GT_IoU": 0.42205128205128206,
+          "best_GT_id": 26
+        },
+        {
+          "node": "18",
+          "points": 1146,
+          "confidence": 0.8417875280707234,
+          "best_eligible_GT_IoU": 0.7093690248565966,
+          "best_GT_id": 6
+        },
+        {
+          "node": "40",
+          "points": 635,
+          "confidence": 0.6224189590435334,
+          "best_eligible_GT_IoU": 0.33004158004158,
+          "best_GT_id": 17
+        },
+        {
+          "node": "72",
+          "points": 251,
+          "confidence": 0.6517624856871524,
+          "best_eligible_GT_IoU": 0.17322291235334714,
+          "best_GT_id": 18
+        },
+        {
+          "node": "19",
+          "points": 1664,
+          "confidence": 0.5218170175907869,
+          "best_eligible_GT_IoU": 0.6045673076923077,
+          "best_GT_id": 7
+        },
+        {
+          "node": "76",
+          "points": 853,
+          "confidence": 0.7696584794984779,
+          "best_eligible_GT_IoU": 0.6813099041533547,
+          "best_GT_id": 28
+        },
+        {
+          "node": "74",
+          "points": 149,
+          "confidence": 0.672591654807974,
+          "best_eligible_GT_IoU": 0.2310077519379845,
+          "best_GT_id": 44
+        },
+        {
+          "node": "144",
+          "points": 387,
+          "confidence": 0.6181162637953086,
+          "best_eligible_GT_IoU": 0.29407294832826747,
+          "best_GT_id": 52
+        },
+        {
+          "node": "26",
+          "points": 183,
+          "confidence": 0.7921381844398886,
+          "best_eligible_GT_IoU": 1.0,
+          "best_GT_id": 51
+        },
+        {
+          "node": "131",
+          "points": 179,
+          "confidence": 0.671395974508987,
+          "best_eligible_GT_IoU": 0.2775193798449612,
+          "best_GT_id": 44
+        },
+        {
+          "node": "85",
+          "points": 664,
+          "confidence": 0.6630909676770732,
+          "best_eligible_GT_IoU": 0.29424657534246573,
+          "best_GT_id": 45
+        },
+        {
+          "node": "15",
+          "points": 104,
+          "confidence": 0.6849989370769307,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        }
+      ]
+    },
+    {
+      "scene": "scene0019_00",
+      "variant": "v19",
+      "best_recall25": 12,
+      "best_recall50": 7,
+      "eligible_GT": 15,
+      "highest_score_low_IoU": [
+        {
+          "node": "1",
+          "points": 1029,
+          "confidence": 0.924641539370933,
+          "best_eligible_GT_IoU": 0.16253356499763072,
+          "best_GT_id": 3
+        },
+        {
+          "node": "2",
+          "points": 924,
+          "confidence": 0.9030232762843677,
+          "best_eligible_GT_IoU": 0.14594850734481124,
+          "best_GT_id": 3
+        },
+        {
+          "node": "28",
+          "points": 127,
+          "confidence": 0.8658810697661956,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "27",
+          "points": 5764,
+          "confidence": 0.8578401746905,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "35",
+          "points": 167,
+          "confidence": 0.8358689629942887,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "34",
+          "points": 179,
+          "confidence": 0.83170883278825,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "59",
+          "points": 132,
+          "confidence": 0.7049668235767133,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "51",
+          "points": 1875,
+          "confidence": 0.6957254664956747,
+          "best_eligible_GT_IoU": 0.4896,
+          "best_GT_id": 11
+        }
+      ],
+      "predictions": [
+        {
+          "node": "20",
+          "points": 5607,
+          "confidence": 0.9013604520913374,
+          "best_eligible_GT_IoU": 0.8667491111454629,
+          "best_GT_id": 19
+        },
+        {
+          "node": "3",
+          "points": 3968,
+          "confidence": 0.7043086227620211,
+          "best_eligible_GT_IoU": 0.6267572263465487,
+          "best_GT_id": 3
+        },
+        {
+          "node": "8",
+          "points": 2904,
+          "confidence": 0.5914178753431053,
+          "best_eligible_GT_IoU": 0.47548566142460685,
+          "best_GT_id": 12
+        },
+        {
+          "node": "27",
+          "points": 5764,
+          "confidence": 0.8578401746905,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "17",
+          "points": 2490,
+          "confidence": 0.9747109823355905,
+          "best_eligible_GT_IoU": 0.9104204753199269,
+          "best_GT_id": 10
+        },
+        {
+          "node": "10",
+          "points": 2278,
+          "confidence": 0.5730699613327807,
+          "best_eligible_GT_IoU": 0.4442508710801394,
+          "best_GT_id": 14
+        },
+        {
+          "node": "4",
+          "points": 6751,
+          "confidence": 0.7387173019062764,
+          "best_eligible_GT_IoU": 0.8409124574137165,
+          "best_GT_id": 21
+        },
+        {
+          "node": "7",
+          "points": 1504,
+          "confidence": 0.7306729261655909,
+          "best_eligible_GT_IoU": 0.7300970873786408,
+          "best_GT_id": 0
+        },
+        {
+          "node": "63",
+          "points": 987,
+          "confidence": 0.5837704507759084,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "1",
+          "points": 1029,
+          "confidence": 0.924641539370933,
+          "best_eligible_GT_IoU": 0.16253356499763072,
+          "best_GT_id": 3
+        },
+        {
+          "node": "5",
+          "points": 1515,
+          "confidence": 0.7195068650877625,
+          "best_eligible_GT_IoU": 0.8224755700325733,
+          "best_GT_id": 23
+        },
+        {
+          "node": "18",
+          "points": 1489,
+          "confidence": 0.9620768973320841,
+          "best_eligible_GT_IoU": 0.977165883143049,
+          "best_GT_id": 8
+        },
+        {
+          "node": "2",
+          "points": 924,
+          "confidence": 0.9030232762843677,
+          "best_eligible_GT_IoU": 0.14594850734481124,
+          "best_GT_id": 3
+        },
+        {
+          "node": "51",
+          "points": 1875,
+          "confidence": 0.6957254664956747,
+          "best_eligible_GT_IoU": 0.4896,
+          "best_GT_id": 11
+        },
+        {
+          "node": "35",
+          "points": 167,
+          "confidence": 0.8358689629942887,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "28",
+          "points": 127,
+          "confidence": 0.8658810697661956,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "34",
+          "points": 179,
+          "confidence": 0.83170883278825,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "59",
+          "points": 132,
+          "confidence": 0.7049668235767133,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        }
+      ]
+    },
+    {
+      "scene": "scene0019_00",
+      "variant": "mutual_r2",
+      "best_recall25": 12,
+      "best_recall50": 7,
+      "eligible_GT": 15,
+      "highest_score_low_IoU": [
+        {
+          "node": "1",
+          "points": 1029,
+          "confidence": 0.924641539370933,
+          "best_eligible_GT_IoU": 0.16253356499763072,
+          "best_GT_id": 3
+        },
+        {
+          "node": "2",
+          "points": 924,
+          "confidence": 0.9030232762843677,
+          "best_eligible_GT_IoU": 0.14594850734481124,
+          "best_GT_id": 3
+        },
+        {
+          "node": "28",
+          "points": 127,
+          "confidence": 0.8658810697661956,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "27",
+          "points": 5764,
+          "confidence": 0.8578401746905,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "35",
+          "points": 167,
+          "confidence": 0.8358689629942887,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "34",
+          "points": 179,
+          "confidence": 0.83170883278825,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "59",
+          "points": 132,
+          "confidence": 0.7049668235767133,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "51",
+          "points": 1875,
+          "confidence": 0.6957254664956747,
+          "best_eligible_GT_IoU": 0.4896,
+          "best_GT_id": 11
+        }
+      ],
+      "predictions": [
+        {
+          "node": "20",
+          "points": 5607,
+          "confidence": 0.9013604520913374,
+          "best_eligible_GT_IoU": 0.8667491111454629,
+          "best_GT_id": 19
+        },
+        {
+          "node": "3",
+          "points": 3968,
+          "confidence": 0.7043086227620211,
+          "best_eligible_GT_IoU": 0.6267572263465487,
+          "best_GT_id": 3
+        },
+        {
+          "node": "8",
+          "points": 2904,
+          "confidence": 0.5914178753431053,
+          "best_eligible_GT_IoU": 0.47548566142460685,
+          "best_GT_id": 12
+        },
+        {
+          "node": "27",
+          "points": 5764,
+          "confidence": 0.8578401746905,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "17",
+          "points": 2490,
+          "confidence": 0.9747109823355905,
+          "best_eligible_GT_IoU": 0.9104204753199269,
+          "best_GT_id": 10
+        },
+        {
+          "node": "10",
+          "points": 2278,
+          "confidence": 0.5730699613327807,
+          "best_eligible_GT_IoU": 0.4442508710801394,
+          "best_GT_id": 14
+        },
+        {
+          "node": "4",
+          "points": 6751,
+          "confidence": 0.7387173019062764,
+          "best_eligible_GT_IoU": 0.8409124574137165,
+          "best_GT_id": 21
+        },
+        {
+          "node": "7",
+          "points": 1504,
+          "confidence": 0.7306729261655909,
+          "best_eligible_GT_IoU": 0.7300970873786408,
+          "best_GT_id": 0
+        },
+        {
+          "node": "63",
+          "points": 987,
+          "confidence": 0.5837704507759084,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "1",
+          "points": 1029,
+          "confidence": 0.924641539370933,
+          "best_eligible_GT_IoU": 0.16253356499763072,
+          "best_GT_id": 3
+        },
+        {
+          "node": "5",
+          "points": 1515,
+          "confidence": 0.7195068650877625,
+          "best_eligible_GT_IoU": 0.8224755700325733,
+          "best_GT_id": 23
+        },
+        {
+          "node": "18",
+          "points": 1489,
+          "confidence": 0.9620768973320841,
+          "best_eligible_GT_IoU": 0.977165883143049,
+          "best_GT_id": 8
+        },
+        {
+          "node": "2",
+          "points": 924,
+          "confidence": 0.9030232762843677,
+          "best_eligible_GT_IoU": 0.14594850734481124,
+          "best_GT_id": 3
+        },
+        {
+          "node": "51",
+          "points": 1875,
+          "confidence": 0.6957254664956747,
+          "best_eligible_GT_IoU": 0.4896,
+          "best_GT_id": 11
+        },
+        {
+          "node": "35",
+          "points": 167,
+          "confidence": 0.8358689629942887,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "28",
+          "points": 127,
+          "confidence": 0.8658810697661956,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "34",
+          "points": 179,
+          "confidence": 0.83170883278825,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        },
+        {
+          "node": "59",
+          "points": 132,
+          "confidence": 0.7049668235767133,
+          "best_eligible_GT_IoU": 0.0,
+          "best_GT_id": 0
+        }
+      ]
+    }
+  ]
+}

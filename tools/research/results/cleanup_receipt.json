@@ -1,0 +1,7 @@
+{
+  "rejected_output_removed": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r1",
+  "bytes_removed": 545048620,
+  "negative_metrics_and_hashes_preserved": "/home/lewisliu/PartAware-SG/tools/research/results/negative_trials.json",
+  "candidate_retained": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2",
+  "formal_default_preserved": "v19"
+}

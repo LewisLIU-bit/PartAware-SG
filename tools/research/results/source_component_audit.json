@@ -1,0 +1,196 @@
+{
+  "GT_reserved_for_diagnostics": true,
+  "not_used_in_construction": true,
+  "results": [
+    {
+      "scene": "scene0015_00",
+      "node": "19",
+      "mixed_GT": [
+        3007,
+        3008
+      ],
+      "mixture_IoUs": [
+        0.10726643598615918,
+        0.6045673076923077
+      ],
+      "observations": [
+        {
+          "frame": "000080",
+          "local_id": 11,
+          "name": "window",
+          "pixels": 13858,
+          "component_fractions": [
+            0.999,
+            0.001,
+            0.0
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "001720",
+          "local_id": 13,
+          "name": "window",
+          "pixels": 30764,
+          "component_fractions": [
+            1.0
+          ],
+          "large_components": 1
+        }
+      ]
+    },
+    {
+      "scene": "scene0019_00",
+      "node": "8",
+      "mixed_GT": [
+        3013,
+        3014
+      ],
+      "mixture_IoUs": [
+        0.47548566142460685,
+        0.38542730677562137
+      ],
+      "observations": [
+        {
+          "frame": "000080",
+          "local_id": 3,
+          "name": "chair",
+          "pixels": 90252,
+          "component_fractions": [
+            1.0
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "000120",
+          "local_id": 2,
+          "name": "chair",
+          "pixels": 371552,
+          "component_fractions": [
+            0.999,
+            0.001,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "000160",
+          "local_id": 1,
+          "name": "chair",
+          "pixels": 418245,
+          "component_fractions": [
+            0.996,
+            0.001,
+            0.001,
+            0.001,
+            0.0,
+            0.0
+          ],
+          "large_components": 1
+        }
+      ]
+    },
+    {
+      "scene": "scene0019_00",
+      "node": "10",
+      "mixed_GT": [
+        3015,
+        3016
+      ],
+      "mixture_IoUs": [
+        0.4442508710801394,
+        0.42899914456800686
+      ],
+      "observations": [
+        {
+          "frame": "000120",
+          "local_id": 1,
+          "name": "chair",
+          "pixels": 196804,
+          "component_fractions": [
+            0.978,
+            0.022
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "000160",
+          "local_id": 2,
+          "name": "chair",
+          "pixels": 160332,
+          "component_fractions": [
+            0.953,
+            0.047,
+            0.0
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "000200",
+          "local_id": 5,
+          "name": "chair",
+          "pixels": 150910,
+          "component_fractions": [
+            0.999,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "large_components": 1
+        }
+      ]
+    },
+    {
+      "scene": "scene0019_00",
+      "node": "4",
+      "mixed_GT": [
+        3022,
+        3023
+      ],
+      "mixture_IoUs": [
+        0.8409124574137165,
+        0.13727181256288631
+      ],
+      "observations": [
+        {
+          "frame": "000000",
+          "local_id": 4,
+          "name": "chair",
+          "pixels": 95687,
+          "component_fractions": [
+            0.998,
+            0.001,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "000040",
+          "local_id": 4,
+          "name": "chair",
+          "pixels": 39817,
+          "component_fractions": [
+            1.0
+          ],
+          "large_components": 1
+        },
+        {
+          "frame": "000520",
+          "local_id": 4,
+          "name": "chair",
+          "pixels": 69310,
+          "component_fractions": [
+            1.0
+          ],
+          "large_components": 1
+        }
+      ]
+    }
+  ]
+}

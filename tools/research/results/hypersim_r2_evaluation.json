@@ -1,0 +1,33 @@
+{
+  "complete": true,
+  "scene": "ai_003_007",
+  "development_scene": true,
+  "full_geometry_replay": true,
+  "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/hypersim/ai_003_007",
+  "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/mutual_r2/hypersim/ai_003_007",
+  "protocol": "observed_hypersim_adaptation_not_official_scannet_or_unigraph3d",
+  "frames": 67,
+  "GT": 10,
+  "frozen_v19": {
+    "geometry_only_box_AP25": 0.3727272727272727,
+    "geometry_only_box_AP50": 0.09
+  },
+  "candidate": {
+    "geometry_only_box_AP25": 0.40772727272727266,
+    "geometry_only_box_AP50": 0.09
+  },
+  "delta_percentage_points": {
+    "geometry_only_box_AP25": 3.4999999999999973,
+    "geometry_only_box_AP50": 0.0
+  },
+  "formal_default": "v19",
+  "new_API_calls": 0,
+  "training": false,
+  "GT_in_construction": false,
+  "GT_and_protocol_unchanged": true,
+  "frontend_masks_and_features_identical": true,
+  "manifest_sha256": "a4e60352b2588c61413a21f659b02c0b46e08054cba596f2ff0406fbda0184a6",
+  "GT_sha256": "2b0e6a368a2df3945c1bc94fe456c6e4e609e57e7ab70ba68869847b2960912f",
+  "graph_sha256": "1f40d4d1ba61124806988344dc146aa259cb697ec99e85e2488543cf146918a6",
+  "final_ply_sha256": "6795c387c3c32230cabc00163c8c237fdd345ae70ca5020971144d9a1e31515e"
+}

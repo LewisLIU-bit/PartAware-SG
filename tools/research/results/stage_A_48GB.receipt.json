@@ -1,0 +1,18 @@
+{
+  "config": "/mnt/c/Users/22174/Documents/Codex/2026-10-03/nin/v20_work/stage_A_48GB.py",
+  "source_sha256": "48e52a31a69dbc7129611b1efa2507950bc6571115049420368f40ce98244a4f",
+  "profile": "48GB",
+  "scene_batch": 1,
+  "frames": 8,
+  "optimizer_type": "AdamW",
+  "lr": 0.0001,
+  "accumulative_counts": 4,
+  "effective_scene_batch_per_device": 4,
+  "class_agnostic_instances": true,
+  "auxiliary_semantic_classes": 200,
+  "pilot_epochs": 2,
+  "training_started": false,
+  "GPU_capacity_verified": false,
+  "PYTHONPATH_required": "/home/lewisliu/PartAware-SG/tools/research",
+  "sparse_CUDA_training_validation_required": true
+}
