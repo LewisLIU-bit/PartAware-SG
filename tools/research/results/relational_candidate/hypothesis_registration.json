@@ -1,0 +1,134 @@
+{
+  "registered_before_screen": true,
+  "hypothesis_id": "cross_source_covisibility_relation",
+  "proposed_distinct_attempt": 15,
+  "completed": false,
+  "GT_in_construction": false,
+  "API_calls": 0,
+  "training": false,
+  "GPU": false,
+  "hypothesis": "A peer geometry covering multiple repeatedly separated original identities should remain a composite provisional hypothesis rather than replace those object identities.",
+  "distinction": "Negative relation structure gates composite cross-source identity; no new scores, NMS threshold, point-support ownership, or local split generation.",
+  "existing_native_pair_conflict_logic_acknowledged": true,
+  "source_paper": "MaskClustering CVPR2024, arXiv:2401.07745v2, sections3.2.1/3.2.3",
+  "source_implementation": {
+    "official_repository": "https://github.com/PKU-EPIC/MaskClustering",
+    "commit": "eb2d41c2267cde21966f4340c37b8cf94b05c23c",
+    "files": [
+      {
+        "path": "graph/construction.py",
+        "sha256": "9578b8e9d6890eee64efce92ded59ed7908ccbf8af681d9ce250272f8ddb75e9"
+      },
+      {
+        "path": "graph/iterative_clustering.py",
+        "sha256": "835508fa73f644be8fedaa2e4af1392eef9e5e00517822936a2ef722a99be4a5"
+      },
+      {
+        "path": "graph/node.py",
+        "sha256": "56d8a00c7ad80cb72eeb71b4ec0ae181d59e1b4da5b595a4b17fa4645febe5dd"
+      },
+      {
+        "path": "mask_predict.py",
+        "sha256": "c76d1a9635a8fa6e27fd1e23e9cdbc24899cbd9620dd387fd447749706711463"
+      },
+      {
+        "path": "utils/mask_backprojection.py",
+        "sha256": "4b5b475dcbb7687eb325134d6dd0fee8f8cb03d5ad8f35db4a71cc39d94e06c0"
+      },
+      {
+        "path": "visualize/vis_mask.py",
+        "sha256": "43a445ef24a7653f28a1b5062a3b6cde08aa097f08b7abf7bf85d044cce230c8"
+      }
+    ],
+    "source_inspection_only": true,
+    "author_pipeline_not_reproduced": true
+  },
+  "author_pipeline_reproduced": false,
+  "policy": {
+    "minimum_visible_points": 32,
+    "dominant_original_mask_fraction": 0.7,
+    "raw_whole_containment": 0.8,
+    "minimum_independent_views": 2,
+    "minimum_camera_baseline_m": 0.15,
+    "peer_native_containment": 0.8,
+    "common_whole_view_makes_relation_ambiguous": true
+  },
+  "risks": [
+    "Consistent 2D oversegmentation can falsely create a cannot-link relation when no raw whole mask is available.",
+    "A single common raw whole mask marks the pair ambiguous; an overbroad raw mask can hide a true separation.",
+    "Merged original masks such as stacked chairs may never provide separation evidence.",
+    "Deferred peer geometry may lower true recall; deferral is not an existence rejection or physical point deletion.",
+    "Instance graph part annotations and original whole masks are incomplete, so part/whole correctness is not guaranteed.",
+    "This is a mask screen; a gain would require full point-cloud/graph publication and the original010 strictbox evaluation."
+  ],
+  "items": [
+    {
+      "dataset": "scannet",
+      "scene": "scene0011_00",
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/scannet/scene0011_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0011_00/manifest.json",
+      "domain": "/home/lewisliu/datasets/scannet/scans/scene0011_00/scene0011_00_vh_clean_2.ply",
+      "domain_kind": "unlabeled_mesh",
+      "segments": "/home/lewisliu/datasets/scannet/scans/scene0011_00/scene0011_00_vh_clean_2.0.010000.segs.json",
+      "peer": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/projection_verification/scannet/scene0011_00/verified_text_positive_peer_masks.npz",
+      "input_hashes": {
+        "manifest": "5959b53975f375d8e42fbae2902e214fcc13e2fb8855f79da03f544c52dac291",
+        "domain": "2941664625d52110aefbfb2b5fd3c869c3f51b999a036a27ba3e0033e3bf21f5",
+        "peer": "b3a8bee8ec66b248b0116c5e5527f24dc17315398b0b458e0f7cb7ede7fa85f3",
+        "segments": "00546eb1505379add58fb3792d03f8b8dddef1bd60d357b243e040c4db3404e2"
+      }
+    },
+    {
+      "dataset": "scannet",
+      "scene": "scene0015_00",
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/scannet/scene0015_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0015_00/manifest.json",
+      "domain": "/home/lewisliu/datasets/scannet/scans/scene0015_00/scene0015_00_vh_clean_2.ply",
+      "domain_kind": "unlabeled_mesh",
+      "segments": "/home/lewisliu/datasets/scannet/scans/scene0015_00/scene0015_00_vh_clean_2.0.010000.segs.json",
+      "peer": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/projection_verification/scannet/scene0015_00/verified_text_positive_peer_masks.npz",
+      "input_hashes": {
+        "manifest": "abdcfd96e95f54427875fa305ab3e4681c4d14fe15ec1a9d917a3df0e40cc268",
+        "domain": "a09877f8a75dd7655e229b3457ad9b7d3c5b3998f317309ca42e86defcb61002",
+        "peer": "e62dca42d218bb7a5dab5c5b60ae035eaeed2d662152d5a5717950b8d7afd158",
+        "segments": "c27ae1ace57348ce92b0449f5c513e7e75f3e133ad4d7e1ddb0c544b65f60624"
+      }
+    },
+    {
+      "dataset": "scannet",
+      "scene": "scene0019_00",
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/scannet/scene0019_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0019_00/manifest.json",
+      "domain": "/home/lewisliu/datasets/scannet/scans/scene0019_00/scene0019_00_vh_clean_2.ply",
+      "domain_kind": "unlabeled_mesh",
+      "segments": "/home/lewisliu/datasets/scannet/scans/scene0019_00/scene0019_00_vh_clean_2.0.010000.segs.json",
+      "peer": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/projection_verification/scannet/scene0019_00/verified_text_positive_peer_masks.npz",
+      "input_hashes": {
+        "manifest": "0be3768df15263bde3b58fa255b68147f12f923c300b647f40b5437a8c60a2d7",
+        "domain": "fad4b0d0a086bf6cc7885104efbe926208935fc0cb690b227fb3678b561002be",
+        "peer": "21f084cfa85de36f77f81d1ff8a15b7447374ff4952e8ee130890f280643b34a",
+        "segments": "4fce1e0a3eacf30327fa73020558545f3b316af7c45b7d690ecb689d17f13258"
+      }
+    },
+    {
+      "dataset": "hypersim",
+      "scene": "ai_001_010",
+      "source": "/home/lewisliu/datasets/scannet-sg-processed/partaware_v19/hypersim/ai_001_010",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/hypersim/ai_001_010_v3/manifest.json",
+      "domain": "/mnt/c/Users/22174/Documents/Codex/2026-10-03/nin/esam_hypersim_work/observed_domain.npz",
+      "domain_kind": "observed_rgbd_voxels",
+      "segments": null,
+      "peer": "/mnt/c/Users/22174/Documents/Codex/2026-10-03/nin/esam_hypersim_work/ESAM_common_domain_masks.npz",
+      "input_hashes": {
+        "manifest": "475f536ff40ac56a34e85f80d0d27269cc141905c3831609bc4a06a0250f1453",
+        "domain": "7de5dae365f8c141f2bb4cfacb9fb1cca469503cc519b5936e04f18be80a5242",
+        "peer": "b9ec459b9d0f786d042c1dd5f37c33e3f097c4f7117238b4a252571201efdee5"
+      }
+    }
+  ],
+  "registration_input_sha256": "41e6ca69c68ddabb133eb2fa1db29f4813559b95e24cbde8004b6626ccd2c8e4",
+  "source_hashes": {
+    "relational_admission.py": "ea3e471c0d489391be085f557092361e9cdaf98b65aa1c9c0142943944c8968a",
+    "stream_core.py": "6b3dcc55a9084bf63fb69274c536c5bbe796bc73331c7e215e1cee72e915c396"
+  }
+}

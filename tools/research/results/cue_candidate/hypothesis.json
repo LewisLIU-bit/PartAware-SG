@@ -1,0 +1,33 @@
+{
+  "registered_at": "2026-10-12",
+  "method": "CUE: Cached-view Unique-positive Evidence ownership",
+  "method_family_candidate": 14,
+  "status": "hypothesis_registered_before_evaluation",
+  "hypothesis": "Some overlapping geometric candidates have incorrect CORE-distance ownership even though independent cached RGB-D masks support exactly one candidate's identity at the disputed surface. Preserve candidate quality/NMS and arbitrate only those disputed points by unique independent positive identity evidence.",
+  "policy": {
+    "candidate_selection": "Existing proposal_ensemble agreement q and IoU>.5 NMS, minimum_points=100, unchanged",
+    "fallback": "Existing exclusive_core q/(1+d/.05), unchanged",
+    "native_identity": "Existing validated track observations map original frame IDs to original local mask IDs; no names/classes as equality rules",
+    "peer_identity": "A frame's dominant nonzero original mask on the candidate uncontested observed core (whole observed candidate only when core<16), >=32 positive points and >=.7 of depth-visible core",
+    "positive_depth_weight_minimum": 0.7,
+    "independent_positive_camera_separation_m": 0.15,
+    "point_arbitration": "Exactly one competing candidate has positive identity support in at least two cameras separated >=.15m; otherwise preserve CORE owner",
+    "unknown": "Occluded/unobserved/background-unannotated pixels contribute no positive support, no negative count, and never prove nonexistence",
+    "publication": "Original unlabeled geometric segment >.5 majority for ScanNet; none invented for Hypersim010"
+  },
+  "risks": [
+    "Cached source identity may already merge different physical objects; positive evidence can repeat that source failure.",
+    "Core-to-frame identity association can be wrong for a broad peer; two positive views are evidence, not calibrated correctness.",
+    "Few-view instances and unknown surfaces cannot gain an override; suppressed proposals cannot be recovered under unchanged NMS.",
+    "ScanNet majority publication can absorb small point-level improvements or amplify a mistaken boundary move.",
+    "The frozen 010 domain/peer has a severe q/NMS regression that ownership alone may not fix."
+  ],
+  "domains": "All four items of ../four_domain_confirmation_registration.json, same manifests, source, peer and physical representation",
+  "GT_in_construction": false,
+  "new_API_calls": 0,
+  "new_training": false,
+  "generated_points": 0,
+  "full_pipeline_replay": false,
+  "acceptance": "Independent unchanged native point-mask AP25/AP50/mean for all four domains, compare same-geometry CORE control plus v19/ESAM references; mask screen cannot justify production upgrade or new 010 strict-box claim",
+  "resource_budget": {"CPU_threads": 2, "GPU": false, "target_max_RSS_GiB": 3}
+}

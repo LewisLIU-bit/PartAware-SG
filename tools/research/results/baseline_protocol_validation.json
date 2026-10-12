@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-12",
+  "official_fragments_executed": true,
+  "dataset_metrics_reproduced": false,
+  "full_models_reproduced": false,
+  "OP3DSG": {
+    "source_sha256": "1aaafb842825ff070f946193561143034f164c444ee5d220d847f6041857fd8c",
+    "default_bbox_threshold": 0,
+    "strict_positive_overlap": true,
+    "example_box_IoU": 0.005025125628140708,
+    "default_R1_hit": true,
+    "IoU_01_R1_hit": false
+  },
+  "ThinkGraphs": {
+    "source_sha256": "a47bc47b235d78e20b8743900f6ddeb5d51a53f0699327e0e36c3e486a7150d7",
+    "default_gt_class_only": true,
+    "unrestricted_argmax": 2,
+    "GT_present_classes_only_argmax": 1,
+    "implication": "GT class-prior semantic evaluation, not blind full-vocabulary evaluation"
+  },
+  "Octree_Graph": {
+    "source_sha256": "38d0a1a6d4520e583fa4be88f0fa69177dbcab0fa2e19c8be87a21d1b915eb43",
+    "mean_IoU_thresholds": [
+      0.5,
+      0.55,
+      0.6000000000000001,
+      0.6500000000000001,
+      0.7000000000000002,
+      0.7500000000000002,
+      0.8000000000000003,
+      0.8500000000000003,
+      0.9000000000000004
+    ],
+    "no_class_void_zero_becomes_instance_3000": true,
+    "example_returned_GT_instance_ids": [
+      3000,
+      3001
+    ],
+    "scope": "class-agnostic wrapper only; does not invalidate published class-aware table"
+  }
+}

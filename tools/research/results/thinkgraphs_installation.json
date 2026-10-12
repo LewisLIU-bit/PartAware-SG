@@ -1,0 +1,27 @@
+{
+  "source": {
+    "name": "ThinkGraphs",
+    "repository": "https://github.com/denizbickici/ThinkGraphs",
+    "commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+    "archive_sha256": "b424a7ab9eebfc68e60271aa3120c9530a61f316ce6776cebd48a32efdfbfd41",
+    "bytes": 329474,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\ThinkGraphs-eb80df83810ce1c380f8f2256f45b20d929a5515",
+    "executed": false
+  },
+  "grounded_sam2_source": {
+    "name": "Grounded-SAM-2",
+    "repository": "https://github.com/IDEA-Research/Grounded-SAM-2",
+    "commit": "b7a9c29f196edff0eb54dbe14588d7ae5e3dde28",
+    "archive_sha256": "cb95401541adec80778363ae0c17468536f3d62ca8c17e187e3a4d94e9a16842",
+    "bytes": 118706300,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\Grounded-SAM-2-b7a9c29f196edff0eb54dbe14588d7ae5e3dde28",
+    "executed": false
+  },
+  "environment": "/home/lewisliu/baselines/thinkgraphs-env",
+  "python": "/home/lewisliu/baselines/thinkgraphs-env/bin/python",
+  "production_changed": false,
+  "models_downloaded": true,
+  "SAM2_optional_cuda_postprocessing_extension": false,
+  "full_inference_tested": false,
+  "metrics_reproduced": false
+}

@@ -1,0 +1,80 @@
+{
+  "complete": true,
+  "official_full_paper_reproduction": false,
+  "variant": "official CDIS geometry backend, shared GPT/SAM3 frontend, raw depth, uniform sparse input variant: all selected views, one-view admission",
+  "GT_in_construction": false,
+  "training": false,
+  "new_API_calls": 0,
+  "official_evaluator_unchanged": true,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "metrics": {
+        "all_ap": 0.19778663201280267,
+        "all_ap_50%": 0.3306361607142857,
+        "all_ap_25%": 0.6887755102040816,
+        "classes": {
+          "object": {
+            "ap": 0.19778663201280267,
+            "ap50%": 0.3306361607142857,
+            "ap25%": 0.6887755102040816
+          }
+        }
+      },
+      "predicted_instances": 108,
+      "native_unassigned_vertices": 91504,
+      "prediction_sha256": "187321335d338048b93c0bca0a270c911cd1637f2baf32fcbaf880751679febd",
+      "confidence": "native official constant 1.0"
+    },
+    {
+      "scene": "scene0015_00",
+      "metrics": {
+        "all_ap": 0.3100953298136397,
+        "all_ap_50%": 0.5258241758241758,
+        "all_ap_25%": 0.7516483516483516,
+        "classes": {
+          "object": {
+            "ap": 0.3100953298136397,
+            "ap50%": 0.5258241758241758,
+            "ap25%": 0.7516483516483516
+          }
+        }
+      },
+      "predicted_instances": 110,
+      "native_unassigned_vertices": 123755,
+      "prediction_sha256": "bcdaaccf6a708ee078714d5757cdd854bb17117f2279f5632d4f45dd17f211cd",
+      "confidence": "native official constant 1.0"
+    },
+    {
+      "scene": "scene0019_00",
+      "metrics": {
+        "all_ap": 0.20714285714285713,
+        "all_ap_50%": 0.35,
+        "all_ap_25%": 0.5714285714285714,
+        "classes": {
+          "object": {
+            "ap": 0.20714285714285713,
+            "ap50%": 0.35,
+            "ap25%": 0.5714285714285714
+          }
+        }
+      },
+      "predicted_instances": 31,
+      "native_unassigned_vertices": 93403,
+      "prediction_sha256": "b44fa9822cc11c67f4f4ba6a2d49391aa3c26ffb91590438d45ace1ce2fc1123",
+      "confidence": "native official constant 1.0"
+    }
+  ],
+  "aggregate": {
+    "all_ap": 0.20830584963716045,
+    "all_ap_50%": 0.3242753623188406,
+    "all_ap_25%": 0.5295609756097561,
+    "classes": {
+      "object": {
+        "ap": 0.20830584963716045,
+        "ap50%": 0.3242753623188406,
+        "ap25%": 0.5295609756097561
+      }
+    }
+  }
+}

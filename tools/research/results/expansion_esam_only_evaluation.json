@@ -1,0 +1,2855 @@
+{
+  "complete": true,
+  "results": [
+    {
+      "scene_id": "scene0025_00",
+      "profile": "ESAM",
+      "frames": 49,
+      "processed_scene": "/home/lewisliu/baselines/ESAM/work_dirs/local_scan200/scene0025_00",
+      "metrics": {
+        "all_ap": 0.33582955374371687,
+        "all_ap_50%": 0.5591284498193505,
+        "all_ap_25%": 0.7773008291046445,
+        "classes": {
+          "object": {
+            "ap": 0.33582955374371687,
+            "ap50%": 0.5591284498193505,
+            "ap25%": 0.7773008291046445
+          }
+        }
+      },
+      "predicted_objects": 71,
+      "eligible_GT_instances": 38,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "monitor",
+          "category_id": 19,
+          "encoded_id": 3001,
+          "vertices": 2099,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "52",
+            "label": "class-agnostic object",
+            "point_IoU": 0.963285910968334
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "monitor",
+          "category_id": 19,
+          "encoded_id": 3002,
+          "vertices": 3263,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7943610174685872
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "monitor",
+          "category_id": 19,
+          "encoded_id": 3003,
+          "vertices": 1609,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9295205083766609
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "couch",
+          "category_id": 6,
+          "encoded_id": 3004,
+          "vertices": 6005,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "32",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8715277777777778
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "couch",
+          "category_id": 6,
+          "encoded_id": 3005,
+          "vertices": 4528,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "24",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8690359316709209
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3008,
+          "vertices": 7268,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "27",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9766835824989714
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3009,
+          "vertices": 3230,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "41",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5367727771679474
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "desk",
+          "category_id": 9,
+          "encoded_id": 3010,
+          "vertices": 4011,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "19",
+            "label": "class-agnostic object",
+            "point_IoU": 0.31028080761197496
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "desk",
+          "category_id": 9,
+          "encoded_id": 3011,
+          "vertices": 6184,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "19",
+            "label": "class-agnostic object",
+            "point_IoU": 0.35790641387656313
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "shelf",
+          "category_id": 8,
+          "encoded_id": 3012,
+          "vertices": 15330,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "31",
+            "label": "class-agnostic object",
+            "point_IoU": 0.969561266874351
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "office chair",
+          "category_id": 10,
+          "encoded_id": 3013,
+          "vertices": 1910,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9183246073298429
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "office chair",
+          "category_id": 10,
+          "encoded_id": 3014,
+          "vertices": 2018,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7973717676981772
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3016,
+          "vertices": 1902,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6563981042654028
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3017,
+          "vertices": 6074,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6881269651145381
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "file cabinet",
+          "category_id": 75,
+          "encoded_id": 3018,
+          "vertices": 1323,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "11",
+            "label": "class-agnostic object",
+            "point_IoU": 0.44410876132930516
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3019,
+          "vertices": 555,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9503424657534246
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3020,
+          "vertices": 1053,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3021,
+          "vertices": 458,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8372943327239488
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3022,
+          "vertices": 1615,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "class-agnostic object",
+            "point_IoU": 0.1128606825993126
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3023,
+          "vertices": 2657,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "class-agnostic object",
+            "point_IoU": 0.1802981307674107
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "blinds",
+          "category_id": 86,
+          "encoded_id": 3024,
+          "vertices": 6363,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "class-agnostic object",
+            "point_IoU": 0.516980825479363
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "book",
+          "category_id": 22,
+          "encoded_id": 3025,
+          "vertices": 547,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "class-agnostic object",
+            "point_IoU": 0.09757494748902043
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "monitor",
+          "category_id": 19,
+          "encoded_id": 3026,
+          "vertices": 1278,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "14",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3929908132017693
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "monitor",
+          "category_id": 19,
+          "encoded_id": 3027,
+          "vertices": 1537,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "14",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5458096590909091
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3028,
+          "vertices": 1315,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "class-agnostic object",
+            "point_IoU": 0.15410233121404784
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "telephone",
+          "category_id": 101,
+          "encoded_id": 3029,
+          "vertices": 321,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "48",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6114285714285714
+          }
+        },
+        {
+          "gt_id": 29,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3030,
+          "vertices": 365,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "51",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6721915285451197
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "keyboard",
+          "category_id": 46,
+          "encoded_id": 3031,
+          "vertices": 192,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "60",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "cup",
+          "category_id": 130,
+          "encoded_id": 3032,
+          "vertices": 138,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "63",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6376811594202898
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "cup",
+          "category_id": 130,
+          "encoded_id": 3033,
+          "vertices": 150,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "class-agnostic object",
+            "point_IoU": 0.25125628140703515
+          }
+        },
+        {
+          "gt_id": 33,
+          "raw_label": "headphones",
+          "category_id": 312,
+          "encoded_id": 3034,
+          "vertices": 105,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "64",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3142857142857143
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "keyboard",
+          "category_id": 46,
+          "encoded_id": 3035,
+          "vertices": 354,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "66",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6807909604519774
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "paper towel roll",
+          "category_id": 138,
+          "encoded_id": 3036,
+          "vertices": 336,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "class-agnostic object",
+            "point_IoU": 0.29708222811671087
+          }
+        },
+        {
+          "gt_id": 36,
+          "raw_label": "shelf",
+          "category_id": 8,
+          "encoded_id": 3037,
+          "vertices": 2598,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "59",
+            "label": "class-agnostic object",
+            "point_IoU": 0.47487721949376654
+          }
+        },
+        {
+          "gt_id": 38,
+          "raw_label": "file cabinet",
+          "category_id": 75,
+          "encoded_id": 3039,
+          "vertices": 1438,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9755766621438263
+          }
+        },
+        {
+          "gt_id": 39,
+          "raw_label": "fan",
+          "category_id": 76,
+          "encoded_id": 3040,
+          "vertices": 1641,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "38",
+            "label": "class-agnostic object",
+            "point_IoU": 0.43388177940280315
+          }
+        },
+        {
+          "gt_id": 40,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3041,
+          "vertices": 591,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "30",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6194968553459119
+          }
+        },
+        {
+          "gt_id": 41,
+          "raw_label": "pillow",
+          "category_id": 13,
+          "encoded_id": 3042,
+          "vertices": 731,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "28",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8620283018867925
+          }
+        }
+      ],
+      "GT_hashes": {
+        "mesh_sha256": "b32e7c910ac77944f96f9ae69b214b36c8e151b8120bf7e7eb9b9bcb04d848b1",
+        "segments_sha256": "03cb779304eca3b0e4121826078c1a936e7c1095721ad7d0c85a47198fad4018",
+        "aggregation_sha256": "3ba40e01e08b68869f04ed1422aed44d39e804b9f1a27f1c93f9af933c9846a5",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "prediction_sha256": "7ed492c33655fdd5afea449b52b6528824c5c6419197bf9b2013e24d682097cd",
+      "checkpoint_sha256": "3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285",
+      "transfer": "author full-frame 1NN + geometric segment majority >0.5"
+    },
+    {
+      "scene_id": "scene0030_00",
+      "profile": "ESAM",
+      "frames": 63,
+      "processed_scene": "/home/lewisliu/baselines/ESAM/work_dirs/local_scan200/scene0030_00",
+      "metrics": {
+        "all_ap": 0.3242399038529188,
+        "all_ap_50%": 0.5428366894905762,
+        "all_ap_25%": 0.7213553342729764,
+        "classes": {
+          "object": {
+            "ap": 0.3242399038529188,
+            "ap50%": 0.5428366894905762,
+            "ap25%": 0.7213553342729764
+          }
+        }
+      },
+      "predicted_objects": 100,
+      "eligible_GT_instances": 83,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "office chair",
+          "category_id": 10,
+          "encoded_id": 3001,
+          "vertices": 1077,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "11",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9505736981465137
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "office chair",
+          "category_id": 10,
+          "encoded_id": 3002,
+          "vertices": 1994,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "44",
+            "label": "class-agnostic object",
+            "point_IoU": 0.600829249905767
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "office chair",
+          "category_id": 10,
+          "encoded_id": 3003,
+          "vertices": 1935,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "42",
+            "label": "class-agnostic object",
+            "point_IoU": 0.26395173453996984
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3004,
+          "vertices": 3692,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8873027798647634
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3005,
+          "vertices": 3988,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7798553976564447
+          }
+        },
+        {
+          "gt_id": 5,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3006,
+          "vertices": 2656,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "19",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9630734800447595
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3007,
+          "vertices": 2034,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8972468043264503
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3008,
+          "vertices": 2062,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8475294117647059
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3009,
+          "vertices": 1571,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "38",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8701464035646085
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3010,
+          "vertices": 2544,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3011,
+          "vertices": 1454,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8858321870701513
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3012,
+          "vertices": 1472,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "12",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8301630434782609
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 1292,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9641791044776119
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 1614,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8385502471169687
+          }
+        },
+        {
+          "gt_id": 14,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3015,
+          "vertices": 603,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "28",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3016,
+          "vertices": 1866,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "13",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9043256997455471
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "bookshelf",
+          "category_id": 18,
+          "encoded_id": 3018,
+          "vertices": 7331,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "79",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3517391304347826
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "bookshelf",
+          "category_id": 18,
+          "encoded_id": 3019,
+          "vertices": 14016,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "78",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5797776806951119
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "bookshelf",
+          "category_id": 18,
+          "encoded_id": 3020,
+          "vertices": 5002,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "86",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9416233506597361
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "bookshelf",
+          "category_id": 18,
+          "encoded_id": 3021,
+          "vertices": 2522,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "69",
+            "label": "class-agnostic object",
+            "point_IoU": 0.4354281767955801
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "blackboard",
+          "category_id": 89,
+          "encoded_id": 3022,
+          "vertices": 16827,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "66",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5576822386409913
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "blackboard",
+          "category_id": 89,
+          "encoded_id": 3023,
+          "vertices": 5589,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "88",
+            "label": "class-agnostic object",
+            "point_IoU": 0.4884735202492212
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "book",
+          "category_id": 22,
+          "encoded_id": 3024,
+          "vertices": 1172,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "52",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6450511945392492
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "book",
+          "category_id": 22,
+          "encoded_id": 3025,
+          "vertices": 1198,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "64",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9811629811629812
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "book",
+          "category_id": 22,
+          "encoded_id": 3026,
+          "vertices": 777,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "68",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6453488372093024
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3027,
+          "vertices": 6162,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "43",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8658156449458215
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3028,
+          "vertices": 5420,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "62",
+            "label": "class-agnostic object",
+            "point_IoU": 0.656639566395664
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3033,
+          "vertices": 1391,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "21",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3300880853036625
+          }
+        },
+        {
+          "gt_id": 33,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3034,
+          "vertices": 937,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "67",
+            "label": "class-agnostic object",
+            "point_IoU": 0.2047082906857728
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3035,
+          "vertices": 1078,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "31",
+            "label": "class-agnostic object",
+            "point_IoU": 0.029684601113172542
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3036,
+          "vertices": 691,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "24",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7512820512820513
+          }
+        },
+        {
+          "gt_id": 36,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3037,
+          "vertices": 1018,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "65",
+            "label": "class-agnostic object",
+            "point_IoU": 0.21377802077638053
+          }
+        },
+        {
+          "gt_id": 37,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3038,
+          "vertices": 926,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "65",
+            "label": "class-agnostic object",
+            "point_IoU": 0.30552147239263805
+          }
+        },
+        {
+          "gt_id": 38,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3039,
+          "vertices": 405,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "47",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8617283950617284
+          }
+        },
+        {
+          "gt_id": 39,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3040,
+          "vertices": 464,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "65",
+            "label": "class-agnostic object",
+            "point_IoU": 0.23133776792313376
+          }
+        },
+        {
+          "gt_id": 40,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3041,
+          "vertices": 361,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "81",
+            "label": "class-agnostic object",
+            "point_IoU": 0.2613941018766756
+          }
+        },
+        {
+          "gt_id": 41,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3042,
+          "vertices": 385,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "81",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6637931034482759
+          }
+        },
+        {
+          "gt_id": 42,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3043,
+          "vertices": 633,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "63",
+            "label": "class-agnostic object",
+            "point_IoU": 0.35071090047393366
+          }
+        },
+        {
+          "gt_id": 43,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3044,
+          "vertices": 318,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "82",
+            "label": "class-agnostic object",
+            "point_IoU": 0.14285714285714285
+          }
+        },
+        {
+          "gt_id": 44,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3045,
+          "vertices": 261,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 45,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3046,
+          "vertices": 204,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 46,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3047,
+          "vertices": 321,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 47,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3048,
+          "vertices": 7420,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7745547073791349
+          }
+        },
+        {
+          "gt_id": 48,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3049,
+          "vertices": 3211,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8661224489795918
+          }
+        },
+        {
+          "gt_id": 49,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3050,
+          "vertices": 3789,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "59",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5460107684777288
+          }
+        },
+        {
+          "gt_id": 50,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3051,
+          "vertices": 2952,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "14",
+            "label": "class-agnostic object",
+            "point_IoU": 0.823492658544205
+          }
+        },
+        {
+          "gt_id": 51,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3052,
+          "vertices": 4752,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8373967358452549
+          }
+        },
+        {
+          "gt_id": 52,
+          "raw_label": "armchair",
+          "category_id": 23,
+          "encoded_id": 3053,
+          "vertices": 5971,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9695193434935522
+          }
+        },
+        {
+          "gt_id": 53,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3054,
+          "vertices": 6390,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "50",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8563829787234043
+          }
+        },
+        {
+          "gt_id": 54,
+          "raw_label": "paper",
+          "category_id": 79,
+          "encoded_id": 3055,
+          "vertices": 504,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "55",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5734126984126984
+          }
+        },
+        {
+          "gt_id": 55,
+          "raw_label": "bag",
+          "category_id": 47,
+          "encoded_id": 3056,
+          "vertices": 844,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "22",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9667812142038946
+          }
+        },
+        {
+          "gt_id": 56,
+          "raw_label": "clock",
+          "category_id": 103,
+          "encoded_id": 3057,
+          "vertices": 356,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "84",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 57,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3058,
+          "vertices": 651,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "26",
+            "label": "class-agnostic object",
+            "point_IoU": 0.4416988416988417
+          }
+        },
+        {
+          "gt_id": 58,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3059,
+          "vertices": 768,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "62",
+            "label": "class-agnostic object",
+            "point_IoU": 0.08915731952832902
+          }
+        },
+        {
+          "gt_id": 59,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3060,
+          "vertices": 3282,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "82",
+            "label": "class-agnostic object",
+            "point_IoU": 0.31550035825173156
+          }
+        },
+        {
+          "gt_id": 60,
+          "raw_label": "shower wall",
+          "category_id": 128,
+          "encoded_id": 3061,
+          "vertices": 776,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 61,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3062,
+          "vertices": 646,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "57",
+            "label": "class-agnostic object",
+            "point_IoU": 0.2606318347509113
+          }
+        },
+        {
+          "gt_id": 62,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3063,
+          "vertices": 690,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "57",
+            "label": "class-agnostic object",
+            "point_IoU": 0.37597402597402596
+          }
+        },
+        {
+          "gt_id": 63,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3064,
+          "vertices": 567,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "32",
+            "label": "class-agnostic object",
+            "point_IoU": 0.4764705882352941
+          }
+        },
+        {
+          "gt_id": 64,
+          "raw_label": "ceiling",
+          "category_id": 41,
+          "encoded_id": 3065,
+          "vertices": 612,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 66,
+          "raw_label": "box",
+          "category_id": 26,
+          "encoded_id": 3067,
+          "vertices": 983,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "27",
+            "label": "class-agnostic object",
+            "point_IoU": 0.251528384279476
+          }
+        },
+        {
+          "gt_id": 68,
+          "raw_label": "bookshelf",
+          "category_id": 18,
+          "encoded_id": 3069,
+          "vertices": 3229,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "85",
+            "label": "class-agnostic object",
+            "point_IoU": 0.16772688719253603
+          }
+        },
+        {
+          "gt_id": 69,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3070,
+          "vertices": 1155,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "50",
+            "label": "class-agnostic object",
+            "point_IoU": 0.04954890448231419
+          }
+        },
+        {
+          "gt_id": 70,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3071,
+          "vertices": 1143,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "21",
+            "label": "class-agnostic object",
+            "point_IoU": 0.17533632286995515
+          }
+        },
+        {
+          "gt_id": 71,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3072,
+          "vertices": 1164,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "35",
+            "label": "class-agnostic object",
+            "point_IoU": 0.58006718924972
+          }
+        },
+        {
+          "gt_id": 72,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3073,
+          "vertices": 1173,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "35",
+            "label": "class-agnostic object",
+            "point_IoU": 0.2454905411350638
+          }
+        },
+        {
+          "gt_id": 73,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3074,
+          "vertices": 1235,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "34",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7117408906882591
+          }
+        },
+        {
+          "gt_id": 74,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3075,
+          "vertices": 953,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "71",
+            "label": "class-agnostic object",
+            "point_IoU": 0.07950191570881227
+          }
+        },
+        {
+          "gt_id": 75,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3076,
+          "vertices": 701,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "75",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6398514851485149
+          }
+        },
+        {
+          "gt_id": 76,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3077,
+          "vertices": 1065,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "15",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8902104300091491
+          }
+        },
+        {
+          "gt_id": 77,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3078,
+          "vertices": 1144,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6778670562454346
+          }
+        },
+        {
+          "gt_id": 78,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3079,
+          "vertices": 1259,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "36",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6957908163265306
+          }
+        },
+        {
+          "gt_id": 79,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3080,
+          "vertices": 1505,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "30",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5363128491620112
+          }
+        },
+        {
+          "gt_id": 80,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3081,
+          "vertices": 1385,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "56",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7083603370058328
+          }
+        },
+        {
+          "gt_id": 81,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3082,
+          "vertices": 1035,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "25",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6604977664326739
+          }
+        },
+        {
+          "gt_id": 82,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3083,
+          "vertices": 1110,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "39",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8427350427350427
+          }
+        },
+        {
+          "gt_id": 83,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3084,
+          "vertices": 991,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "61",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6978873239436619
+          }
+        },
+        {
+          "gt_id": 84,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3085,
+          "vertices": 974,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5431591309453905
+          }
+        },
+        {
+          "gt_id": 85,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3086,
+          "vertices": 1176,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "40",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6880799428979301
+          }
+        },
+        {
+          "gt_id": 86,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3087,
+          "vertices": 1283,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7261356155365372
+          }
+        },
+        {
+          "gt_id": 87,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3088,
+          "vertices": 1127,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "46",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8242220353238016
+          }
+        },
+        {
+          "gt_id": 88,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3089,
+          "vertices": 1086,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "58",
+            "label": "class-agnostic object",
+            "point_IoU": 0.47185185185185186
+          }
+        },
+        {
+          "gt_id": 89,
+          "raw_label": "books",
+          "category_id": 22,
+          "encoded_id": 3090,
+          "vertices": 395,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "78",
+            "label": "class-agnostic object",
+            "point_IoU": 0.016763378465506126
+          }
+        }
+      ],
+      "GT_hashes": {
+        "mesh_sha256": "1541b52e8037f212d1c060b8e89f0cc5ed31b5a1a7be48fb5f446d9ab14b5f69",
+        "segments_sha256": "80e3189c1a3440d43df56a775fa9dc54dc91c7c595e1eb0db545b69660f27242",
+        "aggregation_sha256": "b2ce5891041bdf645955a92e7a3bb5efe55c07a1ba56d6d035c492982066c87e",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "prediction_sha256": "29961f8bdfa6a731fe1b9a949e37feee165fc074ce5a6fb17f0953d4d4d3d740",
+      "checkpoint_sha256": "3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285",
+      "transfer": "author full-frame 1NN + geometric segment majority >0.5"
+    },
+    {
+      "scene_id": "scene0046_00",
+      "profile": "ESAM",
+      "frames": 62,
+      "processed_scene": "/home/lewisliu/baselines/ESAM/work_dirs/local_scan200/scene0046_00",
+      "metrics": {
+        "all_ap": 0.4650899035473615,
+        "all_ap_50%": 0.6869239224897226,
+        "all_ap_25%": 0.8168711431458022,
+        "classes": {
+          "object": {
+            "ap": 0.4650899035473615,
+            "ap50%": 0.6869239224897226,
+            "ap25%": 0.8168711431458022
+          }
+        }
+      },
+      "predicted_objects": 75,
+      "eligible_GT_instances": 41,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "picture",
+          "category_id": 15,
+          "encoded_id": 3001,
+          "vertices": 601,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3002,
+          "vertices": 4062,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9689885496183206
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "bathtub",
+          "category_id": 42,
+          "encoded_id": 3003,
+          "vertices": 3645,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "50",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9037791476815867
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "bed",
+          "category_id": 11,
+          "encoded_id": 3004,
+          "vertices": 11255,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7771021800385585
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "wardrobe",
+          "category_id": 99,
+          "encoded_id": 3005,
+          "vertices": 4984,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "12",
+            "label": "class-agnostic object",
+            "point_IoU": 0.921256931608133
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "desk",
+          "category_id": 9,
+          "encoded_id": 3007,
+          "vertices": 5639,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8608682313238226
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "ceiling",
+          "category_id": 41,
+          "encoded_id": 3008,
+          "vertices": 4922,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "laptop",
+          "category_id": 77,
+          "encoded_id": 3012,
+          "vertices": 1370,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "28",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8846715328467153
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3013,
+          "vertices": 104,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "class-agnostic object",
+            "point_IoU": 0.016019716574245224
+          }
+        },
+        {
+          "gt_id": 14,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3015,
+          "vertices": 754,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7692307692307693
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3016,
+          "vertices": 381,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9133858267716536
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "lamp base",
+          "category_id": 28,
+          "encoded_id": 3017,
+          "vertices": 174,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "32",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5667752442996743
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "suitcase",
+          "category_id": 93,
+          "encoded_id": 3018,
+          "vertices": 2536,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "30",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3438485804416404
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3019,
+          "vertices": 1081,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7710413694721826
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3020,
+          "vertices": 1433,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7344039530574429
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3022,
+          "vertices": 8487,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "36",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9703780544029507
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "light switch",
+          "category_id": 232,
+          "encoded_id": 3024,
+          "vertices": 41,
+          "eligible": false,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3025,
+          "vertices": 2386,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "49",
+            "label": "class-agnostic object",
+            "point_IoU": 0.2930232558139535
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3027,
+          "vertices": 2278,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "26",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6042440318302388
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "mat",
+          "category_id": 140,
+          "encoded_id": 3031,
+          "vertices": 521,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "57",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7178502879078695
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "toilet",
+          "category_id": 17,
+          "encoded_id": 3032,
+          "vertices": 1463,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "56",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6210432456531431
+          }
+        },
+        {
+          "gt_id": 33,
+          "raw_label": "toilet paper",
+          "category_id": 49,
+          "encoded_id": 3034,
+          "vertices": 187,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "69",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8697674418604651
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "ledge",
+          "category_id": 193,
+          "encoded_id": 3035,
+          "vertices": 288,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "56",
+            "label": "class-agnostic object",
+            "point_IoU": 0.1325356649792913
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "light",
+          "category_id": 105,
+          "encoded_id": 3036,
+          "vertices": 387,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "60",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6537162162162162
+          }
+        },
+        {
+          "gt_id": 36,
+          "raw_label": "towel",
+          "category_id": 31,
+          "encoded_id": 3037,
+          "vertices": 1598,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0679155160832898
+          }
+        },
+        {
+          "gt_id": 37,
+          "raw_label": "sink",
+          "category_id": 14,
+          "encoded_id": 3038,
+          "vertices": 1180,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "54",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8076659822039699
+          }
+        },
+        {
+          "gt_id": 38,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3039,
+          "vertices": 141,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "54",
+            "label": "class-agnostic object",
+            "point_IoU": 0.09650924024640657
+          }
+        },
+        {
+          "gt_id": 39,
+          "raw_label": "mirror",
+          "category_id": 71,
+          "encoded_id": 3040,
+          "vertices": 472,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "64",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6299342105263158
+          }
+        },
+        {
+          "gt_id": 40,
+          "raw_label": "ledge",
+          "category_id": 193,
+          "encoded_id": 3041,
+          "vertices": 524,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "58",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 41,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3042,
+          "vertices": 118,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "62",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 42,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3043,
+          "vertices": 114,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 43,
+          "raw_label": "vent",
+          "category_id": 408,
+          "encoded_id": 3044,
+          "vertices": 69,
+          "eligible": false,
+          "best_prediction": {
+            "node_id": "55",
+            "label": "class-agnostic object",
+            "point_IoU": 0.01058444546709618
+          }
+        },
+        {
+          "gt_id": 44,
+          "raw_label": "shower curtain",
+          "category_id": 55,
+          "encoded_id": 3045,
+          "vertices": 5331,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "52",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8696682464454977
+          }
+        },
+        {
+          "gt_id": 47,
+          "raw_label": "pillow",
+          "category_id": 13,
+          "encoded_id": 3048,
+          "vertices": 422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "24",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6687797147385103
+          }
+        },
+        {
+          "gt_id": 48,
+          "raw_label": "shoes",
+          "category_id": 63,
+          "encoded_id": 3049,
+          "vertices": 526,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "39",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 49,
+          "raw_label": "shoes",
+          "category_id": 63,
+          "encoded_id": 3050,
+          "vertices": 646,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "34",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8702064896755162
+          }
+        },
+        {
+          "gt_id": 50,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3051,
+          "vertices": 591,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "40",
+            "label": "class-agnostic object",
+            "point_IoU": 0.4206405693950178
+          }
+        },
+        {
+          "gt_id": 51,
+          "raw_label": "clothes",
+          "category_id": 32,
+          "encoded_id": 3052,
+          "vertices": 814,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "40",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5793594306049822
+          }
+        },
+        {
+          "gt_id": 52,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3053,
+          "vertices": 720,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "class-agnostic object",
+            "point_IoU": 0.46530314097881664
+          }
+        },
+        {
+          "gt_id": 53,
+          "raw_label": "tv",
+          "category_id": 33,
+          "encoded_id": 3054,
+          "vertices": 1037,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8855678906917165
+          }
+        },
+        {
+          "gt_id": 54,
+          "raw_label": "nightstand",
+          "category_id": 34,
+          "encoded_id": 3055,
+          "vertices": 1132,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8841166936790924
+          }
+        },
+        {
+          "gt_id": 55,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3056,
+          "vertices": 336,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "19",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7351190476190477
+          }
+        },
+        {
+          "gt_id": 56,
+          "raw_label": "curtains",
+          "category_id": 21,
+          "encoded_id": 3057,
+          "vertices": 19623,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7366686638705812
+          }
+        }
+      ],
+      "GT_hashes": {
+        "mesh_sha256": "36ecb2768178d21996ac36299cd81b2215405e03e9e3a9fdf704f606b7b47b25",
+        "segments_sha256": "69994eeb368ddeb13b28a1957fd4c12715767f59b90f5728c2bdd1d3a31c0d80",
+        "aggregation_sha256": "a752f8d87b1d9facbe67caf577eecf117c10821353aa31800ea65749aba77f65",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "prediction_sha256": "8b83e5beb04d8b10706de10e029265c09292e99997a1bf3674d2d887d9ba8641",
+      "checkpoint_sha256": "3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285",
+      "transfer": "author full-frame 1NN + geometric segment majority >0.5"
+    },
+    {
+      "scene_id": "scene0050_00",
+      "profile": "ESAM",
+      "frames": 117,
+      "processed_scene": "/home/lewisliu/baselines/ESAM/work_dirs/local_scan200/scene0050_00",
+      "metrics": {
+        "all_ap": 0.29128745911258047,
+        "all_ap_50%": 0.5932284288138505,
+        "all_ap_25%": 0.9148408498989326,
+        "classes": {
+          "object": {
+            "ap": 0.29128745911258047,
+            "ap50%": 0.5932284288138505,
+            "ap25%": 0.9148408498989326
+          }
+        }
+      },
+      "predicted_objects": 72,
+      "eligible_GT_instances": 26,
+      "GT": [
+        {
+          "gt_id": 1,
+          "raw_label": "piano",
+          "category_id": 90,
+          "encoded_id": 3002,
+          "vertices": 7604,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8996045413955862
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "armchair",
+          "category_id": 23,
+          "encoded_id": 3004,
+          "vertices": 8660,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "37",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7584340817501439
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3005,
+          "vertices": 4824,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8780811528251802
+          }
+        },
+        {
+          "gt_id": 5,
+          "raw_label": "desk",
+          "category_id": 9,
+          "encoded_id": 3006,
+          "vertices": 4713,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "21",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5227095769530237
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "tissue box",
+          "category_id": 230,
+          "encoded_id": 3007,
+          "vertices": 439,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "lamp",
+          "category_id": 28,
+          "encoded_id": 3008,
+          "vertices": 486,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "22",
+            "label": "class-agnostic object",
+            "point_IoU": 0.26337448559670784
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "doors",
+          "category_id": 5,
+          "encoded_id": 3009,
+          "vertices": 25061,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6473138256696083
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3010,
+          "vertices": 3681,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "34",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5025831783426328
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3011,
+          "vertices": 3257,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "40",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3684872029250457
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "ottoman",
+          "category_id": 67,
+          "encoded_id": 3012,
+          "vertices": 4574,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "12",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8764022435897436
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "couch",
+          "category_id": 6,
+          "encoded_id": 3014,
+          "vertices": 10811,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7465017667844523
+          }
+        },
+        {
+          "gt_id": 14,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3015,
+          "vertices": 866,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "13",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6183932346723044
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "printer",
+          "category_id": 50,
+          "encoded_id": 3016,
+          "vertices": 1589,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "29",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6066666666666667
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "shelf",
+          "category_id": 8,
+          "encoded_id": 3017,
+          "vertices": 4400,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "class-agnostic object",
+            "point_IoU": 0.32303559435862994
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3019,
+          "vertices": 1177,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9541206457094308
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "ceiling",
+          "category_id": 41,
+          "encoded_id": 3020,
+          "vertices": 8015,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "54",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9857336121018325
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "clock",
+          "category_id": 103,
+          "encoded_id": 3022,
+          "vertices": 177,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "55",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3950892857142857
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "cup",
+          "category_id": 130,
+          "encoded_id": 3025,
+          "vertices": 209,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "35",
+            "label": "class-agnostic object",
+            "point_IoU": 0.6746411483253588
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "laptop",
+          "category_id": 77,
+          "encoded_id": 3026,
+          "vertices": 557,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "26",
+            "label": "class-agnostic object",
+            "point_IoU": 0.7935368043087971
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "bag",
+          "category_id": 47,
+          "encoded_id": 3027,
+          "vertices": 516,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "30",
+            "label": "class-agnostic object",
+            "point_IoU": 0.5560344827586207
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3028,
+          "vertices": 282,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "63",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8723404255319149
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "laptop",
+          "category_id": 77,
+          "encoded_id": 3029,
+          "vertices": 794,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "62",
+            "label": "class-agnostic object",
+            "point_IoU": 0.517632241813602
+          }
+        },
+        {
+          "gt_id": 29,
+          "raw_label": "stool",
+          "category_id": 38,
+          "encoded_id": 3030,
+          "vertices": 576,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "class-agnostic object",
+            "point_IoU": 0.39141414141414144
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "doors",
+          "category_id": 5,
+          "encoded_id": 3033,
+          "vertices": 6690,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "44",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9585900558819315
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3035,
+          "vertices": 1172,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "39",
+            "label": "class-agnostic object",
+            "point_IoU": 0.34500157678965626
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3036,
+          "vertices": 1106,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "33",
+            "label": "class-agnostic object",
+            "point_IoU": 0.27959413754227735
+          }
+        }
+      ],
+      "GT_hashes": {
+        "mesh_sha256": "d2f06f5963bee12a83806ec318412f5832584c00effacc3003a2f2ee32b09c2e",
+        "segments_sha256": "6586d71f486807d6d5b6241dff8c8b2868fc5337b158ee62212b75ef9e1aa413",
+        "aggregation_sha256": "3a30d5ab24b66d217e7d9bdeaa573fd8236dbd3f60db1af733ad505eebf54de2",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "prediction_sha256": "6b911a27456223f2718725b8376d68e9dcdf505b6a88abafc57a85283b656683",
+      "checkpoint_sha256": "3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285",
+      "transfer": "author full-frame 1NN + geometric segment majority >0.5"
+    },
+    {
+      "scene_id": "scene0063_00",
+      "profile": "ESAM",
+      "frames": 15,
+      "processed_scene": "/home/lewisliu/baselines/ESAM/work_dirs/local_scan200/scene0063_00",
+      "metrics": {
+        "all_ap": 0.7498717332050665,
+        "all_ap_50%": 0.8,
+        "all_ap_25%": 0.9333333333333333,
+        "classes": {
+          "object": {
+            "ap": 0.7498717332050665,
+            "ap50%": 0.8,
+            "ap25%": 0.9333333333333333
+          }
+        }
+      },
+      "predicted_objects": 43,
+      "eligible_GT_instances": 15,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "microwave",
+          "category_id": 59,
+          "encoded_id": 3001,
+          "vertices": 884,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "22",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "microwave",
+          "category_id": 59,
+          "encoded_id": 3004,
+          "vertices": 1178,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9567062818336163
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3005,
+          "vertices": 987,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "0",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9293785310734464
+          }
+        },
+        {
+          "gt_id": 5,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3006,
+          "vertices": 805,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3007,
+          "vertices": 701,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "14",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3008,
+          "vertices": 923,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "kitchen cabinets",
+          "category_id": 29,
+          "encoded_id": 3010,
+          "vertices": 3836,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "33",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8103186646433991
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "kitchen cabinet",
+          "category_id": 29,
+          "encoded_id": 3011,
+          "vertices": 2138,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "21",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8990748528174937
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3012,
+          "vertices": 3450,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "24",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3014,
+          "vertices": 1688,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "class-agnostic object",
+            "point_IoU": 0.9562171628721541
+          }
+        },
+        {
+          "gt_id": 14,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3015,
+          "vertices": 6474,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "class-agnostic object",
+            "point_IoU": 0.8022860673463084
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3016,
+          "vertices": 193,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "class-agnostic object",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "kitchen cabinet",
+          "category_id": 29,
+          "encoded_id": 3017,
+          "vertices": 506,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "25",
+            "label": "class-agnostic object",
+            "point_IoU": 0.18346153846153845
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "dishwasher",
+          "category_id": 136,
+          "encoded_id": 3019,
+          "vertices": 1102,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "27",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3490566037735849
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "kitchen counter",
+          "category_id": 159,
+          "encoded_id": 3020,
+          "vertices": 1980,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "class-agnostic object",
+            "point_IoU": 0.3945945945945946
+          }
+        }
+      ],
+      "GT_hashes": {
+        "mesh_sha256": "919ae89bb681326999854fbd1fc7a308ea34936ee0c3f7ba5e29171ba2e261d7",
+        "segments_sha256": "7fa00343f3682a91096de7350def496e90f2d6a0e7f417ec05466162517b0a36",
+        "aggregation_sha256": "19e96863cfc710678f88def399c2056dc08d45976bc600bb84c3083b1a66d843",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "prediction_sha256": "8c4c3fccec8fe7f041de560813651a8efa8678bd01d47032c780650d8f1b89d8",
+      "checkpoint_sha256": "3b50a9b1b67b33bd9a9bd1f50dc9a7f2a140592c0eebc77704166966ba1d3285",
+      "transfer": "author full-frame 1NN + geometric segment majority >0.5"
+    }
+  ],
+  "aggregate": {
+    "all_ap": 0.3770789143945422,
+    "all_ap_50%": 0.6006664767625913,
+    "all_ap_25%": 0.7921107706776237,
+    "classes": {
+      "object": {
+        "ap": 0.3770789143945422,
+        "ap50%": 0.6006664767625913,
+        "ap25%": 0.7921107706776237
+      }
+    }
+  },
+  "fixed_preregistered_scenes": true,
+  "comparison_to_ours_pending": true,
+  "training": false
+}

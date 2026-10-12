@@ -1,0 +1,29 @@
+[
+  {
+    "name": "ThinkGraphs",
+    "repository": "https://github.com/denizbickici/ThinkGraphs",
+    "commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+    "archive_sha256": "b424a7ab9eebfc68e60271aa3120c9530a61f316ce6776cebd48a32efdfbfd41",
+    "bytes": 329474,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\ThinkGraphs-eb80df83810ce1c380f8f2256f45b20d929a5515",
+    "executed": false
+  },
+  {
+    "name": "OV-Octree-Graph",
+    "repository": "https://github.com/yifeisu/OV-Octree-Graph",
+    "commit": "8e121b51631475e78487e5ca9fd2d1f00f3aa04b",
+    "archive_sha256": "03c6b91d9cdcf6ac3f43b046c4c91da753532918ea5a26f1ea07e64690493a58",
+    "bytes": 38299472,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\OV-Octree-Graph-8e121b51631475e78487e5ca9fd2d1f00f3aa04b",
+    "executed": false
+  },
+  {
+    "name": "OVIP-SG",
+    "repository": "https://github.com/Agibot-Spatial-Intelligence/OVIP-SG",
+    "commit": "cf0e3e3821d4cc3fecdea2374bf3872244be5db1",
+    "archive_sha256": "44a8f0054fa5dab3be9ad19c6212b26614cc37ac148b1fa3ad8b041b9b8889b0",
+    "bytes": 665,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\OVIP-SG-cf0e3e3821d4cc3fecdea2374bf3872244be5db1",
+    "executed": false
+  }
+]

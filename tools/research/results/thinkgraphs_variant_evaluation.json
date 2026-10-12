@@ -1,0 +1,2255 @@
+{
+  "complete": true,
+  "full_geometry_pipeline_executed": true,
+  "official_paper_pipeline_reproduced": false,
+  "official_published_metrics_reproduced": false,
+  "GT_in_construction": false,
+  "training": false,
+  "new_API_calls": 0,
+  "results": [
+    {
+      "scene_id": "scene0011_00",
+      "processed_scene": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_pilot/scene0011_00",
+      "metrics": {
+        "all_ap": 0.1213570655534941,
+        "all_ap_50%": 0.202081400742115,
+        "all_ap_25%": 0.23962456194599052,
+        "classes": {
+          "object": {
+            "ap": 0.1213570655534941,
+            "ap50%": 0.202081400742115,
+            "ap25%": 0.23962456194599052
+          }
+        }
+      },
+      "predicted_objects": 13,
+      "eligible_GT_instances": 28,
+      "GT": [
+        {
+          "gt_id": 1,
+          "raw_label": "kitchen cabinets",
+          "category_id": 29,
+          "encoded_id": 3002,
+          "vertices": 6153,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "built - in appliance",
+            "point_IoU": 0.7030034861893268
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3003,
+          "vertices": 12971,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "refrigerator",
+            "point_IoU": 0.1471144061636866
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "armchair",
+          "category_id": 23,
+          "encoded_id": 3004,
+          "vertices": 3243,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3005,
+          "vertices": 3781,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "13",
+            "label": "chair",
+            "point_IoU": 0.8559150657229525
+          }
+        },
+        {
+          "gt_id": 5,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3006,
+          "vertices": 3152,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3007,
+          "vertices": 3612,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "12",
+            "label": "chair",
+            "point_IoU": 0.8236259228876128
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3008,
+          "vertices": 2694,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "11",
+            "label": "chair",
+            "point_IoU": 0.6655139893115373
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3009,
+          "vertices": 3463,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "chair",
+            "point_IoU": 0.8492636442390991
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3010,
+          "vertices": 3356,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.7531939605110337
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3011,
+          "vertices": 3224,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "refrigerator",
+            "point_IoU": 0.06512530885986587
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3012,
+          "vertices": 3800,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 3422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 2422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3016,
+          "vertices": 1411,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3018,
+          "vertices": 4278,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "tv",
+          "category_id": 33,
+          "encoded_id": 3019,
+          "vertices": 9908,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3020,
+          "vertices": 4892,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3021,
+          "vertices": 2166,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "ceiling",
+          "category_id": 41,
+          "encoded_id": 3023,
+          "vertices": 2094,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3024,
+          "vertices": 5281,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3025,
+          "vertices": 5590,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "wooden door",
+            "point_IoU": 0.5374620317246035
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "kitchen counter",
+          "category_id": 159,
+          "encoded_id": 3026,
+          "vertices": 5743,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "countertop",
+            "point_IoU": 0.3947329266478203
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "sink",
+          "category_id": 14,
+          "encoded_id": 3027,
+          "vertices": 1075,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "sink",
+            "point_IoU": 0.2357142857142857
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3028,
+          "vertices": 6152,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "refrigerator",
+            "point_IoU": 0.8319412442396313
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3029,
+          "vertices": 3535,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "refrigerator",
+            "point_IoU": 0.07466496490108487
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "doors",
+          "category_id": 5,
+          "encoded_id": 3031,
+          "vertices": 6336,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3032,
+          "vertices": 1028,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3033,
+          "vertices": 1148,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "1",
+          "label": "chair",
+          "confidence": 0.7013040781021118,
+          "vertices": 2682
+        },
+        {
+          "node_id": "2",
+          "label": "chair",
+          "confidence": 0.6883637309074402,
+          "vertices": 2941
+        },
+        {
+          "node_id": "3",
+          "label": "built - in appliance",
+          "confidence": 0.6298884153366089,
+          "vertices": 6548
+        },
+        {
+          "node_id": "4",
+          "label": "refrigerator",
+          "confidence": 0.6979178190231323,
+          "vertices": 2811
+        },
+        {
+          "node_id": "5",
+          "label": "refrigerator",
+          "confidence": 0.9516838788986206,
+          "vertices": 6569
+        },
+        {
+          "node_id": "6",
+          "label": "wooden door",
+          "confidence": 0.6555565595626831,
+          "vertices": 3521
+        },
+        {
+          "node_id": "7",
+          "label": "sink",
+          "confidence": 0.9223425984382629,
+          "vertices": 482
+        },
+        {
+          "node_id": "8",
+          "label": "electrical outlets",
+          "confidence": 0.8984106183052063,
+          "vertices": 0
+        },
+        {
+          "node_id": "9",
+          "label": "countertop",
+          "confidence": 0.6556668281555176,
+          "vertices": 3631
+        },
+        {
+          "node_id": "10",
+          "label": "electrical outlet",
+          "confidence": 0.7150261998176575,
+          "vertices": 0
+        },
+        {
+          "node_id": "11",
+          "label": "chair",
+          "confidence": 0.6347697377204895,
+          "vertices": 2604
+        },
+        {
+          "node_id": "12",
+          "label": "chair",
+          "confidence": 0.6748009920120239,
+          "vertices": 3057
+        },
+        {
+          "node_id": "13",
+          "label": "chair",
+          "confidence": 0.807612419128418,
+          "vertices": 3561
+        }
+      ],
+      "graph_sha256": "a6d7acf8fc300e098cebf1bc76985fcb40c638579ebafb93482154289ad72aa9",
+      "prediction_cloud": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_pilot/scene0011_00/instance_cloud_thinkgraphs.ply",
+      "prediction_cloud_sha256": "1466654abd4f4a9de363b7502bc59d4181ce1582a8f878fb2e33feb7cb412778",
+      "GT_hashes": {
+        "mesh_sha256": "2941664625d52110aefbfb2b5fd3c869c3f51b999a036a27ba3e0033e3bf21f5",
+        "segments_sha256": "00546eb1505379add58fb3792d03f8b8dddef1bd60d357b243e040c4db3404e2",
+        "aggregation_sha256": "155e188c1bababbe5522931b1cf7c6c971cb4464e75ab389de752afeffe6b23b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 0.1845593191776205,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "baseline_variant": "ThinkGraphs_GPT_tags_without_API_agents",
+      "inference_receipt": {
+        "scene": "scene0011_00",
+        "complete": true,
+        "diagnostic_smoke": false,
+        "frames": [
+          {
+            "frame_id": "000000",
+            "noun_cache_sha256": "2d9480c0fd8fed205fab0280274d3734ccacee6a8a136876e166d8c9eaeecd6c",
+            "objects": 0
+          },
+          {
+            "frame_id": "000040",
+            "noun_cache_sha256": "05050e2d73fedda0feeee5f72265eeff48ed6f515c1e01c9a08888ce95d69405",
+            "objects": 0
+          },
+          {
+            "frame_id": "000080",
+            "noun_cache_sha256": "d0169cd414af60759932d960a45fb299efd8734b4f2417b537f68aa29b895019",
+            "objects": 0
+          },
+          {
+            "frame_id": "000120",
+            "noun_cache_sha256": "370053a858ed56b39f4d4fde0f607c1d88992c4e8794dfa86e14f1fb7ac9f5e2",
+            "objects": 0
+          },
+          {
+            "frame_id": "000160",
+            "noun_cache_sha256": "706d169e8faf590fcb3d9bf44d0fc86cce8773315a7ce51f001dcf7d4e2a26f7",
+            "objects": 0
+          },
+          {
+            "frame_id": "000200",
+            "noun_cache_sha256": "a99d5d7167f6ee07e391db8e08ec01c01b6aeeff71f0045b33b384596792b0d5",
+            "objects": 0
+          },
+          {
+            "frame_id": "000240",
+            "noun_cache_sha256": "7031827355754be1d43210b1bf2978bc5ea2f9d70dd847e3c0a884426acd736d",
+            "objects": 1
+          },
+          {
+            "frame_id": "000280",
+            "noun_cache_sha256": "932c5c688d09980730ee3efa6124e8e1e963b63fbe4d29397905384647301c5d",
+            "objects": 1
+          },
+          {
+            "frame_id": "000320",
+            "noun_cache_sha256": "57952ae4db243fba6c27fd9df61452365691415a47ee6ca9cd4f00267d611a59",
+            "objects": 1
+          },
+          {
+            "frame_id": "000360",
+            "noun_cache_sha256": "0018e4e90a4e222f99f3e73e36f9d260aaea47001d45deb1953d0a27048e1ad6",
+            "objects": 1
+          },
+          {
+            "frame_id": "000400",
+            "noun_cache_sha256": "7cf1d18ebd77812131c5188ccc8f500e14db36024261407fde48b10eeb7e4bb6",
+            "objects": 3
+          },
+          {
+            "frame_id": "000440",
+            "noun_cache_sha256": "a37ef28ae1ef47a638f4d29f2a3da98c4f119fbadeeb2211248940913730249a",
+            "objects": 4
+          },
+          {
+            "frame_id": "000480",
+            "noun_cache_sha256": "3f483868b7420c23f36c4a4e2c97be2a7b80310c2219fd90b896da5089d59866",
+            "objects": 5
+          },
+          {
+            "frame_id": "000520",
+            "noun_cache_sha256": "d660cdf4d4090ed7821de558a73e40be8562cc03cd730667f90b7be03d2754b0",
+            "objects": 5
+          },
+          {
+            "frame_id": "000560",
+            "noun_cache_sha256": "66fe8a4a04150cae2761ed515339a030edc52af00a54e94bfe7a541c71d0ba46",
+            "objects": 5
+          },
+          {
+            "frame_id": "000600",
+            "noun_cache_sha256": "cecbac66d6a1b92e364491b11cd44913edafc93dc4f8ab52eaa4c62a2de95f60",
+            "objects": 6
+          },
+          {
+            "frame_id": "000640",
+            "noun_cache_sha256": "7d0e169e3e46222ea4bde32c02b33e9bd6ac03267e3cdffa49bffa0b40bd3699",
+            "objects": 7
+          },
+          {
+            "frame_id": "000680",
+            "noun_cache_sha256": "81193e618c8e2701f2940e5913149059973ebddb86eebec8f9a24c878d51464b",
+            "objects": 8
+          },
+          {
+            "frame_id": "000720",
+            "noun_cache_sha256": "156d548cc0024791a3865e2d8e3a30705907e6f125b4e042ed94c648d11f6200",
+            "objects": 8
+          },
+          {
+            "frame_id": "000760",
+            "noun_cache_sha256": "93b5d0d7bd5a05261c4a34b82477b42e7a3cdb7e578c13bbb3203d14b09609cb",
+            "objects": 8
+          },
+          {
+            "frame_id": "000800",
+            "noun_cache_sha256": "07446086c061c09db46e9fdc67d4492645c1a00d41b5d9c750dc7fd24224d7d5",
+            "objects": 8
+          },
+          {
+            "frame_id": "000840",
+            "noun_cache_sha256": "142da4c01d7080931b259f61868b7a648ddc651ce32c25cbaebdd0783d4a80a6",
+            "objects": 8
+          },
+          {
+            "frame_id": "000880",
+            "noun_cache_sha256": "29da95687dd39d52aa694a65f32248ee503fd115c30c048ac31965f0c3bc1889",
+            "objects": 8
+          },
+          {
+            "frame_id": "000920",
+            "noun_cache_sha256": "12e174da0a691b14e39b518ffe92c69cf1618904682d064c0adf4983a0f74feb",
+            "objects": 8
+          },
+          {
+            "frame_id": "000960",
+            "noun_cache_sha256": "2689e3e7bd7a82504f0bd3659ee63eb2907f02a52fc048d03b5b0cb13a85a683",
+            "objects": 9
+          },
+          {
+            "frame_id": "001000",
+            "noun_cache_sha256": "6c05821139540eefea4071dd25145796b588e03bd8360bd51a957f7aff2903f2",
+            "objects": 9
+          },
+          {
+            "frame_id": "001040",
+            "noun_cache_sha256": "c2de9b49ba1100f7a0d8c294a9867fa64fb678373bc640fbe9f4e89231473e71",
+            "objects": 9
+          },
+          {
+            "frame_id": "001080",
+            "noun_cache_sha256": "8d23eea183e2d90988acf67d46a0ff53a5a85a14428a260544e441dc1c091dfc",
+            "objects": 9
+          },
+          {
+            "frame_id": "001120",
+            "noun_cache_sha256": "0341bb0bb2fa4b9eb9b8482549bebd907a043fcb00d271d0623b125cffc8e5fb",
+            "objects": 9
+          },
+          {
+            "frame_id": "001160",
+            "noun_cache_sha256": "c8b7cbe8bd8df0f8ba087f6ad3bbe9b3e3104af4641eb11edcc7cdef1c9e0dd3",
+            "objects": 9
+          },
+          {
+            "frame_id": "001200",
+            "noun_cache_sha256": "0c16ebb4a1d9f70705f9a71264c31f315c86c4fc50765d39d73e66e84cff81fe",
+            "objects": 9
+          },
+          {
+            "frame_id": "001240",
+            "noun_cache_sha256": "eab172c8ebd9cf4a11ad83b33c33b2cc0732218d97cb3bf223c418982f09628f",
+            "objects": 9
+          },
+          {
+            "frame_id": "001280",
+            "noun_cache_sha256": "2f5eca8156271dadc5b548ac49ce87b0eaa7ec6e7ee3418c0c829c5ce0f5232a",
+            "objects": 9
+          },
+          {
+            "frame_id": "001320",
+            "noun_cache_sha256": "0d0b2a238460e53932c65f509ac0f4894132f70f29cc0b4c517caa92b44d5ddf",
+            "objects": 9
+          },
+          {
+            "frame_id": "001360",
+            "noun_cache_sha256": "36f16056d54f839156888aa33c7f06fb32d9af4bc010313330aad3440df62e7c",
+            "objects": 9
+          },
+          {
+            "frame_id": "001400",
+            "noun_cache_sha256": "7f086350f182b6efad7291545c625ebd26ab9459ee960620e37d72683ef50ba7",
+            "objects": 9
+          },
+          {
+            "frame_id": "001440",
+            "noun_cache_sha256": "948d640ac492a433171a8f3116b182683cd887cf9908da879987f4ef53ca1990",
+            "objects": 9
+          },
+          {
+            "frame_id": "001480",
+            "noun_cache_sha256": "2f93e21d0f838b2df0c81e257c7d253335566a1bf22c771855bac33b92b51d5a",
+            "objects": 9
+          },
+          {
+            "frame_id": "001520",
+            "noun_cache_sha256": "2f777cb56154cbf06d9dbf078b8b333a40910313f11bf30c809653efce66e782",
+            "objects": 10
+          },
+          {
+            "frame_id": "001560",
+            "noun_cache_sha256": "9b4fc3d709ae7a6a240f30638ad69bb862654049998469a8b1b2a035ae235168",
+            "objects": 10
+          },
+          {
+            "frame_id": "001600",
+            "noun_cache_sha256": "952e4fd86ec60f4ff7e86e72fa486d67b7fea1ccdbf45184c3fc4dc1c640e75a",
+            "objects": 11
+          },
+          {
+            "frame_id": "001640",
+            "noun_cache_sha256": "4001b32ecbd903c02574909fadc4390742a809d35955ce2eae3ec137f5ef34c5",
+            "objects": 12
+          },
+          {
+            "frame_id": "001680",
+            "noun_cache_sha256": "e730af34b1d09be5d6662c31cc7798c1b25c9fc1e69f8cbe5620f0c568a897e7",
+            "objects": 12
+          },
+          {
+            "frame_id": "001720",
+            "noun_cache_sha256": "9bf14152a8ebdd52a9b3369d4fcc5468ac9ab51bd6a6c643cca566754b1f1e68",
+            "objects": 12
+          },
+          {
+            "frame_id": "001760",
+            "noun_cache_sha256": "549ae18a1908281247f85e7386f1f9d6b0f9dad68549614100e669973ae49f05",
+            "objects": 12
+          },
+          {
+            "frame_id": "001800",
+            "noun_cache_sha256": "d3b25489e70491ff4f9e695c20ca23ff884fd13d2fea52fcb5ebe5bac25b46a3",
+            "objects": 12
+          },
+          {
+            "frame_id": "001840",
+            "noun_cache_sha256": "914c9cd27cf528e2f38b5eca7ea9c8f89884705b45e63bf417061c6a484b9195",
+            "objects": 12
+          },
+          {
+            "frame_id": "001880",
+            "noun_cache_sha256": "79c596cb46e47c8d8f88677113b2d970bb1f1baaf27c10f66ccabdd7fb79d6ec",
+            "objects": 12
+          },
+          {
+            "frame_id": "001920",
+            "noun_cache_sha256": "c4a8d7dea19582e8595e9fa930ef40a3014a9260dfe2c628a9ea2ea6586e4910",
+            "objects": 13
+          },
+          {
+            "frame_id": "001960",
+            "noun_cache_sha256": "1b8b953cdd6b67ea6b38501c88aafc7cfe65d35ad4d97ab72157a13e38ed4f26",
+            "objects": 13
+          },
+          {
+            "frame_id": "002000",
+            "noun_cache_sha256": "79367cb7caf16a8f77aecad7e6d3d8582ba63096b2bd2d14f285d0608e69b014",
+            "objects": 13
+          },
+          {
+            "frame_id": "002040",
+            "noun_cache_sha256": "5fbc589549ccc8ca67c378a662b3d076ab02ba822cdd622224743e342be87a10",
+            "objects": 13
+          },
+          {
+            "frame_id": "002080",
+            "noun_cache_sha256": "30086abc608a15685101fb7c53aa75c3376180f86698ba37a8492354587abc41",
+            "objects": 13
+          },
+          {
+            "frame_id": "002120",
+            "noun_cache_sha256": "1d0f3192288b823aeb442e46bc0101cd0d5b058a146505ea3d71d3c2a048b87a",
+            "objects": 13
+          },
+          {
+            "frame_id": "002160",
+            "noun_cache_sha256": "c9bcd526c816875875b69f68e9ac3999fc22e66658bc91ce0b5e01dfb91798eb",
+            "objects": 13
+          },
+          {
+            "frame_id": "002200",
+            "noun_cache_sha256": "2013956156277993d6088c9d239e5161fb408ad25f09700b09e211f9c91af206",
+            "objects": 13
+          },
+          {
+            "frame_id": "002240",
+            "noun_cache_sha256": "853c2a593c89146a7bf6e7213cfa16aee6e8bbe2e3bdd5512249b53e00fd09e8",
+            "objects": 13
+          },
+          {
+            "frame_id": "002280",
+            "noun_cache_sha256": "480f226b5eb008ab291dd6736309804bdbff07884267a04a70b7676eb77ec98b",
+            "objects": 13
+          },
+          {
+            "frame_id": "002320",
+            "noun_cache_sha256": "8f6e9891e4bba540deeea084b35eae58241b3fbd228c899fde72e03ab81ecd37",
+            "objects": 13
+          },
+          {
+            "frame_id": "002360",
+            "noun_cache_sha256": "9634fe4f62d2d72fe6b080df6013d5e37e1147dfd7c9d0d3f31714b9b5a4b6b0",
+            "objects": 13
+          }
+        ],
+        "manifest_sha256": "5959b53975f375d8e42fbae2902e214fcc13e2fb8855f79da03f544c52dac291",
+        "shared_GPT_request_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+        "new_GPT_calls": 0,
+        "Qwen_calls": 0,
+        "GT_in_construction": false,
+        "baseline": "ThinkGraphs_GPT_tags_without_API_agents",
+        "official_full_pipeline_reproduced": false,
+        "official_source_commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+        "optional_SAM2_cuda_postprocessing": false,
+        "attention_compatibility": {
+          "native_pytorch_attention_cpu_gpu_max_abs_error": 5.960464477539063e-08,
+          "architecture_changed": false,
+          "weights_changed": false
+        },
+        "seconds": 59.5408157990023,
+        "nodes": 13,
+        "tracking_settings": {
+          "use_dbscan_filtering": true,
+          "dbscan_eps": 0.05,
+          "dbscan_min_samples": 7,
+          "adaptive_dbscan": false,
+          "dbscan_eps_scale": [
+            0.5,
+            2.0
+          ],
+          "dbscan_voxel_size": 0.025,
+          "use_cuml_dbscan": true,
+          "max_projection_pixels": 0,
+          "subtract_contained_masks": true,
+          "erode_masks": true,
+          "erode_kernel_size": 5,
+          "erode_min_area": 100,
+          "min_points_after_filter": 30,
+          "min_cluster_ratio": 0.7,
+          "openvox_voxel_size": 0.04,
+          "openvox_max_ids_per_voxel": 3,
+          "openvox_geometry_weight": 0.8,
+          "openvox_feature_weight": 0.2,
+          "openvox_pro_threshold": 0.4,
+          "openvox_lazy_reuse_threshold": 0.85,
+          "openvox_lazy_max_children": 6,
+          "tracklet_mask_history": 5,
+          "temporal_window": 999.0,
+          "max_points_per_object": 200000,
+          "min_segment_area": 30,
+          "min_segment_area_ratio": 0.0004,
+          "min_segment_confidence": 0.1,
+          "min_bbox_volume": 0.0,
+          "feature_alpha": 0.1,
+          "feature_min_area_ratio": 0.3,
+          "clip_history_size": 32,
+          "clip_embedding_stride": 1,
+          "semantic_embed_pool_mode": "text_guided",
+          "semantic_embed_topk": 1,
+          "semantic_embed_hybrid_alpha": 0.5
+        },
+        "adaptation_source_sha256": "5978024576e93dc2d8bb28542023f9426f2b8e5ba50d11ddc931aa49ba4e2f01"
+      }
+    },
+    {
+      "scene_id": "scene0015_00",
+      "processed_scene": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_pilot/scene0015_00",
+      "metrics": {
+        "all_ap": 0.2622622923243441,
+        "all_ap_50%": 0.3556721690057008,
+        "all_ap_25%": 0.4871794871794872,
+        "classes": {
+          "object": {
+            "ap": 0.2622622923243441,
+            "ap50%": 0.3556721690057008,
+            "ap25%": 0.4871794871794872
+          }
+        }
+      },
+      "predicted_objects": 20,
+      "eligible_GT_instances": 39,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3001,
+          "vertices": 1844,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "11",
+            "label": "chair",
+            "point_IoU": 0.868763557483731
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3002,
+          "vertices": 712,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3003,
+          "vertices": 1391,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.46702127659574466
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3004,
+          "vertices": 1041,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.37909686817188637
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3007,
+          "vertices": 1536,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "window",
+            "point_IoU": 0.5173459077130347
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3008,
+          "vertices": 1006,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "window",
+            "point_IoU": 0.33883462445267765
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3011,
+          "vertices": 1483,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 1914,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 588,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3017,
+          "vertices": 1969,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3018,
+          "vertices": 1924,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "12",
+            "label": "chair",
+            "point_IoU": 0.9849272349272349
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3019,
+          "vertices": 1449,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3020,
+          "vertices": 1691,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3021,
+          "vertices": 1492,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "chair",
+            "point_IoU": 0.8981233243967829
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3022,
+          "vertices": 1430,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3023,
+          "vertices": 788,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "15",
+            "label": "chair",
+            "point_IoU": 0.8427807486631016
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3024,
+          "vertices": 1911,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3025,
+          "vertices": 1697,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3026,
+          "vertices": 1280,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3027,
+          "vertices": 1950,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "chair",
+            "point_IoU": 0.86
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3028,
+          "vertices": 1453,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "chair",
+            "point_IoU": 0.9472277889111557
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3029,
+          "vertices": 1252,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 29,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3030,
+          "vertices": 908,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3031,
+          "vertices": 1105,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "14",
+            "label": "chair",
+            "point_IoU": 0.8389140271493213
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3032,
+          "vertices": 3161,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "table",
+            "point_IoU": 0.8427712749130022
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3033,
+          "vertices": 4679,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "13",
+            "label": "table",
+            "point_IoU": 0.9087411840136781
+          }
+        },
+        {
+          "gt_id": 33,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3034,
+          "vertices": 3290,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "table",
+            "point_IoU": 0.8140564471499724
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3035,
+          "vertices": 4653,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "table",
+            "point_IoU": 0.8612570948076519
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3036,
+          "vertices": 4078,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "19",
+            "label": "desk",
+            "point_IoU": 0.7109356305336205
+          }
+        },
+        {
+          "gt_id": 36,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3037,
+          "vertices": 2525,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "table",
+            "point_IoU": 0.7900313971742543
+          }
+        },
+        {
+          "gt_id": 37,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3038,
+          "vertices": 3420,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "table",
+            "point_IoU": 0.9315789473684211
+          }
+        },
+        {
+          "gt_id": 40,
+          "raw_label": "whiteboard",
+          "category_id": 52,
+          "encoded_id": 3041,
+          "vertices": 7566,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 44,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3045,
+          "vertices": 645,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 45,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3046,
+          "vertices": 1698,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 47,
+          "raw_label": "whiteboard",
+          "category_id": 52,
+          "encoded_id": 3048,
+          "vertices": 10720,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 49,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3050,
+          "vertices": 2167,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "chair",
+            "point_IoU": 0.4243924392439244
+          }
+        },
+        {
+          "gt_id": 51,
+          "raw_label": "water bottle",
+          "category_id": 392,
+          "encoded_id": 3052,
+          "vertices": 183,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "bottle cup",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 52,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3053,
+          "vertices": 1316,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 53,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3054,
+          "vertices": 1979,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "window",
+            "point_IoU": 0.0
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "1",
+          "label": "window",
+          "confidence": 0.8721297383308411,
+          "vertices": 2746
+        },
+        {
+          "node_id": "2",
+          "label": "chair",
+          "confidence": 0.8080672025680542,
+          "vertices": 1462
+        },
+        {
+          "node_id": "3",
+          "label": "table",
+          "confidence": 0.7058864235877991,
+          "vertices": 3266
+        },
+        {
+          "node_id": "4",
+          "label": "chair",
+          "confidence": 0.6082450747489929,
+          "vertices": 998
+        },
+        {
+          "node_id": "5",
+          "label": "window",
+          "confidence": 0.6106275916099548,
+          "vertices": 2969
+        },
+        {
+          "node_id": "6",
+          "label": "table",
+          "confidence": 0.6840530037879944,
+          "vertices": 4201
+        },
+        {
+          "node_id": "7",
+          "label": "chair",
+          "confidence": 0.6705003976821899,
+          "vertices": 1969
+        },
+        {
+          "node_id": "8",
+          "label": "bottle cup",
+          "confidence": 0.7500038743019104,
+          "vertices": 183
+        },
+        {
+          "node_id": "9",
+          "label": "chair",
+          "confidence": 0.6173973083496094,
+          "vertices": 0
+        },
+        {
+          "node_id": "10",
+          "label": "chair",
+          "confidence": 0.6066150069236755,
+          "vertices": 1677
+        },
+        {
+          "node_id": "11",
+          "label": "chair",
+          "confidence": 0.6436653137207031,
+          "vertices": 1602
+        },
+        {
+          "node_id": "12",
+          "label": "chair",
+          "confidence": 0.6137576103210449,
+          "vertices": 1895
+        },
+        {
+          "node_id": "13",
+          "label": "table",
+          "confidence": 0.6484663486480713,
+          "vertices": 4252
+        },
+        {
+          "node_id": "14",
+          "label": "chair",
+          "confidence": 0.5566104650497437,
+          "vertices": 927
+        },
+        {
+          "node_id": "15",
+          "label": "chair",
+          "confidence": 0.6894102096557617,
+          "vertices": 935
+        },
+        {
+          "node_id": "16",
+          "label": "chair",
+          "confidence": 0.6503562331199646,
+          "vertices": 1340
+        },
+        {
+          "node_id": "17",
+          "label": "table",
+          "confidence": 0.5914872884750366,
+          "vertices": 2664
+        },
+        {
+          "node_id": "18",
+          "label": "table",
+          "confidence": 0.7371581792831421,
+          "vertices": 3186
+        },
+        {
+          "node_id": "19",
+          "label": "desk",
+          "confidence": 0.7367795705795288,
+          "vertices": 3072
+        },
+        {
+          "node_id": "20",
+          "label": "table",
+          "confidence": 0.7531036734580994,
+          "vertices": 2036
+        }
+      ],
+      "graph_sha256": "32e91c744c8f8711e6a9b39b97e9a82030cf1010b64475159969453faa84831b",
+      "prediction_cloud": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_pilot/scene0015_00/instance_cloud_thinkgraphs.ply",
+      "prediction_cloud_sha256": "8d46408da67148e2ab9e2acc350e6329840e85dbaf73399b7c99d5160920bd9d",
+      "GT_hashes": {
+        "mesh_sha256": "a09877f8a75dd7655e229b3457ad9b7d3c5b3998f317309ca42e86defcb61002",
+        "segments_sha256": "c27ae1ace57348ce92b0449f5c513e7e75f3e133ad4d7e1ddb0c544b65f60624",
+        "aggregation_sha256": "76dacdf1f008d549442cd3c4757b5df21d35eea698f570399d8002de48ed540b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 0.1948766848161558,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "baseline_variant": "ThinkGraphs_GPT_tags_without_API_agents",
+      "inference_receipt": {
+        "scene": "scene0015_00",
+        "complete": true,
+        "diagnostic_smoke": false,
+        "frames": [
+          {
+            "frame_id": "000000",
+            "noun_cache_sha256": "b35d23a785eaf3ca136267c42ea86d7629c0f38f87b49158b80fccff8a56ce61",
+            "objects": 0
+          },
+          {
+            "frame_id": "000040",
+            "noun_cache_sha256": "0a828daa6f4f3454f49dd52acdfcec92727458d9763345e013a5ea2486afd2a6",
+            "objects": 0
+          },
+          {
+            "frame_id": "000080",
+            "noun_cache_sha256": "56ade15a7b4bf59cd5c44d3f21d52c7171f6ea7a22edd85a1b66aad7cee7b560",
+            "objects": 0
+          },
+          {
+            "frame_id": "000120",
+            "noun_cache_sha256": "df4dc1175618688086429dfb4d46bda441cf266652f4c175599df867cf3b2b48",
+            "objects": 0
+          },
+          {
+            "frame_id": "000160",
+            "noun_cache_sha256": "102a951176dbc0d1480c4990dc7397a9b751f07cfd9379ba43642d036d7f974a",
+            "objects": 0
+          },
+          {
+            "frame_id": "000200",
+            "noun_cache_sha256": "b8bac49d648249fd3335f88aa9684e815143dde1298fe33f6476942ea2b90cdc",
+            "objects": 0
+          },
+          {
+            "frame_id": "000240",
+            "noun_cache_sha256": "5fbd0b90bb23d26e11b785adc4c6dc8ec753d560e9eb4df39045c4ed634c39c3",
+            "objects": 0
+          },
+          {
+            "frame_id": "000280",
+            "noun_cache_sha256": "47a62fa11872938d10620bef13299e857eea8d7a458ddb3ef3810b3c9218cb74",
+            "objects": 0
+          },
+          {
+            "frame_id": "000320",
+            "noun_cache_sha256": "5f2f737807899a72b5f48761db3b1fe0e07b4234bf5356e810423e45c940a594",
+            "objects": 0
+          },
+          {
+            "frame_id": "000360",
+            "noun_cache_sha256": "7b8ab35c406ffd5c55eade840ddb83b2f9cd760cc23ca0bcf388f32615d21aa1",
+            "objects": 0
+          },
+          {
+            "frame_id": "000400",
+            "noun_cache_sha256": "757e0e8b7d0cba2aeb1a2b2c37598d5f9a5d24f104c59e5d90e08dc60b7a2c79",
+            "objects": 0
+          },
+          {
+            "frame_id": "000440",
+            "noun_cache_sha256": "c165dda4a4c612da6967c8ae7131521bfa293ab587eb3e613f779d05226a30cb",
+            "objects": 0
+          },
+          {
+            "frame_id": "000480",
+            "noun_cache_sha256": "f2d50ff4184a9ebd483be7349a08da55a50203f1448658989a913c79de479e2d",
+            "objects": 0
+          },
+          {
+            "frame_id": "000520",
+            "noun_cache_sha256": "2a55a232b7f169492d87afada2981ecf610a9a36ba932ddf9128a5c44c952121",
+            "objects": 0
+          },
+          {
+            "frame_id": "000560",
+            "noun_cache_sha256": "7efe4c00e003614aef0094139ee37e1c8378ab8d4ab3e8d1dce767dd83f7eab6",
+            "objects": 0
+          },
+          {
+            "frame_id": "000600",
+            "noun_cache_sha256": "3192fadb1a72641e9d0c14228d689dbd3e7c4981c38cac3ec90bd17f773110eb",
+            "objects": 0
+          },
+          {
+            "frame_id": "000640",
+            "noun_cache_sha256": "69669b394826a5cd4b6879fc25282841b864c4451dc19e9a176a568413e03cee",
+            "objects": 1
+          },
+          {
+            "frame_id": "000680",
+            "noun_cache_sha256": "f97069ea92ed0bd89e16df77947497e027abb5483bc90d43efa7b925e5733708",
+            "objects": 1
+          },
+          {
+            "frame_id": "000720",
+            "noun_cache_sha256": "e9c7c699906b5e1c909e4b366430ab6698e47d41306c4bbe055fe1b396aa496f",
+            "objects": 2
+          },
+          {
+            "frame_id": "000760",
+            "noun_cache_sha256": "ef23d3c8916075cd92360b13b1faa68504bc41a1d05a9b4c261f8df5b4ebc1e6",
+            "objects": 2
+          },
+          {
+            "frame_id": "000800",
+            "noun_cache_sha256": "8be3d03df32148156d5829cfe6529064bf08b08355ce3e58293348277ac56a4a",
+            "objects": 3
+          },
+          {
+            "frame_id": "000840",
+            "noun_cache_sha256": "df6d63d7d6af7aa35c0676cfe19eb3a28bd3461483dd3c47697b31e65eb9a2f3",
+            "objects": 5
+          },
+          {
+            "frame_id": "000880",
+            "noun_cache_sha256": "6b7c06bbe5bf0137f4f6a52fc636d97ca741349beb2901ec6722df12293972e7",
+            "objects": 6
+          },
+          {
+            "frame_id": "000920",
+            "noun_cache_sha256": "3bb412518da8df91001ddd85efe4627c1d8f1f9b4d28324bc07666973c2dff25",
+            "objects": 7
+          },
+          {
+            "frame_id": "000960",
+            "noun_cache_sha256": "4648b8f8cba3833f55c6e96b58d836b72dc5a891949bcc83771c5dbd78dc2425",
+            "objects": 10
+          },
+          {
+            "frame_id": "001000",
+            "noun_cache_sha256": "5f47621e72c9c68ea0cabced51f66da7003448c6cb51b1ba91006f1136844030",
+            "objects": 12
+          },
+          {
+            "frame_id": "001040",
+            "noun_cache_sha256": "ea7f8e37f0032296397666050e16b572735ea2d34d014f5da67ae6561b2e6eae",
+            "objects": 12
+          },
+          {
+            "frame_id": "001080",
+            "noun_cache_sha256": "eaa8e7492ec696007f3562a5eedb8a28618ea1236e6c6d2f84e8be4842d1e83e",
+            "objects": 13
+          },
+          {
+            "frame_id": "001120",
+            "noun_cache_sha256": "c26d4deb95733b5889f94b8f4c2cb696195773edd88f46bb3ea3824353559a12",
+            "objects": 13
+          },
+          {
+            "frame_id": "001160",
+            "noun_cache_sha256": "4b6e7d5f242d59d707b86b428860b238f5a4c32662a3932d987466d6e9431fab",
+            "objects": 13
+          },
+          {
+            "frame_id": "001200",
+            "noun_cache_sha256": "3603cfb2a127f08af395d5c2ee88962a8eae796e7236b80d564df1f8d74ea3a6",
+            "objects": 13
+          },
+          {
+            "frame_id": "001240",
+            "noun_cache_sha256": "8d91b914535a62680b8ca0ca121d52595b5b165640b13fdd5dfe4c9222dd429f",
+            "objects": 14
+          },
+          {
+            "frame_id": "001280",
+            "noun_cache_sha256": "29e6f5509d1d99a4a54bd9e8dc0125cc769ff16b7aa5285f3a5f0302de58c70c",
+            "objects": 14
+          },
+          {
+            "frame_id": "001320",
+            "noun_cache_sha256": "d89491f93468c117cfb84801819cdc15cd827f88e901c110b88946e104c69c76",
+            "objects": 14
+          },
+          {
+            "frame_id": "001360",
+            "noun_cache_sha256": "9c4571c8f7105d91d4e5f122d62262e854212bf32d54ad0acf1cd74abab3e3a0",
+            "objects": 14
+          },
+          {
+            "frame_id": "001400",
+            "noun_cache_sha256": "274ecbb6e713b34c5ee4d68a54cffe962f1f018e045eb4bb5828054a2b227260",
+            "objects": 14
+          },
+          {
+            "frame_id": "001440",
+            "noun_cache_sha256": "327edd04f2d3740add6a75de9b7979a2c1f11d2f7b9a93694fe774da2b471399",
+            "objects": 14
+          },
+          {
+            "frame_id": "001480",
+            "noun_cache_sha256": "69745ffec441e010c08128f21cbbcc0d4eaf68c98d47b4a43ab865452a79106b",
+            "objects": 15
+          },
+          {
+            "frame_id": "001520",
+            "noun_cache_sha256": "8af3189c46b2f6e3a534deb833ad5de0cd23a0e0b4e341b0c8fa89fbbd8f7e43",
+            "objects": 15
+          },
+          {
+            "frame_id": "001560",
+            "noun_cache_sha256": "a2f8fb9f30d43733ade5269485488fe79b238f32858117ce2140f0d8c6a515ab",
+            "objects": 15
+          },
+          {
+            "frame_id": "001600",
+            "noun_cache_sha256": "24e8168bb0243ad9338a5c16ae53bf46ceed9a85629bb1f48938356286befe41",
+            "objects": 15
+          },
+          {
+            "frame_id": "001640",
+            "noun_cache_sha256": "b5a847063ba22efef9f43c1b4e2f4d7469e370db45767ccebad3aaa70707fbf5",
+            "objects": 15
+          },
+          {
+            "frame_id": "001680",
+            "noun_cache_sha256": "f8e4b007540bde9ab82b0a14676012e59853f3d754ac62e4b7f6ad7e57301a99",
+            "objects": 15
+          },
+          {
+            "frame_id": "001720",
+            "noun_cache_sha256": "3f9abc0598d2d235f7a2eea48a3bca6321d00f5bafa6fccd88438cd6a54d8603",
+            "objects": 16
+          },
+          {
+            "frame_id": "001760",
+            "noun_cache_sha256": "12d35c2c907e639193a97ab5d1232016a83c995b071672ad07f50e7b15c3f1d5",
+            "objects": 17
+          },
+          {
+            "frame_id": "001800",
+            "noun_cache_sha256": "01450a29065120b76743e501bb02658651f033161bb7b2f288621f0a4dc5c52a",
+            "objects": 19
+          },
+          {
+            "frame_id": "001840",
+            "noun_cache_sha256": "011b5b6633cd4a8d0e088c821269535dd14b510ef4563c35953c1be7fe30dfd7",
+            "objects": 19
+          },
+          {
+            "frame_id": "001880",
+            "noun_cache_sha256": "ef06dc4910faa6a6e352ace779fe4b40c082b759908c270c26e69633a021e0a3",
+            "objects": 19
+          },
+          {
+            "frame_id": "001920",
+            "noun_cache_sha256": "0ca8264e17eabce7e76c558a02d9104f22860093d0cb80a28410212763952a69",
+            "objects": 20
+          },
+          {
+            "frame_id": "001960",
+            "noun_cache_sha256": "04ef44087ef21c06ceea92247dace676b501907a652fe019562024d081e71bd6",
+            "objects": 20
+          }
+        ],
+        "manifest_sha256": "abdcfd96e95f54427875fa305ab3e4681c4d14fe15ec1a9d917a3df0e40cc268",
+        "shared_GPT_request_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+        "new_GPT_calls": 0,
+        "Qwen_calls": 0,
+        "GT_in_construction": false,
+        "baseline": "ThinkGraphs_GPT_tags_without_API_agents",
+        "official_full_pipeline_reproduced": false,
+        "official_source_commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+        "optional_SAM2_cuda_postprocessing": false,
+        "attention_compatibility": {
+          "native_pytorch_attention_cpu_gpu_max_abs_error": 5.960464477539063e-08,
+          "architecture_changed": false,
+          "weights_changed": false
+        },
+        "seconds": 56.74489665299188,
+        "nodes": 20,
+        "tracking_settings": {
+          "use_dbscan_filtering": true,
+          "dbscan_eps": 0.05,
+          "dbscan_min_samples": 7,
+          "adaptive_dbscan": false,
+          "dbscan_eps_scale": [
+            0.5,
+            2.0
+          ],
+          "dbscan_voxel_size": 0.025,
+          "use_cuml_dbscan": true,
+          "max_projection_pixels": 0,
+          "subtract_contained_masks": true,
+          "erode_masks": true,
+          "erode_kernel_size": 5,
+          "erode_min_area": 100,
+          "min_points_after_filter": 30,
+          "min_cluster_ratio": 0.7,
+          "openvox_voxel_size": 0.04,
+          "openvox_max_ids_per_voxel": 3,
+          "openvox_geometry_weight": 0.8,
+          "openvox_feature_weight": 0.2,
+          "openvox_pro_threshold": 0.4,
+          "openvox_lazy_reuse_threshold": 0.85,
+          "openvox_lazy_max_children": 6,
+          "tracklet_mask_history": 5,
+          "temporal_window": 999.0,
+          "max_points_per_object": 200000,
+          "min_segment_area": 30,
+          "min_segment_area_ratio": 0.0004,
+          "min_segment_confidence": 0.1,
+          "min_bbox_volume": 0.0,
+          "feature_alpha": 0.1,
+          "feature_min_area_ratio": 0.3,
+          "clip_history_size": 32,
+          "clip_embedding_stride": 1,
+          "semantic_embed_pool_mode": "text_guided",
+          "semantic_embed_topk": 1,
+          "semantic_embed_hybrid_alpha": 0.5
+        },
+        "adaptation_source_sha256": "5978024576e93dc2d8bb28542023f9426f2b8e5ba50d11ddc931aa49ba4e2f01"
+      }
+    },
+    {
+      "scene_id": "scene0019_00",
+      "processed_scene": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_pilot/scene0019_00",
+      "predicted_objects": 0,
+      "eligible_GT_instances": 15,
+      "GT_hashes": {
+        "mesh_sha256": "fad4b0d0a086bf6cc7885104efbe926208935fc0cb690b227fb3678b561002be",
+        "segments_sha256": "4fce1e0a3eacf30327fa73020558545f3b316af7c45b7d690ecb689d17f13258",
+        "aggregation_sha256": "b51bf966947a9c060edfdfdc4936cea00d08de07480041db586399e5d925c5cc",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "metrics": {
+        "all_ap": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap_25%": 0.0,
+        "classes": {
+          "object": {
+            "ap": 0.0,
+            "ap50%": 0.0,
+            "ap25%": 0.0
+          }
+        }
+      },
+      "protocol": "same_native_class_agnostic_point_AP",
+      "baseline_variant": "ThinkGraphs_GPT_tags_without_API_agents",
+      "inference_receipt": {
+        "scene": "scene0019_00",
+        "complete": true,
+        "diagnostic_smoke": false,
+        "frames": [
+          {
+            "frame_id": "000000",
+            "noun_cache_sha256": "c5310e55f33334913eaf2aa4dc4653c622d7d300f586413e5a3b4825bd87a10f",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 1,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 1604.278159007663,
+              "clip_ms": 207.154208997963,
+              "feature_ms": 0.42292900616303086,
+              "project_ms": 751.6530630236957,
+              "assoc_ms": 18.20810799836181,
+              "post_total_ms": 0.0032660027500241995,
+              "total_ms": 2586.623603012413
+            },
+            "tracked": 3,
+            "valid_depth_fraction": 0.908212890625
+          },
+          {
+            "frame_id": "000040",
+            "noun_cache_sha256": "a5f52e1201eb7c0969172b9e4cba246714ba13f317b9da9751271c61abcac8ba",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 2,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 329.73769700038247,
+              "clip_ms": 36.778398003662005,
+              "feature_ms": 0.11376800830475986,
+              "project_ms": 500.25228498270735,
+              "assoc_ms": 63.90431200270541,
+              "post_total_ms": 0.008567003533244133,
+              "total_ms": 933.5244729882106
+            },
+            "tracked": 4,
+            "valid_depth_fraction": 0.8589908854166667
+          },
+          {
+            "frame_id": "000080",
+            "noun_cache_sha256": "d113e4dd75a7ecfe95cfd441e96f4752e76eb50b9dd06981f8253c1e794b6060",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 3,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 407.72698100772686,
+              "clip_ms": 61.270536010852084,
+              "feature_ms": 0.09268699795939028,
+              "project_ms": 488.2678500143811,
+              "assoc_ms": 22.505675005959347,
+              "post_total_ms": 0.01064100069925189,
+              "total_ms": 982.364747003885
+            },
+            "tracked": 6,
+            "valid_depth_fraction": 0.7950130208333334
+          },
+          {
+            "frame_id": "000120",
+            "noun_cache_sha256": "7e4978ca63a0092884e51dfa4f99f8c50835774c49e4d243223b41fef9777b52",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 4,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 306.58597699948587,
+              "clip_ms": 39.19837102876045,
+              "feature_ms": 0.09232701268047094,
+              "project_ms": 608.9839129999746,
+              "assoc_ms": 4.284972994355485,
+              "post_total_ms": 0.007645023288205266,
+              "total_ms": 961.5831480186898
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.9590625
+          },
+          {
+            "frame_id": "000160",
+            "noun_cache_sha256": "2a78511a4c678ada5af0aa655e930015c8cddb094687dfdae27a2c8119f347da",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 5,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 284.41578400088474,
+              "clip_ms": 30.967624014010653,
+              "feature_ms": 0.07998300134204328,
+              "project_ms": 417.4376279988792,
+              "assoc_ms": 4.081263992702588,
+              "post_total_ms": 1.4470700116362423,
+              "total_ms": 740.1244880165905
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.9507194010416666
+          },
+          {
+            "frame_id": "000200",
+            "noun_cache_sha256": "ac3244dafa7f1ca23e6a85f9dc5294cde3600a92cee5796a2c3ee9a2f299be97",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 6,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 335.0656219990924,
+              "clip_ms": 28.391413012286648,
+              "feature_ms": 0.09096399298869073,
+              "project_ms": 15.617558005033061,
+              "assoc_ms": 0.0029049988370388746,
+              "post_total_ms": 1.6704069857951254,
+              "total_ms": 384.66917199548334
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.876044921875
+          },
+          {
+            "frame_id": "000240",
+            "noun_cache_sha256": "7636801e04c728d64774d41dce62e3efb09c44a89d2e653938aba34b6bf00bcb",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 7,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 293.8881979789585,
+              "clip_ms": 18.54182599345222,
+              "feature_ms": 0.08507200982421637,
+              "project_ms": 17.141625023214146,
+              "assoc_ms": 0.0026650086510926485,
+              "post_total_ms": 0.008055998478084803,
+              "total_ms": 331.3530110171996
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.87521484375
+          },
+          {
+            "frame_id": "000280",
+            "noun_cache_sha256": "5c4a81c1d7d3930030a422cb66a7eff810ae4cdf7208e5e12c4b432aa35eaf09",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 8,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 331.71211200533435,
+              "clip_ms": 24.19220400042832,
+              "feature_ms": 0.07241798448376358,
+              "project_ms": 303.87967501883395,
+              "assoc_ms": 3.9943570154719055,
+              "post_total_ms": 0.004016997991129756,
+              "total_ms": 665.5264750006609
+            },
+            "tracked": 10,
+            "valid_depth_fraction": 0.9592610677083333
+          },
+          {
+            "frame_id": "000320",
+            "noun_cache_sha256": "29482d875b5f2d659de58d5c3b1f30263bdd48cbff8881a9a12663a7f2d8f37b",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 9,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 333.0069560033735,
+              "clip_ms": 50.68787597701885,
+              "feature_ms": 0.13336600386537611,
+              "project_ms": 420.7668890012428,
+              "assoc_ms": 38.69458599365316,
+              "post_total_ms": 0.008325994713231921,
+              "total_ms": 847.3968869948294
+            },
+            "tracked": 11,
+            "valid_depth_fraction": 0.87447265625
+          },
+          {
+            "frame_id": "000360",
+            "noun_cache_sha256": "f21b8130965fe7157dfa5b309be306206d0e82e1c3516d7fd885df74aa3f4852",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 10,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 314.15610801195726,
+              "clip_ms": 39.51832800521515,
+              "feature_ms": 0.08521298877894878,
+              "project_ms": 427.9990539944265,
+              "assoc_ms": 22.390002995962277,
+              "post_total_ms": 0.010890973499044776,
+              "total_ms": 806.4730069891084
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.8715657552083333
+          },
+          {
+            "frame_id": "000400",
+            "noun_cache_sha256": "3fbfc78e7bffaaff5d128470133bee0f5a66da4d6352157a99346ec505495330",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 11,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 307.3687849973794,
+              "clip_ms": 30.39127099327743,
+              "feature_ms": 0.07487399852834642,
+              "project_ms": 475.233997014584,
+              "assoc_ms": 0.004528992576524615,
+              "post_total_ms": 0.012144009815528989,
+              "total_ms": 814.835528988624
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7833040364583334
+          },
+          {
+            "frame_id": "000440",
+            "noun_cache_sha256": "fcc9a49e2161d14545dbc1c68145bc46775eb9778862d68ffa403ead33828c62",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 12,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 320.625407010084,
+              "clip_ms": 40.70100700482726,
+              "feature_ms": 0.08264800999313593,
+              "project_ms": 478.6241300171241,
+              "assoc_ms": 0.00394799280911684,
+              "post_total_ms": 0.00720401294529438,
+              "total_ms": 841.9821060087997
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7629427083333333
+          },
+          {
+            "frame_id": "000480",
+            "noun_cache_sha256": "2375e32b3e366e2266916464ec219c81cb0fda4e1713f590a5dc029e095f53eb",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 13,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 322.1625279984437,
+              "clip_ms": 32.154607004486024,
+              "feature_ms": 0.075663992902264,
+              "project_ms": 357.4562929861713,
+              "assoc_ms": 0.003116001607850194,
+              "post_total_ms": 0.004578992957249284,
+              "total_ms": 714.1947539930698
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7731282552083333
+          },
+          {
+            "frame_id": "000520",
+            "noun_cache_sha256": "0f70607516ecc32d7c304826d6a45092aa64db374df1244977c611a6040f0a56",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 14,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 303.01323797903024,
+              "clip_ms": 46.69431099318899,
+              "feature_ms": 0.08984201122075319,
+              "project_ms": 525.8703049912583,
+              "assoc_ms": 7.4835859995801,
+              "post_total_ms": 0.004748988430947065,
+              "total_ms": 886.1727059702389
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.8752994791666666
+          },
+          {
+            "frame_id": "000560",
+            "noun_cache_sha256": "6a97820cb826d211bcae19ea0b9b5bf40c165e0834b19074a2a1323e532d61f8",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 15,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 359.9758890049998,
+              "clip_ms": 42.732427013106644,
+              "feature_ms": 0.10530199506320059,
+              "project_ms": 442.3939470143523,
+              "assoc_ms": 4.304610978579149,
+              "post_total_ms": 0.009898998541757464,
+              "total_ms": 852.3631819989532
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.8429069010416667
+          }
+        ],
+        "manifest_sha256": "0be3768df15263bde3b58fa255b68147f12f923c300b647f40b5437a8c60a2d7",
+        "shared_GPT_request_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+        "new_GPT_calls": 0,
+        "Qwen_calls": 0,
+        "GT_in_construction": false,
+        "baseline": "ThinkGraphs_GPT_tags_without_API_agents",
+        "official_full_pipeline_reproduced": false,
+        "official_source_commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+        "optional_SAM2_cuda_postprocessing": false,
+        "attention_compatibility": {
+          "native_pytorch_attention_cpu_gpu_max_abs_error": 5.960464477539063e-08,
+          "architecture_changed": false,
+          "weights_changed": false
+        },
+        "seconds": 13.555922235973412,
+        "nodes": 0,
+        "tracking_settings": {
+          "use_dbscan_filtering": true,
+          "dbscan_eps": 0.05,
+          "dbscan_min_samples": 7,
+          "adaptive_dbscan": false,
+          "dbscan_eps_scale": [
+            0.5,
+            2.0
+          ],
+          "dbscan_voxel_size": 0.025,
+          "use_cuml_dbscan": true,
+          "max_projection_pixels": 0,
+          "subtract_contained_masks": true,
+          "erode_masks": true,
+          "erode_kernel_size": 5,
+          "erode_min_area": 100,
+          "min_points_after_filter": 30,
+          "min_cluster_ratio": 0.7,
+          "openvox_voxel_size": 0.04,
+          "openvox_max_ids_per_voxel": 3,
+          "openvox_geometry_weight": 0.8,
+          "openvox_feature_weight": 0.2,
+          "openvox_pro_threshold": 0.4,
+          "openvox_lazy_reuse_threshold": 0.85,
+          "openvox_lazy_max_children": 6,
+          "tracklet_mask_history": 5,
+          "temporal_window": 999.0,
+          "max_points_per_object": 200000,
+          "min_segment_area": 30,
+          "min_segment_area_ratio": 0.0004,
+          "min_segment_confidence": 0.1,
+          "min_bbox_volume": 0.0,
+          "feature_alpha": 0.1,
+          "feature_min_area_ratio": 0.3,
+          "clip_history_size": 32,
+          "clip_embedding_stride": 1,
+          "semantic_embed_pool_mode": "text_guided",
+          "semantic_embed_topk": 1,
+          "semantic_embed_hybrid_alpha": 0.5
+        },
+        "adaptation_source_sha256": "4c71a267852672cb22f4c34a71c99dd3201b0926c324977f4e6e17f7b125bdf1",
+        "tracked_objects": 13,
+        "confirmation_matches_strict_greater_than": 5,
+        "track_match_counts": {
+          "track_0": 5,
+          "track_1": 2,
+          "track_2": 3,
+          "track_3": 1,
+          "track_4": 3,
+          "track_5": 1,
+          "track_6": 2,
+          "track_7": 2,
+          "track_8": 2,
+          "track_9": 2,
+          "track_10": 1,
+          "track_11": 1,
+          "track_12": 1
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "all_ap": 0.15844005501196723,
+    "all_ap_50%": 0.23585794831038273,
+    "all_ap_25%": 0.29807346701411924,
+    "classes": {
+      "object": {
+        "ap": 0.15844005501196723,
+        "ap50%": 0.23585794831038273,
+        "ap25%": 0.29807346701411924
+      }
+    }
+  },
+  "important_limitations": [
+    "shared GPT noun tags replace Qwen",
+    "asynchronous Critic/Descriptor agents disabled",
+    "same selected 125 frames, not official dense sequence or original eight-scene semantic protocol",
+    "native >5-match confirmation retained",
+    "CPU DBSCAN and native PyTorch deformable attention compatibility"
+  ]
+}

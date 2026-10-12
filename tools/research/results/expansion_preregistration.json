@@ -1,0 +1,54 @@
+{
+  "version": "v19",
+  "scenes": [
+    "scene0025_00",
+    "scene0030_00",
+    "scene0046_00",
+    "scene0050_00",
+    "scene0063_00"
+  ],
+  "split": "official_validation_pilot",
+  "selection": "Next five distinct _00 scan prefixes in fixed official validation lexicographic order, before images, annotations or AP; no selection by difficulty or performance.",
+  "frame_stride": 40,
+  "frame_cap": null,
+  "training": false,
+  "ground_truth_in_construction": false,
+  "construction_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+  "reference_commit": "188fc6de44f7577fecec2d69b75c7adbd9992251",
+  "point_evaluation": "class_agnostic_instance_masks_on_official_reconstructed_mesh",
+  "benchmark_scope": "Eight fixed scans, not complete 312-scan benchmark; five new scans begin as a preregistered transfer check and become development if used for changes.",
+  "official_splits": {
+    "val": {
+      "count": 312,
+      "sha256": "d75d4971c3fa7128c643695840e279042c212ef904fe933bd00cf9918c61b083",
+      "source": "https://raw.githubusercontent.com/ScanNet/ScanNet/master/Tasks/Benchmark/scannetv2_val.txt"
+    },
+    "train": {
+      "count": 1201,
+      "sha256": "96acca299b7855f02824c496b19077904d80996e7ced1bb9f0dac98f7dd4d0c8",
+      "source": "https://raw.githubusercontent.com/ScanNet/ScanNet/master/Tasks/Benchmark/scannetv2_train.txt"
+    },
+    "test": {
+      "count": 100,
+      "sha256": "0214c6a3b1ee516ad653393b0321e7c0394c7662a4b3702eac1ddd7fbc00f7e0",
+      "source": "https://raw.githubusercontent.com/ScanNet/ScanNet/master/Tasks/Benchmark/scannetv2_test.txt"
+    }
+  },
+  "existing_development_scans": [
+    "scene0011_00",
+    "scene0015_00",
+    "scene0019_00"
+  ],
+  "expanded_scans": [
+    "scene0011_00",
+    "scene0015_00",
+    "scene0019_00",
+    "scene0025_00",
+    "scene0030_00",
+    "scene0046_00",
+    "scene0050_00",
+    "scene0063_00"
+  ],
+  "acceptance": "Per-scan AP25/AP50/mean, and ai_001_010 original strict-box and point protocols; no pooled-only or per-scene strategy selection.",
+  "training_gate": "At least fifteen distinct, documented general algorithm hypotheses before optional training; repeat jobs and parameter variants do not count separately."
+}

@@ -1,0 +1,10 @@
+{
+  "complete": true,
+  "kind": "success",
+  "message": "The current source compiled successfully with the desktop editor's compiler.",
+  "path": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\outputs\\RESEARCH_LOG.tex",
+  "source_report_sha256": "0786023ccd1a688953a2dffa578d1291a336ab72268f44bf6853573c4ec688fa",
+  "editor_preserved": true,
+  "alternate_document_created": false,
+  "earlier_failure": "Previous attempts returned sandbox timeout; current built-in compiler succeeded."
+}

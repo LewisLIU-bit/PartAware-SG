@@ -1,0 +1,727 @@
+{
+  "complete": true,
+  "GT_only_in_independent_diagnosis": true,
+  "builder_has_no_access_to_diagnosis": true,
+  "full_pipeline_replay": false,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "scores_unchanged": true,
+      "delta_AP_percentage_points": {
+        "all_ap_25%": 0.8516398871108555,
+        "all_ap_50%": 3.8713119233439452,
+        "all_ap": 0.7044033217437962
+      },
+      "eligible_GT_best_IoU_improvements": 5,
+      "eligible_GT_best_IoU_regressions": 1,
+      "largest_best_IoU_gains": [
+        {
+          "GT_encoded_id": 3003,
+          "independent_GT_label": "table",
+          "before": {
+            "GT_encoded_id": 3003,
+            "GT_points": 12971,
+            "candidate": 19,
+            "best_IoU": 0.46181119810902643,
+            "intersection": 6252,
+            "candidate_points": 6819
+          },
+          "after": {
+            "GT_encoded_id": 3003,
+            "GT_points": 12971,
+            "candidate": 21,
+            "best_IoU": 0.5341797575496736,
+            "intersection": 7447,
+            "candidate_points": 8417
+          },
+          "delta_best_IoU": 0.07236855944064718
+        },
+        {
+          "GT_encoded_id": 3029,
+          "independent_GT_label": "cabinet",
+          "before": {
+            "GT_encoded_id": 3029,
+            "GT_points": 3535,
+            "candidate": 20,
+            "best_IoU": 0.696128170894526,
+            "intersection": 2607,
+            "candidate_points": 2817
+          },
+          "after": {
+            "GT_encoded_id": 3029,
+            "GT_points": 3535,
+            "candidate": 20,
+            "best_IoU": 0.7279038718291054,
+            "intersection": 2726,
+            "candidate_points": 2936
+          },
+          "delta_best_IoU": 0.031775700934579376
+        },
+        {
+          "GT_encoded_id": 3020,
+          "independent_GT_label": "refrigerator",
+          "before": {
+            "GT_encoded_id": 3020,
+            "GT_points": 4892,
+            "candidate": 28,
+            "best_IoU": 0.620101880877743,
+            "intersection": 3165,
+            "candidate_points": 3377
+          },
+          "after": {
+            "GT_encoded_id": 3020,
+            "GT_points": 4892,
+            "candidate": 28,
+            "best_IoU": 0.6373432601880877,
+            "intersection": 3253,
+            "candidate_points": 3465
+          },
+          "delta_best_IoU": 0.01724137931034475
+        },
+        {
+          "GT_encoded_id": 3028,
+          "independent_GT_label": "refrigerator",
+          "before": {
+            "GT_encoded_id": 3028,
+            "GT_points": 6152,
+            "candidate": 5,
+            "best_IoU": 0.9237237237237237,
+            "intersection": 6152,
+            "candidate_points": 6660
+          },
+          "after": {
+            "GT_encoded_id": 3028,
+            "GT_points": 6152,
+            "candidate": 5,
+            "best_IoU": 0.9405289711053356,
+            "intersection": 6152,
+            "candidate_points": 6541
+          },
+          "delta_best_IoU": 0.016805247381611932
+        },
+        {
+          "GT_encoded_id": 3026,
+          "independent_GT_label": "kitchen counter",
+          "before": {
+            "GT_encoded_id": 3026,
+            "GT_points": 5743,
+            "candidate": 58,
+            "best_IoU": 0.38429392303674037,
+            "intersection": 2207,
+            "candidate_points": 2207
+          },
+          "after": {
+            "GT_encoded_id": 3026,
+            "GT_points": 5743,
+            "candidate": 41,
+            "best_IoU": 0.39206907579149347,
+            "intersection": 2452,
+            "candidate_points": 2963
+          },
+          "delta_best_IoU": 0.007775152754753101
+        }
+      ],
+      "largest_best_IoU_losses": [
+        {
+          "GT_encoded_id": 3002,
+          "independent_GT_label": "kitchen cabinets",
+          "before": {
+            "GT_encoded_id": 3002,
+            "GT_points": 6153,
+            "candidate": 26,
+            "best_IoU": 0.5371225108795991,
+            "intersection": 4073,
+            "candidate_points": 5503
+          },
+          "after": {
+            "GT_encoded_id": 3002,
+            "GT_points": 6153,
+            "candidate": 26,
+            "best_IoU": 0.5274238970095213,
+            "intersection": 3933,
+            "candidate_points": 5237
+          },
+          "delta_best_IoU": -0.009698613870077755
+        }
+      ],
+      "largest_published_point_transfers": [
+        {
+          "from_candidate": 19,
+          "to_candidate": 21,
+          "points": 5594,
+          "destination_source_index": 0
+        },
+        {
+          "from_candidate": 23,
+          "to_candidate": 21,
+          "points": 224,
+          "destination_source_index": 0
+        },
+        {
+          "from_candidate": 26,
+          "to_candidate": 64,
+          "points": 147,
+          "destination_source_index": 17
+        },
+        {
+          "from_candidate": 59,
+          "to_candidate": 41,
+          "points": 125,
+          "destination_source_index": 71
+        },
+        {
+          "from_candidate": 5,
+          "to_candidate": 20,
+          "points": 119,
+          "destination_source_index": 22
+        },
+        {
+          "from_candidate": 33,
+          "to_candidate": 28,
+          "points": 88,
+          "destination_source_index": 23
+        },
+        {
+          "from_candidate": 25,
+          "to_candidate": 41,
+          "points": 79,
+          "destination_source_index": 71
+        },
+        {
+          "from_candidate": 30,
+          "to_candidate": 65,
+          "points": 49,
+          "destination_source_index": 39
+        },
+        {
+          "from_candidate": 23,
+          "to_candidate": -1,
+          "points": 48,
+          "destination_source_index": null
+        },
+        {
+          "from_candidate": 26,
+          "to_candidate": 60,
+          "points": 46,
+          "destination_source_index": 30
+        }
+      ],
+      "distinction": "Best-IoU diagnostics allow shared proposals and are not AP/FN counts"
+    },
+    {
+      "scene": "scene0015_00",
+      "scores_unchanged": true,
+      "delta_AP_percentage_points": {
+        "all_ap_25%": -0.20367557822901228,
+        "all_ap_50%": 0.0,
+        "all_ap": -0.21616343861998177
+      },
+      "eligible_GT_best_IoU_improvements": 0,
+      "eligible_GT_best_IoU_regressions": 1,
+      "largest_best_IoU_gains": [],
+      "largest_best_IoU_losses": [
+        {
+          "GT_encoded_id": 3024,
+          "independent_GT_label": "chair",
+          "before": {
+            "GT_encoded_id": 3024,
+            "GT_points": 1911,
+            "candidate": 25,
+            "best_IoU": 0.7713239141810571,
+            "intersection": 1474,
+            "candidate_points": 1474
+          },
+          "after": {
+            "GT_encoded_id": 3024,
+            "GT_points": 1911,
+            "candidate": 25,
+            "best_IoU": 0.7346938775510204,
+            "intersection": 1404,
+            "candidate_points": 1404
+          },
+          "delta_best_IoU": -0.03663003663003661
+        }
+      ],
+      "largest_published_point_transfers": [
+        {
+          "from_candidate": 25,
+          "to_candidate": 59,
+          "points": 70,
+          "destination_source_index": 43
+        },
+        {
+          "from_candidate": 29,
+          "to_candidate": 49,
+          "points": 65,
+          "destination_source_index": 24
+        }
+      ],
+      "distinction": "Best-IoU diagnostics allow shared proposals and are not AP/FN counts"
+    },
+    {
+      "scene": "scene0019_00",
+      "scores_unchanged": true,
+      "delta_AP_percentage_points": {
+        "all_ap_25%": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap": 0.5423280423280441
+      },
+      "eligible_GT_best_IoU_improvements": 1,
+      "eligible_GT_best_IoU_regressions": 0,
+      "largest_best_IoU_gains": [
+        {
+          "GT_encoded_id": 3024,
+          "independent_GT_label": "chair",
+          "before": {
+            "GT_encoded_id": 3024,
+            "GT_points": 1842,
+            "candidate": 7,
+            "best_IoU": 0.7829766052762569,
+            "intersection": 1573,
+            "candidate_points": 1740
+          },
+          "after": {
+            "GT_encoded_id": 3024,
+            "GT_points": 1842,
+            "candidate": 7,
+            "best_IoU": 0.8456943753111,
+            "intersection": 1699,
+            "candidate_points": 1866
+          },
+          "delta_best_IoU": 0.06271777003484313
+        }
+      ],
+      "largest_best_IoU_losses": [],
+      "largest_published_point_transfers": [
+        {
+          "from_candidate": -1,
+          "to_candidate": 7,
+          "points": 126,
+          "destination_source_index": 50
+        }
+      ],
+      "distinction": "Best-IoU diagnostics allow shared proposals and are not AP/FN counts"
+    },
+    {
+      "scene": "ai_001_010",
+      "scores_unchanged": true,
+      "delta_AP_percentage_points": {
+        "all_ap_25%": 6.923364322300501,
+        "all_ap_50%": 7.6902259911382,
+        "all_ap": 4.1600110022675345
+      },
+      "eligible_GT_best_IoU_improvements": 75,
+      "eligible_GT_best_IoU_regressions": 8,
+      "largest_best_IoU_gains": [
+        {
+          "GT_encoded_id": 3097,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3097,
+            "GT_points": 2587,
+            "candidate": 45,
+            "best_IoU": 0.08362121158160903,
+            "intersection": 2348,
+            "candidate_points": 27840
+          },
+          "after": {
+            "GT_encoded_id": 3097,
+            "GT_points": 2587,
+            "candidate": 90,
+            "best_IoU": 0.8736517719568567,
+            "intersection": 2268,
+            "candidate_points": 2277
+          },
+          "delta_best_IoU": 0.7900305603752477
+        },
+        {
+          "GT_encoded_id": 3096,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3096,
+            "GT_points": 1594,
+            "candidate": 162,
+            "best_IoU": 0.08197747183979975,
+            "intersection": 131,
+            "candidate_points": 135
+          },
+          "after": {
+            "GT_encoded_id": 3096,
+            "GT_points": 1594,
+            "candidate": 162,
+            "best_IoU": 0.7484355444305382,
+            "intersection": 1196,
+            "candidate_points": 1200
+          },
+          "delta_best_IoU": 0.6664580725907384
+        },
+        {
+          "GT_encoded_id": 3044,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3044,
+            "GT_points": 212,
+            "candidate": 195,
+            "best_IoU": 0.0319634703196347,
+            "intersection": 7,
+            "candidate_points": 14
+          },
+          "after": {
+            "GT_encoded_id": 3044,
+            "GT_points": 212,
+            "candidate": 195,
+            "best_IoU": 0.696969696969697,
+            "intersection": 184,
+            "candidate_points": 236
+          },
+          "delta_best_IoU": 0.6650062266500623
+        },
+        {
+          "GT_encoded_id": 3057,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3057,
+            "GT_points": 316,
+            "candidate": 17,
+            "best_IoU": 0.0372056719136204,
+            "intersection": 286,
+            "candidate_points": 7657
+          },
+          "after": {
+            "GT_encoded_id": 3057,
+            "GT_points": 316,
+            "candidate": 190,
+            "best_IoU": 0.620253164556962,
+            "intersection": 196,
+            "candidate_points": 196
+          },
+          "delta_best_IoU": 0.5830474926433415
+        },
+        {
+          "GT_encoded_id": 3070,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3070,
+            "GT_points": 10957,
+            "candidate": 27,
+            "best_IoU": 0.28438073012168696,
+            "intersection": 3412,
+            "candidate_points": 4453
+          },
+          "after": {
+            "GT_encoded_id": 3070,
+            "GT_points": 10957,
+            "candidate": 27,
+            "best_IoU": 0.8541326223445429,
+            "intersection": 9931,
+            "candidate_points": 10601
+          },
+          "delta_best_IoU": 0.5697518922228559
+        },
+        {
+          "GT_encoded_id": 3012,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3012,
+            "GT_points": 665,
+            "candidate": 132,
+            "best_IoU": 0.4024024024024024,
+            "intersection": 268,
+            "candidate_points": 269
+          },
+          "after": {
+            "GT_encoded_id": 3012,
+            "GT_points": 665,
+            "candidate": 132,
+            "best_IoU": 0.9715568862275449,
+            "intersection": 649,
+            "candidate_points": 652
+          },
+          "delta_best_IoU": 0.5691544838251426
+        },
+        {
+          "GT_encoded_id": 3153,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3153,
+            "GT_points": 170,
+            "candidate": 193,
+            "best_IoU": 0.18235294117647058,
+            "intersection": 31,
+            "candidate_points": 31
+          },
+          "after": {
+            "GT_encoded_id": 3153,
+            "GT_points": 170,
+            "candidate": 193,
+            "best_IoU": 0.7,
+            "intersection": 119,
+            "candidate_points": 119
+          },
+          "delta_best_IoU": 0.5176470588235293
+        },
+        {
+          "GT_encoded_id": 3128,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3128,
+            "GT_points": 1460,
+            "candidate": 50,
+            "best_IoU": 0.4182242990654206,
+            "intersection": 716,
+            "candidate_points": 968
+          },
+          "after": {
+            "GT_encoded_id": 3128,
+            "GT_points": 1460,
+            "candidate": 50,
+            "best_IoU": 0.7882623705408516,
+            "intersection": 1370,
+            "candidate_points": 1648
+          },
+          "delta_best_IoU": 0.370038071475431
+        }
+      ],
+      "largest_best_IoU_losses": [
+        {
+          "GT_encoded_id": 3068,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3068,
+            "GT_points": 30481,
+            "candidate": 3,
+            "best_IoU": 0.6275499660496561,
+            "intersection": 21257,
+            "candidate_points": 24649
+          },
+          "after": {
+            "GT_encoded_id": 3068,
+            "GT_points": 30481,
+            "candidate": 3,
+            "best_IoU": 0.5743723566993612,
+            "intersection": 19149,
+            "candidate_points": 22007
+          },
+          "delta_best_IoU": -0.05317760935029492
+        },
+        {
+          "GT_encoded_id": 3041,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3041,
+            "GT_points": 206,
+            "candidate": 127,
+            "best_IoU": 0.8164251207729468,
+            "intersection": 169,
+            "candidate_points": 170
+          },
+          "after": {
+            "GT_encoded_id": 3041,
+            "GT_points": 206,
+            "candidate": 127,
+            "best_IoU": 0.783410138248848,
+            "intersection": 170,
+            "candidate_points": 181
+          },
+          "delta_best_IoU": -0.033014982524098846
+        },
+        {
+          "GT_encoded_id": 3006,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3006,
+            "GT_points": 917,
+            "candidate": 25,
+            "best_IoU": 0.37641509433962267,
+            "intersection": 798,
+            "candidate_points": 2001
+          },
+          "after": {
+            "GT_encoded_id": 3006,
+            "GT_points": 917,
+            "candidate": 25,
+            "best_IoU": 0.34919786096256683,
+            "intersection": 653,
+            "candidate_points": 1606
+          },
+          "delta_best_IoU": -0.02721723337705584
+        },
+        {
+          "GT_encoded_id": 3048,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3048,
+            "GT_points": 315,
+            "candidate": 102,
+            "best_IoU": 0.5015873015873016,
+            "intersection": 158,
+            "candidate_points": 158
+          },
+          "after": {
+            "GT_encoded_id": 3048,
+            "GT_points": 315,
+            "candidate": 102,
+            "best_IoU": 0.4952978056426332,
+            "intersection": 158,
+            "candidate_points": 162
+          },
+          "delta_best_IoU": -0.006289495944668377
+        },
+        {
+          "GT_encoded_id": 3031,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3031,
+            "GT_points": 97586,
+            "candidate": 1,
+            "best_IoU": 0.754100137985413,
+            "intersection": 76511,
+            "candidate_points": 80385
+          },
+          "after": {
+            "GT_encoded_id": 3031,
+            "GT_points": 97586,
+            "candidate": 1,
+            "best_IoU": 0.7490930956981191,
+            "intersection": 75991,
+            "candidate_points": 79849
+          },
+          "delta_best_IoU": -0.0050070422872938725
+        },
+        {
+          "GT_encoded_id": 3038,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3038,
+            "GT_points": 194,
+            "candidate": 93,
+            "best_IoU": 0.9794871794871794,
+            "intersection": 191,
+            "candidate_points": 192
+          },
+          "after": {
+            "GT_encoded_id": 3038,
+            "GT_points": 194,
+            "candidate": 93,
+            "best_IoU": 0.9744897959183674,
+            "intersection": 191,
+            "candidate_points": 193
+          },
+          "delta_best_IoU": -0.004997383568812075
+        },
+        {
+          "GT_encoded_id": 3058,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3058,
+            "GT_points": 77512,
+            "candidate": 16,
+            "best_IoU": 0.8631596711588997,
+            "intersection": 71606,
+            "candidate_points": 77052
+          },
+          "after": {
+            "GT_encoded_id": 3058,
+            "GT_points": 77512,
+            "candidate": 16,
+            "best_IoU": 0.8629788567708961,
+            "intersection": 71591,
+            "candidate_points": 77037
+          },
+          "delta_best_IoU": -0.00018081438800354732
+        },
+        {
+          "GT_encoded_id": 3105,
+          "independent_GT_label": null,
+          "before": {
+            "GT_encoded_id": 3105,
+            "GT_points": 369,
+            "candidate": 108,
+            "best_IoU": 0.07416267942583732,
+            "intersection": 62,
+            "candidate_points": 529
+          },
+          "after": {
+            "GT_encoded_id": 3105,
+            "GT_points": 369,
+            "candidate": 108,
+            "best_IoU": 0.07398568019093078,
+            "intersection": 62,
+            "candidate_points": 531
+          },
+          "delta_best_IoU": -0.0001769992349065358
+        }
+      ],
+      "largest_published_point_transfers": [
+        {
+          "from_candidate": 10,
+          "to_candidate": 27,
+          "points": 4813,
+          "destination_source_index": 12
+        },
+        {
+          "from_candidate": 10,
+          "to_candidate": 20,
+          "points": 4480,
+          "destination_source_index": 17
+        },
+        {
+          "from_candidate": 13,
+          "to_candidate": 44,
+          "points": 3249,
+          "destination_source_index": 11
+        },
+        {
+          "from_candidate": 14,
+          "to_candidate": 41,
+          "points": 2595,
+          "destination_source_index": 4
+        },
+        {
+          "from_candidate": 15,
+          "to_candidate": 63,
+          "points": 2454,
+          "destination_source_index": 1
+        },
+        {
+          "from_candidate": 15,
+          "to_candidate": 30,
+          "points": 2442,
+          "destination_source_index": 0
+        },
+        {
+          "from_candidate": 14,
+          "to_candidate": 28,
+          "points": 2171,
+          "destination_source_index": 13
+        },
+        {
+          "from_candidate": 29,
+          "to_candidate": 44,
+          "points": 2097,
+          "destination_source_index": 11
+        },
+        {
+          "from_candidate": 45,
+          "to_candidate": 90,
+          "points": 2059,
+          "destination_source_index": 24
+        },
+        {
+          "from_candidate": 17,
+          "to_candidate": 55,
+          "points": 2000,
+          "destination_source_index": 6
+        }
+      ],
+      "distinction": "Best-IoU diagnostics allow shared proposals and are not AP/FN counts"
+    }
+  ],
+  "interpretation": [
+    "The independent CORE controls exactly reproduce the earlier registered-domain screen/full replay mask AP, so gains are caused by ownership rather than score or NMS changes.",
+    "Unique source-mask support can correct ownership, but actual cached source identity is not guaranteed correct; the small scene0015 regression falsifies uniform improvement.",
+    "Hypersim010 gains over the weak same-domain CORE screen remain far below v19. Fixed proposal suppression/quality and source identity errors remain limitations; ownership alone does not establish an acceptable cross-domain replacement.",
+    "Scene0019 AP25/AP50 do not change, so this method does not fix its missing-instance/source-undersegmentation bottleneck.",
+    "No new strict-box scores or production graph claim follows from mask-space screening."
+  ]
+}

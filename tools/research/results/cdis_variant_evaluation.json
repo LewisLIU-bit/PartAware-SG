@@ -1,0 +1,80 @@
+{
+  "complete": true,
+  "official_full_paper_reproduction": false,
+  "variant": "official CDIS geometry backend, shared GPT/SAM3 frontend, raw depth",
+  "GT_in_construction": false,
+  "training": false,
+  "new_API_calls": 0,
+  "official_evaluator_unchanged": true,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "metrics": {
+        "all_ap": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap_25%": 0.0,
+        "classes": {
+          "object": {
+            "ap": 0.0,
+            "ap50%": 0.0,
+            "ap25%": 0.0
+          }
+        }
+      },
+      "predicted_instances": 0,
+      "native_unassigned_vertices": 237360,
+      "prediction_sha256": "be207ec4a3f6507def6ac1ec487fd7aa582a94067532bd311e6a3282eafe1598",
+      "confidence": "native official constant 1.0"
+    },
+    {
+      "scene": "scene0015_00",
+      "metrics": {
+        "all_ap": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap_25%": 0.0,
+        "classes": {
+          "object": {
+            "ap": 0.0,
+            "ap50%": 0.0,
+            "ap25%": 0.0
+          }
+        }
+      },
+      "predicted_instances": 0,
+      "native_unassigned_vertices": 217086,
+      "prediction_sha256": "09f6da20b51c8e9d487c5cd6d0b028861553d3b9b0575c3216f73f4711dd7ff6",
+      "confidence": "native official constant 1.0"
+    },
+    {
+      "scene": "scene0019_00",
+      "metrics": {
+        "all_ap": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap_25%": 0.0,
+        "classes": {
+          "object": {
+            "ap": 0.0,
+            "ap50%": 0.0,
+            "ap25%": 0.0
+          }
+        }
+      },
+      "predicted_instances": 0,
+      "native_unassigned_vertices": 136769,
+      "prediction_sha256": "7753253fb45c542dae2251701b452d0203f3469048304707dd576c702f79efe9",
+      "confidence": "native official constant 1.0"
+    }
+  ],
+  "aggregate": {
+    "all_ap": 0.0,
+    "all_ap_50%": 0.0,
+    "all_ap_25%": 0.0,
+    "classes": {
+      "object": {
+        "ap": 0.0,
+        "ap50%": 0.0,
+        "ap25%": 0.0
+      }
+    }
+  }
+}

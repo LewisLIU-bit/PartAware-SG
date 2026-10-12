@@ -22,11 +22,15 @@
 
 
 
-当前目标为严格AP25≥70\%、AP50≥55\%。GAU统计处理标注整体与预测小实例的粒度差异；它借助GT表面归属，不能与严格AP直接混比或宣称达到原目标。
+厨房历史目标为严格AP25≥70\%、AP50≥55\%；当前自主循环的目标是三个ScanNet扫描逐一显著超过官方ESAM，最新进展见27.8。GAU统计处理标注整体与预测小实例的粒度差异；它借助GT表面归属，不能与严格AP直接混比或宣称达到原目标。
 
 
 
 当前主流程为v19，复用每场景唯一的既有GPT与199份签名SAM3概念/放大观测。第二场景严格AP25/AP50/AP75为66.53\%/43.55\%/19.40\%，同一成品的GAU-AP为80.00\%/56.81\%/23.90\%；第一场景两种口径均100\%。COVE恢复少视角可见身份及被掩码遗漏的实测表面，BASE自动发现并验证底部支撑残余。厨房新增15次本地SAM3几何框验证，没有新增GPT/Qwen请求。新增未参与调试的第三场景，冻结算法对比见26.6。薄柜隐藏形状仍未解决；MATCH-3D联合模型的方法见第27章，最少训练路线与自主诊断见27.6；未开始数据训练、未接入v19。
+
+
+
+\textbf{持续研究最新进度：} 三轮三个ScanNet扫描的真实建图与独立评价已完成，当前SAGE-CORE-V在全部三个扫描的AP50/平均AP超过ESAM，0019 AP25仍未超过，目标未完成。010也必须进步，直接迁移与原图准入筛选均退步，未宣布整体升级。新增五个验证扫描已固定并导出306帧，冻结ESAM五场景实测已完成，我们的对应建图仍在继续，扩至八扫描。15次算法方法族筛选的数量前提已满足，整体验收仍未完成，目前保守归并15类、未训练。六篇论文的源码口径核验和基线部署状态见26.11；最终候选的逐扫描成绩、数学和继续迭代见27.8。正式默认仍为v19。
 
 
 
@@ -5047,6 +5051,58 @@ ESAM本身经过训练，本地已用官方训练权重，推理不需要从零�
 
 
 
+\textbf{官方源码的可执行核验（2026-10-12）。} OP3DSG默认框阈值0、严格大于0；运行未改官方评价片段后，IoU仅0.005的框仍算检索命中，在0.1阈值不算。ThinkGraphs语义评价默认gt\_class\_only=True，只允许GT出现类别竞争；这是有类别先验的语义口径，不是无先验全词汇预测，GT没有进入本地建图。Octree-Graph平均阈值实际为.50–.90；其no\_class包装会把void=0映射为实例3000，合成测试证实增加GT。本项目类无关比较保留原void处理；这一问题不否定论文正式200类主表。这些是固定官方代码片段真实执行，不是复现整套论文指标。源码版本、哈希和测试在baseline\_protocol\_validation.json。
+
+
+
+\textbf{可复现状态与本地对照。} OVIP-SG当前固定公开版本仅两行README，无实现、权重和评价，不能填本地PQ/AP。OpenSGG-VL需已给实例输入；KNA-SG本轮未核得完整可运行公开实现/权重，两者仍是原文指标核读。ThinkGraphs已安装官方DINO/SAM2.1/EVA02与未改关联后端，在同125帧实际运行。为遵守本项目来源约定，使用共用GPT名称缓存替代Qwen，异步Critic/Descriptor API代理未启用，因此称\textbf{几何后端变体}，不是全文复现。原确认>5匹配在15帧0019无输出；轨迹最大仅5匹配。统一把全部扫描确认条件改为>0后再次全跑，最终变体如下：
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+扫描 & ThinkGraphs几何后端变体AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+扫描 & ThinkGraphs几何后端变体AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+scene0011\_00 & 52.06\% & 43.87\% & 16.35\% \\ \hline
+scene0015\_00 & 58.61\% & 41.20\% & 30.26\% \\ \hline
+scene0019\_00 & 53.33\% & 40.00\% & 31.11\% \\ \hline
+\end{longtable}
+}
+
+它未成为这三扫描整体更强基线，不能据此说完整ThinkGraphs论文效果低：输入采样、名称来源和未启用的代理均不同。thinkgraphs\_sparse\_evaluation.json记录真实云/图及独立评价，不把接口检查当论文成绩。官方可变形注意力的原PyTorch参考实现替代缺失CUDA扩展，数值前向最大误差5.96e-8；CPU DBSCAN保持参数；隔离环境没有降级生产Torch。
+
+
+
+\textbf{继续核查更贴合任务的强基线。} CDIS[47]是无需三维专项训练的类无关方法，跟踪二维mask并通过三维superpoints反馈修正身份。作者表ScanNet200 AP/AP50/AP25为33.2/52.1/69.2\%，已经固定下载公开实现；完整CropFormer方法尚无本地三个扫描成绩。共享前端+原深度后端的默认配置在稀疏选帧下输出全空，已归因并用统一适配再跑三个扫描。Open3DIS[48]官方补充表3中3D+SAM类无关结果41.5/51.6/56.3\%，依赖预训练3D分支；与其200类主表分开。两者论文范围/采样/后处理不同，不和三扫描数字直接排名，也不据此判定谁本地更强。下一步核通CDIS的预计算mask后端，再验证独立二维检测模型的完整对照；使用本项目缓存会明确标为变体。Any3DIS项目当前代码链接注明Unofficial，未作为作者正式实现成绩引用。\href{https://teamrobi.github.io/projects/cdis/}{CDIS官方}，\href{https://open3dis.github.io/assets/Open3DIS\_supplementary.pdf}{Open3DIS补充}。
+
+
+
+\textbf{CDIS稀疏输入后端变体已完成。} 原几何每5个选帧再采样，并在3D合并前要求至少2次投票；本来40帧间隔的输入因此进一步稀疏。审计确认米制深度正确、原图有真实前景，不是简单接口断裂。对全部三个扫描统一用全部选帧合并、强度/关联门槛各1，保留未改官方几何后端，实际结果如下。二维掩码来自共享GPT/SAM3，native质量分数固定1，不是作者CropFormer完整系统。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+扫描 & CDIS后端变体AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+扫描 & CDIS后端变体AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+scene0011\_00 & 68.88\% & 33.06\% & 19.78\% \\ \hline
+scene0015\_00 & 75.16\% & 52.58\% & 31.01\% \\ \hline
+scene0019\_00 & 57.14\% & 35.00\% & 20.71\% \\ \hline
+\end{longtable}
+}
+
+三场景实际输出108/110/31个实例，完成状态、预测哈希和独立评价在cdis\_sparse\_variant\_evaluation.json。不以该变体结果否定作者论文；完整独立前端尚未复现。
+
+
+
 \section*{27. MATCH-3D：方法、最少训练路线与自主诊断（数据训练未启动）}
 \addcontentsline{toc}{section}{27. MATCH-3D：方法、最少训练路线与自主诊断（数据训练未启动）}
 
@@ -5438,6 +5494,266 @@ S=0.25\left(F+\frac{q+1}{2}\right)+0.25I+0.15C+0.10K.
 
 
 
+\subsection*{27.8 持续迭代：跨来源几何证据与真实点云发布}
+\addcontentsline{toc}{subsection}{27.8 持续迭代：跨来源几何证据与真实点云发布}
+
+\textbf{目标与当前状态。} 按用户要求持续执行“主动诊断→一般算法→三个扫描全部真实重跑→独立评价→反思并继续”。目标是\textbf{每个扫描显著超过官方ESAM}，不是合并平均超过就结束。当前只在scene0011\_00、scene0015\_00做到AP25/AP50/平均AP三项超过，第三轮scene0019\_00的AP50/平均AP也超过ESAM，但AP25仍只有66.58\%，低于ESAM的78.62\%，目标未完成。三个扫描已经是开发集，不能把开发收益说成统计显著性、完整312扫描领先或未见类别泛化。正式默认仍为v19。
+
+
+
+\textbf{本阶段保留的最终候选。} SAGE（Source Agreement for Geometric Evidence）复用官方已训练ESAM几何候选和既有GPT图像身份，用跨来源掩码重合、唯一所有权与实测表面发布形成结果。下表是同一套策略作用于全部扫描，未按扫描挑策略，也没有重算GT、改阈值或修改评价器。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/5-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+开发扫描 & 方法 & AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+开发扫描 & 方法 & AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+scene0011\_00 & 正式v19 & 72.90\% & 71.93\% & 41.61\% \\ \hline
+scene0011\_00 & SAGE-CORE-V阶段保留候选 & 97.25\% & 79.04\% & 43.78\% \\ \hline
+scene0011\_00 & 官方ESAM权重 & 90.17\% & 70.25\% & 30.89\% \\ \hline
+scene0015\_00 & 正式v19 & 93.48\% & 61.13\% & 40.77\% \\ \hline
+scene0015\_00 & SAGE-CORE-V阶段保留候选 & 92.14\% & 72.58\% & 49.80\% \\ \hline
+scene0015\_00 & 官方ESAM权重 & 88.02\% & 63.46\% & 46.17\% \\ \hline
+scene0019\_00 & 正式v19 & 51.96\% & 35.80\% & 27.73\% \\ \hline
+scene0019\_00 & SAGE-CORE-V阶段保留候选 & 66.58\% & 55.36\% & 31.91\% \\ \hline
+scene0019\_00 & 官方ESAM权重 & 78.62\% & 44.69\% & 28.60\% \\ \hline
+三扫描合并 & 正式v19 & 75.10\% & 58.28\% & 37.11\% \\ \hline
+三扫描合并 & SAGE-CORE-V阶段保留候选 & 88.50\% & 71.32\% & 43.79\% \\ \hline
+三扫描合并 & 官方ESAM权重 & 86.74\% & 61.14\% & 37.16\% \\ \hline
+\end{longtable}
+}
+
+\textbf{依赖与适用范围。} SAGE用到了ESAM，不能称“独立GPT算法超过ESAM”。普通重建网格与segs是额外的实测几何输入，未使用aggregation或GT类别；网格可能含选定125帧之外的重建表面。这是固定网格域的实例建图研究，不证明纯在线速度、隐藏形状补全或完整开放集语义。新候选有独立原帧名称证据才命名，缺证据明确为unlabeled object；类无关AP不惩罚名称错误，名称/关系还须单独评价。
+
+
+
+\textbf{归并后的执行树。} 保持一个执行器，不增加第二套重复流程：
+
+
+
+\begin{verbatim}
+FOVEA  图像候选：共享GPT身份 + 冻结SAM局部边界
+MICA   身份与证据
+       ├─ 多视角关联：既有身份/可见证据
+       └─ SAGE：官方几何候选 / 跨源重复检查 / 独占所有权
+SHAPE  实测几何
+       ├─ 原RGB-D与普通重建表面恢复
+       └─ 独立视角验证：未知保留 / 实测正支持补入
+GRAPH  部件、关系与发布
+       ├─ 规范几何、父归属与来源
+       └─ 保留未归属真实表面，阻止最近邻跨空缺扩张
+\end{verbatim}
+
+
+\textbf{数学与证据。} 对两个来源的候选实测点集，Jaccard重合为
+
+
+
+\[
+J(A,B)=\frac{|A\cap B|}{|A\cup B|},\quad q_i=\frac{s_i+\max_{j\in\mathrm{other\ source}}J(M_i,M_j)}{2}.
+\]
+
+按$q_i$排列进行$J>0.5$重复抑制。第一轮加权策略用$q_i/|M_i|^{1/4}$竞争所有权，第三轮表中最终候选采用下面的CORE规则；每个点只有一个实例。这里$s_i$来自各自模型，$q_i$\textbf{未经质量校准}，不是可靠概率；GPT名称置信度和ESAM掩码质量原本不是同一量。这个一般研究策略是实验得到的保留候选，没有声称论文已经证明其最优。
+
+
+
+CORE（Competing Observed Region Evidence）用不与其他掩码竞争的实测核心$C_i$竞争重叠点：
+
+
+
+\[
+g_i(p)=\frac{q_i}{1+d(p,C_i)/0.05},\qquad d(p,C_i)=\min_{c\in C_i}\|p-c\|_2.
+\]
+
+核心不足则用该候选已有实测表面，不据此判不存在；没有生成坐标。CORE在0019局部改善但没有达到全部逐扫描目标，未作为正式升级。点序、编号重排、刚体变换、独占点归属等行为已核验。
+
+
+
+\textbf{修复实际发布失效。} 只保存已归属的重建顶点，会令原评价所用5cm最近邻把附近未保存的表面扩张成某个物体。我们把这些真实顶点保留为“未归属”，以非图对象的保留身份编码；原点和原标签不变。于是最近邻可以落在真实未归属表面上，不再必须从邻近物体借标签。该修复属于点云发布，不是改变GT或评价规则。越界回归、坐标/点序变换及编号编码测试通过。普通几何分段的多数归属也会吞并局部拆分，因此提案筛选已包含与真实发布相同的多数规则；提案AP仍不等于实际图/云重跑AP。
+
+
+
+\textbf{第三轮实际重跑已完成，下一轮在继续。} 冻结SAM3已对94个已有RGB帧、213个投影框做视觉复核和缓存GPT名称+框复核。选择最多三个拍摄位置且相隔至少15cm；同一图多裁剪不计独立观测。严格深度可见点才投票，遮挡/未知保留。正支持补充策略为
+
+
+
+\[
+B_i'=B_i\cup\{p:v_i(p)\ge2,\ r_i(p)/v_i(p)\ge2/3\},
+\]
+
+其中$v_i$是独立可见视角数，$r_i$是正mask支持数。此次不因SAM负像素剪掉原ESAM点。三个扫描分别补184/145/437个真实观测顶点，没有生成隐藏点，没有新增GPT调用。三个扫描的第三轮融合至最终云/图发布、独立评价均已完整完成，退出状态0。0019 AP50为55.36\%、平均AP为31.91\%，分别超过ESAM的44.69\%/28.60\%；AP25仍未超过。合并AP25/AP50/平均AP为88.50\%/71.32\%/43.79\%。第四项双向覆盖重复规则的筛选已退步，否决；后续继续查同时可见子候选的身份与质量排序，而不以这一轮结果结束。
+
+
+
+\textbf{否定方案与反思。} 使用SAM正负像素直接修剪、追加所有跨视角局部子候选、用peer分数直接替换名称分数的实验，没有同时改善三个扫描，已否决。局部重合、多视角出现或更合理的分数来源，都不足以保证独立实例身份和整体范围正确。0019误合并与漏检仍是下一轮重点；对每个退步对象追溯原RGB/深度、覆盖、纯度、身份和排序，禁止按已知数量、GT编号或坐标切分。
+
+
+
+\textbf{可核验与持续执行。} 三轮新增真实三扫描重放共375帧；原GPT请求、源mask和实例特征逐字节一致，新增API调用0、数据训练0。三个扫描的前置发布对照与冻结v19 AP逐项相同。正式构建指纹保持不变。收据为tools/research/results/sage\_verified\_core\_evaluation.json、sage\_full\_replay\_validation.json；失败仅留紧凑JSON，不增加中途正式版本。详细环境、代码边界、失败、运行状态和下一轮方案写入根AGENTS.md。线程持续跟进已配置，未达到全部扫描目标就继续。
+
+
+
+\textbf{010同时是升级验收条件。} 用户最新要求厨房ai\_001\_010也必须进步。不能只凭ScanNet收益升级，不能按场景挑不同策略拼成绩。010仍用相同100帧和两套既有协议：109官方GT严格框AP25/AP50为66.53\%/43.55\%，104可计共同观测点AP25/AP50/均值为72.73\%/56.41\%/35.33\%。两套指标分别报告，不以点AP完成历史严格框目标。正式发布前要求010原协议不退步且有可复核收益；未完成的对照明确标记未完成。
+
+
+
+当前先测试同一SAGE加权/CORE在冻结RGB-D观测域上的迁移。这里没有ScanNet网格分段，因此不造分段或读取GT造网格；只使用冻结的2,412,033个实测体素。大域采用稀疏int64计数，Jaccard数学与原实现逐项相同。构建与独立GT评价分离，输入/源码/掩码哈希、日志和退出状态保存；这一阶段是提案筛选，还不能称010的完整算法升级。ScanNet之外是否有收益必须实测，ESAM在010的弱迁移表现不构成直接融合一定有利的证据。
+
+
+
+\textbf{010同口径提案筛选实测（未正式发布）。}
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+一般策略 & 观测点AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+一般策略 & 观测点AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+冻结v19 & 72.73\% & 56.41\% & 35.33\% \\ \hline
+exclusive\_weighted & 42.77\% & 26.16\% & 13.01\% \\ \hline
+exclusive\_core & 37.93\% & 20.85\% & 11.10\% \\ \hline
+\end{longtable}
+}
+
+该表只评价掩码提案，严格框仍未复核；不能代替真实云/图发布或宣布升级。退步方案不进入默认版，继续查跨域证据与细物体身份。
+
+
+
+\textbf{开放语义尚不能宣布领先。} 类无关AP只测实例几何与排序，名称全部错误也不会直接扣此AP。当前CORE-V仍有0011/0015/0019分别18/16/9个unlabeled object节点，不能把几何成绩当开放命名正确率。ThinkGraphs在ScanNet的语义mIoU为44\%、ScanRefer A@.5为37.6\%；OP3DSG对象/部件R@3为84.9\%/83.6\%，主口径仅非零框相交；OVIP-SG在Replica mAcc为51.31\%、F-mIoU为61.45\%[41–43]。它们是实际竞争者，但这些任务、数据与三扫描类无关AP不同，不能直接宣布谁战胜谁。我们的同域名称精度、细类混淆、自然语言定位、未见类/拒识与关系评价仍待实现。完整语义代理未启用的ThinkGraphs本地几何变体不能替代该比较；后续使用固定全词表与独立语言查询，不以GT出现类过滤预测。
+
+
+
+\textbf{统一原图准入仍未解决跨域退步。} 对新增peer要求至少两个独立原帧mask的深度可见正支持与一致命名，保留无证据者为暂定几何、不说不存在。该四场景筛选已完成，但未形成同时收益，否决替换正式版；010仍只有38.94\%/22.58\%/12.14\%的点AP25/AP50/均值。名称有原图支持也不足以保证点云纯度、完整范围和竞争所有权正确。接下来须分离几何归属与质量排序的因果影响，不按已知物体数补节点。
+
+
+
+\textbf{新增五场景已事先固定。} 按同一官方val列表的\_00字典序，前三个之后连续取scene0025\_00、scene0030\_00、scene0046\_00、scene0050\_00、scene0063\_00，不看图片/GT/AP挑样本。扩至八扫描仍不是完整312扫描排行。首轮使用被冻结的同一CORE-V策略；若之后依新结果修改算法，后续属于开发。登记、阶段日志、共享缓存、完整原始/v19/ESAM对照与候选重放均在scan200\_expansion\_work，不覆盖原三扫描收据。
+
+
+
+\textbf{训练前至少十五次算法尝试。} 用户允许在算法反复仍很难整体进步时尝试训练，但之前至少15次。当前把阈值/重复作业/同族评分变体保守归并为15个方法族，均有完整收据；基线安装不算一次。15项数量前提已满足，训练还未启动；不以历史参数遍历凑数，也不自动开始训练。新增八扫描与010的统一验收仍未完成；审计新增五扫描完整结果与独立训练数据后，才判断冻结骨干的小验证器或关联头是否值得训练。不从零训练大模型、不用这些验证/开发GT训练再回测。详细账本algorithm\_attempt\_ledger.json保留假设、来源哈希与否定原因；当前没有数据训练。
+
+
+
+新增五扫描原始下载和米制RGB-D导出已完成，共306帧；逐扫描选帧为scene0025\_00=49、scene0030\_00=63、scene0046\_00=62、scene0050\_00=117、scene0063\_00=15。首次共享GPT缓存会有新API调用，原始/v19/候选复用；与此前旧三扫描/010的零新增识图实验分开记录。ESAM五场景已完成独立评价，共享识图与我们的对应建图仍在继续，不能填作已赢。
+
+
+
+\textbf{新增五扫描的冻结ESAM已实测。} 官方完整权重与原生固定评价保持不变，306帧推理及独立点AP已完成。以下是预先固定的新扫描；我们的对应结果尚待共享识图/重建完成，不填虚构对照、不宣布胜出。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+新扫描 & ESAM AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+新扫描 & ESAM AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+scene0025\_00 & 77.73\% & 55.91\% & 33.58\% \\ \hline
+scene0030\_00 & 72.14\% & 54.28\% & 32.42\% \\ \hline
+scene0046\_00 & 81.69\% & 68.69\% & 46.51\% \\ \hline
+scene0050\_00 & 91.48\% & 59.32\% & 29.13\% \\ \hline
+scene0063\_00 & 93.33\% & 80.00\% & 74.99\% \\ \hline
+\end{longtable}
+}
+
+共享GPT采集首轮在0025的000720遇到Connection error，已保留18帧成功缓存；直连/现有本地代理的只读模型检查均可达，代理续跑后000720/000760已成功。不据此确证服务器内部根因。ESAM已独立跑完，首轮resume.exit=1已记录；新显式恢复服务继续识图、原始/v19与统一CORE-V对照，不重复基线。失败API请求是否计费未知，不能把这批初始缓存说成零API调用。日志与阶段退出收据留在scan200\_expansion\_work。
+
+
+
+\textbf{第14项：原帧正身份所有权 CUE，筛选完成但否决升级。} 保持同一CORE候选、质量分数、NMS和普通几何分段发布。只对真正竞争的实测点，使用原帧深度可见的局部mask身份：若仅一个候选在至少两个相距15cm的拍摄位置得到该点的正身份支持，就改为该候选归属；其余情况回到CORE。未看见和背景均不作不存在证据。用 $l_t(p)$ 表示原帧实测可见点的局部身份，用 $k_{it}>0$ 表示候选核心与该帧的可靠正身份联系，则本项目实际规则为
+
+
+
+\[
+e_i(p)=\mathbf{1}\{\exists t\ne u:\|c_t-c_u\|\ge0.15,\quad l_t(p)=k_{it}>0,\quad l_u(p)=k_{iu}>0\},
+\]
+
+\[
+o(p)=\begin{cases}i,&\sum_j e_j(p)=1\text{ 且 }e_i(p)=1,\\o_{\mathrm{CORE}}(p),&\text{其余情况}.\end{cases}
+\]
+
+这是一项点身份仲裁，区别于质量代理调分和名称准入。四项行为/刚体/点序/编号测试通过，同域CORE控制逐项复现冻结指标。以下只是四域\textbf{掩码筛选}，不是新完整点云/场景图结果，没有新010严格框成绩；训练/API/GPU均为0。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+域 & CUE AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+域 & CUE AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+scene0011\_00 & 98.11\% & 82.91\% & 44.48\% \\ \hline
+scene0015\_00 & 91.93\% & 72.58\% & 49.58\% \\ \hline
+scene0019\_00 & 66.58\% & 55.36\% & 32.45\% \\ \hline
+ai\_001\_010 & 44.85\% & 28.54\% & 15.26\% \\ \hline
+\end{longtable}
+}
+
+0011较同域CORE提高0.85/3.87/0.70个百分点，0019平均AP提高0.54；但0015退步0.20/0/0.22，010仍比冻结v19低27.87/27.87/20.07。独立审计发现0015的一个局部原生候选拿走整体椅子的70个正确顶点，使该椅子最佳IoU从.7713降至.7347。原图正身份可偏向部件，不能只凭0011或最佳IoU收益宣布升级。源码、完整四域指标、测试和否定收据在cue\_candidate；本项计作独立第14族；结合第15项，数量门槛满足而训练尚未启动。
+
+
+
+\textbf{010的退步已分离原因。} 固定104实例观测域的独立稀疏审计与原生评价逐项一致：仅追加peer、不做所有权竞争，AP25/AP50/均值已降至46.49/33.52/19.49\%；CORE又从原正确实例移出269641个观测点，其中260469归给peer，27个原IoU超过50\%的实例跌落。原图准入仍有25个跌落，且14个保留原生候选降至固定100点预测门槛以下；NMS另压掉四个本来高IoU的整体候选。这些GT只在独立审计中使用，未导入构建。这说明退步包含错误候选、身份抑制、点归属和排序，不能用“域不同”一句代替归因。反事实诊断不计为新算法尝试，未生成规范框，不填新严格框AP。
+
+
+
+\textbf{第15项：跨源共同可见身份关系，四域筛选已完成但未升级。} 阅读MaskClustering[49]后核查固定作者源码，借鉴多视角mask-ID分布过滤欠分割观察者；作者假设大部分2D mask正确，持续过分割是局限。本项目已有native-native分离反证，本项改变的是跨源复合peer的身份模型选择，未复现作者完整模型。
+
+
+
+设 $S_t(i,j)$ 为原帧中两个可靠原生身份分别对应不同mask，$W_t(i,j)$ 为原始未互斥whole mask同时覆盖二者的歧义证据。本项目实际关系规则为
+
+
+
+\[
+C_{ij}=\mathbf{1}\{\exists t\ne u:S_t(i,j)=S_u(i,j)=1,\ \|c_t-c_u\|\ge0.15\}\,\mathbf{1}\{\forall v, W_v(i,j)=0\}.
+\]
+
+若一个peer在实测共同域中覆盖该关系两端各至少80\%的原生观测，就暂缓其单实例身份；物理域点保留，未知不判不存在。其余质量分数、CORE所有权、5cm和普通几何多数发布保持。全部原帧点投影与packed原mask参与，无随机抽样，不依GT/名称/编号/预期数量作条件；16项行为/未知/部件/重排/刚体/控制等价测试通过。以下仍为掩码筛选，没有完整新云/图或新严格框结果。
+
+
+
+{\small
+\begin{longtable}{|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|p{\dimexpr\linewidth/4-2\tabcolsep-2\arrayrulewidth\relax}|}
+\hline
+域 & 关系约束 AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endfirsthead
+\hline
+域 & 关系约束 AP25 & AP50 & 平均AP(.50–.90) \\ \hline
+\endhead
+scene0011\_00 & 98.11\% & 79.20\% & 44.19\% \\ \hline
+scene0015\_00 & 92.14\% & 72.58\% & 49.80\% \\ \hline
+scene0019\_00 & 66.58\% & 55.36\% & 31.91\% \\ \hline
+ai\_001\_010 & 43.22\% & 26.87\% & 13.92\% \\ \hline
+\end{longtable}
+}
+
+四域签名CORE控制逐项复现；仅暂缓1/0/0/2个复合peer。0011有0.85/0.16/0.42个百分点收益，0015/0019不变；010较CORE提高5.29/6.03/2.81，但仍较v19低29.51/29.53/21.41。0019的13对分离关系没有覆盖被合并的目标，没有独立分开mask就无法靠该关系拆出缺失候选；010仅排掉2/75候选，错误局部peer、NMS和质量尺度仍未解决。四域全完成/退出0，构建峰值1353MiB、评价843MiB，API/训练/GPU均0。关系证据也不能保证实体身份，因此否决全域替换。
+
+
+
+\textbf{数量门槛已满足，训练尚未启动。} 账本保守归并15个有实现、假设、完整跨场景结果和失败原因的方法族；重复、参数变体和诊断反事实均不凑数。数量满足不等于当前证据足够启动训练或宣布算法穷尽；新五扫描我们的完整对照尚未完成，且独立训练/校准数据不足。可靠最小训练建议是冻结骨干的12→32→1、449参数观测mask-IoU小头，校准来源与多视角证据，存在性另分支、未知屏蔽。这是建议，未实现/训练新小头；它不能创造0019缺失的独立mask，后者仍需独立冻结二维候选或有数据监督的局部身份模块。不得用八验证扫描或010GT训练再回测。本文.50–.90均值与MaskClustering正文.50–.95声明分开，不把作者表填作本地成绩。
+
+
+
+\textbf{新增识图恢复的真实状态。} 首次恢复确曾推进，随后仍以退出1结束。保存的流失败来自中转上游错误；只能确认中转返回此状态，不能证实官方负载或账户原因。新的工作区适配保留已成功33帧的字节哈希，只显式恢复允许的failed上游流记录，按SHA归档原失败，并记录特定帧改非流的实际transport及恢复链；模型、提示、图像和预算保持，外层最多2次。两项离线测试通过。新恢复服务已重新启动且001320实际成功，后续仍须检查进程/退出/complete，不能填作五扫描建图已完成。冻结vision\_api源码未修改；原validator不认识新增的上游失败归档，后续缓存严格校验必须使用显式恢复适配器，不把附接成功当作原validator全面兼容。ESAM五扫描已完成，不重复运行；失败请求是否计费未知。
+
+
+
 \section*{28. 保留数据、日志与直接可视化命令}
 \addcontentsline{toc}{section}{28. 保留数据、日志与直接可视化命令}
 
@@ -5717,6 +6033,18 @@ GRAPH / 独立GT核对 & 可观测GT筛选、严格一对一框AP、MVO、数量
 
 
 [46] Kirillov A, He K, Girshick R, Rother C, Dollár P. \textbf{Panoptic Segmentation} [C]. CVPR, 2019. \href{https://arxiv.org/abs/1801.00868}{论文}. PQ/SQ/RQ评价定义；不替代现有严格AP。
+
+
+
+[47] Kim J, Yoon H J, Park Y, Zhang B T. \textbf{CDIS: Cross-Dimensional Class-Agnostic 3D Instance Segmentation via 2D Mask Tracking and 3D–2D Projection Merging} [C]. IROS, 2025. \href{https://teamrobi.github.io/projects/cdis/}{作者项目及指标}，\href{https://github.com/teamROBI/CDIS}{官方代码}。本地下载源码，未复现作者完整数值。
+
+
+
+[48] Nguyen P, Ngo T D, Kalogerakis E, et al. \textbf{Open3DIS: Open-Vocabulary 3D Instance Segmentation with 2D Mask Guidance} [C]. CVPR, 2024. \href{https://open3dis.github.io/}{作者项目}，\href{https://open3dis.github.io/assets/Open3DIS\_supplementary.pdf}{补充类无关表3}。区分类无关与200类指标，未本地部署全系统。
+
+
+
+[49] Yan M, Zhang J, Zhu Y, Wang H. \textbf{MaskClustering: View Consensus based Mask Graph Clustering for Open-Vocabulary 3D Instance Segmentation} [C]. CVPR, 2024. \href{https://arxiv.org/html/2401.07745v2}{原文}，\href{https://github.com/PKU-EPIC/MaskClustering}{作者源码}。本轮核读§3.2，思想借鉴不等于完整模型复现；其正文平均AP阈值.50–.95与本项目固定.50–.90分开。
 
 
 \end{document}

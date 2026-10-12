@@ -1,0 +1,144 @@
+{
+  "complete": true,
+  "method": "CUE: Cached-view Unique-positive Evidence ownership",
+  "method_family_eligible_for_14": true,
+  "method_distinctness": "Point ownership changes from independent original local mask identity; no score/NMS/threshold variant counting",
+  "adopted": false,
+  "decision": "reject_current_cross_domain_replacement",
+  "full_pipeline_replay": false,
+  "new_Hypersim_strict_box_metrics": null,
+  "GT_in_construction": false,
+  "unknown_and_background_are_negative": false,
+  "new_API_calls": 0,
+  "new_training": false,
+  "GPU": false,
+  "original_candidate_q_and_NMS_unchanged": true,
+  "CORE_control_reproduces_prior_registered_domain_metrics": true,
+  "original_ScanNet_geometric_majority_publication_unchanged": true,
+  "observed_candidate_union_preserved_before_publication": true,
+  "exclusive_point_ownership": true,
+  "physical_point_deletions": 0,
+  "generated_points": 0,
+  "builder_peak_RSS_GiB": 2.54510498046875,
+  "evaluator_peak_RSS_GiB": 1.2734794616699219,
+  "resource_control": {
+    "OMP_OPENBLAS_MKL_threads": 2,
+    "KDTree_workers": 2,
+    "current_drivers_CPU_affinity_cores": 2,
+    "executed_builder_exact_source_snapshot": "build_cue_screen_executed.py",
+    "runtime_note": "CPU affinity was additionally restricted externally during the executed build; the current driver includes that resource-only restriction. Ownership component and all inputs stayed unchanged."
+  },
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "dataset": "scannet",
+      "AP25_AP50_mean_percent": [
+        98.10500906882885,
+        82.91064036185492,
+        44.480650365380356
+      ],
+      "delta_vs_same_geometry_CORE_percentage_points": [
+        0.8516398871108555,
+        3.8713119233439452,
+        0.7044033217437962
+      ],
+      "delta_vs_frozen_v19_percentage_points": null,
+      "modified_conflict_points": 1655,
+      "changed_points_after_publication": 6624,
+      "eligible_GT_best_IoU_gains": 5,
+      "eligible_GT_best_IoU_losses": 1
+    },
+    {
+      "scene": "scene0015_00",
+      "dataset": "scannet",
+      "AP25_AP50_mean_percent": [
+        91.93234090064712,
+        72.5752866142467,
+        49.579335752087914
+      ],
+      "delta_vs_same_geometry_CORE_percentage_points": [
+        -0.20367557822901228,
+        0.0,
+        -0.21616343861998177
+      ],
+      "delta_vs_frozen_v19_percentage_points": null,
+      "modified_conflict_points": 306,
+      "changed_points_after_publication": 135,
+      "eligible_GT_best_IoU_gains": 0,
+      "eligible_GT_best_IoU_losses": 1
+    },
+    {
+      "scene": "scene0019_00",
+      "dataset": "scannet",
+      "AP25_AP50_mean_percent": [
+        66.57588707588708,
+        55.36243386243386,
+        32.451499118165785
+      ],
+      "delta_vs_same_geometry_CORE_percentage_points": [
+        0.0,
+        0.0,
+        0.5423280423280441
+      ],
+      "delta_vs_frozen_v19_percentage_points": null,
+      "modified_conflict_points": 96,
+      "changed_points_after_publication": 126,
+      "eligible_GT_best_IoU_gains": 1,
+      "eligible_GT_best_IoU_losses": 0
+    },
+    {
+      "scene": "ai_001_010",
+      "dataset": "hypersim",
+      "AP25_AP50_mean_percent": [
+        44.853955205969406,
+        28.53525347232244,
+        15.264617033837066
+      ],
+      "delta_vs_same_geometry_CORE_percentage_points": [
+        6.923364322300501,
+        7.6902259911382,
+        4.1600110022675345
+      ],
+      "delta_vs_frozen_v19_percentage_points": [
+        -27.871727503319864,
+        -27.871178911520957,
+        -20.066865892778416
+      ],
+      "modified_conflict_points": 55558,
+      "changed_points_after_publication": 55558,
+      "eligible_GT_best_IoU_gains": 75,
+      "eligible_GT_best_IoU_losses": 8
+    }
+  ],
+  "failure_attribution": [
+    "scene0015: one chair best IoU falls .771324 to .734694 when 70 correctly covered published points move from a peer candidate to a native partial candidate. Source positive support does not guarantee whole-object identity or ownership purity.",
+    "scene0011: all three AP metrics gain, but a cabinet loses .009699 best IoU. AP gains do not imply every object improves.",
+    "scene0019: the changed chair best IoU rises .782977 to .845694, improving mean AP; AP25 and AP50 remain unchanged and missing/merged-instance failures are not resolved.",
+    "ai_001_010: all point AP metrics improve over the weak CORE screen, but remain far below v19; 8 eligible objects have lower best IoU while 75 improve. Ownership does not recover proposals suppressed by fixed NMS or repair all source identity mistakes."
+  ],
+  "limitations": [
+    "Four development domains, not a 312-scan benchmark or statistical significance test.",
+    "Mask-space screening only; no production point-cloud/graph replay or new 010 strict-box result.",
+    "Source masks may already undersegment different physical objects; two independent positive views can repeat that mistake.",
+    "Frozen q/NMS can discard native objects before CUE arbitration."
+  ],
+  "unchanged_shared_default_registry_reports_and_training_ledger": true,
+  "source_hashes": {
+    "cue_ownership.py": "c1754c0d3688306f6a193a5d048a1e3263e476fb40233cc1d770070562801f7f",
+    "build_cue_screen.py": "0cb11c08dd69242af7ee5c7b877b2a89e18f510d2e14174fa907d03d99087a8b",
+    "build_cue_screen_executed.py": "7accdec83700e85bafb2475bac43a3be906f4e212fa83c9777dda53bc18bc70c",
+    "evaluate_cue_screen.py": "a499ce547662ade34e0491fc52ba1869678476cf6b1dc2bd472da5c9abc1e023",
+    "diagnose_cue_screen.py": "452695d6fe1df07d9423b9a02b09cdea436e1ad8fba3c520ed3cfdb399d433dd",
+    "test_cue_ownership.py": "a739151f457a06e1d01a66c94a043614197e5cb3d2fdafd4353e203992af14f8",
+    "run_cue_service.sh": "4ac0796ca81889ffa3b326de7cb5a30b3a93d01a3bda36642d36b05a71f12c02"
+  },
+  "receipt_hashes": {
+    "hypothesis.json": "b097b51b31dac5b36f4e45cb8d54ad85d93b8588858e2dbd1505889821bb8ae2",
+    "construction.json": "b287b93e1ba40a373d8122dc784baeb0528881d45fb644208d19914aae0f86de",
+    "evaluation.json": "ca2be23d7eb5d5ec75fdba692b7dfdc843c533aa554bc1d89a5cb8fb47039b0a",
+    "diagnosis.json": "c9867cf2f731f1e1b0e93ebea99e4b6b93734bbdc37c554157a24d02f4050e9c",
+    "behavior_tests.json": "5ee2a4e381063b018a39de54e36bc09edefeb5a38dccb4ea5d7ab29b54e242b0",
+    "service.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "artifacts_retained": "Compact compressed control/candidate masks plus per-frame evidence retained for independent attempt15 audit; temporary dense projection caches deleted only inside cue_candidate/results."
+}

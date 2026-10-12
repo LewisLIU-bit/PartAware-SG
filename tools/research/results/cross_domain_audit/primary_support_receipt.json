@@ -1,0 +1,23 @@
+{
+  "primary_url": "https://arxiv.org/html/2401.07745v2",
+  "document_sha256": "cb72bd4e968e5cd543f58d2955f15fe4853fdd069ead1bfaaa7d0cde7040f61f",
+  "title_present": true,
+  "sections_checked": [
+    {
+      "term": "Under-Segmented Mask Filtering",
+      "found": false
+    },
+    {
+      "term": "under-segmented",
+      "found": true
+    },
+    {
+      "term": "observer",
+      "found": true
+    },
+    {
+      "term": "supporter",
+      "found": true
+    }
+  ]
+}

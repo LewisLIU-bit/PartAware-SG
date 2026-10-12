@@ -1,0 +1,40 @@
+{
+  "complete": true,
+  "syntax_checked": true,
+  "actual_pipeline_results_pending": true,
+  "GT_in_construction": false,
+  "parameter_changes": false,
+  "algorithm_module_paths": "workspace v20_work/research, unchanged frozen CORE-V",
+  "results": [
+    {
+      "file": "prepare_projection_verification.py",
+      "source_sha256": "075d5180fb3e3d4cdb939eda7bcc830e388102f2b601f051fda421378ba3ea4d",
+      "adapter_sha256": "70ac62b70c5e181297ee737c4d627bbd42028ad1e2c7c36dc8769eec6e07a8f6"
+    },
+    {
+      "file": "add_projection_text.py",
+      "source_sha256": "c4d6ee862ba4c1a5ea5470b8f6ff69b8c1d7e5cf03fd1f530e0cbd76d8f14148",
+      "adapter_sha256": "9724f8f8824cc1acae98ee53deca0bffd19ebaadf4cf80a5e0e2932b11473677"
+    },
+    {
+      "file": "run_projection_worker.py",
+      "source_sha256": "73c6e835c0738ef032c55c6b8131fe67d9c7b0d6e4e309cb316635c252069d85",
+      "adapter_sha256": "5951e362946750b28c2d587c35bba789b7f4d3f24d5fc0d3e57cd552e30a9a3b"
+    },
+    {
+      "file": "build_verified_peer_masks.py",
+      "source_sha256": "1588c1e69fcf81e5fc21545ba52953592330baf3209fd9bca5fd765981ae8894",
+      "adapter_sha256": "40c78b480fe286bff5689344313f7a25bd876b9f5ee9ebbf40213ae58a7d78fe"
+    },
+    {
+      "file": "replay_source_verified.py",
+      "source_sha256": "f434faff4129cc1452a27284ca4a51b687e6946fb23b5755bcb8e7770e0be9de",
+      "adapter_sha256": "445bb69d8ec8b84ee43210e6c88cba947d91202577829645cb30472ac31e28e8"
+    },
+    {
+      "file": "evaluate_replay.py",
+      "source_sha256": "22d9a3dfa8c48103bead9a7363fe2bd17289939518bcd304a9914dddf7e4d028",
+      "adapter_sha256": "de1e0925d7742b0e5f5b9508f7f3ca3862e820213a1c94b05abe7d920811d807"
+    }
+  ]
+}

@@ -61,3 +61,9 @@ scannet/script/thirdparty/SAM3/
 !tools/research/training_plan.json
 !tools/research/results/
 !tools/research/results/*.json
+
+# Curated nested algorithm and recovery receipts only.
+!tools/research/results/cue_candidate/*.json
+!tools/research/results/cross_domain_audit/*.json
+!tools/research/results/relational_candidate/*.json
+!tools/research/results/cache_recovery_audit/*.json

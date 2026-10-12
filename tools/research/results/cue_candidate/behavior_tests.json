@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "GT_used": false,
+  "tests": [
+    "test_positive_override_and_unknown",
+    "test_invariances",
+    "test_exact_independent_pair_and_identity",
+    "test_core_control_matches_signed_module"
+  ],
+  "candidate_score_and_NMS_control_identical": true,
+  "unknown_and_background_neutral": true,
+  "rigid_transform_point_candidate_view_and_local_ID_invariances": true
+}

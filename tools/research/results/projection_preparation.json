@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "GT_in_construction": false,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/projection_verification/scannet/scene0011_00",
+      "selected_frames": 39,
+      "geometric_prompts": 65
+    },
+    {
+      "scene": "scene0015_00",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/projection_verification/scannet/scene0015_00",
+      "selected_frames": 42,
+      "geometric_prompts": 109
+    },
+    {
+      "scene": "scene0019_00",
+      "target": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/projection_verification/scannet/scene0019_00",
+      "selected_frames": 13,
+      "geometric_prompts": 39
+    }
+  ]
+}

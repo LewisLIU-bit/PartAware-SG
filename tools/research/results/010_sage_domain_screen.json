@@ -1,0 +1,56 @@
+{
+  "complete": true,
+  "scene": "ai_001_010",
+  "candidate_screen_only": true,
+  "full_pipeline_replay": false,
+  "GT_in_construction": false,
+  "baseline_point_metrics": {
+    "all_ap": 0.3533148292661548,
+    "all_ap_50%": 0.564064323838434,
+    "all_ap_25%": 0.7272568270928927,
+    "classes": {
+      "object": {
+        "ap": 0.3533148292661548,
+        "ap50%": 0.564064323838434,
+        "ap25%": 0.7272568270928927
+      }
+    }
+  },
+  "historical_strict_box_metrics_unchanged": true,
+  "box_evaluation_pending": true,
+  "results": [
+    {
+      "mode": "exclusive_weighted",
+      "metrics": {
+        "all_ap": 0.13013958931874706,
+        "all_ap_50%": 0.26156140440122605,
+        "all_ap_25%": 0.42772659353548537,
+        "classes": {
+          "object": {
+            "ap": 0.13013958931874706,
+            "ap50%": 0.26156140440122605,
+            "ap25%": 0.42772659353548537
+          }
+        }
+      },
+      "predictions": 201
+    },
+    {
+      "mode": "exclusive_core",
+      "metrics": {
+        "all_ap": 0.11104606031569532,
+        "all_ap_50%": 0.20845027481184242,
+        "all_ap_25%": 0.3793059088366891,
+        "classes": {
+          "object": {
+            "ap": 0.11104606031569532,
+            "ap50%": 0.20845027481184242,
+            "ap25%": 0.3793059088366891
+          }
+        }
+      },
+      "predictions": 201
+    }
+  ],
+  "construction_receipt_sha256": "e31ff68b7034c5b564c6b595e564279311e46c7572ad6580662aec67fab350ca"
+}

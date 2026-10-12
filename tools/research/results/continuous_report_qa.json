@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "source_sha256": "0786023ccd1a688953a2dffa578d1291a336ab72268f44bf6853573c4ec688fa",
+  "three_scan_actual_metrics_verified": true,
+  "rows": 12,
+  "all_scene_target_unmet_explicit": true,
+  "ESAM_dependency_explicit": true,
+  "paper_and_local_protocols_separate": true,
+  "new_formulas_no_errors": true,
+  "desktop_mobile_no_body_overflow": true
+}

@@ -1,0 +1,424 @@
+{
+  "complete": true,
+  "hypothesis_id": "cross_source_covisibility_relation",
+  "conservative_distinct_attempt_candidate": 15,
+  "distinct_completed_four_domain_screen": true,
+  "training_gate_does_not_automatically_pass": true,
+  "expanded_five_ours_results_and_independent_train_data_still_required": true,
+  "production_default_changed": false,
+  "global_upgrade_rejected": true,
+  "full_pipeline_replay": false,
+  "strict_box_010_new_result": null,
+  "API_calls": 0,
+  "training": false,
+  "GPU": false,
+  "physical_points_deleted": 0,
+  "generated_points": 0,
+  "signed_controls_exactly_reproduced_all": true,
+  "behavior_and_invariance_tests_passed": 16,
+  "build_seconds": 105.30698561668396,
+  "build_peak_RSS_MiB": 1352.73046875,
+  "evaluation_seconds": 3.42828106880188,
+  "evaluation_peak_RSS_MiB": 842.76171875,
+  "outcome": "Some0011 and010 gains over signed control, but0015 AP25 remains belowv19 and010 far belowv19;0019 unchanged.",
+  "failure_reasons": [
+    "Relations only defer peer hypotheses covering>=80% of two native identities with repeated separated original masks; partial wrong peers survive.",
+    "0019 has13 cannot-link pairs but no peer satisfies the composite test; merged original masks do not expose separate identities, so this candidate cannot recover them.",
+    "010 defers only2 of75 peer proposals; unsafe source quality, four high-IoU native NMS removals and point competition remain.",
+    "Any raw common whole mask marks the pair ambiguous, correctly protecting parts but also potentially hiding true separation behind an overbroad source mask.",
+    "Consistent source oversegmentation cannot be ruled out without additional evidence; these relations are not perfect object-identity labels.",
+    "Uniform CORE scoring still averages uncalibrated image-presence and geometric-quality sources; relational structure does not calibrate their scales."
+  ],
+  "next_minimum_executable_problem": {
+    "priority": "First establish an independent frozen2D entity-mask source for the source-merged0019 objects; a rank-only head cannot supply missing separate hypotheses.",
+    "executable_source_adapter": "Feed author frozen CropFormer masks, after isolated weight/runtime verification, into the existing CDIS precomputed2D mask contract; cache once, keep input/depth/pose and evaluation fixed, permit all object names and no GT quantity constraints.",
+    "independent_source_reliability": "Mechanistically necessary for the missing-candidate failure, but no new local accuracy or guaranteed advantage is claimed; the detector and complete four-domain pipeline must be measured.",
+    "task": "Learn observed-mask quality for candidate adjudication with frozen backbones; keep unknown existence separate from low geometry quality.",
+    "optional_head": "12\u219232\u21921,449 parameters, IoU quality regression; separate optional existence head only on fully labeled reliable observed cases.",
+    "possible_GT_free_input_features": [
+      "native score",
+      "peer score",
+      "cross-source Jaccard",
+      "both directional coverages",
+      "original-mask dominance",
+      "mask-distribution entropy",
+      "independent visible view count",
+      "camera baseline",
+      "cannot-link/composite support",
+      "common-raw-whole ambiguity",
+      "observed extent/point mass"
+    ],
+    "supervision": "Only independent training scenes; targets from independent observed-domain GT audit; no010/eight development-validation GT training.",
+    "must_stop_treating_as_reliable_quality": "Repeated hand tuning of score averages, point-count penalties and support proportions after their documented failures.",
+    "unresolved_source_merge": "0019 lacks independent separate-mask evidence; a449-parameter rank head cannot create missing masks. A different frozen2D proposal source or genuinely supervised local identity head needs separate data/feature evidence.",
+    "not_training_started": true,
+    "not_guaranteed_to_win": true
+  },
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "dataset": "scannet",
+      "metrics": {
+        "all_ap_25%": 0.9810500906882885,
+        "all_ap_50%": 0.7920344580959733,
+        "all_ap": 0.4419367629696009
+      },
+      "signed_CORE_V_control": {
+        "all_ap_25%": 0.97253369181718,
+        "all_ap_50%": 0.7903932843851097,
+        "all_ap": 0.4377624704363656
+      },
+      "v19": {
+        "all_ap_25%": 0.7289794526996728,
+        "all_ap_50%": 0.719283535552333,
+        "all_ap": 0.41611150127189805
+      },
+      "delta_pp_signed_CORE_V": {
+        "all_ap_25%": 0.8516398871108555,
+        "all_ap_50%": 0.1641173710863586,
+        "all_ap": 0.41742925332352576
+      },
+      "delta_pp_v19": {
+        "all_ap_25%": 25.207063798861572,
+        "all_ap_50%": 7.275092254364024,
+        "all_ap": 2.582526169770283
+      },
+      "peer_proposals": 67,
+      "admitted_peer": 66,
+      "deferred_peer_indices": [
+        12
+      ],
+      "cannot_link_pairs": 119,
+      "native_NMS_suppression": [
+        {
+          "mode": "signed_CORE_V_control",
+          "native_nodes": [
+            "8",
+            "2",
+            "4",
+            "82",
+            "22",
+            "108",
+            "7",
+            "26",
+            "3",
+            "5",
+            "89",
+            "86",
+            "40",
+            "13"
+          ]
+        },
+        {
+          "mode": "relational_CORE_V",
+          "native_nodes": [
+            "8",
+            "2",
+            "4",
+            "82",
+            "22",
+            "108",
+            "7",
+            "26",
+            "3",
+            "5",
+            "89",
+            "86",
+            "40",
+            "13"
+          ]
+        }
+      ],
+      "counted_GT_IoU_improved_over5pp": 0,
+      "counted_GT_IoU_regressed_over5pp": 0,
+      "nonmatched_nonignored_FP50_control": 20,
+      "nonmatched_nonignored_FP50_candidate": 17,
+      "signed_inputs": {
+        "manifest": "5959b53975f375d8e42fbae2902e214fcc13e2fb8855f79da03f544c52dac291",
+        "domain": "2941664625d52110aefbfb2b5fd3c869c3f51b999a036a27ba3e0033e3bf21f5",
+        "peer": "b3a8bee8ec66b248b0116c5e5527f24dc17315398b0b458e0f7cb7ede7fa85f3",
+        "segments": "00546eb1505379add58fb3792d03f8b8dddef1bd60d357b243e040c4db3404e2"
+      },
+      "source_cloud_sha256": "979d25ee444411e90d2e3fac74004b97406f19c95283bece3faff7d7d0be9727",
+      "graph_sha256": "4237be18706a379ec637214f087967257c8a4b1558814489e816958e9d3852bb",
+      "tracks_sha256": "68126161e55de9cf5aed4f674ed2dc25804a51b46928fc658739f939d99a20eb",
+      "GT_hashes": {
+        "mesh_sha256": "2941664625d52110aefbfb2b5fd3c869c3f51b999a036a27ba3e0033e3bf21f5",
+        "segments_sha256": "00546eb1505379add58fb3792d03f8b8dddef1bd60d357b243e040c4db3404e2",
+        "aggregation_sha256": "155e188c1bababbe5522931b1cf7c6c971cb4464e75ab389de752afeffe6b23b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      }
+    },
+    {
+      "scene": "scene0015_00",
+      "dataset": "scannet",
+      "metrics": {
+        "all_ap_25%": 0.9213601647887614,
+        "all_ap_50%": 0.725752866142467,
+        "all_ap": 0.4979549919070789
+      },
+      "signed_CORE_V_control": {
+        "all_ap_25%": 0.9213601647887614,
+        "all_ap_50%": 0.725752866142467,
+        "all_ap": 0.4979549919070789
+      },
+      "v19": {
+        "all_ap_25%": 0.9348034579499254,
+        "all_ap_50%": 0.6113344299569529,
+        "all_ap": 0.40771209386343793
+      },
+      "delta_pp_signed_CORE_V": {
+        "all_ap_25%": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap": 0.0
+      },
+      "delta_pp_v19": {
+        "all_ap_25%": -1.3443293161163994,
+        "all_ap_50%": 11.441843618551417,
+        "all_ap": 9.0242898043641
+      },
+      "peer_proposals": 64,
+      "admitted_peer": 64,
+      "deferred_peer_indices": [],
+      "cannot_link_pairs": 167,
+      "native_NMS_suppression": [
+        {
+          "mode": "signed_CORE_V_control",
+          "native_nodes": [
+            "49",
+            "32",
+            "4",
+            "21",
+            "1",
+            "12",
+            "31",
+            "72",
+            "25",
+            "68",
+            "75",
+            "60",
+            "17",
+            "57",
+            "44",
+            "5",
+            "97",
+            "64",
+            "59"
+          ]
+        },
+        {
+          "mode": "relational_CORE_V",
+          "native_nodes": [
+            "49",
+            "32",
+            "4",
+            "21",
+            "1",
+            "12",
+            "31",
+            "72",
+            "25",
+            "68",
+            "75",
+            "60",
+            "17",
+            "57",
+            "44",
+            "5",
+            "97",
+            "64",
+            "59"
+          ]
+        }
+      ],
+      "counted_GT_IoU_improved_over5pp": 0,
+      "counted_GT_IoU_regressed_over5pp": 0,
+      "nonmatched_nonignored_FP50_control": 29,
+      "nonmatched_nonignored_FP50_candidate": 29,
+      "signed_inputs": {
+        "manifest": "abdcfd96e95f54427875fa305ab3e4681c4d14fe15ec1a9d917a3df0e40cc268",
+        "domain": "a09877f8a75dd7655e229b3457ad9b7d3c5b3998f317309ca42e86defcb61002",
+        "peer": "e62dca42d218bb7a5dab5c5b60ae035eaeed2d662152d5a5717950b8d7afd158",
+        "segments": "c27ae1ace57348ce92b0449f5c513e7e75f3e133ad4d7e1ddb0c544b65f60624"
+      },
+      "source_cloud_sha256": "e5716710602c94397b5fdaa4764a06263e7929c18f974acde248a093b5e7060e",
+      "graph_sha256": "87ec25896a8fa605ae62f338206928f2093325680ee77ddede5396da931d4b5c",
+      "tracks_sha256": "777f4648aea8e8dcab9be44763c058be3be348c2a005d9e22a4cc103754d047c",
+      "GT_hashes": {
+        "mesh_sha256": "a09877f8a75dd7655e229b3457ad9b7d3c5b3998f317309ca42e86defcb61002",
+        "segments_sha256": "c27ae1ace57348ce92b0449f5c513e7e75f3e133ad4d7e1ddb0c544b65f60624",
+        "aggregation_sha256": "76dacdf1f008d549442cd3c4757b5df21d35eea698f570399d8002de48ed540b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      }
+    },
+    {
+      "scene": "scene0019_00",
+      "dataset": "scannet",
+      "metrics": {
+        "all_ap_25%": 0.6657588707588707,
+        "all_ap_50%": 0.5536243386243386,
+        "all_ap": 0.3190917107583774
+      },
+      "signed_CORE_V_control": {
+        "all_ap_25%": 0.6657588707588707,
+        "all_ap_50%": 0.5536243386243386,
+        "all_ap": 0.3190917107583774
+      },
+      "v19": {
+        "all_ap_25%": 0.5195719095719096,
+        "all_ap_50%": 0.35798941798941797,
+        "all_ap": 0.27729276895943555
+      },
+      "delta_pp_signed_CORE_V": {
+        "all_ap_25%": 0.0,
+        "all_ap_50%": 0.0,
+        "all_ap": 0.0
+      },
+      "delta_pp_v19": {
+        "all_ap_25%": 14.618696118696118,
+        "all_ap_50%": 19.56349206349206,
+        "all_ap": 4.179894179894184
+      },
+      "peer_proposals": 32,
+      "admitted_peer": 32,
+      "deferred_peer_indices": [],
+      "cannot_link_pairs": 13,
+      "native_NMS_suppression": [
+        {
+          "mode": "signed_CORE_V_control",
+          "native_nodes": [
+            "18",
+            "4",
+            "8",
+            "5",
+            "27",
+            "7",
+            "3",
+            "10"
+          ]
+        },
+        {
+          "mode": "relational_CORE_V",
+          "native_nodes": [
+            "18",
+            "4",
+            "8",
+            "5",
+            "27",
+            "7",
+            "3",
+            "10"
+          ]
+        }
+      ],
+      "counted_GT_IoU_improved_over5pp": 0,
+      "counted_GT_IoU_regressed_over5pp": 0,
+      "nonmatched_nonignored_FP50_control": 8,
+      "nonmatched_nonignored_FP50_candidate": 8,
+      "signed_inputs": {
+        "manifest": "0be3768df15263bde3b58fa255b68147f12f923c300b647f40b5437a8c60a2d7",
+        "domain": "fad4b0d0a086bf6cc7885104efbe926208935fc0cb690b227fb3678b561002be",
+        "peer": "21f084cfa85de36f77f81d1ff8a15b7447374ff4952e8ee130890f280643b34a",
+        "segments": "4fce1e0a3eacf30327fa73020558545f3b316af7c45b7d690ecb689d17f13258"
+      },
+      "source_cloud_sha256": "d2019467337586909342fe58a90f3d1d7779c0c9a49860fa66e4008cf23693ae",
+      "graph_sha256": "4cd63cad2d6fcd9ada6bca0ed0517f8482448af7654f9424990cb884f6ccace8",
+      "tracks_sha256": "52af08eab590a3a2c0b4dc4d8c8c877e66d84a259142b932750d7abe96e5d161",
+      "GT_hashes": {
+        "mesh_sha256": "fad4b0d0a086bf6cc7885104efbe926208935fc0cb690b227fb3678b561002be",
+        "segments_sha256": "4fce1e0a3eacf30327fa73020558545f3b316af7c45b7d690ecb689d17f13258",
+        "aggregation_sha256": "b51bf966947a9c060edfdfdc4936cea00d08de07480041db586399e5d925c5cc",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      }
+    },
+    {
+      "scene": "ai_001_010",
+      "dataset": "hypersim",
+      "metrics": {
+        "all_ap_25%": 0.43220354621340196,
+        "all_ap_50%": 0.2687345589055314,
+        "all_ap": 0.1391786003851364
+      },
+      "signed_CORE_V_control": {
+        "all_ap_25%": 0.3793059088366891,
+        "all_ap_50%": 0.20845027481184242,
+        "all_ap": 0.11104606031569532
+      },
+      "v19": {
+        "all_ap_25%": 0.7272568270928927,
+        "all_ap_50%": 0.564064323838434,
+        "all_ap": 0.3533148292661548
+      },
+      "delta_pp_signed_CORE_V": {
+        "all_ap_25%": 5.289763737671288,
+        "all_ap_50%": 6.028428409368897,
+        "all_ap": 2.813254006944109
+      },
+      "delta_pp_v19": {
+        "all_ap_25%": -29.505328087949078,
+        "all_ap_50%": -29.53297649329026,
+        "all_ap": -21.41362288810184
+      },
+      "peer_proposals": 75,
+      "admitted_peer": 73,
+      "deferred_peer_indices": [
+        8,
+        14
+      ],
+      "cannot_link_pairs": 4673,
+      "native_NMS_suppression": [
+        {
+          "mode": "signed_CORE_V_control",
+          "native_nodes": [
+            "2",
+            "1",
+            "162",
+            "138"
+          ]
+        },
+        {
+          "mode": "relational_CORE_V",
+          "native_nodes": [
+            "2",
+            "1",
+            "162",
+            "138"
+          ]
+        }
+      ],
+      "counted_GT_IoU_improved_over5pp": 23,
+      "counted_GT_IoU_regressed_over5pp": 2,
+      "nonmatched_nonignored_FP50_control": 91,
+      "nonmatched_nonignored_FP50_candidate": 82,
+      "signed_inputs": {
+        "manifest": "475f536ff40ac56a34e85f80d0d27269cc141905c3831609bc4a06a0250f1453",
+        "domain": "7de5dae365f8c141f2bb4cfacb9fb1cca469503cc519b5936e04f18be80a5242",
+        "peer": "b9ec459b9d0f786d042c1dd5f37c33e3f097c4f7117238b4a252571201efdee5"
+      },
+      "source_cloud_sha256": "2b1551cdb9018f26bee18a68fe37d602c728fd30bb084f996d5b088d85deb1e3",
+      "graph_sha256": "35430fb026ab733e584bf4e19d8372db53526bea468a82e2f60118ae4150b8f1",
+      "tracks_sha256": "c403f40e65012fae73dc22b7a0c094717b4f3ff6f6134c343e71ed68be92c398",
+      "GT_hashes": {
+        "evaluation_GT_npz_sha256": "a9daaa8fa48fa96fdd610584475301fe602a08755ec24d4b28d51980caa40326"
+      }
+    }
+  ],
+  "receipt_hashes": {
+    "hypothesis_registration.json": "eccd56f2a913d04c94d7d22c3fa7acfc1cc41d4b58ce5a1adf86925391ac0f3a",
+    "construction.json": "0aad18f06210844950ddb007ff3d52c339dea6c412815b36ab1e307414013134",
+    "evaluation.json": "82aaea71b026a9a6955ebcb1559dfbf36b43d891fa1aa83db7bff393400d339d",
+    "behavior_test_receipt.json": "86d355860d67120997f88ad18678209e15429d578840ff9859594d1400f2b6e4",
+    "official_source_receipt.json": "068d4db8df02a18cb9694ecc506c185adcb7a74d2d7f8f647442da39a63cb4dd"
+  },
+  "module_hashes": {
+    "relational_admission.py": "ea3e471c0d489391be085f557092361e9cdaf98b65aa1c9c0142943944c8968a",
+    "stream_core.py": "6b3dcc55a9084bf63fb69274c536c5bbe796bc73331c7e215e1cee72e915c396",
+    "build_screen.py": "94f70e68e1ad7303ddae2be3274fa3e314d469d519d5585777b26b80ef8edbbf",
+    "evaluate_screen.py": "8c74b86f4bc9280fbc30e16d50efc1b877daafdf9e3a4295ab59e86d6a9ce510",
+    "test_relational_admission.py": "d97f02c6a77e43e66ba168300a746d3471260ae46a5e9bedaf8e8a6e9659b979",
+    "register_hypothesis.py": "06a77da359e6eb29db03e881e0a0a07d3b7b7c70eb0eb94b4b8e47e9366018fd",
+    "finalize_receipt.py": "1755c23f8ff1224ca210eafd2a8ae0a6ea3e48282aaa70e1f7c51afcc20437a8"
+  },
+  "input_and_per_frame_depth_pose_original_mask_raw_cache_hashes_in": "construction.json",
+  "source_paper_and_pinned_commit_in": "official_source_receipt.json"
+}

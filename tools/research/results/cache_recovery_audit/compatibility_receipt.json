@@ -1,0 +1,82 @@
+{
+  "complete": true,
+  "audit_scope": "Independent offline/read-only expansion-cache recovery contract audit",
+  "network_calls": 0,
+  "model_calls": 0,
+  "shared_scripts_cache_reports_written": false,
+  "raw_encrypted_events_or_secrets_output": false,
+  "frozen_production_limit": {
+    "construction_fingerprint_includes_vision_api_py": true,
+    "production_function_must_not_be_changed_while_claiming_original_fingerprint": true,
+    "recommended_change_location": "Explicit workspace cached_relay_recovery adapter and workspace construction gate only",
+    "formal_default_and_existing_production_consumers": "Unchanged"
+  },
+  "observed_snapshot": {
+    "scene0025_successful_raw_frames": 38,
+    "preflight_successful_frames": 33,
+    "preflight_successful_raw_hashes_all_preserved": true,
+    "current_failed_raw_frames": 0,
+    "scene_provenance_complete": false,
+    "legacy_stream_service_exit": "1",
+    "stale_exit_note": "The raw cache advanced during this read-only audit. An earlier exit=1 cannot alone justify starting a duplicate recovery job."
+  },
+  "restored_failure_history_whitelist": [
+    {
+      "frame": "000920",
+      "status": "failed",
+      "error_code": "upstream_http2_stream_error",
+      "sha256": "3c6a63e57f40037bbda83a503b54c80e742879f5a04ea8e2822114c0bb31320f"
+    },
+    {
+      "frame": "001320",
+      "status": "failed",
+      "error_code": "upstream_error",
+      "sha256": "6620732a1f5f12f412b5a83800e9ab9c2345cd7d86dc7ccec69850727b5a724c"
+    }
+  ],
+  "actual_compatibility": {
+    "restored_successes_validate_under_explicit_cached_relay_recovery_adapter": true,
+    "original_unpatched_validate_cached_request_rejected_frames": ["000920", "001320"],
+    "run_scan200_attach_cache_does_not_call_request_validator": true,
+    "validate_expansion_does_not_call_request_validator": true,
+    "original_attach_acceptance_reproduced_in_offline_complete_cache_fixture": true,
+    "conclusion": "Attach compatibility does not imply original unpatched recovery-chain validation or future recognize_manifest reuse compatibility."
+  },
+  "recommended_workspace_gate": {
+    "interface": "validate_all_recovery_chains(cache, settings)",
+    "where_to_call": [
+      "After successful acquisition and before writing scene_recognition_complete.json",
+      "Before workspace run_scan200 calls unchanged production attach_cache"
+    ],
+    "checks": [
+      "Install/use the same explicit cached_relay_recovery eligibility predicate; validate every raw record with configured canonical request fingerprint.",
+      "Traverse every recovery archive recursively using validate_cached_request; check immutable archive SHA, frame identity, image SHA, canonical cache fingerprint and actual transport/budget provenance.",
+      "Parse successful responses and compare existing parsed/refined semantic tags to the raw parse; do not silently promote malformed responses, refusals or incomplete frames.",
+      "Before the completion gate, require the exact manifest frame list, complete scene provenance, and the expected RGB/raw hashes; incomplete acquisition remains pending.",
+      "Write a compact workspace validation receipt containing only hashes, status/code classifications and explicit adapter SHA; never output raw encrypted events or credentials."
+    ],
+    "not_implemented_by_this_audit": true,
+    "preserve_production_vision_api_source": true
+  },
+  "general_explicit_retry_policy": {
+    "successful_frames": "Always reuse successful raw records byte-for-byte. A later failure does not justify replacing successes or restarting model/prompt/image settings.",
+    "output_budget_exhaustion": "Only when the saved failure is the existing max_output_tokens predicate, explicitly pass --retry-max-output-tokens N with max(configured_budget,saved_budget)<N<=32768. Retry only the failed frame, archive the unchanged failed response, retain canonical cache_request_fingerprint and actual per-request budget. Do not pass --new-max-output-tokens unless an explicit policy for all new frames is intended. If no valid larger budget remains, stop and report that budget limit.",
+    "temporary_upstream_failure": "Use a finite, explicit code/status whitelist (currently upstream_http2_stream_error/upstream_error on saved stream requests) with --retry-transport-failures and --recover-non-stream; preserve source model/prompt/budget/images and record archive hashes. Backoff and a bounded retry count should be explicit.",
+    "nonstream_upstream_failure": "The current predicate still requires saved request stream=True. A subsequently saved nonstream upstream failure is not eligible. Add such a case only through an explicit, bounded, offline-tested workspace recovery policy with full archive-chain validation; do not broaden to any failed response.",
+    "authentication_quota_refusal_malformed": "Keep ineligible and report required action; do not convert them to transient failures or retry without cause.",
+    "single_flight": "Reuse the existing recovery/scene locks, inspect active process and current cache progress before retrying. An old exit file alone is insufficient.",
+    "root_cause_limit": "The current 001320 evidence shows relay returned upstream_error. It does not establish HTTP2, proxy, image, model, quota or billing root cause. Failed billing remains unknown."
+  },
+  "offline_tests": {
+    "count": 3,
+    "all_passed": true,
+    "contracts": [
+      "HTTP2 recovery preserves successful raw bytes and archive; original attach succeeds while original validator refuses the adapter-only recovery history.",
+      "Budget failure has no retry under transport-only flags; explicit finite larger budget succeeds, preserves original success bytes, and passes original validation.",
+      "A saved nonstream upstream HTTP2 failure is currently ineligible, produces no further mock request and remains unchanged."
+    ]
+  },
+  "receipts": ["live_contract_audit.json", "offline_contract_tests.json"],
+  "source_hash_reference": "live_contract_audit.json source_hashes",
+  "shared_patch_training_model_or_prompt_change": false
+}

@@ -2571,15 +2571,15 @@
   "raw_fusion_rerun": false,
   "v18_byte_identical": true,
   "strict_target_reached": false,
-  "report_source_sha256": "37ab1ce41cec775ad056ab970e2dec889f0f6789b55a24fcee4aeda5d901fe87",
+  "report_source_sha256": "0786023ccd1a688953a2dffa578d1291a336ab72268f44bf6853573c4ec688fa",
   "report_qa_passed": true,
   "report_version": "v19",
   "latex_compile_confirmed": false,
   "latex_compile_limitation": "Built-in compile_latex_document failed before source compilation: windows sandbox helper_unknown_error: setup refresh had errors. No TeX compiler diagnostic was returned. Existing source preserved; no separate PDF compiled.",
   "published_html": "RESEARCH_LOG.html",
   "published_latex": "RESEARCH_LOG.tex",
-  "html_sha256": "ac8af67b6088cca8b62b11c8c94b6639283adfec2a855d61d22d66556a2d5286",
-  "latex_sha256": "1c85b139dcf698f270104b6aef5a22b3680b06ede2a1c9802576fa4d5c48bb56",
+  "html_sha256": "7af036f12be25033ec41762999288971497fa458085508b301f064985daa75e7",
+  "latex_sha256": "21444ab816ec2e5733dcbb4bdbd1e55b472e0f46461302c77c0db339bfe2c0d5",
   "duplicate_rendered_docs_removed": true,
   "baseline_report_qa_passed": true,
   "independent_benchmarks": {
@@ -2642,6 +2642,134 @@
     }
   },
   "research_cycle": {
+    "formal_default": "v19",
+    "candidate": "SAGE-CORE-V",
+    "candidate_promoted": false,
+    "all_scene_goal_achieved": false,
+    "training": false,
+    "legacy_cache_replay_new_API_calls": 0,
+    "expansion_API_calls": "initial shared cache acquisition in progress, separate from legacy replay",
+    "aggregate": {
+      "all_ap": 0.4378696366335887,
+      "all_ap_50%": 0.7131545200023053,
+      "all_ap_25%": 0.885025923372836,
+      "classes": {
+        "object": {
+          "ap": 0.4378696366335887,
+          "ap50%": 0.7131545200023053,
+          "ap25%": 0.885025923372836
+        }
+      }
+    },
+    "per_scan": [
+      {
+        "scene": "scene0011_00",
+        "metrics": {
+          "all_ap": 0.4377624704363656,
+          "all_ap_50%": 0.7903932843851097,
+          "all_ap_25%": 0.97253369181718,
+          "classes": {
+            "object": {
+              "ap": 0.4377624704363656,
+              "ap50%": 0.7903932843851097,
+              "ap25%": 0.97253369181718
+            }
+          }
+        }
+      },
+      {
+        "scene": "scene0015_00",
+        "metrics": {
+          "all_ap": 0.4979549919070789,
+          "all_ap_50%": 0.725752866142467,
+          "all_ap_25%": 0.9213601647887614,
+          "classes": {
+            "object": {
+              "ap": 0.4979549919070789,
+              "ap50%": 0.725752866142467,
+              "ap25%": 0.9213601647887614
+            }
+          }
+        }
+      },
+      {
+        "scene": "scene0019_00",
+        "metrics": {
+          "all_ap": 0.3190917107583774,
+          "all_ap_50%": 0.5536243386243386,
+          "all_ap_25%": 0.6657588707588707,
+          "classes": {
+            "object": {
+              "ap": 0.3190917107583774,
+              "ap50%": 0.5536243386243386,
+              "ap25%": 0.6657588707588707
+            }
+          }
+        }
+      }
+    ],
+    "actual_three_scan_cycles": 3,
+    "actual_replayed_frames": 375,
+    "input_validation": "tools/research/results/sage_full_replay_validation.json",
+    "Hypersim010": {
+      "historical_results_preserved": true,
+      "strict_box_upgrade_pending": true,
+      "direct_transfer_rejected": true,
+      "image_confirmed_screen_rejected": true,
+      "receipt": "tools/research/results/010_sage_domain_screen.json"
+    },
+    "expansion_scenes": [
+      "scene0025_00",
+      "scene0030_00",
+      "scene0046_00",
+      "scene0050_00",
+      "scene0063_00"
+    ],
+    "expansion_selected_frames": 306,
+    "expanded_results_pending": true,
+    "algorithm_attempts": 15,
+    "training_minimum_attempts": 15,
+    "minimum_attempt_count_met": true,
+    "expanded_ESAM_baseline_complete": true,
+    "network_recovery": "resume failed again; explicit bounded upstream-stream adapter preserves successful bytes and archived recovery chains; current service state must be checked",
+    "CUE": {
+      "complete": true,
+      "adopted": false,
+      "full_pipeline_replay": false,
+      "receipt": "tools/research/results/cue_candidate/final_receipt.json"
+    },
+    "relational_identity": {
+      "complete": true,
+      "adopted": false,
+      "full_pipeline_replay": false,
+      "receipt": "tools/research/results/relational_candidate/final_receipt.json"
+    },
+    "kitchen_causal_audit": "tools/research/results/cross_domain_audit/audit_010.json",
+    "training_gate_passed": false,
+    "AGENTS_sha256": "f82375bdf1e61ab2f52e94c955c6b52efd4353bbc2181092a681459a7336b3f0",
+    "research_report_QA": {
+      "complete": true,
+      "source_sha256": "0786023ccd1a688953a2dffa578d1291a336ab72268f44bf6853573c4ec688fa",
+      "three_scan_actual_metrics_verified": true,
+      "rows": 12,
+      "all_scene_target_unmet_explicit": true,
+      "ESAM_dependency_explicit": true,
+      "paper_and_local_protocols_separate": true,
+      "new_formulas_no_errors": true,
+      "desktop_mobile_no_body_overflow": true
+    },
+    "latex_compilation": {
+      "complete": true,
+      "kind": "success",
+      "message": "The current source compiled successfully with the desktop editor's compiler.",
+      "path": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\outputs\\RESEARCH_LOG.tex",
+      "source_report_sha256": "0786023ccd1a688953a2dffa578d1291a336ab72268f44bf6853573c4ec688fa",
+      "editor_preserved": true,
+      "alternate_document_created": false,
+      "earlier_failure": "Previous attempts returned sandbox timeout; current built-in compiler succeeded."
+    }
+  },
+  "previous_research_cycle": {
     "formal_default": "v19",
     "candidate": "MICA-VSA / mutual_r2",
     "aggregate": {
@@ -2741,7 +2869,7 @@
     "training": false,
     "new_API_calls": 0,
     "receipt": "tools/research/results/full_replay_validation.json",
-    "AGENTS_sha256": "08b8646a1c247975f6ce3e1b28e8565720e58db0cc1f6094aa5417be32484d21",
+    "AGENTS_sha256": "f82375bdf1e61ab2f52e94c955c6b52efd4353bbc2181092a681459a7336b3f0",
     "research_report_QA": {
       "six_papers": [
         "ThinkGraphs [41]",
@@ -2760,8 +2888,8 @@
       "source_RGB_audit_loaded": true,
       "desktop_mobile_no_body_overflow": true,
       "cross_domain_strict_box_values_verified": true,
-      "source_sha256": "37ab1ce41cec775ad056ab970e2dec889f0f6789b55a24fcee4aeda5d901fe87",
-      "AGENTS_lines": 414
+      "source_sha256": "0786023ccd1a688953a2dffa578d1291a336ab72268f44bf6853573c4ec688fa",
+      "AGENTS_lines": 790
     },
     "latex_compilation": "environment failed: windows sandbox helper_unknown_error; no TeX diagnostics"
   }

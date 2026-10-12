@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "network_calls": 0,
+  "model_calls": 0,
+  "real_credentials_used": false,
+  "temporary_fixtures_only_in_audit_directory": true,
+  "tests_run": 3,
+  "failures": 0,
+  "errors": 0,
+  "tested_contracts": [
+    "original attach passes but original validator rejects restored HTTP2 success",
+    "bounded explicit output budget recovery preserves successes and original validation",
+    "saved nonstream upstream HTTP2 failure is not currently retryable by adapter"
+  ]
+}

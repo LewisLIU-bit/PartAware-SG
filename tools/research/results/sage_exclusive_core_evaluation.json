@@ -1,0 +1,3817 @@
+{
+  "complete": true,
+  "cycle": "sage_exclusive_core",
+  "full_geometry_replay": true,
+  "GT_in_construction": false,
+  "training": false,
+  "new_vision_API_calls": 0,
+  "results": [
+    {
+      "scene_id": "scene0011_00",
+      "processed_scene": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/sage_exclusive_core/scannet/scene0011_00",
+      "metrics": {
+        "all_ap": 0.43755486291485557,
+        "all_ap_50%": 0.7894134384237366,
+        "all_ap_25%": 0.97253369181718,
+        "classes": {
+          "object": {
+            "ap": 0.43755486291485557,
+            "ap50%": 0.7894134384237366,
+            "ap25%": 0.97253369181718
+          }
+        }
+      },
+      "predicted_objects": 90,
+      "eligible_GT_instances": 28,
+      "GT": [
+        {
+          "gt_id": 1,
+          "raw_label": "kitchen cabinets",
+          "category_id": 29,
+          "encoded_id": 3002,
+          "vertices": 6153,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "216",
+            "label": "cabinet",
+            "point_IoU": 0.5371225108795991
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3003,
+          "vertices": 12971,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "213",
+            "label": "dining table",
+            "point_IoU": 0.46181119810902643
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "armchair",
+          "category_id": 23,
+          "encoded_id": 3004,
+          "vertices": 3243,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "147",
+            "label": "chair",
+            "point_IoU": 0.7641073080481036
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3005,
+          "vertices": 3781,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "206",
+            "label": "chair",
+            "point_IoU": 0.9724794238683128
+          }
+        },
+        {
+          "gt_id": 5,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3006,
+          "vertices": 3152,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "210",
+            "label": "chair",
+            "point_IoU": 0.7202540923527975
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3007,
+          "vertices": 3612,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "208",
+            "label": "chair",
+            "point_IoU": 0.6411960132890365
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3008,
+          "vertices": 2694,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "205",
+            "label": "chair",
+            "point_IoU": 0.6839124839124839
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3009,
+          "vertices": 3463,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "199",
+            "label": "chair",
+            "point_IoU": 0.8669635402170888
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3010,
+          "vertices": 3356,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "202",
+            "label": "chair",
+            "point_IoU": 0.7876831388130122
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3011,
+          "vertices": 3224,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "200",
+            "label": "chair",
+            "point_IoU": 0.884768617836347
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3012,
+          "vertices": 3800,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "201",
+            "label": "chair",
+            "point_IoU": 0.9131882202304737
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 3422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "204",
+            "label": "chair",
+            "point_IoU": 0.7498567335243553
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 2422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "84",
+            "label": "chair",
+            "point_IoU": 0.9793559042113955
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3016,
+          "vertices": 1411,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "209",
+            "label": "trash can",
+            "point_IoU": 0.7518543492919757
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3018,
+          "vertices": 4278,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "218",
+            "label": "desk",
+            "point_IoU": 0.5634218289085545
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "tv",
+          "category_id": 33,
+          "encoded_id": 3019,
+          "vertices": 9908,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "107",
+            "label": "television",
+            "point_IoU": 0.9369671424465945
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3020,
+          "vertices": 4892,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "95",
+            "label": "refrigerator",
+            "point_IoU": 0.620101880877743
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3021,
+          "vertices": 2166,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "219",
+            "label": "unlabeled object",
+            "point_IoU": 0.709466098919096
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "ceiling",
+          "category_id": 41,
+          "encoded_id": 3023,
+          "vertices": 2094,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "225",
+            "label": "unlabeled object",
+            "point_IoU": 0.25078534031413613
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3024,
+          "vertices": 5281,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "59",
+            "label": "window",
+            "point_IoU": 0.7375897357568352
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3025,
+          "vertices": 5590,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "211",
+            "label": "window",
+            "point_IoU": 0.5929604836968257
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "kitchen counter",
+          "category_id": 159,
+          "encoded_id": 3026,
+          "vertices": 5743,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "233",
+            "label": "countertop",
+            "point_IoU": 0.38429392303674037
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "sink",
+          "category_id": 14,
+          "encoded_id": 3027,
+          "vertices": 1075,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "207",
+            "label": "sink",
+            "point_IoU": 0.2663677130044843
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3028,
+          "vertices": 6152,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "203",
+            "label": "refrigerator",
+            "point_IoU": 0.9237237237237237
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3029,
+          "vertices": 3535,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "38",
+            "label": "cabinet",
+            "point_IoU": 0.696128170894526
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "doors",
+          "category_id": 5,
+          "encoded_id": 3031,
+          "vertices": 6336,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "212",
+            "label": "door",
+            "point_IoU": 0.5490496627835684
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3032,
+          "vertices": 1028,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "229",
+            "label": "unlabeled object",
+            "point_IoU": 0.5535405872193437
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3033,
+          "vertices": 1148,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "148",
+            "label": "trash can",
+            "point_IoU": 0.6434977578475336
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "199",
+          "label": "chair",
+          "confidence": 0.9330786643116427,
+          "vertices": 3245
+        },
+        {
+          "node_id": "200",
+          "label": "chair",
+          "confidence": 0.9043973668282317,
+          "vertices": 2926
+        },
+        {
+          "node_id": "201",
+          "label": "chair",
+          "confidence": 0.8911284424784129,
+          "vertices": 3671
+        },
+        {
+          "node_id": "107",
+          "label": "television",
+          "confidence": 0.8908541097723917,
+          "vertices": 10312
+        },
+        {
+          "node_id": "202",
+          "label": "chair",
+          "confidence": 0.8756073521841721,
+          "vertices": 3843
+        },
+        {
+          "node_id": "203",
+          "label": "refrigerator",
+          "confidence": 0.851469075520513,
+          "vertices": 6660
+        },
+        {
+          "node_id": "84",
+          "label": "chair",
+          "confidence": 0.8415316191299173,
+          "vertices": 2372
+        },
+        {
+          "node_id": "204",
+          "label": "chair",
+          "confidence": 0.8394169415706156,
+          "vertices": 2685
+        },
+        {
+          "node_id": "205",
+          "label": "chair",
+          "confidence": 0.8315841454291061,
+          "vertices": 3848
+        },
+        {
+          "node_id": "206",
+          "label": "chair",
+          "confidence": 0.8276368029281576,
+          "vertices": 3888
+        },
+        {
+          "node_id": "207",
+          "label": "sink",
+          "confidence": 0.7950249969711937,
+          "vertices": 337
+        },
+        {
+          "node_id": "208",
+          "label": "chair",
+          "confidence": 0.785948205055109,
+          "vertices": 2316
+        },
+        {
+          "node_id": "148",
+          "label": "trash can",
+          "confidence": 0.7574896680524354,
+          "vertices": 1784
+        },
+        {
+          "node_id": "147",
+          "label": "chair",
+          "confidence": 0.7561429992499136,
+          "vertices": 2478
+        },
+        {
+          "node_id": "209",
+          "label": "trash can",
+          "confidence": 0.7471114631329872,
+          "vertices": 1187
+        },
+        {
+          "node_id": "210",
+          "label": "chair",
+          "confidence": 0.7433754360745559,
+          "vertices": 3889
+        },
+        {
+          "node_id": "59",
+          "label": "window",
+          "confidence": 0.7430147588823769,
+          "vertices": 6095
+        },
+        {
+          "node_id": "211",
+          "label": "window",
+          "confidence": 0.7123057183127681,
+          "vertices": 9164
+        },
+        {
+          "node_id": "212",
+          "label": "door",
+          "confidence": 0.6999194978201193,
+          "vertices": 3770
+        },
+        {
+          "node_id": "213",
+          "label": "dining table",
+          "confidence": 0.6761811983831953,
+          "vertices": 6819
+        },
+        {
+          "node_id": "38",
+          "label": "cabinet",
+          "confidence": 0.6602950290487806,
+          "vertices": 2817
+        },
+        {
+          "node_id": "1",
+          "label": "dining table",
+          "confidence": 0.6503785801357875,
+          "vertices": 2599
+        },
+        {
+          "node_id": "83",
+          "label": "desk",
+          "confidence": 0.6111427969469527,
+          "vertices": 3157
+        },
+        {
+          "node_id": "214",
+          "label": "dining table",
+          "confidence": 0.5859772513082762,
+          "vertices": 3219
+        },
+        {
+          "node_id": "215",
+          "label": "microwave",
+          "confidence": 0.5693321063305242,
+          "vertices": 714
+        },
+        {
+          "node_id": "56",
+          "label": "oven",
+          "confidence": 0.5592599601609204,
+          "vertices": 425
+        },
+        {
+          "node_id": "216",
+          "label": "cabinet",
+          "confidence": 0.5496049235417968,
+          "vertices": 5503
+        },
+        {
+          "node_id": "117",
+          "label": "table",
+          "confidence": 0.545202198680236,
+          "vertices": 3550
+        },
+        {
+          "node_id": "95",
+          "label": "refrigerator",
+          "confidence": 0.5371121756026018,
+          "vertices": 3377
+        },
+        {
+          "node_id": "217",
+          "label": "kitchen cabinets",
+          "confidence": 0.5176859210657135,
+          "vertices": 748
+        },
+        {
+          "node_id": "218",
+          "label": "desk",
+          "confidence": 0.5159906809707012,
+          "vertices": 2612
+        },
+        {
+          "node_id": "197",
+          "label": "refrigerator",
+          "confidence": 0.5012270623958365,
+          "vertices": 1196
+        },
+        {
+          "node_id": "219",
+          "label": "unlabeled object",
+          "confidence": 0.4898255932282002,
+          "vertices": 3053
+        },
+        {
+          "node_id": "220",
+          "label": "refrigerator",
+          "confidence": 0.4847580459754654,
+          "vertices": 1409
+        },
+        {
+          "node_id": "221",
+          "label": "unlabeled object",
+          "confidence": 0.4845871329307556,
+          "vertices": 2179
+        },
+        {
+          "node_id": "36",
+          "label": "window shade",
+          "confidence": 0.47975827554003647,
+          "vertices": 584
+        },
+        {
+          "node_id": "9",
+          "label": "door",
+          "confidence": 0.4695574717401225,
+          "vertices": 141
+        },
+        {
+          "node_id": "69",
+          "label": "table",
+          "confidence": 0.4439307665910548,
+          "vertices": 518
+        },
+        {
+          "node_id": "222",
+          "label": "unlabeled object",
+          "confidence": 0.44309363289143877,
+          "vertices": 902
+        },
+        {
+          "node_id": "133",
+          "label": "door",
+          "confidence": 0.4179365059547644,
+          "vertices": 716
+        },
+        {
+          "node_id": "74",
+          "label": "kitchen cabinets",
+          "confidence": 0.4154781213135123,
+          "vertices": 781
+        },
+        {
+          "node_id": "223",
+          "label": "countertop",
+          "confidence": 0.4151700927103496,
+          "vertices": 2718
+        },
+        {
+          "node_id": "130",
+          "label": "built-in kitchen appliance",
+          "confidence": 0.407723606003627,
+          "vertices": 216
+        },
+        {
+          "node_id": "224",
+          "label": "desk",
+          "confidence": 0.4062056198795849,
+          "vertices": 776
+        },
+        {
+          "node_id": "225",
+          "label": "unlabeled object",
+          "confidence": 0.39410146007392555,
+          "vertices": 2684
+        },
+        {
+          "node_id": "226",
+          "label": "unlabeled object",
+          "confidence": 0.3854926652592143,
+          "vertices": 118
+        },
+        {
+          "node_id": "97",
+          "label": "oven",
+          "confidence": 0.38406107724741106,
+          "vertices": 586
+        },
+        {
+          "node_id": "25",
+          "label": "door",
+          "confidence": 0.38149423842348734,
+          "vertices": 90
+        },
+        {
+          "node_id": "227",
+          "label": "unlabeled object",
+          "confidence": 0.3764648549220657,
+          "vertices": 341
+        },
+        {
+          "node_id": "228",
+          "label": "unlabeled object",
+          "confidence": 0.3750597165904165,
+          "vertices": 118
+        },
+        {
+          "node_id": "229",
+          "label": "unlabeled object",
+          "confidence": 0.37064417802710137,
+          "vertices": 771
+        },
+        {
+          "node_id": "198",
+          "label": "door",
+          "confidence": 0.362476270147963,
+          "vertices": 25
+        },
+        {
+          "node_id": "60",
+          "label": "door",
+          "confidence": 0.3623608918788774,
+          "vertices": 263
+        },
+        {
+          "node_id": "230",
+          "label": "unlabeled object",
+          "confidence": 0.3616344475834359,
+          "vertices": 503
+        },
+        {
+          "node_id": "10",
+          "label": "cabinet",
+          "confidence": 0.358090583038694,
+          "vertices": 647
+        },
+        {
+          "node_id": "231",
+          "label": "unlabeled object",
+          "confidence": 0.3580146875519338,
+          "vertices": 1405
+        },
+        {
+          "node_id": "141",
+          "label": "rug",
+          "confidence": 0.34466350404560697,
+          "vertices": 2988
+        },
+        {
+          "node_id": "232",
+          "label": "unlabeled object",
+          "confidence": 0.3404781970756733,
+          "vertices": 594
+        },
+        {
+          "node_id": "233",
+          "label": "countertop",
+          "confidence": 0.3281190865344407,
+          "vertices": 2207
+        },
+        {
+          "node_id": "20",
+          "label": "kitchen cabinets",
+          "confidence": 0.3200796279355821,
+          "vertices": 216
+        },
+        {
+          "node_id": "58",
+          "label": "kitchen cabinets",
+          "confidence": 0.3141626642554601,
+          "vertices": 251
+        },
+        {
+          "node_id": "234",
+          "label": "unlabeled object",
+          "confidence": 0.3059948480693788,
+          "vertices": 210
+        },
+        {
+          "node_id": "235",
+          "label": "unlabeled object",
+          "confidence": 0.3037827961006852,
+          "vertices": 555
+        },
+        {
+          "node_id": "236",
+          "label": "unlabeled object",
+          "confidence": 0.27974802255630493,
+          "vertices": 971
+        },
+        {
+          "node_id": "28",
+          "label": "kitchen cabinets",
+          "confidence": 0.25370253603945025,
+          "vertices": 186
+        },
+        {
+          "node_id": "237",
+          "label": "unlabeled object",
+          "confidence": 0.23255217444151083,
+          "vertices": 261
+        },
+        {
+          "node_id": "81",
+          "label": "door",
+          "confidence": 0.22796405979265927,
+          "vertices": 137
+        },
+        {
+          "node_id": "238",
+          "label": "unlabeled object",
+          "confidence": 0.2195303767668044,
+          "vertices": 365
+        },
+        {
+          "node_id": "239",
+          "label": "unlabeled object",
+          "confidence": 0.20018525421619415,
+          "vertices": 303
+        },
+        {
+          "node_id": "240",
+          "label": "unlabeled object",
+          "confidence": 0.13045285642147064,
+          "vertices": 535
+        },
+        {
+          "node_id": "85",
+          "label": "chair",
+          "confidence": 0.7365905753040982,
+          "vertices": 0
+        },
+        {
+          "node_id": "11",
+          "label": "door",
+          "confidence": 0.5932220158931553,
+          "vertices": 0
+        },
+        {
+          "node_id": "90",
+          "label": "door",
+          "confidence": 0.7601773802894088,
+          "vertices": 0
+        },
+        {
+          "node_id": "110",
+          "label": "sofa",
+          "confidence": 0.7975765538772177,
+          "vertices": 0
+        },
+        {
+          "node_id": "136",
+          "label": "table",
+          "confidence": 0.8560688148388532,
+          "vertices": 0
+        },
+        {
+          "node_id": "30",
+          "label": "electrical outlet",
+          "confidence": 0.8330712568692712,
+          "vertices": 0
+        },
+        {
+          "node_id": "80",
+          "label": "oven",
+          "confidence": 0.6132037233538689,
+          "vertices": 0
+        },
+        {
+          "node_id": "145",
+          "label": "sofa",
+          "confidence": 0.7952122809086944,
+          "vertices": 0
+        },
+        {
+          "node_id": "129",
+          "label": "window",
+          "confidence": 0.543414923942825,
+          "vertices": 0
+        },
+        {
+          "node_id": "55",
+          "label": "electrical outlet",
+          "confidence": 0.8177357138709587,
+          "vertices": 0
+        },
+        {
+          "node_id": "185",
+          "label": "light switch",
+          "confidence": 0.756046873019983,
+          "vertices": 0
+        },
+        {
+          "node_id": "115",
+          "label": "door",
+          "confidence": 0.63341245834714,
+          "vertices": 0
+        },
+        {
+          "node_id": "183",
+          "label": "light switch",
+          "confidence": 0.7629242323719165,
+          "vertices": 0
+        },
+        {
+          "node_id": "118",
+          "label": "exit sign",
+          "confidence": 0.8242792285656017,
+          "vertices": 0
+        },
+        {
+          "node_id": "114",
+          "label": "light switch",
+          "confidence": 0.4865460919141488,
+          "vertices": 0
+        },
+        {
+          "node_id": "101",
+          "label": "electrical outlet",
+          "confidence": 0.806451998950175,
+          "vertices": 0
+        },
+        {
+          "node_id": "33",
+          "label": "window",
+          "confidence": 0.5428018656230753,
+          "vertices": 0
+        },
+        {
+          "node_id": "126",
+          "label": "electrical outlet",
+          "confidence": 0.5641192253872375,
+          "vertices": 0
+        },
+        {
+          "node_id": "73",
+          "label": "electrical outlets",
+          "confidence": 0.7738713342179084,
+          "vertices": 0
+        },
+        {
+          "node_id": "72",
+          "label": "oven",
+          "confidence": 0.475538475817036,
+          "vertices": 0
+        }
+      ],
+      "graph_sha256": "1da805cec38dd24e2853304f7b2a31d7ef9e200226a26a90a39eb7cbfd5ecd74",
+      "prediction_cloud": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/sage_exclusive_core/scannet/scene0011_00/instance_cloud_observed_domain.ply",
+      "prediction_cloud_sha256": "471ae66e886abb13f0af0ea531b4f353a7575d60e58e51f966bb229f10f98ff7",
+      "GT_hashes": {
+        "mesh_sha256": "2941664625d52110aefbfb2b5fd3c869c3f51b999a036a27ba3e0033e3bf21f5",
+        "segments_sha256": "00546eb1505379add58fb3792d03f8b8dddef1bd60d357b243e040c4db3404e2",
+        "aggregation_sha256": "155e188c1bababbe5522931b1cf7c6c971cb4464e75ab389de752afeffe6b23b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 1.0,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "diagnosis": {
+        "GT_reserved_for_diagnostics": true,
+        "eligible_GT": 28,
+        "prediction_count": 90,
+        "zero_domain_masks": [
+          "scene0011_00_85",
+          "scene0011_00_11",
+          "scene0011_00_90",
+          "scene0011_00_110",
+          "scene0011_00_136",
+          "scene0011_00_30",
+          "scene0011_00_80",
+          "scene0011_00_145",
+          "scene0011_00_129",
+          "scene0011_00_55",
+          "scene0011_00_185",
+          "scene0011_00_115",
+          "scene0011_00_183",
+          "scene0011_00_118",
+          "scene0011_00_114",
+          "scene0011_00_101",
+          "scene0011_00_33",
+          "scene0011_00_126",
+          "scene0011_00_73",
+          "scene0011_00_72"
+        ],
+        "below_minimum_prediction_masks": 22,
+        "missed_at25": 0,
+        "below50": 4,
+        "mixed_predictions": [
+          {
+            "prediction_id": "scene0011_00_216",
+            "GT_ids": [
+              3002,
+              3027
+            ],
+            "IoUs": [
+              0.5371225108795991,
+              0.10722100656455143
+            ]
+          },
+          {
+            "prediction_id": "scene0011_00_231",
+            "GT_ids": [
+              3031,
+              3032
+            ],
+            "IoUs": [
+              0.17128158571644728,
+              0.12638888888888888
+            ]
+          }
+        ],
+        "GT": [
+          {
+            "GT_id": 3002,
+            "best_prediction": "scene0011_00_216",
+            "IoU": 0.5371225108795991,
+            "GT_coverage": 0.6619535186088087,
+            "prediction_purity": 0.7401417408686172,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3003,
+            "best_prediction": "scene0011_00_213",
+            "IoU": 0.46181119810902643,
+            "GT_coverage": 0.48199830390871945,
+            "prediction_purity": 0.9168499780026397,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 4
+          },
+          {
+            "GT_id": 3004,
+            "best_prediction": "scene0011_00_147",
+            "IoU": 0.7641073080481036,
+            "GT_coverage": 0.7641073080481036,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3005,
+            "best_prediction": "scene0011_00_206",
+            "IoU": 0.9724794238683128,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.9724794238683128,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3006,
+            "best_prediction": "scene0011_00_210",
+            "IoU": 0.7202540923527975,
+            "GT_coverage": 0.9352791878172588,
+            "prediction_purity": 0.7580354847004371,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3007,
+            "best_prediction": "scene0011_00_208",
+            "IoU": 0.6411960132890365,
+            "GT_coverage": 0.6411960132890365,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3008,
+            "best_prediction": "scene0011_00_205",
+            "IoU": 0.6839124839124839,
+            "GT_coverage": 0.9862657757980697,
+            "prediction_purity": 0.6904885654885655,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3009,
+            "best_prediction": "scene0011_00_199",
+            "IoU": 0.8669635402170888,
+            "GT_coverage": 0.8995090961593993,
+            "prediction_purity": 0.9599383667180277,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3010,
+            "best_prediction": "scene0011_00_202",
+            "IoU": 0.7876831388130122,
+            "GT_coverage": 0.9451728247914184,
+            "prediction_purity": 0.8253968253968254,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3011,
+            "best_prediction": "scene0011_00_200",
+            "IoU": 0.884768617836347,
+            "GT_coverage": 0.8954714640198511,
+            "prediction_purity": 0.9866712235133288,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3012,
+            "best_prediction": "scene0011_00_201",
+            "IoU": 0.9131882202304737,
+            "GT_coverage": 0.9384210526315789,
+            "prediction_purity": 0.971397439389812,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3013,
+            "best_prediction": "scene0011_00_204",
+            "IoU": 0.7498567335243553,
+            "GT_coverage": 0.7647574517825833,
+            "prediction_purity": 0.9746741154562384,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3014,
+            "best_prediction": "scene0011_00_84",
+            "IoU": 0.9793559042113955,
+            "GT_coverage": 0.9793559042113955,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3016,
+            "best_prediction": "scene0011_00_209",
+            "IoU": 0.7518543492919757,
+            "GT_coverage": 0.7902197023387668,
+            "prediction_purity": 0.9393428812131424,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3018,
+            "best_prediction": "scene0011_00_218",
+            "IoU": 0.5634218289085545,
+            "GT_coverage": 0.580411407199626,
+            "prediction_purity": 0.9506125574272588,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 3
+          },
+          {
+            "GT_id": 3019,
+            "best_prediction": "scene0011_00_107",
+            "IoU": 0.9369671424465945,
+            "GT_coverage": 0.9871820750908357,
+            "prediction_purity": 0.9485065942591155,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3020,
+            "best_prediction": "scene0011_00_95",
+            "IoU": 0.620101880877743,
+            "GT_coverage": 0.6469746524938675,
+            "prediction_purity": 0.9372223867337874,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3021,
+            "best_prediction": "scene0011_00_219",
+            "IoU": 0.709466098919096,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.709466098919096,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3023,
+            "best_prediction": "scene0011_00_225",
+            "IoU": 0.25078534031413613,
+            "GT_coverage": 0.4574976122254059,
+            "prediction_purity": 0.356929955290611,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3024,
+            "best_prediction": "scene0011_00_59",
+            "IoU": 0.7375897357568352,
+            "GT_coverage": 0.9144101495928801,
+            "prediction_purity": 0.7922887612797375,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3025,
+            "best_prediction": "scene0011_00_211",
+            "IoU": 0.5929604836968257,
+            "GT_coverage": 0.9824686940966011,
+            "prediction_purity": 0.5993016150152771,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3026,
+            "best_prediction": "scene0011_00_233",
+            "IoU": 0.38429392303674037,
+            "GT_coverage": 0.38429392303674037,
+            "prediction_purity": 1.0,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3027,
+            "best_prediction": "scene0011_00_207",
+            "IoU": 0.2663677130044843,
+            "GT_coverage": 0.2762790697674419,
+            "prediction_purity": 0.8813056379821959,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3028,
+            "best_prediction": "scene0011_00_203",
+            "IoU": 0.9237237237237237,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.9237237237237237,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3029,
+            "best_prediction": "scene0011_00_38",
+            "IoU": 0.696128170894526,
+            "GT_coverage": 0.7374823196605375,
+            "prediction_purity": 0.9254526091586794,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3031,
+            "best_prediction": "scene0011_00_212",
+            "IoU": 0.5490496627835684,
+            "GT_coverage": 0.5653409090909091,
+            "prediction_purity": 0.950132625994695,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 3
+          },
+          {
+            "GT_id": 3032,
+            "best_prediction": "scene0011_00_229",
+            "IoU": 0.5535405872193437,
+            "GT_coverage": 0.6235408560311284,
+            "prediction_purity": 0.8313878080415046,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3033,
+            "best_prediction": "scene0011_00_148",
+            "IoU": 0.6434977578475336,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.6434977578475336,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          }
+        ],
+        "empty_mask_is_not_ghost_proof": true
+      },
+      "baseline_metrics": {
+        "all_ap": 0.41611150127189805,
+        "all_ap_50%": 0.719283535552333,
+        "all_ap_25%": 0.7289794526996728,
+        "classes": {
+          "object": {
+            "ap": 0.41611150127189805,
+            "ap50%": 0.719283535552333,
+            "ap25%": 0.7289794526996728
+          }
+        }
+      },
+      "delta_percentage_points": {
+        "all_ap_25%": 24.35542391175072,
+        "all_ap_50%": 7.012990287140353,
+        "all_ap": 2.1443361642957512
+      }
+    },
+    {
+      "scene_id": "scene0015_00",
+      "processed_scene": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/sage_exclusive_core/scannet/scene0015_00",
+      "metrics": {
+        "all_ap": 0.4969746294770453,
+        "all_ap_50%": 0.7237835618561992,
+        "all_ap_25%": 0.9164501588404215,
+        "classes": {
+          "object": {
+            "ap": 0.4969746294770453,
+            "ap50%": 0.7237835618561992,
+            "ap25%": 0.9164501588404215
+          }
+        }
+      },
+      "predicted_objects": 100,
+      "eligible_GT_instances": 39,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3001,
+          "vertices": 1844,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "151",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3002,
+          "vertices": 712,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "157",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3003,
+          "vertices": 1391,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "window",
+            "point_IoU": 0.9237958303378864
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3004,
+          "vertices": 1041,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "window",
+            "point_IoU": 0.5291595197255574
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3007,
+          "vertices": 1536,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "window",
+            "point_IoU": 0.7093690248565966
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3008,
+          "vertices": 1006,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "19",
+            "label": "window",
+            "point_IoU": 0.5566600397614314
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3011,
+          "vertices": 1483,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "181",
+            "label": "unlabeled object",
+            "point_IoU": 0.43219832735961766
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 1914,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "28",
+            "label": "chair",
+            "point_IoU": 0.9691139240506329
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 588,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "29",
+            "label": "chair",
+            "point_IoU": 0.5808383233532934
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3017,
+          "vertices": 1969,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "165",
+            "label": "cushion",
+            "point_IoU": 0.5180294565769427
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3018,
+          "vertices": 1924,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "161",
+            "label": "chair",
+            "point_IoU": 0.66995841995842
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3019,
+          "vertices": 1449,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "177",
+            "label": "chair",
+            "point_IoU": 0.28482446206115514
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3020,
+          "vertices": 1691,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "42",
+            "label": "cushion",
+            "point_IoU": 0.4529863985807215
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3021,
+          "vertices": 1492,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "46",
+            "label": "chair",
+            "point_IoU": 0.4912868632707775
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3022,
+          "vertices": 1430,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "175",
+            "label": "cushion",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3023,
+          "vertices": 788,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "169",
+            "label": "cushion",
+            "point_IoU": 0.7092709270927092
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3024,
+          "vertices": 1911,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "170",
+            "label": "chair",
+            "point_IoU": 0.7713239141810571
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3025,
+          "vertices": 1697,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "162",
+            "label": "chair",
+            "point_IoU": 0.7100766057748968
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3026,
+          "vertices": 1280,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "163",
+            "label": "chair",
+            "point_IoU": 0.97421875
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3027,
+          "vertices": 1950,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "30",
+            "label": "chair",
+            "point_IoU": 0.4379487179487179
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3028,
+          "vertices": 1453,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "154",
+            "label": "chair",
+            "point_IoU": 0.9759119064005506
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3029,
+          "vertices": 1252,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "158",
+            "label": "chair",
+            "point_IoU": 0.8889776357827476
+          }
+        },
+        {
+          "gt_id": 29,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3030,
+          "vertices": 908,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "166",
+            "label": "cushion",
+            "point_IoU": 0.6264550264550265
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3031,
+          "vertices": 1105,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "152",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3032,
+          "vertices": 3161,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "160",
+            "label": "table",
+            "point_IoU": 0.9740137758296806
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3033,
+          "vertices": 4679,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "159",
+            "label": "table",
+            "point_IoU": 0.8903850199873764
+          }
+        },
+        {
+          "gt_id": 33,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3034,
+          "vertices": 3290,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "table",
+            "point_IoU": 0.8140564471499724
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3035,
+          "vertices": 4653,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "table",
+            "point_IoU": 0.8805071996561358
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3036,
+          "vertices": 4078,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "156",
+            "label": "desk",
+            "point_IoU": 0.8450909090909091
+          }
+        },
+        {
+          "gt_id": 36,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3037,
+          "vertices": 2525,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "164",
+            "label": "desk",
+            "point_IoU": 0.7299843014128728
+          }
+        },
+        {
+          "gt_id": 37,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3038,
+          "vertices": 3420,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "153",
+            "label": "table",
+            "point_IoU": 0.9394736842105263
+          }
+        },
+        {
+          "gt_id": 40,
+          "raw_label": "whiteboard",
+          "category_id": 52,
+          "encoded_id": 3041,
+          "vertices": 7566,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "61",
+            "label": "whiteboard",
+            "point_IoU": 0.8928099392016918
+          }
+        },
+        {
+          "gt_id": 44,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3045,
+          "vertices": 645,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "127",
+            "label": "bag",
+            "point_IoU": 0.2775193798449612
+          }
+        },
+        {
+          "gt_id": 45,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3046,
+          "vertices": 1698,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "187",
+            "label": "unlabeled object",
+            "point_IoU": 0.44793261868300155
+          }
+        },
+        {
+          "gt_id": 47,
+          "raw_label": "whiteboard",
+          "category_id": 52,
+          "encoded_id": 3048,
+          "vertices": 10720,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "whiteboard",
+            "point_IoU": 0.9146610325188316
+          }
+        },
+        {
+          "gt_id": 49,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3050,
+          "vertices": 2167,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "155",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 51,
+          "raw_label": "water bottle",
+          "category_id": 392,
+          "encoded_id": 3052,
+          "vertices": 183,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "26",
+            "label": "bottle",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 52,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3053,
+          "vertices": 1316,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "137",
+            "label": "chair",
+            "point_IoU": 0.4787234042553192
+          }
+        },
+        {
+          "gt_id": 53,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3054,
+          "vertices": 1979,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "chair",
+            "point_IoU": 0.5612549800796812
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "151",
+          "label": "chair",
+          "confidence": 0.9810433089733124,
+          "vertices": 1844
+        },
+        {
+          "node_id": "152",
+          "label": "chair",
+          "confidence": 0.9593792538297662,
+          "vertices": 1105
+        },
+        {
+          "node_id": "153",
+          "label": "table",
+          "confidence": 0.9528283796994151,
+          "vertices": 3213
+        },
+        {
+          "node_id": "154",
+          "label": "chair",
+          "confidence": 0.9513950726646732,
+          "vertices": 1418
+        },
+        {
+          "node_id": "155",
+          "label": "chair",
+          "confidence": 0.9314980670796333,
+          "vertices": 2167
+        },
+        {
+          "node_id": "156",
+          "label": "desk",
+          "confidence": 0.9003605574527913,
+          "vertices": 3533
+        },
+        {
+          "node_id": "29",
+          "label": "chair",
+          "confidence": 0.895372148435467,
+          "vertices": 468
+        },
+        {
+          "node_id": "157",
+          "label": "chair",
+          "confidence": 0.8908907486481613,
+          "vertices": 712
+        },
+        {
+          "node_id": "158",
+          "label": "chair",
+          "confidence": 0.8809162409907509,
+          "vertices": 1113
+        },
+        {
+          "node_id": "159",
+          "label": "table",
+          "confidence": 0.878933916823099,
+          "vertices": 4306
+        },
+        {
+          "node_id": "61",
+          "label": "whiteboard",
+          "confidence": 0.8630895822919133,
+          "vertices": 6755
+        },
+        {
+          "node_id": "160",
+          "label": "table",
+          "confidence": 0.8555490069716941,
+          "vertices": 3144
+        },
+        {
+          "node_id": "28",
+          "label": "chair",
+          "confidence": 0.8523863754903658,
+          "vertices": 1975
+        },
+        {
+          "node_id": "3",
+          "label": "table",
+          "confidence": 0.8454927405485675,
+          "vertices": 3266
+        },
+        {
+          "node_id": "161",
+          "label": "chair",
+          "confidence": 0.822979424079094,
+          "vertices": 1289
+        },
+        {
+          "node_id": "162",
+          "label": "chair",
+          "confidence": 0.8118480581280474,
+          "vertices": 1205
+        },
+        {
+          "node_id": "163",
+          "label": "chair",
+          "confidence": 0.8028347875113915,
+          "vertices": 1247
+        },
+        {
+          "node_id": "164",
+          "label": "desk",
+          "confidence": 0.7968536455302693,
+          "vertices": 1883
+        },
+        {
+          "node_id": "10",
+          "label": "table",
+          "confidence": 0.7846111985011173,
+          "vertices": 4097
+        },
+        {
+          "node_id": "2",
+          "label": "whiteboard",
+          "confidence": 0.7844402705575068,
+          "vertices": 10123
+        },
+        {
+          "node_id": "165",
+          "label": "cushion",
+          "confidence": 0.7769814272328178,
+          "vertices": 1020
+        },
+        {
+          "node_id": "166",
+          "label": "cushion",
+          "confidence": 0.7446614322247238,
+          "vertices": 629
+        },
+        {
+          "node_id": "167",
+          "label": "unlabeled object",
+          "confidence": 0.727212815208638,
+          "vertices": 377
+        },
+        {
+          "node_id": "168",
+          "label": "radiator",
+          "confidence": 0.7217333910894107,
+          "vertices": 1092
+        },
+        {
+          "node_id": "169",
+          "label": "cushion",
+          "confidence": 0.7175679870761267,
+          "vertices": 1111
+        },
+        {
+          "node_id": "170",
+          "label": "chair",
+          "confidence": 0.7084161806067988,
+          "vertices": 1474
+        },
+        {
+          "node_id": "171",
+          "label": "unlabeled object",
+          "confidence": 0.7060321814732641,
+          "vertices": 117
+        },
+        {
+          "node_id": "137",
+          "label": "chair",
+          "confidence": 0.6860042486619908,
+          "vertices": 630
+        },
+        {
+          "node_id": "172",
+          "label": "unlabeled object",
+          "confidence": 0.6840483089288076,
+          "vertices": 153
+        },
+        {
+          "node_id": "173",
+          "label": "unlabeled object",
+          "confidence": 0.6817949304912969,
+          "vertices": 275
+        },
+        {
+          "node_id": "174",
+          "label": "window",
+          "confidence": 0.6774661302148517,
+          "vertices": 1193
+        },
+        {
+          "node_id": "175",
+          "label": "cushion",
+          "confidence": 0.6660382289697628,
+          "vertices": 1430
+        },
+        {
+          "node_id": "30",
+          "label": "chair",
+          "confidence": 0.6592749421539346,
+          "vertices": 854
+        },
+        {
+          "node_id": "46",
+          "label": "chair",
+          "confidence": 0.6470648756589664,
+          "vertices": 733
+        },
+        {
+          "node_id": "176",
+          "label": "cushion",
+          "confidence": 0.6450335314456813,
+          "vertices": 186
+        },
+        {
+          "node_id": "177",
+          "label": "chair",
+          "confidence": 0.6271664607758616,
+          "vertices": 820
+        },
+        {
+          "node_id": "8",
+          "label": "window",
+          "confidence": 0.5858647868909906,
+          "vertices": 1285
+        },
+        {
+          "node_id": "42",
+          "label": "cushion",
+          "confidence": 0.5767915308198388,
+          "vertices": 766
+        },
+        {
+          "node_id": "69",
+          "label": "chair",
+          "confidence": 0.5761904190675926,
+          "vertices": 20
+        },
+        {
+          "node_id": "52",
+          "label": "cushion",
+          "confidence": 0.5639134398778345,
+          "vertices": 642
+        },
+        {
+          "node_id": "178",
+          "label": "unlabeled object",
+          "confidence": 0.5550587556119693,
+          "vertices": 581
+        },
+        {
+          "node_id": "63",
+          "label": "cushion",
+          "confidence": 0.553141492824846,
+          "vertices": 644
+        },
+        {
+          "node_id": "179",
+          "label": "chair",
+          "confidence": 0.5417681205251815,
+          "vertices": 334
+        },
+        {
+          "node_id": "41",
+          "label": "cushion",
+          "confidence": 0.5374482550317607,
+          "vertices": 823
+        },
+        {
+          "node_id": "180",
+          "label": "chair",
+          "confidence": 0.5373775444017254,
+          "vertices": 361
+        },
+        {
+          "node_id": "18",
+          "label": "window",
+          "confidence": 0.532982965913296,
+          "vertices": 1146
+        },
+        {
+          "node_id": "181",
+          "label": "unlabeled object",
+          "confidence": 0.5279055801375518,
+          "vertices": 3312
+        },
+        {
+          "node_id": "182",
+          "label": "chair",
+          "confidence": 0.5200122637135681,
+          "vertices": 949
+        },
+        {
+          "node_id": "45",
+          "label": "chair",
+          "confidence": 0.5113101022434021,
+          "vertices": 1807
+        },
+        {
+          "node_id": "183",
+          "label": "unlabeled object",
+          "confidence": 0.5064152089056975,
+          "vertices": 598
+        },
+        {
+          "node_id": "71",
+          "label": "cushion",
+          "confidence": 0.5036432825036329,
+          "vertices": 251
+        },
+        {
+          "node_id": "6",
+          "label": "window",
+          "confidence": 0.4941398305428055,
+          "vertices": 742
+        },
+        {
+          "node_id": "184",
+          "label": "chair",
+          "confidence": 0.49066868727792523,
+          "vertices": 200
+        },
+        {
+          "node_id": "185",
+          "label": "unlabeled object",
+          "confidence": 0.48141610622406006,
+          "vertices": 528
+        },
+        {
+          "node_id": "40",
+          "label": "cushion",
+          "confidence": 0.4762302695425567,
+          "vertices": 635
+        },
+        {
+          "node_id": "84",
+          "label": "television",
+          "confidence": 0.47071844960109777,
+          "vertices": 165
+        },
+        {
+          "node_id": "186",
+          "label": "radiator",
+          "confidence": 0.4654515647215529,
+          "vertices": 1396
+        },
+        {
+          "node_id": "140",
+          "label": "cushion",
+          "confidence": 0.45609460606178803,
+          "vertices": 309
+        },
+        {
+          "node_id": "66",
+          "label": "cushion",
+          "confidence": 0.44740835903248266,
+          "vertices": 261
+        },
+        {
+          "node_id": "187",
+          "label": "unlabeled object",
+          "confidence": 0.43460040735954597,
+          "vertices": 2084
+        },
+        {
+          "node_id": "16",
+          "label": "chair",
+          "confidence": 0.42876485581069035,
+          "vertices": 1156
+        },
+        {
+          "node_id": "188",
+          "label": "unlabeled object",
+          "confidence": 0.4146774588840936,
+          "vertices": 203
+        },
+        {
+          "node_id": "19",
+          "label": "window",
+          "confidence": 0.41019942485518646,
+          "vertices": 560
+        },
+        {
+          "node_id": "127",
+          "label": "bag",
+          "confidence": 0.40529363266662416,
+          "vertices": 179
+        },
+        {
+          "node_id": "26",
+          "label": "bottle",
+          "confidence": 0.3960690922199443,
+          "vertices": 183
+        },
+        {
+          "node_id": "73",
+          "label": "backpack",
+          "confidence": 0.39422739816603986,
+          "vertices": 149
+        },
+        {
+          "node_id": "189",
+          "label": "unlabeled object",
+          "confidence": 0.3515002727508545,
+          "vertices": 517
+        },
+        {
+          "node_id": "15",
+          "label": "cup",
+          "confidence": 0.34249946853846536,
+          "vertices": 104
+        },
+        {
+          "node_id": "190",
+          "label": "unlabeled object",
+          "confidence": 0.3315328359603882,
+          "vertices": 2897
+        },
+        {
+          "node_id": "191",
+          "label": "unlabeled object",
+          "confidence": 0.32423698902130127,
+          "vertices": 52
+        },
+        {
+          "node_id": "192",
+          "label": "unlabeled object",
+          "confidence": 0.2709425091743469,
+          "vertices": 3136
+        },
+        {
+          "node_id": "193",
+          "label": "unlabeled object",
+          "confidence": 0.2471598982810974,
+          "vertices": 313
+        },
+        {
+          "node_id": "194",
+          "label": "unlabeled object",
+          "confidence": 0.21045676802704813,
+          "vertices": 775
+        },
+        {
+          "node_id": "126",
+          "label": "whiteboard",
+          "confidence": 0.9589450705092253,
+          "vertices": 0
+        },
+        {
+          "node_id": "27",
+          "label": "chair",
+          "confidence": 0.8189849036934675,
+          "vertices": 0
+        },
+        {
+          "node_id": "37",
+          "label": "chair",
+          "confidence": 0.7145842156355438,
+          "vertices": 0
+        },
+        {
+          "node_id": "24",
+          "label": "chair",
+          "confidence": 0.8361705337007685,
+          "vertices": 0
+        },
+        {
+          "node_id": "39",
+          "label": "chair",
+          "confidence": 0.6496901908013455,
+          "vertices": 0
+        },
+        {
+          "node_id": "9",
+          "label": "cushion",
+          "confidence": 0.47965315088988136,
+          "vertices": 0
+        },
+        {
+          "node_id": "34",
+          "label": "table",
+          "confidence": 0.7433085332715287,
+          "vertices": 0
+        },
+        {
+          "node_id": "23",
+          "label": "window",
+          "confidence": 0.854512462428848,
+          "vertices": 0
+        },
+        {
+          "node_id": "55",
+          "label": "cushion",
+          "confidence": 0.5945546274497694,
+          "vertices": 0
+        },
+        {
+          "node_id": "117",
+          "label": "cushion",
+          "confidence": 0.5736063636943857,
+          "vertices": 0
+        },
+        {
+          "node_id": "74",
+          "label": "paper",
+          "confidence": 0.8284284156693209,
+          "vertices": 0
+        },
+        {
+          "node_id": "50",
+          "label": "cushion",
+          "confidence": 0.7804576735280323,
+          "vertices": 0
+        },
+        {
+          "node_id": "99",
+          "label": "chair",
+          "confidence": 0.7220531751558853,
+          "vertices": 0
+        },
+        {
+          "node_id": "106",
+          "label": "cushion",
+          "confidence": 0.5428061647854783,
+          "vertices": 0
+        },
+        {
+          "node_id": "36",
+          "label": "electrical outlet",
+          "confidence": 0.6441459267199274,
+          "vertices": 0
+        },
+        {
+          "node_id": "116",
+          "label": "cushion",
+          "confidence": 0.47046464234769547,
+          "vertices": 0
+        },
+        {
+          "node_id": "107",
+          "label": "curtain",
+          "confidence": 0.5560316573240025,
+          "vertices": 0
+        },
+        {
+          "node_id": "85",
+          "label": "speaker",
+          "confidence": 0.5696186194166424,
+          "vertices": 0
+        },
+        {
+          "node_id": "119",
+          "label": "cushion",
+          "confidence": 0.7621894923289717,
+          "vertices": 0
+        },
+        {
+          "node_id": "33",
+          "label": "chair",
+          "confidence": 0.778836814546806,
+          "vertices": 0
+        },
+        {
+          "node_id": "51",
+          "label": "electrical outlet",
+          "confidence": 0.5154027861697149,
+          "vertices": 0
+        },
+        {
+          "node_id": "86",
+          "label": "electrical outlet",
+          "confidence": 0.5985764206084863,
+          "vertices": 0
+        },
+        {
+          "node_id": "88",
+          "label": "marker",
+          "confidence": 0.619889463954167,
+          "vertices": 0
+        },
+        {
+          "node_id": "87",
+          "label": "marker",
+          "confidence": 0.5653703274674419,
+          "vertices": 0
+        },
+        {
+          "node_id": "150",
+          "label": "marker",
+          "confidence": 0.48676288937879847,
+          "vertices": 0
+        },
+        {
+          "node_id": "89",
+          "label": "marker",
+          "confidence": 0.5656340196122454,
+          "vertices": 0
+        },
+        {
+          "node_id": "43",
+          "label": "electrical outlet",
+          "confidence": 0.5852814640142631,
+          "vertices": 0
+        }
+      ],
+      "graph_sha256": "6e26a20c334533e369dd84103536d01a0d1609c0f1fbad82938c2e14b36fed50",
+      "prediction_cloud": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/sage_exclusive_core/scannet/scene0015_00/instance_cloud_observed_domain.ply",
+      "prediction_cloud_sha256": "b927ccc54ec769797b66efd7b37901bbbe8b5cb7e548605431596444ef5ce321",
+      "GT_hashes": {
+        "mesh_sha256": "a09877f8a75dd7655e229b3457ad9b7d3c5b3998f317309ca42e86defcb61002",
+        "segments_sha256": "c27ae1ace57348ce92b0449f5c513e7e75f3e133ad4d7e1ddb0c544b65f60624",
+        "aggregation_sha256": "76dacdf1f008d549442cd3c4757b5df21d35eea698f570399d8002de48ed540b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 1.0,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "diagnosis": {
+        "GT_reserved_for_diagnostics": true,
+        "eligible_GT": 39,
+        "prediction_count": 100,
+        "zero_domain_masks": [
+          "scene0015_00_126",
+          "scene0015_00_27",
+          "scene0015_00_37",
+          "scene0015_00_24",
+          "scene0015_00_39",
+          "scene0015_00_9",
+          "scene0015_00_34",
+          "scene0015_00_23",
+          "scene0015_00_55",
+          "scene0015_00_117",
+          "scene0015_00_74",
+          "scene0015_00_50",
+          "scene0015_00_99",
+          "scene0015_00_106",
+          "scene0015_00_36",
+          "scene0015_00_116",
+          "scene0015_00_107",
+          "scene0015_00_85",
+          "scene0015_00_119",
+          "scene0015_00_33",
+          "scene0015_00_51",
+          "scene0015_00_86",
+          "scene0015_00_88",
+          "scene0015_00_87",
+          "scene0015_00_150",
+          "scene0015_00_89",
+          "scene0015_00_43"
+        ],
+        "below_minimum_prediction_masks": 29,
+        "missed_at25": 0,
+        "below50": 8,
+        "mixed_predictions": [
+          {
+            "prediction_id": "scene0015_00_177",
+            "GT_ids": [
+              3019,
+              3045
+            ],
+            "IoUs": [
+              0.28482446206115514,
+              0.2761324041811847
+            ]
+          },
+          {
+            "prediction_id": "scene0015_00_181",
+            "GT_ids": [
+              3008,
+              3011
+            ],
+            "IoUs": [
+              0.11518595041322315,
+              0.43219832735961766
+            ]
+          }
+        ],
+        "GT": [
+          {
+            "GT_id": 3001,
+            "best_prediction": "scene0015_00_151",
+            "IoU": 1.0,
+            "GT_coverage": 1.0,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3002,
+            "best_prediction": "scene0015_00_157",
+            "IoU": 1.0,
+            "GT_coverage": 1.0,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3003,
+            "best_prediction": "scene0015_00_8",
+            "IoU": 0.9237958303378864,
+            "GT_coverage": 0.9237958303378864,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3004,
+            "best_prediction": "scene0015_00_6",
+            "IoU": 0.5291595197255574,
+            "GT_coverage": 0.5926993275696446,
+            "prediction_purity": 0.8315363881401617,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3007,
+            "best_prediction": "scene0015_00_18",
+            "IoU": 0.7093690248565966,
+            "GT_coverage": 0.724609375,
+            "prediction_purity": 0.9712041884816754,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3008,
+            "best_prediction": "scene0015_00_19",
+            "IoU": 0.5566600397614314,
+            "GT_coverage": 0.5566600397614314,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3011,
+            "best_prediction": "scene0015_00_181",
+            "IoU": 0.43219832735961766,
+            "GT_coverage": 0.9757248819959542,
+            "prediction_purity": 0.4368961352657005,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3013,
+            "best_prediction": "scene0015_00_28",
+            "IoU": 0.9691139240506329,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.9691139240506329,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3014,
+            "best_prediction": "scene0015_00_29",
+            "IoU": 0.5808383233532934,
+            "GT_coverage": 0.6598639455782312,
+            "prediction_purity": 0.8290598290598291,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3017,
+            "best_prediction": "scene0015_00_165",
+            "IoU": 0.5180294565769427,
+            "GT_coverage": 0.5180294565769427,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3018,
+            "best_prediction": "scene0015_00_161",
+            "IoU": 0.66995841995842,
+            "GT_coverage": 0.66995841995842,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3019,
+            "best_prediction": "scene0015_00_177",
+            "IoU": 0.28482446206115514,
+            "GT_coverage": 0.347135955831608,
+            "prediction_purity": 0.6134146341463415,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 4
+          },
+          {
+            "GT_id": 3020,
+            "best_prediction": "scene0015_00_42",
+            "IoU": 0.4529863985807215,
+            "GT_coverage": 0.4529863985807215,
+            "prediction_purity": 1.0,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 3
+          },
+          {
+            "GT_id": 3021,
+            "best_prediction": "scene0015_00_46",
+            "IoU": 0.4912868632707775,
+            "GT_coverage": 0.4912868632707775,
+            "prediction_purity": 1.0,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3022,
+            "best_prediction": "scene0015_00_175",
+            "IoU": 1.0,
+            "GT_coverage": 1.0,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3023,
+            "best_prediction": "scene0015_00_169",
+            "IoU": 0.7092709270927092,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.7092709270927092,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3024,
+            "best_prediction": "scene0015_00_170",
+            "IoU": 0.7713239141810571,
+            "GT_coverage": 0.7713239141810571,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3025,
+            "best_prediction": "scene0015_00_162",
+            "IoU": 0.7100766057748968,
+            "GT_coverage": 0.7100766057748968,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3026,
+            "best_prediction": "scene0015_00_163",
+            "IoU": 0.97421875,
+            "GT_coverage": 0.97421875,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3027,
+            "best_prediction": "scene0015_00_30",
+            "IoU": 0.4379487179487179,
+            "GT_coverage": 0.4379487179487179,
+            "prediction_purity": 1.0,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3028,
+            "best_prediction": "scene0015_00_154",
+            "IoU": 0.9759119064005506,
+            "GT_coverage": 0.9759119064005506,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3029,
+            "best_prediction": "scene0015_00_158",
+            "IoU": 0.8889776357827476,
+            "GT_coverage": 0.8889776357827476,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3030,
+            "best_prediction": "scene0015_00_166",
+            "IoU": 0.6264550264550265,
+            "GT_coverage": 0.6519823788546255,
+            "prediction_purity": 0.9411764705882353,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3031,
+            "best_prediction": "scene0015_00_152",
+            "IoU": 1.0,
+            "GT_coverage": 1.0,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3032,
+            "best_prediction": "scene0015_00_160",
+            "IoU": 0.9740137758296806,
+            "GT_coverage": 0.9841822208161974,
+            "prediction_purity": 0.9895038167938931,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3033,
+            "best_prediction": "scene0015_00_159",
+            "IoU": 0.8903850199873764,
+            "GT_coverage": 0.9044667664030775,
+            "prediction_purity": 0.9828146771946121,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3034,
+            "best_prediction": "scene0015_00_3",
+            "IoU": 0.8140564471499724,
+            "GT_coverage": 0.894224924012158,
+            "prediction_purity": 0.900796080832823,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3035,
+            "best_prediction": "scene0015_00_10",
+            "IoU": 0.8805071996561358,
+            "GT_coverage": 0.8805071996561358,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3036,
+            "best_prediction": "scene0015_00_156",
+            "IoU": 0.8450909090909091,
+            "GT_coverage": 0.8548307994114762,
+            "prediction_purity": 0.9866968581941693,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3037,
+            "best_prediction": "scene0015_00_164",
+            "IoU": 0.7299843014128728,
+            "GT_coverage": 0.7366336633663366,
+            "prediction_purity": 0.9877854487519915,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3038,
+            "best_prediction": "scene0015_00_153",
+            "IoU": 0.9394736842105263,
+            "GT_coverage": 0.9394736842105263,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3041,
+            "best_prediction": "scene0015_00_61",
+            "IoU": 0.8928099392016918,
+            "GT_coverage": 0.8928099392016918,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3045,
+            "best_prediction": "scene0015_00_127",
+            "IoU": 0.2775193798449612,
+            "GT_coverage": 0.2775193798449612,
+            "prediction_purity": 1.0,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 3
+          },
+          {
+            "GT_id": 3046,
+            "best_prediction": "scene0015_00_187",
+            "IoU": 0.44793261868300155,
+            "GT_coverage": 0.6890459363957597,
+            "prediction_purity": 0.5614203454894434,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3048,
+            "best_prediction": "scene0015_00_2",
+            "IoU": 0.9146610325188316,
+            "GT_coverage": 0.9288246268656717,
+            "prediction_purity": 0.983601699101057,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3050,
+            "best_prediction": "scene0015_00_155",
+            "IoU": 1.0,
+            "GT_coverage": 1.0,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3052,
+            "best_prediction": "scene0015_00_26",
+            "IoU": 1.0,
+            "GT_coverage": 1.0,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3053,
+            "best_prediction": "scene0015_00_137",
+            "IoU": 0.4787234042553192,
+            "GT_coverage": 0.4787234042553192,
+            "prediction_purity": 1.0,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 3
+          },
+          {
+            "GT_id": 3054,
+            "best_prediction": "scene0015_00_16",
+            "IoU": 0.5612549800796812,
+            "GT_coverage": 0.5694795351187468,
+            "prediction_purity": 0.9749134948096886,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          }
+        ],
+        "empty_mask_is_not_ghost_proof": true
+      },
+      "baseline_metrics": {
+        "all_ap": 0.40771209386343793,
+        "all_ap_50%": 0.6113344299569529,
+        "all_ap_25%": 0.9348034579499254,
+        "classes": {
+          "object": {
+            "ap": 0.40771209386343793,
+            "ap50%": 0.6113344299569529,
+            "ap25%": 0.9348034579499254
+          }
+        }
+      },
+      "delta_percentage_points": {
+        "all_ap_25%": -1.8353299109503896,
+        "all_ap_50%": 11.244913189924633,
+        "all_ap": 8.926253561360737
+      }
+    },
+    {
+      "scene_id": "scene0019_00",
+      "processed_scene": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/sage_exclusive_core/scannet/scene0019_00",
+      "metrics": {
+        "all_ap": 0.30653145208700766,
+        "all_ap_50%": 0.4405820105820106,
+        "all_ap_25%": 0.6657588707588707,
+        "classes": {
+          "object": {
+            "ap": 0.30653145208700766,
+            "ap50%": 0.4405820105820106,
+            "ap25%": 0.6657588707588707
+          }
+        }
+      },
+      "predicted_objects": 60,
+      "eligible_GT_instances": 15,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3001,
+          "vertices": 2060,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "67",
+            "label": "chair",
+            "point_IoU": 0.8247843849296413
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3002,
+          "vertices": 885,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "75",
+            "label": "unlabeled object",
+            "point_IoU": 0.3597254004576659
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "couch",
+          "category_id": 6,
+          "encoded_id": 3004,
+          "vertices": 6331,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "70",
+            "label": "sofa",
+            "point_IoU": 0.5931132522508292
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3009,
+          "vertices": 1455,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "64",
+            "label": "waste bin",
+            "point_IoU": 0.9226379201014585
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3011,
+          "vertices": 2735,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "door",
+            "point_IoU": 0.9104204753199269
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "lamp",
+          "category_id": 28,
+          "encoded_id": 3012,
+          "vertices": 918,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "72",
+            "label": "unlabeled object",
+            "point_IoU": 0.40361990950226245
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 1881,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "66",
+            "label": "chair",
+            "point_IoU": 0.4957498482088646
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 1165,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "66",
+            "label": "chair",
+            "point_IoU": 0.36765183501136733
+          }
+        },
+        {
+          "gt_id": 14,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3015,
+          "vertices": 1867,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "71",
+            "label": "chair",
+            "point_IoU": 0.5644276901987663
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3016,
+          "vertices": 1063,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "71",
+            "label": "chair",
+            "point_IoU": 0.3389106443574226
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3017,
+          "vertices": 1996,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "75",
+            "label": "unlabeled object",
+            "point_IoU": 0.4398589065255732
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3020,
+          "vertices": 6469,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "door",
+            "point_IoU": 0.8667491111454629
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3022,
+          "vertices": 5677,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "65",
+            "label": "chair",
+            "point_IoU": 0.8101898101898102
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3023,
+          "vertices": 1161,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "65",
+            "label": "chair",
+            "point_IoU": 0.16569145140573713
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3024,
+          "vertices": 1842,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "68",
+            "label": "chair",
+            "point_IoU": 0.7829766052762569
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "64",
+          "label": "waste bin",
+          "confidence": 0.962153976429998,
+          "vertices": 1577
+        },
+        {
+          "node_id": "65",
+          "label": "chair",
+          "confidence": 0.9473919323744777,
+          "vertices": 7007
+        },
+        {
+          "node_id": "17",
+          "label": "door",
+          "confidence": 0.9334249610032614,
+          "vertices": 2490
+        },
+        {
+          "node_id": "66",
+          "label": "chair",
+          "confidence": 0.8798358287211379,
+          "vertices": 3046
+        },
+        {
+          "node_id": "1",
+          "label": "cushion",
+          "confidence": 0.8661669235316203,
+          "vertices": 1029
+        },
+        {
+          "node_id": "20",
+          "label": "door",
+          "confidence": 0.836098646655199,
+          "vertices": 5607
+        },
+        {
+          "node_id": "67",
+          "label": "chair",
+          "confidence": 0.7754188013466471,
+          "vertices": 1960
+        },
+        {
+          "node_id": "68",
+          "label": "chair",
+          "confidence": 0.7399711388445842,
+          "vertices": 1740
+        },
+        {
+          "node_id": "69",
+          "label": "refrigerator",
+          "confidence": 0.7277962345837037,
+          "vertices": 10137
+        },
+        {
+          "node_id": "70",
+          "label": "sofa",
+          "confidence": 0.6942651577654482,
+          "vertices": 3755
+        },
+        {
+          "node_id": "71",
+          "label": "chair",
+          "confidence": 0.669181996319146,
+          "vertices": 2698
+        },
+        {
+          "node_id": "72",
+          "label": "unlabeled object",
+          "confidence": 0.6086633539676667,
+          "vertices": 633
+        },
+        {
+          "node_id": "2",
+          "label": "cushion",
+          "confidence": 0.5324506710784137,
+          "vertices": 924
+        },
+        {
+          "node_id": "51",
+          "label": "table lamp",
+          "confidence": 0.5166627332478373,
+          "vertices": 878
+        },
+        {
+          "node_id": "28",
+          "label": "snack packages",
+          "confidence": 0.43852638991476567,
+          "vertices": 127
+        },
+        {
+          "node_id": "35",
+          "label": "snack packages",
+          "confidence": 0.4252796609482351,
+          "vertices": 167
+        },
+        {
+          "node_id": "34",
+          "label": "snack packages",
+          "confidence": 0.4237273931710427,
+          "vertices": 179
+        },
+        {
+          "node_id": "73",
+          "label": "unlabeled object",
+          "confidence": 0.4211924076080322,
+          "vertices": 5125
+        },
+        {
+          "node_id": "74",
+          "label": "unlabeled object",
+          "confidence": 0.38988171303116076,
+          "vertices": 4572
+        },
+        {
+          "node_id": "75",
+          "label": "unlabeled object",
+          "confidence": 0.36238765716552734,
+          "vertices": 2086
+        },
+        {
+          "node_id": "59",
+          "label": "snack packages",
+          "confidence": 0.35828918237245233,
+          "vertices": 132
+        },
+        {
+          "node_id": "76",
+          "label": "unlabeled object",
+          "confidence": 0.35204108056609756,
+          "vertices": 5416
+        },
+        {
+          "node_id": "77",
+          "label": "unlabeled object",
+          "confidence": 0.35009245454452587,
+          "vertices": 36
+        },
+        {
+          "node_id": "78",
+          "label": "unlabeled object",
+          "confidence": 0.34474642455738036,
+          "vertices": 511
+        },
+        {
+          "node_id": "63",
+          "label": "door",
+          "confidence": 0.33529655543721526,
+          "vertices": 125
+        },
+        {
+          "node_id": "79",
+          "label": "unlabeled object",
+          "confidence": 0.30080586626666833,
+          "vertices": 530
+        },
+        {
+          "node_id": "80",
+          "label": "unlabeled object",
+          "confidence": 0.2528085616489205,
+          "vertices": 31
+        },
+        {
+          "node_id": "81",
+          "label": "door",
+          "confidence": 0.24340912781127633,
+          "vertices": 501
+        },
+        {
+          "node_id": "12",
+          "label": "stool",
+          "confidence": 0.7703812100626931,
+          "vertices": 0
+        },
+        {
+          "node_id": "32",
+          "label": "snack bag",
+          "confidence": 0.7754371086089444,
+          "vertices": 0
+        },
+        {
+          "node_id": "11",
+          "label": "door",
+          "confidence": 0.7086614358508202,
+          "vertices": 0
+        },
+        {
+          "node_id": "46",
+          "label": "snack bag",
+          "confidence": 0.7481170900784055,
+          "vertices": 0
+        },
+        {
+          "node_id": "47",
+          "label": "snack bag",
+          "confidence": 0.6703662334825656,
+          "vertices": 0
+        },
+        {
+          "node_id": "30",
+          "label": "snack packages",
+          "confidence": 0.8408989607316348,
+          "vertices": 0
+        },
+        {
+          "node_id": "52",
+          "label": "snack bag",
+          "confidence": 0.6845316655396906,
+          "vertices": 0
+        },
+        {
+          "node_id": "54",
+          "label": "snack bag",
+          "confidence": 0.704676204598309,
+          "vertices": 0
+        },
+        {
+          "node_id": "44",
+          "label": "snack bag",
+          "confidence": 0.700590600875454,
+          "vertices": 0
+        },
+        {
+          "node_id": "33",
+          "label": "snack bag",
+          "confidence": 0.7559918163882932,
+          "vertices": 0
+        },
+        {
+          "node_id": "48",
+          "label": "snack packages",
+          "confidence": 0.7736332451841775,
+          "vertices": 0
+        },
+        {
+          "node_id": "42",
+          "label": "snack bag",
+          "confidence": 0.7203194150530441,
+          "vertices": 0
+        },
+        {
+          "node_id": "36",
+          "label": "snack packages",
+          "confidence": 0.8392248662880897,
+          "vertices": 0
+        },
+        {
+          "node_id": "41",
+          "label": "snack bag",
+          "confidence": 0.7099163070588572,
+          "vertices": 0
+        },
+        {
+          "node_id": "37",
+          "label": "snack bag",
+          "confidence": 0.7291411448060979,
+          "vertices": 0
+        },
+        {
+          "node_id": "29",
+          "label": "snack packages",
+          "confidence": 0.8462188406154783,
+          "vertices": 0
+        },
+        {
+          "node_id": "31",
+          "label": "snack packages",
+          "confidence": 0.8398469340330071,
+          "vertices": 0
+        },
+        {
+          "node_id": "39",
+          "label": "snack bag",
+          "confidence": 0.7339856892148399,
+          "vertices": 0
+        },
+        {
+          "node_id": "58",
+          "label": "snack bag",
+          "confidence": 0.6701667036779526,
+          "vertices": 0
+        },
+        {
+          "node_id": "57",
+          "label": "snack bag",
+          "confidence": 0.6917720300828065,
+          "vertices": 0
+        },
+        {
+          "node_id": "49",
+          "label": "snack bag",
+          "confidence": 0.6577122734216718,
+          "vertices": 0
+        },
+        {
+          "node_id": "55",
+          "label": "snack bag",
+          "confidence": 0.6788507027859536,
+          "vertices": 0
+        },
+        {
+          "node_id": "40",
+          "label": "snack bag",
+          "confidence": 0.7077609536009186,
+          "vertices": 0
+        },
+        {
+          "node_id": "38",
+          "label": "snack bag",
+          "confidence": 0.7123550148718473,
+          "vertices": 0
+        },
+        {
+          "node_id": "56",
+          "label": "snack bag",
+          "confidence": 0.6738736557597459,
+          "vertices": 0
+        },
+        {
+          "node_id": "43",
+          "label": "snack bag",
+          "confidence": 0.7204440410266764,
+          "vertices": 0
+        },
+        {
+          "node_id": "50",
+          "label": "snack bag",
+          "confidence": 0.6984696692264083,
+          "vertices": 0
+        },
+        {
+          "node_id": "45",
+          "label": "snack bag",
+          "confidence": 0.7298322826375752,
+          "vertices": 0
+        },
+        {
+          "node_id": "53",
+          "label": "snack bag",
+          "confidence": 0.6634564064018117,
+          "vertices": 0
+        },
+        {
+          "node_id": "61",
+          "label": "snack bag",
+          "confidence": 0.6366543733196417,
+          "vertices": 0
+        },
+        {
+          "node_id": "60",
+          "label": "snack packages",
+          "confidence": 0.6572231938075356,
+          "vertices": 0
+        },
+        {
+          "node_id": "62",
+          "label": "snack packages",
+          "confidence": 0.6570019859831973,
+          "vertices": 0
+        }
+      ],
+      "graph_sha256": "3bf501e9b795861b2eda78b621347fed9a710e4c5aa72aaf616d1fde5c06e838",
+      "prediction_cloud": "/home/lewisliu/datasets/scannet-sg-processed/research_cycle/sage_exclusive_core/scannet/scene0019_00/instance_cloud_observed_domain.ply",
+      "prediction_cloud_sha256": "deeb0ca5fdfc250468dca49ffd0d5ee529a6a985490d19183f4df1d37ce94a5a",
+      "GT_hashes": {
+        "mesh_sha256": "fad4b0d0a086bf6cc7885104efbe926208935fc0cb690b227fb3678b561002be",
+        "segments_sha256": "4fce1e0a3eacf30327fa73020558545f3b316af7c45b7d690ecb689d17f13258",
+        "aggregation_sha256": "b51bf966947a9c060edfdfdc4936cea00d08de07480041db586399e5d925c5cc",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 1.0,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "diagnosis": {
+        "GT_reserved_for_diagnostics": true,
+        "eligible_GT": 15,
+        "prediction_count": 60,
+        "zero_domain_masks": [
+          "scene0019_00_12",
+          "scene0019_00_32",
+          "scene0019_00_11",
+          "scene0019_00_46",
+          "scene0019_00_47",
+          "scene0019_00_30",
+          "scene0019_00_52",
+          "scene0019_00_54",
+          "scene0019_00_44",
+          "scene0019_00_33",
+          "scene0019_00_48",
+          "scene0019_00_42",
+          "scene0019_00_36",
+          "scene0019_00_41",
+          "scene0019_00_37",
+          "scene0019_00_29",
+          "scene0019_00_31",
+          "scene0019_00_39",
+          "scene0019_00_58",
+          "scene0019_00_57",
+          "scene0019_00_49",
+          "scene0019_00_55",
+          "scene0019_00_40",
+          "scene0019_00_38",
+          "scene0019_00_56",
+          "scene0019_00_43",
+          "scene0019_00_50",
+          "scene0019_00_45",
+          "scene0019_00_53",
+          "scene0019_00_61",
+          "scene0019_00_60",
+          "scene0019_00_62"
+        ],
+        "below_minimum_prediction_masks": 34,
+        "missed_at25": 1,
+        "below50": 7,
+        "mixed_predictions": [
+          {
+            "prediction_id": "scene0019_00_65",
+            "GT_ids": [
+              3022,
+              3023
+            ],
+            "IoUs": [
+              0.8101898101898102,
+              0.16569145140573713
+            ]
+          },
+          {
+            "prediction_id": "scene0019_00_66",
+            "GT_ids": [
+              3013,
+              3014
+            ],
+            "IoUs": [
+              0.4957498482088646,
+              0.36765183501136733
+            ]
+          },
+          {
+            "prediction_id": "scene0019_00_71",
+            "GT_ids": [
+              3015,
+              3016
+            ],
+            "IoUs": [
+              0.5644276901987663,
+              0.3389106443574226
+            ]
+          },
+          {
+            "prediction_id": "scene0019_00_75",
+            "GT_ids": [
+              3002,
+              3017
+            ],
+            "IoUs": [
+              0.3597254004576659,
+              0.4398589065255732
+            ]
+          }
+        ],
+        "GT": [
+          {
+            "GT_id": 3001,
+            "best_prediction": "scene0019_00_67",
+            "IoU": 0.8247843849296413,
+            "GT_coverage": 0.8820388349514563,
+            "prediction_purity": 0.9270408163265306,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3002,
+            "best_prediction": "scene0019_00_75",
+            "IoU": 0.3597254004576659,
+            "GT_coverage": 0.888135593220339,
+            "prediction_purity": 0.37679769894535,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3004,
+            "best_prediction": "scene0019_00_70",
+            "IoU": 0.5931132522508292,
+            "GT_coverage": 0.5931132522508292,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 3
+          },
+          {
+            "GT_id": 3009,
+            "best_prediction": "scene0019_00_64",
+            "IoU": 0.9226379201014585,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.9226379201014585,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3011,
+            "best_prediction": "scene0019_00_17",
+            "IoU": 0.9104204753199269,
+            "GT_coverage": 0.9104204753199269,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3012,
+            "best_prediction": "scene0019_00_72",
+            "IoU": 0.40361990950226245,
+            "GT_coverage": 0.485838779956427,
+            "prediction_purity": 0.7045813586097947,
+            "status": "below50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 2
+          },
+          {
+            "GT_id": 3013,
+            "best_prediction": "scene0019_00_66",
+            "IoU": 0.4957498482088646,
+            "GT_coverage": 0.8681552365762892,
+            "prediction_purity": 0.536112934996717,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3014,
+            "best_prediction": "scene0019_00_66",
+            "IoU": 0.36765183501136733,
+            "GT_coverage": 0.9716738197424892,
+            "prediction_purity": 0.3716349310571241,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3015,
+            "best_prediction": "scene0019_00_71",
+            "IoU": 0.5644276901987663,
+            "GT_coverage": 0.8821638993036958,
+            "prediction_purity": 0.6104521868050408,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3016,
+            "best_prediction": "scene0019_00_71",
+            "IoU": 0.3389106443574226,
+            "GT_coverage": 0.8955785512699906,
+            "prediction_purity": 0.35285396590066714,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3017,
+            "best_prediction": "scene0019_00_75",
+            "IoU": 0.4398589065255732,
+            "GT_coverage": 0.624749498997996,
+            "prediction_purity": 0.5977948226270374,
+            "status": "below50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3020,
+            "best_prediction": "scene0019_00_20",
+            "IoU": 0.8667491111454629,
+            "GT_coverage": 0.8667491111454629,
+            "prediction_purity": 1.0,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3022,
+            "best_prediction": "scene0019_00_65",
+            "IoU": 0.8101898101898102,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.8101898101898102,
+            "status": "matched_at50",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3023,
+            "best_prediction": "scene0019_00_65",
+            "IoU": 0.16569145140573713,
+            "GT_coverage": 1.0,
+            "prediction_purity": 0.16569145140573713,
+            "status": "missed_at25",
+            "cause": "contamination",
+            "overlapping_predictions": 1
+          },
+          {
+            "GT_id": 3024,
+            "best_prediction": "scene0019_00_68",
+            "IoU": 0.7829766052762569,
+            "GT_coverage": 0.8539630836047775,
+            "prediction_purity": 0.9040229885057471,
+            "status": "matched_at50",
+            "cause": "low_coverage",
+            "overlapping_predictions": 1
+          }
+        ],
+        "empty_mask_is_not_ghost_proof": true
+      },
+      "baseline_metrics": {
+        "all_ap": 0.27729276895943555,
+        "all_ap_50%": 0.35798941798941797,
+        "all_ap_25%": 0.5195719095719096,
+        "classes": {
+          "object": {
+            "ap": 0.27729276895943555,
+            "ap50%": 0.35798941798941797,
+            "ap25%": 0.5195719095719096
+          }
+        }
+      },
+      "delta_percentage_points": {
+        "all_ap_25%": 14.618696118696118,
+        "all_ap_50%": 8.259259259259261,
+        "all_ap": 2.923868312757211
+      }
+    }
+  ],
+  "development_scenes": true,
+  "frozen_v19_preserved": true,
+  "official_evaluator_unchanged": true,
+  "aggregate": {
+    "all_ap": 0.4345189552140345,
+    "all_ap_50%": 0.6848777491232731,
+    "all_ap_25%": 0.8824278429944614,
+    "classes": {
+      "object": {
+        "ap": 0.4345189552140345,
+        "ap50%": 0.6848777491232731,
+        "ap25%": 0.8824278429944614
+      }
+    }
+  },
+  "baseline_aggregate": {
+    "all_ap": 0.37106068077975524,
+    "all_ap_50%": 0.5827663034046122,
+    "all_ap_25%": 0.7509772027592786,
+    "classes": {
+      "object": {
+        "ap": 0.37106068077975524,
+        "ap50%": 0.5827663034046122,
+        "ap25%": 0.7509772027592786
+      }
+    }
+  },
+  "delta_percentage_points": {
+    "all_ap_25%": 13.145064023518282,
+    "all_ap_50%": 10.211144571866093,
+    "all_ap": 6.345827443427926
+  }
+}

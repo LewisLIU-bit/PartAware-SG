@@ -1,0 +1,4572 @@
+{
+  "complete": true,
+  "variant": "gpt_confirm_gt0",
+  "full_geometry_pipeline_executed": true,
+  "official_paper_pipeline_reproduced": false,
+  "official_published_metrics_reproduced": false,
+  "GT_in_construction": false,
+  "training": false,
+  "new_API_calls": 0,
+  "results": [
+    {
+      "scene_id": "scene0011_00",
+      "processed_scene": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_confirm_gt0/scene0011_00",
+      "metrics": {
+        "all_ap": 0.16350966063463618,
+        "all_ap_50%": 0.4387424190924229,
+        "all_ap_25%": 0.5205900257973817,
+        "classes": {
+          "object": {
+            "ap": 0.16350966063463618,
+            "ap50%": 0.4387424190924229,
+            "ap25%": 0.5205900257973817
+          }
+        }
+      },
+      "predicted_objects": 43,
+      "eligible_GT_instances": 28,
+      "GT": [
+        {
+          "gt_id": 1,
+          "raw_label": "kitchen cabinets",
+          "category_id": 29,
+          "encoded_id": 3002,
+          "vertices": 6153,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "built - in appliance",
+            "point_IoU": 0.7035675381263616
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3003,
+          "vertices": 12971,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "refrigerator",
+            "point_IoU": 0.13621165867131851
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "armchair",
+          "category_id": 23,
+          "encoded_id": 3004,
+          "vertices": 3243,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 4,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3005,
+          "vertices": 3781,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "25",
+            "label": "chair",
+            "point_IoU": 0.8559150657229525
+          }
+        },
+        {
+          "gt_id": 5,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3006,
+          "vertices": 3152,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "chair",
+            "point_IoU": 0.7166878172588832
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3007,
+          "vertices": 3612,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "chair",
+            "point_IoU": 0.8236259228876128
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3008,
+          "vertices": 2694,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "chair",
+            "point_IoU": 0.7085006693440429
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3009,
+          "vertices": 3463,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "chair",
+            "point_IoU": 0.8492636442390991
+          }
+        },
+        {
+          "gt_id": 9,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3010,
+          "vertices": 3356,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "chair",
+            "point_IoU": 0.7531939605110337
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3011,
+          "vertices": 3224,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.5350496277915633
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3012,
+          "vertices": 3800,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "upholstered chair",
+            "point_IoU": 0.6176890156918687
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 3422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "35",
+            "label": "chair",
+            "point_IoU": 0.7559906487434249
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 2422,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "36",
+            "label": "chair",
+            "point_IoU": 0.8583815028901735
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3016,
+          "vertices": 1411,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "39",
+            "label": "trash",
+            "point_IoU": 0.5142428785607196
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3018,
+          "vertices": 4278,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "38",
+            "label": "console table",
+            "point_IoU": 0.8645766687993176
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "tv",
+          "category_id": 33,
+          "encoded_id": 3019,
+          "vertices": 9908,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "27",
+            "label": "television",
+            "point_IoU": 0.5845708775313404
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3020,
+          "vertices": 4892,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "34",
+            "label": "refrigerator",
+            "point_IoU": 0.22219950940310712
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3021,
+          "vertices": 2166,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "ceiling",
+          "category_id": 41,
+          "encoded_id": 3023,
+          "vertices": 2094,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3024,
+          "vertices": 5281,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "33",
+            "label": "window",
+            "point_IoU": 0.49157356561257337
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3025,
+          "vertices": 5590,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "wooden door",
+            "point_IoU": 0.5374620317246035
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "kitchen counter",
+          "category_id": 159,
+          "encoded_id": 3026,
+          "vertices": 5743,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "12",
+            "label": "countertop",
+            "point_IoU": 0.386175807663411
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "sink",
+          "category_id": 14,
+          "encoded_id": 3027,
+          "vertices": 1075,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "sink",
+            "point_IoU": 0.2357142857142857
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "refrigerator",
+          "category_id": 27,
+          "encoded_id": 3028,
+          "vertices": 6152,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "refrigerator",
+            "point_IoU": 0.8319412442396313
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "cabinet",
+          "category_id": 7,
+          "encoded_id": 3029,
+          "vertices": 3535,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "refrigerator",
+            "point_IoU": 0.07466496490108487
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "doors",
+          "category_id": 5,
+          "encoded_id": 3031,
+          "vertices": 6336,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "doorframe",
+          "category_id": 161,
+          "encoded_id": 3032,
+          "vertices": 1028,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "chair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3033,
+          "vertices": 1148,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "32",
+            "label": "trash",
+            "point_IoU": 0.5529865125240848
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "1",
+          "label": "chair",
+          "confidence": 0.6918097138404846,
+          "vertices": 1725
+        },
+        {
+          "node_id": "2",
+          "label": "chair",
+          "confidence": 0.7013040781021118,
+          "vertices": 2682
+        },
+        {
+          "node_id": "3",
+          "label": "chair",
+          "confidence": 0.6883637309074402,
+          "vertices": 2941
+        },
+        {
+          "node_id": "4",
+          "label": "upholstered chair",
+          "confidence": 0.7444705963134766,
+          "vertices": 3004
+        },
+        {
+          "node_id": "5",
+          "label": "built - in appliance",
+          "confidence": 0.6298884153366089,
+          "vertices": 6358
+        },
+        {
+          "node_id": "6",
+          "label": "refrigerator",
+          "confidence": 0.6979178190231323,
+          "vertices": 2661
+        },
+        {
+          "node_id": "7",
+          "label": "chairs",
+          "confidence": 0.5157114267349243,
+          "vertices": 193
+        },
+        {
+          "node_id": "8",
+          "label": "refrigerator",
+          "confidence": 0.9516838788986206,
+          "vertices": 6569
+        },
+        {
+          "node_id": "9",
+          "label": "wooden door",
+          "confidence": 0.6555565595626831,
+          "vertices": 3521
+        },
+        {
+          "node_id": "10",
+          "label": "sink",
+          "confidence": 0.9223425984382629,
+          "vertices": 482
+        },
+        {
+          "node_id": "11",
+          "label": "electrical outlets",
+          "confidence": 0.8984106183052063,
+          "vertices": 0
+        },
+        {
+          "node_id": "12",
+          "label": "countertop",
+          "confidence": 0.6556668281555176,
+          "vertices": 3482
+        },
+        {
+          "node_id": "13",
+          "label": "window shade",
+          "confidence": 0.5855752229690552,
+          "vertices": 1098
+        },
+        {
+          "node_id": "14",
+          "label": "electrical outlet",
+          "confidence": 0.7150261998176575,
+          "vertices": 0
+        },
+        {
+          "node_id": "15",
+          "label": "cabinet",
+          "confidence": 0.4944002628326416,
+          "vertices": 76
+        },
+        {
+          "node_id": "16",
+          "label": "electric cooktop",
+          "confidence": 0.6260098814964294,
+          "vertices": 930
+        },
+        {
+          "node_id": "17",
+          "label": "chair",
+          "confidence": 0.6347697377204895,
+          "vertices": 2411
+        },
+        {
+          "node_id": "18",
+          "label": "chair",
+          "confidence": 0.6748009920120239,
+          "vertices": 3057
+        },
+        {
+          "node_id": "19",
+          "label": "chair",
+          "confidence": 0.42996785044670105,
+          "vertices": 148
+        },
+        {
+          "node_id": "20",
+          "label": "chair",
+          "confidence": 0.591428279876709,
+          "vertices": 312
+        },
+        {
+          "node_id": "21",
+          "label": "chair",
+          "confidence": 0.5817189812660217,
+          "vertices": 293
+        },
+        {
+          "node_id": "22",
+          "label": "window",
+          "confidence": 0.8017807006835938,
+          "vertices": 1332
+        },
+        {
+          "node_id": "23",
+          "label": "chair",
+          "confidence": 0.6864751577377319,
+          "vertices": 2259
+        },
+        {
+          "node_id": "24",
+          "label": "trash bin",
+          "confidence": 0.9389128684997559,
+          "vertices": 0
+        },
+        {
+          "node_id": "25",
+          "label": "chair",
+          "confidence": 0.807612419128418,
+          "vertices": 3561
+        },
+        {
+          "node_id": "26",
+          "label": "light switch outlet",
+          "confidence": 0.41229352355003357,
+          "vertices": 0
+        },
+        {
+          "node_id": "27",
+          "label": "television",
+          "confidence": 0.9323301911354065,
+          "vertices": 6524
+        },
+        {
+          "node_id": "28",
+          "label": "dining table dining",
+          "confidence": 0.7823300957679749,
+          "vertices": 1104
+        },
+        {
+          "node_id": "29",
+          "label": "kitchen cabinet",
+          "confidence": 0.5385888814926147,
+          "vertices": 3325
+        },
+        {
+          "node_id": "30",
+          "label": "chair lounge chair",
+          "confidence": 0.5265862345695496,
+          "vertices": 0
+        },
+        {
+          "node_id": "31",
+          "label": "trash",
+          "confidence": 0.8264318704605103,
+          "vertices": 202
+        },
+        {
+          "node_id": "32",
+          "label": "trash",
+          "confidence": 0.9449946880340576,
+          "vertices": 2076
+        },
+        {
+          "node_id": "33",
+          "label": "window",
+          "confidence": 0.7983440160751343,
+          "vertices": 2596
+        },
+        {
+          "node_id": "34",
+          "label": "refrigerator",
+          "confidence": 0.634882926940918,
+          "vertices": 1087
+        },
+        {
+          "node_id": "35",
+          "label": "chair",
+          "confidence": 0.6398485898971558,
+          "vertices": 2587
+        },
+        {
+          "node_id": "36",
+          "label": "chair",
+          "confidence": 0.6420959234237671,
+          "vertices": 2079
+        },
+        {
+          "node_id": "37",
+          "label": "chair",
+          "confidence": 0.5166869163513184,
+          "vertices": 399
+        },
+        {
+          "node_id": "38",
+          "label": "console table",
+          "confidence": 0.8268516063690186,
+          "vertices": 4465
+        },
+        {
+          "node_id": "39",
+          "label": "trash",
+          "confidence": 0.915808916091919,
+          "vertices": 1619
+        },
+        {
+          "node_id": "40",
+          "label": "light switch",
+          "confidence": 0.5247600078582764,
+          "vertices": 0
+        },
+        {
+          "node_id": "41",
+          "label": "light switch",
+          "confidence": 0.40874868631362915,
+          "vertices": 0
+        },
+        {
+          "node_id": "42",
+          "label": "television",
+          "confidence": 0.8237541317939758,
+          "vertices": 3699
+        },
+        {
+          "node_id": "43",
+          "label": "chair",
+          "confidence": 0.5619060397148132,
+          "vertices": 514
+        }
+      ],
+      "graph_sha256": "388edee5473f370460ca3985df57fae95f6ec758920b99663b8c42ba0d09576d",
+      "prediction_cloud": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_confirm_gt0/scene0011_00/instance_cloud_thinkgraphs.ply",
+      "prediction_cloud_sha256": "3b4456e4effee02caa4cb1fed3287e16db1c2aef1fde4f490eab77919908dada",
+      "GT_hashes": {
+        "mesh_sha256": "2941664625d52110aefbfb2b5fd3c869c3f51b999a036a27ba3e0033e3bf21f5",
+        "segments_sha256": "00546eb1505379add58fb3792d03f8b8dddef1bd60d357b243e040c4db3404e2",
+        "aggregation_sha256": "155e188c1bababbe5522931b1cf7c6c971cb4464e75ab389de752afeffe6b23b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 0.3794994944388271,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "baseline_variant": "ThinkGraphs_GPT_tags_without_API_agents",
+      "inference_receipt": {
+        "scene": "scene0011_00",
+        "complete": true,
+        "diagnostic_smoke": false,
+        "frames": [
+          {
+            "frame_id": "000000",
+            "noun_cache_sha256": "2d9480c0fd8fed205fab0280274d3734ccacee6a8a136876e166d8c9eaeecd6c",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 1,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 1025.131427013548,
+              "clip_ms": 207.8693909861613,
+              "feature_ms": 0.13463798677548766,
+              "project_ms": 459.22141600749455,
+              "assoc_ms": 4.027570015750825,
+              "post_total_ms": 0.00220397487282753,
+              "total_ms": 1700.6520009599626
+            },
+            "tracked": 3,
+            "valid_depth_fraction": 0.7323274739583333
+          },
+          {
+            "frame_id": "000040",
+            "noun_cache_sha256": "05050e2d73fedda0feeee5f72265eeff48ed6f515c1e01c9a08888ce95d69405",
+            "objects": 1,
+            "native_timing": {
+              "frame_index": 2,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 343.2052090065554,
+              "clip_ms": 62.0040420035366,
+              "feature_ms": 0.09528201189823449,
+              "project_ms": 354.55374701996334,
+              "assoc_ms": 20.384603994898498,
+              "post_total_ms": 0.009718991350382566,
+              "total_ms": 793.6982449900825
+            },
+            "tracked": 5,
+            "valid_depth_fraction": 0.7397981770833333
+          },
+          {
+            "frame_id": "000080",
+            "noun_cache_sha256": "d0169cd414af60759932d960a45fb299efd8734b4f2417b537f68aa29b895019",
+            "objects": 2,
+            "native_timing": {
+              "frame_index": 3,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 312.57400001049973,
+              "clip_ms": 62.628272018628195,
+              "feature_ms": 0.11359798372723162,
+              "project_ms": 367.6125719794072,
+              "assoc_ms": 2.7781089884229004,
+              "post_total_ms": 0.012764008715748787,
+              "total_ms": 751.001807017019
+            },
+            "tracked": 6,
+            "valid_depth_fraction": 0.8144563802083333
+          },
+          {
+            "frame_id": "000120",
+            "noun_cache_sha256": "370053a858ed56b39f4d4fde0f607c1d88992c4e8794dfa86e14f1fb7ac9f5e2",
+            "objects": 4,
+            "native_timing": {
+              "frame_index": 4,
+              "raw_segments": 11,
+              "filtered_segments": 11,
+              "seg_ms": 382.3488420166541,
+              "clip_ms": 110.59173999819905,
+              "feature_ms": 0.13623098493553698,
+              "project_ms": 624.3429019814357,
+              "assoc_ms": 20.779411017429084,
+              "post_total_ms": 0.017965008737519383,
+              "total_ms": 1150.247120007407
+            },
+            "tracked": 9,
+            "valid_depth_fraction": 0.76029296875
+          },
+          {
+            "frame_id": "000160",
+            "noun_cache_sha256": "706d169e8faf590fcb3d9bf44d0fc86cce8773315a7ce51f001dcf7d4e2a26f7",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 5,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 312.9725629987661,
+              "clip_ms": 63.865625008475035,
+              "feature_ms": 0.10997100616805255,
+              "project_ms": 495.73227600194514,
+              "assoc_ms": 57.09210401983,
+              "post_total_ms": 0.0251989986281842,
+              "total_ms": 936.8421439721715
+            },
+            "tracked": 10,
+            "valid_depth_fraction": 0.7926822916666667
+          },
+          {
+            "frame_id": "000200",
+            "noun_cache_sha256": "a99d5d7167f6ee07e391db8e08ec01c01b6aeeff71f0045b33b384596792b0d5",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 6,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 334.9556479952298,
+              "clip_ms": 98.24888102593832,
+              "feature_ms": 0.13943700469098985,
+              "project_ms": 579.9195889849216,
+              "assoc_ms": 11.860355996759608,
+              "post_total_ms": 0.016241014236584306,
+              "total_ms": 1034.5714570139535
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7192447916666667
+          },
+          {
+            "frame_id": "000240",
+            "noun_cache_sha256": "7031827355754be1d43210b1bf2978bc5ea2f9d70dd847e3c0a884426acd736d",
+            "objects": 7,
+            "native_timing": {
+              "frame_index": 7,
+              "raw_segments": 10,
+              "filtered_segments": 10,
+              "seg_ms": 430.3401849756483,
+              "clip_ms": 94.79700302472338,
+              "feature_ms": 0.16601799870841205,
+              "project_ms": 545.0163210043684,
+              "assoc_ms": 26.73432501615025,
+              "post_total_ms": 0.024106004275381565,
+              "total_ms": 1108.9820899942424
+            },
+            "tracked": 16,
+            "valid_depth_fraction": 0.6170735677083333
+          },
+          {
+            "frame_id": "000280",
+            "noun_cache_sha256": "932c5c688d09980730ee3efa6124e8e1e963b63fbe4d29397905384647301c5d",
+            "objects": 10,
+            "native_timing": {
+              "frame_index": 8,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 417.8140750154853,
+              "clip_ms": 92.19391900114715,
+              "feature_ms": 0.1257399853784591,
+              "project_ms": 496.2774890009314,
+              "assoc_ms": 34.399324998958036,
+              "post_total_ms": 0.026560010155662894,
+              "total_ms": 1052.1037890284788
+            },
+            "tracked": 17,
+            "valid_depth_fraction": 0.6873600260416667
+          },
+          {
+            "frame_id": "000320",
+            "noun_cache_sha256": "57952ae4db243fba6c27fd9df61452365691415a47ee6ca9cd4f00267d611a59",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 9,
+              "raw_segments": 7,
+              "filtered_segments": 7,
+              "seg_ms": 320.9573259809986,
+              "clip_ms": 71.76504901144654,
+              "feature_ms": 0.12048101052641869,
+              "project_ms": 412.89897201932035,
+              "assoc_ms": 14.36631300020963,
+              "post_total_ms": 3.3849400060717016,
+              "total_ms": 833.373636007309
+            },
+            "tracked": 17,
+            "valid_depth_fraction": 0.721552734375
+          },
+          {
+            "frame_id": "000360",
+            "noun_cache_sha256": "0018e4e90a4e222f99f3e73e36f9d260aaea47001d45deb1953d0a27048e1ad6",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 10,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 342.89749499293976,
+              "clip_ms": 86.83973900042474,
+              "feature_ms": 0.11859700316563249,
+              "project_ms": 528.768136020517,
+              "assoc_ms": 42.06317799980752,
+              "post_total_ms": 0.022182008251547813,
+              "total_ms": 1013.7587270291988
+            },
+            "tracked": 18,
+            "valid_depth_fraction": 0.6676204427083333
+          },
+          {
+            "frame_id": "000400",
+            "noun_cache_sha256": "7cf1d18ebd77812131c5188ccc8f500e14db36024261407fde48b10eeb7e4bb6",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 11,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 336.367161013186,
+              "clip_ms": 47.57507998147048,
+              "feature_ms": 0.1017250178847462,
+              "project_ms": 458.95456898142584,
+              "assoc_ms": 8.848860976286232,
+              "post_total_ms": 0.017633981769904494,
+              "total_ms": 858.6693439865485
+            },
+            "tracked": 18,
+            "valid_depth_fraction": 0.8480631510416666
+          },
+          {
+            "frame_id": "000440",
+            "noun_cache_sha256": "a37ef28ae1ef47a638f4d29f2a3da98c4f119fbadeeb2211248940913730249a",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 12,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 347.5201640103478,
+              "clip_ms": 73.16040000296198,
+              "feature_ms": 0.12720300583168864,
+              "project_ms": 557.9589350090828,
+              "assoc_ms": 8.760420983890072,
+              "post_total_ms": 0.013204989954829216,
+              "total_ms": 997.2952849639114
+            },
+            "tracked": 18,
+            "valid_depth_fraction": 0.7507194010416667
+          },
+          {
+            "frame_id": "000480",
+            "noun_cache_sha256": "3f483868b7420c23f36c4a4e2c97be2a7b80310c2219fd90b896da5089d59866",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 13,
+              "raw_segments": 10,
+              "filtered_segments": 10,
+              "seg_ms": 386.0409350018017,
+              "clip_ms": 92.0751020021271,
+              "feature_ms": 0.1588640152476728,
+              "project_ms": 512.1707649959717,
+              "assoc_ms": 40.696670999750495,
+              "post_total_ms": 0.02601000596769154,
+              "total_ms": 1043.0743779870681
+            },
+            "tracked": 19,
+            "valid_depth_fraction": 0.671884765625
+          },
+          {
+            "frame_id": "000520",
+            "noun_cache_sha256": "d660cdf4d4090ed7821de558a73e40be8562cc03cd730667f90b7be03d2754b0",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 14,
+              "raw_segments": 7,
+              "filtered_segments": 7,
+              "seg_ms": 331.8794500082731,
+              "clip_ms": 115.3629140171688,
+              "feature_ms": 0.13814499834552407,
+              "project_ms": 776.4008720114361,
+              "assoc_ms": 32.56679599871859,
+              "post_total_ms": 0.025048007955774665,
+              "total_ms": 1269.1881979990285
+            },
+            "tracked": 20,
+            "valid_depth_fraction": 0.7517805989583334
+          },
+          {
+            "frame_id": "000560",
+            "noun_cache_sha256": "66fe8a4a04150cae2761ed515339a030edc52af00a54e94bfe7a541c71d0ba46",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 15,
+              "raw_segments": 16,
+              "filtered_segments": 16,
+              "seg_ms": 410.10629999800585,
+              "clip_ms": 146.51107098325156,
+              "feature_ms": 0.18031499348580837,
+              "project_ms": 575.1250959874596,
+              "assoc_ms": 22.88745599798858,
+              "post_total_ms": 4.030365002108738,
+              "total_ms": 1177.0631890103687
+            },
+            "tracked": 22,
+            "valid_depth_fraction": 0.7480989583333333
+          },
+          {
+            "frame_id": "000600",
+            "noun_cache_sha256": "cecbac66d6a1b92e364491b11cd44913edafc93dc4f8ab52eaa4c62a2de95f60",
+            "objects": 12,
+            "native_timing": {
+              "frame_index": 16,
+              "raw_segments": 12,
+              "filtered_segments": 12,
+              "seg_ms": 384.98082000296563,
+              "clip_ms": 112.7678930060938,
+              "feature_ms": 0.1829999964684248,
+              "project_ms": 528.4044820000418,
+              "assoc_ms": 15.556672005914152,
+              "post_total_ms": 0.033082993468269706,
+              "total_ms": 1056.9685789814685
+            },
+            "tracked": 23,
+            "valid_depth_fraction": 0.7682454427083333
+          },
+          {
+            "frame_id": "000640",
+            "noun_cache_sha256": "7d0e169e3e46222ea4bde32c02b33e9bd6ac03267e3cdffa49bffa0b40bd3699",
+            "objects": 13,
+            "native_timing": {
+              "frame_index": 17,
+              "raw_segments": 11,
+              "filtered_segments": 11,
+              "seg_ms": 383.7685680191498,
+              "clip_ms": 107.06158398534171,
+              "feature_ms": 0.1455589954275638,
+              "project_ms": 630.259798024781,
+              "assoc_ms": 72.79042102163658,
+              "post_total_ms": 0.02888601738959551,
+              "total_ms": 1207.1546950319316
+            },
+            "tracked": 24,
+            "valid_depth_fraction": 0.7660970052083333
+          },
+          {
+            "frame_id": "000680",
+            "noun_cache_sha256": "81193e618c8e2701f2940e5913149059973ebddb86eebec8f9a24c878d51464b",
+            "objects": 13,
+            "native_timing": {
+              "frame_index": 18,
+              "raw_segments": 10,
+              "filtered_segments": 10,
+              "seg_ms": 364.7887850238476,
+              "clip_ms": 88.54273697943427,
+              "feature_ms": 0.14007798745296896,
+              "project_ms": 390.9987430088222,
+              "assoc_ms": 73.5347589943558,
+              "post_total_ms": 5.929001024924219,
+              "total_ms": 937.5512660189997
+            },
+            "tracked": 25,
+            "valid_depth_fraction": 0.7349251302083334
+          },
+          {
+            "frame_id": "000720",
+            "noun_cache_sha256": "156d548cc0024791a3865e2d8e3a30705907e6f125b4e042ed94c648d11f6200",
+            "objects": 15,
+            "native_timing": {
+              "frame_index": 19,
+              "raw_segments": 19,
+              "filtered_segments": 19,
+              "seg_ms": 424.4690449850168,
+              "clip_ms": 172.52035200363025,
+              "feature_ms": 0.2379060024395585,
+              "project_ms": 605.7723819976673,
+              "assoc_ms": 59.01241902029142,
+              "post_total_ms": 0.020338979084044695,
+              "total_ms": 1280.8860069781076
+            },
+            "tracked": 26,
+            "valid_depth_fraction": 0.7424251302083333
+          },
+          {
+            "frame_id": "000760",
+            "noun_cache_sha256": "93b5d0d7bd5a05261c4a34b82477b42e7a3cdb7e578c13bbb3203d14b09609cb",
+            "objects": 15,
+            "native_timing": {
+              "frame_index": 20,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 308.95758100086823,
+              "clip_ms": 57.058142992900684,
+              "feature_ms": 0.09497199789620936,
+              "project_ms": 510.092609009007,
+              "assoc_ms": 12.872695981059223,
+              "post_total_ms": 0.05521599086932838,
+              "total_ms": 900.8163260004949
+            },
+            "tracked": 27,
+            "valid_depth_fraction": 0.763408203125
+          },
+          {
+            "frame_id": "000800",
+            "noun_cache_sha256": "07446086c061c09db46e9fdc67d4492645c1a00d41b5d9c750dc7fd24224d7d5",
+            "objects": 15,
+            "native_timing": {
+              "frame_index": 21,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 315.9250300086569,
+              "clip_ms": 55.62870402354747,
+              "feature_ms": 0.09275801130570471,
+              "project_ms": 545.2686389908195,
+              "assoc_ms": 8.162687998265028,
+              "post_total_ms": 5.334593006409705,
+              "total_ms": 945.1170329994056
+            },
+            "tracked": 30,
+            "valid_depth_fraction": 0.757685546875
+          },
+          {
+            "frame_id": "000840",
+            "noun_cache_sha256": "142da4c01d7080931b259f61868b7a648ddc651ce32c25cbaebdd0783d4a80a6",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 22,
+              "raw_segments": 10,
+              "filtered_segments": 10,
+              "seg_ms": 382.3332059837412,
+              "clip_ms": 98.31931898952462,
+              "feature_ms": 0.1492059964220971,
+              "project_ms": 464.1145880159456,
+              "assoc_ms": 10.504862002562732,
+              "post_total_ms": 0.01267399056814611,
+              "total_ms": 967.9396569845267
+            },
+            "tracked": 33,
+            "valid_depth_fraction": 0.74982421875
+          },
+          {
+            "frame_id": "000880",
+            "noun_cache_sha256": "29da95687dd39d52aa694a65f32248ee503fd115c30c048ac31965f0c3bc1889",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 23,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 344.17673997813836,
+              "clip_ms": 81.59067798987962,
+              "feature_ms": 0.12257500202395022,
+              "project_ms": 695.3995960066095,
+              "assoc_ms": 54.52567202155478,
+              "post_total_ms": 0.02249301178380847,
+              "total_ms": 1187.3757030116394
+            },
+            "tracked": 35,
+            "valid_depth_fraction": 0.795380859375
+          },
+          {
+            "frame_id": "000920",
+            "noun_cache_sha256": "12e174da0a691b14e39b518ffe92c69cf1618904682d064c0adf4983a0f74feb",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 24,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 363.0559689772781,
+              "clip_ms": 67.23793997662142,
+              "feature_ms": 0.11737400200217962,
+              "project_ms": 266.3294230005704,
+              "assoc_ms": 2.8675700013991445,
+              "post_total_ms": 2.341974002774805,
+              "total_ms": 710.6735720008146
+            },
+            "tracked": 36,
+            "valid_depth_fraction": 0.78873046875
+          },
+          {
+            "frame_id": "000960",
+            "noun_cache_sha256": "2689e3e7bd7a82504f0bd3659ee63eb2907f02a52fc048d03b5b0cb13a85a683",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 25,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 315.1073259941768,
+              "clip_ms": 78.47881098859943,
+              "feature_ms": 0.14092898345552385,
+              "project_ms": 496.59021201659925,
+              "assoc_ms": 34.333878982579336,
+              "post_total_ms": 0.012953998520970345,
+              "total_ms": 936.9180120120291
+            },
+            "tracked": 37,
+            "valid_depth_fraction": 0.7397884114583333
+          },
+          {
+            "frame_id": "001000",
+            "noun_cache_sha256": "6c05821139540eefea4071dd25145796b588e03bd8360bd51a957f7aff2903f2",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 26,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 335.7088909833692,
+              "clip_ms": 37.29616498458199,
+              "feature_ms": 0.08384001557715237,
+              "project_ms": 196.07833502232097,
+              "assoc_ms": 0.6341739790514112,
+              "post_total_ms": 0.026470021111890674,
+              "total_ms": 580.3498810273595
+            },
+            "tracked": 37,
+            "valid_depth_fraction": 0.8068684895833333
+          },
+          {
+            "frame_id": "001040",
+            "noun_cache_sha256": "c2de9b49ba1100f7a0d8c294a9867fa64fb678373bc640fbe9f4e89231473e71",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 27,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 365.8963500056416,
+              "clip_ms": 84.42953397752717,
+              "feature_ms": 0.10934000601992011,
+              "project_ms": 537.978653999744,
+              "assoc_ms": 3.094443993177265,
+              "post_total_ms": 0.009878975106403232,
+              "total_ms": 1004.2492839857005
+            },
+            "tracked": 37,
+            "valid_depth_fraction": 0.7961328125
+          },
+          {
+            "frame_id": "001080",
+            "noun_cache_sha256": "8d23eea183e2d90988acf67d46a0ff53a5a85a14428a260544e441dc1c091dfc",
+            "objects": 19,
+            "native_timing": {
+              "frame_index": 28,
+              "raw_segments": 14,
+              "filtered_segments": 14,
+              "seg_ms": 476.1446850025095,
+              "clip_ms": 116.88339998363517,
+              "feature_ms": 0.1626719895284623,
+              "project_ms": 656.4471430028789,
+              "assoc_ms": 29.177048010751605,
+              "post_total_ms": 0.015399011317640543,
+              "total_ms": 1310.221775987884
+            },
+            "tracked": 41,
+            "valid_depth_fraction": 0.7351790364583334
+          },
+          {
+            "frame_id": "001120",
+            "noun_cache_sha256": "0341bb0bb2fa4b9eb9b8482549bebd907a043fcb00d271d0623b125cffc8e5fb",
+            "objects": 19,
+            "native_timing": {
+              "frame_index": 29,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 434.9056430219207,
+              "clip_ms": 44.67622298398055,
+              "feature_ms": 0.097746989922598,
+              "project_ms": 239.15968599612825,
+              "assoc_ms": 18.234257993754,
+              "post_total_ms": 0.024447013856843114,
+              "total_ms": 751.4911010221113
+            },
+            "tracked": 41,
+            "valid_depth_fraction": 0.7447233072916667
+          },
+          {
+            "frame_id": "001160",
+            "noun_cache_sha256": "c8b7cbe8bd8df0f8ba087f6ad3bbe9b3e3104af4641eb11edcc7cdef1c9e0dd3",
+            "objects": 20,
+            "native_timing": {
+              "frame_index": 30,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 349.64985799160786,
+              "clip_ms": 89.42165999906138,
+              "feature_ms": 0.12362599954940379,
+              "project_ms": 821.7320590047166,
+              "assoc_ms": 33.68665199377574,
+              "post_total_ms": 0.01137200160883367,
+              "total_ms": 1309.8105399985798
+            },
+            "tracked": 46,
+            "valid_depth_fraction": 0.7411197916666666
+          },
+          {
+            "frame_id": "001200",
+            "noun_cache_sha256": "0c16ebb4a1d9f70705f9a71264c31f315c86c4fc50765d39d73e66e84cff81fe",
+            "objects": 23,
+            "native_timing": {
+              "frame_index": 31,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 323.3951150032226,
+              "clip_ms": 47.70887701306492,
+              "feature_ms": 0.09709599544294178,
+              "project_ms": 322.7782550093252,
+              "assoc_ms": 47.68140101805329,
+              "post_total_ms": 0.015119003364816308,
+              "total_ms": 751.7292789998464
+            },
+            "tracked": 48,
+            "valid_depth_fraction": 0.8169303385416666
+          },
+          {
+            "frame_id": "001240",
+            "noun_cache_sha256": "eab172c8ebd9cf4a11ad83b33c33b2cc0732218d97cb3bf223c418982f09628f",
+            "objects": 24,
+            "native_timing": {
+              "frame_index": 32,
+              "raw_segments": 12,
+              "filtered_segments": 12,
+              "seg_ms": 377.0292269764468,
+              "clip_ms": 105.5451330030337,
+              "feature_ms": 0.1520309888292104,
+              "project_ms": 1408.5404759971425,
+              "assoc_ms": 36.48567097843625,
+              "post_total_ms": 0.013967015547677875,
+              "total_ms": 1943.6205380188767
+            },
+            "tracked": 52,
+            "valid_depth_fraction": 0.764443359375
+          },
+          {
+            "frame_id": "001280",
+            "noun_cache_sha256": "2f5eca8156271dadc5b548ac49ce87b0eaa7ec6e7ee3418c0c829c5ce0f5232a",
+            "objects": 25,
+            "native_timing": {
+              "frame_index": 33,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 466.8466320144944,
+              "clip_ms": 48.844951990759,
+              "feature_ms": 0.09584301733411849,
+              "project_ms": 379.2507739854045,
+              "assoc_ms": 19.534002000000328,
+              "post_total_ms": 5.291900975862518,
+              "total_ms": 936.288850964047
+            },
+            "tracked": 53,
+            "valid_depth_fraction": 0.7437955729166666
+          },
+          {
+            "frame_id": "001320",
+            "noun_cache_sha256": "0d0b2a238460e53932c65f509ac0f4894132f70f29cc0b4c517caa92b44d5ddf",
+            "objects": 25,
+            "native_timing": {
+              "frame_index": 34,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 318.5891489847563,
+              "clip_ms": 78.40728899464011,
+              "feature_ms": 0.10775600094348192,
+              "project_ms": 478.95401701680385,
+              "assoc_ms": 33.66276700398885,
+              "post_total_ms": 0.018474995158612728,
+              "total_ms": 935.7501569902524
+            },
+            "tracked": 54,
+            "valid_depth_fraction": 0.8144498697916667
+          },
+          {
+            "frame_id": "001360",
+            "noun_cache_sha256": "36f16056d54f839156888aa33c7f06fb32d9af4bc010313330aad3440df62e7c",
+            "objects": 27,
+            "native_timing": {
+              "frame_index": 35,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 311.33107500500046,
+              "clip_ms": 59.202872012974694,
+              "feature_ms": 0.09638498886488378,
+              "project_ms": 646.7124729824718,
+              "assoc_ms": 5.742553999880329,
+              "post_total_ms": 0.010660005500540137,
+              "total_ms": 1033.468506007921
+            },
+            "tracked": 56,
+            "valid_depth_fraction": 0.7319010416666667
+          },
+          {
+            "frame_id": "001400",
+            "noun_cache_sha256": "7f086350f182b6efad7291545c625ebd26ab9459ee960620e37d72683ef50ba7",
+            "objects": 27,
+            "native_timing": {
+              "frame_index": 36,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 315.24802398053,
+              "clip_ms": 68.7017040036153,
+              "feature_ms": 0.11439897934906185,
+              "project_ms": 506.93757500266656,
+              "assoc_ms": 22.17499099788256,
+              "post_total_ms": 0.01595102366991341,
+              "total_ms": 927.6729230186902
+            },
+            "tracked": 59,
+            "valid_depth_fraction": 0.8651888020833334
+          },
+          {
+            "frame_id": "001440",
+            "noun_cache_sha256": "948d640ac492a433171a8f3116b182683cd887cf9908da879987f4ef53ca1990",
+            "objects": 27,
+            "native_timing": {
+              "frame_index": 37,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 479.58190701319836,
+              "clip_ms": 161.77251801127568,
+              "feature_ms": 0.13735299580730498,
+              "project_ms": 291.5740929893218,
+              "assoc_ms": 1.2783769925590605,
+              "post_total_ms": 0.00982900382950902,
+              "total_ms": 949.8445999925025
+            },
+            "tracked": 59,
+            "valid_depth_fraction": 0.8422688802083333
+          },
+          {
+            "frame_id": "001480",
+            "noun_cache_sha256": "2f93e21d0f838b2df0c81e257c7d253335566a1bf22c771855bac33b92b51d5a",
+            "objects": 27,
+            "native_timing": {
+              "frame_index": 38,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 381.5921689965762,
+              "clip_ms": 212.48865898814984,
+              "feature_ms": 0.21481100702658296,
+              "project_ms": 763.1547939963639,
+              "assoc_ms": 66.2164910172578,
+              "post_total_ms": 0.008415983757004142,
+              "total_ms": 1445.5214320041705
+            },
+            "tracked": 61,
+            "valid_depth_fraction": 0.8221321614583333
+          },
+          {
+            "frame_id": "001520",
+            "noun_cache_sha256": "2f777cb56154cbf06d9dbf078b8b333a40910313f11bf30c809653efce66e782",
+            "objects": 27,
+            "native_timing": {
+              "frame_index": 39,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 503.837028023554,
+              "clip_ms": 41.16554799838923,
+              "feature_ms": 0.08332901052199304,
+              "project_ms": 283.92714701476507,
+              "assoc_ms": 4.045844019856304,
+              "post_total_ms": 0.02967598265968263,
+              "total_ms": 881.3499669777229
+            },
+            "tracked": 61,
+            "valid_depth_fraction": 0.8158658854166667
+          },
+          {
+            "frame_id": "001560",
+            "noun_cache_sha256": "9b4fc3d709ae7a6a240f30638ad69bb862654049998469a8b1b2a035ae235168",
+            "objects": 27,
+            "native_timing": {
+              "frame_index": 40,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 389.64284397661686,
+              "clip_ms": 54.09559200052172,
+              "feature_ms": 0.11674399138428271,
+              "project_ms": 432.6115649892017,
+              "assoc_ms": 27.16577801038511,
+              "post_total_ms": 0.008917006198316813,
+              "total_ms": 914.4592270022258
+            },
+            "tracked": 61,
+            "valid_depth_fraction": 0.8078450520833333
+          },
+          {
+            "frame_id": "001600",
+            "noun_cache_sha256": "952e4fd86ec60f4ff7e86e72fa486d67b7fea1ccdbf45184c3fc4dc1c640e75a",
+            "objects": 28,
+            "native_timing": {
+              "frame_index": 41,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 346.734816004755,
+              "clip_ms": 118.12187498435378,
+              "feature_ms": 0.1415410079061985,
+              "project_ms": 578.0355839815456,
+              "assoc_ms": 18.319922004593536,
+              "post_total_ms": 4.004015994723886,
+              "total_ms": 1084.2982239846606
+            },
+            "tracked": 63,
+            "valid_depth_fraction": 0.73275390625
+          },
+          {
+            "frame_id": "001640",
+            "noun_cache_sha256": "4001b32ecbd903c02574909fadc4390742a809d35955ce2eae3ec137f5ef34c5",
+            "objects": 29,
+            "native_timing": {
+              "frame_index": 42,
+              "raw_segments": 10,
+              "filtered_segments": 10,
+              "seg_ms": 388.1079349957872,
+              "clip_ms": 90.75654798652977,
+              "feature_ms": 0.13788402429781854,
+              "project_ms": 783.9053350035101,
+              "assoc_ms": 8.784987992839888,
+              "post_total_ms": 0.016642006812617183,
+              "total_ms": 1287.0688380207866
+            },
+            "tracked": 67,
+            "valid_depth_fraction": 0.731865234375
+          },
+          {
+            "frame_id": "001680",
+            "noun_cache_sha256": "e730af34b1d09be5d6662c31cc7798c1b25c9fc1e69f8cbe5620f0c568a897e7",
+            "objects": 30,
+            "native_timing": {
+              "frame_index": 43,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 331.1110109789297,
+              "clip_ms": 77.0869380212389,
+              "feature_ms": 0.12266400153748691,
+              "project_ms": 951.1709990038071,
+              "assoc_ms": 35.37435398902744,
+              "post_total_ms": 0.025918998289853334,
+              "total_ms": 1410.4443800169975
+            },
+            "tracked": 71,
+            "valid_depth_fraction": 0.7837565104166667
+          },
+          {
+            "frame_id": "001720",
+            "noun_cache_sha256": "9bf14152a8ebdd52a9b3369d4fcc5468ac9ab51bd6a6c643cca566754b1f1e68",
+            "objects": 30,
+            "native_timing": {
+              "frame_index": 44,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 381.079849001253,
+              "clip_ms": 59.85297201550566,
+              "feature_ms": 0.12093200348317623,
+              "project_ms": 659.5039110106882,
+              "assoc_ms": 28.495220991317183,
+              "post_total_ms": 0.017403974197804928,
+              "total_ms": 1140.9544489870314
+            },
+            "tracked": 72,
+            "valid_depth_fraction": 0.7523860677083334
+          },
+          {
+            "frame_id": "001760",
+            "noun_cache_sha256": "549ae18a1908281247f85e7386f1f9d6b0f9dad68549614100e669973ae49f05",
+            "objects": 30,
+            "native_timing": {
+              "frame_index": 45,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 319.6379800210707,
+              "clip_ms": 63.30055199214257,
+              "feature_ms": 0.10346801718696952,
+              "project_ms": 470.28648099512793,
+              "assoc_ms": 21.971181995468214,
+              "post_total_ms": 0.016261008568108082,
+              "total_ms": 899.4035070063546
+            },
+            "tracked": 74,
+            "valid_depth_fraction": 0.8426106770833334
+          },
+          {
+            "frame_id": "001800",
+            "noun_cache_sha256": "d3b25489e70491ff4f9e695c20ca23ff884fd13d2fea52fcb5ebe5bac25b46a3",
+            "objects": 31,
+            "native_timing": {
+              "frame_index": 46,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 340.99062997847795,
+              "clip_ms": 38.89900801004842,
+              "feature_ms": 0.09816797683015466,
+              "project_ms": 455.2808100124821,
+              "assoc_ms": 9.962510986952111,
+              "post_total_ms": 4.413078015204519,
+              "total_ms": 868.5267540276982
+            },
+            "tracked": 75,
+            "valid_depth_fraction": 0.87505859375
+          },
+          {
+            "frame_id": "001840",
+            "noun_cache_sha256": "914c9cd27cf528e2f38b5eca7ea9c8f89884705b45e63bf417061c6a484b9195",
+            "objects": 31,
+            "native_timing": {
+              "frame_index": 47,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 376.2515929993242,
+              "clip_ms": 88.83748998050578,
+              "feature_ms": 0.11823701788671315,
+              "project_ms": 551.4209409884643,
+              "assoc_ms": 25.498453993350267,
+              "post_total_ms": 0.00995901064015925,
+              "total_ms": 1058.1864020205103
+            },
+            "tracked": 78,
+            "valid_depth_fraction": 0.7927180989583333
+          },
+          {
+            "frame_id": "001880",
+            "noun_cache_sha256": "79c596cb46e47c8d8f88677113b2d970bb1f1baaf27c10f66ccabdd7fb79d6ec",
+            "objects": 31,
+            "native_timing": {
+              "frame_index": 48,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 315.62621201737784,
+              "clip_ms": 74.44289300474338,
+              "feature_ms": 0.13474799925461411,
+              "project_ms": 551.2319269764703,
+              "assoc_ms": 8.264361997134984,
+              "post_total_ms": 0.019758008420467377,
+              "total_ms": 967.8253910096828
+            },
+            "tracked": 78,
+            "valid_depth_fraction": 0.762431640625
+          },
+          {
+            "frame_id": "001920",
+            "noun_cache_sha256": "c4a8d7dea19582e8595e9fa930ef40a3014a9260dfe2c628a9ea2ea6586e4910",
+            "objects": 31,
+            "native_timing": {
+              "frame_index": 49,
+              "raw_segments": 13,
+              "filtered_segments": 13,
+              "seg_ms": 405.91949998633936,
+              "clip_ms": 128.16750101046637,
+              "feature_ms": 0.16143900575116277,
+              "project_ms": 602.5858409993816,
+              "assoc_ms": 15.43591998051852,
+              "post_total_ms": 0.014146993635222316,
+              "total_ms": 1171.185572980903
+            },
+            "tracked": 79,
+            "valid_depth_fraction": 0.7106315104166666
+          },
+          {
+            "frame_id": "001960",
+            "noun_cache_sha256": "1b8b953cdd6b67ea6b38501c88aafc7cfe65d35ad4d97ab72157a13e38ed4f26",
+            "objects": 32,
+            "native_timing": {
+              "frame_index": 50,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 357.9950249986723,
+              "clip_ms": 84.33139801491052,
+              "feature_ms": 0.1366520009469241,
+              "project_ms": 447.01547801378183,
+              "assoc_ms": 8.13566500437446,
+              "post_total_ms": 3.6865959991700947,
+              "total_ms": 920.1484909863211
+            },
+            "tracked": 83,
+            "valid_depth_fraction": 0.7670540364583334
+          },
+          {
+            "frame_id": "002000",
+            "noun_cache_sha256": "79367cb7caf16a8f77aecad7e6d3d8582ba63096b2bd2d14f285d0608e69b014",
+            "objects": 34,
+            "native_timing": {
+              "frame_index": 51,
+              "raw_segments": 13,
+              "filtered_segments": 13,
+              "seg_ms": 429.40726401866414,
+              "clip_ms": 110.82610898301937,
+              "feature_ms": 0.16147899441421032,
+              "project_ms": 614.8579069995321,
+              "assoc_ms": 26.804371998878196,
+              "post_total_ms": 0.021070009097456932,
+              "total_ms": 1202.0523770188447
+            },
+            "tracked": 89,
+            "valid_depth_fraction": 0.7354622395833333
+          },
+          {
+            "frame_id": "002040",
+            "noun_cache_sha256": "5fbc589549ccc8ca67c378a662b3d076ab02ba822cdd622224743e342be87a10",
+            "objects": 37,
+            "native_timing": {
+              "frame_index": 52,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 427.96280299080536,
+              "clip_ms": 90.62124701449648,
+              "feature_ms": 0.1770289964042604,
+              "project_ms": 520.9027829987463,
+              "assoc_ms": 256.52379301027395,
+              "post_total_ms": 0.027081987354904413,
+              "total_ms": 1313.0538719997276
+            },
+            "tracked": 90,
+            "valid_depth_fraction": 0.793212890625
+          },
+          {
+            "frame_id": "002080",
+            "noun_cache_sha256": "30086abc608a15685101fb7c53aa75c3376180f86698ba37a8492354587abc41",
+            "objects": 38,
+            "native_timing": {
+              "frame_index": 53,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 396.1377590021584,
+              "clip_ms": 73.05237502441742,
+              "feature_ms": 0.11229500523768365,
+              "project_ms": 457.4745200225152,
+              "assoc_ms": 10.563561983872205,
+              "post_total_ms": 4.725567006971687,
+              "total_ms": 966.9630810094532
+            },
+            "tracked": 93,
+            "valid_depth_fraction": 0.7798111979166666
+          },
+          {
+            "frame_id": "002120",
+            "noun_cache_sha256": "1d0f3192288b823aeb442e46bc0101cd0d5b058a146505ea3d71d3c2a048b87a",
+            "objects": 41,
+            "native_timing": {
+              "frame_index": 54,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 319.75502698333,
+              "clip_ms": 55.07166500319727,
+              "feature_ms": 0.11608301429077983,
+              "project_ms": 386.87068500439636,
+              "assoc_ms": 3.9236710290424526,
+              "post_total_ms": 0.018315011402592063,
+              "total_ms": 786.4027420000639
+            },
+            "tracked": 94,
+            "valid_depth_fraction": 0.6423111979166667
+          },
+          {
+            "frame_id": "002160",
+            "noun_cache_sha256": "c9bcd526c816875875b69f68e9ac3999fc22e66658bc91ce0b5e01dfb91798eb",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 55,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 354.60269899340346,
+              "clip_ms": 49.167627992574126,
+              "feature_ms": 0.09322797995992005,
+              "project_ms": 386.14917200175114,
+              "assoc_ms": 3.4906519867945462,
+              "post_total_ms": 0.010610994650050998,
+              "total_ms": 809.5683040155564
+            },
+            "tracked": 94,
+            "valid_depth_fraction": 0.7053059895833333
+          },
+          {
+            "frame_id": "002200",
+            "noun_cache_sha256": "2013956156277993d6088c9d239e5161fb408ad25f09700b09e211f9c91af206",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 56,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 365.5670559965074,
+              "clip_ms": 87.1929670101963,
+              "feature_ms": 0.16069802222773433,
+              "project_ms": 499.1172500012908,
+              "assoc_ms": 4.362131003290415,
+              "post_total_ms": 0.009028008207678795,
+              "total_ms": 978.7797240132932
+            },
+            "tracked": 95,
+            "valid_depth_fraction": 0.7720638020833334
+          },
+          {
+            "frame_id": "002240",
+            "noun_cache_sha256": "853c2a593c89146a7bf6e7213cfa16aee6e8bbe2e3bdd5512249b53e00fd09e8",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 57,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 330.89290000498295,
+              "clip_ms": 85.64471200224943,
+              "feature_ms": 0.13490801211446524,
+              "project_ms": 691.0261970188003,
+              "assoc_ms": 4.823043011128902,
+              "post_total_ms": 2.7011710044462234,
+              "total_ms": 1131.171382003231
+            },
+            "tracked": 95,
+            "valid_depth_fraction": 0.7467057291666667
+          },
+          {
+            "frame_id": "002280",
+            "noun_cache_sha256": "480f226b5eb008ab291dd6736309804bdbff07884267a04a70b7676eb77ec98b",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 58,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 350.91508299228735,
+              "clip_ms": 47.75946700829081,
+              "feature_ms": 0.09176498861052096,
+              "project_ms": 424.8300509934779,
+              "assoc_ms": 46.816393005428836,
+              "post_total_ms": 0.012555014109238982,
+              "total_ms": 883.9715560316108
+            },
+            "tracked": 97,
+            "valid_depth_fraction": 0.7252669270833333
+          },
+          {
+            "frame_id": "002320",
+            "noun_cache_sha256": "8f6e9891e4bba540deeea084b35eae58241b3fbd228c899fde72e03ab81ecd37",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 59,
+              "raw_segments": 7,
+              "filtered_segments": 7,
+              "seg_ms": 351.8275749811437,
+              "clip_ms": 68.11509499675594,
+              "feature_ms": 0.11073201312683523,
+              "project_ms": 497.4478390067816,
+              "assoc_ms": 27.8263509972021,
+              "post_total_ms": 0.011542986612766981,
+              "total_ms": 977.3455359973013
+            },
+            "tracked": 100,
+            "valid_depth_fraction": 0.736826171875
+          },
+          {
+            "frame_id": "002360",
+            "noun_cache_sha256": "9634fe4f62d2d72fe6b080df6013d5e37e1147dfd7c9d0d3f31714b9b5a4b6b0",
+            "objects": 43,
+            "native_timing": {
+              "frame_index": 60,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 314.0187190147117,
+              "clip_ms": 57.024658017326146,
+              "feature_ms": 0.13629099703393877,
+              "project_ms": 571.5692040103022,
+              "assoc_ms": 6.546112010255456,
+              "post_total_ms": 3.2736370048951358,
+              "total_ms": 967.0658940158319
+            },
+            "tracked": 104,
+            "valid_depth_fraction": 0.7582649739583334
+          }
+        ],
+        "manifest_sha256": "5959b53975f375d8e42fbae2902e214fcc13e2fb8855f79da03f544c52dac291",
+        "shared_GPT_request_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+        "new_GPT_calls": 0,
+        "Qwen_calls": 0,
+        "GT_in_construction": false,
+        "baseline": "ThinkGraphs_GPT_tags_without_API_agents",
+        "official_full_pipeline_reproduced": false,
+        "official_source_commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+        "optional_SAM2_cuda_postprocessing": false,
+        "attention_compatibility": {
+          "native_pytorch_attention_cpu_gpu_max_abs_error": 5.960464477539063e-08,
+          "architecture_changed": false,
+          "weights_changed": false
+        },
+        "seconds": 63.075720043008914,
+        "nodes": 43,
+        "tracking_settings": {
+          "use_dbscan_filtering": true,
+          "dbscan_eps": 0.05,
+          "dbscan_min_samples": 7,
+          "adaptive_dbscan": false,
+          "dbscan_eps_scale": [
+            0.5,
+            2.0
+          ],
+          "dbscan_voxel_size": 0.025,
+          "use_cuml_dbscan": true,
+          "max_projection_pixels": 0,
+          "subtract_contained_masks": true,
+          "erode_masks": true,
+          "erode_kernel_size": 5,
+          "erode_min_area": 100,
+          "min_points_after_filter": 30,
+          "min_cluster_ratio": 0.7,
+          "openvox_voxel_size": 0.04,
+          "openvox_max_ids_per_voxel": 3,
+          "openvox_geometry_weight": 0.8,
+          "openvox_feature_weight": 0.2,
+          "openvox_pro_threshold": 0.4,
+          "openvox_lazy_reuse_threshold": 0.85,
+          "openvox_lazy_max_children": 6,
+          "tracklet_mask_history": 5,
+          "temporal_window": 999.0,
+          "max_points_per_object": 200000,
+          "min_segment_area": 30,
+          "min_segment_area_ratio": 0.0004,
+          "min_segment_confidence": 0.1,
+          "min_bbox_volume": 0.0,
+          "feature_alpha": 0.1,
+          "feature_min_area_ratio": 0.3,
+          "clip_history_size": 32,
+          "clip_embedding_stride": 1,
+          "semantic_embed_pool_mode": "text_guided",
+          "semantic_embed_topk": 1,
+          "semantic_embed_hybrid_alpha": 0.5,
+          "track_confirm_min_matches": 0
+        },
+        "adaptation_source_sha256": "2278277ca7f83910ad7499dddf23ccf422209622c708467ac536317ac24abbe0",
+        "tracked_objects": 104,
+        "confirmation_matches_strict_greater_than": 1,
+        "track_match_counts": {
+          "track_0": 3,
+          "track_1": 14,
+          "track_2": 14,
+          "track_3": 1,
+          "track_4": 4,
+          "track_5": 39,
+          "track_6": 8,
+          "track_7": 3,
+          "track_8": 1,
+          "track_9": 1,
+          "track_10": 9,
+          "track_11": 1,
+          "track_12": 10,
+          "track_13": 13,
+          "track_14": 6,
+          "track_15": 13,
+          "track_16": 2,
+          "track_17": 1,
+          "track_18": 7,
+          "track_19": 1,
+          "track_20": 2,
+          "track_21": 3,
+          "track_22": 1,
+          "track_23": 1,
+          "track_24": 1,
+          "track_25": 1,
+          "track_26": 1,
+          "track_27": 10,
+          "track_28": 11,
+          "track_29": 2,
+          "track_30": 1,
+          "track_31": 3,
+          "track_32": 3,
+          "track_33": 1,
+          "track_34": 1,
+          "track_35": 3,
+          "track_36": 1,
+          "track_37": 1,
+          "track_38": 5,
+          "track_39": 1,
+          "track_40": 1,
+          "track_41": 5,
+          "track_42": 1,
+          "track_43": 1,
+          "track_44": 11,
+          "track_45": 3,
+          "track_46": 3,
+          "track_47": 1,
+          "track_48": 1,
+          "track_49": 4,
+          "track_50": 1,
+          "track_51": 1,
+          "track_52": 1,
+          "track_53": 1,
+          "track_54": 2,
+          "track_55": 1,
+          "track_56": 1,
+          "track_57": 1,
+          "track_58": 1,
+          "track_59": 1,
+          "track_60": 1,
+          "track_61": 4,
+          "track_62": 1,
+          "track_63": 2,
+          "track_64": 1,
+          "track_65": 1,
+          "track_66": 1,
+          "track_67": 1,
+          "track_68": 1,
+          "track_69": 1,
+          "track_70": 1,
+          "track_71": 1,
+          "track_72": 2,
+          "track_73": 1,
+          "track_74": 1,
+          "track_75": 1,
+          "track_76": 1,
+          "track_77": 1,
+          "track_78": 1,
+          "track_79": 2,
+          "track_80": 2,
+          "track_81": 1,
+          "track_82": 1,
+          "track_83": 3,
+          "track_84": 3,
+          "track_85": 2,
+          "track_86": 1,
+          "track_87": 1,
+          "track_88": 1,
+          "track_89": 2,
+          "track_90": 2,
+          "track_91": 2,
+          "track_92": 2,
+          "track_93": 2,
+          "track_94": 1,
+          "track_95": 1,
+          "track_96": 1,
+          "track_97": 1,
+          "track_98": 1,
+          "track_99": 2,
+          "track_100": 1,
+          "track_101": 1,
+          "track_102": 1,
+          "track_103": 1
+        }
+      }
+    },
+    {
+      "scene_id": "scene0015_00",
+      "processed_scene": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_confirm_gt0/scene0015_00",
+      "metrics": {
+        "all_ap": 0.30255366278190166,
+        "all_ap_50%": 0.4119554240986909,
+        "all_ap_25%": 0.5860814320378687,
+        "classes": {
+          "object": {
+            "ap": 0.30255366278190166,
+            "ap50%": 0.4119554240986909,
+            "ap25%": 0.5860814320378687
+          }
+        }
+      },
+      "predicted_objects": 43,
+      "eligible_GT_instances": 39,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3001,
+          "vertices": 1844,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "15",
+            "label": "chair",
+            "point_IoU": 0.868763557483731
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3002,
+          "vertices": 712,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "18",
+            "label": "chair",
+            "point_IoU": 0.8862359550561798
+          }
+        },
+        {
+          "gt_id": 2,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3003,
+          "vertices": 1391,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "window",
+            "point_IoU": 0.46702127659574466
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3004,
+          "vertices": 1041,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "window",
+            "point_IoU": 0.37909686817188637
+          }
+        },
+        {
+          "gt_id": 6,
+          "raw_label": "window",
+          "category_id": 16,
+          "encoded_id": 3007,
+          "vertices": 1536,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "window",
+            "point_IoU": 0.5173459077130347
+          }
+        },
+        {
+          "gt_id": 7,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3008,
+          "vertices": 1006,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "window",
+            "point_IoU": 0.33883462445267765
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "windowsill",
+          "category_id": 141,
+          "encoded_id": 3011,
+          "vertices": 1483,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 1914,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 588,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3017,
+          "vertices": 1969,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "10",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 17,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3018,
+          "vertices": 1924,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "16",
+            "label": "chair",
+            "point_IoU": 0.9849272349272349
+          }
+        },
+        {
+          "gt_id": 18,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3019,
+          "vertices": 1449,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "26",
+            "label": "chair",
+            "point_IoU": 0.7286173633440515
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3020,
+          "vertices": 1691,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "39",
+            "label": "chair",
+            "point_IoU": 0.9550561797752809
+          }
+        },
+        {
+          "gt_id": 20,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3021,
+          "vertices": 1492,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "22",
+            "label": "chair",
+            "point_IoU": 0.8981233243967829
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3022,
+          "vertices": 1430,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "36",
+            "label": "chair",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3023,
+          "vertices": 788,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "21",
+            "label": "chair",
+            "point_IoU": 0.8427807486631016
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3024,
+          "vertices": 1911,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 24,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3025,
+          "vertices": 1697,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "25",
+            "label": "chair",
+            "point_IoU": 0.8307193077339102
+          }
+        },
+        {
+          "gt_id": 25,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3026,
+          "vertices": 1280,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 26,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3027,
+          "vertices": 1950,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "13",
+            "label": "chair",
+            "point_IoU": 0.86
+          }
+        },
+        {
+          "gt_id": 27,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3028,
+          "vertices": 1453,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "chair",
+            "point_IoU": 0.9472277889111557
+          }
+        },
+        {
+          "gt_id": 28,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3029,
+          "vertices": 1252,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 29,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3030,
+          "vertices": 908,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "38",
+            "label": "chair",
+            "point_IoU": 0.8846560846560847
+          }
+        },
+        {
+          "gt_id": 30,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3031,
+          "vertices": 1105,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "20",
+            "label": "chair",
+            "point_IoU": 0.8389140271493213
+          }
+        },
+        {
+          "gt_id": 31,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3032,
+          "vertices": 3161,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "23",
+            "label": "table",
+            "point_IoU": 0.8427712749130022
+          }
+        },
+        {
+          "gt_id": 32,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3033,
+          "vertices": 4679,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "17",
+            "label": "table",
+            "point_IoU": 0.9087411840136781
+          }
+        },
+        {
+          "gt_id": 33,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3034,
+          "vertices": 3290,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "table",
+            "point_IoU": 0.8140564471499724
+          }
+        },
+        {
+          "gt_id": 34,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3035,
+          "vertices": 4653,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "9",
+            "label": "table",
+            "point_IoU": 0.8612570948076519
+          }
+        },
+        {
+          "gt_id": 35,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3036,
+          "vertices": 4078,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "27",
+            "label": "desk",
+            "point_IoU": 0.7109356305336205
+          }
+        },
+        {
+          "gt_id": 36,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3037,
+          "vertices": 2525,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "40",
+            "label": "table",
+            "point_IoU": 0.7900313971742543
+          }
+        },
+        {
+          "gt_id": 37,
+          "raw_label": "table",
+          "category_id": 4,
+          "encoded_id": 3038,
+          "vertices": 3420,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "24",
+            "label": "table",
+            "point_IoU": 0.9315789473684211
+          }
+        },
+        {
+          "gt_id": 40,
+          "raw_label": "whiteboard",
+          "category_id": 52,
+          "encoded_id": 3041,
+          "vertices": 7566,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 44,
+          "raw_label": "backpack",
+          "category_id": 48,
+          "encoded_id": 3045,
+          "vertices": 645,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "28",
+            "label": "backpack",
+            "point_IoU": 0.8318452380952381
+          }
+        },
+        {
+          "gt_id": 45,
+          "raw_label": "object",
+          "category_id": 1163,
+          "encoded_id": 3046,
+          "vertices": 1698,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "radiator",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 47,
+          "raw_label": "whiteboard",
+          "category_id": 52,
+          "encoded_id": 3048,
+          "vertices": 10720,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "43",
+            "label": "whiteboard",
+            "point_IoU": 0.4597555454956994
+          }
+        },
+        {
+          "gt_id": 49,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3050,
+          "vertices": 2167,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "chair",
+            "point_IoU": 0.4243924392439244
+          }
+        },
+        {
+          "gt_id": 51,
+          "raw_label": "water bottle",
+          "category_id": 392,
+          "encoded_id": 3052,
+          "vertices": 183,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "11",
+            "label": "bottle cup",
+            "point_IoU": 1.0
+          }
+        },
+        {
+          "gt_id": 52,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3053,
+          "vertices": 1316,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "41",
+            "label": "chair",
+            "point_IoU": 0.979483282674772
+          }
+        },
+        {
+          "gt_id": 53,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3054,
+          "vertices": 1979,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "chair",
+            "point_IoU": 0.28802425467407783
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "1",
+          "label": "radiator",
+          "confidence": 0.8987665772438049,
+          "vertices": 1092
+        },
+        {
+          "node_id": "2",
+          "label": "whiteboard",
+          "confidence": 0.8755743503570557,
+          "vertices": 356
+        },
+        {
+          "node_id": "3",
+          "label": "window",
+          "confidence": 0.8721297383308411,
+          "vertices": 2746
+        },
+        {
+          "node_id": "4",
+          "label": "chair",
+          "confidence": 0.8080672025680542,
+          "vertices": 1462
+        },
+        {
+          "node_id": "5",
+          "label": "table",
+          "confidence": 0.7058864235877991,
+          "vertices": 3266
+        },
+        {
+          "node_id": "6",
+          "label": "chair",
+          "confidence": 0.6082450747489929,
+          "vertices": 998
+        },
+        {
+          "node_id": "7",
+          "label": "window",
+          "confidence": 0.6106275916099548,
+          "vertices": 2969
+        },
+        {
+          "node_id": "8",
+          "label": "chair",
+          "confidence": 0.5671576261520386,
+          "vertices": 570
+        },
+        {
+          "node_id": "9",
+          "label": "table",
+          "confidence": 0.6840530037879944,
+          "vertices": 4201
+        },
+        {
+          "node_id": "10",
+          "label": "chair",
+          "confidence": 0.6705003976821899,
+          "vertices": 1969
+        },
+        {
+          "node_id": "11",
+          "label": "bottle cup",
+          "confidence": 0.7500038743019104,
+          "vertices": 183
+        },
+        {
+          "node_id": "12",
+          "label": "chair",
+          "confidence": 0.6173973083496094,
+          "vertices": 0
+        },
+        {
+          "node_id": "13",
+          "label": "chair",
+          "confidence": 0.6066150069236755,
+          "vertices": 1677
+        },
+        {
+          "node_id": "14",
+          "label": "window",
+          "confidence": 0.5473431348800659,
+          "vertices": 0
+        },
+        {
+          "node_id": "15",
+          "label": "chair",
+          "confidence": 0.6436653137207031,
+          "vertices": 1602
+        },
+        {
+          "node_id": "16",
+          "label": "chair",
+          "confidence": 0.6137576103210449,
+          "vertices": 1895
+        },
+        {
+          "node_id": "17",
+          "label": "table",
+          "confidence": 0.6484663486480713,
+          "vertices": 4252
+        },
+        {
+          "node_id": "18",
+          "label": "chair",
+          "confidence": 0.4873836636543274,
+          "vertices": 631
+        },
+        {
+          "node_id": "19",
+          "label": "chair",
+          "confidence": 0.5383158326148987,
+          "vertices": 0
+        },
+        {
+          "node_id": "20",
+          "label": "chair",
+          "confidence": 0.5566104650497437,
+          "vertices": 927
+        },
+        {
+          "node_id": "21",
+          "label": "chair",
+          "confidence": 0.6894102096557617,
+          "vertices": 935
+        },
+        {
+          "node_id": "22",
+          "label": "chair",
+          "confidence": 0.6503562331199646,
+          "vertices": 1340
+        },
+        {
+          "node_id": "23",
+          "label": "table",
+          "confidence": 0.5914872884750366,
+          "vertices": 2664
+        },
+        {
+          "node_id": "24",
+          "label": "table",
+          "confidence": 0.7371581792831421,
+          "vertices": 3186
+        },
+        {
+          "node_id": "25",
+          "label": "chair",
+          "confidence": 0.6410853862762451,
+          "vertices": 1688
+        },
+        {
+          "node_id": "26",
+          "label": "chair",
+          "confidence": 0.7838230133056641,
+          "vertices": 1239
+        },
+        {
+          "node_id": "27",
+          "label": "desk",
+          "confidence": 0.7367795705795288,
+          "vertices": 3072
+        },
+        {
+          "node_id": "28",
+          "label": "backpack",
+          "confidence": 0.8264318704605103,
+          "vertices": 586
+        },
+        {
+          "node_id": "29",
+          "label": "paper document",
+          "confidence": 0.8895288109779358,
+          "vertices": 0
+        },
+        {
+          "node_id": "30",
+          "label": "whiteboard eraser",
+          "confidence": 0.7360212802886963,
+          "vertices": 224
+        },
+        {
+          "node_id": "31",
+          "label": "electrical outlet",
+          "confidence": 0.7839884757995605,
+          "vertices": 0
+        },
+        {
+          "node_id": "32",
+          "label": "disposable cup",
+          "confidence": 0.9339146018028259,
+          "vertices": 0
+        },
+        {
+          "node_id": "33",
+          "label": "chair",
+          "confidence": 0.44733956456184387,
+          "vertices": 0
+        },
+        {
+          "node_id": "34",
+          "label": "chair",
+          "confidence": 0.41905349493026733,
+          "vertices": 0
+        },
+        {
+          "node_id": "35",
+          "label": "heater vent",
+          "confidence": 0.7750945687294006,
+          "vertices": 1228
+        },
+        {
+          "node_id": "36",
+          "label": "chair",
+          "confidence": 0.5116784572601318,
+          "vertices": 1430
+        },
+        {
+          "node_id": "37",
+          "label": "electrical outlet",
+          "confidence": 0.8125700354576111,
+          "vertices": 0
+        },
+        {
+          "node_id": "38",
+          "label": "chair",
+          "confidence": 0.5986642241477966,
+          "vertices": 873
+        },
+        {
+          "node_id": "39",
+          "label": "chair",
+          "confidence": 0.6858443021774292,
+          "vertices": 1615
+        },
+        {
+          "node_id": "40",
+          "label": "table",
+          "confidence": 0.7531036734580994,
+          "vertices": 2036
+        },
+        {
+          "node_id": "41",
+          "label": "chair",
+          "confidence": 0.5968444347381592,
+          "vertices": 1289
+        },
+        {
+          "node_id": "42",
+          "label": "whiteboard",
+          "confidence": 0.848846971988678,
+          "vertices": 2006
+        },
+        {
+          "node_id": "43",
+          "label": "whiteboard",
+          "confidence": 0.86200350522995,
+          "vertices": 5403
+        }
+      ],
+      "graph_sha256": "2b9f6a2ac4a506e5649a5be31e3edc8c32d237b813b94efc7400ff3ada853da2",
+      "prediction_cloud": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_confirm_gt0/scene0015_00/instance_cloud_thinkgraphs.ply",
+      "prediction_cloud_sha256": "a6567b01963de801aafebc71abfbed420d9a45af0ee85968fff1cb7404176a4d",
+      "GT_hashes": {
+        "mesh_sha256": "a09877f8a75dd7655e229b3457ad9b7d3c5b3998f317309ca42e86defcb61002",
+        "segments_sha256": "c27ae1ace57348ce92b0449f5c513e7e75f3e133ad4d7e1ddb0c544b65f60624",
+        "aggregation_sha256": "76dacdf1f008d549442cd3c4757b5df21d35eea698f570399d8002de48ed540b",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 0.3011295062786177,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "baseline_variant": "ThinkGraphs_GPT_tags_without_API_agents",
+      "inference_receipt": {
+        "scene": "scene0015_00",
+        "complete": true,
+        "diagnostic_smoke": false,
+        "frames": [
+          {
+            "frame_id": "000000",
+            "noun_cache_sha256": "b35d23a785eaf3ca136267c42ea86d7629c0f38f87b49158b80fccff8a56ce61",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 1,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 361.52112600393593,
+              "clip_ms": 53.197844012174755,
+              "feature_ms": 0.16251098713837564,
+              "project_ms": 423.6423120019026,
+              "assoc_ms": 4.754431982291862,
+              "post_total_ms": 0.0018339778762310743,
+              "total_ms": 848.6399189569056
+            },
+            "tracked": 5,
+            "valid_depth_fraction": 0.9650520833333334
+          },
+          {
+            "frame_id": "000040",
+            "noun_cache_sha256": "0a828daa6f4f3454f49dd52acdfcec92727458d9763345e013a5ea2486afd2a6",
+            "objects": 3,
+            "native_timing": {
+              "frame_index": 2,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 355.9994109964464,
+              "clip_ms": 79.71310100401752,
+              "feature_ms": 0.1662680006120354,
+              "project_ms": 594.7218630171847,
+              "assoc_ms": 25.419563986361027,
+              "post_total_ms": 0.013306009350344539,
+              "total_ms": 1062.2003079915885
+            },
+            "tracked": 7,
+            "valid_depth_fraction": 0.9737630208333333
+          },
+          {
+            "frame_id": "000080",
+            "noun_cache_sha256": "56ade15a7b4bf59cd5c44d3f21d52c7171f6ea7a22edd85a1b66aad7cee7b560",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 3,
+              "raw_segments": 11,
+              "filtered_segments": 11,
+              "seg_ms": 353.9903810014948,
+              "clip_ms": 98.55773899471387,
+              "feature_ms": 0.14960599946789443,
+              "project_ms": 790.7598429883365,
+              "assoc_ms": 21.537410997552797,
+              "post_total_ms": 0.027031986974179745,
+              "total_ms": 1278.4650789981242
+            },
+            "tracked": 11,
+            "valid_depth_fraction": 0.9513509114583333
+          },
+          {
+            "frame_id": "000120",
+            "noun_cache_sha256": "df4dc1175618688086429dfb4d46bda441cf266652f4c175599df867cf3b2b48",
+            "objects": 8,
+            "native_timing": {
+              "frame_index": 4,
+              "raw_segments": 18,
+              "filtered_segments": 18,
+              "seg_ms": 468.48182202666067,
+              "clip_ms": 155.98102597869,
+              "feature_ms": 0.20080400281585753,
+              "project_ms": 804.194730008021,
+              "assoc_ms": 6.141197023680434,
+              "post_total_ms": 0.01936699845828116,
+              "total_ms": 1451.985336985672
+            },
+            "tracked": 18,
+            "valid_depth_fraction": 0.9480533854166666
+          },
+          {
+            "frame_id": "000160",
+            "noun_cache_sha256": "102a951176dbc0d1480c4990dc7397a9b751f07cfd9379ba43642d036d7f974a",
+            "objects": 11,
+            "native_timing": {
+              "frame_index": 5,
+              "raw_segments": 19,
+              "filtered_segments": 19,
+              "seg_ms": 434.8782890010625,
+              "clip_ms": 230.8867220126558,
+              "feature_ms": 0.23377800243906677,
+              "project_ms": 667.6175210159272,
+              "assoc_ms": 14.635186991654336,
+              "post_total_ms": 0.026039982913061976,
+              "total_ms": 1373.2726149901282
+            },
+            "tracked": 22,
+            "valid_depth_fraction": 0.9472884114583333
+          },
+          {
+            "frame_id": "000200",
+            "noun_cache_sha256": "b8bac49d648249fd3335f88aa9684e815143dde1298fe33f6476942ea2b90cdc",
+            "objects": 14,
+            "native_timing": {
+              "frame_index": 6,
+              "raw_segments": 22,
+              "filtered_segments": 22,
+              "seg_ms": 483.80037798779085,
+              "clip_ms": 167.34696499770507,
+              "feature_ms": 0.22398901637643576,
+              "project_ms": 746.0697359929327,
+              "assoc_ms": 18.28510398627259,
+              "post_total_ms": 0.049694994231685996,
+              "total_ms": 1488.1608249852434
+            },
+            "tracked": 25,
+            "valid_depth_fraction": 0.917138671875
+          },
+          {
+            "frame_id": "000240",
+            "noun_cache_sha256": "5fbd0b90bb23d26e11b785adc4c6dc8ec753d560e9eb4df39045c4ed634c39c3",
+            "objects": 15,
+            "native_timing": {
+              "frame_index": 7,
+              "raw_segments": 15,
+              "filtered_segments": 15,
+              "seg_ms": 385.41281400830485,
+              "clip_ms": 110.79033400164917,
+              "feature_ms": 0.18744898261502385,
+              "project_ms": 559.5611140015535,
+              "assoc_ms": 25.2153399924282,
+              "post_total_ms": 0.04207101301290095,
+              "total_ms": 1101.6649910015985
+            },
+            "tracked": 25,
+            "valid_depth_fraction": 0.9540201822916666
+          },
+          {
+            "frame_id": "000280",
+            "noun_cache_sha256": "47a62fa11872938d10620bef13299e857eea8d7a458ddb3ef3810b3c9218cb74",
+            "objects": 15,
+            "native_timing": {
+              "frame_index": 8,
+              "raw_segments": 15,
+              "filtered_segments": 15,
+              "seg_ms": 393.9061059791129,
+              "clip_ms": 197.16658000834286,
+              "feature_ms": 0.3848769993055612,
+              "project_ms": 718.5462759807706,
+              "assoc_ms": 4.687833978096023,
+              "post_total_ms": 4.240528010996059,
+              "total_ms": 1334.8267580149695
+            },
+            "tracked": 29,
+            "valid_depth_fraction": 0.9231966145833334
+          },
+          {
+            "frame_id": "000320",
+            "noun_cache_sha256": "5f2f737807899a72b5f48761db3b1fe0e07b4234bf5356e810423e45c940a594",
+            "objects": 17,
+            "native_timing": {
+              "frame_index": 9,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 405.4553309979383,
+              "clip_ms": 72.95559599879198,
+              "feature_ms": 0.15790198813192546,
+              "project_ms": 480.7221819937695,
+              "assoc_ms": 46.56133201206103,
+              "post_total_ms": 0.03500698949210346,
+              "total_ms": 1019.6852139779367
+            },
+            "tracked": 33,
+            "valid_depth_fraction": 0.9282259114583333
+          },
+          {
+            "frame_id": "000360",
+            "noun_cache_sha256": "7b8ab35c406ffd5c55eade840ddb83b2f9cd760cc23ca0bcf388f32615d21aa1",
+            "objects": 19,
+            "native_timing": {
+              "frame_index": 10,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 479.1592919791583,
+              "clip_ms": 122.66459898091853,
+              "feature_ms": 0.12946801143698394,
+              "project_ms": 660.7534250069875,
+              "assoc_ms": 8.208646002458408,
+              "post_total_ms": 0.032983021810650826,
+              "total_ms": 1291.7981770006008
+            },
+            "tracked": 33,
+            "valid_depth_fraction": 0.9557747395833334
+          },
+          {
+            "frame_id": "000400",
+            "noun_cache_sha256": "757e0e8b7d0cba2aeb1a2b2c37598d5f9a5d24f104c59e5d90e08dc60b7a2c79",
+            "objects": 19,
+            "native_timing": {
+              "frame_index": 11,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 372.62405100045726,
+              "clip_ms": 101.3046839798335,
+              "feature_ms": 0.13872599811293185,
+              "project_ms": 973.4116470208392,
+              "assoc_ms": 7.346973987296224,
+              "post_total_ms": 0.017722981283441186,
+              "total_ms": 1476.2802409823053
+            },
+            "tracked": 35,
+            "valid_depth_fraction": 0.96943359375
+          },
+          {
+            "frame_id": "000440",
+            "noun_cache_sha256": "c165dda4a4c612da6967c8ae7131521bfa293ab587eb3e613f779d05226a30cb",
+            "objects": 19,
+            "native_timing": {
+              "frame_index": 12,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 321.460812992882,
+              "clip_ms": 48.40205499203876,
+              "feature_ms": 0.12344602146185935,
+              "project_ms": 231.53665498830378,
+              "assoc_ms": 15.701747994171456,
+              "post_total_ms": 7.149877987103537,
+              "total_ms": 642.4692909931764
+            },
+            "tracked": 37,
+            "valid_depth_fraction": 0.9708756510416666
+          },
+          {
+            "frame_id": "000480",
+            "noun_cache_sha256": "f2d50ff4184a9ebd483be7349a08da55a50203f1448658989a913c79de479e2d",
+            "objects": 20,
+            "native_timing": {
+              "frame_index": 13,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 445.1173879788257,
+              "clip_ms": 72.99916999181733,
+              "feature_ms": 0.14079001266509295,
+              "project_ms": 701.9595059973653,
+              "assoc_ms": 48.9568900084123,
+              "post_total_ms": 0.008726026862859726,
+              "total_ms": 1279.9123100121506
+            },
+            "tracked": 40,
+            "valid_depth_fraction": 0.9393294270833333
+          },
+          {
+            "frame_id": "000520",
+            "noun_cache_sha256": "2a55a232b7f169492d87afada2981ecf610a9a36ba932ddf9128a5c44c952121",
+            "objects": 22,
+            "native_timing": {
+              "frame_index": 14,
+              "raw_segments": 7,
+              "filtered_segments": 7,
+              "seg_ms": 527.1274670085404,
+              "clip_ms": 84.52364002005197,
+              "feature_ms": 0.14840398216620088,
+              "project_ms": 634.8237479978707,
+              "assoc_ms": 193.7451730191242,
+              "post_total_ms": 0.04213000647723675,
+              "total_ms": 1468.094629002735
+            },
+            "tracked": 43,
+            "valid_depth_fraction": 0.90794921875
+          },
+          {
+            "frame_id": "000560",
+            "noun_cache_sha256": "7efe4c00e003614aef0094139ee37e1c8378ab8d4ab3e8d1dce767dd83f7eab6",
+            "objects": 22,
+            "native_timing": {
+              "frame_index": 15,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 447.0095429860521,
+              "clip_ms": 56.72166598378681,
+              "feature_ms": 0.10589300654828548,
+              "project_ms": 375.2182989846915,
+              "assoc_ms": 7.812039984855801,
+              "post_total_ms": 0.026240013539791107,
+              "total_ms": 910.8495370019227
+            },
+            "tracked": 45,
+            "valid_depth_fraction": 0.9604850260416666
+          },
+          {
+            "frame_id": "000600",
+            "noun_cache_sha256": "3192fadb1a72641e9d0c14228d689dbd3e7c4981c38cac3ec90bd17f773110eb",
+            "objects": 23,
+            "native_timing": {
+              "frame_index": 16,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 340.0099769933149,
+              "clip_ms": 49.78085900074802,
+              "feature_ms": 0.10611300240270793,
+              "project_ms": 144.51835298677906,
+              "assoc_ms": 31.13920899340883,
+              "post_total_ms": 0.015218975022435188,
+              "total_ms": 585.9448079718277
+            },
+            "tracked": 47,
+            "valid_depth_fraction": 0.9801432291666666
+          },
+          {
+            "frame_id": "000640",
+            "noun_cache_sha256": "69669b394826a5cd4b6879fc25282841b864c4451dc19e9a176a568413e03cee",
+            "objects": 23,
+            "native_timing": {
+              "frame_index": 17,
+              "raw_segments": 7,
+              "filtered_segments": 7,
+              "seg_ms": 368.18197899265215,
+              "clip_ms": 84.08627298194915,
+              "feature_ms": 0.22382900351658463,
+              "project_ms": 353.20365100051276,
+              "assoc_ms": 33.993927005212754,
+              "post_total_ms": 0.019717990653589368,
+              "total_ms": 859.6114739775658
+            },
+            "tracked": 47,
+            "valid_depth_fraction": 0.9834537760416666
+          },
+          {
+            "frame_id": "000680",
+            "noun_cache_sha256": "f97069ea92ed0bd89e16df77947497e027abb5483bc90d43efa7b925e5733708",
+            "objects": 25,
+            "native_timing": {
+              "frame_index": 18,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 360.6646260013804,
+              "clip_ms": 76.5282129868865,
+              "feature_ms": 0.16249099280685186,
+              "project_ms": 612.8945380041841,
+              "assoc_ms": 55.40467501850799,
+              "post_total_ms": 0.016640988178551197,
+              "total_ms": 1118.720246013254
+            },
+            "tracked": 48,
+            "valid_depth_fraction": 0.9681510416666667
+          },
+          {
+            "frame_id": "000720",
+            "noun_cache_sha256": "e9c7c699906b5e1c909e4b366430ab6698e47d41306c4bbe055fe1b396aa496f",
+            "objects": 25,
+            "native_timing": {
+              "frame_index": 19,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 801.6382530040573,
+              "clip_ms": 113.25464199762791,
+              "feature_ms": 0.1670289784669876,
+              "project_ms": 607.2156239824835,
+              "assoc_ms": 18.169212999055162,
+              "post_total_ms": 0.019036000594496727,
+              "total_ms": 1560.5096720100846
+            },
+            "tracked": 48,
+            "valid_depth_fraction": 0.97017578125
+          },
+          {
+            "frame_id": "000760",
+            "noun_cache_sha256": "ef23d3c8916075cd92360b13b1faa68504bc41a1d05a9b4c261f8df5b4ebc1e6",
+            "objects": 25,
+            "native_timing": {
+              "frame_index": 20,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 386.26818801276386,
+              "clip_ms": 91.0748610040173,
+              "feature_ms": 0.12969798990525305,
+              "project_ms": 715.3201829933096,
+              "assoc_ms": 16.229469008976594,
+              "post_total_ms": 0.02722200588323176,
+              "total_ms": 1234.9151170055848
+            },
+            "tracked": 48,
+            "valid_depth_fraction": 0.9483268229166667
+          },
+          {
+            "frame_id": "000800",
+            "noun_cache_sha256": "8be3d03df32148156d5829cfe6529064bf08b08355ce3e58293348277ac56a4a",
+            "objects": 26,
+            "native_timing": {
+              "frame_index": 21,
+              "raw_segments": 13,
+              "filtered_segments": 13,
+              "seg_ms": 391.13052701577544,
+              "clip_ms": 117.14192799990997,
+              "feature_ms": 0.16862299526110291,
+              "project_ms": 768.9007940061856,
+              "assoc_ms": 10.47658600145951,
+              "post_total_ms": 0.017835001926869154,
+              "total_ms": 1305.85175199667
+            },
+            "tracked": 52,
+            "valid_depth_fraction": 0.9393489583333333
+          },
+          {
+            "frame_id": "000840",
+            "noun_cache_sha256": "df6d63d7d6af7aa35c0676cfe19eb3a28bd3461483dd3c47697b31e65eb9a2f3",
+            "objects": 28,
+            "native_timing": {
+              "frame_index": 22,
+              "raw_segments": 18,
+              "filtered_segments": 18,
+              "seg_ms": 452.82540400512516,
+              "clip_ms": 195.12279800255783,
+              "feature_ms": 0.20974199287593365,
+              "project_ms": 693.0771369952708,
+              "assoc_ms": 17.87788499495946,
+              "post_total_ms": 0.02773301093839109,
+              "total_ms": 1381.4408280013595
+            },
+            "tracked": 56,
+            "valid_depth_fraction": 0.9418717447916667
+          },
+          {
+            "frame_id": "000880",
+            "noun_cache_sha256": "6b7c06bbe5bf0137f4f6a52fc636d97ca741349beb2901ec6722df12293972e7",
+            "objects": 29,
+            "native_timing": {
+              "frame_index": 23,
+              "raw_segments": 17,
+              "filtered_segments": 17,
+              "seg_ms": 428.6634490126744,
+              "clip_ms": 157.14095800649375,
+              "feature_ms": 0.2741549978964031,
+              "project_ms": 964.2941989877727,
+              "assoc_ms": 15.698401984991506,
+              "post_total_ms": 0.03462599124759436,
+              "total_ms": 1589.3992009805515
+            },
+            "tracked": 56,
+            "valid_depth_fraction": 0.9452994791666667
+          },
+          {
+            "frame_id": "000920",
+            "noun_cache_sha256": "3bb412518da8df91001ddd85efe4627c1d8f1f9b4d28324bc07666973c2dff25",
+            "objects": 29,
+            "native_timing": {
+              "frame_index": 24,
+              "raw_segments": 21,
+              "filtered_segments": 21,
+              "seg_ms": 429.8165270010941,
+              "clip_ms": 201.23094000155106,
+              "feature_ms": 0.22614301997236907,
+              "project_ms": 759.8018650023732,
+              "assoc_ms": 17.27806599228643,
+              "post_total_ms": 0.031540985219180584,
+              "total_ms": 1438.8340619916562
+            },
+            "tracked": 58,
+            "valid_depth_fraction": 0.9308528645833334
+          },
+          {
+            "frame_id": "000960",
+            "noun_cache_sha256": "4648b8f8cba3833f55c6e96b58d836b72dc5a891949bcc83771c5dbd78dc2425",
+            "objects": 31,
+            "native_timing": {
+              "frame_index": 25,
+              "raw_segments": 22,
+              "filtered_segments": 22,
+              "seg_ms": 423.86560200247914,
+              "clip_ms": 201.59638399491087,
+              "feature_ms": 0.2395189949311316,
+              "project_ms": 596.8348110036459,
+              "assoc_ms": 56.34903197642416,
+              "post_total_ms": 0.03565798397175968,
+              "total_ms": 1306.6895829688292
+            },
+            "tracked": 59,
+            "valid_depth_fraction": 0.9294954427083333
+          },
+          {
+            "frame_id": "001000",
+            "noun_cache_sha256": "5f47621e72c9c68ea0cabced51f66da7003448c6cb51b1ba91006f1136844030",
+            "objects": 31,
+            "native_timing": {
+              "frame_index": 26,
+              "raw_segments": 21,
+              "filtered_segments": 21,
+              "seg_ms": 437.3962469981052,
+              "clip_ms": 218.49277298315428,
+              "feature_ms": 0.26302397600375116,
+              "project_ms": 557.4801689945161,
+              "assoc_ms": 18.06314999703318,
+              "post_total_ms": 0.054343981901183724,
+              "total_ms": 1264.5387499942444
+            },
+            "tracked": 60,
+            "valid_depth_fraction": 0.9351953125
+          },
+          {
+            "frame_id": "001040",
+            "noun_cache_sha256": "ea7f8e37f0032296397666050e16b572735ea2d34d014f5da67ae6561b2e6eae",
+            "objects": 32,
+            "native_timing": {
+              "frame_index": 27,
+              "raw_segments": 16,
+              "filtered_segments": 16,
+              "seg_ms": 428.8027559814509,
+              "clip_ms": 119.31474599987268,
+              "feature_ms": 0.18599600298330188,
+              "project_ms": 743.402422987856,
+              "assoc_ms": 23.502953990828246,
+              "post_total_ms": 0.03426600596867502,
+              "total_ms": 1337.9039209976327
+            },
+            "tracked": 60,
+            "valid_depth_fraction": 0.92751953125
+          },
+          {
+            "frame_id": "001080",
+            "noun_cache_sha256": "eaa8e7492ec696007f3562a5eedb8a28618ea1236e6c6d2f84e8be4842d1e83e",
+            "objects": 32,
+            "native_timing": {
+              "frame_index": 28,
+              "raw_segments": 16,
+              "filtered_segments": 16,
+              "seg_ms": 383.2493740192149,
+              "clip_ms": 116.72785098198801,
+              "feature_ms": 0.1789130037650466,
+              "project_ms": 679.7390279825777,
+              "assoc_ms": 7.688128011068329,
+              "post_total_ms": 4.338836006354541,
+              "total_ms": 1212.4054820160381
+            },
+            "tracked": 61,
+            "valid_depth_fraction": 0.9177799479166666
+          },
+          {
+            "frame_id": "001120",
+            "noun_cache_sha256": "c26d4deb95733b5889f94b8f4c2cb696195773edd88f46bb3ea3824353559a12",
+            "objects": 33,
+            "native_timing": {
+              "frame_index": 29,
+              "raw_segments": 13,
+              "filtered_segments": 13,
+              "seg_ms": 391.85301001998596,
+              "clip_ms": 125.08462299592793,
+              "feature_ms": 0.20643501193262637,
+              "project_ms": 647.8053750179242,
+              "assoc_ms": 21.740288997534662,
+              "post_total_ms": 0.047932000597938895,
+              "total_ms": 1212.4351790116634
+            },
+            "tracked": 63,
+            "valid_depth_fraction": 0.9407779947916667
+          },
+          {
+            "frame_id": "001160",
+            "noun_cache_sha256": "4b6e7d5f242d59d707b86b428860b238f5a4c32662a3932d987466d6e9431fab",
+            "objects": 35,
+            "native_timing": {
+              "frame_index": 30,
+              "raw_segments": 13,
+              "filtered_segments": 13,
+              "seg_ms": 368.8123839965556,
+              "clip_ms": 103.69143498246558,
+              "feature_ms": 0.15716100460849702,
+              "project_ms": 595.4903390083928,
+              "assoc_ms": 17.5841529853642,
+              "post_total_ms": 0.024667009711265564,
+              "total_ms": 1104.4375940109603
+            },
+            "tracked": 65,
+            "valid_depth_fraction": 0.9514811197916667
+          },
+          {
+            "frame_id": "001200",
+            "noun_cache_sha256": "3603cfb2a127f08af395d5c2ee88962a8eae796e7236b80d564df1f8d74ea3a6",
+            "objects": 35,
+            "native_timing": {
+              "frame_index": 31,
+              "raw_segments": 12,
+              "filtered_segments": 12,
+              "seg_ms": 383.56944199767895,
+              "clip_ms": 113.41698199976236,
+              "feature_ms": 0.15745099517516792,
+              "project_ms": 502.72314899484627,
+              "assoc_ms": 8.175021008355543,
+              "post_total_ms": 0.03163999645039439,
+              "total_ms": 1035.4277699952945
+            },
+            "tracked": 67,
+            "valid_depth_fraction": 0.95234375
+          },
+          {
+            "frame_id": "001240",
+            "noun_cache_sha256": "8d91b914535a62680b8ca0ca121d52595b5b165640b13fdd5dfe4c9222dd429f",
+            "objects": 35,
+            "native_timing": {
+              "frame_index": 32,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 341.8976340035442,
+              "clip_ms": 84.14436300517991,
+              "feature_ms": 0.1438350009266287,
+              "project_ms": 376.593356981175,
+              "assoc_ms": 2.6272899995092303,
+              "post_total_ms": 0.02022800617851317,
+              "total_ms": 820.5040300090332
+            },
+            "tracked": 67,
+            "valid_depth_fraction": 0.9391796875
+          },
+          {
+            "frame_id": "001280",
+            "noun_cache_sha256": "29e6f5509d1d99a4a54bd9e8dc0125cc769ff16b7aa5285f3a5f0302de58c70c",
+            "objects": 36,
+            "native_timing": {
+              "frame_index": 33,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 316.58363301539794,
+              "clip_ms": 111.51470197364688,
+              "feature_ms": 0.14508800813928246,
+              "project_ms": 1491.870163998101,
+              "assoc_ms": 18.937795015517622,
+              "post_total_ms": 0.014919001841917634,
+              "total_ms": 1954.6056970139034
+            },
+            "tracked": 69,
+            "valid_depth_fraction": 0.9681803385416666
+          },
+          {
+            "frame_id": "001320",
+            "noun_cache_sha256": "d89491f93468c117cfb84801819cdc15cd827f88e901c110b88946e104c69c76",
+            "objects": 38,
+            "native_timing": {
+              "frame_index": 34,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 301.1003320279997,
+              "clip_ms": 53.600482002366334,
+              "feature_ms": 0.1161030086223036,
+              "project_ms": 569.5875399978831,
+              "assoc_ms": 5.29376498889178,
+              "post_total_ms": 4.002112022135407,
+              "total_ms": 947.071960021276
+            },
+            "tracked": 69,
+            "valid_depth_fraction": 0.9570572916666666
+          },
+          {
+            "frame_id": "001360",
+            "noun_cache_sha256": "9c4571c8f7105d91d4e5f122d62262e854212bf32d54ad0acf1cd74abab3e3a0",
+            "objects": 38,
+            "native_timing": {
+              "frame_index": 35,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 309.2596619972028,
+              "clip_ms": 45.65923899644986,
+              "feature_ms": 0.1144290145020932,
+              "project_ms": 485.6392400106415,
+              "assoc_ms": 4.463925986783579,
+              "post_total_ms": 0.011041003745049238,
+              "total_ms": 857.0867340022232
+            },
+            "tracked": 69,
+            "valid_depth_fraction": 0.9646712239583334
+          },
+          {
+            "frame_id": "001400",
+            "noun_cache_sha256": "274ecbb6e713b34c5ee4d68a54cffe962f1f018e045eb4bb5828054a2b227260",
+            "objects": 38,
+            "native_timing": {
+              "frame_index": 36,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 305.73991299024783,
+              "clip_ms": 31.412776006618515,
+              "feature_ms": 0.08011300815269351,
+              "project_ms": 218.78703800030053,
+              "assoc_ms": 1.7623839958105236,
+              "post_total_ms": 6.602809997275472,
+              "total_ms": 585.6458769994788
+            },
+            "tracked": 69,
+            "valid_depth_fraction": 0.9398828125
+          },
+          {
+            "frame_id": "001440",
+            "noun_cache_sha256": "327edd04f2d3740add6a75de9b7979a2c1f11d2f7b9a93694fe774da2b471399",
+            "objects": 38,
+            "native_timing": {
+              "frame_index": 37,
+              "raw_segments": 12,
+              "filtered_segments": 12,
+              "seg_ms": 408.0925919988658,
+              "clip_ms": 85.9190669725649,
+              "feature_ms": 0.15666999388486147,
+              "project_ms": 524.216969992267,
+              "assoc_ms": 4.004777001682669,
+              "post_total_ms": 0.0078550074249506,
+              "total_ms": 1041.3738080242183
+            },
+            "tracked": 69,
+            "valid_depth_fraction": 0.9587141927083334
+          },
+          {
+            "frame_id": "001480",
+            "noun_cache_sha256": "69745ffec441e010c08128f21cbbcc0d4eaf68c98d47b4a43ab865452a79106b",
+            "objects": 38,
+            "native_timing": {
+              "frame_index": 38,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 357.1680299937725,
+              "clip_ms": 67.08847402478568,
+              "feature_ms": 0.11358698247931898,
+              "project_ms": 847.0483509881888,
+              "assoc_ms": 8.897012012312189,
+              "post_total_ms": 0.02142100129276514,
+              "total_ms": 1298.7695430056192
+            },
+            "tracked": 70,
+            "valid_depth_fraction": 0.958974609375
+          },
+          {
+            "frame_id": "001520",
+            "noun_cache_sha256": "8af3189c46b2f6e3a534deb833ad5de0cd23a0e0b4e341b0c8fa89fbbd8f7e43",
+            "objects": 39,
+            "native_timing": {
+              "frame_index": 39,
+              "raw_segments": 13,
+              "filtered_segments": 13,
+              "seg_ms": 386.4512190048117,
+              "clip_ms": 101.11867199884728,
+              "feature_ms": 0.1679210108704865,
+              "project_ms": 1663.6377479881048,
+              "assoc_ms": 14.089973992668092,
+              "post_total_ms": 0.013786018826067448,
+              "total_ms": 2184.8490810371004
+            },
+            "tracked": 74,
+            "valid_depth_fraction": 0.9442317708333333
+          },
+          {
+            "frame_id": "001560",
+            "noun_cache_sha256": "a2f8fb9f30d43733ade5269485488fe79b238f32858117ce2140f0d8c6a515ab",
+            "objects": 40,
+            "native_timing": {
+              "frame_index": 40,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 390.7502229849342,
+              "clip_ms": 75.98509400850162,
+              "feature_ms": 0.11846699635498226,
+              "project_ms": 518.1392889935523,
+              "assoc_ms": 11.024625971913338,
+              "post_total_ms": 0.024787004804238677,
+              "total_ms": 1018.3049039915204
+            },
+            "tracked": 74,
+            "valid_depth_fraction": 0.9460579427083333
+          },
+          {
+            "frame_id": "001600",
+            "noun_cache_sha256": "24e8168bb0243ad9338a5c16ae53bf46ceed9a85629bb1f48938356286befe41",
+            "objects": 41,
+            "native_timing": {
+              "frame_index": 41,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 431.8463609961327,
+              "clip_ms": 88.30391801893711,
+              "feature_ms": 0.12557097943499684,
+              "project_ms": 431.6405750287231,
+              "assoc_ms": 10.194195987423882,
+              "post_total_ms": 0.015109020750969648,
+              "total_ms": 982.3490650160238
+            },
+            "tracked": 75,
+            "valid_depth_fraction": 0.9464453125
+          },
+          {
+            "frame_id": "001640",
+            "noun_cache_sha256": "b5a847063ba22efef9f43c1b4e2f4d7469e370db45767ccebad3aaa70707fbf5",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 42,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 390.8910980098881,
+              "clip_ms": 59.82221200247295,
+              "feature_ms": 0.11294599971733987,
+              "project_ms": 922.5720899994485,
+              "assoc_ms": 72.67957698786631,
+              "post_total_ms": 0.04432498826645315,
+              "total_ms": 1508.9034719858319
+            },
+            "tracked": 76,
+            "valid_depth_fraction": 0.9849153645833333
+          },
+          {
+            "frame_id": "001680",
+            "noun_cache_sha256": "f8e4b007540bde9ab82b0a14676012e59853f3d754ac62e4b7f6ad7e57301a99",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 43,
+              "raw_segments": 11,
+              "filtered_segments": 11,
+              "seg_ms": 503.05521400878206,
+              "clip_ms": 86.15903600002639,
+              "feature_ms": 0.16306198085658252,
+              "project_ms": 805.5320949933957,
+              "assoc_ms": 17.85271699191071,
+              "post_total_ms": 0.018524995539337397,
+              "total_ms": 1434.5875270082615
+            },
+            "tracked": 76,
+            "valid_depth_fraction": 0.984521484375
+          },
+          {
+            "frame_id": "001720",
+            "noun_cache_sha256": "3f9abc0598d2d235f7a2eea48a3bca6321d00f5bafa6fccd88438cd6a54d8603",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 44,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 429.53475398826413,
+              "clip_ms": 112.8852010006085,
+              "feature_ms": 0.148263992741704,
+              "project_ms": 894.0334100043401,
+              "assoc_ms": 36.60864301491529,
+              "post_total_ms": 0.04529699799604714,
+              "total_ms": 1521.2870289979037
+            },
+            "tracked": 77,
+            "valid_depth_fraction": 0.9446484375
+          },
+          {
+            "frame_id": "001760",
+            "noun_cache_sha256": "12d35c2c907e639193a97ab5d1232016a83c995b071672ad07f50e7b15c3f1d5",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 45,
+              "raw_segments": 9,
+              "filtered_segments": 9,
+              "seg_ms": 464.9564269930124,
+              "clip_ms": 77.75249099358916,
+              "feature_ms": 0.16136901103891432,
+              "project_ms": 751.2263199896552,
+              "assoc_ms": 19.804554001893848,
+              "post_total_ms": 0.01858500763773918,
+              "total_ms": 1334.0824450133368
+            },
+            "tracked": 81,
+            "valid_depth_fraction": 0.9616341145833334
+          },
+          {
+            "frame_id": "001800",
+            "noun_cache_sha256": "01450a29065120b76743e501bb02658651f033161bb7b2f288621f0a4dc5c52a",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 46,
+              "raw_segments": 8,
+              "filtered_segments": 8,
+              "seg_ms": 335.05339099792764,
+              "clip_ms": 75.8634019875899,
+              "feature_ms": 0.14854400069452822,
+              "project_ms": 909.9557310109958,
+              "assoc_ms": 12.199568998767063,
+              "post_total_ms": 4.484074015635997,
+              "total_ms": 1359.078870009398
+            },
+            "tracked": 81,
+            "valid_depth_fraction": 0.9596647135416667
+          },
+          {
+            "frame_id": "001840",
+            "noun_cache_sha256": "011b5b6633cd4a8d0e088c821269535dd14b510ef4563c35953c1be7fe30dfd7",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 47,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 349.728186003631,
+              "clip_ms": 39.96919098426588,
+              "feature_ms": 0.10100399958901107,
+              "project_ms": 341.33357397513464,
+              "assoc_ms": 0.0020239967852830887,
+              "post_total_ms": 0.016651989426463842,
+              "total_ms": 744.6717219718266
+            },
+            "tracked": 81,
+            "valid_depth_fraction": 0.9561751302083333
+          },
+          {
+            "frame_id": "001880",
+            "noun_cache_sha256": "ef06dc4910faa6a6e352ace779fe4b40c082b759908c270c26e69633a021e0a3",
+            "objects": 42,
+            "native_timing": {
+              "frame_index": 48,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 324.1747769934591,
+              "clip_ms": 49.69676898326725,
+              "feature_ms": 0.09461099398322403,
+              "project_ms": 421.707592002349,
+              "assoc_ms": 2.003636007430032,
+              "post_total_ms": 0.004578992957249284,
+              "total_ms": 809.4251849979628
+            },
+            "tracked": 81,
+            "valid_depth_fraction": 0.9758528645833333
+          },
+          {
+            "frame_id": "001920",
+            "noun_cache_sha256": "0ca8264e17eabce7e76c558a02d9104f22860093d0cb80a28410212763952a69",
+            "objects": 43,
+            "native_timing": {
+              "frame_index": 49,
+              "raw_segments": 6,
+              "filtered_segments": 6,
+              "seg_ms": 318.3964949857909,
+              "clip_ms": 51.06926598818973,
+              "feature_ms": 0.10491098510101438,
+              "project_ms": 633.2726710243151,
+              "assoc_ms": 18.517910997616127,
+              "post_total_ms": 4.293068981496617,
+              "total_ms": 1040.3171719808597
+            },
+            "tracked": 83,
+            "valid_depth_fraction": 0.9546809895833334
+          },
+          {
+            "frame_id": "001960",
+            "noun_cache_sha256": "04ef44087ef21c06ceea92247dace676b501907a652fe019562024d081e71bd6",
+            "objects": 43,
+            "native_timing": {
+              "frame_index": 50,
+              "raw_segments": 11,
+              "filtered_segments": 11,
+              "seg_ms": 361.5081770112738,
+              "clip_ms": 103.03978697629645,
+              "feature_ms": 0.160146999405697,
+              "project_ms": 739.17217500275,
+              "assoc_ms": 23.158383992267773,
+              "post_total_ms": 0.01799498568288982,
+              "total_ms": 1260.374798992416
+            },
+            "tracked": 83,
+            "valid_depth_fraction": 0.9677734375
+          }
+        ],
+        "manifest_sha256": "abdcfd96e95f54427875fa305ab3e4681c4d14fe15ec1a9d917a3df0e40cc268",
+        "shared_GPT_request_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+        "new_GPT_calls": 0,
+        "Qwen_calls": 0,
+        "GT_in_construction": false,
+        "baseline": "ThinkGraphs_GPT_tags_without_API_agents",
+        "official_full_pipeline_reproduced": false,
+        "official_source_commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+        "optional_SAM2_cuda_postprocessing": false,
+        "attention_compatibility": {
+          "native_pytorch_attention_cpu_gpu_max_abs_error": 5.960464477539063e-08,
+          "architecture_changed": false,
+          "weights_changed": false
+        },
+        "seconds": 61.05763393099187,
+        "nodes": 43,
+        "tracking_settings": {
+          "use_dbscan_filtering": true,
+          "dbscan_eps": 0.05,
+          "dbscan_min_samples": 7,
+          "adaptive_dbscan": false,
+          "dbscan_eps_scale": [
+            0.5,
+            2.0
+          ],
+          "dbscan_voxel_size": 0.025,
+          "use_cuml_dbscan": true,
+          "max_projection_pixels": 0,
+          "subtract_contained_masks": true,
+          "erode_masks": true,
+          "erode_kernel_size": 5,
+          "erode_min_area": 100,
+          "min_points_after_filter": 30,
+          "min_cluster_ratio": 0.7,
+          "openvox_voxel_size": 0.04,
+          "openvox_max_ids_per_voxel": 3,
+          "openvox_geometry_weight": 0.8,
+          "openvox_feature_weight": 0.2,
+          "openvox_pro_threshold": 0.4,
+          "openvox_lazy_reuse_threshold": 0.85,
+          "openvox_lazy_max_children": 6,
+          "tracklet_mask_history": 5,
+          "temporal_window": 999.0,
+          "max_points_per_object": 200000,
+          "min_segment_area": 30,
+          "min_segment_area_ratio": 0.0004,
+          "min_segment_confidence": 0.1,
+          "min_bbox_volume": 0.0,
+          "feature_alpha": 0.1,
+          "feature_min_area_ratio": 0.3,
+          "clip_history_size": 32,
+          "clip_embedding_stride": 1,
+          "semantic_embed_pool_mode": "text_guided",
+          "semantic_embed_topk": 1,
+          "semantic_embed_hybrid_alpha": 0.5,
+          "track_confirm_min_matches": 0
+        },
+        "adaptation_source_sha256": "2278277ca7f83910ad7499dddf23ccf422209622c708467ac536317ac24abbe0",
+        "tracked_objects": 83,
+        "confirmation_matches_strict_greater_than": 1,
+        "track_match_counts": {
+          "track_0": 5,
+          "track_1": 3,
+          "track_2": 8,
+          "track_3": 11,
+          "track_4": 17,
+          "track_5": 8,
+          "track_6": 1,
+          "track_7": 6,
+          "track_8": 3,
+          "track_9": 16,
+          "track_10": 9,
+          "track_11": 8,
+          "track_12": 1,
+          "track_13": 8,
+          "track_14": 1,
+          "track_15": 9,
+          "track_16": 2,
+          "track_17": 14,
+          "track_18": 1,
+          "track_19": 6,
+          "track_20": 14,
+          "track_21": 4,
+          "track_22": 1,
+          "track_23": 2,
+          "track_24": 6,
+          "track_25": 9,
+          "track_26": 1,
+          "track_27": 8,
+          "track_28": 6,
+          "track_29": 1,
+          "track_30": 8,
+          "track_31": 1,
+          "track_32": 3,
+          "track_33": 1,
+          "track_34": 1,
+          "track_35": 2,
+          "track_36": 1,
+          "track_37": 6,
+          "track_38": 3,
+          "track_39": 2,
+          "track_40": 1,
+          "track_41": 1,
+          "track_42": 1,
+          "track_43": 5,
+          "track_44": 1,
+          "track_45": 3,
+          "track_46": 1,
+          "track_47": 1,
+          "track_48": 1,
+          "track_49": 1,
+          "track_50": 1,
+          "track_51": 1,
+          "track_52": 2,
+          "track_53": 1,
+          "track_54": 2,
+          "track_55": 2,
+          "track_56": 2,
+          "track_57": 1,
+          "track_58": 1,
+          "track_59": 1,
+          "track_60": 4,
+          "track_61": 2,
+          "track_62": 2,
+          "track_63": 2,
+          "track_64": 1,
+          "track_65": 1,
+          "track_66": 1,
+          "track_67": 1,
+          "track_68": 6,
+          "track_69": 1,
+          "track_70": 2,
+          "track_71": 1,
+          "track_72": 1,
+          "track_73": 1,
+          "track_74": 2,
+          "track_75": 4,
+          "track_76": 1,
+          "track_77": 1,
+          "track_78": 1,
+          "track_79": 1,
+          "track_80": 1,
+          "track_81": 1,
+          "track_82": 1
+        }
+      }
+    },
+    {
+      "scene_id": "scene0019_00",
+      "processed_scene": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_confirm_gt0/scene0019_00",
+      "metrics": {
+        "all_ap": 0.3111111111111111,
+        "all_ap_50%": 0.4,
+        "all_ap_25%": 0.5333333333333333,
+        "classes": {
+          "object": {
+            "ap": 0.3111111111111111,
+            "ap50%": 0.4,
+            "ap25%": 0.5333333333333333
+          }
+        }
+      },
+      "predicted_objects": 8,
+      "eligible_GT_instances": 15,
+      "GT": [
+        {
+          "gt_id": 0,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3001,
+          "vertices": 2060,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "4",
+            "label": "armchair",
+            "point_IoU": 0.7300970873786408
+          }
+        },
+        {
+          "gt_id": 1,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3002,
+          "vertices": 885,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "armchair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 3,
+          "raw_label": "couch",
+          "category_id": 6,
+          "encoded_id": 3004,
+          "vertices": 6331,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "armchair",
+            "point_IoU": 0.9352392986889907
+          }
+        },
+        {
+          "gt_id": 8,
+          "raw_label": "trash can",
+          "category_id": 56,
+          "encoded_id": 3009,
+          "vertices": 1455,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "7",
+            "label": "trash",
+            "point_IoU": 0.9485006518904824
+          }
+        },
+        {
+          "gt_id": 10,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3011,
+          "vertices": 2735,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "8",
+            "label": "door",
+            "point_IoU": 0.9817184643510055
+          }
+        },
+        {
+          "gt_id": 11,
+          "raw_label": "lamp",
+          "category_id": 28,
+          "encoded_id": 3012,
+          "vertices": 918,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "armchair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 12,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3013,
+          "vertices": 1881,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "armchair",
+            "point_IoU": 0.42017879948914433
+          }
+        },
+        {
+          "gt_id": 13,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3014,
+          "vertices": 1165,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "6",
+            "label": "armchair",
+            "point_IoU": 0.3766137956473626
+          }
+        },
+        {
+          "gt_id": 14,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3015,
+          "vertices": 1867,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "armchair",
+            "point_IoU": 0.3780487804878049
+          }
+        },
+        {
+          "gt_id": 15,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3016,
+          "vertices": 1063,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "5",
+            "label": "armchair",
+            "point_IoU": 0.46694599627560524
+          }
+        },
+        {
+          "gt_id": 16,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3017,
+          "vertices": 1996,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "armchair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 19,
+          "raw_label": "door",
+          "category_id": 5,
+          "encoded_id": 3020,
+          "vertices": 6469,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "1",
+            "label": "armchair",
+            "point_IoU": 0.0
+          }
+        },
+        {
+          "gt_id": 21,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3022,
+          "vertices": 5677,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "armchair",
+            "point_IoU": 0.7200892857142858
+          }
+        },
+        {
+          "gt_id": 22,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3023,
+          "vertices": 1161,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "2",
+            "label": "armchair",
+            "point_IoU": 0.15686596583442838
+          }
+        },
+        {
+          "gt_id": 23,
+          "raw_label": "chair",
+          "category_id": 2,
+          "encoded_id": 3024,
+          "vertices": 1842,
+          "eligible": true,
+          "best_prediction": {
+            "node_id": "3",
+            "label": "armchair",
+            "point_IoU": 0.744842562432139
+          }
+        }
+      ],
+      "predictions": [
+        {
+          "node_id": "1",
+          "label": "armchair",
+          "confidence": 0.7778065800666809,
+          "vertices": 5921
+        },
+        {
+          "node_id": "2",
+          "label": "armchair",
+          "confidence": 0.6180891394615173,
+          "vertices": 5882
+        },
+        {
+          "node_id": "3",
+          "label": "armchair",
+          "confidence": 0.5734992623329163,
+          "vertices": 1372
+        },
+        {
+          "node_id": "4",
+          "label": "armchair",
+          "confidence": 0.5435901880264282,
+          "vertices": 1504
+        },
+        {
+          "node_id": "5",
+          "label": "armchair",
+          "confidence": 0.5120216012001038,
+          "vertices": 2088
+        },
+        {
+          "node_id": "6",
+          "label": "armchair",
+          "confidence": 0.44755083322525024,
+          "vertices": 2567
+        },
+        {
+          "node_id": "7",
+          "label": "trash",
+          "confidence": 0.8960696458816528,
+          "vertices": 1534
+        },
+        {
+          "node_id": "8",
+          "label": "door",
+          "confidence": 0.6962682008743286,
+          "vertices": 2685
+        }
+      ],
+      "graph_sha256": "be2e0c48d74a8121012bd7b82e976230a30c4510489e625d02312cfd1d570dce",
+      "prediction_cloud": "/home/lewisliu/baselines/ThinkGraphs/outputs/gpt_confirm_gt0/scene0019_00/instance_cloud_thinkgraphs.ply",
+      "prediction_cloud_sha256": "175509f8715ddb600e20a6a9b7fcfbfeda53c918def58b3144f7bbabfbba4b4c",
+      "GT_hashes": {
+        "mesh_sha256": "fad4b0d0a086bf6cc7885104efbe926208935fc0cb690b227fb3678b561002be",
+        "segments_sha256": "4fce1e0a3eacf30327fa73020558545f3b316af7c45b7d690ecb689d17f13258",
+        "aggregation_sha256": "b51bf966947a9c060edfdfdc4936cea00d08de07480041db586399e5d925c5cc",
+        "mapping_sha256": "68674782476d967c35e8d0776933b70e10d21f1ea8019eba20221d38275139c0"
+      },
+      "protocol": "class_agnostic_point_masks_full_official_reconstruction",
+      "GT_grouping": false,
+      "GT_in_construction": false,
+      "transfer": {
+        "method": "nearest canonical instance point within fixed 5cm",
+        "radius_m": 0.05,
+        "within_radius_fraction": 0.17022863368160915,
+        "GT_registration": false,
+        "segment_smoothing": "author ESAM geometric regions, >0.5 majority; no instance GT"
+      },
+      "scope": "Validation pilot, not full 312-scan benchmark; source sampling/point transfer differ by native output representation.",
+      "baseline_variant": "ThinkGraphs_GPT_tags_without_API_agents",
+      "inference_receipt": {
+        "scene": "scene0019_00",
+        "complete": true,
+        "diagnostic_smoke": false,
+        "frames": [
+          {
+            "frame_id": "000000",
+            "noun_cache_sha256": "c5310e55f33334913eaf2aa4dc4653c622d7d300f586413e5a3b4825bd87a10f",
+            "objects": 0,
+            "native_timing": {
+              "frame_index": 1,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 326.3869920047,
+              "clip_ms": 45.805524016031995,
+              "feature_ms": 0.09439099812880158,
+              "project_ms": 722.4210840067826,
+              "assoc_ms": 13.005878019612283,
+              "post_total_ms": 0.0024649780243635178,
+              "total_ms": 1110.4489859717432
+            },
+            "tracked": 3,
+            "valid_depth_fraction": 0.908212890625
+          },
+          {
+            "frame_id": "000040",
+            "noun_cache_sha256": "a5f52e1201eb7c0969172b9e4cba246714ba13f317b9da9751271c61abcac8ba",
+            "objects": 1,
+            "native_timing": {
+              "frame_index": 2,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 350.54414000478573,
+              "clip_ms": 43.786124006146565,
+              "feature_ms": 0.11549098417162895,
+              "project_ms": 460.24665000732057,
+              "assoc_ms": 78.40945798670873,
+              "post_total_ms": 0.00896799610927701,
+              "total_ms": 936.3069270038977
+            },
+            "tracked": 4,
+            "valid_depth_fraction": 0.8589908854166667
+          },
+          {
+            "frame_id": "000080",
+            "noun_cache_sha256": "d113e4dd75a7ecfe95cfd441e96f4752e76eb50b9dd06981f8253c1e794b6060",
+            "objects": 2,
+            "native_timing": {
+              "frame_index": 3,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 356.61027100286447,
+              "clip_ms": 40.587901981780306,
+              "feature_ms": 0.08343000081367791,
+              "project_ms": 510.9741869964637,
+              "assoc_ms": 25.048374984180555,
+              "post_total_ms": 0.011872994946315885,
+              "total_ms": 937.0683890010696
+            },
+            "tracked": 6,
+            "valid_depth_fraction": 0.7950130208333334
+          },
+          {
+            "frame_id": "000120",
+            "noun_cache_sha256": "7e4978ca63a0092884e51dfa4f99f8c50835774c49e4d243223b41fef9777b52",
+            "objects": 3,
+            "native_timing": {
+              "frame_index": 4,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 316.28592798369937,
+              "clip_ms": 64.2563340079505,
+              "feature_ms": 0.09499202133156359,
+              "project_ms": 535.2273030148353,
+              "assoc_ms": 4.653017997043207,
+              "post_total_ms": 0.007655005902051926,
+              "total_ms": 924.0753850026522
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.9590625
+          },
+          {
+            "frame_id": "000160",
+            "noun_cache_sha256": "2a78511a4c678ada5af0aa655e930015c8cddb094687dfdae27a2c8119f347da",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 5,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 289.78208400076255,
+              "clip_ms": 34.149765997426584,
+              "feature_ms": 0.08272798731923103,
+              "project_ms": 442.77039798907936,
+              "assoc_ms": 4.359996994026005,
+              "post_total_ms": 0.008807022823020816,
+              "total_ms": 774.4316150201485
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.9507194010416666
+          },
+          {
+            "frame_id": "000200",
+            "noun_cache_sha256": "ac3244dafa7f1ca23e6a85f9dc5294cde3600a92cee5796a2c3ee9a2f299be97",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 6,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 341.7400339967571,
+              "clip_ms": 32.364648999646306,
+              "feature_ms": 0.09678499191068113,
+              "project_ms": 15.879269019933417,
+              "assoc_ms": 0.0018030114006251097,
+              "post_total_ms": 4.777605994604528,
+              "total_ms": 399.1902959824074
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.876044921875
+          },
+          {
+            "frame_id": "000240",
+            "noun_cache_sha256": "7636801e04c728d64774d41dce62e3efb09c44a89d2e653938aba34b6bf00bcb",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 7,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 312.2888259822503,
+              "clip_ms": 26.813320990186185,
+              "feature_ms": 0.0830089848022908,
+              "project_ms": 17.13997300248593,
+              "assoc_ms": 0.0017730053514242172,
+              "post_total_ms": 0.0055010023061186075,
+              "total_ms": 359.71807400346734
+            },
+            "tracked": 8,
+            "valid_depth_fraction": 0.87521484375
+          },
+          {
+            "frame_id": "000280",
+            "noun_cache_sha256": "5c4a81c1d7d3930030a422cb66a7eff810ae4cdf7208e5e12c4b432aa35eaf09",
+            "objects": 5,
+            "native_timing": {
+              "frame_index": 8,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 322.2815610060934,
+              "clip_ms": 24.783764994936064,
+              "feature_ms": 0.07840001489967108,
+              "project_ms": 346.05837700655684,
+              "assoc_ms": 4.658066987758502,
+              "post_total_ms": 0.003697001375257969,
+              "total_ms": 701.6697430226486
+            },
+            "tracked": 10,
+            "valid_depth_fraction": 0.9592610677083333
+          },
+          {
+            "frame_id": "000320",
+            "noun_cache_sha256": "29482d875b5f2d659de58d5c3b1f30263bdd48cbff8881a9a12663a7f2d8f37b",
+            "objects": 7,
+            "native_timing": {
+              "frame_index": 9,
+              "raw_segments": 5,
+              "filtered_segments": 5,
+              "seg_ms": 306.8479950015899,
+              "clip_ms": 47.29705399950035,
+              "feature_ms": 0.09587299427948892,
+              "project_ms": 453.9211810042616,
+              "assoc_ms": 258.78028298029676,
+              "post_total_ms": 0.0072239781729876995,
+              "total_ms": 1073.167072958313
+            },
+            "tracked": 11,
+            "valid_depth_fraction": 0.87447265625
+          },
+          {
+            "frame_id": "000360",
+            "noun_cache_sha256": "f21b8130965fe7157dfa5b309be306206d0e82e1c3516d7fd885df74aa3f4852",
+            "objects": 7,
+            "native_timing": {
+              "frame_index": 10,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 366.0535569943022,
+              "clip_ms": 40.150513988919556,
+              "feature_ms": 0.08774801972322166,
+              "project_ms": 396.18198000243865,
+              "assoc_ms": 40.75250599998981,
+              "post_total_ms": 0.014377990737557411,
+              "total_ms": 848.8820319762453
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.8715657552083333
+          },
+          {
+            "frame_id": "000400",
+            "noun_cache_sha256": "3fbfc78e7bffaaff5d128470133bee0f5a66da4d6352157a99346ec505495330",
+            "objects": 7,
+            "native_timing": {
+              "frame_index": 11,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 309.8656820075121,
+              "clip_ms": 35.398556996369734,
+              "feature_ms": 0.086315005319193,
+              "project_ms": 508.21524902130477,
+              "assoc_ms": 0.0026049965526908636,
+              "post_total_ms": 0.0097390147857368,
+              "total_ms": 858.1313740287442
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7833040364583334
+          },
+          {
+            "frame_id": "000440",
+            "noun_cache_sha256": "fcc9a49e2161d14545dbc1c68145bc46775eb9778862d68ffa403ead33828c62",
+            "objects": 7,
+            "native_timing": {
+              "frame_index": 12,
+              "raw_segments": 2,
+              "filtered_segments": 2,
+              "seg_ms": 322.3413750238251,
+              "clip_ms": 33.98002599715255,
+              "feature_ms": 0.0789809855632484,
+              "project_ms": 507.63531000120565,
+              "assoc_ms": 0.002554996171966195,
+              "post_total_ms": 0.004599016392603517,
+              "total_ms": 867.9497840057593
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7629427083333333
+          },
+          {
+            "frame_id": "000480",
+            "noun_cache_sha256": "2375e32b3e366e2266916464ec219c81cb0fda4e1713f590a5dc029e095f53eb",
+            "objects": 7,
+            "native_timing": {
+              "frame_index": 13,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 295.9303290117532,
+              "clip_ms": 43.110380007419735,
+              "feature_ms": 0.0865460024215281,
+              "project_ms": 406.88825698453,
+              "assoc_ms": 0.002073997166007757,
+              "post_total_ms": 0.004036992322653532,
+              "total_ms": 750.7342039898504
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.7731282552083333
+          },
+          {
+            "frame_id": "000520",
+            "noun_cache_sha256": "0f70607516ecc32d7c304826d6a45092aa64db374df1244977c611a6040f0a56",
+            "objects": 8,
+            "native_timing": {
+              "frame_index": 14,
+              "raw_segments": 4,
+              "filtered_segments": 4,
+              "seg_ms": 303.3929960220121,
+              "clip_ms": 38.2464180001989,
+              "feature_ms": 0.09708499419502914,
+              "project_ms": 555.1873320073355,
+              "assoc_ms": 8.26851901365444,
+              "post_total_ms": 0.004197994712740183,
+              "total_ms": 910.5154419958126
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.8752994791666666
+          },
+          {
+            "frame_id": "000560",
+            "noun_cache_sha256": "6a97820cb826d211bcae19ea0b9b5bf40c165e0834b19074a2a1323e532d61f8",
+            "objects": 8,
+            "native_timing": {
+              "frame_index": 15,
+              "raw_segments": 3,
+              "filtered_segments": 3,
+              "seg_ms": 300.61109497910365,
+              "clip_ms": 41.26358401845209,
+              "feature_ms": 0.10536200716160238,
+              "project_ms": 469.74848801619373,
+              "assoc_ms": 4.702701990026981,
+              "post_total_ms": 0.010920979548245668,
+              "total_ms": 821.8005099624861
+            },
+            "tracked": 13,
+            "valid_depth_fraction": 0.8429069010416667
+          }
+        ],
+        "manifest_sha256": "0be3768df15263bde3b58fa255b68147f12f923c300b647f40b5437a8c60a2d7",
+        "shared_GPT_request_fingerprint": "42d7eae87469ebe0c431ddaa8b3980cb51230fd45ca2827bb221a2224fa985be",
+        "new_GPT_calls": 0,
+        "Qwen_calls": 0,
+        "GT_in_construction": false,
+        "baseline": "ThinkGraphs_GPT_tags_without_API_agents",
+        "official_full_pipeline_reproduced": false,
+        "official_source_commit": "eb80df83810ce1c380f8f2256f45b20d929a5515",
+        "optional_SAM2_cuda_postprocessing": false,
+        "attention_compatibility": {
+          "native_pytorch_attention_cpu_gpu_max_abs_error": 5.960464477539063e-08,
+          "architecture_changed": false,
+          "weights_changed": false
+        },
+        "seconds": 12.426035884011071,
+        "nodes": 8,
+        "tracking_settings": {
+          "use_dbscan_filtering": true,
+          "dbscan_eps": 0.05,
+          "dbscan_min_samples": 7,
+          "adaptive_dbscan": false,
+          "dbscan_eps_scale": [
+            0.5,
+            2.0
+          ],
+          "dbscan_voxel_size": 0.025,
+          "use_cuml_dbscan": true,
+          "max_projection_pixels": 0,
+          "subtract_contained_masks": true,
+          "erode_masks": true,
+          "erode_kernel_size": 5,
+          "erode_min_area": 100,
+          "min_points_after_filter": 30,
+          "min_cluster_ratio": 0.7,
+          "openvox_voxel_size": 0.04,
+          "openvox_max_ids_per_voxel": 3,
+          "openvox_geometry_weight": 0.8,
+          "openvox_feature_weight": 0.2,
+          "openvox_pro_threshold": 0.4,
+          "openvox_lazy_reuse_threshold": 0.85,
+          "openvox_lazy_max_children": 6,
+          "tracklet_mask_history": 5,
+          "temporal_window": 999.0,
+          "max_points_per_object": 200000,
+          "min_segment_area": 30,
+          "min_segment_area_ratio": 0.0004,
+          "min_segment_confidence": 0.1,
+          "min_bbox_volume": 0.0,
+          "feature_alpha": 0.1,
+          "feature_min_area_ratio": 0.3,
+          "clip_history_size": 32,
+          "clip_embedding_stride": 1,
+          "semantic_embed_pool_mode": "text_guided",
+          "semantic_embed_topk": 1,
+          "semantic_embed_hybrid_alpha": 0.5,
+          "track_confirm_min_matches": 0
+        },
+        "adaptation_source_sha256": "2278277ca7f83910ad7499dddf23ccf422209622c708467ac536317ac24abbe0",
+        "tracked_objects": 13,
+        "confirmation_matches_strict_greater_than": 1,
+        "track_match_counts": {
+          "track_0": 5,
+          "track_1": 2,
+          "track_2": 3,
+          "track_3": 1,
+          "track_4": 3,
+          "track_5": 1,
+          "track_6": 2,
+          "track_7": 2,
+          "track_8": 2,
+          "track_9": 2,
+          "track_10": 1,
+          "track_11": 1,
+          "track_12": 1
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "all_ap": 0.22027291412615155,
+    "all_ap_50%": 0.4078974281668648,
+    "all_ap_25%": 0.5400765263403631,
+    "classes": {
+      "object": {
+        "ap": 0.22027291412615155,
+        "ap50%": 0.4078974281668648,
+        "ap25%": 0.5400765263403631
+      }
+    }
+  },
+  "important_limitations": [
+    "shared GPT noun tags replace Qwen",
+    "asynchronous Critic/Descriptor agents disabled",
+    "same selected 125 frames, not official dense sequence or original eight-scene semantic protocol",
+    "declared all-scene sparse-frame confirmation changed to >0 matches",
+    "CPU DBSCAN and native PyTorch deformable attention compatibility"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "complete": true,
+  "official_full_paper_reproduction": false,
+  "variant": "official CDIS geometry backend, shared GPT/SAM3 frontend, raw depth, uniform sparse input variant: all selected views, one-view admission",
+  "GT_in_construction": false,
+  "new_API_calls": 0,
+  "training": false,
+  "preparation_sha256": "3c27e549a0b01ebec9b7ff252c1b1abef788bf9de07f2c29b336f9290b8de11c",
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "prediction": "/home/lewisliu/baselines/CDIS/output/shared_frontend_sparse/scene0011_00.pth",
+      "sha256": "187321335d338048b93c0bca0a270c911cd1637f2baf32fcbaf880751679febd"
+    },
+    {
+      "scene": "scene0015_00",
+      "prediction": "/home/lewisliu/baselines/CDIS/output/shared_frontend_sparse/scene0015_00.pth",
+      "sha256": "bcdaaccf6a708ee078714d5757cdd854bb17117f2279f5632d4f45dd17f211cd"
+    },
+    {
+      "scene": "scene0019_00",
+      "prediction": "/home/lewisliu/baselines/CDIS/output/shared_frontend_sparse/scene0019_00.pth",
+      "sha256": "b44fa9822cc11c67f4f4ba6a2d49391aa3c26ffb91590438d45ace1ce2fc1123"
+    }
+  ]
+}

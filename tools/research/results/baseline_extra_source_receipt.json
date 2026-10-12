@@ -1,0 +1,20 @@
+[
+  {
+    "name": "OP3DSG",
+    "repository": "https://github.com/AutoCompSysLab/OP3DSG",
+    "commit": "4fb31abf20e36483427663c5bfe41ab757a682a1",
+    "archive_sha256": "e64d5a6ca6a92a0a992826b123157df8aea9d740e45bbdb06a0d79910f41d87a",
+    "bytes": 25665596,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\OP3DSG-4fb31abf20e36483427663c5bfe41ab757a682a1",
+    "executed": false
+  },
+  {
+    "name": "Grounded-SAM-2",
+    "repository": "https://github.com/IDEA-Research/Grounded-SAM-2",
+    "commit": "b7a9c29f196edff0eb54dbe14588d7ae5e3dde28",
+    "archive_sha256": "cb95401541adec80778363ae0c17468536f3d62ca8c17e187e3a4d94e9a16842",
+    "bytes": 118706300,
+    "source_directory": "C:\\Users\\22174\\Documents\\Codex\\2026-10-03\\nin\\v20_work\\baseline_sources\\Grounded-SAM-2-b7a9c29f196edff0eb54dbe14588d7ae5e3dde28",
+    "executed": false
+  }
+]

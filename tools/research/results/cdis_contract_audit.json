@@ -1,0 +1,89 @@
+{
+  "complete": true,
+  "results": [
+    {
+      "scene": "scene0011_00",
+      "first_frame_foreground_pixels": 211825,
+      "first_frame_valid_instance_depth_points": 151523,
+      "first_depth_max_m": 3.8970000743865967,
+      "first_backproject_z_max_m": 3.8889999389648438,
+      "first_native_intrinsics": [
+        [
+          577.5906982421875,
+          0.0,
+          318.9054260253906
+        ],
+        [
+          0.0,
+          578.7297973632812,
+          242.68360900878906
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "tracked_ids": 8,
+      "max_tracked_frames": 6,
+      "tracks_at_least_three": 8,
+      "GT_used": false
+    },
+    {
+      "scene": "scene0015_00",
+      "first_frame_foreground_pixels": 83885,
+      "first_frame_valid_instance_depth_points": 81520,
+      "first_depth_max_m": 2.944999933242798,
+      "first_backproject_z_max_m": 2.9170000553131104,
+      "first_native_intrinsics": [
+        [
+          577.87060546875,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          577.87060546875,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "tracked_ids": 12,
+      "max_tracked_frames": 3,
+      "tracks_at_least_three": 12,
+      "GT_used": false
+    },
+    {
+      "scene": "scene0019_00",
+      "first_frame_foreground_pixels": 150159,
+      "first_frame_valid_instance_depth_points": 126216,
+      "first_depth_max_m": 4.118000030517578,
+      "first_backproject_z_max_m": 3.756999969482422,
+      "first_native_intrinsics": [
+        [
+          577.87060546875,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          577.87060546875,
+          239.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "tracked_ids": 0,
+      "max_tracked_frames": 0,
+      "tracks_at_least_three": 0,
+      "GT_used": false
+    }
+  ]
+}

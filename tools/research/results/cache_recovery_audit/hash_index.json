@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "network_calls": 0,
+  "model_calls": 0,
+  "shared_files_written": false,
+  "source_hashes": {
+    "audit_recovery.py": "043c8f1f42ceda5a0522fe7f1d60611789e95fcdb60edcc5c7053e8430a027f0",
+    "test_contract_offline.py": "5c4aee06b00f5065a95e59ace930d78ad4598acdbc9e109ed281dca5106c9bbc"
+  },
+  "receipt_hashes": {
+    "live_contract_audit.json": "96788db5d466759855ee37aea987a8f75fa5d15083e9f78a18402fa8f5b584f0",
+    "offline_contract_tests.json": "228c3f533d6b7a04b132159ccd7906eec998d7004b16e08255cbaf959f6c5052",
+    "compatibility_receipt.json": "b7c8a55ec1f9438e44ed6fa69d90b4e127bc0c6585335ea4604a6b8ddff3b051"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "image_calls": 0,
+  "secret_values_recorded": false,
+  "results": [
+    {
+      "transport": "direct",
+      "success": true,
+      "configured_model_listed": true,
+      "models_count": 11
+    },
+    {
+      "transport": "existing_local_proxy",
+      "success": true,
+      "configured_model_listed": true,
+      "models_count": 11
+    }
+  ]
+}

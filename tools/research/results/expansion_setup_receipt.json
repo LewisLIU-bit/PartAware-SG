@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "preregistered": true,
+  "original_download_driver_sha256": "908beee97e6162aa961d6b2069b9498fdc543ee6f32b244adf60dbf3ee64bee4",
+  "source_evaluator_sha256": "0ecbb4fde815af2973acd1f493fee7ab42d777c0c36a5174076dbae22594c64c",
+  "copied_evaluator_sha256": "0ecbb4fde815af2973acd1f493fee7ab42d777c0c36a5174076dbae22594c64c",
+  "registration_sha256": "a222bcd180347c4eb3c7801c86158e39bfc0835b323968e63b16d54abeb7eb94",
+  "new_data_GT_in_construction": false,
+  "algorithms_trained": false,
+  "semantic_API_config_reused": "local config path only, never included"
+}

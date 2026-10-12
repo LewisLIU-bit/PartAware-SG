@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "tests": [
+    "repeated_co_visible_separation",
+    "composite_peer_deferral",
+    "unknown_kept_unknown",
+    "duplicate_view_not_independent",
+    "whole_part_ambiguity",
+    "explicit_part_parent",
+    "local_ID_remap",
+    "point_order",
+    "native_order",
+    "peer_order",
+    "view_order",
+    "rigid_camera_transform",
+    "stream_CORE_exact_signed_mask_score_equivalence",
+    "stream_CORE_point_order",
+    "stream_CORE_rigid_transform",
+    "projection_rigid_transform"
+  ],
+  "GT_in_test": false,
+  "new_API_calls": 0,
+  "training": false
+}

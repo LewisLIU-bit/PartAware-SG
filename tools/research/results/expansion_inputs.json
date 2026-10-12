@@ -1,0 +1,204 @@
+{
+  "preregistration": {
+    "version": "v19",
+    "scenes": [
+      "scene0025_00",
+      "scene0030_00",
+      "scene0046_00",
+      "scene0050_00",
+      "scene0063_00"
+    ],
+    "split": "official_validation_pilot",
+    "selection": "Next five distinct _00 scan prefixes in fixed official validation lexicographic order, before images, annotations or AP; no selection by difficulty or performance.",
+    "frame_stride": 40,
+    "frame_cap": null,
+    "training": false,
+    "ground_truth_in_construction": false,
+    "construction_sha256": "250368fb6d5d99eb5a9129ef3d51ed44be10176789d8d7ea4c8d9bd882b2f894",
+    "reference_commit": "188fc6de44f7577fecec2d69b75c7adbd9992251",
+    "point_evaluation": "class_agnostic_instance_masks_on_official_reconstructed_mesh",
+    "benchmark_scope": "Eight fixed scans, not complete 312-scan benchmark; five new scans begin as a preregistered transfer check and become development if used for changes.",
+    "official_splits": {
+      "val": {
+        "count": 312,
+        "sha256": "d75d4971c3fa7128c643695840e279042c212ef904fe933bd00cf9918c61b083",
+        "source": "https://raw.githubusercontent.com/ScanNet/ScanNet/master/Tasks/Benchmark/scannetv2_val.txt"
+      },
+      "train": {
+        "count": 1201,
+        "sha256": "96acca299b7855f02824c496b19077904d80996e7ced1bb9f0dac98f7dd4d0c8",
+        "source": "https://raw.githubusercontent.com/ScanNet/ScanNet/master/Tasks/Benchmark/scannetv2_train.txt"
+      },
+      "test": {
+        "count": 100,
+        "sha256": "0214c6a3b1ee516ad653393b0321e7c0394c7662a4b3702eac1ddd7fbc00f7e0",
+        "source": "https://raw.githubusercontent.com/ScanNet/ScanNet/master/Tasks/Benchmark/scannetv2_test.txt"
+      }
+    },
+    "existing_development_scans": [
+      "scene0011_00",
+      "scene0015_00",
+      "scene0019_00"
+    ],
+    "expanded_scans": [
+      "scene0011_00",
+      "scene0015_00",
+      "scene0019_00",
+      "scene0025_00",
+      "scene0030_00",
+      "scene0046_00",
+      "scene0050_00",
+      "scene0063_00"
+    ],
+    "acceptance": "Per-scan AP25/AP50/mean, and ai_001_010 original strict-box and point protocols; no pooled-only or per-scene strategy selection.",
+    "training_gate": "At least fifteen distinct, documented general algorithm hypotheses before optional training; repeat jobs and parameter variants do not count separately."
+  },
+  "results": [
+    {
+      "scene": "scene0025_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0025_00/manifest.json",
+      "manifest_sha256": "b0cc61db7f280527cb3c3b181ff8ec99c5c6ae48af42a28e3acf27be55e3587b",
+      "frames": 49,
+      "split": "val",
+      "files": [
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0025_00/scene0025_00.sens",
+          "sha256": "a708de8ba8653f15a3dd64506362783846e183c4817d242903f7a70f3625abc2"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0025_00/scene0025_00.txt",
+          "sha256": "09d8c5dcb1a65100f5c014ba52cdeacdbea3eeb7edce99cd8ffce748bc2fa694"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0025_00/scene0025_00_vh_clean_2.ply",
+          "sha256": "b32e7c910ac77944f96f9ae69b214b36c8e151b8120bf7e7eb9b9bcb04d848b1"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0025_00/scene0025_00.aggregation.json",
+          "sha256": "3ba40e01e08b68869f04ed1422aed44d39e804b9f1a27f1c93f9af933c9846a5"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0025_00/scene0025_00_vh_clean_2.0.010000.segs.json",
+          "sha256": "03cb779304eca3b0e4121826078c1a936e7c1095721ad7d0c85a47198fad4018"
+        }
+      ]
+    },
+    {
+      "scene": "scene0030_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0030_00/manifest.json",
+      "manifest_sha256": "84002d7a75dd63e986d19a94d76c5214f95358717855c489399acb20c738ecd3",
+      "frames": 63,
+      "split": "val",
+      "files": [
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0030_00/scene0030_00.sens",
+          "sha256": "0b103c13bdb8b2c00b058941b6b725bd8c1cda351efdcc990a8c7a2188a2da5f"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0030_00/scene0030_00.txt",
+          "sha256": "da186aa376564dfb383cf31b7738ab5e33fb6e50491f95e5acb37a81bd38f704"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0030_00/scene0030_00_vh_clean_2.ply",
+          "sha256": "1541b52e8037f212d1c060b8e89f0cc5ed31b5a1a7be48fb5f446d9ab14b5f69"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0030_00/scene0030_00.aggregation.json",
+          "sha256": "b2ce5891041bdf645955a92e7a3bb5efe55c07a1ba56d6d035c492982066c87e"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0030_00/scene0030_00_vh_clean_2.0.010000.segs.json",
+          "sha256": "80e3189c1a3440d43df56a775fa9dc54dc91c7c595e1eb0db545b69660f27242"
+        }
+      ]
+    },
+    {
+      "scene": "scene0046_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0046_00/manifest.json",
+      "manifest_sha256": "a1b964b9e9afd6c745c96c524b1d3dab257e4ed98bbc251ff76400e2f5198601",
+      "frames": 62,
+      "split": "val",
+      "files": [
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0046_00/scene0046_00.sens",
+          "sha256": "29afd39d3696572c0b39e80eaf631db7a204df3701ee722bf1ce85db255af88c"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0046_00/scene0046_00.txt",
+          "sha256": "2f5acee2dc1e82ffa4c21ad39f93c5ea0917647f48a2a259f4268f17c2ed3570"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0046_00/scene0046_00_vh_clean_2.ply",
+          "sha256": "36ecb2768178d21996ac36299cd81b2215405e03e9e3a9fdf704f606b7b47b25"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0046_00/scene0046_00.aggregation.json",
+          "sha256": "a752f8d87b1d9facbe67caf577eecf117c10821353aa31800ea65749aba77f65"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0046_00/scene0046_00_vh_clean_2.0.010000.segs.json",
+          "sha256": "69994eeb368ddeb13b28a1957fd4c12715767f59b90f5728c2bdd1d3a31c0d80"
+        }
+      ]
+    },
+    {
+      "scene": "scene0050_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0050_00/manifest.json",
+      "manifest_sha256": "11d140cff8c313cb373b1bf93cd9d5377e6ece0304bbec24e1c435ef7b381dca",
+      "frames": 117,
+      "split": "val",
+      "files": [
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0050_00/scene0050_00.sens",
+          "sha256": "3982aa1e47325c74b47e138ab37e177301bfe4874bcc46d2a74fd4eff961620b"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0050_00/scene0050_00.txt",
+          "sha256": "3afc02f85a823275e070788022abd178816c902119606360c3dc99465752f02c"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0050_00/scene0050_00_vh_clean_2.ply",
+          "sha256": "d2f06f5963bee12a83806ec318412f5832584c00effacc3003a2f2ee32b09c2e"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0050_00/scene0050_00.aggregation.json",
+          "sha256": "3a30d5ab24b66d217e7d9bdeaa573fd8236dbd3f60db1af733ad505eebf54de2"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0050_00/scene0050_00_vh_clean_2.0.010000.segs.json",
+          "sha256": "6586d71f486807d6d5b6241dff8c8b2868fc5337b158ee62212b75ef9e1aa413"
+        }
+      ]
+    },
+    {
+      "scene": "scene0063_00",
+      "manifest": "/home/lewisliu/datasets/scannet-sg-input/scannet/scene0063_00/manifest.json",
+      "manifest_sha256": "222863012fb64e713838c5ef17a0344ab619faba5d8e16f785b3ee32323c7104",
+      "frames": 15,
+      "split": "val",
+      "files": [
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0063_00/scene0063_00.sens",
+          "sha256": "cd52790e043399c105c3efaf78b063e0264bed9d1734def0f6169ac09f9b6710"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0063_00/scene0063_00.txt",
+          "sha256": "77bcc6f0c011b764c7b0b8b120e7f19bd14125188661910156eec9c5e65fef73"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0063_00/scene0063_00_vh_clean_2.ply",
+          "sha256": "919ae89bb681326999854fbd1fc7a308ea34936ee0c3f7ba5e29171ba2e261d7"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0063_00/scene0063_00.aggregation.json",
+          "sha256": "19e96863cfc710678f88def399c2056dc08d45976bc600bb84c3083b1a66d843"
+        },
+        {
+          "path": "/home/lewisliu/datasets/scannet/scans/scene0063_00/scene0063_00_vh_clean_2.0.010000.segs.json",
+          "sha256": "7fa00343f3682a91096de7350def496e90f2d6a0e7f417ec05466162517b0a36"
+        }
+      ]
+    }
+  ],
+  "complete": true
+}

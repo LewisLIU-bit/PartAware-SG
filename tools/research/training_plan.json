@@ -132,6 +132,16 @@
     "requirement": "independent multi-scene train/calibration/test; freeze all large backbones"
   },
   "retained_algorithm_candidate": {
+    "name": "SAGE-CORE-V",
+    "formal_default": "v19",
+    "promoted": false,
+    "ESAM_geometric_peer_dependency": true,
+    "full_three_scan_cycles": 3,
+    "new_project_training": false,
+    "Hypersim010_transfer_rejected": true,
+    "expanded_five_scan_comparison_pending": true
+  },
+  "previous_retained_algorithm_candidate": {
     "name": "MICA-VSA",
     "module": "soft_mutual_association.py",
     "full_three_scan_replay": true,
@@ -144,5 +154,13 @@
     ],
     "per_scene_regression": true,
     "formal_default": "v19"
+  },
+  "training_attempt_gate": {
+    "minimum_distinct_hypotheses": 15,
+    "conservatively_grouped_completed": 15,
+    "minimum_attempt_count_met": true,
+    "parameter_or_repeat_variants_count_separately": false,
+    "passed": false,
+    "eight_scan_and_010_acceptance_pending": true
   }
 }

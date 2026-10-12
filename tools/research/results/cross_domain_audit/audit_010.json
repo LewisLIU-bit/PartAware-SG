@@ -1,0 +1,3131 @@
+{
+  "complete": true,
+  "evaluation_only": true,
+  "GT_in_construction": false,
+  "no_candidate_or_production_mutation": true,
+  "API_calls": 0,
+  "training": false,
+  "counterfactuals_are_attribution_not_new_algorithm_attempts": true,
+  "scene": "ai_001_010",
+  "domain_points": 2412033,
+  "point_eligible_GT": 104,
+  "historical_full_box_GT": 109,
+  "historical_strict_box_metrics": {
+    "AP25": 0.665310717064037,
+    "AP50": 0.4354798656162385
+  },
+  "new_strict_box_not_computed_because_screens_have_no_canonical_published_boxes": true,
+  "metric_protocol": "pinned native OpenMMLab evaluator; .50-.90 mean; 100-point GT/pred criterion; fixed 5cm transfer",
+  "sparse_equivalence_check": {
+    "exact_matches_to_fixed_native_evaluator": true,
+    "seed": 1701,
+    "synthetic_points": 1500,
+    "synthetic_predictions": 9
+  },
+  "baseline": {
+    "metrics": {
+      "all_ap_25%": 0.7272568270928927,
+      "all_ap_50%": 0.564064323838434,
+      "all_ap": 0.3533148292661548
+    },
+    "geometry": {
+      "predictions": 141,
+      "predictions_ge100": 133,
+      "best_GT_IoU_le25": 31,
+      "best_GT_IoU_le50": 51,
+      "mixed_at_least_two_GT_IoU_gt10": 5,
+      "GT_with_any_IoU_gt25": 97,
+      "GT_with_any_IoU_gt50": 82,
+      "GT_with_counted_prediction_IoU_gt25": 97,
+      "GT_with_counted_prediction_IoU_gt50": 82,
+      "any_prediction_counts_include_under100_masks": true,
+      "best_recall_is_not_one_to_one_AP_recall": true
+    },
+    "FP": {
+      "0.25": {
+        "nonmatched_nonignored": 19,
+        "highest_score": [
+          {
+            "name": "native:199",
+            "score": 0.785269288912143,
+            "points": 23894
+          },
+          {
+            "name": "native:114",
+            "score": 0.7067834821561991,
+            "points": 2421
+          },
+          {
+            "name": "native:411",
+            "score": 0.6833066929085871,
+            "points": 1234
+          },
+          {
+            "name": "native:8",
+            "score": 0.6770645955581855,
+            "points": 22120
+          },
+          {
+            "name": "native:47",
+            "score": 0.6726678430982818,
+            "points": 30710
+          },
+          {
+            "name": "native:113",
+            "score": 0.6549342131398943,
+            "points": 607
+          },
+          {
+            "name": "native:174",
+            "score": 0.6521110078531299,
+            "points": 11938
+          },
+          {
+            "name": "native:40",
+            "score": 0.5435165917589292,
+            "points": 321
+          }
+        ]
+      },
+      "0.5": {
+        "nonmatched_nonignored": 36,
+        "highest_score": [
+          {
+            "name": "native:199",
+            "score": 0.785269288912143,
+            "points": 23894
+          },
+          {
+            "name": "native:114",
+            "score": 0.7067834821561991,
+            "points": 2421
+          },
+          {
+            "name": "native:411",
+            "score": 0.6833066929085871,
+            "points": 1234
+          },
+          {
+            "name": "native:279",
+            "score": 0.6796922317820955,
+            "points": 200
+          },
+          {
+            "name": "native:8",
+            "score": 0.6770645955581855,
+            "points": 22120
+          },
+          {
+            "name": "native:47",
+            "score": 0.6726678430982818,
+            "points": 30710
+          },
+          {
+            "name": "native:113",
+            "score": 0.6549342131398943,
+            "points": 607
+          },
+          {
+            "name": "native:174",
+            "score": 0.6521110078531299,
+            "points": 11938
+          }
+        ]
+      }
+    },
+    "correct_points_against_fixed_best_GT": 721183
+  },
+  "peer": {
+    "geometry": {
+      "predictions": 75,
+      "predictions_ge100": 72,
+      "best_GT_IoU_le25": 54,
+      "best_GT_IoU_le50": 66,
+      "mixed_at_least_two_GT_IoU_gt10": 7,
+      "GT_with_any_IoU_gt25": 15,
+      "GT_with_any_IoU_gt50": 6,
+      "GT_with_counted_prediction_IoU_gt25": 15,
+      "GT_with_counted_prediction_IoU_gt50": 6,
+      "any_prediction_counts_include_under100_masks": true,
+      "best_recall_is_not_one_to_one_AP_recall": true
+    }
+  },
+  "image_confirmed_peer": {
+    "count": 64,
+    "geometry": {
+      "predictions": 64,
+      "predictions_ge100": 62,
+      "best_GT_IoU_le25": 45,
+      "best_GT_IoU_le50": 56,
+      "mixed_at_least_two_GT_IoU_gt10": 7,
+      "GT_with_any_IoU_gt25": 14,
+      "GT_with_any_IoU_gt50": 6,
+      "GT_with_counted_prediction_IoU_gt25": 14,
+      "GT_with_counted_prediction_IoU_gt50": 6,
+      "any_prediction_counts_include_under100_masks": true,
+      "best_recall_is_not_one_to_one_AP_recall": true
+    }
+  },
+  "inputs": {
+    "comparison.json": "da5d9d9fd16d16330941951ebc0abc7bd9cb3bd8d89ae59cf9933ef6f7e8854b",
+    "observed_domain.npz": "7de5dae365f8c141f2bb4cfacb9fb1cca469503cc519b5936e04f18be80a5242",
+    "evaluation_GT.npz": "a9daaa8fa48fa96fdd610584475301fe602a08755ec24d4b28d51980caa40326",
+    "ESAM_common_domain_masks.npz": "b9ec459b9d0f786d042c1dd5f37c33e3f097c4f7117238b4a252571201efdee5"
+  },
+  "source_cloud_sha256": "2b1551cdb9018f26bee18a68fe37d602c728fd30bb084f996d5b088d85deb1e3",
+  "graph_sha256": "35430fb026ab733e584bf4e19d8372db53526bea468a82e2f60118ae4150b8f1",
+  "script_sha256": "390eb0b5a8499ec8e6f3ed03119413455513f0b788eca1ae0fa59a3397c24965",
+  "variants": [
+    {
+      "mode": "exclusive_weighted",
+      "saved_masks_sha256": "f43a0b01af208558c568e9ce92394f34cde98c843bfe4e16329978bf96531d09",
+      "metrics": {
+        "all_ap_25%": 0.42772659353548537,
+        "all_ap_50%": 0.26156140440122605,
+        "all_ap": 0.13013958931874706
+      },
+      "geometry": {
+        "predictions": 201,
+        "predictions_ge100": 195,
+        "best_GT_IoU_le25": 98,
+        "best_GT_IoU_le50": 126,
+        "mixed_at_least_two_GT_IoU_gt10": 6,
+        "GT_with_any_IoU_gt25": 92,
+        "GT_with_any_IoU_gt50": 69,
+        "GT_with_counted_prediction_IoU_gt25": 90,
+        "GT_with_counted_prediction_IoU_gt50": 69,
+        "any_prediction_counts_include_under100_masks": true,
+        "best_recall_is_not_one_to_one_AP_recall": true
+      },
+      "FP": {
+        "0.25": {
+          "nonmatched_nonignored": 64,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 1525
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 33559
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 10972
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 32140
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 28259
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 18366
+            },
+            {
+              "name": "peer:3",
+              "score": 0.5432150211569102,
+              "points": 6562
+            },
+            {
+              "name": "native:8",
+              "score": 0.5411915432954811,
+              "points": 16553
+            }
+          ]
+        },
+        "0.5": {
+          "nonmatched_nonignored": 97,
+          "highest_score": [
+            {
+              "name": "peer:6",
+              "score": 0.6637906938522786,
+              "points": 7668
+            },
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 1525
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 33559
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 10972
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 32140
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 28259
+            },
+            {
+              "name": "native:15",
+              "score": 0.5657068089021521,
+              "points": 9840
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 20008
+            }
+          ]
+        }
+      },
+      "native_NMS_suppressed": [
+        {
+          "name": "native:2",
+          "points": 9709,
+          "score": 0.7885398866993336,
+          "best_GT_id": 24,
+          "GT_label": "chair",
+          "best_GT_IoU": 0.9275929549902152
+        },
+        {
+          "name": "native:1",
+          "points": 10954,
+          "score": 0.7763082954950912,
+          "best_GT_id": 25,
+          "GT_label": "chair",
+          "best_GT_IoU": 0.8784918751141135
+        },
+        {
+          "name": "native:162",
+          "points": 97873,
+          "score": 0.7139223613071153,
+          "best_GT_id": 30,
+          "GT_label": "cabinet",
+          "best_GT_IoU": 0.8792869710692549
+        },
+        {
+          "name": "native:138",
+          "points": 32371,
+          "score": 0.60236737473353,
+          "best_GT_id": 67,
+          "GT_label": "refrigerator",
+          "best_GT_IoU": 0.8980491634958023
+        }
+      ],
+      "native_or_peer_under100_skipped": [
+        "native:300",
+        "native:301",
+        "native:181",
+        "native:214",
+        "native:239",
+        "native:449",
+        "native:462",
+        "native:467",
+        "peer:55",
+        "peer:70",
+        "peer:73"
+      ],
+      "original_geometry_after_NMS": {
+        "predictions": 201,
+        "predictions_ge100": 201,
+        "best_GT_IoU_le25": 85,
+        "best_GT_IoU_le50": 117,
+        "mixed_at_least_two_GT_IoU_gt10": 12,
+        "GT_with_any_IoU_gt25": 97,
+        "GT_with_any_IoU_gt50": 82,
+        "GT_with_counted_prediction_IoU_gt25": 97,
+        "GT_with_counted_prediction_IoU_gt50": 82,
+        "any_prediction_counts_include_under100_masks": true,
+        "best_recall_is_not_one_to_one_AP_recall": true
+      },
+      "original_geometry_after_NMS_FP": {
+        "0.25": {
+          "nonmatched_nonignored": 64,
+          "highest_score": [
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 34934
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 46052
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 45534
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 35749
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 19503
+            },
+            {
+              "name": "native:8",
+              "score": 0.5411915432954811,
+              "points": 22120
+            },
+            {
+              "name": "native:47",
+              "score": 0.5209242769637913,
+              "points": 30710
+            },
+            {
+              "name": "native:174",
+              "score": 0.5020016538014707,
+              "points": 11938
+            }
+          ]
+        },
+        "0.5": {
+          "nonmatched_nonignored": 93,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 3033
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 34934
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 46052
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 45534
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 35749
+            },
+            {
+              "name": "peer:8",
+              "score": 0.5733903315329043,
+              "points": 212029
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 28688
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 19503
+            }
+          ]
+        }
+      },
+      "counterfactuals": {
+        "v19_geometry_native_NMS_only_original_scores": {
+          "all_ap_25%": 0.6733085156747229,
+          "all_ap_50%": 0.5088925907728723,
+          "all_ap": 0.3052011500019139
+        },
+        "post_NMS_original_geometry_SAGE_scores": {
+          "all_ap_25%": 0.4536905704864794,
+          "all_ap_50%": 0.32846045860032314,
+          "all_ap": 0.1844494017027813
+        },
+        "final_geometry_original_branch_scores": {
+          "all_ap_25%": 0.44992631771137165,
+          "all_ap_50%": 0.28271433459026124,
+          "all_ap": 0.14492753946404188
+        },
+        "final_native_geometry_only_original_native_scores": {
+          "all_ap_25%": 0.592405980850685,
+          "all_ap_50%": 0.39426638417500587,
+          "all_ap": 0.2233504721407152
+        }
+      },
+      "native_point_ownership": {
+        "native_points_original": 849602,
+        "baseline_correct_points": 721183,
+        "correct_points_moved": 462522,
+        "moved_to_peer": 453350,
+        "moved_to_other_native": 0,
+        "moved_to_unowned": 9172
+      },
+      "GT_crossed_down_25": 5,
+      "GT_crossed_down_50": 13,
+      "GT_crossed_up_25": 0,
+      "GT_crossed_up_50": 0,
+      "GT_counted_prediction_crossed_down_25": 7,
+      "GT_counted_prediction_crossed_down_50": 13,
+      "native_kept_ge100_before_but_under100_after": 3,
+      "GT_regressions_gt5pp": [
+        {
+          "GT_id": 1,
+          "GT_label": "lamp",
+          "GT_points": 14841,
+          "baseline_native": "native:25",
+          "baseline_IoU": 0.8722458055387103,
+          "final_best_name": "native:25",
+          "final_best_IoU": 0.24425577791253958,
+          "original_identity_IoU_after": 0.24425577791253958,
+          "baseline_correct_points": 12945,
+          "original_identity_correct_points_after": 3625,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.24425577791253958
+        },
+        {
+          "GT_id": 6,
+          "GT_label": "otherprop",
+          "GT_points": 374,
+          "baseline_native": "native:444",
+          "baseline_IoU": 0.8354114713216958,
+          "final_best_name": "native:444",
+          "final_best_IoU": 0.24802110817941952,
+          "original_identity_IoU_after": 0.24802110817941952,
+          "baseline_correct_points": 335,
+          "original_identity_correct_points_after": 94,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9494949494949495,
+          "final_best_GT_coverage": 0.25133689839572193
+        },
+        {
+          "GT_id": 9,
+          "GT_label": "otherprop",
+          "GT_points": 354,
+          "baseline_native": "native:447",
+          "baseline_IoU": 0.8844086021505376,
+          "final_best_name": "native:447",
+          "final_best_IoU": 0.31301939058171746,
+          "original_identity_IoU_after": 0.31301939058171746,
+          "baseline_correct_points": 329,
+          "original_identity_correct_points_after": 113,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9416666666666667,
+          "final_best_GT_coverage": 0.3192090395480226
+        },
+        {
+          "GT_id": 5,
+          "GT_label": "otherprop",
+          "GT_points": 917,
+          "baseline_native": "native:84",
+          "baseline_IoU": 0.9349173553719008,
+          "final_best_name": "peer:38",
+          "final_best_IoU": 0.37641509433962267,
+          "original_identity_IoU_after": 0.12740899357601712,
+          "baseline_correct_points": 905,
+          "original_identity_correct_points_after": 119,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.3988005997001499,
+          "final_best_GT_coverage": 0.8702290076335878
+        },
+        {
+          "GT_id": 63,
+          "GT_label": "otherprop",
+          "GT_points": 752,
+          "baseline_native": "native:57",
+          "baseline_IoU": 0.9973474801061007,
+          "final_best_name": "native:57",
+          "final_best_IoU": 0.4454787234042553,
+          "original_identity_IoU_after": 0.4454787234042553,
+          "baseline_correct_points": 752,
+          "original_identity_correct_points_after": 335,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.4454787234042553
+        },
+        {
+          "GT_id": 62,
+          "GT_label": "otherprop",
+          "GT_points": 806,
+          "baseline_native": "native:35",
+          "baseline_IoU": 0.9962917181705809,
+          "final_best_name": "native:35",
+          "final_best_IoU": 0.46220570012391576,
+          "original_identity_IoU_after": 0.46220570012391576,
+          "baseline_correct_points": 806,
+          "original_identity_correct_points_after": 373,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9973262032085561,
+          "final_best_GT_coverage": 0.4627791563275434
+        },
+        {
+          "GT_id": 148,
+          "GT_label": "counter",
+          "GT_points": 121251,
+          "baseline_native": "native:141",
+          "baseline_IoU": 0.6632398383646304,
+          "final_best_name": "peer:8",
+          "final_best_IoU": 0.13741347473610413,
+          "original_identity_IoU_after": 0.043984025099085305,
+          "baseline_correct_points": 89288,
+          "original_identity_correct_points_after": 5804,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.25505163897620114,
+          "final_best_GT_coverage": 0.22954037492474288
+        },
+        {
+          "GT_id": 10,
+          "GT_label": "otherprop",
+          "GT_points": 525,
+          "baseline_native": "native:448",
+          "baseline_IoU": 0.8378839590443686,
+          "final_best_name": "native:448",
+          "final_best_IoU": 0.3159722222222222,
+          "original_identity_IoU_after": 0.3159722222222222,
+          "baseline_correct_points": 491,
+          "original_identity_correct_points_after": 182,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7811158798283262,
+          "final_best_GT_coverage": 0.3466666666666667
+        },
+        {
+          "GT_id": 105,
+          "GT_label": "otherprop",
+          "GT_points": 447,
+          "baseline_native": "native:34",
+          "baseline_IoU": 0.9977628635346756,
+          "final_best_name": "native:34",
+          "final_best_IoU": 0.5145413870246085,
+          "original_identity_IoU_after": 0.5145413870246085,
+          "baseline_correct_points": 446,
+          "original_identity_correct_points_after": 230,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.5145413870246085
+        },
+        {
+          "GT_id": 7,
+          "GT_label": "otherprop",
+          "GT_points": 252,
+          "baseline_native": "native:445",
+          "baseline_IoU": 0.7027027027027027,
+          "final_best_name": "native:445",
+          "final_best_IoU": 0.2536764705882353,
+          "original_identity_IoU_after": 0.2536764705882353,
+          "baseline_correct_points": 208,
+          "original_identity_correct_points_after": 69,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7752808988764045,
+          "final_best_GT_coverage": 0.27380952380952384
+        },
+        {
+          "GT_id": 127,
+          "GT_label": "otherprop",
+          "GT_points": 1460,
+          "baseline_native": "native:37",
+          "baseline_IoU": 0.8101772441395083,
+          "final_best_name": "native:37",
+          "final_best_IoU": 0.4304750869061414,
+          "original_identity_IoU_after": 0.4304750869061414,
+          "baseline_correct_points": 1417,
+          "original_identity_correct_points_after": 743,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.736372646184341,
+          "final_best_GT_coverage": 0.5089041095890411
+        },
+        {
+          "GT_id": 57,
+          "GT_label": "cabinet",
+          "GT_points": 77512,
+          "baseline_native": "native:15",
+          "baseline_IoU": 0.8739428062703769,
+          "final_best_name": "peer:10",
+          "final_best_IoU": 0.5024322446143155,
+          "original_identity_IoU_after": 0.06893133787736022,
+          "baseline_correct_points": 72643,
+          "original_identity_correct_points_after": 5633,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.776041844140798,
+          "final_best_GT_coverage": 0.5876380431417071
+        },
+        {
+          "GT_id": 67,
+          "GT_label": "refrigerator",
+          "GT_points": 30481,
+          "baseline_native": "native:138",
+          "baseline_IoU": 0.8980491634958023,
+          "final_best_name": "peer:15",
+          "final_best_IoU": 0.5626229508196722,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 29738,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.7087079454840042,
+          "final_best_GT_coverage": 0.7318657524359437
+        },
+        {
+          "GT_id": 36,
+          "GT_label": "otherprop",
+          "GT_points": 142,
+          "baseline_native": "native:473",
+          "baseline_IoU": 0.9659863945578231,
+          "final_best_name": "native:473",
+          "final_best_IoU": 0.7142857142857143,
+          "original_identity_IoU_after": 0.7142857142857143,
+          "baseline_correct_points": 142,
+          "original_identity_correct_points_after": 105,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9545454545454546,
+          "final_best_GT_coverage": 0.7394366197183099
+        },
+        {
+          "GT_id": 119,
+          "GT_label": "otherprop",
+          "GT_points": 1902,
+          "baseline_native": "native:101",
+          "baseline_IoU": 0.9085487077534792,
+          "final_best_name": "native:101",
+          "final_best_IoU": 0.7087525150905433,
+          "original_identity_IoU_after": 0.7087525150905433,
+          "baseline_correct_points": 1828,
+          "original_identity_correct_points_after": 1409,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9424749163879599,
+          "final_best_GT_coverage": 0.7407991587802313
+        },
+        {
+          "GT_id": 8,
+          "GT_label": "otherprop",
+          "GT_points": 126,
+          "baseline_native": "native:446",
+          "baseline_IoU": 0.5026455026455027,
+          "final_best_name": "native:446",
+          "final_best_IoU": 0.3108108108108108,
+          "original_identity_IoU_after": 0.3108108108108108,
+          "baseline_correct_points": 95,
+          "original_identity_correct_points_after": 46,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.6764705882352942,
+          "final_best_GT_coverage": 0.36507936507936506
+        },
+        {
+          "GT_id": 26,
+          "GT_label": "window",
+          "GT_points": 14964,
+          "baseline_native": "native:156",
+          "baseline_IoU": 0.3705198136939899,
+          "final_best_name": "peer:31",
+          "final_best_IoU": 0.18536260811709915,
+          "original_identity_IoU_after": 0.04704999732061518,
+          "baseline_correct_points": 14876,
+          "original_identity_correct_points_after": 878,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.2695955099670989,
+          "final_best_GT_coverage": 0.3723603314621759
+        },
+        {
+          "GT_id": 95,
+          "GT_label": "otherstructure",
+          "GT_points": 1594,
+          "baseline_native": "native:348",
+          "baseline_IoU": 0.9415384615384615,
+          "final_best_name": "native:348",
+          "final_best_IoU": 0.785139318885449,
+          "original_identity_IoU_after": 0.785139318885449,
+          "baseline_correct_points": 1530,
+          "original_identity_correct_points_after": 1268,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9837083010085338,
+          "final_best_GT_coverage": 0.795483061480552
+        },
+        {
+          "GT_id": 68,
+          "GT_label": "cabinet",
+          "GT_points": 172568,
+          "baseline_native": "native:177",
+          "baseline_IoU": 0.30571541053460394,
+          "final_best_name": "peer:9",
+          "final_best_IoU": 0.1578802500828554,
+          "original_identity_IoU_after": 0.03228776411865869,
+          "baseline_correct_points": 52805,
+          "original_identity_correct_points_after": 5576,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8375100569146876,
+          "final_best_GT_coverage": 0.16286912985026192
+        },
+        {
+          "GT_id": 30,
+          "GT_label": "cabinet",
+          "GT_points": 97586,
+          "baseline_native": "native:162",
+          "baseline_IoU": 0.8792869710692549,
+          "final_best_name": "peer:29",
+          "final_best_IoU": 0.7428941827822833,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 91452,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.9383656936014085,
+          "final_best_GT_coverage": 0.7810034226220974
+        },
+        {
+          "GT_id": 126,
+          "GT_label": "otherprop",
+          "GT_points": 1122,
+          "baseline_native": "native:247",
+          "baseline_IoU": 0.5167373880245167,
+          "final_best_name": "native:247",
+          "final_best_IoU": 0.40218943360304615,
+          "original_identity_IoU_after": 0.40218943360304615,
+          "baseline_correct_points": 1096,
+          "original_identity_correct_points_after": 845,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.46326754385964913,
+          "final_best_GT_coverage": 0.7531194295900179
+        },
+        {
+          "GT_id": 25,
+          "GT_label": "chair",
+          "GT_points": 9623,
+          "baseline_native": "native:1",
+          "baseline_IoU": 0.8784918751141135,
+          "final_best_name": "peer:0",
+          "final_best_IoU": 0.7727038449644367,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 9623,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.9897016107736994,
+          "final_best_GT_coverage": 0.7789670580899928
+        },
+        {
+          "GT_id": 117,
+          "GT_label": "otherprop",
+          "GT_points": 284,
+          "baseline_native": "native:274",
+          "baseline_IoU": 0.839344262295082,
+          "final_best_name": "native:274",
+          "final_best_IoU": 0.7344262295081967,
+          "original_identity_IoU_after": 0.7344262295081967,
+          "baseline_correct_points": 256,
+          "original_identity_correct_points_after": 224,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9142857142857143,
+          "final_best_GT_coverage": 0.7887323943661971
+        },
+        {
+          "GT_id": 27,
+          "GT_label": "window",
+          "GT_points": 14335,
+          "baseline_native": "native:156",
+          "baseline_IoU": 0.3519236504622726,
+          "final_best_name": "peer:31",
+          "final_best_IoU": 0.25584816303099883,
+          "original_identity_IoU_after": 0.038839751689281984,
+          "baseline_correct_points": 14160,
+          "original_identity_correct_points_after": 707,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.3450261273466228,
+          "final_best_GT_coverage": 0.49745378444366933
+        },
+        {
+          "GT_id": 98,
+          "GT_label": "otherprop",
+          "GT_points": 614,
+          "baseline_native": "native:45",
+          "baseline_IoU": 0.9838969404186796,
+          "final_best_name": "native:45",
+          "final_best_IoU": 0.8904991948470209,
+          "original_identity_IoU_after": 0.8904991948470209,
+          "baseline_correct_points": 611,
+          "original_identity_correct_points_after": 553,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9875,
+          "final_best_GT_coverage": 0.9006514657980456
+        },
+        {
+          "GT_id": 24,
+          "GT_label": "chair",
+          "GT_points": 9006,
+          "baseline_native": "native:2",
+          "baseline_IoU": 0.9275929549902152,
+          "final_best_name": "peer:1",
+          "final_best_IoU": 0.8372821208642104,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 9006,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.9331162033267418,
+          "final_best_GT_coverage": 0.8907395069953364
+        },
+        {
+          "GT_id": 13,
+          "GT_label": "otherprop",
+          "GT_points": 241,
+          "baseline_native": "native:450",
+          "baseline_IoU": 0.8980392156862745,
+          "final_best_name": "native:450",
+          "final_best_IoU": 0.8117647058823529,
+          "original_identity_IoU_after": 0.8117647058823529,
+          "baseline_correct_points": 229,
+          "original_identity_correct_points_after": 207,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9366515837104072,
+          "final_best_GT_coverage": 0.8589211618257261
+        },
+        {
+          "GT_id": 60,
+          "GT_label": "otherprop",
+          "GT_points": 295,
+          "baseline_native": "native:62",
+          "baseline_IoU": 0.7544757033248082,
+          "final_best_name": "native:62",
+          "final_best_IoU": 0.675392670157068,
+          "original_identity_IoU_after": 0.675392670157068,
+          "baseline_correct_points": 295,
+          "original_identity_correct_points_after": 258,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7478260869565218,
+          "final_best_GT_coverage": 0.8745762711864407
+        },
+        {
+          "GT_id": 23,
+          "GT_label": "counter",
+          "GT_points": 125593,
+          "baseline_native": "native:3",
+          "baseline_IoU": 0.7952214461249836,
+          "final_best_name": "native:3",
+          "final_best_IoU": 0.7392427451071653,
+          "original_identity_IoU_after": 0.7392427451071653,
+          "baseline_correct_points": 102578,
+          "original_identity_correct_points_after": 95298,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9663347461923787,
+          "final_best_GT_coverage": 0.758784327151991
+        },
+        {
+          "GT_id": 45,
+          "GT_label": "shelves",
+          "GT_points": 12857,
+          "baseline_native": "native:78",
+          "baseline_IoU": 0.3650584484590861,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.31307683087618365,
+          "original_identity_IoU_after": 0.021776178754023857,
+          "baseline_correct_points": 8588,
+          "original_identity_correct_points_after": 345,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.3916433426629348,
+          "final_best_GT_coverage": 0.6094734385937621
+        }
+      ]
+    },
+    {
+      "mode": "exclusive_core",
+      "saved_masks_sha256": "4f3fb84b513bc968bdd901ed0d682791cf82c86368fac5222af28c99243dadb5",
+      "metrics": {
+        "all_ap_25%": 0.3793059088366891,
+        "all_ap_50%": 0.20845027481184242,
+        "all_ap": 0.11104606031569532
+      },
+      "geometry": {
+        "predictions": 201,
+        "predictions_ge100": 179,
+        "best_GT_IoU_le25": 91,
+        "best_GT_IoU_le50": 123,
+        "mixed_at_least_two_GT_IoU_gt10": 3,
+        "GT_with_any_IoU_gt25": 85,
+        "GT_with_any_IoU_gt50": 56,
+        "GT_with_counted_prediction_IoU_gt25": 82,
+        "GT_with_counted_prediction_IoU_gt50": 56,
+        "any_prediction_counts_include_under100_masks": true,
+        "best_recall_is_not_one_to_one_AP_recall": true
+      },
+      "FP": {
+        "0.25": {
+          "nonmatched_nonignored": 59,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 776
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 15998
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 21192
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 16916
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 10717
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 7657
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 373
+            },
+            {
+              "name": "native:8",
+              "score": 0.5411915432954811,
+              "points": 9718
+            }
+          ]
+        },
+        "0.5": {
+          "nonmatched_nonignored": 91,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 776
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 15998
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 21192
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 16916
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 10717
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 7657
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 373
+            },
+            {
+              "name": "peer:3",
+              "score": 0.5432150211569102,
+              "points": 684
+            }
+          ]
+        }
+      },
+      "native_NMS_suppressed": [
+        {
+          "name": "native:2",
+          "points": 9709,
+          "score": 0.7885398866993336,
+          "best_GT_id": 24,
+          "GT_label": "chair",
+          "best_GT_IoU": 0.9275929549902152
+        },
+        {
+          "name": "native:1",
+          "points": 10954,
+          "score": 0.7763082954950912,
+          "best_GT_id": 25,
+          "GT_label": "chair",
+          "best_GT_IoU": 0.8784918751141135
+        },
+        {
+          "name": "native:162",
+          "points": 97873,
+          "score": 0.7139223613071153,
+          "best_GT_id": 30,
+          "GT_label": "cabinet",
+          "best_GT_IoU": 0.8792869710692549
+        },
+        {
+          "name": "native:138",
+          "points": 32371,
+          "score": 0.60236737473353,
+          "best_GT_id": 67,
+          "GT_label": "refrigerator",
+          "best_GT_IoU": 0.8980491634958023
+        }
+      ],
+      "native_or_peer_under100_skipped": [
+        "native:300",
+        "native:301",
+        "native:181",
+        "native:214",
+        "native:239",
+        "native:449",
+        "native:462",
+        "native:467",
+        "peer:55",
+        "peer:70",
+        "peer:73"
+      ],
+      "original_geometry_after_NMS": {
+        "predictions": 201,
+        "predictions_ge100": 201,
+        "best_GT_IoU_le25": 85,
+        "best_GT_IoU_le50": 117,
+        "mixed_at_least_two_GT_IoU_gt10": 12,
+        "GT_with_any_IoU_gt25": 97,
+        "GT_with_any_IoU_gt50": 82,
+        "GT_with_counted_prediction_IoU_gt25": 97,
+        "GT_with_counted_prediction_IoU_gt50": 82,
+        "any_prediction_counts_include_under100_masks": true,
+        "best_recall_is_not_one_to_one_AP_recall": true
+      },
+      "original_geometry_after_NMS_FP": {
+        "0.25": {
+          "nonmatched_nonignored": 64,
+          "highest_score": [
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 34934
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 46052
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 45534
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 35749
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 19503
+            },
+            {
+              "name": "native:8",
+              "score": 0.5411915432954811,
+              "points": 22120
+            },
+            {
+              "name": "native:47",
+              "score": 0.5209242769637913,
+              "points": 30710
+            },
+            {
+              "name": "native:174",
+              "score": 0.5020016538014707,
+              "points": 11938
+            }
+          ]
+        },
+        "0.5": {
+          "nonmatched_nonignored": 93,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 3033
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 34934
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 46052
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 45534
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 35749
+            },
+            {
+              "name": "peer:8",
+              "score": 0.5733903315329043,
+              "points": 212029
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 28688
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 19503
+            }
+          ]
+        }
+      },
+      "counterfactuals": {
+        "v19_geometry_native_NMS_only_original_scores": {
+          "all_ap_25%": 0.6733085156747229,
+          "all_ap_50%": 0.5088925907728723,
+          "all_ap": 0.3052011500019139
+        },
+        "post_NMS_original_geometry_SAGE_scores": {
+          "all_ap_25%": 0.4536905704864794,
+          "all_ap_50%": 0.32846045860032314,
+          "all_ap": 0.1844494017027813
+        },
+        "final_geometry_original_branch_scores": {
+          "all_ap_25%": 0.39650975110980474,
+          "all_ap_50%": 0.2342507867738941,
+          "all_ap": 0.12430121067828136
+        },
+        "final_native_geometry_only_original_native_scores": {
+          "all_ap_25%": 0.5318209535467641,
+          "all_ap_50%": 0.3095409191028524,
+          "all_ap": 0.16361629186558432
+        }
+      },
+      "native_point_ownership": {
+        "native_points_original": 849602,
+        "baseline_correct_points": 721183,
+        "correct_points_moved": 269641,
+        "moved_to_peer": 260469,
+        "moved_to_other_native": 0,
+        "moved_to_unowned": 9172
+      },
+      "GT_crossed_down_25": 12,
+      "GT_crossed_down_50": 27,
+      "GT_crossed_up_25": 0,
+      "GT_crossed_up_50": 1,
+      "GT_counted_prediction_crossed_down_25": 15,
+      "GT_counted_prediction_crossed_down_50": 27,
+      "native_kept_ge100_before_but_under100_after": 14,
+      "GT_regressions_gt5pp": [
+        {
+          "GT_id": 56,
+          "GT_label": "otherprop",
+          "GT_points": 316,
+          "baseline_native": "native:108",
+          "baseline_IoU": 0.940625,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.0372056719136204,
+          "original_identity_IoU_after": 0.03481012658227848,
+          "baseline_correct_points": 301,
+          "original_identity_correct_points_after": 11,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.03735144312393888,
+          "final_best_GT_coverage": 0.9050632911392406
+        },
+        {
+          "GT_id": 95,
+          "GT_label": "otherstructure",
+          "GT_points": 1594,
+          "baseline_native": "native:348",
+          "baseline_IoU": 0.9415384615384615,
+          "final_best_name": "native:348",
+          "final_best_IoU": 0.08197747183979975,
+          "original_identity_IoU_after": 0.08197747183979975,
+          "baseline_correct_points": 1530,
+          "original_identity_correct_points_after": 131,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9703703703703703,
+          "final_best_GT_coverage": 0.0821831869510665
+        },
+        {
+          "GT_id": 96,
+          "GT_label": "otherstructure",
+          "GT_points": 2587,
+          "baseline_native": "native:269",
+          "baseline_IoU": 0.9224006116207951,
+          "final_best_name": "peer:26",
+          "final_best_IoU": 0.08362121158160903,
+          "original_identity_IoU_after": 0.08024691358024691,
+          "baseline_correct_points": 2413,
+          "original_identity_correct_points_after": 208,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.08433908045977012,
+          "final_best_GT_coverage": 0.9076149980672594
+        },
+        {
+          "GT_id": 49,
+          "GT_label": "otherprop",
+          "GT_points": 101,
+          "baseline_native": "native:472",
+          "baseline_IoU": 0.8035714285714286,
+          "final_best_name": "native:472",
+          "final_best_IoU": 0.06930693069306931,
+          "original_identity_IoU_after": 0.06930693069306931,
+          "baseline_correct_points": 90,
+          "original_identity_correct_points_after": 7,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.06930693069306931
+        },
+        {
+          "GT_id": 55,
+          "GT_label": "otherprop",
+          "GT_points": 326,
+          "baseline_native": "native:82",
+          "baseline_IoU": 0.7085889570552147,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.039453125,
+          "original_identity_IoU_after": 0.03067484662576687,
+          "baseline_correct_points": 231,
+          "original_identity_correct_points_after": 10,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.03957163379913804,
+          "final_best_GT_coverage": 0.9294478527607362
+        },
+        {
+          "GT_id": 152,
+          "GT_label": "otherprop",
+          "GT_points": 170,
+          "baseline_native": "native:337",
+          "baseline_IoU": 0.8187134502923976,
+          "final_best_name": "native:337",
+          "final_best_IoU": 0.18235294117647058,
+          "original_identity_IoU_after": 0.18235294117647058,
+          "baseline_correct_points": 140,
+          "original_identity_correct_points_after": 31,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.18235294117647058
+        },
+        {
+          "GT_id": 13,
+          "GT_label": "otherprop",
+          "GT_points": 241,
+          "baseline_native": "native:450",
+          "baseline_IoU": 0.8980392156862745,
+          "final_best_name": "native:450",
+          "final_best_IoU": 0.2793522267206478,
+          "original_identity_IoU_after": 0.2793522267206478,
+          "baseline_correct_points": 229,
+          "original_identity_correct_points_after": 69,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.92,
+          "final_best_GT_coverage": 0.2863070539419087
+        },
+        {
+          "GT_id": 6,
+          "GT_label": "otherprop",
+          "GT_points": 374,
+          "baseline_native": "native:444",
+          "baseline_IoU": 0.8354114713216958,
+          "final_best_name": "native:444",
+          "final_best_IoU": 0.23746701846965698,
+          "original_identity_IoU_after": 0.23746701846965698,
+          "baseline_correct_points": 335,
+          "original_identity_correct_points_after": 90,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9473684210526315,
+          "final_best_GT_coverage": 0.24064171122994651
+        },
+        {
+          "GT_id": 9,
+          "GT_label": "otherprop",
+          "GT_points": 354,
+          "baseline_native": "native:447",
+          "baseline_IoU": 0.8844086021505376,
+          "final_best_name": "native:447",
+          "final_best_IoU": 0.28888888888888886,
+          "original_identity_IoU_after": 0.28888888888888886,
+          "baseline_correct_points": 329,
+          "original_identity_correct_points_after": 104,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9454545454545454,
+          "final_best_GT_coverage": 0.2937853107344633
+        },
+        {
+          "GT_id": 11,
+          "GT_label": "otherprop",
+          "GT_points": 665,
+          "baseline_native": "native:39",
+          "baseline_IoU": 0.9715568862275449,
+          "final_best_name": "native:39",
+          "final_best_IoU": 0.4024024024024024,
+          "original_identity_IoU_after": 0.4024024024024024,
+          "baseline_correct_points": 649,
+          "original_identity_correct_points_after": 268,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9962825278810409,
+          "final_best_GT_coverage": 0.4030075187969925
+        },
+        {
+          "GT_id": 5,
+          "GT_label": "otherprop",
+          "GT_points": 917,
+          "baseline_native": "native:84",
+          "baseline_IoU": 0.9349173553719008,
+          "final_best_name": "peer:38",
+          "final_best_IoU": 0.37641509433962267,
+          "original_identity_IoU_after": 0.12740899357601712,
+          "baseline_correct_points": 905,
+          "original_identity_correct_points_after": 119,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.3988005997001499,
+          "final_best_GT_coverage": 0.8702290076335878
+        },
+        {
+          "GT_id": 69,
+          "GT_label": "otherstructure",
+          "GT_points": 10957,
+          "baseline_native": "native:93",
+          "baseline_IoU": 0.8224741029875394,
+          "final_best_name": "native:93",
+          "final_best_IoU": 0.28438073012168696,
+          "original_identity_IoU_after": 0.28438073012168696,
+          "baseline_correct_points": 10957,
+          "original_identity_correct_points_after": 3412,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.766225016842578,
+          "final_best_GT_coverage": 0.31139910559459705
+        },
+        {
+          "GT_id": 10,
+          "GT_label": "otherprop",
+          "GT_points": 525,
+          "baseline_native": "native:448",
+          "baseline_IoU": 0.8378839590443686,
+          "final_best_name": "native:448",
+          "final_best_IoU": 0.3107638888888889,
+          "original_identity_IoU_after": 0.3107638888888889,
+          "baseline_correct_points": 491,
+          "original_identity_correct_points_after": 179,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7782608695652173,
+          "final_best_GT_coverage": 0.34095238095238095
+        },
+        {
+          "GT_id": 43,
+          "GT_label": "otherprop",
+          "GT_points": 212,
+          "baseline_native": "native:470",
+          "baseline_IoU": 0.5435897435897435,
+          "final_best_name": "native:470",
+          "final_best_IoU": 0.0319634703196347,
+          "original_identity_IoU_after": 0.0319634703196347,
+          "baseline_correct_points": 212,
+          "original_identity_correct_points_after": 7,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.5,
+          "final_best_GT_coverage": 0.0330188679245283
+        },
+        {
+          "GT_id": 105,
+          "GT_label": "otherprop",
+          "GT_points": 447,
+          "baseline_native": "native:34",
+          "baseline_IoU": 0.9977628635346756,
+          "final_best_name": "native:34",
+          "final_best_IoU": 0.49217002237136465,
+          "original_identity_IoU_after": 0.49217002237136465,
+          "baseline_correct_points": 446,
+          "original_identity_correct_points_after": 220,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.49217002237136465
+        },
+        {
+          "GT_id": 7,
+          "GT_label": "otherprop",
+          "GT_points": 252,
+          "baseline_native": "native:445",
+          "baseline_IoU": 0.7027027027027027,
+          "final_best_name": "native:445",
+          "final_best_IoU": 0.24074074074074073,
+          "original_identity_IoU_after": 0.24074074074074073,
+          "baseline_correct_points": 208,
+          "original_identity_correct_points_after": 65,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7831325301204819,
+          "final_best_GT_coverage": 0.25793650793650796
+        },
+        {
+          "GT_id": 54,
+          "GT_label": "otherprop",
+          "GT_points": 280,
+          "baseline_native": "native:464",
+          "baseline_IoU": 0.8392857142857143,
+          "final_best_name": "native:464",
+          "final_best_IoU": 0.4107142857142857,
+          "original_identity_IoU_after": 0.4107142857142857,
+          "baseline_correct_points": 235,
+          "original_identity_correct_points_after": 115,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.4107142857142857
+        },
+        {
+          "GT_id": 51,
+          "GT_label": "otherprop",
+          "GT_points": 293,
+          "baseline_native": "native:88",
+          "baseline_IoU": 0.8503184713375797,
+          "final_best_name": "native:88",
+          "final_best_IoU": 0.43097643097643096,
+          "original_identity_IoU_after": 0.43097643097643096,
+          "baseline_correct_points": 267,
+          "original_identity_correct_points_after": 128,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9696969696969697,
+          "final_best_GT_coverage": 0.43686006825938567
+        },
+        {
+          "GT_id": 1,
+          "GT_label": "lamp",
+          "GT_points": 14841,
+          "baseline_native": "native:25",
+          "baseline_IoU": 0.8722458055387103,
+          "final_best_name": "native:25",
+          "final_best_IoU": 0.47308132875143183,
+          "original_identity_IoU_after": 0.47308132875143183,
+          "baseline_correct_points": 12945,
+          "original_identity_correct_points_after": 7021,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.47308132875143183
+        },
+        {
+          "GT_id": 127,
+          "GT_label": "otherprop",
+          "GT_points": 1460,
+          "baseline_native": "native:37",
+          "baseline_IoU": 0.8101772441395083,
+          "final_best_name": "native:37",
+          "final_best_IoU": 0.4182242990654206,
+          "original_identity_IoU_after": 0.4182242990654206,
+          "baseline_correct_points": 1417,
+          "original_identity_correct_points_after": 716,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7396694214876033,
+          "final_best_GT_coverage": 0.4904109589041096
+        },
+        {
+          "GT_id": 16,
+          "GT_label": "otherprop",
+          "GT_points": 298,
+          "baseline_native": "native:453",
+          "baseline_IoU": 0.7042606516290727,
+          "final_best_name": "native:453",
+          "final_best_IoU": 0.33116883116883117,
+          "original_identity_IoU_after": 0.33116883116883117,
+          "baseline_correct_points": 281,
+          "original_identity_correct_points_after": 102,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9107142857142857,
+          "final_best_GT_coverage": 0.3422818791946309
+        },
+        {
+          "GT_id": 14,
+          "GT_label": "otherprop",
+          "GT_points": 161,
+          "baseline_native": "native:451",
+          "baseline_IoU": 0.5,
+          "final_best_name": "native:451",
+          "final_best_IoU": 0.16666666666666666,
+          "original_identity_IoU_after": 0.16666666666666666,
+          "baseline_correct_points": 92,
+          "original_identity_correct_points_after": 28,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8,
+          "final_best_GT_coverage": 0.17391304347826086
+        },
+        {
+          "GT_id": 60,
+          "GT_label": "otherprop",
+          "GT_points": 295,
+          "baseline_native": "native:62",
+          "baseline_IoU": 0.7544757033248082,
+          "final_best_name": "native:62",
+          "final_best_IoU": 0.45897435897435895,
+          "original_identity_IoU_after": 0.45897435897435895,
+          "baseline_correct_points": 295,
+          "original_identity_correct_points_after": 179,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.6532846715328468,
+          "final_best_GT_coverage": 0.6067796610169491
+        },
+        {
+          "GT_id": 67,
+          "GT_label": "refrigerator",
+          "GT_points": 30481,
+          "baseline_native": "native:138",
+          "baseline_IoU": 0.8980491634958023,
+          "final_best_name": "peer:15",
+          "final_best_IoU": 0.6275499660496561,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 29738,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.86238792648789,
+          "final_best_GT_coverage": 0.6973852563892261
+        },
+        {
+          "GT_id": 98,
+          "GT_label": "otherprop",
+          "GT_points": 614,
+          "baseline_native": "native:45",
+          "baseline_IoU": 0.9838969404186796,
+          "final_best_name": "native:45",
+          "final_best_IoU": 0.7179902755267423,
+          "original_identity_IoU_after": 0.7179902755267423,
+          "baseline_correct_points": 611,
+          "original_identity_correct_points_after": 443,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9932735426008968,
+          "final_best_GT_coverage": 0.7214983713355049
+        },
+        {
+          "GT_id": 36,
+          "GT_label": "otherprop",
+          "GT_points": 142,
+          "baseline_native": "native:473",
+          "baseline_IoU": 0.9659863945578231,
+          "final_best_name": "native:473",
+          "final_best_IoU": 0.7142857142857143,
+          "original_identity_IoU_after": 0.7142857142857143,
+          "baseline_correct_points": 142,
+          "original_identity_correct_points_after": 105,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9545454545454546,
+          "final_best_GT_coverage": 0.7394366197183099
+        },
+        {
+          "GT_id": 121,
+          "GT_label": "otherprop",
+          "GT_points": 150,
+          "baseline_native": "native:103",
+          "baseline_IoU": 0.9144736842105263,
+          "final_best_name": "native:103",
+          "final_best_IoU": 0.6644736842105263,
+          "original_identity_IoU_after": 0.6644736842105263,
+          "baseline_correct_points": 139,
+          "original_identity_correct_points_after": 101,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9805825242718447,
+          "final_best_GT_coverage": 0.6733333333333333
+        },
+        {
+          "GT_id": 8,
+          "GT_label": "otherprop",
+          "GT_points": 126,
+          "baseline_native": "native:446",
+          "baseline_IoU": 0.5026455026455027,
+          "final_best_name": "native:446",
+          "final_best_IoU": 0.2867132867132867,
+          "original_identity_IoU_after": 0.2867132867132867,
+          "baseline_correct_points": 95,
+          "original_identity_correct_points_after": 41,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7068965517241379,
+          "final_best_GT_coverage": 0.3253968253968254
+        },
+        {
+          "GT_id": 119,
+          "GT_label": "otherprop",
+          "GT_points": 1902,
+          "baseline_native": "native:101",
+          "baseline_IoU": 0.9085487077534792,
+          "final_best_name": "native:101",
+          "final_best_IoU": 0.701665825340737,
+          "original_identity_IoU_after": 0.701665825340737,
+          "baseline_correct_points": 1828,
+          "original_identity_correct_points_after": 1390,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9462219196732471,
+          "final_best_GT_coverage": 0.7308096740273397
+        },
+        {
+          "GT_id": 153,
+          "GT_label": "otherprop",
+          "GT_points": 526,
+          "baseline_native": "native:94",
+          "baseline_IoU": 0.39540816326530615,
+          "final_best_name": "native:279",
+          "final_best_IoU": 0.19666048237476808,
+          "original_identity_IoU_after": 0.16531604538087522,
+          "baseline_correct_points": 310,
+          "original_identity_correct_points_after": 102,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8907563025210085,
+          "final_best_GT_coverage": 0.20152091254752852
+        },
+        {
+          "GT_id": 148,
+          "GT_label": "counter",
+          "GT_points": 121251,
+          "baseline_native": "native:141",
+          "baseline_IoU": 0.6632398383646304,
+          "final_best_name": "native:141",
+          "final_best_IoU": 0.4656506220224316,
+          "original_identity_IoU_after": 0.4656506220224316,
+          "baseline_correct_points": 89288,
+          "original_identity_correct_points_after": 62359,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.831165196065364,
+          "final_best_GT_coverage": 0.5142967893048305
+        },
+        {
+          "GT_id": 44,
+          "GT_label": "otherprop",
+          "GT_points": 118,
+          "baseline_native": "native:470",
+          "baseline_IoU": 0.23300970873786409,
+          "final_best_name": "native:470",
+          "final_best_IoU": 0.03937007874015748,
+          "original_identity_IoU_after": 0.03937007874015748,
+          "baseline_correct_points": 96,
+          "original_identity_correct_points_after": 5,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.35714285714285715,
+          "final_best_GT_coverage": 0.0423728813559322
+        },
+        {
+          "GT_id": 123,
+          "GT_label": "otherprop",
+          "GT_points": 150,
+          "baseline_native": "native:100",
+          "baseline_IoU": 0.8245614035087719,
+          "final_best_name": "native:100",
+          "final_best_IoU": 0.6491228070175439,
+          "original_identity_IoU_after": 0.6491228070175439,
+          "baseline_correct_points": 141,
+          "original_identity_correct_points_after": 111,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8409090909090909,
+          "final_best_GT_coverage": 0.74
+        },
+        {
+          "GT_id": 124,
+          "GT_label": "otherprop",
+          "GT_points": 149,
+          "baseline_native": "native:210",
+          "baseline_IoU": 0.9194630872483222,
+          "final_best_name": "native:210",
+          "final_best_IoU": 0.7449664429530202,
+          "original_identity_IoU_after": 0.7449664429530202,
+          "baseline_correct_points": 137,
+          "original_identity_correct_points_after": 111,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.7449664429530202
+        },
+        {
+          "GT_id": 118,
+          "GT_label": "otherprop",
+          "GT_points": 109,
+          "baseline_native": "native:283",
+          "baseline_IoU": 0.6692307692307692,
+          "final_best_name": "native:283",
+          "final_best_IoU": 0.5,
+          "original_identity_IoU_after": 0.5,
+          "baseline_correct_points": 87,
+          "original_identity_correct_points_after": 64,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7710843373493976,
+          "final_best_GT_coverage": 0.5871559633027523
+        },
+        {
+          "GT_id": 122,
+          "GT_label": "otherprop",
+          "GT_points": 147,
+          "baseline_native": "native:211",
+          "baseline_IoU": 0.9183673469387755,
+          "final_best_name": "native:211",
+          "final_best_IoU": 0.7687074829931972,
+          "original_identity_IoU_after": 0.7687074829931972,
+          "baseline_correct_points": 135,
+          "original_identity_correct_points_after": 113,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.7687074829931972
+        },
+        {
+          "GT_id": 68,
+          "GT_label": "cabinet",
+          "GT_points": 172568,
+          "baseline_native": "native:177",
+          "baseline_IoU": 0.30571541053460394,
+          "final_best_name": "native:177",
+          "final_best_IoU": 0.1615682595931697,
+          "original_identity_IoU_after": 0.1615682595931697,
+          "baseline_correct_points": 52805,
+          "original_identity_correct_points_after": 27903,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9952560993008989,
+          "final_best_GT_coverage": 0.16169278197580084
+        },
+        {
+          "GT_id": 117,
+          "GT_label": "otherprop",
+          "GT_points": 284,
+          "baseline_native": "native:274",
+          "baseline_IoU": 0.839344262295082,
+          "final_best_name": "native:274",
+          "final_best_IoU": 0.707641196013289,
+          "original_identity_IoU_after": 0.707641196013289,
+          "baseline_correct_points": 256,
+          "original_identity_correct_points_after": 213,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9260869565217391,
+          "final_best_GT_coverage": 0.75
+        },
+        {
+          "GT_id": 97,
+          "GT_label": "otherprop",
+          "GT_points": 894,
+          "baseline_native": "native:46",
+          "baseline_IoU": 0.9944320712694877,
+          "final_best_name": "native:46",
+          "final_best_IoU": 0.8657718120805369,
+          "original_identity_IoU_after": 0.8657718120805369,
+          "baseline_correct_points": 893,
+          "original_identity_correct_points_after": 774,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.8657718120805369
+        },
+        {
+          "GT_id": 38,
+          "GT_label": "otherprop",
+          "GT_points": 106,
+          "baseline_native": "native:443",
+          "baseline_IoU": 0.14046822742474915,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.013711151736745886,
+          "original_identity_IoU_after": 0.003367003367003367,
+          "baseline_correct_points": 42,
+          "original_identity_correct_points_after": 1,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.013712942405641896,
+          "final_best_GT_coverage": 0.9905660377358491
+        },
+        {
+          "GT_id": 30,
+          "GT_label": "cabinet",
+          "GT_points": 97586,
+          "baseline_native": "native:162",
+          "baseline_IoU": 0.8792869710692549,
+          "final_best_name": "peer:29",
+          "final_best_IoU": 0.754100137985413,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 91452,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.951806929153449,
+          "final_best_GT_coverage": 0.7840366446006599
+        },
+        {
+          "GT_id": 126,
+          "GT_label": "otherprop",
+          "GT_points": 1122,
+          "baseline_native": "native:247",
+          "baseline_IoU": 0.5167373880245167,
+          "final_best_name": "native:247",
+          "final_best_IoU": 0.39224349533627884,
+          "original_identity_IoU_after": 0.39224349533627884,
+          "baseline_correct_points": 1096,
+          "original_identity_correct_points_after": 799,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.4661610268378063,
+          "final_best_GT_coverage": 0.7121212121212122
+        },
+        {
+          "GT_id": 113,
+          "GT_label": "otherprop",
+          "GT_points": 520,
+          "baseline_native": "native:292",
+          "baseline_IoU": 0.8014184397163121,
+          "final_best_name": "native:292",
+          "final_best_IoU": 0.6892138939670932,
+          "original_identity_IoU_after": 0.6892138939670932,
+          "baseline_correct_points": 452,
+          "original_identity_correct_points_after": 377,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9331683168316832,
+          "final_best_GT_coverage": 0.725
+        },
+        {
+          "GT_id": 151,
+          "GT_label": "otherprop",
+          "GT_points": 430,
+          "baseline_native": "native:217",
+          "baseline_IoU": 0.7429078014184397,
+          "final_best_name": "native:217",
+          "final_best_IoU": 0.6321626617375231,
+          "original_identity_IoU_after": 0.6321626617375231,
+          "baseline_correct_points": 419,
+          "original_identity_correct_points_after": 342,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7549668874172185,
+          "final_best_GT_coverage": 0.7953488372093023
+        },
+        {
+          "GT_id": 86,
+          "GT_label": "otherprop",
+          "GT_points": 1052,
+          "baseline_native": "native:13",
+          "baseline_IoU": 0.7653061224489796,
+          "final_best_name": "native:13",
+          "final_best_IoU": 0.6613515565679575,
+          "original_identity_IoU_after": 0.6613515565679575,
+          "baseline_correct_points": 1050,
+          "original_identity_correct_points_after": 871,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.766725352112676,
+          "final_best_GT_coverage": 0.8279467680608364
+        },
+        {
+          "GT_id": 18,
+          "GT_label": "otherprop",
+          "GT_points": 695,
+          "baseline_native": "native:22",
+          "baseline_IoU": 0.8369829683698297,
+          "final_best_name": "native:22",
+          "final_best_IoU": 0.7408759124087592,
+          "original_identity_IoU_after": 0.7408759124087592,
+          "baseline_correct_points": 688,
+          "original_identity_correct_points_after": 609,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8274456521739131,
+          "final_best_GT_coverage": 0.8762589928057554
+        },
+        {
+          "GT_id": 53,
+          "GT_label": "otherprop",
+          "GT_points": 276,
+          "baseline_native": "native:459",
+          "baseline_IoU": 0.968421052631579,
+          "final_best_name": "native:459",
+          "final_best_IoU": 0.8802816901408451,
+          "original_identity_IoU_after": 0.8802816901408451,
+          "baseline_correct_points": 276,
+          "original_identity_correct_points_after": 250,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9689922480620154,
+          "final_best_GT_coverage": 0.9057971014492754
+        },
+        {
+          "GT_id": 120,
+          "GT_label": "otherprop",
+          "GT_points": 150,
+          "baseline_native": "native:102",
+          "baseline_IoU": 0.4067796610169492,
+          "final_best_name": "native:102",
+          "final_best_IoU": 0.3220338983050847,
+          "original_identity_IoU_after": 0.3220338983050847,
+          "baseline_correct_points": 144,
+          "original_identity_correct_points_after": 114,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.3584905660377358,
+          "final_best_GT_coverage": 0.76
+        },
+        {
+          "GT_id": 61,
+          "GT_label": "otherprop",
+          "GT_points": 597,
+          "baseline_native": "native:31",
+          "baseline_IoU": 0.996661101836394,
+          "final_best_name": "native:31",
+          "final_best_IoU": 0.9212730318257957,
+          "original_identity_IoU_after": 0.9212730318257957,
+          "baseline_correct_points": 597,
+          "original_identity_correct_points_after": 550,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.9212730318257957
+        },
+        {
+          "GT_id": 23,
+          "GT_label": "counter",
+          "GT_points": 125593,
+          "baseline_native": "native:3",
+          "baseline_IoU": 0.7952214461249836,
+          "final_best_name": "native:3",
+          "final_best_IoU": 0.7295050180712612,
+          "original_identity_IoU_after": 0.7295050180712612,
+          "baseline_correct_points": 102578,
+          "original_identity_correct_points_after": 94058,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9656977997720716,
+          "final_best_GT_coverage": 0.7489111654311944
+        },
+        {
+          "GT_id": 128,
+          "GT_label": "otherprop",
+          "GT_points": 530,
+          "baseline_native": "native:65",
+          "baseline_IoU": 0.6834924965893588,
+          "final_best_name": "native:65",
+          "final_best_IoU": 0.62,
+          "original_identity_IoU_after": 0.62,
+          "baseline_correct_points": 501,
+          "original_identity_correct_points_after": 434,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7185430463576159,
+          "final_best_GT_coverage": 0.8188679245283019
+        },
+        {
+          "GT_id": 45,
+          "GT_label": "shelves",
+          "GT_points": 12857,
+          "baseline_native": "native:78",
+          "baseline_IoU": 0.3650584484590861,
+          "final_best_name": "native:78",
+          "final_best_IoU": 0.3028899082568807,
+          "original_identity_IoU_after": 0.3028899082568807,
+          "baseline_correct_points": 8588,
+          "original_identity_correct_points_after": 6603,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.42473948282516405,
+          "final_best_GT_coverage": 0.5135723730263669
+        },
+        {
+          "GT_id": 116,
+          "GT_label": "otherprop",
+          "GT_points": 233,
+          "baseline_native": "native:465",
+          "baseline_IoU": 0.7070707070707071,
+          "final_best_name": "native:465",
+          "final_best_IoU": 0.6505190311418685,
+          "original_identity_IoU_after": 0.6505190311418685,
+          "baseline_correct_points": 210,
+          "original_identity_correct_points_after": 188,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7704918032786885,
+          "final_best_GT_coverage": 0.8068669527896996
+        },
+        {
+          "GT_id": 149,
+          "GT_label": "sink",
+          "GT_points": 5146,
+          "baseline_native": "native:131",
+          "baseline_IoU": 0.9749903809157369,
+          "final_best_name": "native:131",
+          "final_best_IoU": 0.9201616006156214,
+          "original_identity_IoU_after": 0.9201616006156214,
+          "baseline_correct_points": 5068,
+          "original_identity_correct_points_after": 4783,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9892450879007239,
+          "final_best_GT_coverage": 0.9294597745821997
+        },
+        {
+          "GT_id": 62,
+          "GT_label": "otherprop",
+          "GT_points": 806,
+          "baseline_native": "native:35",
+          "baseline_IoU": 0.9962917181705809,
+          "final_best_name": "native:35",
+          "final_best_IoU": 0.9418316831683168,
+          "original_identity_IoU_after": 0.9418316831683168,
+          "baseline_correct_points": 806,
+          "original_identity_correct_points_after": 761,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9973787680209698,
+          "final_best_GT_coverage": 0.9441687344913151
+        },
+        {
+          "GT_id": 125,
+          "GT_label": "otherprop",
+          "GT_points": 126,
+          "baseline_native": "native:212",
+          "baseline_IoU": 0.6276595744680851,
+          "final_best_name": "native:212",
+          "final_best_IoU": 0.574468085106383,
+          "original_identity_IoU_after": 0.574468085106383,
+          "baseline_correct_points": 118,
+          "original_identity_correct_points_after": 108,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.6352941176470588,
+          "final_best_GT_coverage": 0.8571428571428571
+        },
+        {
+          "GT_id": 25,
+          "GT_label": "chair",
+          "GT_points": 9623,
+          "baseline_native": "native:1",
+          "baseline_IoU": 0.8784918751141135,
+          "final_best_name": "peer:0",
+          "final_best_IoU": 0.8277674706246135,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 9623,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.9902589395807645,
+          "final_best_GT_coverage": 0.834563026083342
+        }
+      ]
+    },
+    {
+      "mode": "image_confirmed_core",
+      "saved_masks_sha256": "52b77a3db36c94a3f141494036a843f2945e6018db3f0c0274e1509290371473",
+      "metrics": {
+        "all_ap_25%": 0.38937582455878467,
+        "all_ap_50%": 0.22582688655129787,
+        "all_ap": 0.12144523282936309
+      },
+      "geometry": {
+        "predictions": 191,
+        "predictions_ge100": 169,
+        "best_GT_IoU_le25": 82,
+        "best_GT_IoU_le50": 111,
+        "mixed_at_least_two_GT_IoU_gt10": 3,
+        "GT_with_any_IoU_gt25": 85,
+        "GT_with_any_IoU_gt50": 58,
+        "GT_with_counted_prediction_IoU_gt25": 82,
+        "GT_with_counted_prediction_IoU_gt50": 58,
+        "any_prediction_counts_include_under100_masks": true,
+        "best_recall_is_not_one_to_one_AP_recall": true
+      },
+      "FP": {
+        "0.25": {
+          "nonmatched_nonignored": 57,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 995
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 16067
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 21192
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 16912
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 10717
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 7496
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 330
+            },
+            {
+              "name": "native:8",
+              "score": 0.5411915432954811,
+              "points": 9718
+            }
+          ]
+        },
+        "0.5": {
+          "nonmatched_nonignored": 86,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 995
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 16067
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 21192
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 16912
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 10717
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 7496
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 330
+            },
+            {
+              "name": "peer:3",
+              "score": 0.5432150211569102,
+              "points": 694
+            }
+          ]
+        }
+      },
+      "native_NMS_suppressed": [
+        {
+          "name": "native:2",
+          "points": 9709,
+          "score": 0.7885398866993336,
+          "best_GT_id": 24,
+          "GT_label": "chair",
+          "best_GT_IoU": 0.9275929549902152
+        },
+        {
+          "name": "native:1",
+          "points": 10954,
+          "score": 0.7763082954950912,
+          "best_GT_id": 25,
+          "GT_label": "chair",
+          "best_GT_IoU": 0.8784918751141135
+        },
+        {
+          "name": "native:162",
+          "points": 97873,
+          "score": 0.7139223613071153,
+          "best_GT_id": 30,
+          "GT_label": "cabinet",
+          "best_GT_IoU": 0.8792869710692549
+        },
+        {
+          "name": "native:138",
+          "points": 32371,
+          "score": 0.60236737473353,
+          "best_GT_id": 67,
+          "GT_label": "refrigerator",
+          "best_GT_IoU": 0.8980491634958023
+        }
+      ],
+      "native_or_peer_under100_skipped": [
+        "native:300",
+        "native:301",
+        "native:181",
+        "native:214",
+        "native:239",
+        "native:449",
+        "native:462",
+        "native:467",
+        "peer:55",
+        "peer:73"
+      ],
+      "original_geometry_after_NMS": {
+        "predictions": 191,
+        "predictions_ge100": 191,
+        "best_GT_IoU_le25": 76,
+        "best_GT_IoU_le50": 107,
+        "mixed_at_least_two_GT_IoU_gt10": 12,
+        "GT_with_any_IoU_gt25": 97,
+        "GT_with_any_IoU_gt50": 82,
+        "GT_with_counted_prediction_IoU_gt25": 97,
+        "GT_with_counted_prediction_IoU_gt50": 82,
+        "any_prediction_counts_include_under100_masks": true,
+        "best_recall_is_not_one_to_one_AP_recall": true
+      },
+      "original_geometry_after_NMS_FP": {
+        "0.25": {
+          "nonmatched_nonignored": 61,
+          "highest_score": [
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 34934
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 46052
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 45534
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 35749
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 19503
+            },
+            {
+              "name": "native:8",
+              "score": 0.5411915432954811,
+              "points": 22120
+            },
+            {
+              "name": "native:47",
+              "score": 0.5209242769637913,
+              "points": 30710
+            },
+            {
+              "name": "native:174",
+              "score": 0.5020016538014707,
+              "points": 11938
+            }
+          ]
+        },
+        "0.5": {
+          "nonmatched_nonignored": 89,
+          "highest_score": [
+            {
+              "name": "peer:36",
+              "score": 0.6386931055619312,
+              "points": 3033
+            },
+            {
+              "name": "peer:9",
+              "score": 0.6052332678024983,
+              "points": 34934
+            },
+            {
+              "name": "peer:2",
+              "score": 0.5981275997415471,
+              "points": 46052
+            },
+            {
+              "name": "peer:18",
+              "score": 0.5852750265146786,
+              "points": 45534
+            },
+            {
+              "name": "peer:32",
+              "score": 0.5820584957971265,
+              "points": 35749
+            },
+            {
+              "name": "peer:8",
+              "score": 0.5733903315329043,
+              "points": 212029
+            },
+            {
+              "name": "peer:14",
+              "score": 0.5579188821450974,
+              "points": 28688
+            },
+            {
+              "name": "peer:11",
+              "score": 0.5508601393053236,
+              "points": 19503
+            }
+          ]
+        }
+      },
+      "counterfactuals": {
+        "v19_geometry_native_NMS_only_original_scores": {
+          "all_ap_25%": 0.6733085156747229,
+          "all_ap_50%": 0.5088925907728723,
+          "all_ap": 0.3052011500019139
+        },
+        "post_NMS_original_geometry_SAGE_scores": {
+          "all_ap_25%": 0.46423603020963616,
+          "all_ap_50%": 0.3359148051321927,
+          "all_ap": 0.1888624978765152
+        },
+        "final_geometry_original_branch_scores": {
+          "all_ap_25%": 0.4041647669084103,
+          "all_ap_50%": 0.2505571000443813,
+          "all_ap": 0.13400545287098534
+        },
+        "final_native_geometry_only_original_native_scores": {
+          "all_ap_25%": 0.5318209535467641,
+          "all_ap_50%": 0.3278654383112167,
+          "all_ap": 0.18034811051981942
+        }
+      },
+      "native_point_ownership": {
+        "native_points_original": 849602,
+        "baseline_correct_points": 721183,
+        "correct_points_moved": 268149,
+        "moved_to_peer": 257379,
+        "moved_to_other_native": 0,
+        "moved_to_unowned": 10770
+      },
+      "GT_crossed_down_25": 12,
+      "GT_crossed_down_50": 25,
+      "GT_crossed_up_25": 0,
+      "GT_crossed_up_50": 1,
+      "GT_counted_prediction_crossed_down_25": 15,
+      "GT_counted_prediction_crossed_down_50": 25,
+      "native_kept_ge100_before_but_under100_after": 14,
+      "GT_regressions_gt5pp": [
+        {
+          "GT_id": 56,
+          "GT_label": "otherprop",
+          "GT_points": 316,
+          "baseline_native": "native:108",
+          "baseline_IoU": 0.940625,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.03813953488372093,
+          "original_identity_IoU_after": 0.03481012658227848,
+          "baseline_correct_points": 301,
+          "original_identity_correct_points_after": 11,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.03828708644610459,
+          "final_best_GT_coverage": 0.9082278481012658
+        },
+        {
+          "GT_id": 95,
+          "GT_label": "otherstructure",
+          "GT_points": 1594,
+          "baseline_native": "native:348",
+          "baseline_IoU": 0.9415384615384615,
+          "final_best_name": "native:348",
+          "final_best_IoU": 0.08197747183979975,
+          "original_identity_IoU_after": 0.08197747183979975,
+          "baseline_correct_points": 1530,
+          "original_identity_correct_points_after": 131,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9703703703703703,
+          "final_best_GT_coverage": 0.0821831869510665
+        },
+        {
+          "GT_id": 96,
+          "GT_label": "otherstructure",
+          "GT_points": 2587,
+          "baseline_native": "native:269",
+          "baseline_IoU": 0.9224006116207951,
+          "final_best_name": "peer:26",
+          "final_best_IoU": 0.08362121158160903,
+          "original_identity_IoU_after": 0.08024691358024691,
+          "baseline_correct_points": 2413,
+          "original_identity_correct_points_after": 208,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.08433908045977012,
+          "final_best_GT_coverage": 0.9076149980672594
+        },
+        {
+          "GT_id": 49,
+          "GT_label": "otherprop",
+          "GT_points": 101,
+          "baseline_native": "native:472",
+          "baseline_IoU": 0.8035714285714286,
+          "final_best_name": "native:472",
+          "final_best_IoU": 0.06930693069306931,
+          "original_identity_IoU_after": 0.06930693069306931,
+          "baseline_correct_points": 90,
+          "original_identity_correct_points_after": 7,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.06930693069306931
+        },
+        {
+          "GT_id": 55,
+          "GT_label": "otherprop",
+          "GT_points": 326,
+          "baseline_native": "native:82",
+          "baseline_IoU": 0.7085889570552147,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.04029791195637718,
+          "original_identity_IoU_after": 0.03067484662576687,
+          "baseline_correct_points": 231,
+          "original_identity_correct_points_after": 10,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.040421558164354325,
+          "final_best_GT_coverage": 0.9294478527607362
+        },
+        {
+          "GT_id": 152,
+          "GT_label": "otherprop",
+          "GT_points": 170,
+          "baseline_native": "native:337",
+          "baseline_IoU": 0.8187134502923976,
+          "final_best_name": "native:337",
+          "final_best_IoU": 0.18235294117647058,
+          "original_identity_IoU_after": 0.18235294117647058,
+          "baseline_correct_points": 140,
+          "original_identity_correct_points_after": 31,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.18235294117647058
+        },
+        {
+          "GT_id": 13,
+          "GT_label": "otherprop",
+          "GT_points": 241,
+          "baseline_native": "native:450",
+          "baseline_IoU": 0.8980392156862745,
+          "final_best_name": "native:450",
+          "final_best_IoU": 0.2793522267206478,
+          "original_identity_IoU_after": 0.2793522267206478,
+          "baseline_correct_points": 229,
+          "original_identity_correct_points_after": 69,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.92,
+          "final_best_GT_coverage": 0.2863070539419087
+        },
+        {
+          "GT_id": 6,
+          "GT_label": "otherprop",
+          "GT_points": 374,
+          "baseline_native": "native:444",
+          "baseline_IoU": 0.8354114713216958,
+          "final_best_name": "native:444",
+          "final_best_IoU": 0.23746701846965698,
+          "original_identity_IoU_after": 0.23746701846965698,
+          "baseline_correct_points": 335,
+          "original_identity_correct_points_after": 90,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9473684210526315,
+          "final_best_GT_coverage": 0.24064171122994651
+        },
+        {
+          "GT_id": 9,
+          "GT_label": "otherprop",
+          "GT_points": 354,
+          "baseline_native": "native:447",
+          "baseline_IoU": 0.8844086021505376,
+          "final_best_name": "native:447",
+          "final_best_IoU": 0.28888888888888886,
+          "original_identity_IoU_after": 0.28888888888888886,
+          "baseline_correct_points": 329,
+          "original_identity_correct_points_after": 104,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9454545454545454,
+          "final_best_GT_coverage": 0.2937853107344633
+        },
+        {
+          "GT_id": 11,
+          "GT_label": "otherprop",
+          "GT_points": 665,
+          "baseline_native": "native:39",
+          "baseline_IoU": 0.9715568862275449,
+          "final_best_name": "native:39",
+          "final_best_IoU": 0.4024024024024024,
+          "original_identity_IoU_after": 0.4024024024024024,
+          "baseline_correct_points": 649,
+          "original_identity_correct_points_after": 268,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9962825278810409,
+          "final_best_GT_coverage": 0.4030075187969925
+        },
+        {
+          "GT_id": 5,
+          "GT_label": "otherprop",
+          "GT_points": 917,
+          "baseline_native": "native:84",
+          "baseline_IoU": 0.9349173553719008,
+          "final_best_name": "peer:38",
+          "final_best_IoU": 0.37641509433962267,
+          "original_identity_IoU_after": 0.12740899357601712,
+          "baseline_correct_points": 905,
+          "original_identity_correct_points_after": 119,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.3988005997001499,
+          "final_best_GT_coverage": 0.8702290076335878
+        },
+        {
+          "GT_id": 69,
+          "GT_label": "otherstructure",
+          "GT_points": 10957,
+          "baseline_native": "native:93",
+          "baseline_IoU": 0.8224741029875394,
+          "final_best_name": "native:93",
+          "final_best_IoU": 0.28438073012168696,
+          "original_identity_IoU_after": 0.28438073012168696,
+          "baseline_correct_points": 10957,
+          "original_identity_correct_points_after": 3412,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.766225016842578,
+          "final_best_GT_coverage": 0.31139910559459705
+        },
+        {
+          "GT_id": 10,
+          "GT_label": "otherprop",
+          "GT_points": 525,
+          "baseline_native": "native:448",
+          "baseline_IoU": 0.8378839590443686,
+          "final_best_name": "native:448",
+          "final_best_IoU": 0.3107638888888889,
+          "original_identity_IoU_after": 0.3107638888888889,
+          "baseline_correct_points": 491,
+          "original_identity_correct_points_after": 179,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7782608695652173,
+          "final_best_GT_coverage": 0.34095238095238095
+        },
+        {
+          "GT_id": 43,
+          "GT_label": "otherprop",
+          "GT_points": 212,
+          "baseline_native": "native:470",
+          "baseline_IoU": 0.5435897435897435,
+          "final_best_name": "native:470",
+          "final_best_IoU": 0.0319634703196347,
+          "original_identity_IoU_after": 0.0319634703196347,
+          "baseline_correct_points": 212,
+          "original_identity_correct_points_after": 7,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.5,
+          "final_best_GT_coverage": 0.0330188679245283
+        },
+        {
+          "GT_id": 105,
+          "GT_label": "otherprop",
+          "GT_points": 447,
+          "baseline_native": "native:34",
+          "baseline_IoU": 0.9977628635346756,
+          "final_best_name": "native:34",
+          "final_best_IoU": 0.49217002237136465,
+          "original_identity_IoU_after": 0.49217002237136465,
+          "baseline_correct_points": 446,
+          "original_identity_correct_points_after": 220,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.49217002237136465
+        },
+        {
+          "GT_id": 54,
+          "GT_label": "otherprop",
+          "GT_points": 280,
+          "baseline_native": "native:464",
+          "baseline_IoU": 0.8392857142857143,
+          "final_best_name": "native:464",
+          "final_best_IoU": 0.3678571428571429,
+          "original_identity_IoU_after": 0.3678571428571429,
+          "baseline_correct_points": 235,
+          "original_identity_correct_points_after": 103,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.3678571428571429
+        },
+        {
+          "GT_id": 7,
+          "GT_label": "otherprop",
+          "GT_points": 252,
+          "baseline_native": "native:445",
+          "baseline_IoU": 0.7027027027027027,
+          "final_best_name": "native:445",
+          "final_best_IoU": 0.24074074074074073,
+          "original_identity_IoU_after": 0.24074074074074073,
+          "baseline_correct_points": 208,
+          "original_identity_correct_points_after": 65,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7831325301204819,
+          "final_best_GT_coverage": 0.25793650793650796
+        },
+        {
+          "GT_id": 51,
+          "GT_label": "otherprop",
+          "GT_points": 293,
+          "baseline_native": "native:88",
+          "baseline_IoU": 0.8503184713375797,
+          "final_best_name": "native:88",
+          "final_best_IoU": 0.43097643097643096,
+          "original_identity_IoU_after": 0.43097643097643096,
+          "baseline_correct_points": 267,
+          "original_identity_correct_points_after": 128,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9696969696969697,
+          "final_best_GT_coverage": 0.43686006825938567
+        },
+        {
+          "GT_id": 1,
+          "GT_label": "lamp",
+          "GT_points": 14841,
+          "baseline_native": "native:25",
+          "baseline_IoU": 0.8722458055387103,
+          "final_best_name": "native:25",
+          "final_best_IoU": 0.47308132875143183,
+          "original_identity_IoU_after": 0.47308132875143183,
+          "baseline_correct_points": 12945,
+          "original_identity_correct_points_after": 7021,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.47308132875143183
+        },
+        {
+          "GT_id": 16,
+          "GT_label": "otherprop",
+          "GT_points": 298,
+          "baseline_native": "native:453",
+          "baseline_IoU": 0.7042606516290727,
+          "final_best_name": "native:453",
+          "final_best_IoU": 0.33116883116883117,
+          "original_identity_IoU_after": 0.33116883116883117,
+          "baseline_correct_points": 281,
+          "original_identity_correct_points_after": 102,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9107142857142857,
+          "final_best_GT_coverage": 0.3422818791946309
+        },
+        {
+          "GT_id": 14,
+          "GT_label": "otherprop",
+          "GT_points": 161,
+          "baseline_native": "native:451",
+          "baseline_IoU": 0.5,
+          "final_best_name": "native:451",
+          "final_best_IoU": 0.16666666666666666,
+          "original_identity_IoU_after": 0.16666666666666666,
+          "baseline_correct_points": 92,
+          "original_identity_correct_points_after": 28,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8,
+          "final_best_GT_coverage": 0.17391304347826086
+        },
+        {
+          "GT_id": 60,
+          "GT_label": "otherprop",
+          "GT_points": 295,
+          "baseline_native": "native:62",
+          "baseline_IoU": 0.7544757033248082,
+          "final_best_name": "native:62",
+          "final_best_IoU": 0.45897435897435895,
+          "original_identity_IoU_after": 0.45897435897435895,
+          "baseline_correct_points": 295,
+          "original_identity_correct_points_after": 179,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.6532846715328468,
+          "final_best_GT_coverage": 0.6067796610169491
+        },
+        {
+          "GT_id": 67,
+          "GT_label": "refrigerator",
+          "GT_points": 30481,
+          "baseline_native": "native:138",
+          "baseline_IoU": 0.8980491634958023,
+          "final_best_name": "peer:15",
+          "final_best_IoU": 0.6262373320763611,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 29738,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.8599110032362459,
+          "final_best_GT_coverage": 0.6973852563892261
+        },
+        {
+          "GT_id": 98,
+          "GT_label": "otherprop",
+          "GT_points": 614,
+          "baseline_native": "native:45",
+          "baseline_IoU": 0.9838969404186796,
+          "final_best_name": "native:45",
+          "final_best_IoU": 0.7179902755267423,
+          "original_identity_IoU_after": 0.7179902755267423,
+          "baseline_correct_points": 611,
+          "original_identity_correct_points_after": 443,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9932735426008968,
+          "final_best_GT_coverage": 0.7214983713355049
+        },
+        {
+          "GT_id": 36,
+          "GT_label": "otherprop",
+          "GT_points": 142,
+          "baseline_native": "native:473",
+          "baseline_IoU": 0.9659863945578231,
+          "final_best_name": "native:473",
+          "final_best_IoU": 0.7142857142857143,
+          "original_identity_IoU_after": 0.7142857142857143,
+          "baseline_correct_points": 142,
+          "original_identity_correct_points_after": 105,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9545454545454546,
+          "final_best_GT_coverage": 0.7394366197183099
+        },
+        {
+          "GT_id": 8,
+          "GT_label": "otherprop",
+          "GT_points": 126,
+          "baseline_native": "native:446",
+          "baseline_IoU": 0.5026455026455027,
+          "final_best_name": "native:446",
+          "final_best_IoU": 0.2867132867132867,
+          "original_identity_IoU_after": 0.2867132867132867,
+          "baseline_correct_points": 95,
+          "original_identity_correct_points_after": 41,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7068965517241379,
+          "final_best_GT_coverage": 0.3253968253968254
+        },
+        {
+          "GT_id": 153,
+          "GT_label": "otherprop",
+          "GT_points": 526,
+          "baseline_native": "native:94",
+          "baseline_IoU": 0.39540816326530615,
+          "final_best_name": "native:279",
+          "final_best_IoU": 0.19666048237476808,
+          "original_identity_IoU_after": 0.16531604538087522,
+          "baseline_correct_points": 310,
+          "original_identity_correct_points_after": 102,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8907563025210085,
+          "final_best_GT_coverage": 0.20152091254752852
+        },
+        {
+          "GT_id": 148,
+          "GT_label": "counter",
+          "GT_points": 121251,
+          "baseline_native": "native:141",
+          "baseline_IoU": 0.6632398383646304,
+          "final_best_name": "native:141",
+          "final_best_IoU": 0.4660703085331979,
+          "original_identity_IoU_after": 0.4660703085331979,
+          "baseline_correct_points": 89288,
+          "original_identity_correct_points_after": 62418,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8312314391871196,
+          "final_best_GT_coverage": 0.5147833832298291
+        },
+        {
+          "GT_id": 44,
+          "GT_label": "otherprop",
+          "GT_points": 118,
+          "baseline_native": "native:470",
+          "baseline_IoU": 0.23300970873786409,
+          "final_best_name": "native:470",
+          "final_best_IoU": 0.03937007874015748,
+          "original_identity_IoU_after": 0.03937007874015748,
+          "baseline_correct_points": 96,
+          "original_identity_correct_points_after": 5,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.35714285714285715,
+          "final_best_GT_coverage": 0.0423728813559322
+        },
+        {
+          "GT_id": 118,
+          "GT_label": "otherprop",
+          "GT_points": 109,
+          "baseline_native": "native:283",
+          "baseline_IoU": 0.6692307692307692,
+          "final_best_name": "native:283",
+          "final_best_IoU": 0.5,
+          "original_identity_IoU_after": 0.5,
+          "baseline_correct_points": 87,
+          "original_identity_correct_points_after": 64,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7710843373493976,
+          "final_best_GT_coverage": 0.5871559633027523
+        },
+        {
+          "GT_id": 68,
+          "GT_label": "cabinet",
+          "GT_points": 172568,
+          "baseline_native": "native:177",
+          "baseline_IoU": 0.30571541053460394,
+          "final_best_name": "native:177",
+          "final_best_IoU": 0.1615682595931697,
+          "original_identity_IoU_after": 0.1615682595931697,
+          "baseline_correct_points": 52805,
+          "original_identity_correct_points_after": 27903,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9952560993008989,
+          "final_best_GT_coverage": 0.16169278197580084
+        },
+        {
+          "GT_id": 30,
+          "GT_label": "cabinet",
+          "GT_points": 97586,
+          "baseline_native": "native:162",
+          "baseline_IoU": 0.8792869710692549,
+          "final_best_name": "peer:29",
+          "final_best_IoU": 0.7486180007240208,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 91452,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.9430455413816479,
+          "final_best_GT_coverage": 0.7840673867153075
+        },
+        {
+          "GT_id": 97,
+          "GT_label": "otherprop",
+          "GT_points": 894,
+          "baseline_native": "native:46",
+          "baseline_IoU": 0.9944320712694877,
+          "final_best_name": "native:46",
+          "final_best_IoU": 0.8657718120805369,
+          "original_identity_IoU_after": 0.8657718120805369,
+          "baseline_correct_points": 893,
+          "original_identity_correct_points_after": 774,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.8657718120805369
+        },
+        {
+          "GT_id": 38,
+          "GT_label": "otherprop",
+          "GT_points": 106,
+          "baseline_native": "native:443",
+          "baseline_IoU": 0.14046822742474915,
+          "final_best_name": "peer:14",
+          "final_best_IoU": 0.014005602240896359,
+          "original_identity_IoU_after": 0.003367003367003367,
+          "baseline_correct_points": 42,
+          "original_identity_correct_points_after": 1,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.014007470651013874,
+          "final_best_GT_coverage": 0.9905660377358491
+        },
+        {
+          "GT_id": 119,
+          "GT_label": "otherprop",
+          "GT_points": 1902,
+          "baseline_native": "native:101",
+          "baseline_IoU": 0.9085487077534792,
+          "final_best_name": "native:101",
+          "final_best_IoU": 0.7900302114803626,
+          "original_identity_IoU_after": 0.7900302114803626,
+          "baseline_correct_points": 1828,
+          "original_identity_correct_points_after": 1569,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9491833030852994,
+          "final_best_GT_coverage": 0.8249211356466877
+        },
+        {
+          "GT_id": 151,
+          "GT_label": "otherprop",
+          "GT_points": 430,
+          "baseline_native": "native:217",
+          "baseline_IoU": 0.7429078014184397,
+          "final_best_name": "native:217",
+          "final_best_IoU": 0.6275229357798165,
+          "original_identity_IoU_after": 0.6275229357798165,
+          "baseline_correct_points": 419,
+          "original_identity_correct_points_after": 342,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.7483588621444202,
+          "final_best_GT_coverage": 0.7953488372093023
+        },
+        {
+          "GT_id": 113,
+          "GT_label": "otherprop",
+          "GT_points": 520,
+          "baseline_native": "native:292",
+          "baseline_IoU": 0.8014184397163121,
+          "final_best_name": "native:292",
+          "final_best_IoU": 0.6892138939670932,
+          "original_identity_IoU_after": 0.6892138939670932,
+          "baseline_correct_points": 452,
+          "original_identity_correct_points_after": 377,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9331683168316832,
+          "final_best_GT_coverage": 0.725
+        },
+        {
+          "GT_id": 86,
+          "GT_label": "otherprop",
+          "GT_points": 1052,
+          "baseline_native": "native:13",
+          "baseline_IoU": 0.7653061224489796,
+          "final_best_name": "native:13",
+          "final_best_IoU": 0.6613515565679575,
+          "original_identity_IoU_after": 0.6613515565679575,
+          "baseline_correct_points": 1050,
+          "original_identity_correct_points_after": 871,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.766725352112676,
+          "final_best_GT_coverage": 0.8279467680608364
+        },
+        {
+          "GT_id": 18,
+          "GT_label": "otherprop",
+          "GT_points": 695,
+          "baseline_native": "native:22",
+          "baseline_IoU": 0.8369829683698297,
+          "final_best_name": "native:22",
+          "final_best_IoU": 0.7408759124087592,
+          "original_identity_IoU_after": 0.7408759124087592,
+          "baseline_correct_points": 688,
+          "original_identity_correct_points_after": 609,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.8274456521739131,
+          "final_best_GT_coverage": 0.8762589928057554
+        },
+        {
+          "GT_id": 53,
+          "GT_label": "otherprop",
+          "GT_points": 276,
+          "baseline_native": "native:459",
+          "baseline_IoU": 0.968421052631579,
+          "final_best_name": "native:459",
+          "final_best_IoU": 0.8802816901408451,
+          "original_identity_IoU_after": 0.8802816901408451,
+          "baseline_correct_points": 276,
+          "original_identity_correct_points_after": 250,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9689922480620154,
+          "final_best_GT_coverage": 0.9057971014492754
+        },
+        {
+          "GT_id": 61,
+          "GT_label": "otherprop",
+          "GT_points": 597,
+          "baseline_native": "native:31",
+          "baseline_IoU": 0.996661101836394,
+          "final_best_name": "native:31",
+          "final_best_IoU": 0.9212730318257957,
+          "original_identity_IoU_after": 0.9212730318257957,
+          "baseline_correct_points": 597,
+          "original_identity_correct_points_after": 550,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 1.0,
+          "final_best_GT_coverage": 0.9212730318257957
+        },
+        {
+          "GT_id": 23,
+          "GT_label": "counter",
+          "GT_points": 125593,
+          "baseline_native": "native:3",
+          "baseline_IoU": 0.7952214461249836,
+          "final_best_name": "native:3",
+          "final_best_IoU": 0.7295050180712612,
+          "original_identity_IoU_after": 0.7295050180712612,
+          "baseline_correct_points": 102578,
+          "original_identity_correct_points_after": 94058,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9656977997720716,
+          "final_best_GT_coverage": 0.7489111654311944
+        },
+        {
+          "GT_id": 45,
+          "GT_label": "shelves",
+          "GT_points": 12857,
+          "baseline_native": "native:78",
+          "baseline_IoU": 0.3650584484590861,
+          "final_best_name": "native:78",
+          "final_best_IoU": 0.3085871307533776,
+          "original_identity_IoU_after": 0.3085871307533776,
+          "baseline_correct_points": 8588,
+          "original_identity_correct_points_after": 6738,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.4287350470857725,
+          "final_best_GT_coverage": 0.52407248969433
+        },
+        {
+          "GT_id": 149,
+          "GT_label": "sink",
+          "GT_points": 5146,
+          "baseline_native": "native:131",
+          "baseline_IoU": 0.9749903809157369,
+          "final_best_name": "native:131",
+          "final_best_IoU": 0.9201616006156214,
+          "original_identity_IoU_after": 0.9201616006156214,
+          "baseline_correct_points": 5068,
+          "original_identity_correct_points_after": 4783,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9892450879007239,
+          "final_best_GT_coverage": 0.9294597745821997
+        },
+        {
+          "GT_id": 62,
+          "GT_label": "otherprop",
+          "GT_points": 806,
+          "baseline_native": "native:35",
+          "baseline_IoU": 0.9962917181705809,
+          "final_best_name": "native:35",
+          "final_best_IoU": 0.9418316831683168,
+          "original_identity_IoU_after": 0.9418316831683168,
+          "baseline_correct_points": 806,
+          "original_identity_correct_points_after": 761,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9973787680209698,
+          "final_best_GT_coverage": 0.9441687344913151
+        },
+        {
+          "GT_id": 31,
+          "GT_label": "otherprop",
+          "GT_points": 1807,
+          "baseline_native": "native:172",
+          "baseline_IoU": 0.914745308310992,
+          "final_best_name": "native:172",
+          "final_best_IoU": 0.8612157073695536,
+          "original_identity_IoU_after": 0.8612157073695536,
+          "baseline_correct_points": 1706,
+          "original_identity_correct_points_after": 1601,
+          "cause": "point_ownership_competition",
+          "final_best_purity": 0.9685420447670902,
+          "final_best_GT_coverage": 0.8859988931931378
+        },
+        {
+          "GT_id": 25,
+          "GT_label": "chair",
+          "GT_points": 9623,
+          "baseline_native": "native:1",
+          "baseline_IoU": 0.8784918751141135,
+          "final_best_name": "peer:0",
+          "final_best_IoU": 0.8277674706246135,
+          "original_identity_IoU_after": 0.0,
+          "baseline_correct_points": 9623,
+          "original_identity_correct_points_after": 0,
+          "cause": "native_NMS_suppression",
+          "final_best_purity": 0.9902589395807645,
+          "final_best_GT_coverage": 0.834563026083342
+        }
+      ]
+    }
+  ],
+  "ranking": {
+    "native_score_vs_best_IoU_spearman": 0.04028657526493506,
+    "SAGE_native_q_vs_best_IoU_spearman": 0.0061211763371870065,
+    "peer_raw_score_vs_best_IoU_spearman": 0.5734444794491261,
+    "peer_SAGE_q_vs_best_IoU_spearman": 0.7337335346791508
+  },
+  "counterfactuals": {
+    "v19_geometry_SAGE_native_scores_only": {
+      "all_ap_25%": 0.7011623800812529,
+      "all_ap_50%": 0.5285315057783413,
+      "all_ap": 0.337040759551968
+    },
+    "v19_geometry_plus_all_raw_peers_no_NMS_no_ownership": {
+      "all_ap_25%": 0.4649186432776319,
+      "all_ap_50%": 0.33516890132944027,
+      "all_ap": 0.19491263886053106
+    }
+  },
+  "elapsed_seconds": 43.37742042541504,
+  "peak_RSS_MiB": 1596.28125,
+  "practical_limits": [
+    "Best-IoU diagnostics are not one-to-one AP recall.",
+    "Only repeated-development 010 is diagnosed; no full Hypersim benchmark claim.",
+    "All candidates contain existing observed points, so no hidden-surface accuracy is demonstrated.",
+    "Historical canonical box protocol is unchanged; saved screens have no new canonical publication.",
+    "Attribution counterfactuals are not candidate build methods and cannot count toward the fifteen-attempt gate."
+  ]
+}

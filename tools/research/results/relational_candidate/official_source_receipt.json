@@ -1,0 +1,32 @@
+{
+  "official_repository": "https://github.com/PKU-EPIC/MaskClustering",
+  "commit": "eb2d41c2267cde21966f4340c37b8cf94b05c23c",
+  "files": [
+    {
+      "path": "graph/construction.py",
+      "sha256": "9578b8e9d6890eee64efce92ded59ed7908ccbf8af681d9ce250272f8ddb75e9"
+    },
+    {
+      "path": "graph/iterative_clustering.py",
+      "sha256": "835508fa73f644be8fedaa2e4af1392eef9e5e00517822936a2ef722a99be4a5"
+    },
+    {
+      "path": "graph/node.py",
+      "sha256": "56d8a00c7ad80cb72eeb71b4ec0ae181d59e1b4da5b595a4b17fa4645febe5dd"
+    },
+    {
+      "path": "mask_predict.py",
+      "sha256": "c76d1a9635a8fa6e27fd1e23e9cdbc24899cbd9620dd387fd447749706711463"
+    },
+    {
+      "path": "utils/mask_backprojection.py",
+      "sha256": "4b5b475dcbb7687eb325134d6dd0fee8f8cb03d5ad8f35db4a71cc39d94e06c0"
+    },
+    {
+      "path": "visualize/vis_mask.py",
+      "sha256": "43a445ef24a7653f28a1b5062a3b6cde08aa097f08b7abf7bf85d044cce230c8"
+    }
+  ],
+  "source_inspection_only": true,
+  "author_pipeline_not_reproduced": true
+}

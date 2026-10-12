@@ -70,37 +70,50 @@ are documented in [baseline setup](tools/esam_baseline/README.md).
 
 ## Autonomous research cycle
 
-The root [AGENTS.md](AGENTS.md) is the detailed handoff for architecture,
-environment, data contracts, known failures, experiments and next steps.
-The [research tools](tools/research/README.md) contain reproducible cached-scene
-replay and optional minimum-training interfaces. No dataset training has started.
-
-Retained research candidate MICA-VSA uses symmetric current-visible surface
-coverage and soft semantic identity for association. All three scans were
-reconstructed from fusion through final cloud/graph publication with identical
-frontend masks/features; no fresh image API calls or training.
+Formal default remains v19. The latest retained research candidate SAGE-CORE-V
+uses frozen official ESAM geometric proposals, shared GPT image identities,
+independent positive SAM evidence, observed-core ownership and complete unowned
+surface publication. It is not an independent GPT-only method or hidden-shape
+generation. Three actual all-scan cycles from cached frontend through final
+cloud/graph publication (375 frames total) are independently validated.
 
 | Development scan | AP25 | AP50 | Mean AP (.50–.90) |
 | --- | --- | --- | --- |
-| scene0011_00 | 71.41% | 70.44% | 40.72% |
-| scene0015_00 | 94.24% | 66.03% | 41.74% |
-| scene0019_00 | 51.96% | 35.80% | 27.73% |
-| Pooled | 75.36% | 60.60% | 37.77% |
+| scene0011_00 | 97.25% | 79.04% | 43.78% |
+| scene0015_00 | 92.14% | 72.58% | 49.80% |
+| scene0019_00 | 66.58% | 55.36% | 31.91% |
+| Pooled | 88.50% | 71.32% | 43.79% |
 
-Pooled gains over v19 are 0.26/2.32/0.67 percentage points. scene0011 regresses,
-scene0019 is unchanged; this does not replace the formal v19 default or establish
-unseen/full-benchmark performance. On ai_003_007, the same strict observed-box
-protocol gives candidate AP25/AP50 40.77%/9.00%
-versus v19 37.27%/9.00%. Cross-domain and per-scan limitations remain explicit.
+Each scan exceeds ESAM AP50/mean, but scene0019 AP25 remains 66.58% against
+78.62%. This is not the all-scene goal. Direct SAGE/CORE transfer and cached
+image admission regress on ai_001_010; those screens were rejected, the
+historical kitchen final is untouched, and no new strict-box result is claimed.
+The same algorithm must improve both the ScanNet comparison and kitchen.
 
-See [full evaluation](tools/research/results/mutual_r2_evaluation.json),
-[cache/input validation](tools/research/results/full_replay_validation.json),
-[cross-domain validation](tools/research/results/hypersim_r2_evaluation.json), and
-canonical RESEARCH_LOG.html sections 26.11 and 27.6–27.7 for six-paper protocols,
-source-mask failures, mathematics and minimum-training opinions.
-Rejected replay products were removed; compact [negative receipts](tools/research/results/negative_trials.json)
-retain metrics/hashes. A proposed 449-parameter quality head is unimplemented;
-the 725890-parameter matching prototype has only synthetic interface checks.
+Five additional official validation scans were preregistered before images/GT/AP:
+scene0025_00, scene0030_00, scene0046_00, scene0050_00, scene0063_00.
+Their 306 selected frames are downloaded/exported; frozen ESAM inference/evaluation is complete; shared GPT acquisition uses
+explicit bounded archived upstream-stream recovery, with successful frames kept. New scenes need one initial shared image
+cache; consumer calls remain zero. No project dataset training has started.
+At least 15 distinct algorithm attempts precede optional small-head training;
+the conservative ledger currently groups 15 families, counting parameter/replay
+variants once. The expanded eight scans are not the full 312-scan benchmark.
+
+CUE positive identity ownership (14) and relational composite-peer abstention
+(15) completed four-domain mask screens and were rejected as global upgrades.
+Kitchen remains below v19 and source-merged0019 masks are not recovered. The
+quantity prerequisite is met; training has not begun, with expanded comparisons
+and independent training/calibration data still pending. These are not new full
+reconstructions or strict-box metrics. Separate frozen2D front-end and small
+quality-head feasibility work is continuing.
+
+See [detailed handoff](AGENTS.md), [research components](tools/research/README.md),
+[actual candidate evaluation](tools/research/results/sage_verified_core_evaluation.json),
+[cache/publication validation](tools/research/results/sage_full_replay_validation.json),
+[attempt ledger](tools/research/results/algorithm_attempt_ledger.json), and
+RESEARCH_LOG.html sections 26.11/27.8. Six-paper semantics/retrieval protocols,
+ThinkGraphs/CDIS backend variants and open-vocabulary evidence gaps are explicit.
+Class-agnostic AP does not establish naming or relationship correctness.
 
 ## Default EviScene pipeline
 
